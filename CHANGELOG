@@ -1,3 +1,31 @@
+Version 1.54, 2013-03-28
+========================
+
+- Requires Rails 2.3.18, for Rails security patch reasons.
+- Public release of changes previously used only by Endurance.
+- This is the last release of the v1.x series for Rails 2, except possibly
+  for future security-only changes; development now continues on the v2.x
+  v2.x series for Rails 3.
+
+
+Version 1.53, 2013-03-17
+========================
+
+- Requires Rails 2.3.15, for Rails security patch reasons.
+- Daily report type enabled, but with a hard-coded 32 day maximum date range
+  throttle applied.
+- Endurance release only.
+
+
+Version 1.52, 2012-04-11
+========================
+
+- Requires Rails 2.3.14.
+- A few very small fixes related to the CSRF protection in this newer
+  version of Rails are included.
+- Endurance release only.
+
+
 Version 1.51, 2009-12-10
 ========================
 

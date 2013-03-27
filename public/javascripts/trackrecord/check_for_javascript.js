@@ -20,8 +20,8 @@
 
 Event.observe
 (
-  window,
-  'load',
+  document,
+  'dom:loaded',
   function()
   { 
     var                      forms = document.getElementsByTagName( 'form' );

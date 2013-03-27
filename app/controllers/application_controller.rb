@@ -241,8 +241,7 @@ private
   # Ensure that we're logged in. If not, redirect to the Home page.
 
   def appctrl_confirm_user
-    redirect_to( new_user_path() ) and return if ( User.count.zero? )
-    redirect_to( signin_path()   ) and return unless ( @current_user )
+    redirect_to( signin_path() ) unless @current_user
   end
 
   # If logged in but the current user has no name, assume a partial

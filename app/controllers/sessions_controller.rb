@@ -13,6 +13,23 @@ class SessionsController < ApplicationController
   skip_before_filter( :appctrl_confirm_user,     :only => [ :new, :create           ] )
   skip_before_filter( :appctrl_ensure_user_name, :only => [ :new, :create, :destroy ] )
 
+  # With the Rails CSRF fix/bodge (sigh), unverified requests - such as that
+  # issued by the OpenID provider - cause the session to be reset. Since data
+  # about JavaScript support in the sign-in form is stored there, this would
+  # be lost and the system would always behave as if JS support were absent.
+  #
+  # The workaround is to replace the default "handle_unverified_request()"
+  # implementation to deal very specifically with just this one case. Having
+  # the session reset on login to contain just the JS token and, thereafter,
+  # any extra data resulting from the successful (or not) login attempt keeps
+  # everything clean and means that any real attempted attacks would fail.
+  #
+  def handle_unverified_request
+    js = session[ :javascript ]
+    reset_session()
+    session[ :javascript ] = js
+  end
+
   def new
     if ( User.count.zero? )
       flash[ :notice ] = 'Please sign by providing the OpenID which is to be ' <<

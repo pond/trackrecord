@@ -86,7 +86,11 @@ module TrackRecordReport
       # to be generated and this can take longer than the web browser will wait
       # before timing out. In the mean time, Rails keeps building the report...
       #
-      # { :label => 'Daily',            :title => 'Date:',              :column => :heading_daily,            :generator => :daily_report                                           },
+      # Previously daily reports were disabled to work around this. Now, a hard
+      # coded date throttle stops the generation of daily reports for more than
+      # a 60 day period before the end date.
+
+      { :label => 'Daily',            :title => 'Date:',             :column => :heading_daily,             :generator => :daily_report                                           },
     ]
 
     # Complete date range for the whole report; array of user IDs used for
@@ -578,6 +582,13 @@ module TrackRecordReport
         @range = range_end..range_start
       else
         @range = range_start..range_end
+      end
+
+      # Hard-coded range throttle to 32 days (just over a "longest month") for
+      # daily reports to avoid excessive server load.
+
+      if ( @frequency_data[ :generator ] == :daily_report )
+        @range = ( @range.last - 32.days )..( @range.last ) if ( @range.last.to_time - @range.first.to_time > 32.days )
       end
     end
 
