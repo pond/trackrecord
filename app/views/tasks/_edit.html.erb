@@ -1,0 +1,61 @@
+<%= error_messages_for :record %>
+<% form_for( @record ) do | f | %>
+  <%= f.hidden_field( :lock_version ) %>
+  <table border="0" cellspacing="0" cellpadding="2">
+    <tr align="left">
+      <th>Task title (required)</th>
+      <td><%= f.text_field( :title ) %></td>
+    </tr>
+
+    <tr align="left">
+      <th>Task code</th>
+      <td><%= f.text_field( :code ) %></td>
+    </tr>
+
+    <tr align="left">
+      <th>Expected duration (in hours, required)</th>
+      <td><%= f.text_field( :duration, { :maxlength => 6 } ) %></td>
+    </tr>
+
+    <tr align="left">
+      <th>Description</th>
+      <td><%= f.text_area( :description, { :cols => 40, :rows => 4 } ) %></td>
+    </tr>
+
+    <tr align="left">
+      <th>Tick if billable:</th>
+      <td><%= f.check_box( :billable ) %></td>
+    </tr>
+
+    <tr align="left" valign="top">
+      <th>Assigned to project?</th>
+      <td>
+<% if ( ( projects = Project.active ).empty? ) -%>
+        There are no active projects.
+<% else -%>
+<%= taskhelp_project_selector( @record ) %>
+<% end -%>
+      </td>
+    </tr>
+
+<% if ( action_name == 'edit' or action_name == 'update' ) -%>
+    <tr align="left">
+      <th>Active?</th>
+      <td>
+<%= f.select( :active, [ [ 'Active', true ], [ 'Inactive', false ] ] ) %>
+      <b><i>Warning</i></b> &ndash; once made inactive, a task cannot be edited again.
+      </td>
+    </tr>
+<% end -%>
+  </table>
+
+  <p>
+<% if ( action_name == 'new' or action_name == 'create' ) -%>
+    <%= f.submit( 'Create', { :disable_with => 'Creating...' } ) %>
+<% else -%>
+    <%= f.submit( 'Update', { :disable_with => 'Updating...' } ) %>
+    else <%= link_to( 'cancel and show details', @record ) %>
+<% end -%>
+    or <%= link_to( 'cancel and list tasks', tasks_path() ) %>.
+  </p>
+<% end %>

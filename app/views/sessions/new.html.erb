@@ -1,0 +1,89 @@
+<h1>Welcome to TrackRecord</h1>
+
+<p>
+  To use the <%= ORGANISATION_NAME %> timesheet service you must sign in.
+  Please enter your OpenID into the text field below.
+</p>
+
+<table class="openid" border="0" cellspacing="0" cellpadding="4">
+  <tr valign="bottom">
+    <td><%= image_tag( 'trackrecord/openid_med_logo_text.png', { :size => '84x28', :alt => 'OpenID logo' } ) %></td>
+    <td>
+      <% form_for( :session, { :url => { :action => 'create' } } ) do %>
+        <label for="openid_url">&nbsp;</label>
+        <%= text_field_tag "openid_url" %>
+        &nbsp;
+        <%= submit_tag 'Sign in', :disable_with => "Signing in, please wait&hellip;" %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<h2 id="item_breakdown_heading">Help</h2>
+
+<div id="item_breakdown_contents">
+  <p>
+    This site uses <a href="http://openid.net/">OpenID</a> for signing in.
+    An OpenID is a globally unique way for you to identify yourself to any
+    OpenID-aware web site. You don't need to create a new user name and
+    password for such sites &ndash; just use your OpenID.
+  </p>
+
+  <p>
+    If you already have an OpenID, sign up by entering it into the form above.
+    You must have told your system administrator about your OpenID first as
+    only people previously authorised by the administrator are allowed access.
+  </p>
+
+  <h3>How to get an OpenID</h3>
+
+  <p>
+    You can get an OpenID from one of several providers &ndash; the choice is
+    entirely up to you:
+  </p>
+
+  <ul>
+    <li>MyOpenID: <%= auto_link( 'https://www.myopenid.com/' ) %></li>
+    <li>LiveJournal: <%= auto_link( 'http://www.livejournal.com/' ) %></li>
+    <li>VeriSign Personal Identity Provider: <%= auto_link( 'http://pip.verisignlabs.com/' ) %></li>
+    <li><%= link_to( 'Others...', 'http://openid.net/wiki/index.php/Public_OpenID_providers' ) %></li>
+  </ul>
+
+  <h3>For life, not just for Christmas!</h3>
+
+  <p>
+    OpenIDs are kept for life. Your provider will let you delete your OpenID
+    to invalidate it, but the user name is remembered so that nobody can ever
+    use it again. This prevents someone from impersonating you, either
+    accidentally or maliciously, by choosing the same user name from the same
+    provider.
+  </p>
+
+  <h3>Signing in</h3>
+
+  <p>
+    Fill in your OpenID above and submit it with the "Sign in" button. You may
+    be sent back to your OpenID provider to sign in there and your provider may
+    double-check that you are happy to let TrackRecord remember your OpenID.
+  </p>
+  
+  <p>
+    Most providers let you decide if you want to stay logged in with them. If
+    you do this then entering your OpenID into the TrackRecord sign-in form
+    will grant you immediate access. This is convenient, but only stay logged
+    in with your provider if you are <em>absolutely sure</em> that your
+    computer and web browser are private, secure and only used by you.
+  </p>
+
+  <h3>Further information</h3>
+
+  <p>
+    For more information about OpenID, have a look at the following:
+  </p>
+
+  <ul>
+    <li>The OpenID site: <%= auto_link( 'http://openid.net/' ) %></li>
+    <li>Simon Willison's excellent screencast: <%= auto_link( 'http://simonwillison.net/2006/openid-screencast/' ) %></li>
+    <li>The Rails Wiki: <%= auto_link( 'http://wiki.rubyonrails.org/rails/pages/OpenID' ) %></li>
+  </ul>
+</div>

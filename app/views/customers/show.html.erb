@@ -1,0 +1,67 @@
+    <h1>Customer details</h1>
+    
+    <h2><%= h( @record.title ) %> (<%= apphelp_commit_label( @record ) %>)</h2>
+
+    <table border="0" cellspacing="0" cellpadding="2" style="margin-left: 1em">
+      <tr align="left">
+        <th>Created at</th>
+        <td><%= @record.created_at %></td>
+      </tr>
+      <tr align="left">
+        <th>Code</th>
+        <td><%= apphelp_h( @record.code ) %></td>
+      </tr>
+      <tr valign="top" align="left">
+        <th>Description</th>
+        <td><%= apphelp_h( @record.description ) %></td>
+      </tr>
+    </table>
+
+<% if ( @current_user.privileged? ) -%>
+    <p>
+      The customer has <%= pluralize( @record.projects.size, 'associated project' ) %>.
+<%   unless ( @record.projects.empty? ) -%>
+      A summary is given below. For full details, see the
+      <%= link_to( 'report generator', new_report_path() ) %>.
+<%   end -%>
+    </p>
+
+<%   unless ( @record.projects.empty? ) -%>
+    <h2 id="item_breakdown_heading">Project list</h2>
+    <div id="item_breakdown_contents">
+
+<%     @record.projects.each do | @project | -%>
+      <h3>Project: <%= link_to( h( @project.title ), @project ) %></h3>
+
+      <table border="0" cellspacing="0" cellpadding="2" style="margin-left: 1em">
+        <tr align="left">
+          <th>Project code</th>
+          <td><%= apphelp_h( @project.code ) %></td>
+        </tr>
+        <tr valign="top" align="left">
+          <th>Tasks</th>
+          <td>
+<%       if ( @project.tasks.empty? ) -%>
+            None
+<%       else -%>
+<%         @project.tasks.each do | task | %>
+            <%= link_to( h( task.title ), task ) %><br />
+<%         end -%>
+<%       end -%>
+          </td>
+        </tr>
+      </table>
+<%     end -%>
+<%   end -%>
+    </div>
+
+<p align="center">
+<%     if ( @current_user.admin? or ( @current_user.manager? and @record.active ) ) %>
+  <%= link_to( 'Edit this customer', edit_customer_path( @record ) ) %>,
+  <%= link_to( 'list customers', customers_path() ) %>
+<%     else -%>
+  <%= link_to( 'List customers', customers_path() ) %>
+<%     end -%>
+  or <%= link_to( 'return home', home_path() ) %>
+</p>
+<% end -%>

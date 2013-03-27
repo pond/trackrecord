@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>vendor/plugins/quiet_leightbox/README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Mon Nov 16 17:01:03 +0000 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+QuietLightbox
+</p>
+<h6>=======</h6>
+<p>
+Makes it easy to include Leightbox only when you want it while still having
+an application-global layout. That is, rather than using something like the
+following in a &quot;layouts/application.html.erb&quot; file:
+</p>
+<pre>
+  &lt;%= javascript_include_tag :defaults %&gt;
+  &lt;%= javascript_include_tag 'leightbox/leightbox' %&gt;
+  &lt;%= stylesheet_link_tag    'leightbox/leightbox' %&gt;
+</pre>
+<p>
+&#8230;you instead do something like this:
+</p>
+<pre>
+  &lt;%= include_leightbox_if_used %&gt;
+</pre>
+<p>
+&#8230;and JS plus CSS links will only be output if a Controller handling
+the current action has said that it wants Leightbox facilities for that
+action&#8216;s view by making a call along the lines of:
+</p>
+<pre>
+  uses_leightbox()
+</pre>
+<p>
+&#8230;around the same place it might declare &quot;before_filter&quot;
+items and the like. The &quot;uses_leightbox&quot; method takes a hash of
+options which are passed straight through to the Rails
+&quot;before_filter&quot; API allowing the Controller to further refine its
+use of Leightbox to certain views, for example, to use Leightbox in an
+&quot;edit&quot; action (and in a related &quot;update&quot; action in case
+an update fails and re-renders the &quot;edit&quot; view):
+</p>
+<pre>
+  uses_leightbox( :only =&gt; [ :edit, :update ] )
+</pre>
+<p>
+If you also use the &quot;quiet_prototype&quot; plugin, then note that you
+should not use both &quot;uses_prototype&quot; and
+&quot;uses_leightbox&quot; for the same actions in the same controller.
+Since Leightbox depends on Prototype, the default set of JS inclusions will
+be used for Leightbox. Calling &quot;uses_prototype&quot; as well as
+&quot;uses_leightbox&quot; will result in the same JS and CSS being
+included twice.
+</p>
+<p>
+This plugin does not include Leightbox components for installation.
+Download these and install them per your specific requirements. At the time
+of writing, Leightbox is available from:
+</p>
+<pre>
+  http://www.eight.nl/static/files/leightbox/
+</pre>
+<p>
+Copy &quot;scripts/lightbox.js&quot; into the public Javascript folder, as
+&quot;leightbox.js&quot; inside a folder &quot;leightbox.js&quot; (hence,
+&quot;javascripts/leightbox/leightbox.js&quot;). Similarly, copy the
+stylesheet as &quot;leightbox/leightbox.css&quot; into the public
+stylesheets folder.
+</p>
+<p>
+Useful patch
+</p>
+<h6>======</h6>
+<p>
+To allow ESCape to close a Leightbox popup, modify the Leightbox JS file as
+follows.
+</p>
+<ul>
+<li>Add this in the &quot;initialize&quot; function (anywhere will do);
+
+<pre>
+              this.keyHandler = this.deactivateKey.bindAsEventListener(this);
+</pre>
+</li>
+<li>In the &quot;displayLightbox&quot; function, replace this single line:
+
+<pre>
+              if(display != 'none') this.actions();
+</pre>
+<p>
+&#8230;with this set of lines:
+</p>
+<pre>
+              if(display != 'none'){
+                this.actions();
+                Event.observe(window, 'keydown', this.keyHandler);
+        }else{
+                Event.stopObserving(window, 'keydown', this.keyHandler);
+  }
+</pre>
+</li>
+<li>Finally, add this new function somewhere in the class definition - e.g.
+just above the definition of &quot;deactivate&quot;:
+
+<pre>
+      deactivateKey: function(event){
+              if (event.keyCode == 27){
+                      this.deactivate();
+                      Event.stop(event);
+              }
+      },
+</pre>
+<p>
+Note the trailing comma at the end of the function definition which is
+required if another item definition follows (JavaScript required syntax).
+</p>
+</li>
+</ul>
+<p>
+Heritage
+</p>
+<h6>==</h6>
+<p>
+The plugin wrapper concept comes from larsklevan&#8216;s
+&quot;yui_editor&quot; plugin:
+</p>
+<pre>
+  http://github.com/larsklevan/yui_editor/tree/master
+</pre>
+<p>
+The <a href="../../../../classes/QuietLeightbox.html">QuietLeightbox</a>
+plugin would not exist without this component. My thanks go to the author
+for his hard work.
+</p>
+<p>
+Installation
+</p>
+<h6>======</h6>
+<p>
+script/plugin install [TBD]
+</p>
+<p>
+Feedback
+</p>
+<h6>==</h6>
+<p>
+Send feedback and questions to ahodgkin@rowing.org.uk
+</p>
+<p>
+Copyright (c) 2009 Hipposoft (Andrew Hodgkinson). Released under the MIT
+license.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

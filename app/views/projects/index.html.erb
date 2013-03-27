@@ -1,0 +1,29 @@
+<%= render(
+      {
+        :partial => 'shared/active_inactive_list',
+        :locals  =>
+        {
+          :model          => 'project',
+          :active         => @active_projects,
+          :inactive       => @inactive_projects,
+          :columns        => @columns,
+          :actions_method => 'projecthelp_actions'
+        }
+      }
+    )
+%>
+      <h2>Find projects</h2>
+
+      <% form_tag projects_path, :method => 'get' do %>
+        <%= hidden_field_tag( 'sort',      params[ :sort      ] ) %>
+        <%= hidden_field_tag( 'direction', params[ :direction ] ) %>
+        <%= hidden_field_tag( 'entries',   params[ :entries   ] ) %>
+        <% content_tag :label do %>
+          Search project and customer titles and project codes (TBD - created-at ranges):
+          <%= text_field_tag :search, params[ :search ] %>
+          <%= submit_tag( 'Go', { :name => 'search_go' } ) %>
+<% if ( params[ :search ] ) -%>
+          <%= submit_tag( 'Clear', { :name => 'search_cancel' } ) %>
+<% end -%>
+        <% end %>
+      <% end %>

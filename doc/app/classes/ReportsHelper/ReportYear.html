@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ReportsHelper::ReportYear</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ReportsHelper::ReportYear</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/app/helpers/reports_helper_rb.html">
+                app/helpers/reports_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Helper class for reporthelp_week_selection and reporthelp_month_selection.
+Initialize by passing a year for a full set of months, or by passing a year
+and a range of accurate dates. If the year matches the first or last date
+in that range, then the months associated with the year will be restricted
+according to the matching start and/or end date. The range, if given, MUST
+have a &quot;first&quot; date which is earlier in the year, or at worst the
+same date as the &quot;last&quot; date (i.e. don&#8216;t pass in
+&quot;backwards&quot; ranges).
+</p>
+<p>
+Commercial numbered weeks within which a given date falls may start or end
+on the previous or next year. If the caller provides a limiting date range
+that exhibits this (e.g. passes in 31st December 2008, which actually lies
+in week 1, 2009) then the <a href="ReportYear.html">ReportYear</a> object
+can do nothing other than represent a full set of its own numbered weeks.
+If you want to create an object for the extra year, where applicable, you
+must do so manually.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000167">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">months</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">title</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">weeks</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000167" class="method-detail">
+        <a name="M000167"></a>
+
+        <div class="method-heading">
+          <a href="#M000167" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">( year, date_range = nil )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000167-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000167-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 55</span>
+ 55:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">date_range</span> = <span class="ruby-keyword kw">nil</span> )
+ 56:       <span class="ruby-ivar">@title</span>  = <span class="ruby-identifier">year</span>.<span class="ruby-identifier">to_s</span>
+ 57:       <span class="ruby-ivar">@weeks</span>  = []
+ 58:       <span class="ruby-ivar">@months</span> = []
+ 59: 
+ 60:       <span class="ruby-comment cmt"># &quot;limit&quot; is set if the object is being built for the current year.</span>
+ 61:       <span class="ruby-comment cmt"># Weeks and months are checked and any that lie in the future are</span>
+ 62:       <span class="ruby-comment cmt"># not included.</span>
+ 63: 
+ 64:       <span class="ruby-identifier">today</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>
+ 65:       <span class="ruby-identifier">limit</span> = ( <span class="ruby-identifier">year</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">today</span>.<span class="ruby-identifier">year</span> )
+ 66:       <span class="ruby-identifier">range</span> = ( <span class="ruby-value">1</span><span class="ruby-operator">..</span>( <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">get_last_week_number</span>( <span class="ruby-identifier">year</span> ) ) )
+ 67: 
+ 68:       <span class="ruby-comment cmt"># Work out the weeks, limited as above, or perhaps by an optional date</span>
+ 69:       <span class="ruby-comment cmt"># range passed in by the caller.</span>
+ 70: 
+ 71:       <span class="ruby-identifier">range</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">week</span> <span class="ruby-operator">|</span>
+ 72:         <span class="ruby-identifier">first_day_of_week</span> = <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">date_for</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">week</span>, <span class="ruby-constant">TimesheetRow</span><span class="ruby-operator">::</span><span class="ruby-constant">FIRST_DAY</span>, <span class="ruby-keyword kw">true</span> )
+ 73:         <span class="ruby-identifier">last_day_of_week</span>  = <span class="ruby-identifier">first_day_of_week</span> <span class="ruby-operator">+</span> <span class="ruby-value">6</span>
+ 74: 
+ 75:         <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> (
+ 76:           ( <span class="ruby-identifier">limit</span>      <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">first_day_of_week</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">today</span>           ) <span class="ruby-keyword kw">or</span>
+ 77:           ( <span class="ruby-identifier">date_range</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">first_day_of_week</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">date_range</span>.<span class="ruby-identifier">last</span> )
+ 78:         )
+ 79: 
+ 80:         <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> (
+ 81:           ( <span class="ruby-identifier">date_range</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">last_day_of_week</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">date_range</span>.<span class="ruby-identifier">first</span> )
+ 82:         )
+ 83: 
+ 84:         <span class="ruby-ivar">@weeks</span>.<span class="ruby-identifier">unshift</span>( <span class="ruby-constant">ReportWeek</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">week</span> ) )
+ 85:       <span class="ruby-keyword kw">end</span>
+ 86: 
+ 87:       <span class="ruby-comment cmt"># Work out hte months, again limited as above.</span>
+ 88: 
+ 89:       ( <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">12</span> ).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">|</span>
+ 90: 
+ 91:         <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> (
+ 92:           ( <span class="ruby-identifier">limit</span>      <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">today</span>.<span class="ruby-identifier">month</span>           ) <span class="ruby-keyword kw">or</span>
+ 93:           ( <span class="ruby-identifier">date_range</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">date_range</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">month</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">date_range</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">year</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">year</span> )
+ 94:         )
+ 95: 
+ 96:         <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> (
+ 97:           ( <span class="ruby-identifier">date_range</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">date_range</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">month</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">date_range</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">year</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">year</span>  )
+ 98:         )
+ 99: 
+100:         <span class="ruby-ivar">@months</span>.<span class="ruby-identifier">unshift</span>( <span class="ruby-constant">ReportMonth</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span> ) )
+101:       <span class="ruby-keyword kw">end</span>
+102:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

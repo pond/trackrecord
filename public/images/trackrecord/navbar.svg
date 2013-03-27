@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="navbar.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.1">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3637">
+      <stop
+         style="stop-color:#82fa86;stop-opacity:1;"
+         offset="0"
+         id="stop3639" />
+      <stop
+         style="stop-color:#a5fba6;stop-opacity:1;"
+         offset="1"
+         id="stop3641" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3195">
+      <stop
+         style="stop-color:#373737;stop-opacity:1;"
+         offset="0"
+         id="stop3197" />
+      <stop
+         style="stop-color:#8c8c8c;stop-opacity:1;"
+         offset="1"
+         id="stop3200" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3233">
+      <stop
+         id="stop3235"
+         offset="0"
+         style="stop-color:#176c17;stop-opacity:1;" />
+      <stop
+         id="stop3237"
+         offset="1"
+         style="stop-color:#82fa86;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3197">
+      <stop
+         style="stop-color:#17176c;stop-opacity:1;"
+         offset="0"
+         id="stop3199" />
+      <stop
+         style="stop-color:#82c0fa;stop-opacity:1;"
+         offset="1"
+         id="stop3201" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3197"
+       id="linearGradient3203"
+       x1="125"
+       y1="-37.362183"
+       x2="125"
+       y2="-122.36218"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3233"
+       id="linearGradient3227"
+       x1="343.16382"
+       y1="-35.388039"
+       x2="343.96552"
+       y2="-124.33633"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3195"
+       id="linearGradient3202"
+       x1="506"
+       y1="39.362183"
+       x2="506"
+       y2="104.36218"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(137,17)" />
+    <filter
+       inkscape:collect="always"
+       id="filter3720"
+       x="-0.091532816"
+       width="1.1830656"
+       y="-0.17416678"
+       height="1.3483336">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="7.818428"
+         id="feGaussianBlur3722" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3741"
+       x="-0.087804878"
+       width="1.1756098"
+       y="-0.18947368"
+       height="1.3789474">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="7.5"
+         id="feGaussianBlur3743" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3637"
+       id="linearGradient3643"
+       x1="565"
+       y1="140.28537"
+       x2="565"
+       y2="218.51581"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="559.52035"
+     inkscape:cy="642.93812"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="1152"
+     inkscape:window-x="1600"
+     inkscape:window-y="22"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2383" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       inkscape:export-ydpi="66.998596"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       transform="scale(1,-1)"
+       y="-127.36218"
+       x="30"
+       height="95"
+       width="205"
+       id="rect3739"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter3741)" />
+    <g
+       id="g2942"
+       style="fill:#000000;fill-opacity:1;filter:url(#filter3720)"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596">
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect2944"
+         width="205"
+         height="95"
+         x="235"
+         y="-127.36218"
+         transform="scale(1,-1)"
+         inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+         inkscape:export-xdpi="53.002655"
+         inkscape:export-ydpi="53.002655" />
+      <path
+         sodipodi:type="star"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2946"
+         sodipodi:sides="3"
+         sodipodi:cx="565"
+         sodipodi:cy="166.36218"
+         sodipodi:r1="52.153618"
+         sodipodi:r2="26.076805"
+         sodipodi:arg1="1.5707963"
+         sodipodi:arg2="2.6179939"
+         inkscape:flatsided="false"
+         inkscape:rounded="7.2858386e-17"
+         inkscape:randomized="0"
+         d="M 565,218.5158 L 542.41682,179.40058 L 519.83364,140.28537 L 565,140.28538 L 610.16636,140.28537 L 587.58318,179.40059 L 565,218.5158 z"
+         transform="matrix(0.4594097,0,0,0.1757755,77.93352,101.68958)"
+         inkscape:export-xdpi="53.002655"
+         inkscape:export-ydpi="53.002655"
+         inkscape:export-filename="/Users/adh1003/Desktop/all.png" />
+    </g>
+    <g
+       id="g2908"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596">
+      <rect
+         inkscape:export-ydpi="53.002655"
+         inkscape:export-xdpi="53.002655"
+         inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+         transform="scale(1,-1)"
+         y="-127.36218"
+         x="235"
+         height="95"
+         width="205"
+         id="rect3179"
+         style="fill:url(#linearGradient3227);fill-opacity:1.0;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+         inkscape:export-ydpi="53.002655"
+         inkscape:export-xdpi="53.002655"
+         transform="matrix(0.4594097,0,0,0.1757755,77.93352,101.68958)"
+         d="m 565,218.5158 -22.58318,-39.11522 -22.58318,-39.11521 45.16636,1e-5 45.16636,-1e-5 -22.58318,39.11522 L 565,218.5158 z"
+         inkscape:randomized="0"
+         inkscape:rounded="7.2858386e-17"
+         inkscape:flatsided="false"
+         sodipodi:arg2="2.6179939"
+         sodipodi:arg1="1.5707963"
+         sodipodi:r2="26.076805"
+         sodipodi:r1="52.153618"
+         sodipodi:cy="166.36218"
+         sodipodi:cx="565"
+         sodipodi:sides="3"
+         id="path3259"
+         style="fill:url(#linearGradient3643);fill-opacity:1.0;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="star" />
+    </g>
+    <rect
+       style="fill:url(#linearGradient3203);fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2387"
+       width="205"
+       height="95"
+       x="30"
+       y="-127.36218"
+       transform="scale(1,-1)"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596" />
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#b9d4d8;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
+       x="83.482765"
+       y="93.034492"
+       id="text3175"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596"><tspan
+         sodipodi:role="line"
+         id="tspan3177"
+         x="83.482765"
+         y="93.034492">Home</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3181"
+       width="205"
+       height="95"
+       x="440"
+       y="-127.36218"
+       transform="scale(1,-1)" />
+    <text
+       xml:space="preserve"
+       style="font-size:36;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
+       x="238"
+       y="92.362183"
+       id="text3185"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596"><tspan
+         sodipodi:role="line"
+         id="tspan3187"
+         x="238"
+         y="92.362183">Timesheets</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.06666667;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3229"
+       width="11.435625"
+       height="124.97504"
+       x="191.95512"
+       y="-146.49733"
+       transform="scale(1,-1)"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.2;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3231"
+       width="11.435625"
+       height="124.97504"
+       x="206.65807"
+       y="-142.00478"
+       transform="scale(1,-1)"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596" />
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
+       x="27"
+       y="220.36218"
+       id="text3241"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="27"
+         y="220.36218"
+         id="tspan2463">Select everything above left including the narrow green strips which make</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="245.36218"
+         id="tspan3751">sure Inkscape includes the blur drop shadow during a PNG export. Export as</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="270.36218"
+         id="tspan3753">a 110px high PNG. Use e.g. Photoshop to cut 1px wide slices for the mouse-</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="295.36218"
+         id="tspan3755">over highlight (brightest blue strip), endcap (mid-blue strip) and normal</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="320.36218"
+         id="tspan3757">backgrounds (dark blue or green strips). Cut out just the arrow part with</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="345.36218"
+         id="tspan3562">its drop shadow at a maximum possible width, including the bottom edge</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="370.36218"
+         id="tspan2875">of just-green/half-shadow pixels. Make sure the arrow part ends up in the</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="395.36218"
+         id="tspan2877">middle of this (151 pixels wide overall at the time of writing). You may</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="420.36218"
+         id="tspan2879">need to patch a few columns of shadow at the right hand edge by copying</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="445.36218"
+         id="tspan2881">the left hand edge to avoid a subtle gap in the shadow showing up when</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="470.36218"
+         id="tspan2883">the image is acutally used.</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="495.36218"
+         id="tspan2885" /><tspan
+         sodipodi:role="line"
+         x="27"
+         y="520.36218"
+         id="tspan2897">To avoid compositing problems, it's best to flatten the whole image to match</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="545.36218"
+         id="tspan2901">the background colour of the page.</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="670.36218"
+         id="tspan3568" /><tspan
+         sodipodi:role="line"
+         x="27"
+         y="695.36218"
+         id="tspan3206">The grey stripe on the top right is used to create 1 pixel wide</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="720.36218"
+         id="tspan3208">table_header.png. Export it as a 56 pixel high image. Finally, footer.png</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="745.36218"
+         id="tspan3210">is created from the normal (darkest) blue background and joining its top</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="770.36218"
+         id="tspan3864">two blue pixels with the drop shadow part.</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="795.36218"
+         id="tspan3870" /><tspan
+         sodipodi:role="line"
+         x="27"
+         y="820.36218"
+         id="tspan3872">The various filenames needed should be obvious from the image files already</tspan><tspan
+         sodipodi:role="line"
+         x="27"
+         y="845.36218"
+         id="tspan3874">defined in the TrackRecord public images folder.</tspan></text>
+    <rect
+       style="fill:#a8faaa;fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3613"
+       width="92"
+       height="3"
+       x="291.5"
+       y="158.36218"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-ydpi="66.998596" />
+    <rect
+       inkscape:export-ydpi="66.998596"
+       inkscape:export-xdpi="66.998596"
+       inkscape:export-filename="/Users/adh1003/Desktop/all.png"
+       y="158.36218"
+       x="89.5"
+       height="3"
+       width="92"
+       id="rect2469"
+       style="fill:#a8faaa;fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       style="fill:url(#linearGradient3202);fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2423"
+       width="36"
+       height="65"
+       x="625"
+       y="56.362183"
+       inkscape:export-xdpi="77.5"
+       inkscape:export-ydpi="77.5" />
+  </g>
+</svg>

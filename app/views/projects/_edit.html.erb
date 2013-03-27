@@ -1,0 +1,83 @@
+<%= error_messages_for :record %>
+<% form_for( @record ) do | f | %>
+  <%= f.hidden_field( :lock_version ) %>
+  <table border="0" cellspacing="0" cellpadding="2">
+    <tr align="left" valign="top">
+      <th>Project title</th>
+      <td><%= f.text_field( :title ) %> (required; must be unique)</td>
+    </tr>
+
+    <tr align="left" valign="top">
+      <th>Project code</th>
+      <td><%= f.text_field( :code ) %></td>
+    </tr>
+
+    <tr align="left" valign="top">
+      <th>Description</th>
+      <td><%= f.text_area( :description, { :cols => 40, :rows => 4 } ) %></td>
+    </tr>
+
+    <tr align="left" valign="top">
+      <th>Assigned to customer?</th>
+      <td>
+<% if ( ( customers = Customer.active ).empty? ) -%>
+        There are no active customers.
+<% else -%>
+<%= f.collection_select(
+  :customer_id,
+  customers,
+  :id,
+  :title,
+  { :size => [ customers.size, 10 ].min, :include_blank => 'None' }
+) %>
+<% end -%>
+      </td>
+    </tr>
+
+<% if ( action_name == 'edit' or action_name == 'update' ) -%>
+    <tr align="left" valign="top">
+      <th>Active?</th>
+      <td>
+<%= f.select( :active, [ [ 'Active', true ], [ 'Inactive', false ] ] ) %>
+
+<% if ( @current_user.admin? ) -%>
+        <p>
+          If changing the 'active' state:
+        </p>
+
+        <p>
+          <%= check_box_tag( 'update_tasks', '1', true ) %>
+          Change associated tasks too
+        </p>
+<% else -%>
+        <p>
+          If changing to inactive:
+        </p>
+
+        <p>
+          <%= check_box_tag( 'update_tasks', '1', true ) %>
+          Make associated tasks inactive too
+        </p>
+<% end -%>
+
+        <p>
+          When a project is made inactive, all of its tasks may be made inactive
+          too. Hours cannot be booked to inactive tasks. Once something is made
+          inactive, it cannot be edited again. Only an administrator can make
+          something active again.
+        </p>
+      </td>
+    </tr>
+<% end -%>
+  </table>
+
+  <p>
+<% if ( action_name == 'new' or action_name == 'create' ) -%>
+    <%= f.submit( 'Create', { :disable_with => 'Creating...' } ) %>
+<% else -%>
+    <%= f.submit( 'Update', { :disable_with => 'Updating...' } ) %>
+    else <%= link_to( 'cancel and show details', @record ) %>
+<% end -%>
+    or <%= link_to( 'cancel and list projects', projects_path() ) %>.
+  </p>
+<% end %>

@@ -1,0 +1,25 @@
+<h1>Delete task<%= @record.title.nil? or @record.title.empty? ? '' : " '#{ h( @record.title ) }'" %>?</h1>
+
+<%= image_tag( 'trackrecord/drawing.png', { :size => '96x84', :align => 'left', :alt => '!', :style => 'padding-right: 5px;' } ) %>
+<h2>Warning!</h2>
+
+<% form_for( :task, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+
+  Only use the 'delete' button if you are <strong>absolutely sure</strong>
+  that you wish to delete this task. Any timesheets with rows referring to
+  the task will have those rows automatically deleted. Work packets booked
+  for those rows will be deleted in passing; there will be no record
+  remaining of any time booked to the task. <strong>The action cannot be
+  undone.</strong>
+
+  <br clear="all" /><br />
+
+  <div align="center">
+    <%= f.submit( 'Delete task', { :disable_with => 'Deleting...' } ) %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to( 'Cancel and show details', @record      ) %> |
+  <%= link_to( 'Cancel and list tasks',   tasks_path() ) %>
+</p>

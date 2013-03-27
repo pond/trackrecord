@@ -1,0 +1,21 @@
+<% unless ( @current_user.admin? ) -%>
+    <p>Action not permitted</p>
+<% else
+   @user = @record -%>
+    <h1>Create new account</h1>
+
+    <%= error_messages_for :user %>
+    <% form_for( @user ) do | @f | %>
+      <%= @f.hidden_field( :lock_version ) %>
+
+<%= render( :partial => 'admin_edit' ) -%>
+
+      <p>
+        <%= @f.submit( 'Create', { :disable_with => 'Creating...' } ) %>
+      </p>
+    <% end %>
+
+    <p>
+      <%= link_to 'Cancel', users_path %>
+    </p>
+<% end -%>

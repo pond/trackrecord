@@ -1,0 +1,50 @@
+      <h1>Bulk task import</h1>
+
+<% if ( Project.active.count.zero? ) -%>
+      <p>
+        There are no projects defined. You must
+        <%= link_to( 'create at least one', new_project_path() ) %> before you
+        can import any tasks.
+      </p>
+<% else -%>
+      <% form_for( :import, { :url => { :action => 'create' }, :html => { :id => 'import', :multipart => true } } ) do | f | %>
+
+        <p>
+          TrackRecord can import data from XML format project management files which
+          were created by applications such as OpenProj or Microsoft Project.
+        </p>
+
+        <p>
+          Any tasks with non-zero work time assigned are included. TrackRecord task
+          names are generated from the name of each XML file task, with the name of
+          the most immediate grouping parent summary added as a prefix. Assigned work
+          time in the XML data is converted to TrackRecord project durations in hours,
+          mathematically rounded to two decimal places if need be. Task codes are
+          created from the current date and the task ID, this being typically directly
+          related to position in which the task is listed in most graphical project
+          plan editors. Tasks are imported "flat" since TrackRecord does not support
+          hierarchical task structures.
+        </p>
+
+        <p>
+          To import tasks, choose an XML file stored locally on your computer using
+          the button below, then use the "Analyse" button to upload the file. Please
+          be patient - XML project files can be very large and may take a while to
+          upload and analyse. You can GZip the XML file and upload that instead to
+          save on upload time.
+        </p>
+  
+        <p>
+          When analysis is complete, a summary of the tasks that have been found will
+          be presented, allowing you to control exactly which tasks are imported.
+        </p>
+
+        <%= f.file_field 'xmlfile' %>
+        <%= f.submit( 'Analyse', { :name => 'import[analyse]', :disable_with => 'Analysing...' } ) %>
+
+      <% end %>
+<% end -%>
+    
+      <p>
+        <%= link_to( 'Cancel and return home', home_path() ) %>
+      </p>

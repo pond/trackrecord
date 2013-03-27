@@ -1,0 +1,71 @@
+    <h1>User account details</h1>
+
+    <h2>Basic information</h2>
+
+    <table border="0" cellspacing="0" cellpadding="2">
+      <tr align="left">
+        <th>Full name</th>
+        <td><%= h( @user.name ) %></td>
+      </tr>
+
+      <tr align="left">
+        <th>Contact e-mail address</th>
+        <td><%= h( @user.email) %></td>
+      </tr>
+
+      <tr align="left">
+        <th>User code</th>
+        <td><%= h( @user.code ) %></td>
+      </tr>
+
+      <tr align="left">
+        <td colspan="2"><h2>Security</h2></td>
+      </tr>
+
+      <tr align="left" valign="top">
+        <th>Account type</th>
+        <td><%= h( @user.user_type ) %></td>
+      </tr>
+
+<% if ( @user.restricted? ) -%>
+      <tr align="left" valign="top">
+        <th>Assigned tasks</th>
+        <td>
+          <%= apphelp_object_list( @user.tasks ) %>
+        </td>
+      </tr>
+<% end -%>
+
+      <tr align="left" valign="top">
+        <th>Active?</th>
+        <td><%= @user.active ? 'Yes' : 'No' %></td>
+      </tr>
+
+      <tr align="left" valign="top">
+        <th>Owned by you?</th>
+        <td><%= @user.id == @current_user.id ? 'Yes' : 'No' %></td>
+      </tr>
+
+      <tr align="left">
+        <td colspan="2"><h2>Configuration</h2></td>
+      </tr>
+
+      <tr align="left" valign="top">
+        <th>Default timesheet tasks</th>
+        <td>
+          <%= apphelp_object_list( @user.control_panel.tasks ) %>
+        </td>
+      </tr>
+
+<% if ( @user.privileged? ) -%>
+      <tr align="left" valign="top">
+        <th>Default project</th>
+        <td><%= @user.control_panel.project ? link_to( h( @user.control_panel.project.title ), @user.control_panel.project ) : 'None' %></td>
+      </tr>
+
+      <tr align="left" valign="top">
+        <th>Default customer</th>
+        <td><%= @user.control_panel.customer ? link_to( h( @user.control_panel.customer.title ), @user.control_panel.customer ) : 'None' %></td>
+      </tr>
+<% end -%>
+    </table>

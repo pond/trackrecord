@@ -1,0 +1,26 @@
+/************************************************************************\
+ * File:    trackrecord_print.css                                       *
+ *          Hipposoft 2009                                              *
+ *                                                                      *
+ * Purpose: Default TrackRecord stylesheet. Works in conjunction with   *
+ *          the standard scaffold styles. All media types.              *
+ *                                                                      *
+ * History: 29-Nov-2009 (ADH): Created.                                 *
+\************************************************************************/
+
+div#header, div#footer {
+  display: none;
+}
+
+a, a:link, a:visited {
+  color: #aaa;
+  text-decoration: none;
+}
+
+div#main_page_content {
+  margin: auto;
+}
+
+input {
+  opacity: 0.5;
+}

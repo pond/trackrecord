@@ -1,0 +1,111 @@
+      <h1>Timesheet details</h1>
+      <h2>
+        Week <%= @timesheet.week_number %>,
+        <%= h( @timesheet.year ) %> &ndash;
+        <%= timesheethelp_commit_label( @timesheet ) %>
+      </h2>
+
+      <p />
+      <%= taskhelp_billable_help %> <%= taskhelp_active_help %>
+
+      <p />
+      <table border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tr>
+          <td align="left" width="50%">
+<% unless ( @prev_week.nil? ) -%>
+            <%= link_to( "Show week #{ @prev_week[ :week_number ] }", timesheet_path( @prev_week[ :timesheet ] ) ) %>
+<% end -%>
+          </td>
+          <td align="right" width="50%">
+<% unless ( @next_week.nil? ) -%>
+            <%= link_to( "Show week #{ @next_week[ :week_number ] }", timesheet_path( @next_week[ :timesheet ] ) ) %>
+<% end -%>
+          </td>
+        </tr>
+      </table>
+      
+      <p />
+      <table border="0" cellspacing="0" cellpadding="2" align="center" width="100%" class="ts_show_table">
+        <tr align="center" class="info">
+          <th></th>
+
+<% TimesheetRow::DAY_ORDER.each do | day_number | -%>
+          <th>
+            <%= Date::DAYNAMES[ day_number ] %><br />
+            <%= @timesheet.date_for( day_number )%>
+          </th>
+<% end -%>
+
+          <th valign="bottom">Total</th>
+        </tr>
+
+<% sections_initialise_sections()
+   @row_number   = -1
+   @timesheet.timesheet_rows.each_index do | @timesheet_row_index |
+     @row_number += 1
+     @timesheet_row = @timesheet.timesheet_rows[ @timesheet_row_index ] -%>
+<%   if ( sections_new_section?( @timesheet_row.task ) ) -%>
+        <tr align="left" class="<%= cycle( 'even', 'odd' ) %>">
+          <th colspan="8" class="ts_show_heading">
+            <%= h( sections_section_title() ) %>
+          </th>
+          <th align="center" class="ts_show_section_total total" id="section_total_<%= sections_section_index() %>"></th>
+        </tr>
+
+<%   end -%>
+<%   if ( sections_new_group?( @timesheet_row.task ) ) -%>
+        <tr align="left" class="even group_gap">
+          <th colspan="8"   height="2"></th>
+          <td class="total" height="2"></td>
+        </tr>
+
+<%   end -%>
+<%= render( :partial => 'timesheet_rows/show.html.erb' ) %>
+
+<% end -%>
+        <tr align="center" class="<%= cycle( 'even', 'odd' ) %>">
+          <th align="left" class="total">Totals</th>
+
+<% TimesheetRow::DAY_ORDER.each do | day_number | -%>
+          <td class="total">
+            <%= @timesheet.column_sum( day_number ) %>
+          </td>
+<% end -%>
+
+          <td class="overall_total"><%= @timesheet.total_sum() %></td>
+        </tr>
+
+        <tr><td colspan="8">&nbsp;</td></tr>
+
+        <tr align="center">
+          <th align="left">Description of week</th>
+          <td colspan="7" align="left">
+            <%= timesheethelp_always_visible_description( @timesheet ) %>
+          </td>
+        </tr>
+      </table>
+
+      <p />
+      <table border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tr>
+          <td align="left" width="33%">
+<% unless ( @prev_week.nil? ) -%>
+            <%= link_to( "Show week #{ @prev_week[ :week_number ] }", timesheet_path( @prev_week[ :timesheet ] ) ) %>
+<% end -%>
+          </td>
+          <td align="center" width="34%" nowrap="nowrap">
+<% unless @timesheet.committed -%>
+            <%= link_to( 'Edit this timesheet', edit_timesheet_path( @timesheet ) ) %>,
+            <%= link_to( 'timesheet entry overview', new_timesheet_path() ) %>
+<% else -%>
+            <%= link_to( 'Timesheet entry overview', new_timesheet_path() ) %>
+<% end -%>
+            or <%= link_to( 'return home', home_path() ) %>
+          </td>
+          <td align="right" width="33%">
+<% unless ( @next_week.nil? ) -%>
+            <%= link_to( "Show week #{ @next_week[ :week_number ] }", timesheet_path( @next_week[ :timesheet ] ) ) %>
+<% end -%>
+          </td>
+        </tr>
+      </table>

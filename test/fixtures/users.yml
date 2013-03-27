@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  identifier: 
+  name: 
+  password: 
+  email: 
+  type: 
+  active: 
+  last_submitted: 2008-01-03 16:15:54
+
+two:
+  identifier: 
+  name: 
+  password: 
+  email: 
+  type: 
+  active: 
+  last_submitted: 2008-01-03 16:15:54

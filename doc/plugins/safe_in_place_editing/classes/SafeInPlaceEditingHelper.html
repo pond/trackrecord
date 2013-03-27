@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: SafeInPlaceEditingHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">SafeInPlaceEditingHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/vendor/plugins/safe_in_place_editing/lib/safe_in_place_editing_helper_rb.html">
+                vendor/plugins/safe_in_place_editing/lib/safe_in_place_editing_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+File: safe_in_place_editing_helper.rb #
+</p>
+<pre>
+         Hipposoft 2008                                              #
+                                                                     #
+</pre>
+<p>
+Purpose: Safe, lockable in-place editing - helper methods. #
+</p>
+<pre>
+                                                                     #
+</pre>
+<p>
+History: 24-Jun-2008 (ADH): Created. #
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000003">safe_in_place_editor</a>&nbsp;&nbsp;
+      <a href="#M000004">safe_in_place_editor_field</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">safe_in_place_editor</span><span class="method-args">( field_id, options = {} )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Exact API equivalent of in_place_editor, except fixes various bugs (see
+README for the rationale) and:
+</p>
+<ul>
+<li>Includes an equivalent of the Rails 2 CSRF plug-in patch.
+
+</li>
+<li>New option &quot;:lock_var&quot;, which is the name of a global variable to
+be used in the JS domain to track the lock version at the client side. By
+default set to nil, meaning no optimistic locking support. Options value
+&quot;:lock_version&quot; MUST be set to the lock version of the object for
+which the in-place editor is being created in this case. The variable is
+incremented each time the object is successfully updated through the
+in-place editor, since the server will have incremented its lock version so
+the client must keep in step. If someone else edits the item, the client
+and server lock versions will not match and the update will fail, which is
+the desired result.
+
+</li>
+<li>The &quot;:save_text&quot; option is set to &quot;OK&quot; by default,
+since I detest that nasty lower case &quot;ok&quot; button that&#8216;s
+produced by the JS code otherwise.
+
+</li>
+<li>The &quot;:cancel_text&quot; option is set to &quot;Cancel&quot; by default
+to match the above change.
+
+</li>
+</ul>
+<p>
+Custom on-failure and on-complete functions are used. To try and reduce the
+code bulk for each instance of the editor, hard-coded JS function names are
+used with the support code placed in
+&#8216;safe_in_place_editing.js&#8217;. See there for a reference
+implementation if intending to write customised equivalents. To override
+the default names of these functions for any reason, give the names as
+strings in options properties :on_complete and :on_failure, then make sure
+appropriate JS functions are actually defined.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/safe_in_place_editing/lib/safe_in_place_editing_helper.rb, line 42</span>
+ 42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">safe_in_place_editor</span>( <span class="ruby-identifier">field_id</span>, <span class="ruby-identifier">options</span> = {} )
+ 43: 
+ 44:     <span class="ruby-comment cmt"># Set up some default values</span>
+ 45: 
+ 46:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">protect_against_forgery?</span>
+ 47:       <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:with</span> ] <span class="ruby-operator">||=</span> <span class="ruby-value str">&quot;Form.serialize(form)&quot;</span>
+ 48:       <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:with</span> ] <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; + '&amp;authenticity_token=' + encodeURIComponent('#{ form_authenticity_token }')&quot;</span>
+ 49:     <span class="ruby-keyword kw">end</span>
+ 50: 
+ 51:     <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:on_complete</span> ] <span class="ruby-operator">||=</span> <span class="ruby-value str">'safeInPlaceEditorOnComplete'</span>
+ 52:     <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:on_failure</span>  ] <span class="ruby-operator">||=</span> <span class="ruby-value str">'safeInPlaceEditorOnFailure'</span>
+ 53:     <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:save_text</span>   ] <span class="ruby-operator">||=</span> <span class="ruby-value str">'OK'</span>
+ 54:     <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:cancel_text</span> ] <span class="ruby-operator">||=</span> <span class="ruby-value str">'Cancel'</span>
+ 55: 
+ 56:     <span class="ruby-comment cmt"># Preliminary script data</span>
+ 57: 
+ 58:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">options</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">:lock_var</span> ) )
+ 59:       <span class="ruby-identifier">function</span> = <span class="ruby-node">&quot;window['#{ options[ :lock_var ] }']=#{ options[ :lock_version ] };&quot;</span>
+ 60:     <span class="ruby-keyword kw">else</span>
+ 61:       <span class="ruby-identifier">function</span> = <span class="ruby-value str">''</span>
+ 62:     <span class="ruby-keyword kw">end</span>
+ 63: 
+ 64:     <span class="ruby-identifier">function_name</span> = <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:is_boolean</span> ] <span class="ruby-operator">?</span> <span class="ruby-value str">'InPlaceCollectionEditor'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'InPlaceEditor'</span>
+ 65: 
+ 66:     <span class="ruby-identifier">function</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;new Ajax.#{ function_name }(&quot;</span>
+ 67:     <span class="ruby-identifier">function</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;'#{ field_id }', &quot;</span>
+ 68:     <span class="ruby-identifier">function</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;'#{ url_for( options[ :url ] ) }'&quot;</span>
+ 69: 
+ 70:     <span class="ruby-comment cmt"># Map Rails in-place editor options to JS in-place editor options - see:</span>
+ 71:     <span class="ruby-comment cmt">#</span>
+ 72:     <span class="ruby-comment cmt">#   http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor</span>
+ 73: 
+ 74:     <span class="ruby-identifier">js_options</span> = {}
+ 75: 
+ 76:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'rows'</span>                ] =   <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:rows</span>    ] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:rows</span>    ]
+ 77:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'cols'</span>                ] =   <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:cols</span>    ] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:cols</span>    ]
+ 78:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'size'</span>                ] =   <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:size</span>    ] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:size</span>    ]
+ 79:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'ajaxOptions'</span>         ] =   <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:options</span> ] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:options</span> ]
+ 80:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'htmlResponse'</span>        ] = <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:script</span>  ] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:script</span>  ]
+ 81: 
+ 82:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'cancelText'</span>          ] = <span class="ruby-node">%('#{ options[ :cancel_text           ] }')</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:cancel_text</span>           ]
+ 83:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'okText'</span>              ] = <span class="ruby-node">%('#{ options[ :save_text             ] }')</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:save_text</span>             ]
+ 84:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'loadingText'</span>         ] = <span class="ruby-node">%('#{ options[ :loading_text          ] }')</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:loading_text</span>          ]
+ 85:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'savingText'</span>          ] = <span class="ruby-node">%('#{ options[ :saving_text           ] }')</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:saving_text</span>           ]
+ 86:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'clickToEditText'</span>     ] = <span class="ruby-node">%('#{ options[ :click_to_edit_text    ] }')</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:click_to_edit_text</span>    ]
+ 87:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'textBetweenControls'</span> ] = <span class="ruby-node">%('#{ options[ :text_between_controls ] }')</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:text_between_controls</span> ]
+ 88: 
+ 89:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'externalControl'</span>     ] = <span class="ruby-node">&quot;'#{          options[ :external_control ]   }'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:external_control</span> ]
+ 90:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'loadTextURL'</span>         ] = <span class="ruby-node">&quot;'#{ url_for( options[ :load_text_url    ] ) }'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:load_text_url</span>    ]
+ 91: 
+ 92:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'callback'</span>            ] = <span class="ruby-node">&quot;function(form) { return #{ options[ :with ] }; }&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:with</span>       ]
+ 93:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'collection'</span>          ] = <span class="ruby-value str">%([['false','No'],['true','Yes']])</span>                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">:is_boolean</span> ]
+ 94: 
+ 95:     <span class="ruby-comment cmt"># Set up the custom on-failure and on-complete handlers</span>
+ 96: 
+ 97:     <span class="ruby-identifier">js_options</span>[ <span class="ruby-value str">'onFailure'</span> ] = <span class="ruby-node">&quot;#{ options[ :on_failure ] }&quot;</span>
+ 98: 
+ 99:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">options</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">:lock_var</span> ) )
+100:       <span class="ruby-identifier">js_options</span>[<span class="ruby-value str">'onComplete'</span>] = <span class="ruby-node">&quot;function(transport, element) {#{ options[ :on_complete ] }(transport,element,'#{ options[ :lock_var ] }');}&quot;</span>
+101:     <span class="ruby-keyword kw">else</span>
+102:       <span class="ruby-identifier">js_options</span>[<span class="ruby-value str">'onComplete'</span>] = <span class="ruby-node">&quot;#{ options[ :on_complete ] }&quot;</span>
+103:     <span class="ruby-keyword kw">end</span>
+104: 
+105:     <span class="ruby-comment cmt"># Assemble the content</span>
+106: 
+107:     <span class="ruby-identifier">function</span> <span class="ruby-operator">&lt;&lt;</span> ( <span class="ruby-value str">', '</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">options_for_javascript</span>( <span class="ruby-identifier">js_options</span> ) ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">js_options</span>.<span class="ruby-identifier">empty?</span>
+108:     <span class="ruby-identifier">function</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">')'</span>
+109: 
+110:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">javascript_tag</span>( <span class="ruby-identifier">function</span> )
+111:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">safe_in_place_editor_field</span><span class="method-args">( object, method, tag_options = {}, editor_options = {}, no_escape = false )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Exact API equivalent of in_place_editor_field, except fixes various bugs
+(see the README for rational) and allows either an object name in the first
+parameter (e.g. &quot;:foo&quot;, in which case instance variable
+&quot;@foo&quot; must point to the object instance of interest) or an
+object instance (to save messing around with magic instance variables, but
+obtains the object name from &quot;class.class_name.underscore&quot;, so
+may not be appropriate for unusual object classes). Anyway, clearer error
+reporting and the ability to pass in an object reference directly may help
+avoid a common error experienced with the InPlaceEditing plug-in code, as
+described here at the time of writing:
+</p>
+<pre>
+  http://wiki.rubyonrails.org/rails/pages/InPlaceEditing
+</pre>
+<p>
+Includes the following options:
+</p>
+<ul>
+<li>:lock_var is the name of the variable used for optimistic locking, by
+default set to a row-unique value. The assumption is that this same
+variable gets used throughout the row so that multiple edits on that row
+all cause the same variable to be incremented. If your back-end update
+function has side effects that might invalidate the value shown in another
+column on that row - which would be pretty strange! - you&#8216;d need to
+override the lock variable name with something that&#8216;s unique to both
+the row and the column. When using a lock variable, additional option
+&quot;:lock_version&quot; is always set internally to the lock version of
+the object for which the field is being built and cannot be overridden.
+
+</li>
+<li>:with is extended to include a &quot;lock_version&quot; parameter in the
+query string so that the client side&#8216;s idea of the current
+object&#8216;s lock version may be communicated to the server&#8216;s
+attribute update action. This is done internally; there is no need to set
+the option yourself.
+
+</li>
+</ul>
+<p>
+The Prototype library getText function must be patched as described in the
+README rationale; &quot;application.js&quot; is a good place to do this.
+</p>
+<p>
+Note an optional fifth parameter which if &#8216;true&#8217; will prevent
+HTML escaping of the value for values which are really meant to contain
+HTML code. Be very, very careful with this.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/safe_in_place_editing/lib/safe_in_place_editing_helper.rb, line 150</span>
+150:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">safe_in_place_editor_field</span>( <span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">tag_options</span> = {}, <span class="ruby-identifier">editor_options</span> = {}, <span class="ruby-identifier">no_escape</span> = <span class="ruby-keyword kw">false</span> )
+151: 
+152:     <span class="ruby-comment cmt"># Allow a symbol or object instance to be passed. Since the symbol use</span>
+153:     <span class="ruby-comment cmt"># case involves accessing a 'magic' related instance variable name and</span>
+154:     <span class="ruby-comment cmt"># since there are lots of examples via Google of this confusing people,</span>
+155:     <span class="ruby-comment cmt"># raise a helpful error message if the relevant variable is missing.</span>
+156: 
+157:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">object</span>.<span class="ruby-identifier">instance_of?</span>( <span class="ruby-constant">Symbol</span> ) )
+158:       <span class="ruby-identifier">object_name</span> = <span class="ruby-identifier">object</span>
+159:       <span class="ruby-identifier">var_name</span> = <span class="ruby-node">&quot;@#{ object_name }&quot;</span>
+160:       <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">instance_variable_defined?</span>( <span class="ruby-identifier">var_name</span> ) )
+161:         <span class="ruby-identifier">object</span> = <span class="ruby-identifier">instance_variable_get</span>( <span class="ruby-identifier">var_name</span> )
+162:       <span class="ruby-keyword kw">else</span>
+163:         <span class="ruby-identifier">raise</span>( <span class="ruby-value str">'If passing \':foo\' to in_place_editor_field, \'@foo\' must refer to the object for which the field is being built'</span> )
+164:       <span class="ruby-keyword kw">end</span>
+165:     <span class="ruby-keyword kw">else</span>
+166:       <span class="ruby-identifier">object_name</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">class_name</span>.<span class="ruby-identifier">underscore</span>
+167:     <span class="ruby-keyword kw">end</span>
+168: 
+169:     <span class="ruby-comment cmt"># Pass the lock version in for optimistic locking support, should the</span>
+170:     <span class="ruby-comment cmt"># object support it. The update callback function must manually compare</span>
+171:     <span class="ruby-comment cmt"># the params[ :lock_version ] value against the lock_version.to_s()</span>
+172:     <span class="ruby-comment cmt"># value of the object that's being updated.</span>
+173: 
+174:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">object</span>.<span class="ruby-identifier">respond_to?</span>( <span class="ruby-identifier">:lock_version</span> ) )
+175:       <span class="ruby-identifier">var</span> = <span class="ruby-node">&quot;#{ object_name }_#{ object.id }_safeInPlaceEditorLockVersion&quot;</span>
+176: 
+177:       <span class="ruby-identifier">editor_options</span>[ <span class="ruby-identifier">:lock_version</span> ]   = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">lock_version</span>.<span class="ruby-identifier">to_s</span>
+178:       <span class="ruby-identifier">editor_options</span>[ <span class="ruby-identifier">:lock_var</span>     ] <span class="ruby-operator">||=</span> <span class="ruby-identifier">var</span>
+179:       <span class="ruby-identifier">editor_options</span>[ <span class="ruby-identifier">:with</span>         ] <span class="ruby-operator">||=</span> <span class="ruby-value str">&quot;Form.serialize(form)&quot;</span>
+180:       <span class="ruby-identifier">editor_options</span>[ <span class="ruby-identifier">:with</span>         ]  <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; + '&amp;lock_version=' + #{ var }&quot;</span>
+181:     <span class="ruby-keyword kw">end</span>
+182: 
+183:     <span class="ruby-comment cmt"># Escape the value unless told not to and construct the complete in-place</span>
+184:     <span class="ruby-comment cmt"># editor assembly. Check for boolean values too, allowing caller-override.</span>
+185: 
+186:     <span class="ruby-identifier">column_value</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">method</span> )
+187: 
+188:     <span class="ruby-identifier">is_boolean</span> = ( <span class="ruby-identifier">editor_options</span>[ <span class="ruby-identifier">:is_boolean</span> ] <span class="ruby-operator">||</span> ( <span class="ruby-identifier">column_value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">TrueClass</span> ) <span class="ruby-operator">||</span> ( <span class="ruby-identifier">column_value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">FalseClass</span> ) )
+189:     
+190:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">is_boolean</span> )
+191:       <span class="ruby-identifier">column_value</span> = <span class="ruby-identifier">column_value</span> <span class="ruby-value">? </span><span class="ruby-value str">'Yes'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'No'</span>
+192:     <span class="ruby-keyword kw">else</span>
+193:       <span class="ruby-identifier">column_value</span> = <span class="ruby-constant">ERB</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-identifier">html_escape</span>( <span class="ruby-identifier">column_value</span> ) <span class="ruby-keyword kw">unless</span> ( <span class="ruby-identifier">no_escape</span> )
+194:     <span class="ruby-keyword kw">end</span>
+195: 
+196:     <span class="ruby-identifier">tag_options</span> = {
+197:       <span class="ruby-identifier">:tag</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;span&quot;</span>,
+198:       <span class="ruby-identifier">:id</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{object_name}_#{method}_#{object.id}_in_place_editor&quot;</span>,
+199:       <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;in_place_editor_field&quot;</span>
+200:     }.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">tag_options</span> )
+201: 
+202:     <span class="ruby-identifier">editor_options</span>[ <span class="ruby-identifier">:url</span> ] <span class="ruby-operator">||=</span> <span class="ruby-identifier">url_for</span>( {
+203:       <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;set_#{object_name}_#{method}&quot;</span>,
+204:       <span class="ruby-identifier">:id</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">id</span> 
+205:     } )
+206: 
+207:     <span class="ruby-comment cmt"># Update the boolean value flag, unless the caller had already set one.</span>
+208: 
+209:     <span class="ruby-identifier">editor_options</span>[ <span class="ruby-identifier">:is_boolean</span> ] = <span class="ruby-identifier">is_boolean</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">editor_options</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-identifier">:is_boolean</span> )
+210: 
+211:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">content_tag</span>( <span class="ruby-identifier">:span</span>, <span class="ruby-identifier">column_value</span>, <span class="ruby-identifier">tag_options</span> ) <span class="ruby-operator">+</span>
+212:            <span class="ruby-identifier">safe_in_place_editor</span>( <span class="ruby-identifier">tag_options</span>[ <span class="ruby-identifier">:id</span> ], <span class="ruby-identifier">editor_options</span> )
+213:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  project_id: 1
+  title: MyString
+  code: MyString
+  description: MyString
+  duration: 1
+  committed: 1
+  active: 1
+
+two:
+  project_id: 1
+  title: MyString
+  code: MyString
+  description: MyString
+  duration: 1
+  committed: 1
+  active: 1

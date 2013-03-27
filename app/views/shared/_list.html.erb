@@ -1,0 +1,68 @@
+<%
+  # List partial. Creates a table showing a list of items. Requires rendering
+  # with local variables as follows:
+  #
+  #   model:          Name of model to list, lower case, singular - e.g. "user"
+  #   collection:     The array of objects to list
+  #   columns:        Describes the list header and contents columns in a
+  #                   merged format based on arrays of hashes with all
+  #                   properties needed for both the header and body rows, as
+  #                   described for helper functions "apphelp_list_header" and
+  #                   "apphelp_list_row".
+  #   actions_method: Name of a helper method to call which will be passed the
+  #                   current list item as an input parameter and must return
+  #                   an array of action names, as described for
+  #                   "apphelp_list_row". If omitted, there will be no actions
+  #                   column added to the list table.
+-%>
+<% if ( collection.nil? or collection.empty? ) -%>
+      <p class="list_empty">
+        No items <%= ( params[ :search ].nil? or params[ :search ].empty? ) ? "to show" : "found" %>.
+      </p>
+<% else -%>
+      <table border="0" cellspacing="0" cellpadding="2" width="100%" class="list">
+        <tr>
+          <td colspan="<%= columns.length + 1 %>">
+            <table border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tr valign="middle">
+                <td align="left" class="navigation" width="34%">
+                  <% form_tag( send( "#{ model.pluralize }_path" ), { :method => 'get' } ) do %>
+                    <%= hidden_field_tag( 'sort',      params[ :sort      ] ) %>
+                    <%= hidden_field_tag( 'direction', params[ :direction ] ) %>
+                    <%= hidden_field_tag( 'search',    params[ :search    ] ) %>
+                    <% content_tag( :label ) do %>
+                      Items per page:
+<%=
+  select_tag(
+    'entries',
+    options_for_select(
+      [ '10', '25', '50', '200', '500' ],
+      params[ :entries ]
+    )
+  )
+%>
+                    <% end %>
+                    <%= submit_tag( 'Change', { :name => 'entries_change' } ) %>
+                  <% end %>
+                </td>
+                <td align="center" width="32%">
+                  <%= page_entries_info( collection ) %>
+                </td>
+                <td align="right" width="34%">
+<% if ( collection.total_pages == 1 ) -%>
+                  Displaying only page
+<% else -%>
+                  <%= will_paginate( collection ) %>
+<% end -%>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+<%= apphelp_list_header( columns, model, actions_method ) %>
+<% collection.each do | item | -%>
+<%= apphelp_list_row( columns, item, actions_method ) %>
+<% end -%>
+      </table>
+<% end -%>

@@ -1,0 +1,230 @@
+= YUI Tree
+
+The YUI Tree plugin integrates the Yahoo User Interface (YUI) library TreeView
+component into a Rails application. For more information on YUI and TreeView, please see http://developer.yahoo.com/yui/examples/treeview.
+
+At the time of writing this plugin is designed to work with YUI version 2.7.0.
+
+
+== Installation
+
+From the root of the Rails application to which you wish to add the plugin,
+run this command:
+
+  script/plugin install svn://rubyforge.org/var/svn/yuitree/yui_tree
+
+If you wish to install the API documentation into "doc/plugins", next run:
+
+  rake doc:plugins:yui_tree
+
+
+==  Usage
+=== Example 1: Single model "nested set" use
+
+Set the parent of an instance of a hierarchical taxonomy model called Category.
+
+
+==== models/category.rb
+
+Use of the YUI tree plugin is simplest when it is used to represent a single
+model with nested set characteristics, for example through the Awesome Nested
+Set plug-in (see http://github.com/collectiveidea/awesome_nested_set):
+
+  class Category < ActiveRecord::Base
+    acts_as_nested_set()
+
+    # Later example code for the view uses this custom "to_s" method
+    # so that "<%= some_category %>" will write the name of the category
+    # into the view, or write nothing if some_category is "nil", without
+    # needing any "nil?" checks (c.f. using "<%= some_category.name %>").
+
+    def to_s
+      name
+    end
+  end
+
+
+==== controllers/category_controller.rb
+
+In the Controller, note that YUI tree is used. You can use Rails
+ActionController::Filters semantics here (e.g. as in "before_filter"):
+
+  class CategoryController < ApplicationController
+    uses_yui_tree( { :xhr_url_method => :categories_path }, {} )
+
+    # ...where "{}" might be :only   => [ :new, :create, :edit, :update ] )
+    #                     or :except => [ :index                        ] )
+    #
+    # ...or some other valid filter options hash, or even simply omitted
+    # entirely to include the tree resources in all views unconditionally.
+
+    def index
+      return if yui_tree_handled_xhr_request?( Category )
+
+      # ...the rest of a normal 'index' action goes here.
+    end
+  end
+
+In the above code, we also specify that the XHR requests should go via
+"categories_path", directing them to the controller's "index" method. This
+method then makes a single-line call to a YUI tree support method to get data
+sent back to the tree view if the request is intended for it, else continue
+processing as normal. This all works automatically for nested set-like
+objects due to the various default values and method names used by the tree
+code, described in more detail in the rest of the API documentation.
+
+
+==== views/layouts/application.html.erb
+
+In the application layout, conditionally include the YUI components. The
+"uses_yui_tree" declarations in controllers lead to only those views which
+actually use YUI components including the relevant scripts and stylesheets,
+improving page load times for views which don't need the tree view.
+
+  <head>
+  <%= include_yui_tree_if_used( '  ' ) -%>
+  </head>
+
+The optional parameter to the call above is a string used as prefix on each
+line of output. Usually this is a series of spaces so that the output HTML
+indentation looks good (if you care about such things!).
+
+
+==== views/categories/new.html.erb or edit.html.erb
+
+Finally, invoke the tree from relevant views. Assuming the controller sets @category to the new Category or category being edited, then:
+
+  <% form_for( @category ) do | f | %>
+    <p>
+      <b><%= label_tag :enclosing_category, 'Parent category' %>:</b>
+      <span id="selected_item"><%= @category.parent %></span>
+      <%= hidden_field_tag :enclosing_category, "#{ @category.parent_id }" %>
+    </p>
+    <%=
+      parent    = @item.parent
+      ancestors = parent.ancestors unless ( parent.nil? )
+
+      yui_tree(
+        :target_form_field_id => 'enclosing_category',
+        :target_name_field_id => 'selected_item',
+        :exclude              => @category,
+        :highlight            => parent,
+        :expand               => ancestors
+      )
+    %>
+  <% end %>
+
+This code writes a label for the 'parent' field selector, then writes a SPAN
+which contains the currently selected parent name (if any). This is optional.
+A mandatory hidden field carries the ID of the selected item. This uses custom
+form field "enclosing_category" for reasons described later.
+
+Then the tree is written. The ID of the hidden field is given so that the YUI
+tree handler code knows where to write the ID of any item selected in the tree.
+The optional name field ID of "selected_item" makes the tree also write the
+name of the selected item into that element, as innerHTML. Since the category
+we are editing or creating cannot be its own parent, we ask the tree to exclude
+this item when listing other categories. If the item already has a parent then
+the tree needs to be told to select (highlight) this item by default. Since
+that parent may lie down in some branch below the root node ('trunk') level the
+tree is also asked to expand the ancestor nodes of that parent.
+
+The YUI tree's automatic code handles cases where things act as a nested set,
+using methods "id" to determine the IDs of objects for form submissions and
+"name" to determine the human-readable names to show in the tree selector. All
+of this can be overridden for more complex cases.
+
+A complication arises because of the fiddly way which assignments of parents in
+something like a tree of categories, where several items will want to sit at
+the root/trunk level, must be carried out. One way to tackle this is to use a
+custom controller method which assigns the parent and call it using code
+along the following lines, in the controller:
+
+  def create
+    parent_id  = params[ :enclosing_parent ]
+    Category   = Category.new( params[ :category )
+    successful = set_parent( @category, parent_id ) do
+      @category.save # Note how here we pass a block in to "set_parent"
+    end
+
+    if ( successful )
+      flash[ :notice ] = 'New category created successfully'
+      redirect_to @category
+    else
+      render :action => 'new'
+    end
+  end
+
+Since this is example code, I'm not including issues such as a web services
+XML API in there (compare this with Rails scaffold code, which does) and
+display strings are hard-coded (modern Rails applications might be using the
+internalisation mechanism instead).
+
+The example "set_parent" code is below. It handles changing the parent of the
+item, as well as saving it or updating it via calling back to the block which
+the caller passes in, atomically. It does that via a transaction. If any part
+of the process fails, the database will be rolled back to a consistent state.
+
+  def set_parent( child, parent_id )
+    parent_id = parent_id.to_i
+
+    begin
+      child.class.transaction do
+        return false unless ( yield() == true )
+
+        if ( parent_id.zero? )
+          child.move_to_root()
+        else
+          child.move_to_child_of( parent_id )
+        end
+      end
+
+    rescue => error
+      # Report the error, e.g. via 'flash'
+      return false
+
+    end
+
+    return true
+  end
+
+
+=== Example 2: Non-"nested set" or multi-model use
+
+For models which do not conform to Acts As Nested Set style semantics, or to
+use a tree for multiple models concurrently (e.g. assign Tasks to Projects,
+where Task and Project are distinctly different models) then you will need to
+provide a controller which serves up data for the XML requests made by the YUI
+tree. Consult the API documentation for details. For real-world example code,
+have a look at the XML request handler in TrackRecord, a Rails application
+which uses a YUI tree to manage Customers, Projects and Tasks:
+
+http://trackrecord.rubyforge.org/svn/app/controllers/trees_controller.rb
+
+
+== Configuration
+
+Default settings are held in in "config/yui_editor.yml". You can override the
+editor defaults in each controller with in the "uses_yui_tree" method call if
+you wish; see the documentation for that call for details.
+
+
+== Heritage
+
+The plugin wrapper concept comes from larsklevan's "yui_editor" plugin:
+
+http://github.com/larsklevan/yui_editor/tree/master
+
+The YuiTree plugin would not exist without this component. My thanks go to the
+author for his hard work.
+
+
+== Feedback
+
+Please send feedback and questions to ahodgkin@rowing.org.uk
+
+
+= Copyright
+
+Copyright (c) 2009 Hipposoft (Andrew Hodgkinson).
+Released under the MIT license.

@@ -1,0 +1,171 @@
+      <% form_for( :import, { :url => { :action => 'update' }, :html => { :id => 'import' } } ) do | f | %>
+
+        <p>
+          The tasks found in the file are listed below. Only items with a ticked
+          check box in the "Import?" column will be imported. The menu below the
+          task list selects the project to which all tasks will be assigned. The
+          default project is chosen in your
+          <%= link_to( 'account settings', edit_user_path( @current_user ) ) %>.
+        </p>
+
+        <table border="0" cellspacing="0" cellpadding="2" align="center" class="bulk_task_import">
+
+          <tr valign="middle" align="center" class="info">
+            <th align="left">&nbsp;Name</th>
+            <th align="left">Code</th>
+            <th>&nbsp;Duration&nbsp;<br />(hours)</th>
+            <th>
+              Billable?<br />
+              <script language="javascript" type="text/javascript">
+                check_box_toggle_field( 'toggle_billable', 'billable' );
+              </script>
+            </th>
+            <th>
+              Import?<br />
+              <script language="javascript" type="text/javascript">
+                check_box_toggle_field( 'toggle_import', 'import' );
+              </script>
+            </th>
+          </tr>
+
+<%
+   # Check for duplicated titles
+
+   titles = {}
+   dupes  = 0
+
+   @import.filtered_tasks.each do | task |
+     if ( titles[ task.title ] == true )
+       dupes += 1
+       titles[ task.title ] = dupes
+     elsif ( titles[ task.title ].nil? )
+       titles[ task.title ] = true
+     end
+   end
+
+   billable_by_default = Task.new.billable
+   breadcrumb          = nil
+-%>
+<%
+   @import.filtered_tasks.each_index do | index |
+     task = @import.filtered_tasks[ index ]
+-%>
+<%   
+     current_breadcrumb = @import.filtered_parent_titles[ index ].join( ': ' )
+     if ( breadcrumb != current_breadcrumb )
+       breadcrumb = current_breadcrumb
+-%>
+          <tr valign="top" align="center" class="breadcrumb">
+            <td align="left" colspan="5">
+              <strong>Outline level <%= task.level %></strong><% unless ( breadcrumb.empty? ) -%>&nbsp;&nbsp;<%= breadcrumb %><% end %>
+            </td>
+          </tr>
+
+<%   end -%>
+          <tr valign="top" align="center" class="<%= cycle( 'even', 'odd' ) -%>">
+            <td align="left" class="task_title">
+              <%= titles[ task.title ] != true ? "<span class=\"dup\">#{ titles[ task.title] }:</span>" : '&nbsp;' %>
+              <%= text_field_tag( "import[filtered_tasks][#{ index }][title]", task.title, { :size => 50, :class => 'task_title' } ) %>
+              &nbsp;
+            </td>
+            <td align="left">
+              <%= text_field_tag( "import[filtered_tasks][#{ index }][code]", task.code, { :size => 16 } ) %>
+            </td>
+            <td>
+              <%= text_field_tag( "import[filtered_tasks][#{ index }][duration]", task.duration, { :maxlength => 6, :size => 6 } ) %>
+            </td>
+            <td>
+              <%= check_box_tag( "import[filtered_tasks][#{ index }][billable]", '1', billable_by_default, { :class => 'checkbox billable' } ) %>
+            </td>
+            <td>
+              <%= check_box_tag( "import[filtered_tasks][#{ index }][import]", '1', true, { :class => 'checkbox import' } ) %>
+            </td>
+          </tr>
+
+<% end -%>
+        </table>
+<% if ( dupes > 0 ) -%>
+
+        <p align="center">
+          <strong>Warning!</strong>
+          Some task titles are identical. Consider renaming them if importing.
+        </p>
+<% end -%>
+
+        <!-- Remember any other information about tasks across form submissions -->
+
+<%
+   @import.filtered_tasks.each_index do | index |
+     task = @import.filtered_tasks[ index ]
+-%>
+        <%= hidden_field_tag( "import[filtered_tasks][#{ index }][level]", task.level ) %>
+        <%= hidden_field_tag( "import[filtered_tasks][#{ index }][tid]",   task.tid   ) %>
+        <%= hidden_field_tag( "import[filtered_tasks][#{ index }][uid]",   task.uid   ) %>
+<%   
+     @import.filtered_parent_uids[ index ].each_index do | parent_index |
+       uid   = @import.filtered_parent_uids[   index ][ parent_index ]
+       title = @import.filtered_parent_titles[ index ][ parent_index ]
+-%>
+        <%= hidden_field_tag( "import[filtered_parent_uids][#{ index }][#{ parent_index }]", uid ) %>
+        <%= hidden_field_tag( "import[filtered_parent_titles][#{ index }][#{ parent_index }]", title ) %>
+<%   end -%>
+<% end   -%>
+<%
+   @import.tasks.each_index do | index |
+     task = @import.tasks[ index ]
+-%>
+        <%= hidden_field_tag( "import[tasks][#{ index }][level]",    task.level    ) %>
+        <%= hidden_field_tag( "import[tasks][#{ index }][tid]",      task.tid      ) %>
+        <%= hidden_field_tag( "import[tasks][#{ index }][uid]",      task.uid      ) %>
+        <%= hidden_field_tag( "import[tasks][#{ index }][code]",     task.code     ) %>
+        <%= hidden_field_tag( "import[tasks][#{ index }][title]",    task.title    ) %>
+        <%= hidden_field_tag( "import[tasks][#{ index }][duration]", task.duration ) %>
+<%
+     @import.parent_uids[ index ].each_index do | parent_index |
+       uid   = @import.parent_uids[   index ][ parent_index ]
+       title = @import.parent_titles[ index ][ parent_index ]
+-%>
+        <%= hidden_field_tag( "import[parent_uids][#{   index }][#{ parent_index }]", uid   ) %>
+        <%= hidden_field_tag( "import[parent_titles][#{ index }][#{ parent_index }]", title ) %>
+<%   end -%>
+<% end   -%>
+
+        <!-- What next? -->
+
+        <p />
+        <table border="0" cellspacing="0" cellpadding="2" align="center" class="bulk_task_import">
+          <tr>
+            <th align="right">Now EITHER</th>
+            <td>
+              Assign all tasks to
+<%= timphelp_project_selector( f, '          ' ) %>
+              and
+              <%= f.submit( 'import selected tasks', { :name => 'do_import', :disable_with => 'Importing...' } ) %>
+            </td>
+          </tr>
+<% unless ( @import.max_level.zero? ) -%>
+          <tr>
+            <th align="right">OR</th>
+            <td>
+              Collapse tasks above
+<%= timphelp_collapse_selector( f, @import.max_level, '          ' ) %>
+              and
+              <%= f.submit( 'generate new task list', { :name => 'do_collapse', :disable_with => 'Generating...' } ) %>
+            </td>
+          </tr>
+<% end -%>
+          <tr>
+            <th align="right">OR</th>
+            <td>
+              <%= link_to( 'Cancel and choose another file', new_task_import_path() ) %>   
+            </td>
+          </tr>
+          <tr>
+            <th align="right">OR</th>
+            <td>
+              <%= link_to( 'Cancel and return home', home_path() ) %>   
+            </td>
+          </tr>
+        </table>
+
+      <% end %>

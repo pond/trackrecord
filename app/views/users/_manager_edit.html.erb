@@ -1,0 +1,78 @@
+    <h2>Basic information</h2>
+
+    <table border="0" cellspacing="0" cellpadding="2">
+      <tr align="left">
+        <th>Full name (required)</th>
+        <td><%= @user.id == @current_user.id ? @f.text_field( :name ) : h( @user.name )%></td>
+      </tr>
+
+      <tr align="left">
+        <th>Contact e-mail address (required)</th>
+        <td><%= @user.id == @current_user.id ? @f.text_field( :email ) : h( @user.email )%></td>
+      </tr>
+
+      <tr align="left">
+        <th>User code (leave as-is if unsure)</th>
+        <td><%= @f.text_field( :code ) %></td>
+      </tr>
+    </table>
+
+    <h2>Security</h2>
+
+    <table border="0" cellspacing="0" cellpadding="2">
+<% unless( @user.admin? ) -%>
+      <tr align="left" valign="top">
+        <th>Tasks the user is permitted to see</th>
+        <td>
+<%=
+  taskhelp_degrading_selector(
+    :user_permitted_task_list,
+    { :form => @f, :user => @user, :line_prefix => '          ' }
+  )
+%>
+        </td>
+      </tr>
+<% end -%>
+
+      <tr align="left" valign="top">
+        <th>Account type</th>
+        <td>
+<%= userhelp_user_type_selector( @f, @user ) %>
+        </td>
+      </tr>
+    </table>
+
+<% if( @user.id == @current_user.id ) %>
+    <h2>Configuration</h2>
+<% fields_for :control_panel do | cp | -%>
+    <%= error_messages_for :control_panel %>
+
+    <table border="0" cellspacing="0" cellpadding="2">
+      <tr align="left" valign="top">
+        <th>Tasks added to new timesheets by default</th>
+        <td>
+<%=
+  taskhelp_degrading_selector(
+    :user_default_task_list,
+    { :form => cp, :user => @user, :line_prefix => '          ' }
+  )
+%>
+        </td>
+      </tr>
+
+      <tr align="left" valign="top">
+        <th>Project assigned to new tasks by default</th>
+        <td>
+<%= userhelp_default_project_selector( @user ) %>
+        </td>
+      </tr>
+
+      <tr align="left" valign="top">
+        <th>Customer assigned to new projects by default</th>
+        <td>
+<%= userhelp_default_customer_selector( cp, @user ) %>
+        </td>
+      </tr>
+    </table>
+<% end -%>
+<% end -%>

@@ -1,0 +1,622 @@
+/************************************************************************\
+ * File:    trackrecord_all.css                                         *
+ *          Hipposoft 2008                                              *
+ *                                                                      *
+ * Purpose: Default TrackRecord stylesheet. Works in conjunction with   *
+ *          the standard scaffold styles. All media types.              *
+ *                                                                      *
+ * History: 24-May-2008 (ADH): Standard comment header added.           *
+ *          02-Nov-2009 (ADH): Version 1.5 extensions added.            *
+\************************************************************************/
+
+/* Overall page */
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 800px;
+}
+
+/* Heading font */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+/* Header with navigation bar */
+
+div#header {
+  padding: 0 2%;
+  height: 82px;
+  background: url( ../images/trackrecord/menu_normal.png ) top left repeat-x;
+}
+
+div#title {
+  margin-top: -4px;
+  float: left;
+  color: #fff;
+}
+
+span.slug {
+  font-size: 80%;
+}
+
+span.slug a {
+  color: #fff;
+  text-decoration: none;
+}
+
+div#header span.version {
+  color: #bbb;
+}
+
+div#header h1, div#navbar a {
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 24px 0 0 0;
+}
+
+div#header h1 {
+  font-size: 18pt;
+}
+
+div#navbar {
+  float: right;
+}
+
+div#navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+div#navbar li {
+  display: block;
+  float: left;
+  width: 141px;
+}
+
+div#navbar li:first-child {
+  width: 1px;
+}
+
+div#navbar li div.endcap {
+  float: right;
+  width: 1px;
+  height: 81px;
+  background: url( ../images/trackrecord/menu_endcap.png ) top left repeat-x;
+}
+
+div#navbar a {
+  display: block;
+  float: left;
+  text-decoration: none;
+  text-align: center;
+  color: #ddd;
+
+  font-size: 16pt;
+
+  width: 140px;
+  height: 63px;
+}
+
+div#navbar a:hover {
+  color: #111;
+  background: url( ../images/trackrecord/menu_highlight.png ) top left repeat-x;
+}
+
+div#navbar li.current {
+  background: url( ../images/trackrecord/menu_current.png ) top left repeat-x;
+}
+
+div#navbar li.current a {
+  color: #020;
+  background: url( ../images/trackrecord/menu_arrow.png ) bottom center no-repeat;
+}
+
+/* Main content */
+
+div#main_page_content {
+  margin: 0 3em;
+}
+
+input[ type="checkbox" ],
+input[ type="radio" ] {
+  margin-right: 5px;
+}
+
+/* Float management */
+
+div.float_clear {
+  clear: both;
+}
+
+/* Footer */
+
+div#footer {
+  margin-top: 20px;
+  background: url( ../images/trackrecord/footer.png ) top left repeat-x;
+  padding: 20px 3em;
+}
+
+div#footer div {
+  text-align: right;
+}
+
+div#footer div:first-child {
+  float: left;
+}
+
+/* Flash messages */
+
+div.messages {
+  margin-top: 12px;
+  font-size: 125%;
+  font-weight: bold;
+}
+
+div.messages div {
+  padding: 5px;
+}
+
+div.messages div.flash_error {
+  color: #800;
+  border: 1px solid #800;
+  background: #fee;
+}
+
+div.messages div.flash_notice {
+  color: #080;
+  border: 1px solid #080;
+  background: #efe;
+}
+
+/* OpenID login table */
+
+table.openid form {
+  margin: 0;
+  padding: 0;
+}
+
+table.openid input#openid_url {
+  font-size: 100%;
+  background: url( ../images/trackrecord/openid_small_logo.png ) 2px 50% no-repeat; 
+  padding-left: 22px;
+  display: inline;
+}
+
+table.openid input#commit {
+  font-size: 100%;
+}
+
+/* Home page sections */
+
+div#home_general,
+div#home_management,
+div#home_admin {
+  float:left;
+  width: 32%;
+}
+
+div#home_general,
+div#home_management {
+  padding-right: 2%;
+}
+
+/* List views */
+
+div#main_page_content{
+}
+
+div.list_titles {
+}
+
+div.list_create {
+  float: right;
+}
+
+div.list_titles h1,
+div.list_create h1 {
+}
+
+table.list, p.list_empty {
+  clear: both;
+}
+
+table.list td, table.list th {
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 95%;
+}
+
+table.list td.navigation {
+  padding: 2px 0;
+}
+
+table.list td.list_actions {
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+table.list tr.odd td.list_actions {
+  background: #fee;
+}
+
+table.list tr.even td.list_actions {
+  background: #fdd;
+}
+
+table.list td.list_actions a {
+  color: black;
+}
+
+table.list td.list_actions a:hover {
+  color: white;
+}
+
+table.list form {
+  margin: 0;
+  padding: 0;
+}
+
+table.list th.sorted_column_asc {
+  background: #686;
+}
+
+table.list th.sorted_column_desc {
+  background: #866;
+}
+
+table.list th.sorted_column_asc a:before {
+  content: url( ../images/trackrecord/up.png );
+}
+
+table.list th.sorted_column_desc a:before {
+  content: url( ../images/trackrecord/down.png );
+}
+
+/* In-place editors */
+
+form.inplaceeditor-form {
+  position: absolute;
+  background: white;
+  border: 2px solid #888;
+  text-align: center;
+}
+
+form.inplaceeditor-form input[ type="text" ] {
+  margin: 5px;
+  width: 90%;
+}
+
+form.inplaceeditor-form input[ type="submit" ] {
+  margin: 5px;
+  float: left;
+}
+
+form.inplaceeditor-form a {
+  margin: 5px;
+  float: right;
+}
+
+form.inplaceeditor-form select {
+  margin: 5px;
+  float: left;
+}
+
+/* Rows in general tables */
+
+tr.info {
+  background: url( ../images/trackrecord/table_header.png ) top left repeat-x;
+  color: #fff;
+  white-space: nowrap;
+}
+
+tr.info th {
+  background: url( ../images/trackrecord/table_header.png ) top left repeat-x;
+  font-weight: normal;
+}
+
+tr.info th a {
+  color: white;
+}
+
+tr.odd {
+  background: #eee;
+}
+
+tr.even {
+  background: #ddd;
+}
+
+tr.odd .total {
+  background: #cec;
+}
+
+tr.even .total {
+  background: #bdb;
+}
+
+tr.odd .overall_total {
+  background: #040;
+  color: #0f0;
+}
+
+tr.even .overall_total {
+  background: #030;
+  color: #0e0;
+}
+
+/* Audit changes table */
+
+table.audit_changes,
+.active-scaffold table.audit_changes {
+  color: #000;
+  font-size: 80%;
+  border: 1px solid #aaa;
+  padding: 0;
+  margin: 2px 0;
+}
+
+table.audit_changes tr,
+.active-scaffold table.audit_changes tr {
+  border: none;
+  padding: 0;
+}
+
+table.audit_changes td,
+table.audit_changes th,
+.active-scaffold table.audit_changes td,
+.active-scaffold table.audit_changes th {
+  border: none;
+  color: #000;
+  text-align: left;
+  padding: 1px;
+}
+
+table.audit_changes th,
+.active-scaffold table.audit_changes th {
+  background: #aaa;
+}
+
+/* Report pages */
+
+div.report table {
+  font-size: 80%;
+}
+
+h3.report {
+  padding: 4px;
+  background: #ddd;
+}
+
+h4.report {
+  padding-bottom: 4px;
+  border-bottom: 1px dashed #888;
+}
+
+div.report img {
+  margin-right: 10px;
+  border: 1px dashed #888;
+}
+
+/* Timesheet year overview chart - see timesheethelp_year_chart */
+
+table.timesheet_chart {
+  border: none;
+  border-collapse: collapse;
+  margin-bottom: 5px;
+}
+
+table.timesheet_chart tr td {
+  border-left: 1px solid #444;
+}
+
+table.timesheet_chart tr td:first-child {
+  border-left: none;
+}
+
+table.timesheet_chart tr.last {
+  border-bottom: 1px solid #444;
+}
+
+table.timesheet_chart th {
+  font-weight: normal;
+  background: url( ../images/trackrecord/table_header.png ) top left repeat-x;
+  color: #fff;
+}
+
+table.timesheet_chart td.committed {
+  background: #7c7;
+}
+
+table.timesheet_chart td.not_committed {
+  background: #fa7;
+}
+
+table.timesheet_chart td.timesheet_chart_month {
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+table.timesheet_chart a {
+  text-decoration: none;
+}
+
+table.timesheet_chart a:visited {
+  color: black;
+}
+
+table.timesheet_chart a:hover {
+  color: white;
+}
+
+table.timesheet_chart form, table.timesheet_chart div {
+  margin: 0;
+  padding: 0;
+}
+
+/* Timesheet editor and display grids */
+
+table.ts_edit_table,
+table.ts_show_table {
+  border-collapse: collapse;
+}
+
+table.ts_edit_table th,
+table.ts_show_table th {
+  padding: 2px;
+}
+
+table.ts_edit_table td,
+table.ts_show_table td {
+  padding: 0;
+}
+
+table.ts_edit_table td.ts_edit_task,
+table.ts_show_table td.ts_show_task {
+  padding: 0 2px;
+}
+
+td.ts_edit_work {
+  border: 1px solid #888;
+  background: white;
+}
+
+td.ts_show_work {
+  border: 1px solid #aaa;
+  background: #f5f5f5;
+  color: #444;
+}
+
+td.ts_edit_work input {
+  border: none;
+  width: 90%;
+  height: 100%;
+  text-align: center;
+}
+
+th.ts_edit_heading,
+th.ts_show_heading {
+  padding: 2px;
+  font-size: 90%;
+}
+
+table.ts_edit_table .total,
+table.ts_show_table .total {
+  padding: 0 2px;
+}
+
+table.ts_edit_table .overall_total,
+table.ts_show_table .overall_total {
+  padding: 2px;
+}
+
+table.ts_edit_table tr.group_gap td,
+table.ts_show_table tr.group_gap td,
+table.ts_edit_table tr.group_gap th,
+table.ts_show_table tr.group_gap th {
+  padding: 0;
+  margin: 0;
+  height: 3px;
+}
+
+/* Bulk task import table */
+
+table.bulk_task_import {
+  width: 80%;
+  white-space: nowrap;
+  border-collapse: separate !important;
+}
+
+table.bulk_task_import td.task_title {
+  width: 100%;
+}
+
+table.bulk_task_import input.task_title {
+  width: 95%;
+}
+
+table.bulk_task_import tr.breadcrumb {
+  background-color: #ccc;
+  color: black;
+  font-size: 90%;
+}
+
+table.bulk_task_import tr.breadcrumb td {
+  padding: 5px 7px;
+  border-top: 7px solid white;
+}
+
+/* Committed / not committed timesheet labels; active / not active
+ * items; overrunning / not overrunning labels.
+ */
+
+span.timesheet_not_committed {
+  color: #a50;
+}
+
+span.timesheet_committed, span.item_active, span.no_overrun {
+  color: #080;
+}
+
+
+span.item_inactive, span.overrun, span.dup {
+  color: #800;
+}
+
+span.overrun {
+  font-weight: bold;
+}
+
+/* Table cells carrying totals with italic or bold content are
+ * indicating a problem with the total (see timesheet_editor.js).
+ */
+
+td.total b, td.total i {
+  color: #800;
+}
+
+/* Task indicators - billable / not billable, active / inactive */
+
+.task_billable {
+}
+
+.task_not_billable {
+  color: #59f;
+}
+
+.task_active {
+}
+
+.task_inactive {
+  text-decoration: line-through;
+}
+
+/* General YUI tree view settings */
+
+div.yui-tree-container {
+  border: 1px solid #ccc;
+  padding: 0 5px 3px 5px;
+}
+
+textarea.tree_selector_text {
+  margin: 0;
+  padding: 2px;
+}
+
+/* Fix some odd styles in the default YUI TreeView CSS */
+
+.ygtv-checkbox .ygtv-highlight0 .ygtvcontent,
+.ygtv-checkbox .ygtv-highlight1 .ygtvcontent,
+.ygtv-checkbox .ygtv-highlight2 .ygtvcontent {
+  padding-left: 17px; /* Check box image is 16px wide with some built-in padding and text labels rarely precisely abut their left edge due to the shapes of characters and anti-aliasing; default '1em' leaves check box too close to text for my liking */
+}
+
+/* Leightbox links */
+
+a.lbOn {
+  font-size: 90%;
+}

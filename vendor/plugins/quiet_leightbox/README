@@ -1,0 +1,109 @@
+QuietLightbox
+=============
+
+Makes it easy to include Leightbox only when you want it while still having
+an application-global layout. That is, rather than using something like the
+following in a "layouts/application.html.erb" file:
+
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'leightbox/leightbox' %>
+  <%= stylesheet_link_tag    'leightbox/leightbox' %>
+
+...you instead do something like this:
+
+  <%= include_leightbox_if_used %>
+
+...and JS plus CSS links will only be output if a Controller handling the
+current action has said that it wants Leightbox facilities for that action's
+view by making a call along the lines of:
+
+  uses_leightbox()
+
+...around the same place it might declare "before_filter" items and the like.
+The "uses_leightbox" method takes a hash of options which are passed straight
+through to the Rails "before_filter" API allowing the Controller to further
+refine its use of Leightbox to certain views, for example, to use Leightbox
+in an "edit" action (and in a related "update" action in case an update fails
+and re-renders the "edit" view):
+
+  uses_leightbox( :only => [ :edit, :update ] )
+
+If you also use the "quiet_prototype" plugin, then note that you should not use
+both "uses_prototype" and "uses_leightbox" for the same actions in the same
+controller. Since Leightbox depends on Prototype, the default set of JS
+inclusions will be used for Leightbox. Calling "uses_prototype" as well as
+"uses_leightbox" will result in the same JS and CSS being included twice.
+
+This plugin does not include Leightbox components for installation. Download
+these and install them per your specific requirements. At the time of writing,
+Leightbox is available from:
+
+  http://www.eight.nl/static/files/leightbox/
+
+Copy "scripts/lightbox.js" into the public Javascript folder, as "leightbox.js"
+inside a folder "leightbox.js" (hence, "javascripts/leightbox/leightbox.js").
+Similarly, copy the stylesheet as "leightbox/leightbox.css" into the public
+stylesheets folder.
+
+
+Useful patch
+============
+
+To allow ESCape to close a Leightbox popup, modify the Leightbox JS file as
+follows.
+
+* Add this in the "initialize" function (anywhere will do);
+
+		this.keyHandler = this.deactivateKey.bindAsEventListener(this);
+
+* In the "displayLightbox" function, replace this single line:
+
+		if(display != 'none') this.actions();
+
+  ...with this set of lines:
+
+		if(display != 'none'){
+		  this.actions();
+		  Event.observe(window, 'keydown', this.keyHandler);
+	  }else{
+		  Event.stopObserving(window, 'keydown', this.keyHandler);
+    }
+
+* Finally, add this new function somewhere in the class definition - e.g. just
+  above the definition of "deactivate":
+
+	deactivateKey: function(event){
+		if (event.keyCode == 27){
+			this.deactivate();
+			Event.stop(event);
+		}
+	},
+
+  Note the trailing comma at the end of the function definition which is
+  required if another item definition follows (JavaScript required syntax).
+
+
+Heritage
+========
+
+The plugin wrapper concept comes from larsklevan's "yui_editor" plugin:
+
+  http://github.com/larsklevan/yui_editor/tree/master
+
+The QuietLeightbox plugin would not exist without this component. My thanks
+go to the author for his hard work.
+
+
+Installation
+============
+
+script/plugin install [TBD]
+
+
+Feedback
+========
+
+Send feedback and questions to ahodgkin@rowing.org.uk
+
+Copyright (c) 2009 Hipposoft (Andrew Hodgkinson).
+Released under the MIT license.

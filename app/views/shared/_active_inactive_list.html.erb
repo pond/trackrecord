@@ -1,0 +1,55 @@
+<%
+  # Shared partial for lists which show active and inactive items. Render
+  # with the following local variables:
+  #
+  #   model:          Name of model to list, lower case, singular - e.g. "user"
+  #   active:         Collection of items for the 'active' part of the list
+  #   inactive:       Collection of items for the 'inactive' part of the list
+  #   columns:        Columns data for the list tables - see "_list.html.erb"
+  #   actions_method: Helper method for list tables - see "_list.html.erb"
+  #
+  # Uses the "list" shared partial, as mentioned above, so see "_list.html.erb"
+  # for more information.
+
+  objects = model.pluralize
+-%>
+      <div class="list_titles">
+<% if ( @current_user.privileged? ) -%>
+        <div class="list_create">
+          <h2><%= link_to( "Add #{ model }", send( "new_#{ model }_path" ) ) %></h2>
+        </div>
+<% end -%>
+        <h1><%= params[ :search ] ? 'Search results' : "Manage #{ objects }" %></h1>
+        <h2><%= apphelp_commit_label( nil, true ) %> <%= objects %></h2>
+      </div>
+
+<%=
+  render (
+    {
+      :partial => 'shared/list',
+      :locals  =>
+      {
+        :model          => model,
+        :columns        => columns,
+        :collection     => active,
+        :actions_method => actions_method
+      }
+    }
+  )
+%>
+      <h2><%= apphelp_commit_label( nil, false ) %> <%= objects %></h2>
+
+<%=
+  render (
+    {
+      :partial => 'shared/list',
+      :locals  =>
+      {
+        :model          => model,
+        :columns        => columns,
+        :collection     => inactive,
+        :actions_method => actions_method
+      }
+    }
+  )
+%>

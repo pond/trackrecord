@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ReportsHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ReportsHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/helpers/reports_helper_rb.html">
+                app/helpers/reports_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <table>
+<tr><td valign="top">File:</td><td>reports_helper.rb
+
+</td></tr>
+<tr><td valign="top">(C):</td><td>Hipposoft 2008, 2009
+
+</td></tr>
+<tr><td valign="top">Purpose:</td><td>Support functions for views related to report generation. See
+controllers/reports_controller.rb for more.
+
+</td></tr>
+</table>
+<hr size="10"></hr><pre>
+          18-Feb-2008 (ADH): Created.
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000162">reporthelp_decorated_hours</a>&nbsp;&nbsp;
+      <a href="#M000153">reporthelp_end_time</a>&nbsp;&nbsp;
+      <a href="#M000156">reporthelp_frequency_selection</a>&nbsp;&nbsp;
+      <a href="#M000159">reporthelp_grouping_selector</a>&nbsp;&nbsp;
+      <a href="#M000163">reporthelp_hidden_fields</a>&nbsp;&nbsp;
+      <a href="#M000161">reporthelp_hours</a>&nbsp;&nbsp;
+      <a href="#M000154">reporthelp_month_selection</a>&nbsp;&nbsp;
+      <a href="#M000164">reporthelp_shortcut_path</a>&nbsp;&nbsp;
+      <a href="#M000158">reporthelp_sorting_selector</a>&nbsp;&nbsp;
+      <a href="#M000152">reporthelp_start_time</a>&nbsp;&nbsp;
+      <a href="#M000157">reporthelp_user_selection</a>&nbsp;&nbsp;
+      <a href="#M000155">reporthelp_week_selection</a>&nbsp;&nbsp;
+      <a href="#M000160">reporthelp_work_breakdown_item_name</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="TrackRecordReport.html">TrackRecordReport</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="ReportsHelper/ReportMonth.html" class="link">ReportsHelper::ReportMonth</a><br />
+Class <a href="ReportsHelper/ReportWeek.html" class="link">ReportsHelper::ReportWeek</a><br />
+Class <a href="ReportsHelper/ReportYear.html" class="link">ReportsHelper::ReportYear</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000162" class="method-detail">
+        <a name="M000162"></a>
+
+        <div class="method-heading">
+          <a href="#M000162" class="method-signature">
+          <span class="method-name">reporthelp_decorated_hours</span><span class="method-args">( actual, potential )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Report a terse number of hours with an &#8216;overrun&#8217; span if
+negative or a &#8216;no_overrun&#8217; span if &gt;= 0 in two sections
+separated by a &quot;/&quot; - the idea is to pass actual and potential
+remaining hours for a task in here.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000162-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000162-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 309</span>
+309:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_decorated_hours</span>( <span class="ruby-identifier">actual</span>, <span class="ruby-identifier">potential</span> )
+310:     <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">actual</span>    <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'overrun'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'no_overrun'</span>
+311:     <span class="ruby-identifier">output</span>      = <span class="ruby-node">&quot;&lt;strong&gt;&lt;span class=\&quot;#{ class_name }\&quot;&gt;#{ apphelp_terse_hours( actual ) }&lt;/span&gt; / &quot;</span>
+312:     <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">potential</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'overrun'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'no_overrun'</span>
+313:     <span class="ruby-identifier">output</span>     <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;span class=\&quot;#{ class_name }\&quot;&gt;#{ apphelp_terse_hours( potential ) }&lt;/span&gt;&lt;/strong&gt;&quot;</span>
+314: 
+315:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">output</span>
+316:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000153" class="method-detail">
+        <a name="M000153"></a>
+
+        <div class="method-heading">
+          <a href="#M000153" class="method-signature">
+          <span class="method-name">reporthelp_end_time</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use the Calendar Date Select plug-in to generate a selector for the end
+time of a report.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000153-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000153-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 125</span>
+125:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_end_time</span>
+126:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">calendar_date_select</span>(
+127:       <span class="ruby-identifier">:report</span>,
+128:       <span class="ruby-identifier">:range_end</span>,
+129:       {
+130:         <span class="ruby-identifier">:embedded</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+131:         <span class="ruby-identifier">:year_range</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">used_range</span>(),
+132:         <span class="ruby-identifier">:size</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-value">24</span>
+133:       }
+134:     )
+135:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000156" class="method-detail">
+        <a name="M000156"></a>
+
+        <div class="method-heading">
+          <a href="#M000156" class="method-signature">
+          <span class="method-name">reporthelp_frequency_selection</span><span class="method-args">( form )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return HTML suitable for inclusion in the form passed in the first
+parameter (i.e. the &#8216;f&#8217; in &quot;form for &#8230; do |f|&quot;
+), which provides a selection list allowing the user to choose a report
+frequency (weekly, monthly etc.).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000156-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000156-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 187</span>
+187:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_frequency_selection</span>( <span class="ruby-identifier">form</span> )
+188:     <span class="ruby-identifier">collection</span> = []
+189: 
+190:     <span class="ruby-constant">Report</span>.<span class="ruby-identifier">labels</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+191:       <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">push</span>( [ <span class="ruby-constant">Report</span>.<span class="ruby-identifier">labels</span>[ <span class="ruby-identifier">index</span> ], <span class="ruby-identifier">index</span> ] )
+192:     <span class="ruby-keyword kw">end</span>
+193: 
+194:     <span class="ruby-identifier">form</span>.<span class="ruby-identifier">select</span>( <span class="ruby-identifier">:frequency</span>, <span class="ruby-identifier">collection</span> )
+195:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000159" class="method-detail">
+        <a name="M000159"></a>
+
+        <div class="method-heading">
+          <a href="#M000159" class="method-signature">
+          <span class="method-name">reporthelp_grouping_selector</span><span class="method-args">( form )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generate a menu for the given form allowing the user to choose a grouping
+option.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000159-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000159-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 240</span>
+240:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_grouping_selector</span>( <span class="ruby-identifier">form</span> )
+241:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">apphelp_select</span>(
+242:       <span class="ruby-identifier">form</span>,
+243:       <span class="ruby-identifier">:task_grouping</span>,
+244:       [
+245:         [ <span class="ruby-value str">'No special grouping'</span>,                <span class="ruby-value str">'default'</span>  ],
+246:         [ <span class="ruby-value str">'Group billable tasks together'</span>,      <span class="ruby-value str">'billable'</span> ],
+247:         [ <span class="ruby-value str">'Group active tasks together'</span>,        <span class="ruby-value str">'active'</span>   ],
+248:         [ <span class="ruby-value str">'Group both kinds of tasks together'</span>, <span class="ruby-value str">'both'</span>     ]
+249:       ],
+250:       <span class="ruby-keyword kw">false</span>
+251:     )
+252:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000163" class="method-detail">
+        <a name="M000163"></a>
+
+        <div class="method-heading">
+          <a href="#M000163" class="method-signature">
+          <span class="method-name">reporthelp_hidden_fields</span><span class="method-args">( form )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For a report &#8216;show&#8217; view, generate a series of hidden fields
+that carry all information about a report so that a &#8216;new&#8217; view,
+or another report creation operation, can progress with the same parameters
+as the current item. Pass the wrapping form object reference (&quot;f&quot;
+in &quot;form_for :report&#8230; do | f |&quot;).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000163-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000163-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 323</span>
+323:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_hidden_fields</span>( <span class="ruby-identifier">form</span> )
+324:     <span class="ruby-identifier">output</span>  = <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:range_start</span>           )
+325:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:range_end</span>             )
+326:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:range_week_start</span>      )
+327:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:range_week_end</span>        )
+328:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:range_month_start</span>     )
+329:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:range_month_end</span>       )
+330:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:frequency</span>             )
+331:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:task_filter</span>           )
+332:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:task_grouping</span>         )
+333:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:task_sort_field</span>       )
+334:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:project_sort_field</span>    )
+335:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:customer_sort_field</span>   )
+336:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:include_totals</span>        )
+337:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:include_committed</span>     )
+338:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:include_not_committed</span> )
+339:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:exclude_zero_rows</span>     )
+340:     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">hidden_field</span>( <span class="ruby-identifier">:exclude_zero_cols</span>     )
+341: 
+342:     <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+343:       <span class="ruby-identifier">user</span> = <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">users</span>[ <span class="ruby-identifier">index</span> ]
+344:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hidden_field_tag</span>( <span class="ruby-node">&quot;report[user_ids][#{ index }]&quot;</span>, <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> )
+345:     <span class="ruby-keyword kw">end</span>
+346: 
+347:     <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+348:       <span class="ruby-identifier">task</span> = <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span> ]
+349:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hidden_field_tag</span>( <span class="ruby-node">&quot;report[task_ids][#{ index }]&quot;</span>, <span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> )
+350:     <span class="ruby-keyword kw">end</span>
+351: 
+352:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">output</span>
+353:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000161" class="method-detail">
+        <a name="M000161"></a>
+
+        <div class="method-heading">
+          <a href="#M000161" class="method-signature">
+          <span class="method-name">reporthelp_hours</span><span class="method-args">( calculator, show_zero = false )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return HTML suitable for an &#8216;hours&#8217; field which gives a total
+amount, then a committed and not-committed amount wrapped in SPANs to give
+the correct committed/uncommitted text styles. If the overall total time is
+zero, &quot;&amp;nbsp;&quot; is returned instead. Pass any object
+subclassing <a
+href="TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+and, optionally, &#8216;true&#8217; to show &quot;0.0&quot; rather than
+&quot;&amp;nbsp;&quot; in the zero hours total case.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000161-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 276</span>
+276:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_hours</span>( <span class="ruby-identifier">calculator</span>, <span class="ruby-identifier">show_zero</span> = <span class="ruby-keyword kw">false</span> )
+277: 
+278:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">has_hours?</span> )
+279:       <span class="ruby-identifier">output</span>  = <span class="ruby-value str">''</span>
+280:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">total</span> ) <span class="ruby-keyword kw">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> )
+281:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">' ('</span> <span class="ruby-keyword kw">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> ) )
+282: 
+283:       <span class="ruby-keyword kw">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> )
+284:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;span class=&quot;timesheet_committed&quot;&gt;'</span>
+285:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">committed</span> )
+286:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;/span&gt;'</span>
+287:       <span class="ruby-keyword kw">end</span>
+288: 
+289:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'/'</span> <span class="ruby-keyword kw">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> )
+290: 
+291:       <span class="ruby-keyword kw">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> )
+292:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;span class=&quot;timesheet_not_committed&quot;&gt;'</span>
+293:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">not_committed</span> )
+294:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;/span&gt;'</span>
+295:       <span class="ruby-keyword kw">end</span>
+296: 
+297:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">')'</span> <span class="ruby-keyword kw">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span> ) )
+298: 
+299:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">output</span>
+300:     <span class="ruby-keyword kw">else</span>
+301:       <span class="ruby-keyword kw">return</span> ( <span class="ruby-identifier">show_zero</span> <span class="ruby-value">? </span><span class="ruby-value str">'0'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'&amp;nbsp;'</span> )
+302:     <span class="ruby-keyword kw">end</span>
+303:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000154" class="method-detail">
+        <a name="M000154"></a>
+
+        <div class="method-heading">
+          <a href="#M000154" class="method-signature">
+          <span class="method-name">reporthelp_month_selection</span><span class="method-args">( to_select, is_start )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return HTML suitable for inclusion in a form which provides a pull-down
+menu of years for the full permitted time range subdivided into months.
+Pass the current item to select or nil for none, then &#8216;true&#8217;
+for a start time menu, else an end time menu.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000154-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000154-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 143</span>
+143:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_month_selection</span>( <span class="ruby-identifier">to_select</span>, <span class="ruby-identifier">is_start</span> )
+144:     <span class="ruby-identifier">method</span> = <span class="ruby-identifier">is_start</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-identifier">start</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:end</span>
+145:     <span class="ruby-identifier">years</span>  = <span class="ruby-identifier">get_year_array</span>()
+146: 
+147:     <span class="ruby-identifier">data</span> = <span class="ruby-node">&quot;&lt;select id=\&quot;report_range_month_#{method}\&quot; name=\&quot;report[range_month_#{method}]\&quot;&gt;&quot;</span>
+148:     <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;option value=&quot;&quot;&gt;-&lt;/option&gt;'</span>
+149:     <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">option_groups_from_collection_for_select</span>(
+150:       <span class="ruby-identifier">years</span>,   <span class="ruby-comment cmt"># Use years for groups</span>
+151:       <span class="ruby-identifier">:months</span>, <span class="ruby-comment cmt"># A years's &quot;months&quot; method returns its month list</span>
+152:       <span class="ruby-identifier">:title</span>,  <span class="ruby-comment cmt"># Use the year 'title' for the group labels</span>
+153:       <span class="ruby-identifier">:id</span>,     <span class="ruby-comment cmt"># A month's &quot;id&quot; method returns the value for an option tag</span>
+154:       <span class="ruby-identifier">method</span>,  <span class="ruby-comment cmt"># A month's &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
+155:       <span class="ruby-identifier">to_select</span>
+156:     )
+157:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;/select&gt;'</span>
+158:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000164" class="method-detail">
+        <a name="M000164"></a>
+
+        <div class="method-heading">
+          <a href="#M000164" class="method-signature">
+          <span class="method-name">reporthelp_shortcut_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000164-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000164-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 355</span>
+355:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_shortcut_path</span>
+356:     <span class="ruby-node">&quot;#{ report_shortcut_path }?#{ { 'report' =&gt; params[ 'report' ] } .to_query }&quot;</span>
+357:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000158" class="method-detail">
+        <a name="M000158"></a>
+
+        <div class="method-heading">
+          <a href="#M000158" class="method-signature">
+          <span class="method-name">reporthelp_sorting_selector</span><span class="method-args">( form, method )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generate a sort field selector menu for the given form which will use the
+given method to set the chosen option in the report - one of
+&quot;:customer_sort_field&quot;, &quot;:project_sort_field&quot; or
+&quot;:task_sort_field&quot;.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000158-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000158-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 224</span>
+224:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_sorting_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">method</span> )
+225:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">apphelp_select</span>(
+226:       <span class="ruby-identifier">form</span>,
+227:       <span class="ruby-identifier">method</span>,
+228:       [
+229:         [ <span class="ruby-value str">'Sort by name'</span>,          <span class="ruby-value str">'title'</span>      ],
+230:         [ <span class="ruby-value str">'Sort by code'</span>,          <span class="ruby-value str">'code'</span>       ],
+231:         [ <span class="ruby-value str">'Sort by addition date'</span>, <span class="ruby-value str">'created_at'</span> ]
+232:       ],
+233:       <span class="ruby-keyword kw">false</span>
+234:     )
+235:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000152" class="method-detail">
+        <a name="M000152"></a>
+
+        <div class="method-heading">
+          <a href="#M000152" class="method-signature">
+          <span class="method-name">reporthelp_start_time</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use the Calendar Date Select plug-in to generate a selector for the start
+time of a report.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000152-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000152-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 110</span>
+110:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_start_time</span>
+111:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">calendar_date_select</span>(
+112:       <span class="ruby-identifier">:report</span>,
+113:       <span class="ruby-identifier">:range_start</span>,
+114:       {
+115:         <span class="ruby-identifier">:embedded</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+116:         <span class="ruby-identifier">:year_range</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">used_range</span>(),
+117:         <span class="ruby-identifier">:size</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-value">25</span>
+118:       }
+119:     )
+120:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000157" class="method-detail">
+        <a name="M000157"></a>
+
+        <div class="method-heading">
+          <a href="#M000157" class="method-signature">
+          <span class="method-name">reporthelp_user_selection</span><span class="method-args">( form, users )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return HTML suitable for inclusion in the form passed in the first
+parameter (i.e. the &#8216;f&#8217; in &quot;form for &#8230; do |f|&quot;
+), based on the user array given in the second parameter, which provides:
+</p>
+<ul>
+<li>A &lt;select&gt; tag with options listing all users in the array in the
+order in which they are stored in that array.
+
+</li>
+<li>An empty string if the input users array is itself empty.
+
+</li>
+</ul>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000157-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000157-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 206</span>
+206:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_user_selection</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">users</span> )
+207:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">users</span>.<span class="ruby-identifier">empty?</span> )
+208:       <span class="ruby-keyword kw">return</span> <span class="ruby-value str">''</span>
+209:     <span class="ruby-keyword kw">else</span>
+210:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">apphelp_collection_select</span>(
+211:         <span class="ruby-identifier">form</span>,
+212:         <span class="ruby-value str">'user_ids'</span>,
+213:         <span class="ruby-identifier">users</span>,
+214:         <span class="ruby-identifier">:id</span>,
+215:         <span class="ruby-identifier">:name</span>
+216:       )
+217:     <span class="ruby-keyword kw">end</span>
+218:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000155" class="method-detail">
+        <a name="M000155"></a>
+
+        <div class="method-heading">
+          <a href="#M000155" class="method-signature">
+          <span class="method-name">reporthelp_week_selection</span><span class="method-args">( to_select, is_start )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return HTML suitable for inclusion in a form which provides a pull-down
+menu of years for the full permitted time range subdivided into weeks. Pass
+&#8216;true&#8217; for a start time menu, else an end time menu.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000155-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000155-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 165</span>
+165:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_week_selection</span>( <span class="ruby-identifier">to_select</span>, <span class="ruby-identifier">is_start</span> )
+166:     <span class="ruby-identifier">method</span> = <span class="ruby-identifier">is_start</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-identifier">start</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:end</span>
+167:     <span class="ruby-identifier">years</span>  = <span class="ruby-identifier">get_year_array</span>()
+168: 
+169:     <span class="ruby-identifier">data</span> = <span class="ruby-node">&quot;&lt;select id=\&quot;report_range_week_#{method}\&quot; name=\&quot;report[range_week_#{method}]\&quot;&gt;&quot;</span>
+170:     <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;option value=&quot;&quot;&gt;-&lt;/option&gt;'</span>
+171:     <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">option_groups_from_collection_for_select</span>(
+172:       <span class="ruby-identifier">years</span>,  <span class="ruby-comment cmt"># Use years for groups</span>
+173:       <span class="ruby-identifier">:weeks</span>, <span class="ruby-comment cmt"># A years's &quot;weeks&quot; method returns its week list</span>
+174:       <span class="ruby-identifier">:title</span>, <span class="ruby-comment cmt"># Use the year 'title' for the group labels</span>
+175:       <span class="ruby-identifier">:id</span>,    <span class="ruby-comment cmt"># A week's &quot;id&quot; method returns the value for an option tag</span>
+176:       <span class="ruby-identifier">method</span>, <span class="ruby-comment cmt"># A week's &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
+177:       <span class="ruby-identifier">to_select</span>
+178:     )
+179:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;/select&gt;'</span>
+180:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000160" class="method-detail">
+        <a name="M000160"></a>
+
+        <div class="method-heading">
+          <a href="#M000160" class="method-signature">
+          <span class="method-name">reporthelp_work_breakdown_item_name</span><span class="method-args">( item )</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Pass a hash. The &quot;:item&quot; entry is read. If a <a
+href="User.html">User</a>, a string of &quot;by &lt;name&gt;&quot; is
+returned. Otherwise, a string of &quot;on &#8217;&lt;title&gt;&#8217;&quot;
+is returned. Useful for indicating hours are done by a user, or were worked
+on some task.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000160-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/reports_helper.rb, line 259</span>
+259:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reporthelp_work_breakdown_item_name</span>( <span class="ruby-identifier">item</span> )
+260:     <span class="ruby-identifier">item</span> = <span class="ruby-identifier">item</span>[ <span class="ruby-identifier">:item</span> ]
+261: 
+262:     <span class="ruby-keyword kw">if</span> ( <span class="ruby-identifier">item</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span> )
+263:       <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;by #{ h( item.name ) }&quot;</span>
+264:     <span class="ruby-keyword kw">else</span>
+265:       <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;on '#{ h( item.augmented_title ) }'&quot;</span>
+266:     <span class="ruby-keyword kw">end</span>
+267:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

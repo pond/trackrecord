@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  task_id: 1
+  duration: 1
+  description: 1
+  date: 2007-12-24 16:47:28
+  committed: 1
+
+two:
+  task_id: 1
+  duration: 1
+  description: 1
+  date: 2007-12-24 16:47:28
+  committed: 1

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  timesheet_id: 1
+  task_id: 1
+
+two:
+  timesheet_id: 1
+  task_id: 1

@@ -1,0 +1,86 @@
+<%
+  # Set '@task' to the task of interest.
+
+  total         = @task.total_worked()
+  committed     = @task.committed_worked()
+  not_committed = total - committed
+
+  ( restricted, unrestricted ) = @task.split_user_types
+-%>
+    <table border="0" cellspacing="0" cellpadding="2" style="margin-left: 1em">
+      <tr align="left">
+        <th>Created at</th>
+        <td><%= @task.created_at %></td>
+      </tr>
+      <tr align="left">
+        <th>Code</th>
+        <td><%= apphelp_h( @task.code ) %></td>
+      </tr>
+      <tr valign="top" align="left">
+        <th>Description</th>
+        <td><%= apphelp_h( @task.description) %></td>
+      </tr>
+      <tr valign="top" align="left">
+        <th>Billable?</th>
+        <td><%= apphelp_boolean( @task.billable ) %></td>
+      </tr>
+
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+      <tr align="left">
+        <th>Expected duration</th>
+        <td><%= apphelp_hours( @task.duration ) %></td>
+      </tr>
+      <tr align="left">
+        <th>Committed time</th>
+        <td><%= apphelp_hours( committed ) %></td>
+      </tr>
+      <tr align="left">
+        <th>Not yet committed</th>
+        <td><%= apphelp_hours( not_committed ) %></td>
+      </tr>
+      <tr align="left">
+        <th>Total potentially worked</th>
+        <td><%= apphelp_hours( total ) %></td>
+      </tr>
+
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+      <tr align="left">
+        <th>Committed remaining</th>
+        <td><%= taskhelp_remaining( committed, @task.duration ) %></td>
+      </tr>
+      <tr align="left">
+        <th>Committed overrun</th>
+        <td><%= taskhelp_overrun( committed, @task.duration ) %></td>
+      </tr>
+      <tr align="left">
+        <th>Potential remaining</th>
+        <td><%= taskhelp_remaining( total, @task.duration ) %></td>
+      </tr>
+      <tr align="left">
+        <th>Potential overrun</th>
+        <td><%= taskhelp_overrun( total, @task.duration ) %></td>
+      </tr>
+
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+      <tr align="left">
+        <th>Associated project</th>
+        <td><%= ( @task.project ) ? link_to( h( @task.project.title ), @task.project ) : 'None' %></td>
+      </tr>
+      <tr align="left">
+        <th>Associated customer</th>
+        <td><%= ( @task.project and @task.project.customer ) ? link_to( h( @task.project.customer.title ), @task.project.customer ) : 'None' %></td>
+      </tr>
+<% if ( @current_user.privileged? ) -%>
+      <tr align="left">
+        <th>Associated restricted users</th>
+        <td><%= apphelp_object_list( restricted, :name ) %></td>
+      </tr>
+      <tr valign="top" align="left">
+        <th>Other associated users</th>
+        <td><%= apphelp_object_list( unrestricted, :name ) %></td>
+      </tr>
+<% end -%>
+    </table>

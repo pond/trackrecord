@@ -1,0 +1,53 @@
+QuietPrototype
+==============
+
+Makes it easy to include Prototype only when you want it while still having
+an application-global layout. That is, rather than using the following in a
+"layouts/application.html.erb" file:
+
+  <%= javascript_include_tag :defaults %>
+
+...you instead do something like this:
+
+  <%= include_prototype_if_used %>
+
+...and JS links will only be output if a Controller handling the current
+action has said that it wants Prototype facilities for that action's view
+by making a call along the lines of:
+
+  uses_prototype()
+
+...around the same place it might declare "before_filter" items and the like.
+The "uses_prototype" method takes a hash of options which are passed straight
+through to the Rails "before_filter" API allowing the Controller to further
+refine its use of Prototype to certain views, for example, to use Prototype in
+an "edit" action (and in a related "update" action in case an update fails and
+re-renders the "edit" view):
+
+  uses_prototype( :only => [ :edit, :update ] )
+
+
+Heritage
+========
+
+The plugin wrapper concept comes from larsklevan's "yui_editor" plugin:
+
+  http://github.com/larsklevan/yui_editor/tree/master
+
+The QuietPrototype plugin would not exist without this component. My thanks go
+to the author for his hard work.
+
+
+Installation
+============
+
+script/plugin install [TBD]
+
+
+Feedback
+========
+
+Send feedback and questions to ahodgkin@rowing.org.uk
+
+Copyright (c) 2009 Hipposoft (Andrew Hodgkinson).
+Released under the MIT license.

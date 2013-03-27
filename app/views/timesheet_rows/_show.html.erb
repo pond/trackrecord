@@ -1,0 +1,15 @@
+        <tr align="center" class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
+          <td align="left" class="ts_show_task <%= taskhelp_billable_class( @timesheet_row.task ) %> <%= taskhelp_active_class( @timesheet_row.task ) %>">
+            <%= h( @timesheet_row.task.title ) %>
+          </td>
+
+<% TimesheetRow::DAY_ORDER.each do | day_number |
+   @work_packet = WorkPacket.find_by_timesheet_row_id( @timesheet_row.id, :conditions => { :day_number => day_number } )
+-%>
+          <td class="ts_show_work"><%= render( :partial => 'work_packets/show.html.erb' ) %></td>
+<% end -%>
+
+          <td class="ts_show_total total" id="row_total_<%= sections_section_index() %>_<%= @row_number %>">
+            <%= @timesheet_row.row_sum() %>
+          </td>
+        </tr>

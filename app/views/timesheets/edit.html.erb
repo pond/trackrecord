@@ -1,0 +1,227 @@
+<h2>Edit timesheet</h2>
+
+<% if ( ( not @errors.nil? ) and ( not @errors.empty? ) ) -%>
+  <div class="errorExplanation" id="errorExplanation">
+    <h2>
+      <%= "#{ pluralize( @errors.size, 'error' ) }" %>
+      prohibited this timesheet from being saved
+    </h2>
+
+    <p>
+      The following problems were encountered:
+    </p>
+
+    <ul>
+<% @errors.each do | error | -%>
+      <li><%= h( error ) %></li>
+<% end -%>
+    </ul>
+  </div>
+<% end -%>
+
+<div id="custom"><% form_for( @timesheet, { :html => { :autocomplete => 'off' } } ) do | f | %>
+  <%= f.hidden_field( :lock_version ) %>
+
+  <b>Week <%= @timesheet.week_number %>, <%= @timesheet.year %></b> &ndash;
+<% data = timesheethelp_week_selection( f, @timesheet ) -%>
+  <%= data.empty? ? 'no other weeks available' : "Alter this timesheet's week number?\n#{ data }" %>
+  <%= f.submit( 'Alter', { :disable_with => 'Altering...', :id => nil } ) %>
+
+  <p />
+  <%= taskhelp_billable_help %> <%= taskhelp_active_help %>
+
+  <p />
+  <table border="0" cellspacing="0" cellpadding="10" width="100%" class="ts_edit_table">
+    <tr align="center" class="info">
+      <th>
+        <table border="0" cellspacing="0" cellpadding="2" width="100%">
+          <tr>
+            <td align="left">
+              <table border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
+                <%= submit_tag( '&nbsp;&uarr;&nbsp;', { :name => 'move_row_up'   } ) %>
+                <%= submit_tag( '&nbsp;&darr;&nbsp;', { :name => 'move_row_down' } ) %>
+                <%= submit_tag( 'Del', { :name => 'remove_row'    } ) %>
+              </td></tr><tr><td align="center">
+                <script language="javascript" type="text/javascript">
+                  check_box_toggle_field( 'toggle_check_boxes', 'checkbox' );
+                </script>
+              </td></tr></table>
+            </td>
+            <td align="right">
+              <table border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
+                <%= submit_tag( 'Sort ascending by:', { :name => 'sort'   } ) %>
+              </td></tr><tr><td align="center">
+                <select id="sort_by" name="sort_by">
+                  <option value="choose" disabled="disabled" selected="selected">Choose order...</option>
+                  <option value="rows_added">Order rows added</option>
+                  <option value="tasks_added">Order tasks added</option>
+                  <option value="task_code">Task code</option>
+                  <option value="task_title">Task title</option>
+                  <option value="associations">Customer/project</option>
+                </select>
+              </td></tr></table>
+            </td>
+          </tr>
+        </table>
+      </th>
+<% TimesheetRow::DAY_ORDER.each do | day_number | -%>
+      <th>
+        <%= TimesheetRow::DAY_NAMES[ day_number ] %><br />
+        <%= @timesheet.date_for( day_number )%>
+      </th>
+<% end -%>
+      <th>Total</th>
+    </tr>
+
+<% sections_initialise_sections()
+   @row_number   = -1
+   @timesheet.timesheet_rows.each_index do | @timesheet_row_index |
+     @row_number += 1
+     @timesheet_row = @timesheet.timesheet_rows[ @timesheet_row_index ] -%>
+
+<%   if ( sections_new_section?( @timesheet_row.task ) ) -%>
+    <tr align="left" class="<%= cycle( 'even', 'odd' ) %>">
+      <th colspan="8" class="ts_edit_heading">
+        <%= h( sections_section_title() ) %>
+      </th>
+      <th align="center" class="total" id="section_total_<%= sections_section_index() %>"></th>
+    </tr>
+<%   end -%>
+
+<%   if ( sections_new_group?( @timesheet_row.task ) ) -%>
+    <tr align="left" class="even group_gap">
+      <th colspan="8"   height="2"></th>
+      <td class="total" height="2"></td>
+    </tr>
+<%   end -%>
+
+<%= render( :partial => 'timesheet_rows/edit.html.erb' ) %>
+<% end -%>
+
+    <tr align="center" class="<%= cycle( 'even', 'odd' ) %>">
+      <th align="left" class="total">Total</th>
+
+<% col_number = -1
+   TimesheetRow::DAY_ORDER.each do | day_number |
+   col_number += 1 -%>
+      <td class="total" id="col_total_<%= col_number %>">
+        <%= @timesheet.column_sum( day_number ).precision( 2 ) %>
+      </td>
+<% end -%>
+
+      <th class="overall_total" id="overall_total"><%= h @timesheet.total_sum() %></th>
+    </tr>
+  </table>
+
+  <p />
+  <table border="0" cellspacing="0" cellpadding="2">
+    <tr valign="top">
+      <th align="left">
+        Add rows
+      </th>
+      <td>&nbsp;&nbsp;</td>
+      <td align="left">
+<%
+  data = taskhelp_degrading_selector(
+    :timesheet_editor,
+    { :form => f, :timesheet => @timesheet, :line_prefix => '        ' }
+  )
+-%>
+<% if ( data.empty? ) -%>
+        All tasks already included.
+<% else -%>
+<%= data %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <small>
+          Rows are added to the end of the timesheet and, for multiple
+          selections, added in the order listed above.
+        </small>
+<% end -%>
+      </td>
+    </tr>
+
+    <tr>
+      <th></th><td>&nbsp;&nbsp;</td><td></td>
+    </tr>
+
+    <tr valign="top">
+      <th align="left">Description of week</th>
+      <td>&nbsp;&nbsp;</td>
+      <td align="left">
+        <%= f.text_area( :description, { :cols => 80, :rows => 4 } ) %><br />
+        <small>
+          &nbsp;Descriptions are recommended but not mandatory.
+        </small>
+      </td>
+    </tr>
+
+    <tr>
+      <th></th><td>&nbsp;&nbsp;</td><td></td>
+    </tr>
+
+    <tr align="center">
+      <th align="left">Committed?</th>
+      <td>&nbsp;&nbsp;</td>
+      <td align="left">
+<%= f.select( :committed, [ [ 'Yes', true ], [ 'No', false ] ] ) %>
+        <b><i>Warning</i></b> &ndash; once committed, a timesheet cannot be edited again.
+      </td>
+    </tr>
+  </table>
+
+<%
+  if ( @prev_week.nil? )
+    prev_what = 'go to'
+    prev_when = 'previous week'
+  else
+    prev_what = @prev_week[ :timesheet ].nil? ? 'use as template for' : 'edit'
+    prev_when = "week #{ @prev_week[ :week_number ] }"
+  end
+
+  if ( @next_week.nil? )
+    next_what = 'go to'
+    next_when = 'previous week'
+  else
+    next_what = @next_week[ :timesheet ].nil? ? 'use as template for' : 'edit'
+    next_when = "week #{ @next_week[ :week_number ] }"
+  end
+-%>
+  <p />
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td align="left" width="33%">
+        <%= f.submit(
+              "&lt;&lt; Save and #{ prev_what } #{ prev_when }",
+              {
+                :name     => 'previous',
+                :id       => nil,
+                :disabled => ( @prev_week.nil? )
+              }
+            ) %>
+      </td>
+      <td align="center" width="34%">
+        <%= f.submit( 'Save changes and exit' ) %>
+      </td>
+      <td align="right" width="33%">
+        <%= f.submit(
+              "Save and #{ next_what } #{ next_when } &gt;&gt;",
+              {
+                :name     => 'next',
+                :id       => nil,
+                :disabled => ( @next_week.nil? )
+              }
+            ) %>
+      </td>
+    </tr>
+  </table>
+
+  <p align="center">
+    <%= link_to( 'Cancel and show overview', new_timesheet_path() ) %> or
+    <%= link_to( 'cancel and show timesheet', timesheet_path( @timesheet ) ) %>
+  </p>
+<% end -%></div>

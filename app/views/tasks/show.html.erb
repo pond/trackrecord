@@ -1,0 +1,24 @@
+    <h1>Task details</h1>
+    
+    <h2><%= h( @record.title ) %> (<%= apphelp_commit_label( @record ) %>)</h2>
+
+<% @task = @record -%>
+<%= render( :partial => 'shared/task_info' ) %>
+
+<% if ( @current_user.privileged? ) -%>
+    <p>
+      Note that managers and administrators may commit hours against
+      tasks even if not associated with them. All commits are recorded
+      in the <%= link_to( 'audit trail', audits_path() ) %>.
+    </p>
+
+    <p align="center">
+<%   if ( @current_user.admin? or ( @current_user.manager? and @record.active ) ) %>
+      <%= link_to( 'Edit this task', edit_task_path( @record ) ) %>,
+      <%= link_to( 'list tasks', tasks_path() ) %>
+<%   else -%>
+      <%= link_to( 'List tasks', tasks_path() ) %>
+<%   end -%>
+      or <%= link_to( 'return home', home_path() ) %>
+    </p>
+<% end -%>

@@ -1,0 +1,231 @@
+    <h1><%= @report.label %> report</h1>
+    <h2>Task data for <%= @report.display_range %> <%= ( @report.filtered_users.empty? ) ? '(all users)' : '(selected users only)' %></h2>
+
+<% if ( @report.filtered_tasks.empty? ) -%>
+    <p>
+      No tasks matching your report&rsquo;s specification can be found.
+    </p>
+<% elsif ( @report.rows.empty? ) -%>
+    <p>
+      There are no non-zero totals for rows in the requested report.
+    </p>
+<% else -%>
+    <p />
+    <%= taskhelp_billable_help %> <%= taskhelp_active_help %>
+    
+    <p />
+    <table border="0" cellpadding="2" width="100%" class="ts_show_table" style="white-space: nowrap">
+
+      <!-- Heading - show dates/totals based on report frequency -->
+
+      <tr class="info">
+        <th align="right"><%= @report.column_title %></th>
+
+<%   @report.column_ranges.each_index do | col_index | -%>
+<%     if ( @report.partial_column?( col_index ) ) -%>
+        <th><%= @report.column_heading( col_index ) %> (partial)</th>
+<%     else -%>
+        <th><%= @report.column_heading( col_index ) %></th>
+<%     end -%>
+<%   end -%>
+
+        <th>Row total</th>
+<%   if ( @report.filtered_users.empty? ) -%>
+        <th>Duration</th>
+        <th>Remaining</th>
+<%   end -%>
+      </tr>
+
+      <!-- Section and task list, date range breakdown -->
+
+<%   sections_initialise_sections()
+     @report.rows.each_index do | row_index |
+
+       row  = @report.rows[ row_index ]
+       task = @report.filtered_tasks[ row_index ]
+
+       if ( sections_new_section?( task ) )
+         row_class = cycle( 'even', 'odd' ) -%>
+      <!-- New section -->
+
+      <tr align="left" class="<%= row_class %>">
+        <th class="ts_edit_heading"><%= h( sections_section_title() ) %></th>
+<%       row.cells.each_index do | col_index | -%>
+        <td align="center"><%= reporthelp_hours( @report.sections[ sections_section_index() ].cells[ col_index ] ) %></td>
+<%       end -%>
+        <th align="center"><%= reporthelp_hours( @report.sections[ sections_section_index() ], true ) %></th>
+<%       if ( @report.filtered_users.empty? ) -%>
+        <th colspan="2">&nbsp;</th>
+<%       end -%>
+      </tr>
+<%     end -%>
+
+<%     if ( sections_new_group?( task ) ) -%>
+      <!-- New group -->
+
+      <tr align="left" class="even group_gap">
+        <th height="2" colspan="<%= @report.column_count + ( @report.filtered_users.empty? ? 4 : 2 ) %>"></th>
+      </tr>
+
+<%     end -%>
+      <!-- Task data -->
+
+      <tr align="left" class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
+        <td class="ts_show_task <%= taskhelp_billable_class( task ) %> <%= taskhelp_active_class( task ) %>"><%= h( task.title ) %></td>
+
+        <!-- Task breakdown -->
+
+<%     row.cells.each do | cell | -%>
+        <td align="center" class="ts_show_work"><%= reporthelp_hours( cell ) %></td>
+<%     end -%>
+
+        <!-- Task total -->
+
+        <th align="center" class="ts_show_total total"><%= reporthelp_hours( row, true ) %></th>
+<%     if ( @report.filtered_users.empty? ) -%>
+<%       if ( task.duration == 0.0 ) -%>
+        <td align="center" class="ts_show_work">&nbsp;</td>
+        <td align="center" class="ts_show_work">&nbsp;</td>
+<%        else -%>
+        <td align="center" class="ts_show_work"><%= apphelp_terse_hours( task.duration ) %></td>
+        <td align="center" class="ts_show_work">
+          <%= reporthelp_decorated_hours( task.duration - row.committed, task.duration - row.total ) %>
+        </td>
+<%       end -%>
+<%     end -%>
+      </tr>
+<%   end -%>
+
+      <!-- Column totals -->
+
+      <tr align="center" class="<%= cycle( 'even', 'odd' ) %>">
+        <th align="left" class="total">Column total</th>
+
+<%   @report.column_totals.each do | total | -%>
+        <td align="center" class="total"><%= reporthelp_hours( total, true ) %></td>
+<%   end -%>
+
+        <td align="center" class="overall_total"><%= reporthelp_hours( @report, true ) %></td>
+<%   if ( @report.filtered_users.empty? ) -%>
+        <td align="center" class="total">
+          <%= apphelp_terse_hours( @report.total_duration, true ) %>
+        </td>
+        <td align="center" class="total">
+<%     if ( @report.total_actual_remaining.nil? ) -%>
+          &nbsp;
+<%     else -%>
+          <%= reporthelp_decorated_hours( @report.total_actual_remaining, @report.total_potential_remaining ) %>
+<%     end -%>
+<%   end -%>
+        </td>
+      </tr>
+    </table>
+
+<%= render( { :partial => 'export_csv', :locals  => { :form_type => :task } } ) %>
+<% end -%>
+
+<% if ( @report.filtered_tasks.empty? or @report.filtered_users.empty? ) -%>
+<%   if ( @report.filtered_users.empty? and not @report.users.empty? ) -%>
+    <h2>User summaries</h2>
+    
+    <p>
+      There are no users with non-zero total hours booked across the
+      selected tasks.
+    <p>
+<%   end -%>
+<% else %>
+    <!-- Per-user summaries -->
+
+    <h2>User summaries for <%= @report.display_range %></h2>
+
+    <table border="0" cellpadding="2" width="100%" class="ts_show_table" style="white-space: nowrap">
+
+      <!-- Heading - show user names -->
+
+      <tr class="info">
+        <th align="right">Name:</th>
+
+<%   @report.filtered_users.each do | user | -%>
+        <th><%= h( user.name ) %></th>
+<%   end -%>
+
+        <th>Row total</th>
+      </tr>
+
+      <!-- Section and task list, user breakdown -->
+
+<%   sections_initialise_sections()
+     @report.rows.each_index do | row_index |
+
+       row  = @report.rows[ row_index ]
+       task = @report.filtered_tasks[ row_index ]
+
+       if ( sections_new_section?( task ) )
+         row_class = cycle( 'even', 'odd' ) -%>
+      <!-- New section -->
+
+      <tr align="left" class="<%= row_class %>">
+        <th class="ts_edit_heading"><%= h( sections_section_title() ) %></th>
+<%       @report.filtered_users.each_index do | user_index | -%>
+        <td align="center"><%= reporthelp_hours( @report.sections[ sections_section_index() ].user_row_totals[ user_index ] ) %></td>
+<%       end -%>
+        <th align="center"><%= reporthelp_hours( @report.sections[ sections_section_index() ], true ) %></th>
+      </tr>
+<%     end -%>
+<%     if ( sections_new_group?( task ) ) -%>
+      <!-- New group -->
+
+      <tr align="left" class="even group_gap">
+        <th height="2" colspan="<%= @report.filtered_users.size + 2 %>"></th>
+      </tr>
+
+<%     end -%>
+      <!-- Task data -->
+
+      <tr align="left" class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
+        <td class="ts_show_task <%= taskhelp_billable_class( task ) %> <%= taskhelp_active_class( task ) %>"><%= h( task.title ) %></td>
+
+        <!-- Per-user breakdown -->
+
+<%     row.user_row_totals.each do | user_row_total | -%>
+        <td align="center" class="ts_show_work"><%= reporthelp_hours( user_row_total ) %></td>
+<%     end -%>
+
+        <!-- Task total -->
+
+        <th align="center" class="ts_show_total total"><%= reporthelp_hours( row, true ) %></th>
+      </tr>
+<%   end -%>
+
+      <!-- Column totals -->
+
+      <tr align="center" class="<%= cycle( 'even', 'odd' ) %>">
+        <th align="left" class="total">Column total</th>
+
+<%   @report.user_column_totals.each do | user_column_total | -%>
+        <td align="center" class="total"><%= reporthelp_hours( user_column_total, true ) %></td>
+<%   end -%>
+
+        <td align="center" class="overall_total"><%= reporthelp_hours( @report, true ) %></td>
+      </tr>
+    </table>
+
+<%= render( { :partial => 'export_csv', :locals  => { :form_type => :user } } ) %>
+<% end -%>
+
+    <!-- Form to modify report, make new report, cancel -->
+
+    <p><div align="center">
+      <% form_for( :report, { :url => { :action => 'new' } } ) do | f | %>
+        <%= reporthelp_hidden_fields( f ) %>
+        <%= @report.include_totals ? hidden_field_tag( 'include_totals', '1' ) : '' %><%= @report.include_committed ? hidden_field_tag( 'include_committed', '1' ) : '' %><%= @report.include_not_committed ? hidden_field_tag( 'include_not_committed', '1' ) : '' %>
+        <%= hidden_field_tag( 'task_filter', @task_filter ) %>
+
+        <%= submit_tag( 'Change report parameters' ) %>,
+
+        <%= link_to( 'create a new report', new_report_path() ) %> or
+        <%= link_to( 'cancel', home_path() ) %>.
+        Shortcut URI for this report is
+        <%= link_to( 'this', reporthelp_shortcut_path() ) %>.
+      <% end %>
+    </div></p>

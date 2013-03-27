@@ -1,0 +1,51 @@
+<% if ( @current_user.id == @user.id ) -%>
+<%   if ( @user.name.nil? or @user.name.empty? ) -%>
+    <h1>Please set up your new account</h1>
+<%   else -%>
+    <h1>Change account settings</h1>
+<%   end -%>
+<% else -%>
+<%   if ( @current_user.privileged? ) -%>
+    <h1>Change account settings for '<%= h( @user.name ) %>'</h1>
+<%   end -%>
+<% end -%>
+
+    <%= error_messages_for :user %>
+    <% form_for( @user ) do | @f | %>
+      <%= @f.hidden_field( :lock_version ) %>
+
+<% if ( @current_user.admin? ) -%>
+<%= render( :partial => 'admin_edit' ) -%>
+<% elsif ( @current_user.manager? ) -%>
+<%= render( :partial => 'manager_edit' ) -%>
+<% else -%>
+<%= render( :partial => 'normal_edit' ) -%>
+<% end -%>
+
+      <p>
+<% if @current_user.nil? or @current_user.name.nil? or @current_user.name.empty? -%>
+        <%= @f.submit( 'Create', { :disable_with => 'Creating...' } ) %>
+<% else -%>
+<%   if ( @current_user.admin? ) and ( @user.id != @current_user.id ) -%>
+        <%= check_box_tag( 'notify_user', '1', true ) %>
+        <em><%= label_tag( 'notify_user', 'Notify the user about this update by e-mail' ) %></em>
+        <br /><br />
+<%   end -%>
+        <%= @f.submit( 'Update', { :disable_with => 'Updating...' } ) %>
+        else <%= link_to( 'cancel and show details', @user ) %><%= @current_user.privileged? ? '' : '.' %>
+<%   if ( @current_user.privileged? ) -%>
+        or <%= link_to( 'cancel and list users', users_path() ) %>.
+<%   end -%>
+<% end -%>
+      </p>
+    <% end %>
+
+<% if @current_user.nil? or @current_user.name.nil? or @current_user.name.empty? -%>
+    <%= button_to 'Cancel', user_cancel_path( @user ) %>
+
+    <p>
+      If you choose to cancel, your sign in will be aborted and
+      your in-progress user account will be deleted. There will
+      be no information about you retained on this site.
+    </p>
+<% end -%>

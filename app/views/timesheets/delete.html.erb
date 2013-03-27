@@ -1,0 +1,23 @@
+<h1>Delete timesheet for week <%= @record.week_number %>, <%= @record.year %>?</h1>
+
+<%= image_tag( 'trackrecord/drawing.png', { :size => '96x84', :align => 'left', :alt => '!', :style => 'padding-right: 5px;' } ) %>
+<h2>Warning!</h2>
+
+<% form_for( :task, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+
+  Only use the 'delete' button if you are <strong>absolutely sure</strong>
+  that you wish to delete this timesheet. All rows and work packets therein
+  will be deleted; there will be no record remaining of any time booked in
+  the timesheet. <strong>The action cannot be undone.</strong>
+
+  <br clear="all" /><br />
+
+  <div align="center">
+    <%= f.submit( 'Delete timesheet', { :disable_with => 'Deleting...' } ) %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to( 'Cancel and show details',    @record           ) %> |
+  <%= link_to( 'Cancel and list timesheets', timesheets_path() ) %>
+</p>

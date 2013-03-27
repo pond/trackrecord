@@ -1,0 +1,29 @@
+<%= render(
+      {
+        :partial => 'shared/active_inactive_list',
+        :locals  =>
+        {
+          :model          => 'task',
+          :active         => @active_tasks,
+          :inactive       => @inactive_tasks,
+          :columns        => @columns,
+          :actions_method => 'taskhelp_actions'
+        }
+      }
+    )
+%>
+      <h2>Find tasks</h2>
+
+      <% form_tag tasks_path, :method => 'get' do %>
+        <%= hidden_field_tag( 'sort',      params[ :sort      ] ) %>
+        <%= hidden_field_tag( 'direction', params[ :direction ] ) %>
+        <%= hidden_field_tag( 'entries',   params[ :entries   ] ) %>
+        <% content_tag :label do %>
+          Search task, project and customer titles and task codes (TBD - created-at ranges):
+          <%= text_field_tag :search, params[ :search ] %>
+          <%= submit_tag( 'Go', { :name => 'search_go' } ) %>
+<% if ( params[ :search ] ) -%>
+          <%= submit_tag( 'Clear', { :name => 'search_cancel' } ) %>
+<% end -%>
+        <% end %>
+      <% end %>

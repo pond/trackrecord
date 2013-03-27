@@ -1,0 +1,203 @@
+
+SafeInPlaceEditing                                         0.02 23-Oct-2009
+==================                                         ================
+
+The stock InPlaceEditing plug-in code is inadequate for a few reasons
+documented below. This compelled me to write a replacement. For all of
+the shortcomings I may perceive in the InPlaceEditing plug-in, though,
+this plug-in would not exist without the original, from which it
+borrows very heavily. My thanks to all involved.
+
+This variant attempts to fix the problems described below.
+
+
+1) InPlaceEditing introduces an XSS vulnerability
+-------------------------------------------------
+
+One call to in_place_editor_field and you've just introduced an XSS
+security vulnerability into your site. The implementation calls an
+undocumented internal Rails interface to put the field value into the
+page in the first place, which does not use ERB::Util::html_escape to do
+so. The in-place editor JS does NOT (contrary to its documentation) strip
+HTML on entered values and the helper method "in_place_edit_for" builds a
+Controller method which updates the field and renders its new value again
+with no escaping. One can easily enter arbitrary JavaScript and have it
+executed. It's practically your very own JavaScript console for each
+in-place editor field. Oops.
+
+If we fix the in_place_editor_field code (in passing using a clue from
+ActiveScaffold which shows how to write smaller code without using the
+undocumented interface) and we update in_place_edit_for to render escaped
+text, then we arrive at something like this:
+
+  def in_place_editor_field(...etc...)
+    # Get the object's name into 'object_name' and *actual* object into
+    # 'object' - this exercise left to reader
+    #
+    # You might also wish to let the function accept an object name or
+    # an object reference as well as being more explicit about the magic
+    # instance variable name it assumes if given an object name instead,
+    # so that Google doesn't fill up with any more confused people
+    # who've been caught out by the rather confusing API.
+    #
+    column_value = ERB::Util::html_escape(object.send(method))
+    tag_options = {:tag => "span", :id =>
+        "#{object_name}_#{method}_#{object.id}_in_place_editor", :class
+        => "in_place_editor_field"}.merge!(tag_options)
+    in_place_editor_options[:url] = in_place_editor_options[:url] ||
+        url_for({ :action => "set_#{object_name}_#{method}", :id
+        => object.id })
+    content_tag(:span, column_value, tag_options) +
+        in_place_editor(tag_options[:id], in_place_editor_options)
+  end
+
+  def in_place_edit_for(object, attribute, options = {})
+    define_method("set_#{object}_#{attribute}") do
+      @item = object.to_s.camelize.constantize.find(params[:id])
+      @item.update_attribute(attribute, params[:value])
+      render :text => ERB::Util::html_escape(@item.send(attribute).to_s)
+    end
+  end
+
+...but then we encounter more problems:
+
+(1) It's no longer possible to deliberately insert HTML, as per
+    documentation examples for Textile and Markaby in-place editors.
+
+(2) The in-place editor form, when shown, shows the *literal* escaped
+    text because it uses a "getText" call in the JS domain that reads
+    "innerHTML" of the <span> used to mark up the text to be used for
+    editing. There are two ways around this:
+
+    * Patch getText to a better implementation as described on the
+      scriptalicious Wiki (why is this not in their core release?!)
+
+      http://github.com/madrobby/scriptaculous/wikis/ajax-inplaceeditor
+
+        Object.extend(Ajax.InPlaceEditor.prototype, {
+            getText: function() {
+                return this.element.childNodes[0]           ?
+                       this.element.childNodes[0].nodeValue : '';
+            }
+        });
+
+    * Have a custom method to return the unescaped value of the field
+      sitting on the server side (again, as for the Textile and Markaby
+      examples) - but this means one more controller method and a server
+      round-trip each time an editor is shown.
+
+SafeInPlaceEditing patches getText as described above, escapes values in
+the initially created form and its auto-generated helpers, if used, escape
+updated values when rendering them for the in-place view update. You can
+defeat escaping in the safe_in_place_editor_field helper method with a
+special override parameter but this is strongly discouraged.
+
+You must include the JavaScript code for the getText patch and supporting
+methods:
+
+  <%= javascript_include_tag( "safe_in_place_editing/safe_in_place_editing" ) %>
+
+
+2) InPlaceEditing bypasses optimistic locking
+---------------------------------------------
+
+List views do not hold references to objects so the lock version of an
+item with an in-place editor present is not recorded. The update code is
+forced to find a new object in the database by ID, so it always operates
+on a brand new object. Any changes someone else might have made while the
+first user was looking at their in-place editor view will be trampled over.
+
+One might take the approach of the anti-forgery request mechanism patch
+needed to get the in-place edit plug-in working with Rails 2, extending
+the ":with" key's value in the options hash with a query string passing
+the lock_version through:
+
+    if ( object.respond_to?( :lock_version ) )
+      in_place_editor_options[ :with ] ||= "Form.serialize(form)"
+      in_place_editor_options[ :with ] += " +
+          '&lock_version=#{ object.lock_version }'"
+    end
+
+The update code on the server side could manually check this against the
+object it just found in the database. Unfortunately the form JavaScript
+is static, so after a first update the form itself is out of date,
+passing an old lock version through so all subsequent update attempts
+fail until the whole view is reloaded.
+
+    lock_version = nil
+    lock_version = @item.lock_version.to_s if
+       (@item.respond_to?(:lock_version))
+
+    if ( lock_version != params[ :lock_version ] )
+      # Somebody else already edited this item. Do "something"
+      # (see later).
+    else
+      @item.update_attribute( attribute, params[ :value ] )
+    end
+
+We might attempt to write out JS which assigns global variables unique to
+each form with the initial lock value. An on-complete JS handler could
+then increment the lock version at the client side. But this is
+ridiculously complex for the task at hand, requires one to override the
+default on-complete handler, bypass or extend the Rails plug-in (since it
+offers no interface to change the on-complete handler details) and the
+client might still get out of sync with the server's lock versions. Since
+there is little alternative, SafeInPlaceEditing takes this approach, using
+extra JS support methods to try and reduce the inline code baggage.
+
+
+3) Error handling seems to be faulty
+------------------------------------
+
+In theory, returning a 500 error should lead to the onFailure handler
+running in the JS domain, but when used from Rails 2.0.2, the just about
+all properties of the 'transport' object used in the default handler
+function are undefined. As a result, no alert box can be shown to the user.
+
+The onComplete handler is *always* run, regardless of whether the request
+returns a 2xx or other status code. The transport.status value must be
+checked carefully by custom handler code. The responseText value is set
+correctly for failure cases here, so custom handler code must be used to
+report errors as well as handle the "it worked" case. This means custom
+JS written out for every single in-line editor field on the page and an
+extension to the plug-in since it doesn't expose the onComplete or
+onFailure JS options in its API.
+
+The JavaScript assistance functions included with SafeInPlaceEditing take
+care of error handling so that if the on-failure code seems to be having
+trouble the on-complete code will take over. These functions are also
+used to support optimistic locking as described above.
+
+
+4) It is falling out of date
+----------------------------
+
+In-place editing was moved to a plug-in in more recent versions of Rails,
+but is has stagnated. It requires a patch just to work with the
+anti-request-forgery (CSRF) mechanism of Rails 2. It isn't RESTful. It's
+wasteful, requiring multiple near-identical handler methods in the
+Controller to deal with field updates.
+
+Some of that's the same with SafeInPlaceEditing. It certainly isn't
+RESTful, but it tries to reduce controller bloat a bit and doesn't need
+patching for Rails 2. It knows about optimistic locking and takes more
+care over security.
+
+
+Example
+=======
+
+See above. See also documentation for the standard InPlaceEditor plug-in.
+Sorry, I know, that's lame. Hopefully I'll put something useful in here
+sooner rather than later.
+
+
+Contacts
+========
+
+Feel free to contact me at "ahodgkin@rowing.org.uk" with questions, patches
+or suggestions. Or even praise, if you reckon this is worth it :-)
+
+  http://pond.org.uk/
+
+Copyright (c) 2008, 2009 Hipposoft, released under the MIT license.
