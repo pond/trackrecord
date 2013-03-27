@@ -1,15 +1,15 @@
-<h1>Delete user<%= @record.name.nil? or @record.name.empty? ? '' : " '#{ h( @record.name ) }'" %>?</h1>
+<h1>Delete user<%= @record.name.blank? ? '' : " '#{ @record.name }'" %>?</h1>
 
-<%= image_tag( 'trackrecord/drawing.png', { :size => '96x84', :align => 'left', :alt => '!', :style => 'padding-right: 5px;' } ) %>
+<%= image_tag( 'trackrecord/warning.png', { :size => '96x84', :alt=>'!', :class=>'warning' } ) %>
 <h2>Warning!</h2>
 
-<% form_for( :user, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+<%= form_for( :user, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
 
   Only use the 'delete' button if you are <strong>absolutely sure</strong>
   that you wish to delete the user and <em>all</em> of their timesheets and
   account configuration data. <strong>The action cannot be undone.</strong>
 
-  <br clear="all" /><br />
+  <br style="clear: both" /><br />
 
   <div align="center">
     <%= f.submit( 'Delete user', { :disable_with => 'Deleting...' } ) %>

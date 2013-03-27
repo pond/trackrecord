@@ -1,25 +1,25 @@
 <%= error_messages_for :record %>
-<% form_for( @record ) do | f | %>
+<%= form_for( @record ) do | f | %>
   <%= f.hidden_field( :lock_version ) %>
-  <table border="0" cellspacing="0" cellpadding="2">
-    <tr align="left" valign="top">
+  <table class="editing_table">
+    <tr class="editing_row">
       <th>Customer name</th>
       <td><%= f.text_field( :title ) %> (required; must be unique)</td>
     </tr>
 
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Customer code</th>
       <td><%= f.text_field( :code ) %></td>
     </tr>
 
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Description</th>
       <td><%= f.text_area( :description, { :cols => 40, :rows => 4 } ) %></td>
     </tr>
 
 
 <% if ( action_name == 'edit' or action_name == 'update' ) -%>
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Active?</th>
       <td>
 <%= f.select( :active, [ [ 'Active', true ], [ 'Inactive', false ] ] ) %>

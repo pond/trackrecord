@@ -1,6 +1,6 @@
 ########################################################################
 # File::    task_imports_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to Task Import objects.
 #           See controllers/task_imports_controller.rb for more.
@@ -30,7 +30,7 @@ module TaskImportsHelper
       output = ''
     end
 
-    return output
+    return output.html_safe()
   end
 
   # Generate a selector menu for collapsing a task tree to a given level. Pass
@@ -49,6 +49,6 @@ module TaskImportsHelper
              :collapse,
              levels,
              false
-           ).gsub( /^/, line_prefix )
+           ).gsub( /^/, line_prefix ).html_safe()
   end
 end

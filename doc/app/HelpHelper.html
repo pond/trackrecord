@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module HelpHelper - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/helpers/help_helper.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-help_link">#help_link</a>
+    
+    <li><a href="#method-i-help_url">#help_url</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module HelpHelper</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>help_helper.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2010</p>
+</dd><dt>Purpose
+<dd>
+<p>Utility methods for views providing help text.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>15-Jan-2010 (ADH): Created.
+18-Oct-2011 (ADH): Imported into TrackRecord.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-help_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">help_link</span><span
+            class="method-args">( partial )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pass the name of a help view parial, e.g. “user_geography” or
+“attach_video”. Returns HTML consisting of an image linked to the
+associated help page in a blank target window.</p>
+          
+
+          
+          <div class="method-source-code" id="help_link-source">
+            <pre><span class="ruby-comment"># File app/helpers/help_helper.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">help_link</span>( <span class="ruby-identifier">partial</span> )
+  <span class="ruby-identifier">help_url</span>( <span class="ruby-identifier">help_path</span>( <span class="ruby-identifier">partial</span> ) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- help_link-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- help_link-method -->
+
+    
+      <div id="method-i-help_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">help_url</span><span
+            class="method-args">( url )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pass a URL. Returns HTML consisting of an image linked to the given URL on
+the assumption that this URL is for some kind of help page.</p>
+          
+
+          
+          <div class="method-source-code" id="help_url-source">
+            <pre><span class="ruby-comment"># File app/helpers/help_helper.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">help_url</span>( <span class="ruby-identifier">url</span> )
+
+  <span class="ruby-comment"># We link to an image tag so that we don't have to worry about inline</span>
+  <span class="ruby-comment"># block styling and bugs in some browsers related to those; we want an</span>
+  <span class="ruby-comment"># image, but we want an image we can change in CSS for a 'hover' state.</span>
+  <span class="ruby-comment"># So, use a blank foreground image and set a background image in CSS.</span>
+  <span class="ruby-comment"># See the &quot;help&quot; class styling in the CSS file for the styles that make</span>
+  <span class="ruby-comment"># things work.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># Yes, this is just Yet Another Hack for the mess that is HTML + CSS.</span>
+
+  <span class="ruby-identifier">link_to</span>(
+    <span class="ruby-identifier">image_tag</span>(
+      <span class="ruby-string">'trackrecord/blank.png'</span>,
+      <span class="ruby-value">:size</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'16x16'</span>,
+      <span class="ruby-value">:alt</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'?'</span>,
+      <span class="ruby-value">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'top'</span>,
+      <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'help'</span>
+    ),
+    <span class="ruby-identifier">url</span>,
+    <span class="ruby-value">:target</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'_blank'</span>,
+    <span class="ruby-value">:class</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'help'</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- help_url-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- help_url-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

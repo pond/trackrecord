@@ -1,6 +1,6 @@
 ########################################################################
 # File::    timesheet_rows_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage TimesheetRow objects. See models/timesheet_row.rb
 #           for more.

@@ -69,7 +69,7 @@ lightbox.prototype = {
 	xPos : 0,
 
 	initialize: function(ctrl) {
-		this.content = ctrl.rel;
+		this.content = ctrl.dataset.leightbox; /* 2013-03-27 (ADH): Use 'data-leightbox' rather than 'rel' attribute for HTML 5 compliance */
 		Event.observe(ctrl, 'click', this.activate.bindAsEventListener(this), false);
 		ctrl.onclick = function(){return false;};
 		/* 2009-11-16 (ADH): Added line below */
@@ -142,8 +142,8 @@ lightbox.prototype = {
 	actions: function(){
 		lbActions = document.getElementsByClassName('lbAction');
 
-		for(i = 0; i < lbActions.length; i++) {
-			Event.observe(lbActions[i], 'click', this[lbActions[i].rel].bindAsEventListener(this), false);
+		for(i = 0; i < lbActions.length; i++) {  /* 2013-03-27 (ADH): Use 'data-leightbox' rather than 'rel' attribute for HTML 5 compliance */
+			Event.observe(lbActions[i], 'click', this[lbActions[i].dataset.leightbox].bindAsEventListener(this), false);
 			lbActions[i].onclick = function(){return false;};
 		}
 

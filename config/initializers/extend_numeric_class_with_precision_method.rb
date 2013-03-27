@@ -1,6 +1,6 @@
 ########################################################################
 # File::    extend_numeric_class_with_precision_method.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Extend Numeric to provide a 'precision' method which rounds
 #           numbers to the required number of decimal places. Adapted

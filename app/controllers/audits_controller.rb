@@ -1,6 +1,6 @@
 ########################################################################
 # File::    audits_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage Acts As Audited tables.
 # ----------------------------------------------------------------------
@@ -8,6 +8,8 @@
 ########################################################################
 
 class AuditsController < ApplicationController
+
+  uses_prototype( :only => :index )
 
   # Security.
 
@@ -32,24 +34,21 @@ class AuditsController < ApplicationController
     # Get the basic options hash from ApplicationController, then handle
     # search forms.
 
-    options = appctrl_index_assist( Audit )
+    options         = appctrl_index_assist( Audited::Adapters::ActiveRecord::Audit )
     conditions_vars = {}
 
-    unless ( params[ :search ].nil? )
-      if ( params[ :search ].empty? or params[ :search_cancel ] )
-        params.delete( :search )
-      else
-        search_num      = params[ :search ].to_i
-        search_str      = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
-        conditions_sql  = 'WHERE ( action ILIKE :search_str OR auditable_type ILIKE :search_str OR users.name ILIKE :search_str OR version ILIKE :search_num )'
-        conditions_vars = { :search_num => search_num, :search_str => search_str }
-      end
-    end
+    search_num      = params[ :search ].to_i
+    search_str      = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
+
+    range_sql, range_start, range_end = appctrl_search_range_sql( Audited::Adapters::ActiveRecord::Audit )
+
+    conditions_sql  = "WHERE #{ range_sql } ( action ILIKE :search_str OR auditable_type ILIKE :search_str OR users.name ILIKE :search_str OR version = :search_num )"
+    conditions_vars = { :search_num => search_num, :search_str => search_str, :range_start => range_start, :range_end => range_end }
 
     # Sort order is already partially compiled in 'options' from the earlier
     # call to 'appctrl_index_assist'.
 
-    order_sql = "ORDER BY #{ options[ :order ] }"
+    order_sql = "ORDER BY #{ options[ :order ] }, created_at DESC"
     options.delete( :order )
 
     # Construct the query.
@@ -61,7 +60,7 @@ class AuditsController < ApplicationController
 
     # Now paginate using this SQL query.
 
-    @audits = Audit.paginate_by_sql( [ finder_sql, conditions_vars ], options )
+    @audits = Audited::Adapters::ActiveRecord::Audit.paginate_by_sql( [ finder_sql, conditions_vars ], options )
   end
 
 private

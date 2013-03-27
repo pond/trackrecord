@@ -1,6 +1,6 @@
 ########################################################################
 # File::    track_record_report.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Mixin providing classes which represent all aspects of a
 #           TrackRecord report.
@@ -73,7 +73,16 @@ module TrackRecordReport
     # the list with the 'label' method. Use the 'column_title' method for
     # a column "title", shown alongside or above column headings. Use the
     # 'column_heading' method for per-column headings.
-
+    #
+    # THESE MUST STAY IN THE SAME ORDER!  If you add new entries, you must
+    # ==================================  add them at the end of the list.
+    #
+    # Saved reports specify the reporting frequency by reference to this
+    # constant and an index into its array of entries. If you produce a new
+    # TrackRecord version that changes the meaning of any array index rather
+    # than merely adding new entries, you will have to include a migration
+    # that maps old indices to new for existing saved report records.
+    #
     FREQUENCY = [
       { :label => 'Totals only',      :title => '',                  :column => :heading_total,             :generator => :totals_report                                          },
       { :label => 'UK tax year',      :title => 'UK tax year:',      :column => :heading_tax_year,          :generator => :periodic_report, :generator_arg => :end_of_uk_tax_year },
@@ -96,12 +105,13 @@ module TrackRecordReport
     # Complete date range for the whole report; array of user IDs used for
     # per-user breakdowns; array of task IDs the report will represent.
     attr_accessor :range
-    attr_reader   :user_ids, :task_ids, :active_task_ids, :inactive_task_ids # Bespoke "writer" methods are defined later
+    attr_reader   :reportable_user_ids, :task_ids, :active_task_ids, :inactive_task_ids # Bespoke "writer" methods are defined later
 
-    # Range data for the 'new' view form.
-    attr_accessor :range_start, :range_end
-    attr_accessor :range_week_start, :range_week_end
-    attr_accessor :range_month_start, :range_month_end
+    # Range data for the 'new' view form. Custom attribute writer methods are
+    # used to call "rationalise_dates()" whenever a range value is altered.
+    attr_reader :range_start, :range_end
+    attr_reader :range_week_start, :range_week_end
+    attr_reader :range_month_start, :range_month_end
 
     # Handle all ("all"), only billable ("billable") or only non-billable
     # ("non_billable") tasks?
@@ -127,13 +137,11 @@ module TrackRecordReport
       )
     end
 
-    # A row from the FREQUENCY constant and the current index into that array,
-    # as a stringify_keys.
+    # A row from the FREQUENCY constant and the current index into that array.
     attr_reader :frequency_data, :frequency
 
-    # Read-only array of actual user and task objects based on the IDs; call
-    # "build_task_and_user_arrays" to build it. Not all users or tasks may be
-    # included, depending on security settings.
+    # Read-only array of actual user and task objects based on the IDs. Not all
+    # users or tasks may be included, depending on security settings.
     attr_reader :users, :tasks    # Bespoke "reader" methods for active/inactive lists are defined later
     attr_accessor :filtered_tasks # Only valid after the "compile" method has been called.
     attr_accessor :filtered_users # Only valid after the "compile" method has been called.
@@ -210,7 +218,7 @@ module TrackRecordReport
 
       @users                 = []
       @filtered_users        = []
-      @user_ids              = []
+      @reportable_user_ids   = []
 
       unless ( params.nil? )
 
@@ -223,7 +231,11 @@ module TrackRecordReport
           if ( key.include?( '(' ) )
             raise( "Multi-parameter attributes are not supported." )
           else
-            send( key + "=", value )
+            begin
+              send( key + "=", value )
+            rescue
+              # Ignore errors
+            end
           end
         end
       end
@@ -254,43 +266,43 @@ module TrackRecordReport
     # Build the 'tasks' array if 'task_ids' is updated externally.
     #
     def task_ids=( ids )
-      @task_ids = map_raw_ids( ids )
-      assign_tasks_from_ids( @task_ids )
+      @provided_task_ids = map_raw_ids( ids )
+      assign_actual_tasks_from_provided_ids()
     end
 
     # Build the 'tasks' array if 'active_task_ids' is updated externally. The
     # result will be the sum of existing inactive and updated active task IDs.
     #
     def active_task_ids=( ids )
-      @active_task_ids = map_raw_ids( ids )
-      assign_tasks_from_ids( @active_task_ids, @inactive_task_ids )
+      @provided_active_task_ids = map_raw_ids( ids )
+      assign_actual_tasks_from_provided_ids()
     end
 
     # Build the 'tasks' array if 'inactive_task_ids' is updated externally. The
     # result will be the sum of existing active and updated inactive task IDs.
     #
     def inactive_task_ids=( ids )
-      @inactive_task_ids = map_raw_ids( ids )
-      assign_tasks_from_ids( @active_task_ids, @inactive_task_ids )
+      @provided_inactive_task_ids = map_raw_ids( ids )
+      assign_actual_tasks_from_provided_ids()
     end
 
-    # Build the 'user' array if 'user_ids' is updated externally.
+    # Build the 'user' array if 'reportable_user_ids' is updated externally.
     #
-    def user_ids=( ids )
+    def reportable_user_ids=( ids )
       ids ||= []
       ids = ids.values if ( ids.is_a?( Hash ) or ids.is_a?( HashWithIndifferentAccess ) )
-      @user_ids = ids.map { | str | str.to_i }
+      @reportable_user_ids = ids.map { | str | str.to_i }
 
       # Security - if the current user is restricted they might try and hack
       # the form to view other user details.
 
       if ( @current_user.restricted? )
-        @user_ids = [ @current_user.id ] unless( @user_ids.empty? )
+        @reportable_user_ids = [ @current_user.id ] unless( @reportable_user_ids.empty? )
       end
 
       # Turn the list of (now numeric) user IDs into user objects.
 
-      @users = User.active.find( @user_ids )
+      @users = User.where( :id => @reportable_user_ids )
     end
 
     # Set the 'frequency_data' field when 'frequency' is updated externally.
@@ -299,6 +311,16 @@ module TrackRecordReport
       @frequency      = freq.to_i
       @frequency_data = FREQUENCY[ @frequency ]
     end
+
+    # Rationalise overall date ranges whenever a related field is updated
+    # externally.
+
+    def range_start=( value );       @range_start       = value; rationalise_dates(); end
+    def range_end=( value );         @range_end         = value; rationalise_dates(); end
+    def range_week_start=( value );  @range_week_start  = value; rationalise_dates(); end
+    def range_week_end=( value );    @range_week_end    = value; rationalise_dates(); end
+    def range_month_start=( value ); @range_month_start = value; rationalise_dates(); end
+    def range_month_end=( value );   @range_month_end   = value; rationalise_dates(); end
 
     # Compile the report.
     #
@@ -371,7 +393,7 @@ module TrackRecordReport
 #        purposes in the column headings.
 
       col_range = @column_ranges[ col_index ]
-      return ( col_range.first < @range.first or col_range.last > @range.last )
+      return ( col_range.min < @range.min or col_range.max > @range.max )
     end
 
   private
@@ -387,20 +409,15 @@ module TrackRecordReport
       ids.map { | str | str.to_i }
     end
 
-    # Given an array of numerical IDs, assign "@tasks" to the (permitted) array
-    # of corresponding tasks, sorted by augmented title. Pass an optional extra
-    # array of IDs which is added to the first. "@task_ids" is set to the sum
-    # of the two arrays. You can thus directly set @task_ids by just passing in
-    # one array with the IDs you want; or combine e.g. active and inactive
-    # task lists by passing those two arrays instead.
+    # Build the internal @task_ids, @active_task_ids and @inactive_task_ids
+    # lists based on the caller-provided master list of IDs, active IDs or
+    # inactive IDs. Basically we can't trust that the caller has an up to date
+    # view of what is active or what a current user can see, so we always take
+    # the union of the caller's values and build our own internal view of it.
     #
-    # Note that @task_ids, @active_task_ids and @inactive_task_ids will all be
-    # reconstructed at the end of the method so that they contain an updated,
-    # sorted ID list taking account of current user task viewing permissions.
-    #
-    def assign_tasks_from_ids( id_array_1, id_array_2 = [] )
-      @task_ids = id_array_1 + id_array_2
-      @tasks    = Task.find( @task_ids )
+    def assign_actual_tasks_from_provided_ids()
+      @task_ids = ( ( @provided_task_ids || [] ) + ( @provided_active_task_ids || [] ) + ( @provided_inactive_task_ids || [] ) ).uniq
+      @tasks    = Task.where( :id => @task_ids )
 
       update_internal_task_lists()
     end
@@ -443,7 +460,7 @@ module TrackRecordReport
     # Apply task selection filters to @tasks thus initialising @filtered_tasks.
     #
     def apply_filters
-      @filtered_tasks = ( @tasks.empty? ) ? @current_user.active_permitted_tasks : @tasks.dup
+      @filtered_tasks = ( @tasks.empty? ) ? @current_user.all_permitted_tasks : @tasks.dup
 
       case @task_filter
         when 'billable'
@@ -531,16 +548,21 @@ module TrackRecordReport
       # finally sort by the task itself. The field used for the sorting of each
       # of the three object types is configurable and usually one of :title,
       # :code or :created_at.
+      #
+      # Liberal use of 'try' to deal with unassigned items - tasks with no
+      # project, projects with no customer. Any "<=>" comparison with 'nil' will
+      # result in 'nil' and a failed sort, so return '0' for such cases to treat
+      # any nil comparison as 'same' (the "|| 0" at the end of comparison lines).
 
-      if ( task_a.project.customer_id != task_b.project.customer_id )
+      if ( task_a.project.try( :customer_id ) != task_b.project.try( :customer_id ) )
         method = options[ :customer_sort_field ] || :title
-        return task_a.project.customer.send( method ) <=> task_b.project.customer.send( method )
+        return ( task_a.project.try( :customer ).try( method ) <=> task_b.project.try( :customer ).try( method ) ) || 0
       elsif ( task_a.project_id != task_b.project_id )
         method = options[ :project_sort_field ] || :title
-        return task_a.project.send( method ) <=> task_b.project.send( method )
+        return ( task_a.project.try( method ) <=> task_b.project.try( method ) ) || 0
       else
         method = options[ :task_sort_field ] || :title
-        return task_a.send( method ) <=> task_b.send( method )
+        return ( task_a.send( method ) <=> task_b.send( method ) ) || 0
       end
     end
 
@@ -561,7 +583,7 @@ module TrackRecordReport
           range_start = Date.parse( @range_start )
         end
       rescue
-        range_start = default_range.first
+        range_start = default_range.min
       end
 
       begin
@@ -575,7 +597,7 @@ module TrackRecordReport
           range_end = Date.parse( @range_end )
         end
       rescue
-        range_end = default_range.last
+        range_end = default_range.max
       end
 
       if ( range_end < range_start )
@@ -602,8 +624,16 @@ module TrackRecordReport
       earliest = WorkPacket.find_earliest_by_tasks( @task_ids )
       latest   = WorkPacket.find_latest_by_tasks( @task_ids )
 
-      end_of_range   = latest.nil?   ? Date.current                                      : latest.date.to_date
-      start_of_range = earliest.nil? ? Date.new( Timesheet.allowed_range().first, 1, 1 ) : earliest.date.to_date
+      # If the earliest or latest work packet value is nil, both should be
+      # nil (obviously) and this means there are no work pckets for the
+      # tasks. In that case we just span 'all of time' so that the user
+      # can see explicitly there's no booked time. Generating a report over
+      # some single day range just looks odd (user thinks "why hasn't it
+      # covered all dates"). The hide-zero-columns option can be employed
+      # to clear up the report.
+
+      end_of_range   = latest.nil?   ? Date.current                                    : latest.date.to_date
+      start_of_range = earliest.nil? ? Date.new( Timesheet.allowed_range().min, 1, 1 ) : earliest.date.to_date
 
       return ( start_of_range..end_of_range )
     end
@@ -640,7 +670,7 @@ module TrackRecordReport
 
       @committed_work_packets     = []
       @not_committed_work_packets = []
-      user_ids                    = @user_ids.empty? ? nil : @user_ids
+      reportable_user_ids         = @reportable_user_ids.empty? ? nil : @reportable_user_ids
 
       @filtered_tasks.each_index do | index |
         task_id = @filtered_tasks[ index ]
@@ -648,13 +678,13 @@ module TrackRecordReport
         @committed_work_packets[ index ] = WorkPacket.find_committed_by_task_user_and_range(
             @range,
             task_id,
-            user_ids
+            reportable_user_ids
         )
 
         @not_committed_work_packets[ index ] = WorkPacket.find_not_committed_by_task_user_and_range(
             @range,
             task_id,
-            user_ids
+            reportable_user_ids
         )
       end
 
@@ -690,8 +720,8 @@ module TrackRecordReport
     # range is *not* quantised to a column boundary.
     #
     def periodic_report( end_of_period_method )
-      period_start_day = @range.first
-      report_end_day   = @range.last
+      period_start_day = @range.min
+      report_end_day   = @range.max
 
       begin
         column_end_day = period_start_day.send( end_of_period_method )
@@ -729,7 +759,7 @@ module TrackRecordReport
           range,
           @committed_work_packets[ task_index ],
           @not_committed_work_packets[ task_index ],
-          @user_ids
+          @reportable_user_ids
         )
 
         # Include the cell in this row and the running column total.
@@ -906,32 +936,40 @@ module TrackRecordReport
     end
 
     # Helper methods which return a user-displayable column heading for various
-    # different report types. Pass the date range to displayl
+    # different report types. Pass the date range to display and, for some of
+    # the methods, optional format strings for date formatting.
 
-    def heading_total( range )
-      format = '%d-%b-%Y' # DD-Mth-YYYY
-      return "#{ range.first.strftime( format ) } to #{ range.last.strftime( format ) }"
+    def heading_total( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      "#{ heading_start( range, format ) } to #{ heading_end( range, format ) }"
+    end
+
+    def heading_start( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      "#{ range.min.strftime( format ) }"
+    end
+
+    def heading_end( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      "#{ range.max.strftime( format ) }"
     end
 
     def heading_tax_year( range )
-      year = range.first.beginning_of_uk_tax_year.year
+      year = range.min.beginning_of_uk_tax_year.year
       return "#{ year } / #{ year + 1 }"
     end
 
     def heading_calendar_year( range )
-      return range.first.year.to_s
+      return range.min.year.to_s
     end
 
-    def heading_quarter_and_month( range )
-      return range.first.strftime( '%b %Y' ) # Mth-YYYY
+    def heading_quarter_and_month( range, format = '%b %Y' ) # Mth-YYYY
+      return range.min.strftime( format )
     end
 
-    def heading_weekly( range )
-      return "#{ range.first.strftime( '%d-%b-%Y' ) } (#{ range.first.cweek })" # DD-Mth-YYYY
+    def heading_weekly( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      return "#{ range.min.strftime( '%d %b' ) }<br />#{ range.min.year }: #{ range.min.cweek }".html_safe()
     end
 
-    def heading_daily( range )
-      return range.first.strftime( '%d-%b-%Y' ) # DD-Mth-YYYY
+    def heading_daily( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      return range.min.strftime( format )
     end
   end
 
@@ -1091,14 +1129,14 @@ module TrackRecordReport
     # are removed from the arrays. Separate totals for each of the users in the
     # given array are maintained in the @user_data array.
     #
-    def calculate!( range, committed, not_committed, user_ids = [] )
+    def calculate!( range, committed, not_committed, reportable_user_ids = [] )
       # Reset internal calculations and pre-allocate ReportUserData objects for
       # each user (if any).
 
       reset!()
       @user_data = []
 
-      user_ids.each_index do | user_index |
+      reportable_user_ids.each_index do | user_index |
         @user_data[ user_index ]= ReportUserData.new
       end
 
@@ -1109,7 +1147,7 @@ module TrackRecordReport
       @committed = sum(
         range,
         committed,
-        user_ids,
+        reportable_user_ids,
         :add_committed_hours
       )
 
@@ -1118,7 +1156,7 @@ module TrackRecordReport
       @not_committed = sum(
         range,
         not_committed,
-        user_ids,
+        reportable_user_ids,
         :add_not_committed_hours
       )
     end
@@ -1133,14 +1171,14 @@ module TrackRecordReport
     # user data object at the corresponding index in @user_data will have the
     # given method called and passed the packet.
     #
-    def sum( range, packets, user_ids, user_data_method )
+    def sum( range, packets, reportable_user_ids, user_data_method )
       total  = 0.0
       packet = packets[ -1 ]
 
       while ( ( not packets.empty? ) and ( range.include?( packet.date.to_date ) ) )
         total += packet.worked_hours
 
-        index = user_ids.index( packet.timesheet_row.timesheet.user_id )
+        index = reportable_user_ids.index( packet.timesheet_row.timesheet.user_id )
         @user_data[ index ].send( user_data_method, packet ) unless ( index.nil? )
 
         packets.pop()

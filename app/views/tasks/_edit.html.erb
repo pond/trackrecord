@@ -1,33 +1,33 @@
 <%= error_messages_for :record %>
-<% form_for( @record ) do | f | %>
+<%= form_for( @record ) do | f | %>
   <%= f.hidden_field( :lock_version ) %>
-  <table border="0" cellspacing="0" cellpadding="2">
-    <tr align="left">
+  <table class="editing_table">
+    <tr class="editing_row">
       <th>Task title (required)</th>
       <td><%= f.text_field( :title ) %></td>
     </tr>
 
-    <tr align="left">
+    <tr class="editing_row">
       <th>Task code</th>
       <td><%= f.text_field( :code ) %></td>
     </tr>
 
-    <tr align="left">
+    <tr class="editing_row">
       <th>Expected duration (in hours, required)</th>
       <td><%= f.text_field( :duration, { :maxlength => 6 } ) %></td>
     </tr>
 
-    <tr align="left">
+    <tr class="editing_row">
       <th>Description</th>
       <td><%= f.text_area( :description, { :cols => 40, :rows => 4 } ) %></td>
     </tr>
 
-    <tr align="left">
+    <tr class="editing_row">
       <th>Tick if billable:</th>
       <td><%= f.check_box( :billable ) %></td>
     </tr>
 
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Assigned to project?</th>
       <td>
 <% if ( ( projects = Project.active ).empty? ) -%>
@@ -35,11 +35,18 @@
 <% else -%>
 <%= taskhelp_project_selector( @record ) %>
 <% end -%>
+        <p>
+          Users cannot add a task to timesheets unless the task is assigned
+          to a project and the project is assigned to a customer.
+          <% if ( action_name == 'edit' || action_name == 'update' ) -%>
+          Any timesheets already including the task will be unaffected.
+          <% end -%>
+        </p>
       </td>
     </tr>
 
 <% if ( action_name == 'edit' or action_name == 'update' ) -%>
-    <tr align="left">
+    <tr class="editing_row">
       <th>Active?</th>
       <td>
 <%= f.select( :active, [ [ 'Active', true ], [ 'Inactive', false ] ] ) %>
@@ -56,6 +63,7 @@
     <%= f.submit( 'Update', { :disable_with => 'Updating...' } ) %>
     else <%= link_to( 'cancel and show details', @record ) %>
 <% end -%>
-    or <%= link_to( 'cancel and list tasks', tasks_path() ) %>.
+    or <%= link_to( 'cancel and list tasks', tasks_path() ) %>
+    or <%= link_to( 'cancel and add a new project', new_project_path() ) %>.
   </p>
 <% end %>

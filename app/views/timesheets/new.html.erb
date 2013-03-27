@@ -1,38 +1,30 @@
-    <h1>Enter timesheets</h1>
+    <h1><%= apphelp_heading() %></h1>
 
     <p>
-      The chart below shows all weeks in <%= @year %>.
-      <span class="timesheet_committed">Green</span> entries show
-      <span class="timesheet_committed">committed timesheets</span>
-      and link to their details.
-      <span class="timesheet_not_committed">Orange</span> entries show
-      <span class="timesheet_not_committed">incomplete timesheets</span> 
-      and link to their edit page. The other entries contain buttons which
-      create new, empty timesheets using your
-      <%= link_to( 'account settings', edit_user_path( @current_user) ) %> 
-      to determine the initial task list.
+      This table shows all weeks in <strong><%= @year %></strong>.
+      <%= link_to( 'Manage other timesheets here', timesheets_path() ) %>.
     </p>
 
+    <br />
     <%= error_messages_for( :timesheet ) %>
-    <div align="center">
-      <table border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td colspan="3">
+    <table class="timesheet_chart_container">
+      <tr>
+        <td>
 <%= timesheethelp_year_chart( @year ) %>
-          </td>
-        </tr>
+        </td>
+      </tr>
 
-        <tr>
-          <td colspan="3">
-            <% form_tag( new_timesheet_path(), { :method => :post } ) do %>
+      <tr>
+        <td>
+          <%= form_tag( new_timesheet_path(), { :method => :get } ) do %>
 
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-              <tr>
-                <td align="left">
-                  <%= submit_tag( '&lt;&lt;', { :name => 'previous', :disabled => ( @year == @years.first ) } ) %>
-                </td>
-                <td align="center">
-                  <b>View different year:</b>
+          <table class="display_actions" style="width: 100%">
+            <tr>
+              <td class="left">
+                <%= submit_tag( raw( '&lt;&lt;' ), { :name => 'previous', :disabled => ( @year == @years.first ) } ) %>
+              </td>
+              <td class="centered">
+                <b>View different year:</b>
 
 <%=
   select(
@@ -47,16 +39,23 @@
   )
 %>
 
-                  <%= submit_tag( 'View' ) %> or <%= link_to( 'cancel', home_path() ) %>
-                </td>
-                <td align="right">
-                  <%= submit_tag( '&gt;&gt;', { :name => 'next', :disabled => ( @year == @years.last ) } ) %>
-                </td>
-              </tr>
-            </table>
-            <% end -%>
-          </td>
-        </tr>
+                <%= submit_tag( 'View' ) %>
+              </td>
+              <td class="right">
+                <%= submit_tag( raw( '&gt;&gt;' ), { :name => 'next', :disabled => ( @year == @years.last ) } ) %>
+              </td>
+            </tr>
+          </table>
+          <% end %>
+        </td>
+      </tr>
 
-      </table>
-    </div>
+    </table>
+
+    <br />
+    <ul>
+      <li><span class="timesheet_committed">Green:</span> Committed &ndash; read-only
+      <li><span class="timesheet_not_committed">Orange:</span> Not committed &ndash; editable
+      <li>Otherwise: Each button starts an empty timesheet with a task list
+          <%= link_to( 'found in your account settings', edit_user_path( @current_user) ) %>.
+    </ul>

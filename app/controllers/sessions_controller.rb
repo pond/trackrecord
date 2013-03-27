@@ -1,6 +1,6 @@
 ########################################################################
 # File::    sessions_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage OpenID logins. Originally created from examples in
 #           the open_id_authentication plugin.
@@ -110,10 +110,9 @@ protected
             # would require an exposed URL that could be used to try
             # and create users without OpenID authentication.
 
-            user_type = 'Admin'
-
-            @current_user = User.new
-            @current_user.assign_defaults( nil, identity_url, user_type )
+            @current_user              = User.new
+            @current_user.identity_url = identity_url
+            @current_user.user_type    = User::USER_TYPE_ADMIN
             @current_user.save!
 
             new_login()

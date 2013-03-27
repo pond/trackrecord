@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module TrackRecordSections - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/track_record_sections.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-sections_augmented_link">#sections_augmented_link</a>
+    
+    <li><a href="#method-i-sections_group_title">#sections_group_title</a>
+    
+    <li><a href="#method-i-sections_initialise_sections">#sections_initialise_sections</a>
+    
+    <li><a href="#method-i-sections_new_group-3F">#sections_new_group?</a>
+    
+    <li><a href="#method-i-sections_new_section-3F">#sections_new_section?</a>
+    
+    <li><a href="#method-i-sections_section_index">#sections_section_index</a>
+    
+    <li><a href="#method-i-sections_section_title">#sections_section_title</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module TrackRecordSections</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>track_record_sections.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Mixin providing abstract section handling for various bits of TrackRecord
+code.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>30-Jun-2008 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-sections_augmented_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sections_augmented_link</span><span
+            class="method-args">( obj )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>For an object with a ‘title’, ‘code’ and ‘description’ attribute, make a
+link to that object showing its title as the link text, with a link title
+attribute consisting of the code and description (where either, both or
+neither may be an empty string or even nil). Returns the link.</p>
+          
+
+          
+          <div class="method-source-code" id="sections_augmented_link-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sections_augmented_link</span>( <span class="ruby-identifier">obj</span> )
+  <span class="ruby-identifier">title</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">title</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">code</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:code</span> ).<span class="ruby-identifier">blank?</span>
+  <span class="ruby-identifier">title</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:description</span> ).<span class="ruby-identifier">blank?</span>
+  <span class="ruby-identifier">title</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">description</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:description</span> ).<span class="ruby-identifier">blank?</span>
+
+  <span class="ruby-identifier">content_tag</span>(
+    <span class="ruby-value">:span</span>,
+    <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">h</span>( <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">title</span> ), <span class="ruby-identifier">obj</span> ),
+    <span class="ruby-value">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">title</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sections_augmented_link-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sections_augmented_link-method -->
+
+    
+      <div id="method-i-sections_group_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sections_group_title</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return the group name inferred from the given task title, or ‘nil’ for no
+apparent group name in the task title. See “new_group?” for details. The
+method is called “group_title” rather than “group_name” for symmetry with
+“section_title” - it’s more natural when writing caller code to remember
+(or guess at!) a name of “group_title”.</p>
+          
+
+          
+          <div class="method-source-code" id="sections_group_title-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sections_group_title</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-identifier">this_group</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">task_title</span> = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
+  <span class="ruby-identifier">colon</span>      = <span class="ruby-identifier">task_title</span>.<span class="ruby-identifier">index</span>( <span class="ruby-string">':'</span> )
+  <span class="ruby-identifier">this_group</span> = <span class="ruby-identifier">task_title</span>[ <span class="ruby-value">0</span><span class="ruby-operator">..</span>( <span class="ruby-identifier">colon</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> ) ] <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">colon</span>.<span class="ruby-identifier">nil?</span> )
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">this_group</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sections_group_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sections_group_title-method -->
+
+    
+      <div id="method-i-sections_initialise_sections" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sections_initialise_sections</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initialise the section discovery mechanism. Call this before processing
+rows. Then, for each row, call “new_section?” to find out if a new section
+has been entered with the given row, “section_title” to discover its title,
+then “new_group?” to find out if there is also a new group within the
+section (if you wish to make such a distinction).</p>
+
+<p>Instance variables are used to record progress across calls. These are:</p>
+
+<pre>@sections_last_customer (internal state)
+@sections_last_project  (internal state)
+@sections_last_group    (internal state)
+@sections_current_index (internal state)</pre>
+
+<p>Calling code must avoid these variable names.</p>
+
+<p>Each new section is given a monotonically rising index value, starting at
+zero. Use the “section_index” method to read the current section’s index.</p>
+          
+
+          
+          <div class="method-source-code" id="sections_initialise_sections-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sections_initialise_sections</span>
+  <span class="ruby-ivar">@sections_last_customer</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@sections_last_project</span>  = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@sections_last_group</span>    = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@sections_current_index</span> = <span class="ruby-value">-1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sections_initialise_sections-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sections_initialise_sections-method -->
+
+    
+      <div id="method-i-sections_new_group-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sections_new_group?</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Similar to “new_section?”, except returns ‘true’ when the task title
+indicates a group. A task title includes a group name if the title has at
+least one “:” (colon) character in it. Any part of the title before the
+first colon is considered a group name. View code usually makes only a
+subtle disctinction for changes in group, e.g. an extra vertical spacer,
+but if you want to explicitly show new group names then you can do so by
+calling “group_title” to recover the name string.</p>
+
+<p>Unlike sections, groups are not given unique indices.</p>
+          
+
+          
+          <div class="method-source-code" id="sections_new_group-3F-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sections_new_group?</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-identifier">this_group</span> = <span class="ruby-identifier">sections_group_title</span>( <span class="ruby-identifier">task</span> )
+
+  <span class="ruby-identifier">changed</span> = ( <span class="ruby-identifier">this_group</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@sections_last_group</span> )
+  <span class="ruby-ivar">@sections_last_group</span> = <span class="ruby-identifier">this_group</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">changed</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">changed</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sections_new_group-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sections_new_group-3F-method -->
+
+    
+      <div id="method-i-sections_new_section-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sections_new_section?</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See “initialise_sections” for details; call here, passing a task related to
+the currently processed row, to find out if this task (and therefore its
+associated row) are the first row in a new section. Returns ‘true’ if so,
+else ‘false’.</p>
+          
+
+          
+          <div class="method-source-code" id="sections_new_section-3F-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sections_new_section?</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-identifier">this_project</span>  = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>
+  <span class="ruby-identifier">this_customer</span> = <span class="ruby-identifier">this_project</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">this_project</span>.<span class="ruby-identifier">customer</span>
+
+  <span class="ruby-identifier">changed</span> = ( <span class="ruby-identifier">this_customer</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@sections_last_customer</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">this_project</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@sections_last_project</span> )
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">changed</span> )
+    <span class="ruby-ivar">@sections_last_customer</span>  = <span class="ruby-identifier">this_customer</span>
+    <span class="ruby-ivar">@sections_last_project</span>   = <span class="ruby-identifier">this_project</span>
+    <span class="ruby-ivar">@sections_last_group</span>     = <span class="ruby-identifier">sections_group_title</span>( <span class="ruby-identifier">task</span> )
+    <span class="ruby-ivar">@sections_current_index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">changed</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sections_new_section-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sections_new_section-3F-method -->
+
+    
+      <div id="method-i-sections_section_index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sections_section_index</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return the section index of the current section. Call any time after at
+least on prior call to “new_section?” (regardless of the return value of
+that prior call).</p>
+          
+
+          
+          <div class="method-source-code" id="sections_section_index-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sections_section_index</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@sections_current_index</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sections_section_index-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sections_section_index-method -->
+
+    
+      <div id="method-i-sections_section_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sections_section_title</span><span
+            class="method-args">( plain_text = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If “new_section?” returns ‘true’, call here to return a title appropriate
+for this section (it’ll be based on customer and project name set up by the
+prior call to “new_section?”). Assumes an HTML view for the caller and may
+return HTML data (HTML safe, unescaped where necessary, might have links to
+things); however if you pass ‘true’ in the optional input parameter then
+plain text is returned with no escaping (e.g. for CSV).</p>
+          
+
+          
+          <div class="method-source-code" id="sections_section_title-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sections_section_title</span>( <span class="ruby-identifier">plain_text</span> = <span class="ruby-keyword">false</span> ) 
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@sections_last_project</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-string">'No customer, no project'</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@sections_last_customer</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">plain_text</span> )
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;(No customer) #{ @sections_last_project.title }&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;(No customer) #{ sections_augmented_link( @sections_last_project ) }&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">plain_text</span> )
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;Customer #{ @sections_last_customer.title } - #{ @sections_last_project.title }&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;Customer #{ sections_augmented_link( @sections_last_customer ) } - #{ sections_augmented_link( @sections_last_project ) }&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sections_section_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sections_section_title-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

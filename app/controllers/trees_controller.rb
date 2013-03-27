@@ -1,6 +1,6 @@
 ########################################################################
 # File::    trees_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Collate data for and send data to the YUI tree plugin.
 # ----------------------------------------------------------------------
@@ -94,7 +94,7 @@ class TreesController < ApplicationController
               # and the project's task IDs is empty.
 
               children.reject! do | project |
-                project.tasks.send( active).count.zero? || (
+                project.tasks.send( active ).count.zero? || (
                   ( ! restrict_user.nil? ) && ( project.tasks & restrict_user.tasks ).empty?
                 ) || (
                   ( ! include_only.nil? ) && ( project.task_ids & include_only ).empty?

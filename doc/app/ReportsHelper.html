@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module ReportsHelper - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/helpers/reports_helper.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="TrackRecordReport.html">TrackRecordReport</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-reporthelp_actions">#reporthelp_actions</a>
+    
+    <li><a href="#method-i-reporthelp_decorated_hours">#reporthelp_decorated_hours</a>
+    
+    <li><a href="#method-i-reporthelp_end_date">#reporthelp_end_date</a>
+    
+    <li><a href="#method-i-reporthelp_end_time">#reporthelp_end_time</a>
+    
+    <li><a href="#method-i-reporthelp_frequency_selection">#reporthelp_frequency_selection</a>
+    
+    <li><a href="#method-i-reporthelp_grouping_selector">#reporthelp_grouping_selector</a>
+    
+    <li><a href="#method-i-reporthelp_hours">#reporthelp_hours</a>
+    
+    <li><a href="#method-i-reporthelp_month_selection">#reporthelp_month_selection</a>
+    
+    <li><a href="#method-i-reporthelp_owner">#reporthelp_owner</a>
+    
+    <li><a href="#method-i-reporthelp_sorting_selector">#reporthelp_sorting_selector</a>
+    
+    <li><a href="#method-i-reporthelp_start_date">#reporthelp_start_date</a>
+    
+    <li><a href="#method-i-reporthelp_start_time">#reporthelp_start_time</a>
+    
+    <li><a href="#method-i-reporthelp_updated_at">#reporthelp_updated_at</a>
+    
+    <li><a href="#method-i-reporthelp_user_selection">#reporthelp_user_selection</a>
+    
+    <li><a href="#method-i-reporthelp_week_selection">#reporthelp_week_selection</a>
+    
+    <li><a href="#method-i-reporthelp_work_breakdown_item_name">#reporthelp_work_breakdown_item_name</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module ReportsHelper</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>reports_helper.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Support functions for views related to report generation. See
+controllers/reports_controller.rb for more.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>18-Feb-2008 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-reporthelp_actions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_actions</span><span
+            class="method-args">( report )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return appropriate list view actions for the given report</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_actions-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 341</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_actions</span>( <span class="ruby-identifier">report</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> )
+    <span class="ruby-keyword">return</span> [ <span class="ruby-string">'edit'</span>, <span class="ruby-string">'delete'</span>, <span class="ruby-string">'show'</span> ]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_actions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_actions-method -->
+
+    
+      <div id="method-i-reporthelp_decorated_hours" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_decorated_hours</span><span
+            class="method-args">( actual, potential )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Report a terse number of hours with an ‘overrun’ span if negative or a
+‘no_overrun’ span if &gt;= 0 in two sections separated by a “/” - the idea
+is to pass actual and potential remaining hours for a task in here.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_decorated_hours-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 302</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_decorated_hours</span>( <span class="ruby-identifier">actual</span>, <span class="ruby-identifier">potential</span> )
+  <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">actual</span>    <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">'overrun'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'no_overrun'</span>
+  <span class="ruby-identifier">output</span>      = <span class="ruby-node">&quot;&lt;strong&gt;&lt;span class=\&quot;#{ class_name }\&quot;&gt;#{ apphelp_terse_hours( actual ) }&lt;/span&gt; / &quot;</span>
+  <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">potential</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">'overrun'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'no_overrun'</span>
+  <span class="ruby-identifier">output</span>     <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;span class=\&quot;#{ class_name }\&quot;&gt;#{ apphelp_terse_hours( potential ) }&lt;/span&gt;&lt;/strong&gt;&quot;</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_decorated_hours-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_decorated_hours-method -->
+
+    
+      <div id="method-i-reporthelp_end_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_end_date</span><span
+            class="method-args">( report )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List helper - formatted end date for the given report</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_end_date-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 335</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_end_date</span>( <span class="ruby-identifier">report</span> )
+  <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">generate_report</span>().<span class="ruby-identifier">range</span>.<span class="ruby-identifier">max</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_end_date-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_end_date-method -->
+
+    
+      <div id="method-i-reporthelp_end_time" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_end_time</span><span
+            class="method-args">( form )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Use the Calendar Date Select plug-in to generate a selector for the end
+time of a report. Pass the form instance upon which to operate.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_end_time-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_end_time</span>( <span class="ruby-identifier">form</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">calendar_date_select</span>(
+    <span class="ruby-value">:range_end</span>,
+    {
+      <span class="ruby-value">:embedded</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>,
+      <span class="ruby-value">:year_range</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">used_range</span>()
+    }
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_end_time-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_end_time-method -->
+
+    
+      <div id="method-i-reporthelp_frequency_selection" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_frequency_selection</span><span
+            class="method-args">( form )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML suitable for inclusion in the form passed in the first
+parameter (i.e. the ‘f’ in “form for … do |f|” ), which provides a
+selection list allowing the user to choose a report frequency (weekly,
+monthly etc.).</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_frequency_selection-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 180</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_frequency_selection</span>( <span class="ruby-identifier">form</span> )
+  <span class="ruby-identifier">collection</span> = []
+
+  <span class="ruby-constant">Report</span>.<span class="ruby-identifier">labels</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">push</span>( [ <span class="ruby-constant">Report</span>.<span class="ruby-identifier">labels</span>[ <span class="ruby-identifier">index</span> ], <span class="ruby-identifier">index</span> ] )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">form</span>.<span class="ruby-identifier">select</span>( <span class="ruby-value">:frequency</span>, <span class="ruby-identifier">collection</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_frequency_selection-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_frequency_selection-method -->
+
+    
+      <div id="method-i-reporthelp_grouping_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_grouping_selector</span><span
+            class="method-args">( form )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generate a menu for the given form allowing the user to choose a grouping
+option.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_grouping_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_grouping_selector</span>( <span class="ruby-identifier">form</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_select</span>(
+    <span class="ruby-identifier">form</span>,
+    <span class="ruby-value">:task_grouping</span>,
+    [
+      [ <span class="ruby-string">'No special grouping'</span>,                <span class="ruby-string">'default'</span>  ],
+      [ <span class="ruby-string">'Group billable tasks together'</span>,      <span class="ruby-string">'billable'</span> ],
+      [ <span class="ruby-string">'Group active tasks together'</span>,        <span class="ruby-string">'active'</span>   ],
+      [ <span class="ruby-string">'Group both kinds of tasks together'</span>, <span class="ruby-string">'both'</span>     ]
+    ],
+    <span class="ruby-keyword">false</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_grouping_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_grouping_selector-method -->
+
+    
+      <div id="method-i-reporthelp_hours" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_hours</span><span
+            class="method-args">( calculator, show_zero = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML suitable for an ‘hours’ field which gives a total amount, then
+a committed and not-committed amount wrapped in SPANs to give the correct
+committed/uncommitted text styles. If the overall total time is zero,
+“&amp;nbsp;” is returned instead. Pass any object subclassing <a
+href="TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+and, optionally, ‘true’ to show “0.0” rather than “&amp;nbsp;” in the zero
+hours total case.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_hours-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 269</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_hours</span>( <span class="ruby-identifier">calculator</span>, <span class="ruby-identifier">show_zero</span> = <span class="ruby-keyword">false</span> )
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">has_hours?</span> )
+    <span class="ruby-identifier">output</span>  = <span class="ruby-string">''</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">total</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' ('</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> ) )
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;span class=&quot;timesheet_committed&quot;&gt;'</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">committed</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/span&gt;'</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'/'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;span class=&quot;timesheet_not_committed&quot;&gt;'</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">not_committed</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/span&gt;'</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">')'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> ) )
+
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">show_zero</span> <span class="ruby-operator">?</span> <span class="ruby-string">'0'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'&amp;nbsp;'</span> ).<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_hours-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_hours-method -->
+
+    
+      <div id="method-i-reporthelp_month_selection" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_month_selection</span><span
+            class="method-args">( form, method )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML suitable for inclusion in a form which provides a pull-down
+menu of years for the full permitted time range subdivided into months.
+Pass the form being constructed and “:range_month_start” or
+“:range_month_end”.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_month_selection-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_month_selection</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">method</span> )
+  <span class="ruby-identifier">start_or_end</span> = ( <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:range_month_start</span> ) <span class="ruby-operator">?</span> <span class="ruby-value">:start</span> <span class="ruby-operator">:</span> <span class="ruby-value">:end</span>
+
+  <span class="ruby-identifier">form</span>.<span class="ruby-identifier">grouped_collection_select</span>(
+    <span class="ruby-identifier">method</span>,
+    <span class="ruby-identifier">get_year_array</span>(), <span class="ruby-comment"># Use years for groups</span>
+    <span class="ruby-value">:months</span>,          <span class="ruby-comment"># A years's &quot;months&quot; method returns its month list</span>
+    <span class="ruby-value">:title</span>,           <span class="ruby-comment"># Use the year 'title' for the group labels</span>
+    <span class="ruby-value">:id</span>,              <span class="ruby-comment"># A month's &quot;id&quot; method returns the value for an option tag</span>
+    <span class="ruby-identifier">start_or_end</span>,     <span class="ruby-comment"># A month's &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
+    {
+      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'-'</span>
+    }
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_month_selection-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_month_selection-method -->
+
+    
+      <div id="method-i-reporthelp_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_owner</span><span
+            class="method-args">( report )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List helper - owner of the given report</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_owner-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 317</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_owner</span>( <span class="ruby-identifier">report</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">user_path</span>( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">user</span> ) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_owner-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_owner-method -->
+
+    
+      <div id="method-i-reporthelp_sorting_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_sorting_selector</span><span
+            class="method-args">( form, method )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generate a sort field selector menu for the given form which will use the
+given method to set the chosen option in the report - one of
+“:customer_sort_field”, “:project_sort_field” or “:task_sort_field”.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_sorting_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_sorting_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">method</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_select</span>(
+    <span class="ruby-identifier">form</span>,
+    <span class="ruby-identifier">method</span>,
+    [
+      [ <span class="ruby-string">'Sort by name'</span>,          <span class="ruby-string">'title'</span>      ],
+      [ <span class="ruby-string">'Sort by code'</span>,          <span class="ruby-string">'code'</span>       ],
+      [ <span class="ruby-string">'Sort by addition date'</span>, <span class="ruby-string">'created_at'</span> ]
+    ],
+    <span class="ruby-keyword">false</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_sorting_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_sorting_selector-method -->
+
+    
+      <div id="method-i-reporthelp_start_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_start_date</span><span
+            class="method-args">( report )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List helper - formatted start date for the given report</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_start_date-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_start_date</span>( <span class="ruby-identifier">report</span> )
+  <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">generate_report</span>().<span class="ruby-identifier">range</span>.<span class="ruby-identifier">min</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_start_date-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_start_date-method -->
+
+    
+      <div id="method-i-reporthelp_start_time" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_start_time</span><span
+            class="method-args">( form )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Use the Calendar Date Select plug-in to generate a selector for the start
+time of a report. Pass the form instance upon which to operate.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_start_time-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_start_time</span>( <span class="ruby-identifier">form</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">calendar_date_select</span>(
+    <span class="ruby-value">:range_start</span>,
+    {
+      <span class="ruby-value">:embedded</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>,
+      <span class="ruby-value">:year_range</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">used_range</span>()
+    }
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_start_time-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_start_time-method -->
+
+    
+      <div id="method-i-reporthelp_updated_at" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_updated_at</span><span
+            class="method-args">( report )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List helper - formatted ‘updated at’ date for the given report</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_updated_at-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 323</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_updated_at</span>( <span class="ruby-identifier">report</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">updated_at</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_updated_at-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_updated_at-method -->
+
+    
+      <div id="method-i-reporthelp_user_selection" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_user_selection</span><span
+            class="method-args">( form, users )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML suitable for inclusion in the form passed in the first
+parameter (i.e. the ‘f’ in “form for … do |f|” ), based on the user array
+given in the second parameter, which provides:</p>
+<ul><li>
+<p>A &lt;select&gt; tag with options listing all users in the array in the
+order in which they are stored in that array.</p>
+</li><li>
+<p>An empty string if the input users array is itself empty.</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_user_selection-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_user_selection</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">users</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">users</span>.<span class="ruby-identifier">empty?</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_collection_select</span>(
+      <span class="ruby-identifier">form</span>,
+      <span class="ruby-string">'reportable_user_ids'</span>,
+      <span class="ruby-identifier">users</span>,
+      <span class="ruby-value">:id</span>,
+      <span class="ruby-value">:name</span>
+    )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_user_selection-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_user_selection-method -->
+
+    
+      <div id="method-i-reporthelp_week_selection" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_week_selection</span><span
+            class="method-args">( form, method )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML suitable for inclusion in a form which provides a pull-down
+menu of years for the full permitted time range subdivided into weeks. Pass
+the form being constructed and “:range_week_start” or “:range_week_end”.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_week_selection-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_week_selection</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">method</span> )
+  <span class="ruby-identifier">start_or_end</span> = ( <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:range_week_start</span> ) <span class="ruby-operator">?</span> <span class="ruby-value">:start</span> <span class="ruby-operator">:</span> <span class="ruby-value">:end</span>
+
+  <span class="ruby-identifier">form</span>.<span class="ruby-identifier">grouped_collection_select</span>(
+    <span class="ruby-identifier">method</span>,
+    <span class="ruby-identifier">get_year_array</span>(), <span class="ruby-comment"># Use years for groups</span>
+    <span class="ruby-value">:weeks</span>,           <span class="ruby-comment"># A years's &quot;weeks&quot; method returns its week list</span>
+    <span class="ruby-value">:title</span>,           <span class="ruby-comment"># Use the year 'title' for the group labels</span>
+    <span class="ruby-value">:id</span>,              <span class="ruby-comment"># A week's &quot;id&quot; method returns the value for an option tag</span>
+    <span class="ruby-identifier">start_or_end</span>,     <span class="ruby-comment"># A week's &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
+    {
+      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'-'</span>
+    }
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_week_selection-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_week_selection-method -->
+
+    
+      <div id="method-i-reporthelp_work_breakdown_item_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reporthelp_work_breakdown_item_name</span><span
+            class="method-args">( item )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pass a hash. The “:item” entry is read. If a <a href="User.html">User</a>,
+a string of “by &lt;name&gt;” is returned. Otherwise, a string of “on
+‘&lt;title&gt;’” is returned. Useful for indicating hours are done by a
+user, or were worked on some task.</p>
+          
+
+          
+          <div class="method-source-code" id="reporthelp_work_breakdown_item_name-source">
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_work_breakdown_item_name</span>( <span class="ruby-identifier">item</span> )
+  <span class="ruby-identifier">item</span> = <span class="ruby-identifier">item</span>[ <span class="ruby-value">:item</span> ]
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">item</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;by #{ h( item.name ) }&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;on '#{ h( item.augmented_title ) }'&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reporthelp_work_breakdown_item_name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reporthelp_work_breakdown_item_name-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

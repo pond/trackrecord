@@ -1,6 +1,6 @@
 ########################################################################
 # File::    timesheet_row.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Describe the behaviour of TimesheetRow objects. See below
 #           for more details.
@@ -55,10 +55,10 @@ private
   # Run via "validate".
   #
   def task_is_active_and_permitted
-    errors.add_to_base( 'Only active tasks may be included' ) unless self.task.active
+    errors.add( :base, 'Only active tasks may be included' ) unless self.task.active
 
     if ( self.timesheet.user.restricted? )
-      errors.add_to_base( 'Inclusion of this task is not permitted' ) unless self.timesheet.user.task_ids.include?( self.task.id )
+      errors.add( :base, 'Inclusion of this task is not permitted' ) unless self.timesheet.user.task_ids.include?( self.task.id )
     end
   end
 

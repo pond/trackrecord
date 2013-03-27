@@ -1,6 +1,6 @@
-        <tr align="center" class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
-          <td align="left" class="ts_show_task <%= taskhelp_billable_class( @timesheet_row.task ) %> <%= taskhelp_active_class( @timesheet_row.task ) %>">
-            <%= h( @timesheet_row.task.title ) %>
+        <tr class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
+          <td class="ts_show_task <%= taskhelp_billable_class( @timesheet_row.task ) %> <%= taskhelp_active_class( @timesheet_row.task ) %>">
+            <%= sections_augmented_link( @timesheet_row.task ) %>
           </td>
 
 <% TimesheetRow::DAY_ORDER.each do | day_number |

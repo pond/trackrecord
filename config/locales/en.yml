@@ -1,0 +1,171 @@
+# Generic (UK) English translation. Although Rails users may conventionally
+# expect "en" to mean "US English" and something like "en_gb" be used for
+# British English, TrackRecord has historically been written using UK English
+# throughout. Add an "en_us" translation if you want US English messages.
+
+en:
+
+  # General ActiveRecord model translations.
+
+  activerecord:
+    models:
+      "audited/adapters/active_record/audit":
+        zero:                                          "audit entries"
+        one:                                           "audit entry"
+        other:                                         "audit entries"
+
+      customer:
+        zero:                                          "customers"
+        one:                                           "customer"
+        other:                                         "customers"
+
+      project:
+        zero:                                          "projects"
+        one:                                           "project"
+        other:                                         "projects"
+
+      saved_report:
+        zero:                                          "reports"
+        one:                                           "report"
+        other:                                         "reports"
+
+      task:
+        zero:                                          "tasks"
+        one:                                           "task"
+        other:                                         "tasks"
+
+      timesheet:
+        zero:                                          "timesheets"
+        one:                                           "timesheet"
+        other:                                         "timesheets"
+
+      user:
+        zero:                                          "users"
+        one:                                           "user"
+        other:                                         "users"
+
+    attributes:
+      saved_report:
+        shared:                                        "Shared?"
+        title:                                         "Name"
+
+  # Translations for index views generated using Will Paginate.
+
+  will_paginate:
+    previous_label:                                    "&#8592; Previous"
+    next_label:                                        "Next &#8594;"
+    page_gap:                                          "&hellip;"
+
+    page_entries_info:
+      single_page:
+        zero:                                          "No %{model} found"
+        one:                                           "Displaying 1 %{model}"
+        other:                                         "Displaying all %{count} %{model}"
+      single_page_html:
+        zero:                                          "No %{model} found"
+        one:                                           "Displaying <b>1</b> %{model}"
+        other:                                         "Displaying <b>all&nbsp;%{count}</b> %{model}"
+
+      multi_page:                                      "Displaying %{model} %{from} - %{to} of %{count} in total"
+      multi_page_html:                                 "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b> in total"
+
+  # TrackRecord-specific messages.
+
+  uk:
+    org:
+      pond:
+        trackrecord:
+          site_name:                                   "TrackRecord"
+
+          generic_messages:
+            "no":                                      "No"
+            "yes":                                     "Yes"
+
+          action_names:
+            index:                                     "List"
+            new:                                       "New"
+            create:                                    "Create"
+            edit:                                      "Edit details"
+            update:                                    "Update details"
+            show:                                      "Show details"
+            delete:                                    "Delete"
+            destroy:                                   "Delete"
+
+          controllers:
+            audits:
+              action_title_index:                      "Auditing"
+
+            customers:
+              action_title_index:                      "Manage customers"
+              action_title_new:         &new_title     "Add customer"
+              action_title_create:      *new_title
+              action_title_edit:        &edit_title    "Edit customer details"
+              action_title_update:      *edit_title
+              action_title_show:                       "Customer details"
+              action_title_delete:                     "Delete customer"
+
+            help:
+              action_title_show:                       "Help"
+
+              view_report_name_help_1:                 "When a report is given a name and created, it is saved in your personal list of reports so you can recall it easily later. Names are optional; unnamed reports are not saved. To view, edit or delete saved reports, go to the Home page and follow the 'Manage reports' link in the 'General options' section."
+              view_report_name_help_2:                 "Saved reports can be shared with other users. Select the 'Shared' option to allow the report to be shared immediately. Leave this unset to keep the report private. To enable sharing later on, edit the saved report."
+              view_report_name_help_3:                 "If you ask for an unnamed report to be shared, it will be given a name automatically."
+
+              view_report_share_help_1:                "Once a report is saved and marked as shared, other users can view it. To share, view the report, copy the address of the page out of the browser's address bar and send this address to other people (e.g. paste it into an e-mail message)."
+              view_report_share_help_2:                "A viewer's security restrictions always apply. There may be task or user details they are not permitted to see. As a result, the report you share may look different when viewed by other people."
+              view_report_share_help_3:                "If you need to share a report <em>precisely</em>, export it to a CSV file or, if your operating system or browser supports it, save the report web page as a PDF file. Bear in mind that this <em>bypasses security restrictions</em> since you can send that full report to anybody. Take care to only send it to users who are allowed to view all of its contents."
+
+            projects:
+              action_title_index:                      "Manage projects"
+              action_title_new:         &new_title     "Add project"
+              action_title_create:      *new_title
+              action_title_edit:        &edit_title    "Edit project details"
+              action_title_update:      *edit_title
+              action_title_show:                       "Project details"
+              action_title_delete:                     "Delete project"
+
+            reports:
+              action_title_show:                       "Report details"
+
+            saved_reports:
+              action_title_index:                      "Manage reports"
+              action_title_new:         &new_title     "Create a report"
+              action_title_create:      *new_title
+              action_title_edit:        &edit_title    "Update a report"
+              action_title_update:      *edit_title
+
+            sessions:
+              action_title_new:         &new_title     "Sign in"
+              action_title_create:      *new_title
+
+            task_imports:
+              action_title_new:         &new_title     "Bulk task import"
+              action_title_create:      *new_title
+
+            tasks:
+              action_title_index:                      "Manage tasks"
+              action_title_new:         &new_title     "Add task"
+              action_title_create:      *new_title
+              action_title_edit:        &edit_title    "Edit task details"
+              action_title_update:      *edit_title
+              action_title_show:                       "Task details"
+              action_title_delete:                     "Delete task"
+
+            timesheets:
+              action_title_index:                      "Manage timesheets"
+              action_title_new:         &new_title     "Enter timesheets"
+              action_title_create:      *new_title
+              action_title_edit:        &edit_title    "Edit timesheet"
+              action_title_update:      *edit_title
+              action_title_show:                       "Timesheet details"
+              action_title_delete:                     "Delete timesheet"
+
+            users:
+              action_title_home:                       "Home"
+              action_title_index:                      "Manage accounts"
+              action_title_new:         &new_title     "Create account"
+              action_title_create:      *new_title
+              action_title_edit:        &edit_title    "Edit account"
+              action_title_update:      *edit_title
+              action_title_show:                       "Account details"
+              action_title_delete:                     "Delete account"

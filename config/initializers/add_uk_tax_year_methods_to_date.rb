@@ -1,6 +1,6 @@
 ########################################################################
 # File::    add_uk_tax_year_methods_to_date.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Add methods to return the beginning date, end date and date
 #           of next UK tax year to the Date object. Comparable to the

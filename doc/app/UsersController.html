@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class UsersController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/users_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-cancel">#cancel</a>
+    
+    <li><a href="#method-i-create">#create</a>
+    
+    <li><a href="#method-i-delete">#delete</a>
+    
+    <li><a href="#method-i-delete_confirm">#delete_confirm</a>
+    
+    <li><a href="#method-i-edit">#edit</a>
+    
+    <li><a href="#method-i-home">#home</a>
+    
+    <li><a href="#method-i-index">#index</a>
+    
+    <li><a href="#method-i-new">#new</a>
+    
+    <li><a href="#method-i-show">#show</a>
+    
+    <li><a href="#method-i-update">#update</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class UsersController</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>users_controller.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Manage <a href="User.html">User</a> objects. See models/user.rb for more.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>03-Jan-2008 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-cancel" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cancel</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Cancel a sign in account edit request.</p>
+          
+
+          
+          <div class="method-source-code" id="cancel-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cancel</span>
+  <span class="ruby-identifier">id</span>    = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ]
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">id</span> )
+
+  <span class="ruby-comment"># We must have found a user in the database matching the ID.</span>
+  <span class="ruby-comment"># The ID must be provided. There must be a currently logged in</span>
+  <span class="ruby-comment"># user and their ID must match that of the cancellation request.</span>
+  <span class="ruby-comment"># The user must not have a name yet - if they do, it implies a</span>
+  <span class="ruby-comment"># created, active account.</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> ( <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_i</span>() <span class="ruby-operator">!=</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> ) <span class="ruby-keyword">or</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">name</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&quot;Cancellation request not understood.&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">destroy</span>()
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'Sign in cancelled.'</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">signout_path</span>() )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cancel-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cancel-method -->
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new <a href="User.html">User</a> account.</p>
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span>
+
+  <span class="ruby-ivar">@record</span> = <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@control_panel</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">control_panel</span> = <span class="ruby-constant">ControlPanel</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-identifier">update_and_save_user</span>( <span class="ruby-string">'New account created'</span>, <span class="ruby-string">'new'</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create-method -->
+
+    
+      <div id="method-i-delete" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Users should not normally be destroyed. Only administrators can do this.</p>
+          
+
+          
+          <div class="method-source-code" id="delete-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
+  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">'User'</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete-method -->
+
+    
+      <div id="method-i-delete_confirm" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_confirm</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Show an “Are you sure?” prompt.</p>
+          
+
+          
+          <div class="method-source-code" id="delete_confirm-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 210</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_confirm</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+
+  <span class="ruby-comment"># Nobody can delete admin accounts. You must assign the admin</span>
+  <span class="ruby-comment"># privilege to someone else, then, since you can't revoke your</span>
+  <span class="ruby-comment"># own admin privileges either, have the new admin change your</span>
+  <span class="ruby-comment"># account type and delete the user record. This is a good way</span>
+  <span class="ruby-comment"># of ensuring that there is always at least one admin.</span>
+
+  <span class="ruby-ivar">@record</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">admin?</span> )
+
+  <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">destroy</span>()
+
+  <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'User and all associated data deleted'</span>
+  <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">users_path</span>() )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_confirm-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_confirm-method -->
+
+    
+      <div id="method-i-edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">edit</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prepare for the ‘edit’ view, allowing a user to update their account
+details. Restricted users can only edit their own account.</p>
+          
+
+          
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ]
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_i</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>()
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@user</span>          = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">id</span> )
+  <span class="ruby-ivar">@control_panel</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">control_panel</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- edit-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- edit-method -->
+
+    
+      <div id="method-i-home" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">home</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Home page - only show if logged in.</p>
+          
+
+          
+          <div class="method-source-code" id="home-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">home</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">signin_path</span>() <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">nil?</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- home-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- home-method -->
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List users - not allowed for restricted users</p>
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+
+  <span class="ruby-comment"># Set up the column data; see the index helper functions in</span>
+  <span class="ruby-comment"># application_helper.rb for details.</span>
+
+  <span class="ruby-ivar">@columns</span> = [
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Name'</span>,           <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'name'</span>,         <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                  },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Code'</span>,           <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'code'</span>,         <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                  },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Account type'</span>,   <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'user_type'</span>                                              },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'E-mail address'</span>, <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'email'</span>,        <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'userhelp_email'</span>        },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Identity URL'</span>,   <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'identity_url'</span>, <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'userhelp_identity_url'</span> },
+  ]
+
+  <span class="ruby-comment"># Get the basic options hash from ApplicationController, then work out</span>
+  <span class="ruby-comment"># the conditions on objects being fetched, including handling the search</span>
+  <span class="ruby-comment"># form data.</span>
+
+  <span class="ruby-identifier">options</span>        = <span class="ruby-identifier">appctrl_index_assist</span>( <span class="ruby-constant">User</span> )
+  <span class="ruby-identifier">active_vars</span>    = { <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>  }
+  <span class="ruby-identifier">inactive_vars</span>  = { <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> }
+  <span class="ruby-identifier">conditions_sql</span> = <span class="ruby-string">&quot;WHERE ( active = :active )\n&quot;</span>
+
+  <span class="ruby-comment"># If asked to search for something, build extra conditions to do so.</span>
+
+  <span class="ruby-identifier">range_sql</span>, <span class="ruby-identifier">range_start</span>, <span class="ruby-identifier">range_end</span> = <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-constant">User</span> )
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">range_sql</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-identifier">search</span> = <span class="ruby-node">&quot;%#{ params[ :search ] }%&quot;</span> <span class="ruby-comment"># SQL wildcards either side of the search string</span>
+    <span class="ruby-identifier">conditions_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;AND #{ range_sql } ( name ILIKE :search OR email ILIKE :search OR identity_url ILIKE :search )\n&quot;</span>
+
+    <span class="ruby-identifier">vars</span> = { <span class="ruby-value">:search</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search</span>, <span class="ruby-value">:range_start</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range_start</span>, <span class="ruby-value">:range_end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range_end</span> }
+    <span class="ruby-identifier">active_vars</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">vars</span> )
+    <span class="ruby-identifier">inactive_vars</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">vars</span> )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Sort order is already partially compiled in 'options' from the earlier</span>
+  <span class="ruby-comment"># call to 'appctrl_index_assist'.</span>
+
+  <span class="ruby-identifier">order_sql</span> = <span class="ruby-node">&quot;ORDER BY #{ options[ :order ] }, name ASC, code ASC&quot;</span>
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:order</span> )
+
+  <span class="ruby-comment"># Compile the main SQL statement.</span>
+
+  <span class="ruby-identifier">finder_sql</span>  = <span class="ruby-string">&quot;SELECT * FROM users\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+                <span class="ruby-node">&quot;#{ conditions_sql }\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+                <span class="ruby-node">&quot;#{ order_sql      }&quot;</span>
+
+  <span class="ruby-comment"># Now paginate using this SQL. The only difference between the active and</span>
+  <span class="ruby-comment"># inactive cases is the value of the variables passed to Active Record for</span>
+  <span class="ruby-comment"># substitution into the final SQL query going to the database.</span>
+
+  <span class="ruby-ivar">@active_users</span>   = <span class="ruby-constant">User</span>.<span class="ruby-identifier">paginate_by_sql</span>( [ <span class="ruby-identifier">finder_sql</span>, <span class="ruby-identifier">active_vars</span>   ], <span class="ruby-identifier">options</span> )
+  <span class="ruby-ivar">@inactive_users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">paginate_by_sql</span>( [ <span class="ruby-identifier">finder_sql</span>, <span class="ruby-identifier">inactive_vars</span> ], <span class="ruby-identifier">options</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- index-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- index-method -->
+
+    
+      <div id="method-i-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Never allow direct creation attempts. <a href="User.html">User</a> creation
+is done via session management. The only exception is for administrators,
+who may (carefully!) choose to create user accounts up-front after adding
+an ID to the permitted list.</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span>
+  <span class="ruby-ivar">@record</span> = <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Show user details.</p>
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@user</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">privileged?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@user</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@current_user</span> ) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- show-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- show-method -->
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Update a <a href="User.html">User</a> following submission of an ‘edit’
+view form. Restricted users can only edit their own account.</p>
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ]
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_i</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>()
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">id</span> )
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:notify_user</span> ] )
+    <span class="ruby-constant">EmailNotifier</span>.<span class="ruby-identifier">admin_update_notification</span>( <span class="ruby-ivar">@user</span> ).<span class="ruby-identifier">deliver</span>()
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># New user just set up a previously uninitialised account (no</span>
+  <span class="ruby-comment"># e-mail yet stored - update_and_save_user will take that from</span>
+  <span class="ruby-comment"># the params hash) or a normal account edit?</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> )
+    <span class="ruby-keyword">if</span> ( <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> )
+      <span class="ruby-identifier">message</span> = <span class="ruby-string">'New administrator account created. You can now set up whatever '</span> <span class="ruby-operator">&lt;&lt;</span>
+                <span class="ruby-string">'initial customers, projects and tasks you need.'</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">message</span> = <span class="ruby-string">'New account created. Before you can use the service fully, the '</span>   <span class="ruby-operator">&lt;&lt;</span>
+                <span class="ruby-string">'administrator will have to configure some account settings. You '</span>  <span class="ruby-operator">&lt;&lt;</span>
+                <span class="ruby-string">'will be notified by e-mail when this process is complete. Please '</span> <span class="ruby-operator">&lt;&lt;</span>
+                <span class="ruby-node">&quot;direct queries to the administrator at '#{ EMAIL_ADMIN }'.&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">update_and_save_user</span>(
+      <span class="ruby-identifier">message</span>,
+      <span class="ruby-string">'edit'</span>,
+      <span class="ruby-keyword">true</span>
+    )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">update_and_save_user</span>( <span class="ruby-string">'User details updated.'</span>, <span class="ruby-string">'edit'</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

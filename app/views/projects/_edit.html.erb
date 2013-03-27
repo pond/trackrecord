@@ -1,23 +1,23 @@
 <%= error_messages_for :record %>
-<% form_for( @record ) do | f | %>
+<%= form_for( @record ) do | f | %>
   <%= f.hidden_field( :lock_version ) %>
-  <table border="0" cellspacing="0" cellpadding="2">
-    <tr align="left" valign="top">
+  <table class="editing_table">
+    <tr class="editing_row">
       <th>Project title</th>
       <td><%= f.text_field( :title ) %> (required; must be unique)</td>
     </tr>
 
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Project code</th>
       <td><%= f.text_field( :code ) %></td>
     </tr>
 
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Description</th>
       <td><%= f.text_area( :description, { :cols => 40, :rows => 4 } ) %></td>
     </tr>
 
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Assigned to customer?</th>
       <td>
 <% if ( ( customers = Customer.active ).empty? ) -%>
@@ -31,11 +31,19 @@
   { :size => [ customers.size, 10 ].min, :include_blank => 'None' }
 ) %>
 <% end -%>
+        <p>
+          Users cannot add a project's tasks to timesheets unless the project
+          is assigned to a customer.
+          <% if ( action_name == 'edit' || action_name == 'update' ) -%>
+          Any timesheets already including tasks from the project will be
+          unaffected.
+          <% end -%>
+        </p>
       </td>
     </tr>
 
 <% if ( action_name == 'edit' or action_name == 'update' ) -%>
-    <tr align="left" valign="top">
+    <tr class="editing_row">
       <th>Active?</th>
       <td>
 <%= f.select( :active, [ [ 'Active', true ], [ 'Inactive', false ] ] ) %>
@@ -78,6 +86,7 @@
     <%= f.submit( 'Update', { :disable_with => 'Updating...' } ) %>
     else <%= link_to( 'cancel and show details', @record ) %>
 <% end -%>
-    or <%= link_to( 'cancel and list projects', projects_path() ) %>.
+    or <%= link_to( 'cancel and list projects', projects_path() ) %>
+    or <%= link_to( 'cancel and add a new customer', new_customer_path() ) %>.
   </p>
 <% end %>

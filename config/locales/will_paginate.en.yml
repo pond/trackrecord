@@ -1,0 +1,30 @@
+########################################################################
+# File::    will_paginate.en.yml
+# (C)::     Hipposoft 2013
+#
+# Purpose:: Generic (UK) English translation: Messages for the
+#           will_paginate gem:
+#
+#             https://github.com/mislav/will_paginate
+# ----------------------------------------------------------------------
+#           22-Mar-2013 (ADH): Created.
+########################################################################
+
+# Additional translations at https://github.com/tigrish/will-paginate-i18n
+
+en:
+  will_paginate:
+    next_label:                 "Next &#8594;"
+    page_entries_info:
+      multi_page:               "%{from} - %{to} of %{count}"
+      multi_page_html:          "<b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b>"
+      single_page:
+        one:                    "Displaying 1 %{model}"
+        other:                  "Displaying all %{count} %{model}"
+        zero:                   "No %{model} found"
+      single_page_html:
+        one:                    "Displaying <b>1</b> %{model}"
+        other:                  "Displaying <b>all&nbsp;%{count}</b> %{model}"
+        zero:                   "No %{model} found"
+    page_gap:                   "&hellip;"
+    previous_label:             "&#8592; Previous"

@@ -1,12 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 
   <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<%= ( csrf_meta_tag || '' ).gsub( /^/, '    ' ) %>
+    <meta charset="utf-8" />
+<%= raw( ( csrf_meta_tags || '' ).gsub( /^/, '    ' ) ) %>
 
-    <title>TrackRecord: <%= apphelp_title() %></title>
+    <title><%= apphelp_title() %></title>
 
 <%= include_prototype_if_used( '    ' ) -%>
 <%= include_leightbox_if_used( '    ' ) -%>
@@ -29,10 +28,10 @@
     <%= javascript_include_tag( 'trackrecord/section_revealer'     ) %>
 <% end -%>
 <% if ( action_name == 'index' ) -%>
-    <%= javascript_include_tag( "safe_in_place_editing/safe_in_place_editing" ) %>
+    <%= javascript_include_tag( 'safe_in_place_editing/safe_in_place_editing' ) %>
 <% end -%>
-<% if ( controller.controller_name == 'reports' ) -%>
-<%= calendar_date_select_includes().gsub( /^/, '    ' ) %>
+<% if ( controller.controller_name == 'saved_reports' || action_name == 'index' ) -%>
+<%= raw( calendar_date_select_includes().gsub( /^/, '    ' ) ) %>
 <% end -%>
 
     <%= stylesheet_link_tag( 'scaffold',          :media => :all   )%>
@@ -42,34 +41,31 @@
     <link rel="shortcut icon" href="<%= image_path( '/favicon.ico' ) %>" />
   </head>
 
-  <body>
+  <body><div id="container">
 
     <!-- Header with navigation bar -->
 
     <div id="header">
       <div id="title">
-        <h1>TrackRecord <span class="version">v1.54</span></h1>
-        <span class="slug"><%= apphelp_slug() %></span>
+        <h1>TrackRecord <span class="version">v2.0</span></h1>
+        <span class="slug"><%= raw( apphelp_slug() ) %></span>
       </div>
       <div id="navbar">
         <ul>
-          <li><div class="endcap"></div></li>
 <% if ( @current_user.nil? ) -%>
-<% current = ' class="current"'
-   class1  = ( controller.controller_name == 'sessions' and action_name == 'new' ) ? current : ''
--%>
-          <li<%= class1 %>><%= link_to( 'Sign in', signin_path() ) %><div class="endcap"></div></li>
+          <li class="current"><%= link_to( 'Sign in', signin_path() ) %></li>
 <% else -%>
 <% current = ' class="current"'
+
    class1  = ( controller.controller_name == 'users' and ( action_name == 'edit' or action_name == 'show' ) and params[ :id ] == @current_user.id.to_s ) ? current : ''
-   class2  = ( controller.controller_name == 'reports' ) ? current : ''
+   class2  = ( controller.controller_name == 'saved_reports' || controller.controller_name == 'reports' ) ? current : ''
    class3  = ( controller.controller_name == 'timesheets' ) ? current : ''
    class4  = ( controller.controller_name == 'users' and action_name == 'home' ) ? current : ''
 -%>
-          <li<%= class1 %>><%= link_to( 'Account', edit_user_path( @current_user ) ) %><div class="endcap"></div></li>
-          <li<%= class2 %>><%= link_to( 'Reports', new_report_path() ) %><div class="endcap"></div></li>
-          <li<%= class3 %>><%= link_to( 'Timesheets', new_timesheet_path() ) %><div class="endcap"></div></li>
-          <li<%= class4 %>><%= link_to( 'Home', home_path() ) %><div class="endcap"></div></li>
+          <li<%= raw( class1 ) %>><%= link_to( 'Account', edit_user_path( @current_user ) ) %></li>
+          <li<%= raw( class2 ) %>><%= link_to( 'Reports', user_saved_reports_path( @current_user ) ) %></li>
+          <li<%= raw( class3 ) %>><%= link_to( 'Timesheets', new_timesheet_path() ) %></li>
+          <li<%= raw( class4 ) %>><%= link_to( 'Home', home_path() ) %></li>
 <% end -%>
         </ul>
       </div>
@@ -78,15 +74,15 @@
     <!-- Main page content -->
 
     <div id="main_page_content">
-<%= apphelp_flash_messages( '      ' ) -%>
-<%= yield  %>
+<%= raw( apphelp_flash_messages( '      ' ) ) -%>
+<%= yield %>
     </div>
 
     <!-- Footer -->
 
     <div id="footer" class="float_clear">
-      <div><a href="http://trackrecord.pond.org.uk/">TrackRecord</a> by <a href="http://hipposoft.pond.org.uk/">Hipposoft</a> 2008-2013</div>
+      <div><a href="http://trackrecord.pond.org.uk/">TrackRecord</a> by <a href="http://hipposoft.pond.org.uk/">Hipposoft</a> 2007-2013</div>
       <div><%= apphelp_sign_or_signed_in() %></div>
     </div>
-  </body>
+  </div></body>
 </html>

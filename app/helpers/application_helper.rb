@@ -1,6 +1,6 @@
 ########################################################################
 # File::    application_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2007
 #
 # Purpose:: Standard Rails application helper.
 # ----------------------------------------------------------------------
@@ -18,39 +18,70 @@ module ApplicationHelper
   # Equivalent of 'h()', but returns '-' for nil or empty strings.
 
   def apphelp_h( value )
-    return '-' if ( value.nil? or value.empty? )
+    return '-'.html_safe() if ( value.blank? )
     return h( value )
   end
 
-  # Return a dynamic title based on the current request action and
-  # controller.
+  # Return an internationalised version of the web site's name.
+  #
+  def apphelp_site_name
+    t( :'uk.org.pond.trackrecord.site_name' )
+  end
 
-  def apphelp_title
-    action = h( action_name )
-    ctname = h( controller.controller_name )
+  # Return an internationalised version of the given action name. If 'true'
+  # is passed in the second parameter, a default fallback of the humanized
+  # version of the non-internationalised action name will be chosen. If this
+  # parameter is omitted or 'false' is given, the I18n engine's "missing token"
+  # message is returned instead (no default string is used).
+  #
+  def apphelp_action_name( action, use_default = false )
+    options = use_default ? { :default => action.to_s.humanize } : {}
+    t( "uk.org.pond.trackrecord.action_names.#{ action }", options )
+  end
 
-    if ( [ '', 'index', 'list' ].include?( action ) )
-      title = ctname.capitalize
-    else
-      if ( action == 'home' )
-        title = 'Home page'
-      else
-        ctname = ctname.singularize()
+  # Return an internationalised heading appropriate for a page handling the
+  # current action for the current controller, or the given controller and
+  # optional given action name. If you want to use a default string, pass it
+  # in the optional third parameter. Headings like this can be (and are) also
+  # used as descriptive action link text.
+  #
+  def apphelp_heading( ctrl = controller, action = nil, default = nil )
+    action ||= ctrl.action_name
 
-        if ( ctname == 'user' )
-          title = "#{ action.capitalize } account"
-        elsif ( ctname == 'task_import' )
-          title = 'Bulk task import'
-        else
-          title = "#{ action.capitalize } #{ ctname }"
-        end
-      end
-    end
+    t(
+      "uk.org.pond.trackrecord.controllers.#{ ctrl.controller_name }.action_title_#{ action }",
+      :default => default
+    )
+  end
 
-    # Awkward special case
-    title = "Enter timesheets" if ( title == "New timesheet" )
+  # Return an internationalised title appropriate for a page handling the
+  # current action for the current controller, or the given controller.
+  #
+  def apphelp_title( ctrl = controller )
+    "#{ apphelp_site_name }: #{ apphelp_heading( ctrl ) }"
+  end
 
-    return title
+  # Shortcut for long references to "uk.org.pond.trackrecord.generic_messages"
+  # when reading generic messages from the locale file. Pass the message token
+  # part (e.g. "yes", "no", "confirmation"). Only useful for basic messages
+  # which require no parameter substitution or default lookup values.
+  #
+  def apphelp_generic( message_name )
+    I18n::t( "uk.org.pond.trackrecord.generic_messages.#{ message_name }" )
+  end
+
+  # Return a controller view hint, based on looking up "view_<foo>" in the
+  # locale file for the given value of "<foo>" (as a string or symbol). The
+  # controller handling the current request is consulted by default, else
+  # pass a reference to the controller of interest in the optional second
+  # parameter. If the hint includes subsitution tokens, pass them in an
+  # optional third parameter as a hash.
+  #
+  def apphelp_view_hint( hint_name, ctrl = controller, substitutions = {} )
+    t(
+      "uk.org.pond.trackrecord.controllers.#{ ctrl.controller_name }.view_#{ hint_name }",
+      substitutions
+    ).html_safe()
   end
 
   # Return data for the navigation bar ("slug").
@@ -58,37 +89,39 @@ module ApplicationHelper
   def apphelp_slug
     action = h( action_name )
     ctname = h( controller.controller_name )
-    sep    = '&nbsp;&raquo;&nbsp;'
-    slug   = link_to( 'Home page', home_path() ) << sep
+    sep    = '&nbsp;&raquo;&nbsp;'.html_safe()
+    slug   = link_to( 'Home', home_path() ) << sep
 
     if ( ctname == 'users' and action == 'home' )
-      slug = 'Home page'
+      slug = 'Home'
     elsif ( ctname == 'sessions' and action == 'new' )
       slug << 'Sign in'
     elsif ( action == 'index' or action == 'list' )
-      slug << apphelp_title()
+      slug << apphelp_heading()
     elsif ( ctname == 'reports' )
-      if ( action == 'create' )
-        slug << link_to( 'Reports', new_report_path() ) <<
-                sep <<
-                'Show report'
-      else
-        slug << 'Reports'
-      end
+      slug << link_to( 'Reports', new_user_saved_report_path( @current_user ) ) <<
+              sep <<
+              'Show report'
+    elsif ( ctname == 'saved_reports' )
+      slug << link_to( 'Reports', new_user_saved_report_path( @current_user ) ) <<
+              sep <<
+              apphelp_heading()
     else
       slug << link_to( ctname.capitalize(), send( "#{ ctname }_path" ) ) <<
               sep <<
-              apphelp_title()
+              apphelp_heading()
     end
 
     return slug
   end
 
-  # Return strings 'Yes' or 'No' depending on the value of the given
-  # boolean quantity.
+  # Return 'yes' or 'no', internationalised, according to the given value,
+  # which is evaluated as (or should already be) a boolean. Remember that in
+  # Ruby the boolean evaluation of certain types can be unexpected - e.g.
+  # integer zero is not "nil", so it evaluates to 'true' in a boolean context.
   #
-  def apphelp_boolean( boolean )
-    boolean ? 'Yes' : 'No'
+  def apphelp_boolean( bool )
+    apphelp_generic( bool ? :yes : :no )
   end
 
   # Return any flash messages using class names prefixed by "flash_",
@@ -106,10 +139,10 @@ module ApplicationHelper
     end
 
     unless ( output.empty? )
-      output = indent + content_tag( :div, output, { :class => 'messages' } ) + "\n\n"
+      output = "#{ indent }#{ content_tag( :div, output.html_safe(), { :class => 'messages' } ) }\n\n"
     end
 
-    return output
+    return output.html_safe()
   end
 
   # Return 'sign in' or 'you are signed in' text indicating current
@@ -128,7 +161,7 @@ module ApplicationHelper
       signinfo = "Please #{ link_to( 'sign in', signin_path() ) }"
     end
 
-    return signinfo
+    return signinfo.html_safe()
   end
 
   # Output HTML suitable as a label to show whether or not the
@@ -138,8 +171,12 @@ module ApplicationHelper
 
   def apphelp_commit_label( item, active = nil )
     active = item.active if ( active.nil? )
-    active ? '<span class="item_active">Active</span>' :
-             '<span class="item_inactive">Inactive</span>'
+
+    return content_tag(
+      :span,
+      active ? 'Active' : 'Inactive',
+      { :class => ( active ? :active : :inactive ) }
+    )
   end
 
   # Simple wrapper over 'pluralize' to return a string indicating a
@@ -154,7 +191,7 @@ module ApplicationHelper
 
   def apphelp_terse_hours( hours, zero_is_blank = false )
     hours = hours.precision( 2 ).to_s.chomp( '0' ).chomp( '0' ).chomp( '.' )
-    return '' if ( hours == '0' and zero_is_blank )
+    return ''.html_safe() if ( hours == '0' and zero_is_blank )
     return hours
   end
 
@@ -164,14 +201,19 @@ module ApplicationHelper
   # the duration/worked hours value be empty itself.
 
   def apphelp_string_hours( hours, alt_str, empty_str = nil )
-    return ( empty_str ) if ( hours.empty? and not empty_str.nil? and not empty_str.empty? )
+    return ( empty_str ) if ( hours.empty? and not empty_str.blank? )
     return ( hours == '0.0' ? alt_str : hours )
   end
 
-  # Standard date formatting; pass the date to format.
-
+  # Standard date formatting; pass the date to format. This can be either a
+  # date-only Date class, or a date-with-time DateTime class.
+  #
   def apphelp_date( date )
-    return date.strftime( '%Y-%m-%d %H:%M:%S' )
+    if ( date.is_a?( Date ) )
+      return date.strftime( '<span class="nowrap">%Y-%m-%d</span>' )
+    else
+      return date.strftime( '<span class="nowrap">%Y-%m-%d</span> <span class="nowrap">%H:%M:%S</span>' )
+    end
   end
 
   #############################################################################
@@ -277,7 +319,7 @@ module ApplicationHelper
       :title,    # A project's "title" method is used for the option contents
       match      # Match this ID for the selected option item
     )
-    return data << '</select>'
+    return ( data << '</select>' ).html_safe()
   end
 
   # Return HTML representing a human-readable list of the given
@@ -286,13 +328,13 @@ module ApplicationHelper
   # optional second parameter.
 
   def apphelp_object_list( objects, field = :title )
-    return 'None' if ( objects.nil? or objects.empty? )
+    return 'None' if ( objects.blank? )
 
     objects.collect! do | object |
       link_to( h( object.send( field ) ), object )
     end
 
-    return objects.join( ', ' )
+    return objects.join( ', ' ).html_safe()
   end
 
   #############################################################################
@@ -310,10 +352,11 @@ module ApplicationHelper
   # that cell. The text is placed in the cell wrapped up in an HTML link which
   # will re-fetch the list view with modified search parameters. To achieve
   # this requires a second mandatory input parameter, which is the name of the
-  # model being listed, singular, lower case (e.g. "user").
+  # method to use for the 'index' view - e.g. "users_path" or (for an example
+  # nested resource) "user_saved_reports_path".
   #
   # A blank header cell is placed at the end of the row to appear above an
-  # actions column if the third mandatory parameter is non-nil. If nil, no room
+  # actions column if the third optiona parameter is non-nil. If nil, no room
   # is made for an actions column.
   #
   # See also apphelp_list_row.
@@ -328,9 +371,9 @@ module ApplicationHelper
   #     ],
   #     'users_path'
   #   )
-
-  def apphelp_list_header( structure, model, actions_method )
-    output = "        <tr valign=\"middle\" align=\"left\" class=\"info\">\n"
+  #
+  def apphelp_list_header( structure, index_method, actions_method = nil )
+    output = "        <tr class=\"info\">\n"
 
     structure.each_index do | index |
       entry      = structure[ index ]
@@ -351,11 +394,11 @@ module ApplicationHelper
       if ( align.nil? )
         output << ">" if ( align.nil? )
       else
-        output << " align=\"#{ align }\">"
+        output << " style=\"text-align: #{ align }\">"
       end
 
       if ( entry[ :value_method ] or entry[ :sort_by ] )
-        output << apphelp_list_header_link( model, entry[ :header_text ], index )
+        output << apphelp_list_header_link( index_method, entry[ :header_text ], index )
       else
         output << entry[ :header_text ]
       end
@@ -363,8 +406,62 @@ module ApplicationHelper
       output << "</th>\n"
     end
 
-    output << "          <th width=\"1\">&nbsp;</th>\n" unless ( actions_method.nil? )
-    return ( output << "        </tr>\n" )
+    output << "          <th class=\"spacer\">&nbsp;</th>\n" unless ( actions_method.nil? )
+    return ( output << "        </tr>\n" ).html_safe()
+  end
+
+  # Support function for apphelp_list_header.
+  #
+  # Returns an HTML link based on a URL acquired by calling the given index
+  # method (e.g. "users_path" or "user_saved_reports_path") and wrapping the
+  # link text given in the second parameter with a link to the result of the
+  # index method call. Pass also the index of the column in the list structure.
+  # Generates a link with query string attempting to maintain or  set correctly
+  # the sort and pagination parameters based on the current request parameters
+  # and given column index.
+  #
+  # E.g.:
+  #
+  #   apphelp_list_header_link( 'users_path', 'User name', 0 )
+  #
+  def apphelp_list_header_link( index_method, text, index )
+
+    # When generating the link, there is no point maintaining the
+    # current page number - reset to 1. Do maintain the entries count.
+
+    entries   = ''
+    entries   = "&entries=#{ params[ :entries ] }" if params[ :entries ]
+
+    # For the direction, if the current sort index in 'params' matches
+    # the index for this column, the link should be used to toggle the
+    # sort order; if currently on 'asc', write 'desc' and vice versa.
+    # If building a link for a different column, default to 'asc'.
+
+    direction = ''
+
+    if ( params[ :sort ] == index.to_s && params[ :direction ] == 'asc' )
+      direction = '&direction=desc'
+    else
+      direction = '&direction=asc'
+    end
+
+    # Get the base URL using the caller-supplied method and assemble the
+    # query string after it.
+
+    base = send( index_method )
+    url  = "#{ base }?sort=#{ index }#{ direction }&page=1#{ entries }"
+
+    unless ( ( params[ :search ].blank? and params[ :search_range_start ].blank? and params[ :search_range_end ].blank? ) or params[ :search_cancel ] )
+      hash = {
+        :search             => params[ :search             ],
+        :search_range_start => params[ :search_range_start ],
+        :search_range_end   => params[ :search_range_end   ],
+      }
+
+      url << '&' << hash.to_query()
+    end
+
+    return link_to( text, url )
   end
 
   # Construct a body row for a list table, returning HTML for it. The table
@@ -384,6 +481,12 @@ module ApplicationHelper
   # of actions permitted for that item, in an array. Actions will be placed
   # in the final cell on the row as normal links. If the parameter is 'nil',
   # no actions cell will be added onto the rows.
+  #
+  # The fourth input parameter is optional. If present and 'true', buttons
+  # linking to auto-generated reports relevant for the resource at hand are
+  # added in the actions area. For example, a task would link to a report
+  # for hours on just that task; a user to a user report over all tasks;
+  # a project to all tasks in that project and so-on.
   #
   # Since models can't always generate what you want (e.g. they don't have
   # access to helpers, so creating values with associations' "show" views
@@ -405,9 +508,9 @@ module ApplicationHelper
   #     ],
   #     User.find( :first )
   #   )
-
-  def apphelp_list_row( structure, item, actions_method )
-    output = "        <tr valign=\"top\" align=\"left\" class=\"#{ cycle( 'even', 'odd' ) }\">\n"
+  #
+  def apphelp_list_row( structure, item, actions_method, with_reports = false )
+    output = "        <tr class=\"#{ cycle( 'even', 'odd' ) }\">\n"
 
     # Handle the item columns first
 
@@ -420,7 +523,7 @@ module ApplicationHelper
       if ( align.nil? )
         output << ">" if ( align.nil? )
       else
-        output << " align=\"#{ align }\">"
+        output << " style=\"text-align: #{ align }\">"
       end
 
       method = entry[ :value_method ]
@@ -452,64 +555,30 @@ module ApplicationHelper
 
     unless ( actions_method.nil? )
       actions = send( actions_method, item ) || []
-      output << "          <td class=\"list_actions\" nowrap=\"nowrap\">\n"
+      output << "          <td class=\"list_actions\">\n"
       actions.each do | action |
         output << "            "
         output << link_to( action.humanize, { :action => action, :id => item.id } )
         output << "\n"
       end
+
+      if ( with_reports )
+        output << render(
+                          {
+                            :partial => 'shared/report_button',
+                            :locals  =>
+                            {
+                              :user => @current_user,
+                              :item => item
+                            }
+                          }
+                        ).gsub( /^/, '            ' )
+      end
+
       output << "          </td>\n"
     end
 
-    return ( output << "        </tr>\n" )
-  end
-
-  # Support function for apphelp_list_header.
-  #
-  # Returns an HTML link based on a URL acquired by calling "models_path",
-  # where "models" comes from pluralizing the given lower case singular
-  # model name, wrapping the given link text (which will be protected in turn
-  # with a call to "h(...)"). Pass also the index of the column in the list
-  # structure. Generates a link with query string attempting to maintain or
-  # set correctly the sort and pagination parameters based on the current
-  # request parameters and given column index.
-  #
-  # E.g.:
-  #
-  #   apphelp_list_header_link( 'users_path', 'User name', 0 )
-
-  def apphelp_list_header_link( model, text, index )
-
-    # When generating the link, there is no point maintaining the
-    # current page number - reset to 1. Do maintain the entries count.
-
-    entries   = ''
-    entries   = "&entries=#{ params[ :entries ] }" if params[ :entries ]
-
-    # For the direction, if the current sort index in 'params' matches
-    # the index for this column, the link should be used to toggle the
-    # sort order; if currently on 'asc', write 'desc' and vice versa.
-    # If building a link for a different column, default to 'asc'.
-
-    direction = ''
-
-    if ( params[ :sort ] == index.to_s && params[ :direction ] == 'asc' )
-      direction = '&direction=desc'
-    else
-      direction = '&direction=asc'
-    end
-
-    # Get the base URL using the caller-supplied method and assemble the
-    # query string after it.
-
-    base = send( "#{ model.pluralize }_path" )
-    url  = "#{ base }?sort=#{ index }#{ direction }&page=1#{ entries }"
-
-    unless ( params[ :search ].nil? or params[ :search ].empty? )
-      url << "&search=#{ params[ :search ] }"
-    end
-
-    return link_to( h( text ), url )
+    return ( output << "        </tr>\n" ).html_safe()
   end
 
   # Column formatting helper for creation dates. Pass an object with a

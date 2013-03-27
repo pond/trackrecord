@@ -5,11 +5,11 @@
   Please enter your OpenID into the text field below.
 </p>
 
-<table class="openid" border="0" cellspacing="0" cellpadding="4">
+<table class="openid" border="0">
   <tr valign="bottom">
     <td><%= image_tag( 'trackrecord/openid_med_logo_text.png', { :size => '84x28', :alt => 'OpenID logo' } ) %></td>
     <td>
-      <% form_for( :session, { :url => { :action => 'create' } } ) do %>
+      <%= form_for( :session, { :url => { :action => 'create' } } ) do %>
         <label for="openid_url">&nbsp;</label>
         <%= text_field_tag "openid_url" %>
         &nbsp;

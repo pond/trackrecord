@@ -1,252 +1,102 @@
-Version 1.54, 2013-03-28
+Version 2.00, 2013-03-27
 ========================
 
-- Requires Rails 2.3.18, for Rails security patch reasons.
-- Public release of changes previously used only by Endurance.
-- This is the last release of the v1.x series for Rails 2, except possibly
-  for future security-only changes; development now continues on the v2.x
-  v2.x series for Rails 3.
+Important
+---------
 
+TrackRecord now requires Rails 3.2. It does not run on Rails 2. As a result,
+the Ruby version requirements are increased too; you need version 1.9.3 at
+patch 392 or later. The upgrade instructions below assume that this is
+already available.
 
-Version 1.53, 2013-03-17
-========================
-
-- Requires Rails 2.3.15, for Rails security patch reasons.
-- Daily report type enabled, but with a hard-coded 32 day maximum date range
-  throttle applied.
-- Endurance release only.
-
-
-Version 1.52, 2012-04-11
-========================
-
-- Requires Rails 2.3.14.
-- A few very small fixes related to the CSRF protection in this newer
-  version of Rails are included.
-- Endurance release only.
-
-
-Version 1.51, 2009-12-10
-========================
-
-- Bug fix update to second public release.
-- Requires Rails 2.3.5.
-- For upgrade instructions, please see version 1.50 information below.
-- Fixes first-time user account setup problems.
-- Correctly propagates changes of project active/inactive state to tasks if
-  asked to do so by the user via the relevant form checkbox.
-
-
-Version 1.50, 2009-12-07
-========================
-
-- Second public release.
-- Requires Rails 2.3.5.
-
-TrackRecord is supplied in two versions - one with and one without all required
-gems embedded (or "frozen") inside. If you downloaded the version without the
-frozen gems, make sure you are running Rails 2.3.5 centrally ("gem update
-rails"). You will also need updated versions of gems 'fastercsv', 'ruby-openid'
-and 'will_paginate' - see the change details list later on for more details.
+On the client side, TrackRecord's views now assume a competent HTML 5, CSS 2
+capable browser is used. It looks best on modern CSS 3 aware browsers such as
+recent Safari, Chrome, Opera and Firefox builds. JavaScript is very strongly
+recommended but not required, so if you have it turned off in your browser
+for any reason or your browser doesn't support it, TrackRecord can still be
+used. Internet Explorer is untested and not officially supported at any
+version, though it may work in practice.
 
 
 Upgrading
 ---------
 
-To upgrade from an earlier version, shut down your web server and move the
-current TrackRecord application directory out of the way. Unpack the 1.5
-directory in its place. Copy the database configuration file from the old
-installation ('config/database.yml') and re-apply any customisations you
-made to the old installation. In particular check the following files:
+To upgrade, first do a full database backup in case anything goes wrong!
+Next, unpack TrackRecord somewhere new - don't copy it on top of an existing
+installation. Make any configuration changes you made to your old copy:
 
-  config/initializers/email_config.rb
-  config/initializers/general_config.rb
+- You can safely just copy over the old 'config/database.yml'
+- ...and 'config/initializers/email_config.rb'
+- ...and 'config/initializers/general_config.rb' files
 
-Note that the PATH_PREFIX mechanism for running the application in a non-root
-location has been removed. Most Rails deployment mechanisms provide a better
-way to do this (e.g. see Phusion Passenger). Contact me if you still need this
-feature - e-mail "ahodgkin@rowing.org.uk".
+- Possibly port over your e-mail sending configuration for ActionMailer
+  in 'config/environments/production.rb' or '...development.rb' - see:
+  http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration
 
-You are now ready to migrate your data for the new version. This adds a
-'billable' flag to tasks. By default all your tasks will be marked billable.
-If more of your tasks are to be marked as not billable instead, change the
-migration so it sets the billable flag to 'false'. See the following file:
+You must also set a secret key in 'config/initializers/secret_token.rb';
+this is the equivalent of the key that in previous versions lived inside
+'config/environment.rb'. Comments in the file give detailed instructions.
 
-  db/migrations/017_add_billable_task_flag.rb
+The gem dependencies for TrackRecord are all listed in 'Gemfile'. To get
+these installed, from inside the 'trackrecord' directory (the same directory
+as this change log file and 'Gemfile'), run:
 
-Perform a database backup before running the migration so that you can recover
-your data if anything goes wrong. Consult your database documentation for
-instructions. When ready, start the migration by issuing this command:
+  bundle install
 
-  RAILS_ENV=production rake db:migrate
+...to make sure all the relevant gems required by the updated TrackRecord
+are present. Now make sure your web server is offline and bring your database
+up to date (changing 'production' to 'development' if being rightly cautious
+and testing on a development copy first):
 
-...from the command line with the current working directory set to somewhere
-inside the TrackRecord 1,5 application directory (change "production" to read
-"development" or another environment name to run the migration for other
-environments, if you need that). You should now be able to restart your web
-server and use the upgraded application.
+  rake db:migrate RAILS_ENV=production
 
+Then you should be able to start your web server again. There may be some
+server changes needed for Rails 3; consult your web server documentation if
+necessary. I recommend using Phusion Passenger, if possible, to serve Rails
+application such as TrackRecord.
 
-Browsers
---------
-
-This release of TrackRecord has been tested on Firefox 3.5 and Safari 4. For
-very best results please use these browsers or a later version of either. Opera
-10 has been tested and works well, except for some minor visual degradation due
-to use of some non-standard CSS extensions which Opera does not support.
-
-The application should work correctly on older Firefox versions back to version
-2.0, the Opera 9 series and WebKit-based browsers such as recent versions of
-Konqueror or Google Chrome, though these have not been used for testing.
-
-Although TrackRecord will function under Microsoft Internet Explorer 8, some
-functions will not be available and performance will be degraded, with greater
-load on the server for some operations. Earlier versions of this browser are
-not supported at all.
-
-Browsers without JavaScript support such as NetSurf v2.x should work but, as in
-Internet Explorer 8, some functions will not be available and greater load will
-be placed on the web server for some operations.
+If you have trouble running 'bundle' or the migration, in the first
+instance check Google for the error message you see - upgrading Rails and
+using bundles is very rarely a pain-free process and the issues will usually
+be to do with your computing environment rather than TrackRecord's own code.
 
 
-Changes from version 1.0
-------------------------
+Changes from version 1.54 (see the v1.x branch for more v1.x changes)
+-------------------------
 
-- The following new gems are now required:
-  + Gem: calendar_date_select 1.15 (replaces plugin used in TrackRecord v1.0)
-    ("gem install calendar_date_select" or "rake gems:install").
-      http://code.google.com/p/calendardateselect/
-      http://github.com/timcharper/calendar_date_select
+- New major version number reflects bump to Rails 3.2 / Ruby 1.9.
+  + Functionality is an evolution and refinement over TrackRecord v1.x,
+    rather than a major overhaul.
 
-- The following new gem versions are needed:
-  + fastercsv 1.5.0
-      http://fastercsv.rubyforge.org/
-  + ruby-openid 2.1.17
-      http://openidenabled.com/ruby-openid/
-      http://github.com/pelle/ruby-openid
-  + will_paginate (formerly called "mislav-will_paginate") 2.3.11
-      http://wiki.github.com/mislav/will_paginate
+- Improved navigation flow throughout.
+  + More consistent and logical navigation options in some places.
+  + Updated visual theme makes things easier to read.
 
-- The following plugins have been updated:
-  + acts_as_audited 2009-01-27
-      http://github.com/collectiveidea/acts_as_audited
-  + open_id_authentication 2009-10-21
-      http://github.com/rails/open_id_authentication
-  + safe_in_place_editing 0.02 23-Oct-2009 - custom plugin; provides in-place
-    editing features without XSS vulnerabilities present in earlier Rails
-    releases and with some extra facilities not available in the current
-    Rails release at the time of writing. Currently only available as part of
-    TrackRecord.
+- Reports can be saved for recollection and modification later.
+  + Can be kept private or shared to other TrackRecord users.
+  + Sharing URLs are very simple, since they just refer to a saved.
+    database object rather than recording all report parameters.
+  + Old-style long report URLs from TrackRecord v1.5 are supported and
+    create a temporary user report.
+  + Quick report generation buttons available when managing or viewing
+    customers, projects, tasks and users.
 
-- The following plugins have been removed:
-  + calendar_date_select (is now a gem, see above)
-  + scope-out (application now uses Rails' named_scope)
-      http://code.google.com/p/scope-out-rails/
+- All list search forms extended to at long last support date ranges.
 
-- The following new plugins have been added:
-  + quiet_leightbox - custom plugin; only include Leightbox components if the
-    view requires it. Currently only available as part of TrackRecord.
-  + quiet_prototype - custom plugin; only include Prototype and Scriptalicious
-    components if the view requires it. Currently only available as part of
-    TrackRecord.
-  + yui_tree - custom plugin; support the YUI tree component. Currently only
-    available as part of TrackRecord.
+- Improved labels for customers, projects and tasks everywhere - link back
+  to the original item, with tooltips giving code and description details.
 
-- The following third party JavaScript components have been updated:
-  + Prototype 1.6.1
-      http://www.prototypejs.org/
-  + Scriptalicious 1.8.3
-      http://script.aculo.us/
+- The beginnings of proper internationalisation are in place, though a lot
+  of messages are not yet run through the language files.
 
-- The following new third party scripts have been added:
-  + builder.js from Scriptalicious 1.8.3
-      http://script.aculo.us/
-  + leightbox.js (21/2/2006)
-      http://www.eight.nl/static/files/leightbox/
-  + YUI tree resources are in 'public/yui' and come from the YUI library 2.7.0
-      http://developer.yahoo.com/yui/treeview/
+- The 'gruff' gem is commented out inside 'Gemfile' to prevent annoying
+  dependencies. The graph controller mechanism is still present but will
+  not work unless you uncomment the gruff line in 'Gemfile' and re-run
+  "bundle install". It isn't used by default anywhere in TrackRecord.
 
-- The following scripts have moved:
-  + safe_in_place_editing.js is now installed in an eponymous subdirectory.
-  + TrackRecord custom scripts are now also in an eponymous subdirectory (see
-    'check_box_toggler.js', 'section_revealer.js' and 'timesheet_editor.js').
+- Bugs related to tasks with no project or projects with on customer fixed.
 
-- The following scripts are removed:
-  + dynamic_task_list.js (replaced by YUI tree)
-
-- Files 'config/initializers/acquire_fastercsv.rb' and 'acquire_paginator.rb'
-  removed as the list of gem versions in 'config/environment.rb' does their
-  job; application controller file 'application.rb' now called
-  'application_controller.rb'.
-
-- Streamlined sign-in process - users are taken to the log in page straight
-  away, without a pointless click-through Home page. Help text on the sign
-  in page is hidden behind a show/hide panel to keep the page simple.
-
-- Added notion of billable and non-billable tasks. Tasks are considered
-  billable by default.
-
-- Numerous improvements to the report generator:
-  + Report on active, inactive, billable and non-billable tasks.
-  + Custom task sorting and grouping in the final report.
-  + Hide rows or columns which add up to zero hours.
-  + Improved date menu selectors which reflect the precise range of actual
-    work packets in the database, rather than rounding to a whole year.
-  + Extra columns in CSV output to aid further processing (e.g. task and
-    project code information).
-
-- Improvements to the bulk task importer:
-  + JS toggle switches to select all, deselect all or invert the selection
-    of tasks for import.
-  + Grouped display of tasks and control over collapsing tasks into their
-    parent groups, for cases where an XML project file describes a project
-    in greater detail than required by the corresponding timesheets.
-  + Important bug fix - sometimes task durations could be rounded to
-    integer hours when imported.
-
-- Other minor improvements such as:
-  + Uses Rails default scoping and named scopes to improve code legibility
-    and efficiency throughout.
-  + Detects presence of JavaScript when the user logs in, then shows JS or
-    non-JS versions of certain pages to lessen database load where possible.
-    For example, YUI tree task selectors only fetch the tasks needed to show
-    branches opened by the user, while the non-JS task selector menu must
-    fetch all tasks from the database to show one huge selection list; this
-    is considerably less efficient at the server side.
-  + Only includes scripts in the main layout template when they're needed
-    via things like the custom "quiet_prototype" plugin.
-  + Minor visual tweaks to the navigation bar (now taller) and various other
-    CSS modifications, including a minimum page width to stop undesirable
-    wrapping of navigation bar items. A print-specific stylesheet should give
-    much better results for printed pages if your browser supports it.
-  + Timesheet "show" views show section totals as in the "edit" views (needs
-    robust JavaScript support in the browser).
-  + Administrator user Home pages are now more clear and compact.
-
-- Various bug fixes, most notable of which are:
-  + Custom JavaScript task selectors were a little clumsy and had various
-    niggles. Replaced the whole thing with a Leightbox popup which shows a
-    heavily customised YUI tree for task selection controlled by a custom
-    plugin (see 'vendor/plugins/yui_tree').
-  + OpenID servers which return via HTTPS should now work (tested with
-    openid.org).
-  + The name of a user responsible for a change in the audit trail is now
-    shown correctly (due to fixes in the updated acts_as_audited plugin).
-  + Section revealer script for hidden text in project views, customer views
-    and the sign-in page now works with Opera 10.
-  + Migration 014 had a flaw; "rake db:migrate" for a clean installation,
-    rather than "rake db:schema:load", would have failed. This is now fixed
-    and either approach should work fine.
-  + Some redundant ActiveScaffold resources from pre-1.0 versions were
-    present in the v1.0 release. These were harmless but have all be removed
-    now to keep things tidy.
-
-- Unlisted fixes are very minor, such as the correction of typing errors
-  for help text in some views.
-
-
-Version 1.00, 2008-10-14 (roughly)
-==================================
-
-- First public release.
-- Requires Rails 2.1.x (tested on 2.1.0 and 2.1.2).
+- Old-style report URLs are now reliable, rather than leading to 404 errors
+  on older TrackRecord versions if active tasks had become inactive or vice
+  versa. Now the active-vs-inactive lists are reassessed at generation time
+  (and the signed in user's task permissions taken into account as usual).

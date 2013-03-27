@@ -1,6 +1,6 @@
 ########################################################################
 # File::    audits_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to audit data. See
 #           controllers/audits_controller.rb for more.
@@ -57,9 +57,9 @@ module AuditsHelper
 
   def audithelp_changes( record )
     type    = record.auditable_type
-    changes = record.changes
+    changes = record.audited_changes
 
-    if changes.nil? or changes.empty?
+    if ( changes.blank? )
       if ( type == 'Timesheet' )
         return 'Added or removed rows, or edited hours within rows'
       else
@@ -67,8 +67,8 @@ module AuditsHelper
       end
     end
 
-    output  = '<table border="0" cellspacing="0" cellpadding="1" class="audit_changes" width="100%">'
-    output << '<tr><th width="24%">Field</th><th width="43%">From</th><th width="43%">To</th></tr>'
+    output  = '<table class="list audit_changes">'
+    output << '<tr><th class="audit_changes_field">Field</th><th class="audit_changes_from">From</th><th class="audit_changes_to">To</th></tr>'
 
     changes.keys.each do | key |
       cdata = changes[ key ]
@@ -77,7 +77,7 @@ module AuditsHelper
         cfrom = to_descriptive_s( cdata[ 0 ] )
         cto   = to_descriptive_s( cdata[ 1 ] )
       else
-        cfrom = '(N/A)'
+        cfrom = '&ndash;'.html_safe()
         cto   = cdata.to_s()
       end
 
@@ -114,10 +114,10 @@ module AuditsHelper
         end
       end
 
-      output << "<tr><td>#{ h( key ) }</td><td>#{ cfrom }</td><td>#{ cto }</td></tr>"
+      output << "<tr><td>#{ h( key ) }</td><td>#{ h( cfrom ) }</td><td>#{ h( cto ) }</td></tr>"
     end
 
-    return output << '</table>'
+    return ( output << '</table>' ).html_safe
   end
 
 private
@@ -126,14 +126,15 @@ private
   # given text expressed as a link to the item identified by the given record.
 
   def append_link( output, text, record )
-    return output << " " << link_to(
-      text,
-      {
-        :controller => record.auditable_type.downcase.pluralize,
-        :action     => 'show',
-        :id         => record.auditable_id
-      }
-    )
+    return ( output << " " << link_to(
+        text.html_safe,
+        {
+          :controller => record.auditable_type.downcase.pluralize,
+          :action     => 'show',
+          :id         => record.auditable_id
+        }
+      )
+    ).html_safe()
   end
 
   # A descriptive to_s; indicates empty or nil strings. Result is run through

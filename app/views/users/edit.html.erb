@@ -1,5 +1,5 @@
 <% if ( @current_user.id == @user.id ) -%>
-<%   if ( @user.name.nil? or @user.name.empty? ) -%>
+<%   if ( @user.name.blank? ) -%>
     <h1>Please set up your new account</h1>
 <%   else -%>
     <h1>Change account settings</h1>
@@ -11,27 +11,27 @@
 <% end -%>
 
     <%= error_messages_for :user %>
-    <% form_for( @user ) do | @f | %>
-      <%= @f.hidden_field( :lock_version ) %>
+    <%= form_for( @user ) do | f | %>
+      <%= f.hidden_field( :lock_version ) %>
 
 <% if ( @current_user.admin? ) -%>
-<%= render( :partial => 'admin_edit' ) -%>
+<%= render( :partial => 'admin_edit', :locals => { :f => f } ) -%>
 <% elsif ( @current_user.manager? ) -%>
-<%= render( :partial => 'manager_edit' ) -%>
+<%= render( :partial => 'manager_edit', :locals => { :f => f } ) -%>
 <% else -%>
-<%= render( :partial => 'normal_edit' ) -%>
+<%= render( :partial => 'normal_edit', :locals => { :f => f } ) -%>
 <% end -%>
 
       <p>
-<% if @current_user.nil? or @current_user.name.nil? or @current_user.name.empty? -%>
-        <%= @f.submit( 'Create', { :disable_with => 'Creating...' } ) %>
+<% if @current_user.nil? or @current_user.name.blank? -%>
+        <%= f.submit( 'Create', { :disable_with => 'Creating...' } ) %>
 <% else -%>
 <%   if ( @current_user.admin? ) and ( @user.id != @current_user.id ) -%>
         <%= check_box_tag( 'notify_user', '1', true ) %>
         <em><%= label_tag( 'notify_user', 'Notify the user about this update by e-mail' ) %></em>
         <br /><br />
 <%   end -%>
-        <%= @f.submit( 'Update', { :disable_with => 'Updating...' } ) %>
+        <%= f.submit( 'Update', { :disable_with => 'Updating...' } ) %>
         else <%= link_to( 'cancel and show details', @user ) %><%= @current_user.privileged? ? '' : '.' %>
 <%   if ( @current_user.privileged? ) -%>
         or <%= link_to( 'cancel and list users', users_path() ) %>.
@@ -40,7 +40,7 @@
       </p>
     <% end %>
 
-<% if @current_user.nil? or @current_user.name.nil? or @current_user.name.empty? -%>
+<% if @current_user.nil? or @current_user.name.blank? -%>
     <%= button_to 'Cancel', user_cancel_path( @user ) %>
 
     <p>

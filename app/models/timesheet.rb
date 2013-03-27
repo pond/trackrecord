@@ -1,6 +1,6 @@
 ########################################################################
 # File::    timesheet.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Describe the behaviour of Timesheet objects. See below for
 #           more details.
@@ -10,17 +10,20 @@
 
 class Timesheet < ActiveRecord::Base
 
-  acts_as_audited( :except => [
+  audited( :except => [
     :lock_version,
     :updated_at,
     :created_at,
     :id,
-    :committed_at
+    :committed_at,
+    :start_day_cache
   ] )
 
-  DEFAULT_SORT_COLUMN    = 'year, week_number'
+  DEFAULT_SORT_COLUMN    = 'start_day_cache'
   DEFAULT_SORT_DIRECTION = 'DESC'
   DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
+
+  USED_RANGE_COLUMN      = 'start_day_cache'
 
   # Timesheets describe a week of activity by a particular
   # user. They are made up of TimesheetRows, where each row
@@ -125,6 +128,10 @@ class Timesheet < ActiveRecord::Base
   # date.
 
   before_update :check_committed_state
+
+  # Update the start date cache when records are saved or updated.
+
+  before_update :update_start_day_cache
 
   # Is the given user permitted to do anything with this timesheet?
   #
@@ -282,10 +289,11 @@ class Timesheet < ActiveRecord::Base
     return self.work_packets.sum( :worked_hours )
   end
 
-  # Return the date of the first day for this timesheet as a string.
+  # Return the date of the first day for this timesheet as a string
+  # augmented with week number for display purposes.
   #
   def start_day()
-    return self.date_for( TimesheetRow::FIRST_DAY )
+    return "#{ self.date_for( TimesheetRow::FIRST_DAY ) } (week #{ self.week_number })"
   end
 
   # Get the date of the first day of week 1 in the given year.
@@ -431,7 +439,7 @@ private
   def column_sums_are_sane
     TimesheetRow::DAY_ORDER.each do | day |
       if ( self.column_sum( day ) > 24 )
-        errors.add_to_base( "#{ TimesheetRow::DAY_NAMES[ day ] }: Cannot exceed 24 hours per day" )
+        errors.add( :base, "#{ TimesheetRow::DAY_NAMES[ day ] }: Cannot exceed 24 hours per day" )
       end
     end
   end
@@ -450,10 +458,10 @@ private
   #
   def tasks_are_active_and_permitted
     self.tasks.each do | task |
-      errors.add_to_base( "Task '#{ task.augmented_title }' is no longer active and cannot be included" ) unless task.active
+      errors.add( :base, "Task '#{ task.augmented_title }' is no longer active and cannot be included" ) unless task.active
 
       if ( self.user.restricted? )
-        errors.add_to_base( "Inclusion of task '#{ task.augmented_title }' is no longer permitted" ) unless self.user.task_ids.include?( task.id )
+        errors.add( :base, "Inclusion of task '#{ task.augmented_title }' is no longer permitted" ) unless self.user.task_ids.include?( task.id )
       end
     end
   end
@@ -473,5 +481,14 @@ private
       self.committed_at = self.user.last_committed = Time.new
       self.user.save!
     end
+  end
+
+  # Run via "before_update".
+  #
+  def update_start_day_cache
+    self.start_day_cache = self.date_for(
+      TimesheetRow::FIRST_DAY,
+      true # Return as a Date rather than a String
+    )
   end
 end

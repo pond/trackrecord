@@ -2,20 +2,20 @@
     
     <h2><%= h( @record.title ) %> (<%= apphelp_commit_label( @record ) %>)</h2>
 
-    <table border="0" cellspacing="0" cellpadding="2" style="margin-left: 1em">
-      <tr align="left">
+    <table class="display_table indented">
+      <tr class="display_row">
         <th>Created at</th>
         <td><%= @record.created_at %></td>
       </tr>
-      <tr align="left">
+      <tr class="display_row">
         <th>Code</th>
         <td><%= apphelp_h( @record.code ) %></td>
       </tr>
-      <tr valign="top" align="left">
+      <tr class="display_row">
         <th>Description</th>
         <td><%= apphelp_h( @record.description ) %></td>
       </tr>
-      <tr align="left">
+      <tr class="display_row">
         <th>Associated customer</th>
         <td><%= @record.customer ? link_to( h( @record.customer.title ), @record.customer ) : 'None' %></td>
       </tr>
@@ -26,7 +26,7 @@
       The project has <%= pluralize( @record.tasks.size, 'associated task' ) %>.
 <%   unless ( @record.tasks.empty? ) -%>
       A summary is given below. For full details, see the
-      <%= link_to( 'report generator', new_report_path() ) %>.
+      <%= link_to( 'report generator', new_user_saved_report_path( @current_user ) ) %>.
 <%   end -%>
     </p>
 
@@ -34,21 +34,28 @@
     <h2 id="item_breakdown_heading">Task breakdown</h2>
     <div id="item_breakdown_contents">
 
-<%     @record.tasks.each do | @task | -%>
-      <h3>Task: <%= link_to( h( @task.title ), @task ) %></h3>
+<%     @record.tasks.each do | task | -%>
+      <h3>Task: <%= link_to( h( task.title ), task ) %></h3>
 
-<%= render( :partial => 'shared/task_info' ) %>
+<%= render( :partial => 'shared/task_info', :locals => { :task => task } ) %>
 <%     end -%>
 <%   end -%>
     </div>
 
-<p align="center">
+    <div class="display_actions">
+      <%=
+          render(
+            :partial => 'shared/report_button',
+            :locals  => {
+              :user => @current_user,
+              :item => @record
+            }
+          )
+      %>,
 <%     if ( @current_user.admin? or ( @current_user.manager? and @record.active ) ) %>
-  <%= link_to( 'Edit this project', edit_project_path( @record ) ) %>,
-  <%= link_to( 'list projects', projects_path() ) %>
-<%     else -%>
-  <%= link_to( 'List projects', projects_path() ) %>
+      <%= link_to( 'edit this project', edit_project_path( @record ) ) %>,
 <%     end -%>
-  or <%= link_to( 'return home', home_path() ) %>
-</p>
+      <%= link_to( 'List projects', projects_path() ) %>
+      or <%= link_to( 'return home', home_path() ) %>
+    </div>
 <% end -%>

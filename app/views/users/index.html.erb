@@ -14,16 +14,14 @@
 %>
       <h2>Find user accounts</h2>
 
-      <% form_tag users_path, :method => 'get' do %>
-        <%= hidden_field_tag( 'sort',      params[ :sort      ] ) %>
-        <%= hidden_field_tag( 'direction', params[ :direction ] ) %>
-        <%= hidden_field_tag( 'entries',   params[ :entries   ] ) %>
-        <% content_tag :label do %>
-          Search names, addresses, identity URLs:
-          <%= text_field_tag :search, params[ :search ] %>
-          <%= submit_tag( 'Go', { :name => 'search_go' } ) %>
-<% if ( params[ :search ] ) -%>
-          <%= submit_tag( 'Clear', { :name => 'search_cancel' } ) %>
-<% end -%>
-        <% end %>
-      <% end %>
+<%=
+    render(
+      :partial => 'shared/search',
+      :locals  => {
+        :path    => users_path(),
+        :prompt  => 'Search names, e-mail addresses and identity URLs',
+        :dprompt => 'between account creation date',
+        :years   => User.used_range()
+      }
+    )
+%>

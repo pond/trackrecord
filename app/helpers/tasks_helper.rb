@@ -1,6 +1,6 @@
 ########################################################################
 # File::    tasks_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to Task objects. See
 #           controllers/tasks_controller.rb for more.
@@ -17,9 +17,10 @@ module TasksHelper
 
   def taskhelp_project_selector( task )
     return apphelp_project_selector(
-    'task_project_id',
-    'task[project_id]',
-    task.project_id
+      'task_project_id',
+      'task[project_id]',
+      task.project_id,
+      true
     )
   end
 
@@ -29,7 +30,7 @@ module TasksHelper
 
   def taskhelp_remaining( hours, duration )
     if ( hours > duration and duration != 0 )
-      return '<span class="overrun">Overrunning</span>'
+      return '<span class="overrun">Overrunning</span>'.html_safe()
     else
       return apphelp_hours( 0 ) if ( duration == 0 )
       return apphelp_hours( duration - hours )
@@ -44,22 +45,22 @@ module TasksHelper
     if ( hours > duration and duration != 0 )
       return apphelp_hours( hours - duration )
     else
-      return '<span class="no_overrun">None</span>'
+      return '<span class="no_overrun">None</span>'.html_safe()
     end
   end
 
   # Return a name of a given task's associated project, for use in list views.
 
   def taskhelp_project( task )
-    reutnr '-' if ( task.project.nil? )
-    return link_to( task.project.title, project_path( task.project ) )
+    return '-'.html_safe() if ( task.project.nil? )
+    return sections_augmented_link( task.project )
   end
 
   # Return a name of a given task's associated customer, for use in list views.
 
   def taskhelp_customer( task )
-    return '-' if ( task.project.nil? or task.project.customer.nil? )
-    return link_to( task.project.customer.title, customer_path( task.project.customer ) )
+    return '-'.html_safe() if ( task.project.nil? or task.project.customer.nil? )
+    return sections_augmented_link( task.project.customer )
   end
 
   # Return a formatted duration for the given task, for use in list views.
@@ -97,9 +98,11 @@ module TasksHelper
   # Return an HTML fragment giving help on billable versus non-billable tasks.
   #
   def taskhelp_billable_help
-    "Names of billable or non-billable tasks are shown as follows: " <<
-    "'<span class=\"#{ taskhelp_billable_class( true  ) }\">billable</span>', " <<
-    "'<span class=\"#{ taskhelp_billable_class( false ) }\">not billable</span>'."
+    return (
+      "Names of billable or non-billable tasks are shown as follows: " <<
+      "'<span class=\"#{ taskhelp_billable_class( true  ) }\">billable</span>', " <<
+      "'<span class=\"#{ taskhelp_billable_class( false ) }\">not billable</span>'."
+    ).html_safe()
   end
 
   # As taskhelp_billable_class, but for active/inactive tasks.
@@ -112,9 +115,11 @@ module TasksHelper
   # As taskhelp_billable_help, but for active/inactive tasks.
   #
   def taskhelp_active_help
-    "Names of active or inactive tasks are shown as follows: " <<
-    "'<span class=\"#{ taskhelp_active_class( true  ) }\">active</span>', " <<
-    "'<span class=\"#{ taskhelp_active_class( false ) }\">inactive</span>'."
+    return (
+      "Names of active or inactive tasks are shown as follows: " <<
+      "'<span class=\"#{ taskhelp_active_class( true  ) }\">active</span>', " <<
+      "'<span class=\"#{ taskhelp_active_class( false ) }\">inactive</span>'."
+    ).html_safe()
   end
 
   # Generate a YUI tree task selector. Pass a form builder object in the first
@@ -175,6 +180,13 @@ module TasksHelper
   #
   # See also "taskhelp_degrading_selector" for JS/non-JS degrading code.
   #
+  # Note that projects with no customer, or tasks with no project will not be
+  # shown in the tree; "unassigned" projects and customers are really just an
+  # administrative convenience during times when things might be in the
+  # process of being reassigned, or right at the start when someone is setting
+  # up new tasks, projects and customers, not necessarily starting with the
+  # customer definition first.
+  #
   def taskhelp_tree_selector( form, options = {} )
 
     inactive       = options.delete( :inactive       )
@@ -215,8 +227,8 @@ module TasksHelper
     if ( permitted_tasks.nil? )
       root_customers = Customer.all
     else
-      root_projects  = permitted_tasks.map { | task    | task.project     }.uniq
-      root_customers = root_projects.map   { | project | project.customer }.uniq
+      root_projects  = permitted_tasks.map { | task    | task.project             }.uniq
+      root_customers = root_projects.map   { | project | project.try( :customer ) }.uniq
     end
 
     # Reject items with no active / inactive tasks.
@@ -224,7 +236,7 @@ module TasksHelper
     method = inactive ? :inactive : :active
 
     root_customers.reject! do | customer |
-      customer.tasks.send( method ).count.zero?
+      customer.nil? || customer.tasks.send( method ).count.zero?
     end
 
     # Sort the root list by default order. Related associations are sorted
@@ -293,16 +305,18 @@ module TasksHelper
     html = <<HTML
 <textarea disabled="disabled" rows="5" cols="60" class="tree_selector_text" id="#{ id }_text">Task data loading...</textarea>
 <br />
-<a href="#leightbox_tree_#{ id }" rel="leightbox_tree_#{ id }" class="lbOn">#{ change_text }</a>
+<a href="#leightbox_tree_#{ id }" data-leightbox="leightbox_tree_#{ id }" class="lbOn">#{ change_text }</a>
 #{ suffix_html }<div id="leightbox_tree_#{ id }" class="leightbox">
-  <a href="#" class="lbAction" rel="deactivate">Close</a>
+  <a href="#" class="lbAction" data-leightbox="deactivate">Close</a>
   #{ taskhelp_billable_help }
-  <p />
+  <p></p>
   #{ hidden_field_tag( id, selected_task_ids.join( ',' ), { :name => name } ) }
 #{ tree }
-  <a href="#" class="lbAction" rel="deactivate">Close</a>
+  <a href="#" class="lbAction" data-leightbox="deactivate">Close</a>
 </div>
 HTML
+
+    return html.html_safe()
   end
 
   # Create a degrading task selector using either a YUI tree or a SELECT list,
@@ -370,14 +384,14 @@ HTML
             Task.sort_by_augmented_title( tasks )
             output << apphelp_collection_select( form, :task_ids, tasks, :id, :augmented_title )
             output << '<br />'
-            output << form.submit( 'Add', { :name => 'add_row', :id => nil } )
+            output << form.submit( 'Add', { :name => 'add_row' } )
           else
             output << taskhelp_tree_selector(
               form,
               {
                 :included_tasks => tasks,
                 :change_text    => 'Choose tasks...',
-                :suffix_html    => " then #{ form.submit( 'add them', { :name => 'add_row', :id => nil } ) }\n"
+                :suffix_html    => " then #{ form.submit( 'add them', { :name => 'add_row' } ) }\n"
               }
             )
           end
@@ -566,7 +580,7 @@ HTML
             output << "\n\n"
             output << "<p>\n"
             output << "  This list is only enforced for users with a\n"
-            output << "  'Normal' account type. It is included here\n"
+            output << "  'normal' account type. It is included here\n"
             output << "  in case you are intending to change the account\n"
             output << "  type and want to assign tasks at the same time.\n"
             output << "</p>"
@@ -581,6 +595,6 @@ HTML
     line_prefix = options.delete( :line_prefix )
     output.gsub!( /^/, line_prefix ) unless ( output.empty? || line_prefix.nil? )
 
-    return output
+    return output.html_safe()
   end
 end

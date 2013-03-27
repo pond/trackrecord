@@ -1,6 +1,6 @@
 ########################################################################
 # File::    task.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2007
 #
 # Purpose:: Describe the behaviour of Task objects. See below for more
 #           details.
@@ -8,25 +8,26 @@
 #           24-Dec-2007 (ADH): Created.
 ########################################################################
 
-class Task < ActiveRecord::Base
+class Task < Rangeable
 
-  acts_as_audited( :except => [
+  audited( :except => [
     :lock_version,
     :updated_at,
     :created_at,
-    :id,
-    :code,
-    :description
+    :id
   ] )
 
-  DEFAULT_SORT_COLUMN    = 'code'
+  DEFAULT_SORT_COLUMN    = 'title'
   DEFAULT_SORT_DIRECTION = 'ASC'
   DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
 
+  USED_RANGE_COLUMN      = 'created_at' # For Rangeable base class
+
   default_scope( { :order => DEFAULT_SORT_ORDER } )
 
-  named_scope( :active,   :conditions => { :active => true  } )
-  named_scope( :inactive, :conditions => { :active => false } )
+  scope( :active,     :conditions => { :active     => true  } )
+  scope( :inactive,   :conditions => { :active     => false } )
+  scope( :unassigned, :conditions => { :project_id => nil   } )
 
   # Tasks are the fundamental building blocks of a Project. They define
   # specific pieces of work of expected duration, against which work
@@ -72,6 +73,31 @@ class Task < ActiveRecord::Base
   )
 
   validate( :project_is_active )
+
+  # Some default properties are dynamic, so assign these here rather than
+  # as defaults in a migration.
+  #
+  # Parameters:
+  #
+  #   Optional hash used for instance initialisation in the traditional way
+  #   for an ActiveRecord subclass.
+  #
+  #   Optional User object. A default project is taken from that user's
+  #   control panel data, if available.
+  #
+  #
+  def initialize( params = nil, user = nil )
+    super( params )
+
+    self.duration = 0
+    self.active   = true
+    self.code     = "TID%05d" % Task.count
+
+    if ( user and user.control_panel )
+      cp = user.control_panel
+      self.project = cp.project if ( cp.project and cp.project.active )
+    end
+  end
 
   # Is the given user permitted to do anything with this task?
   #
@@ -140,25 +166,6 @@ class Task < ActiveRecord::Base
     return [ restricted, unrestricted ]
   end
 
-  # Assign default conditions for a brand new object, used whether
-  # or not the object ends up being saved in the database (so a
-  # before_create filter is not sufficient). For user-specific
-  # default values, pass a User object.
-  #
-  def assign_defaults( user )
-    self.duration = 0
-    self.active   = true
-    self.code     = "TID%05d" % Task.count
-
-    # User-specific defaults - pick up the default project
-    # from the user's control panel, if defined.
-
-    if ( user and user.control_panel )
-      cp = user.control_panel
-      self.project = cp.project if ( cp.project and cp.project.active )
-    end
-  end
-
   # Update an object with the given attributes. This is done by a
   # special model method because changes of the 'active' flag have
   # side effects for other associated objects. THE CALLER **MUST**
@@ -188,7 +195,7 @@ class Task < ActiveRecord::Base
         user.save!
       end
 
-      ControlPanel.find( :all ).each do | cp |
+      ControlPanel.all.each do | cp |
         cp.remove_inactive_tasks()
         cp.save!
       end
@@ -236,7 +243,7 @@ class Task < ActiveRecord::Base
   def sum_hours_over_range( date_range, user = nil )
     committed_sum     = 0.0
     not_committed_sum = 0.0
-    work_packets      = self.work_packets.find( :all, :conditions => { :date => date_range } )
+    work_packets      = self.work_packets.all( :conditions => { :date => date_range } )
 
     work_packets.each do | work_packet |
       timesheet = work_packet.timesheet_row.timesheet
@@ -259,7 +266,7 @@ private
   #
   def project_is_active()
     unless ( ( not self.active ) or self.project.nil? or self.project.active )
-      errors.add_to_base( 'Active tasks can only be associated with active projects' )
+      errors.add( :base, 'Active tasks can only be associated with active projects' )
     end
   end
 

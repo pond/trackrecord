@@ -1,6 +1,6 @@
 ########################################################################
 # File::    task_group.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Base class for things which group tasks, such as Projects
 #           or Customers. See below for more details.
@@ -8,7 +8,7 @@
 #           07-Mar-2008 (ADH): Created from project.rb.
 ########################################################################
 
-class TaskGroup < ActiveRecord::Base
+class TaskGroup < Rangeable
 
   self.abstract_class = true
 
@@ -20,8 +20,8 @@ class TaskGroup < ActiveRecord::Base
 
   default_scope( { :order => DEFAULT_SORT_ORDER } )
 
-  named_scope( :active,   :conditions => { :active => true  } )
-  named_scope( :inactive, :conditions => { :active => false } )
+  scope( :active,   :conditions => { :active => true  } )
+  scope( :inactive, :conditions => { :active => false } )
 
   # Derived classes must state their associations. None are set up
   # in the base class. They should also restrict mass assignment to

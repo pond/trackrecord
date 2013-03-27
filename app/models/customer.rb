@@ -1,6 +1,6 @@
 ########################################################################
 # File::    customer.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2007
 #
 # Purpose:: Describe the behaviour of Customer objects. See below for
 #           more details.
@@ -10,14 +10,14 @@
 
 class Customer < TaskGroup
 
-  acts_as_audited( :except => [
+  audited( :except => [
     :lock_version,
     :updated_at,
     :created_at,
-    :id,
-    :code,
-    :description
+    :id
   ] )
+
+  USED_RANGE_COLUMN = 'created_at' # For the Rangeable base class of TaskGroup
 
   # Customers are people for whom work is done. Customers are involved
   # with various projects, which in turn include various tasks.
@@ -35,17 +35,23 @@ class Customer < TaskGroup
     :control_panel_ids
   )
 
-  # Assign default conditions for a brand new object, used whether
-  # or not the object ends up being saved in the database (so a
-  # before_create filter is not sufficient). For user-specific
-  # default values, pass a User object.
+  # Some default properties are dynamic, so assign these here rather than
+  # as defaults in a migration.
   #
-  def assign_defaults( user )
+  # Parameters:
+  #
+  #   Optional hash used for instance initialisation in the traditional way
+  #   for an ActiveRecord subclass.
+  #
+  #   Optional User object. Default data from a user control panel may be used
+  #   for the new object in future, though presently this parameter is ignored.
+  #
+  #
+  def initialize( params = nil, user = nil )
+    super( params )
+
     self.active = true
     self.code   = "CID%04d" % Customer.count
-
-    # Presently, there are no user-specific default values for
-    # Customer objects.
   end
 
   # Apply a default sort to the given array of customer objects. The array is
@@ -92,6 +98,8 @@ class Customer < TaskGroup
       self.projects.each do | project |
         project.destroy_with_side_effects( destroy_tasks )
       end
+    else
+      Project.where( :customer_id => self.id ).update_all( :customer_id => nil )
     end
 
     self.destroy()

@@ -1,27 +1,27 @@
     <h2>Basic information</h2>
 
-    <table border="0" cellspacing="0" cellpadding="2">
-      <tr align="left">
+    <table class="editing_table">
+      <tr class="editing_row">
         <th>Full name (required)</th>
-        <td><%= @user.id == @current_user.id ? @f.text_field( :name ) : h( @user.name )%></td>
+        <td><%= @user.id == @current_user.id ? f.text_field( :name ) : h( @user.name )%></td>
       </tr>
 
-      <tr align="left">
+      <tr class="editing_row">
         <th>Contact e-mail address (required)</th>
-        <td><%= @user.id == @current_user.id ? @f.text_field( :email ) : h( @user.email )%></td>
+        <td><%= @user.id == @current_user.id ? f.text_field( :email ) : h( @user.email )%></td>
       </tr>
 
-      <tr align="left">
+      <tr class="editing_row">
         <th>User code (leave as-is if unsure)</th>
-        <td><%= @f.text_field( :code ) %></td>
+        <td><%= f.text_field( :code ) %></td>
       </tr>
     </table>
 
     <h2>Security</h2>
 
-    <table border="0" cellspacing="0" cellpadding="2">
+    <table class="editing_table">
 <% unless( @user.admin? ) -%>
-      <tr align="left" valign="top">
+      <tr class="editing_row">
         <th>Tasks the user is permitted to see</th>
         <td>
 <%=
@@ -34,7 +34,7 @@
       </tr>
 <% end -%>
 
-      <tr align="left" valign="top">
+      <tr class="editing_row">
         <th>Account type</th>
         <td>
 <%= userhelp_user_type_selector( @f, @user ) %>
@@ -44,11 +44,11 @@
 
 <% if( @user.id == @current_user.id ) %>
     <h2>Configuration</h2>
-<% fields_for :control_panel do | cp | -%>
+<%= fields_for :control_panel do | cp | -%>
     <%= error_messages_for :control_panel %>
 
-    <table border="0" cellspacing="0" cellpadding="2">
-      <tr align="left" valign="top">
+    <table class="editing_table">
+      <tr class="editing_row">
         <th>Tasks added to new timesheets by default</th>
         <td>
 <%=
@@ -60,14 +60,14 @@
         </td>
       </tr>
 
-      <tr align="left" valign="top">
+      <tr class="editing_row">
         <th>Project assigned to new tasks by default</th>
         <td>
 <%= userhelp_default_project_selector( @user ) %>
         </td>
       </tr>
 
-      <tr align="left" valign="top">
+      <tr class="editing_row">
         <th>Customer assigned to new projects by default</th>
         <td>
 <%= userhelp_default_customer_selector( cp, @user ) %>

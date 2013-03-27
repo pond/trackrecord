@@ -1,6 +1,6 @@
 ########################################################################
 # File::    customers_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to Customer objects.
 #           See controllers/customers_controller.rb for more.

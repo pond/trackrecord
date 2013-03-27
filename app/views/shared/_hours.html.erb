@@ -1,29 +1,29 @@
 <% unless ( @duration.nil? or @committed.nil? or @not_committed.nil? ) -%>
             <%= charthelp_image( @duration, @committed, @not_committed, 128, 157 ) %>
 <% end -%>
-            <table border="0" cellspacing="0" cellpadding="2">
+            <table class="display_table">
 <% unless ( @duration.nil? ) -%>
-              <tr valign="top" align="left">
+              <tr class="display_row">
                 <th>Expected duration</th>
                 <td><%= apphelp_hours( @duration ) %></td>
               </tr>
 <% end -%>
 <% unless ( @committed.nil? ) -%>
-              <tr valign="top" align="left">
+              <tr class="display_row">
                 <th valign="top">Committed</th>
                 <td>
 <% if ( @committed_items.nil? or @committed_items.length == 0 ) -%>
                   <%= apphelp_hours( @committed ) %>
 <% else -%>
-                  <table cellpadding="0" cellspacing="0" border="0">
+                  <table class="display_table">
                     <tr>
-                      <td align="right"><%= apphelp_hours( @committed ) %></td>
+                      <td style="text-align: right"><%= apphelp_hours( @committed ) %></td>
                       <td>&nbsp;</td>
                       <td>booked<%= @current_user.restricted? ? ', including' : ' as' %>:</td>
                     </tr>
 <% @committed_items.each do | item | -%>
                     <tr>
-                      <td align="right"><%= apphelp_hours( item[ :hours ] ) %></td>
+                      <td style="text-align: right"><%= apphelp_hours( item[ :hours ] ) %></td>
                       <td>&nbsp;</td>
                       <td><%= reporthelp_work_breakdown_item_name( item ) %></td>
                     </tr>
@@ -34,21 +34,21 @@
               </tr>
 <% end -%>
 <% unless ( @not_committed.nil? ) -%>
-              <tr valign="top" align="left">
+              <tr class="display_row">
                 <th valign="top">Not yet committed</th>
                 <td>
 <% if ( @not_committed_items.nil? or @not_committed_items.length == 0 ) -%>
                   <%= apphelp_hours( @not_committed ) %>
 <% else -%>
-                  <table cellpadding="0" cellspacing="0" border="0">
+                  <table class="display_table">
                     <tr>
-                      <td align="right"><%= apphelp_hours( @not_committed ) %></td>
+                      <td style="text-align: right"><%= apphelp_hours( @not_committed ) %></td>
                       <td>&nbsp;</td>
                       <td>booked<%= @current_user.restricted? ? ', including' : ' as' %>:</td>
                     </tr>
 <% @not_committed_items.each do | item | -%>
                     <tr>
-                      <td align="right"><%= apphelp_hours( item[ :hours ] ) %></td>
+                      <td style="text-align: right"><%= apphelp_hours( item[ :hours ] ) %></td>
                       <td>&nbsp;</td>
                       <td><%= reporthelp_work_breakdown_item_name( item ) %></td>
                     </tr>
@@ -59,7 +59,7 @@
               </tr>
 <% end -%>
 <% unless ( @total.nil? ) -%>
-              <tr valign="top" align="left">
+              <tr class="display_row">
                 <th>Potentially worked</th>
                 <td><%= apphelp_hours( @total ) %></td>
               </tr>
@@ -70,21 +70,21 @@
 
 <% end -%>
 <% unless ( @committed.nil? or @duration.nil? ) -%>
-              <tr align="left">
+              <tr class="display_row">
                 <th>Committed remaining</th>
                 <td><%= taskhelp_remaining( @committed, @duration ) %></td>
               </tr>
-              <tr align="left">
+              <tr class="display_row">
                 <th>Committed overrun</th>
                 <td><%= taskhelp_overrun( @committed, @duration ) %></td>
               </tr>
 <% end -%>
 <% unless ( @total.nil? or @duration.nil? ) -%>
-              <tr align="left">
+              <tr class="display_row">
                 <th>Potential remaining</th>
                 <td><%= taskhelp_remaining( @total, @duration ) %></td>
               </tr>
-              <tr align="left">
+              <tr class="display_row">
                 <th>Potential overrun</th>
                 <td><%= taskhelp_overrun( @total, @duration ) %></td>
               </tr>

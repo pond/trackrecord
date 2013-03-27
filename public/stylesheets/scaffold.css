@@ -1,9 +1,7 @@
 body { background-color: #fff; color: #333; }
 
 body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
+  line-height: 130%
 }
 
 pre {
@@ -17,7 +15,7 @@ a:visited { color: #666; }
 a:hover { color: #fff; background-color:#000; }
 
 .fieldWithErrors {
-  padding: 2px;
+  padding: 5px;
   background-color: red;
   display: table;
 }

@@ -1,6 +1,6 @@
 ########################################################################
 # File::    projects_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to Project objects. See
 #           controllers/projects_controller.rb for more.
@@ -14,8 +14,8 @@ module ProjectsHelper
   # in list views.
 
   def projecthelp_customer( project )
-    return '-' if ( project.customer.nil? )
-    return link_to( project.customer.title, customer_path( project.customer ) )
+    return '-'.html_safe() if ( project.customer.nil? )
+    return sections_augmented_link( project.customer )
   end
 
   # Return list actions appropriate for the given project

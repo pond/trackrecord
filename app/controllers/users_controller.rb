@@ -1,6 +1,6 @@
 ########################################################################
 # File::    users_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage User objects. See models/user.rb for more.
 # ----------------------------------------------------------------------
@@ -55,25 +55,42 @@ class UsersController < ApplicationController
     # the conditions on objects being fetched, including handling the search
     # form data.
 
-    options             =  appctrl_index_assist( User )
-    active_conditions   = { :active => true  }
-    inactive_conditions = { :active => false }
+    options        = appctrl_index_assist( User )
+    active_vars    = { :active => true  }
+    inactive_vars  = { :active => false }
+    conditions_sql = "WHERE ( active = :active )\n"
 
-    unless ( params[ :search ].nil? )
-      if ( params[ :search ].empty? or params[ :search_cancel ] )
-        params.delete( :search )
-      else
-        search = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
-        str    = '( name ILIKE :search OR email ILIKE :search OR identity_url ILIKE :search ) AND active = :active'
-        active_conditions   = [ str, { :search => search, :active => true  } ]
-        inactive_conditions = [ str, { :search => search, :active => false } ]
-      end
+    # If asked to search for something, build extra conditions to do so.
+
+    range_sql, range_start, range_end = appctrl_search_range_sql( User )
+
+    unless ( range_sql.nil? )
+      search = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
+      conditions_sql << "AND #{ range_sql } ( name ILIKE :search OR email ILIKE :search OR identity_url ILIKE :search )\n"
+
+      vars = { :search => search, :range_start => range_start, :range_end => range_end }
+      active_vars.merge!( vars )
+      inactive_vars.merge!( vars )
     end
 
-    # Finally, compile the collections for the view.
+    # Sort order is already partially compiled in 'options' from the earlier
+    # call to 'appctrl_index_assist'.
 
-    @active_users   = User.paginate( options.merge( { :conditions => active_conditions   } ) )
-    @inactive_users = User.paginate( options.merge( { :conditions => inactive_conditions } ) )
+    order_sql = "ORDER BY #{ options[ :order ] }, name ASC, code ASC"
+    options.delete( :order )
+
+    # Compile the main SQL statement.
+
+    finder_sql  = "SELECT * FROM users\n" <<
+                  "#{ conditions_sql }\n" <<
+                  "#{ order_sql      }"
+
+    # Now paginate using this SQL. The only difference between the active and
+    # inactive cases is the value of the variables passed to Active Record for
+    # substitution into the final SQL query going to the database.
+
+    @active_users   = User.paginate_by_sql( [ finder_sql, active_vars   ], options )
+    @inactive_users = User.paginate_by_sql( [ finder_sql, inactive_vars ], options )
   end
 
   # Show user details.
@@ -87,12 +104,10 @@ class UsersController < ApplicationController
   # session management. The only exception is for administrators, who
   # may (carefully!) choose to create user accounts up-front after
   # adding an ID to the permitted list.
-
-  # Administrators can (carefully) create User accounts up-front.
   #
   def new
     return appctrl_not_permitted() unless @current_user.admin?
-    return appctrl_new( 'User' )
+    @record = @user = User.new
   end
 
   # Create a new User account.
@@ -133,7 +148,7 @@ class UsersController < ApplicationController
     @user = User.find( id )
 
     if ( @current_user.admin? and params[ :notify_user ] )
-      EmailNotifier.deliver_admin_update_notification( @user )
+      EmailNotifier.admin_update_notification( @user ).deliver()
     end
 
     # New user just set up a previously uninitialised account (no
@@ -265,7 +280,7 @@ private
           end
         elsif ( @current_user.manager? )
           user_type = params[ :user ][ :user_type ]
-          @user.user_type = user_type if ( user_type != 'Admin' )
+          @user.user_type = user_type if ( user_type != User::USER_TYPE_ADMIN )
         end
       end
 
@@ -302,7 +317,7 @@ private
         @user.control_panel.save!
 
         begin
-          EmailNotifier.deliver_signup_notification( @user ) if ( send_email )
+          EmailNotifier.signup_notification( @user ).deliver() if ( send_email )
           flash[ :notice ] = success_message
         rescue => error
           flash[ :notice ] = success_message + " Please note, though, that the notification e-mail message could not be sent: #{ error.message }"

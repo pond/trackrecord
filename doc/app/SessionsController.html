@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class SessionsController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/sessions_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-create">#create</a>
+    
+    <li><a href="#method-i-destroy">#destroy</a>
+    
+    <li><a href="#method-i-handle_unverified_request">#handle_unverified_request</a>
+    
+    <li><a href="#method-i-new">#new</a>
+    
+    <li><a href="#method-i-open_id_authentication">#open_id_authentication</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class SessionsController</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>sessions_controller.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Manage OpenID logins. Originally created from examples in the <a
+href="SessionsController.html#method-i-open_id_authentication">#open_id_authentication</a>
+plugin.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>06-Jan-2008 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Called when the sign in form is submitted or when the OpenID plug- in has
+completed a sign-in attempt, successfully or otherwise.</p>
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-identifier">identity_url</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:openid_url</span> ]
+
+  <span class="ruby-comment"># Identity URL is *not* nil, but *is* empty? Form was submitted</span>
+  <span class="ruby-comment"># with an empty string. URL is *not* nil and is *not* empty? Form</span>
+  <span class="ruby-comment"># was submitted with a URL; call authentication routine. URL *is*</span>
+  <span class="ruby-comment"># nil? We're being called from the Open ID plug-in with the result</span>
+  <span class="ruby-comment"># of a sign-in attempt. Again, call the authentication routine but</span>
+  <span class="ruby-comment"># don't try and read the JavaScript detection field.</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">not</span> <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">empty?</span> )
+    <span class="ruby-identifier">failed_login</span>( <span class="ruby-string">'You must provide an ID.'</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
+    <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:javascript</span> ] <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-identifier">open_id_authentication</span>()
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+  <span class="ruby-identifier">failed_login</span>( <span class="ruby-node">&quot;An unexpected error was encountered: #{ error.message }&quot;</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create-method -->
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sign out - may be called by a normal user or if a user decides to cancel
+during the sign-up process.</p>
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">user</span>   = <span class="ruby-ivar">@current_user</span>
+  <span class="ruby-identifier">normal</span> = ( <span class="ruby-ivar">@current_user</span> <span class="ruby-keyword">and</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> ) <span class="ruby-keyword">and</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> ) )
+  <span class="ruby-identifier">reset_session</span>()
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">normal</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'You have signed out.'</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">destroy</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'Sign in process aborted.'</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">signin_path</span>() )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- destroy-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- destroy-method -->
+
+    
+      <div id="method-i-handle_unverified_request" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">handle_unverified_request</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>With the Rails CSRF fix/bodge (sigh), unverified requests - such as that
+issued by the OpenID provider - cause the session to be reset. Since data
+about JavaScript support in the sign-in form is stored there, this would be
+lost and the system would always behave as if JS support were absent.</p>
+
+<p>The workaround is to replace the default “<a
+href="SessionsController.html#method-i-handle_unverified_request">#handle_unverified_request</a>()”
+implementation to deal very specifically with just this one case. Having
+the session reset on login to contain just the JS token and, thereafter,
+any extra data resulting from the successful (or not) login attempt keeps
+everything clean and means that any real attempted attacks would fail.</p>
+          
+
+          
+          <div class="method-source-code" id="handle_unverified_request-source">
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_unverified_request</span>
+  <span class="ruby-identifier">js</span> = <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ]
+  <span class="ruby-identifier">reset_session</span>()
+  <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">js</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- handle_unverified_request-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- handle_unverified_request-method -->
+
+    
+      <div id="method-i-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'Please sign by providing the OpenID which is to be '</span> <span class="ruby-operator">&lt;&lt;</span>
+                       <span class="ruby-string">'assigned to a new administrator account.'</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-open_id_authentication" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">open_id_authentication</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="open_id_authentication-source">
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_id_authentication</span>()
+
+  <span class="ruby-identifier">authenticate_with_open_id</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">identity_url</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">successful?</span>
+
+      <span class="ruby-comment"># The OpenID sign in went OK. If we can find an active user</span>
+      <span class="ruby-comment"># with that ID, sign in is complete. If there's an inactive</span>
+      <span class="ruby-comment"># user, complain. Otherwise, create a new user account - if</span>
+      <span class="ruby-comment"># this is the first user, any OpenID will do; else it must</span>
+      <span class="ruby-comment"># be in the permitted list.</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">find_by_identity_url</span>( <span class="ruby-identifier">identity_url</span> ) )
+        <span class="ruby-identifier">successful_login</span>()
+
+      <span class="ruby-keyword">elsif</span> ( <span class="ruby-constant">User</span>.<span class="ruby-identifier">inactive</span>.<span class="ruby-identifier">find_by_identity_url</span>( <span class="ruby-identifier">identity_url</span> ) )
+        <span class="ruby-identifier">failed_login</span>( <span class="ruby-node">&quot;The account for OpenID '#{ identity_url }' has been deactivated. Please contact your system administrator for assistance.&quot;</span> )
+
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment"># Handle very first login auto-creation of the admin account</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
+
+          <span class="ruby-comment"># Do this here because redirecting to the User controller</span>
+          <span class="ruby-comment"># would require an exposed URL that could be used to try</span>
+          <span class="ruby-comment"># and create users without OpenID authentication.</span>
+
+          <span class="ruby-ivar">@current_user</span>              = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">identity_url</span> = <span class="ruby-identifier">identity_url</span>
+          <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">user_type</span>    = <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span>
+          <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">save!</span>
+
+          <span class="ruby-identifier">new_login</span>()
+
+        <span class="ruby-keyword">else</span>
+
+          <span class="ruby-comment"># The identity URL does not match any existing user and the</span>
+          <span class="ruby-comment"># administrator account already exists.</span>
+
+          <span class="ruby-identifier">failed_login</span>( <span class="ruby-node">&quot;Sorry, OpenID '#{ identity_url }' is not permitted to use this service. Please contact your system administrator for assistance.&quot;</span>)
+
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># The OpenID login attempt failed.</span>
+      <span class="ruby-identifier">failed_login</span>( <span class="ruby-identifier">result</span>.<span class="ruby-identifier">message</span> )
+
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- open_id_authentication-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- open_id_authentication-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -1,6 +1,6 @@
 ########################################################################
 # File::    project.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2007
 #
 # Purpose:: Describe the behaviour of Project objects. See below for
 #           more details.
@@ -10,13 +10,11 @@
 
 class Project < TaskGroup
 
-  acts_as_audited( :except => [
+  audited( :except => [
     :lock_version,
     :updated_at,
     :created_at,
-    :id,
-    :code,
-    :description
+    :id
   ] )
 
   # A Project is an organisational unit for the benefit of the
@@ -31,7 +29,7 @@ class Project < TaskGroup
   has_many( :tasks )
   has_many( :control_panels )
 
-  named_scope( :unassigned, { :conditions => { :customer_id => nil } } )
+  scope( :unassigned, { :conditions => { :customer_id => nil } } )
 
   # Unfortunately, Acts As Audited runs on this model (see above) and
   # uses attr_protected. Rails doesn't allow both, so I have to use
@@ -42,17 +40,24 @@ class Project < TaskGroup
     :control_panel_ids
   )
 
-  # Assign default conditions for a brand new object, used whether
-  # or not the object ends up being saved in the database (so a
-  # before_create filter is not sufficient). For user-specific
-  # default values, pass a User object.
+  USED_RANGE_COLUMN = 'created_at' # For the Rangeable base class of TaskGroup
+
+  # Some default properties are dynamic, so assign these here rather than
+  # as defaults in a migration.
   #
-  def assign_defaults( user )
+  # Parameters:
+  #
+  #   Optional hash used for instance initialisation in the traditional way
+  #   for an ActiveRecord subclass.
+  #
+  #   Optional User object. A default customer is taken from that user's
+  #   control panel data, if available.
+  #
+  def initialize( params = nil, user = nil )
+    super( params )
+
     self.active = true
     self.code   = "PID%04d" % Project.count
-
-    # User-specific defaults - pick up the default customer
-    # from the user's control panel, if defined.
 
     if ( user and user.control_panel )
       cp = user.control_panel
@@ -90,6 +95,8 @@ class Project < TaskGroup
       self.tasks.each do | task |
         task.destroy()
       end
+    else
+      Task.where( :project_id => self.id ).update_all( :project_id => nil )
     end
 
     self.destroy()

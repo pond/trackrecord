@@ -11,50 +11,101 @@
 
 /* Overall page */
 
+html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+body {
   min-width: 800px;
+  font-family: "Lucida Grande", "Helvetica Neue", sans-serif;
+  font-size: 11pt;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+}
+
+/* Global "utility" classes */
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.left {
+  text-align: left;
+}
+
+.centred {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+tr.top {
+  vertical-align: top;
 }
 
 /* Heading font */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Trebuchet MS", sans-serif;
+  font-weight: bold;
 }
 
 /* Header with navigation bar */
 
 div#header {
-  padding: 0 2%;
-  height: 82px;
-  background: url( ../images/trackrecord/menu_normal.png ) top left repeat-x;
+  padding: 10px 2%;
+  height: 72px;
+  margin-bottom: 35px;
+
+  background: rgb(96,108,136); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+  
+  -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow:    0px 5px 5px rgba(0, 0, 0, 0.3);
+  box-shadow:         0px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 div#title {
-  margin-top: -4px;
   float: left;
   color: #fff;
+  padding: 13px 0 0 0;
 }
 
 span.slug {
-  font-size: 80%;
+  display: block;
+  margin-top: 8px;
+  font-size: 100%;
+  font-weight: bold;
+  color: #fff;
 }
 
 span.slug a {
-  color: #fff;
+  color: #ccc;
   text-decoration: none;
 }
 
 div#header span.version {
-  color: #bbb;
+  color: #aaa;
 }
 
 div#header h1, div#navbar a {
   font-family: "Trebuchet MS", sans-serif;
   font-weight: bold;
   margin: 0;
-  padding: 24px 0 0 0;
 }
 
 div#header h1 {
@@ -74,18 +125,7 @@ div#navbar ul {
 div#navbar li {
   display: block;
   float: left;
-  width: 141px;
-}
-
-div#navbar li:first-child {
-  width: 1px;
-}
-
-div#navbar li div.endcap {
-  float: right;
-  width: 1px;
-  height: 81px;
-  background: url( ../images/trackrecord/menu_endcap.png ) top left repeat-x;
+  margin-left: 5px;
 }
 
 div#navbar a {
@@ -93,37 +133,38 @@ div#navbar a {
   float: left;
   text-decoration: none;
   text-align: center;
-  color: #ddd;
+  color: #ccc;
 
   font-size: 16pt;
 
-  width: 140px;
-  height: 63px;
+  width: 130px;
+  height: 70px;
+  line-height: 70px;
 }
 
 div#navbar a:hover {
-  color: #111;
-  background: url( ../images/trackrecord/menu_highlight.png ) top left repeat-x;
+  color: #fff;
+  background: rgba( 255, 255, 255, 0.25 );
 }
 
 div#navbar li.current {
-  background: url( ../images/trackrecord/menu_current.png ) top left repeat-x;
+  background: #1d6721; /* Old browsers */
+  background: -moz-linear-gradient(top, #1d6721 0%, #81ff81 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1d6721), color-stop(100%,#81ff81)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #1d6721 0%,#81ff81 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d6721', endColorstr='#81ff81',GradientType=0 ); /* IE6-9 */
+
+  -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow:    0px 5px 5px rgba(0, 0, 0, 0.3);
+  box-shadow:         0px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 div#navbar li.current a {
-  color: #020;
-  background: url( ../images/trackrecord/menu_arrow.png ) bottom center no-repeat;
-}
-
-/* Main content */
-
-div#main_page_content {
-  margin: 0 3em;
-}
-
-input[ type="checkbox" ],
-input[ type="radio" ] {
-  margin-right: 5px;
+  color: #fff;
+  height: 92px;
 }
 
 /* Float management */
@@ -132,31 +173,69 @@ div.float_clear {
   clear: both;
 }
 
+/* Main content */
+
+div#main_page_content {
+  padding: 0 3em;
+  padding-bottom: 84px; /* Footer height plus padding, see below */
+  font-size: 10.5pt;
+}
+
+input[ type="checkbox" ],
+input[ type="radio" ] {
+  margin-right: 5px;
+}
+
 /* Footer */
 
 div#footer {
-  margin-top: 20px;
-  background: url( ../images/trackrecord/footer.png ) top left repeat-x;
-  padding: 20px 3em;
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: 24px;
+  padding: 20px 0;
+
+  background: rgb(96,108,136); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+    
+  -webkit-box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow:    0px -5px 5px rgba(0, 0, 0, 0.3);
+  box-shadow:         0px -5px 5px rgba(0, 0, 0, 0.3);
+
+  color: #aaa;
 }
 
-div#footer div {
-  text-align: right;
+div#footer a {
+  color: #fff;
+  text-decoration: none;
 }
 
 div#footer div:first-child {
   float: left;
+  padding-left: 3em;
+}
+
+div#footer div:last-child {
+  float: right;
+  padding-right: 3em;
 }
 
 /* Flash messages */
 
 div.messages {
-  margin-top: 12px;
   font-size: 125%;
   font-weight: bold;
 }
 
 div.messages div {
+  margin-top: 12px;
   padding: 5px;
 }
 
@@ -164,6 +243,12 @@ div.messages div.flash_error {
   color: #800;
   border: 1px solid #800;
   background: #fee;
+}
+
+div.messages div.flash_warning {
+  color: #840;
+  border: 1px solid #840;
+  background: #fff8ee;
 }
 
 div.messages div.flash_notice {
@@ -204,9 +289,25 @@ div#home_management {
   padding-right: 2%;
 }
 
+/* Buttons leading to auto-generated reports */
+
+div.report_button {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+div.report_button input {
+  margin: 0;
+}
+
 /* List views */
 
-div#main_page_content{
+table.list,
+table.navigation {
+  border: none;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 div.list_titles {
@@ -224,20 +325,17 @@ table.list, p.list_empty {
   clear: both;
 }
 
-table.list td, table.list th {
-  padding-left: 4px;
-  padding-right: 4px;
-  font-size: 95%;
-}
-
-table.list td.navigation {
-  padding: 2px 0;
+table.list         td,
+table.list tr.info th {
+  padding: 5px 10px;
+  font-size: 90%;
 }
 
 table.list td.list_actions {
   padding-left: 10px;
   padding-right: 10px;
   text-align: right;
+  white-space: nowrap;
 }
 
 table.list tr.odd td.list_actions {
@@ -262,11 +360,25 @@ table.list form {
 }
 
 table.list th.sorted_column_asc {
-  background: #686;
+  background: #a90329; /* Old browsers */
+  background: -moz-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a90329), color-stop(44%,#8f0222), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
 }
 
 table.list th.sorted_column_desc {
-  background: #866;
+  background: #03a929; /* Old browsers */
+  background: -moz-linear-gradient(top, #03a929 0%, #028f22 44%, #006d19 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#03a929), color-stop(44%,#028f22), color-stop(100%,#006d19)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #03a929 0%,#028f22 44%,#006d19 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03a929', endColorstr='#006d19',GradientType=0 ); /* IE6-9 */
 }
 
 table.list th.sorted_column_asc a:before {
@@ -275,6 +387,40 @@ table.list th.sorted_column_asc a:before {
 
 table.list th.sorted_column_desc a:before {
   content: url( ../images/trackrecord/down.png );
+}
+
+/* Navigation links within list tables (overriding some styles above) */
+
+tr.navigation,
+tr.navigation table,
+tr.navigation tr,
+tr.navigation td {
+  padding: 0;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+tr.navigation table {
+  width: 100%;
+}
+
+tr.navigation td {
+  padding-bottom: 2px;
+}
+
+td.navigation_per_page {
+  width: 40%;
+}
+
+td.navigation_page_info {
+  width: 20%;
+  text-align: center;
+}
+
+td.navigation_page_selection {
+  width: 40%;
+  text-align: right;
+  white-space: nowrap;
 }
 
 /* In-place editors */
@@ -309,18 +455,41 @@ form.inplaceeditor-form select {
 /* Rows in general tables */
 
 tr.info {
-  background: url( ../images/trackrecord/table_header.png ) top left repeat-x;
+  background: rgb(96,108,136); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+
   color: #fff;
   white-space: nowrap;
+  vertical-align: middle;
+  text-align: left;
+}
+
+tr.info th,
+tr.info td {
+  padding: 4px 1px;
 }
 
 tr.info th {
-  background: url( ../images/trackrecord/table_header.png ) top left repeat-x;
   font-weight: normal;
 }
 
 tr.info th a {
   color: white;
+}
+
+th.spacer, td.spacer {
+  width: 1px;
+}
+
+tr.even, tr.odd {
+  vertical-align: top;
+  text-align: left;
 }
 
 tr.odd {
@@ -349,60 +518,80 @@ tr.even .overall_total {
   color: #0e0;
 }
 
+/* Edit-item and show-item presentation tables */
+
+table.editing_table,
+table.display_table {
+  border: none;
+}
+
+table.editing_table.indented,
+table.display_table.indented {
+  margin-left: 2em;
+}
+
+tr.editing_row,
+tr.display_row {
+  vertical-align: top;
+  text-align: left;
+}
+
+.display_actions,
+.editing_actions {
+  text-align: center;
+}
+
+/* Search form tables */
+
+td.search_prompt {
+  text-align: right;
+}
+
 /* Audit changes table */
 
-table.audit_changes,
-.active-scaffold table.audit_changes {
+table.audit_changes {
   color: #000;
-  font-size: 80%;
   border: 1px solid #aaa;
   padding: 0;
   margin: 2px 0;
+  border-collapse: collapse;
 }
 
-table.audit_changes tr,
-.active-scaffold table.audit_changes tr {
+table.audit_changes tr {
   border: none;
   padding: 0;
 }
 
 table.audit_changes td,
-table.audit_changes th,
-.active-scaffold table.audit_changes td,
-.active-scaffold table.audit_changes th {
-  border: none;
+table.audit_changes th {
+  border-left: 1px solid #aaa;
   color: #000;
   text-align: left;
-  padding: 1px;
+  padding: 1px 4px;
 }
 
-table.audit_changes th,
-.active-scaffold table.audit_changes th {
+table.audit_changes th {
   background: #aaa;
 }
 
-/* Report pages */
-
-div.report table {
-  font-size: 80%;
+.audit_changes_field {
+  width: 20%;
 }
 
-h3.report {
-  padding: 4px;
-  background: #ddd;
+.audit_changes_from {
+  width: 20%;
 }
 
-h4.report {
-  padding-bottom: 4px;
-  border-bottom: 1px dashed #888;
-}
-
-div.report img {
-  margin-right: 10px;
-  border: 1px dashed #888;
+.audit_changes_to {
+  width: 60%
 }
 
 /* Timesheet year overview chart - see timesheethelp_year_chart */
+
+table.timesheet_chart_container {
+  border: none;
+  margin: 0 auto;
+}
 
 table.timesheet_chart {
   border: none;
@@ -412,6 +601,7 @@ table.timesheet_chart {
 
 table.timesheet_chart tr td {
   border-left: 1px solid #444;
+  padding: 4px 8px;
 }
 
 table.timesheet_chart tr td:first-child {
@@ -419,13 +609,21 @@ table.timesheet_chart tr td:first-child {
 }
 
 table.timesheet_chart tr.last {
-  border-bottom: 1px solid #444;
 }
 
 table.timesheet_chart th {
+  background: rgb(96,108,136); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+
   font-weight: normal;
-  background: url( ../images/trackrecord/table_header.png ) top left repeat-x;
   color: #fff;
+  padding: 4px;
 }
 
 table.timesheet_chart td.committed {
@@ -458,16 +656,31 @@ table.timesheet_chart form, table.timesheet_chart div {
   padding: 0;
 }
 
-/* Timesheet editor and display grids */
+/* Reports (see also timesheet editor/display styles later) */
+
+table.report {
+  white-space: nowrap;
+}
+
+/* Timesheet editor and display grids; reports also use some of
+ * these styles.
+ */
 
 table.ts_edit_table,
 table.ts_show_table {
+  width: 100%;
+  border: none;
   border-collapse: collapse;
+}
+
+table.ts_edit_table tr,
+table.ts_show_table tr {
+  vertical-align: middle;
 }
 
 table.ts_edit_table th,
 table.ts_show_table th {
-  padding: 2px;
+  text-align: center;
 }
 
 table.ts_edit_table td,
@@ -475,43 +688,68 @@ table.ts_show_table td {
   padding: 0;
 }
 
-table.ts_edit_table td.ts_edit_task,
-table.ts_show_table td.ts_show_task {
+table.ts_edit_table td.ts_edit_task {
   padding: 0 2px;
+}
+
+table.ts_show_table td.ts_show_task {
+  padding: 2px 2px 2px 6px;
+}
+
+table.ts_edit_table td a,
+table.ts_show_table td a {
+  color: inherit;
+  text-decoration: none;
+}
+
+table.ts_edit_table td a:hover,
+table.ts_show_table td a:hover {
+  color: #fff;
 }
 
 td.ts_edit_work {
   border: 1px solid #888;
   background: white;
+  text-align: center;
 }
 
 td.ts_show_work {
   border: 1px solid #aaa;
   background: #f5f5f5;
   color: #444;
+  text-align: center;
 }
 
 td.ts_edit_work input {
   border: none;
   width: 90%;
-  height: 100%;
   text-align: center;
 }
 
-th.ts_edit_heading,
-th.ts_show_heading {
-  padding: 2px;
+table.ts_edit_table th.ts_edit_heading,
+table.ts_show_table th.ts_show_heading {
+  padding: 4px 2px 4px 6px;
   font-size: 90%;
+  text-align: left;
+  background: #c8c8c8;
+}
+
+table.report th.ts_show_heading.ts_show_work {
+  text-align: center;
 }
 
 table.ts_edit_table .total,
-table.ts_show_table .total {
+table.ts_show_table .total,
+table.ts_edit_table .overall_total,
+table.ts_show_table .overall_total {
+  text-align: center;
   padding: 0 2px;
 }
 
-table.ts_edit_table .overall_total,
-table.ts_show_table .overall_total {
-  padding: 2px;
+table.ts_edit_table .total:first-child,
+table.ts_show_table .total:first-child {
+  text-align: right;
+  padding-right: 10px;
 }
 
 table.ts_edit_table tr.group_gap td,
@@ -521,14 +759,16 @@ table.ts_show_table tr.group_gap th {
   padding: 0;
   margin: 0;
   height: 3px;
+  background: #fff;
 }
 
 /* Bulk task import table */
 
 table.bulk_task_import {
+  margin: 0 auto;
   width: 80%;
   white-space: nowrap;
-  border-collapse: separate !important;
+  border-collapse: collapse;
 }
 
 table.bulk_task_import td.task_title {
@@ -562,7 +802,6 @@ span.timesheet_committed, span.item_active, span.no_overrun {
   color: #080;
 }
 
-
 span.item_inactive, span.overrun, span.dup {
   color: #800;
 }
@@ -593,6 +832,34 @@ td.total b, td.total i {
 
 .task_inactive {
   text-decoration: line-through;
+}
+
+/* Definition lists */
+
+dt {
+  font-weight: bold;
+  padding: 1em 0;
+}
+
+/* "Help" icons */
+
+img.help {
+  position: relative;
+  padding: 2px 1px 1px 1px;
+  top: 0px;
+
+  background: url( ../images/trackrecord/help_sprite.png ) 1px 2px no-repeat;
+}
+
+a:hover img.help {
+  background-position: 1px -30px;
+}
+
+/* "Warning" icons on deletion pages */
+
+img.warning {
+  float: left;
+  padding-right: 15px;
 }
 
 /* General YUI tree view settings */

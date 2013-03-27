@@ -1,6 +1,6 @@
 ########################################################################
 # File::    timesheets_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to Timesheet objects.
 #           See controllers/timesheets_controller.rb for more.
@@ -28,13 +28,13 @@ module TimesheetsHelper
     weeks = timesheet.unused_weeks();
 
     if ( weeks.empty? )
-      return ''
+      return ''.html_safe()
     else
       return form.select(
         :week_number,
         weeks.collect do | week |
           [
-            "#{ week } (#{ Timesheet.date_for( timesheet.year, week, TimesheetRow::FIRST_DAY ) })",
+            "Week #{ week } (#{ Timesheet.date_for( timesheet.year, week, TimesheetRow::FIRST_DAY ) })",
             week
           ]
         end
@@ -45,9 +45,16 @@ module TimesheetsHelper
   # Return an array of tasks suitable for timesheet row addition.
   # Will be empty if all tasks are already included, or no tasks are
   # available for any other reason. Pass the timesheet of interest.
-
+  #
+  # Note that tasks with no project, or tasks with a project with no
+  # customer, are excluded from the list.
+  #
   def timesheethelp_tasks_for_addition( timesheet )
-    @current_user.active_permitted_tasks - timesheet.tasks
+    tasks = @current_user.active_permitted_tasks - timesheet.tasks
+
+    tasks.reject! do | task |
+      task.project_id.nil? || task.project.customer_id.nil?
+    end || []
   end
 
   # Return HTML suitable for inclusion in the form passed in the
@@ -59,10 +66,10 @@ module TimesheetsHelper
   #
   # * An empty string if the timesheet already has rows for every
   #   task presently stored in the system.
-
+  #
   def timesheethelp_task_selection( form, tasks )
     if ( tasks.empty? )
-      return ''
+      return ''.html_safe()
     else
       Task.sort_by_augmented_title( tasks )
 
@@ -83,8 +90,10 @@ module TimesheetsHelper
 
   def timesheethelp_commit_label( timesheet, committed = nil )
     committed = @timesheet.committed if ( committed.nil? )
-    committed ? '<span class="timesheet_committed">Committed</span>' :
-                '<span class="timesheet_not_committed">Not Committed</span>'
+    return (
+      committed ? '<span class="timesheet_committed">Committed</span>' :
+                  '<span class="timesheet_not_committed">Not Committed</span>'
+    ).html_safe()
   end
 
   # Return the timesheet description, or 'None' if it is empty.
@@ -96,7 +105,7 @@ module TimesheetsHelper
       des = h( timesheet.description )
     end
 
-    return des
+    return des.html_safe()
   end
 
   # Return a year chart for the given year. This is a complete table of
@@ -137,7 +146,7 @@ module TimesheetsHelper
 
     keys      = months.keys.sort
     row_class = 'even'
-    output    = "<table class=\"timesheet_chart\" border=\"0\" cellspacing=\"0\" cellpadding=\"4\">\n"
+    output    = "<table class=\"timesheet_chart\">\n"
     output   << "  <tr><th>Month</th><th colspan=\"5\">Week start date and number</th></tr>\n"
 
     keys.each do | key |
@@ -150,9 +159,9 @@ module TimesheetsHelper
       row_class = ( row_class == 'even' ) ? 'odd' : 'even'
       row_class = row_class + ' last' if ( key == keys.last )
 
-      output << "  <tr valign=\"middle\" class=\"#{ row_class }\">\n"
-      output << "    <td class=\"timesheet_chart_month\" align=\"left\">#{ heading }</td>\n"
-      output << "    <td align=\"center\">&nbsp;</td>\n" * ( 5 - data.length )
+      output << "  <tr class=\"#{ row_class }\">\n"
+      output << "    <td class=\"timesheet_chart_month\">#{ heading }</td>\n"
+      output << "    <td>&nbsp;</td>\n" * ( 5 - data.length )
 
       data.each do | week |
         timesheet = Timesheet.find_by_user_id_and_year_and_week_number(
@@ -161,22 +170,22 @@ module TimesheetsHelper
           week[ :week ]
         )
 
-        bgcolor = ''
+        classnm = 'centred'
         content = "#{ week[ :start_date ].day }" <<
                   " #{ Date::ABBR_MONTHNAMES[ week[ :start_date ].month ] }" <<
                   " (#{ week[ :week ] })"
 
         if ( timesheet )
           if ( timesheet.committed )
-            bgcolor = ' bgcolor="#77cc77" class="committed"'
-            content = link_to( content, timesheet_path( timesheet ) )
+            classnm = 'centred committed'
+            content = link_to( content.html_safe(), timesheet_path( timesheet ) )
           else
-            bgcolor = ' bgcolor="#ffaa77" class="not_committed"'
-            content = link_to( content, edit_timesheet_path( timesheet ) )
+            classnm = 'centred not_committed'
+            content = link_to( content.html_safe(), edit_timesheet_path( timesheet ) )
           end
         else
           content = button_to(
-            content,
+            content.html_safe(),
             {
               :action      => :create,
               :method      => :post,
@@ -186,13 +195,13 @@ module TimesheetsHelper
           )
         end
 
-        output << "    <td align='center'#{ bgcolor }>#{ content }</td>\n"
+        output << "    <td class=\"#{ classnm }\">#{ content }</td>\n"
       end
 
       output << "  </tr>\n"
     end
 
-    return output << '</table>'
+    return ( output << '</table>' ).html_safe()
   end
 
   #############################################################################

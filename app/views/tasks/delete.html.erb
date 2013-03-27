@@ -1,9 +1,9 @@
-<h1>Delete task<%= @record.title.nil? or @record.title.empty? ? '' : " '#{ h( @record.title ) }'" %>?</h1>
+<h1>Delete task<%= @record.title.blank? ? '' : " '#{ @record.title }'" %>?</h1>
 
-<%= image_tag( 'trackrecord/drawing.png', { :size => '96x84', :align => 'left', :alt => '!', :style => 'padding-right: 5px;' } ) %>
+<%= image_tag( 'trackrecord/warning.png', { :size => '96x84', :alt=>'!', :class=>'warning' } ) %>
 <h2>Warning!</h2>
 
-<% form_for( :task, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+<%= form_for( :task, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
 
   Only use the 'delete' button if you are <strong>absolutely sure</strong>
   that you wish to delete this task. Any timesheets with rows referring to
@@ -12,14 +12,11 @@
   remaining of any time booked to the task. <strong>The action cannot be
   undone.</strong>
 
-  <br clear="all" /><br />
+  <br style="clear: both" /><br />
 
   <div align="center">
     <%= f.submit( 'Delete task', { :disable_with => 'Deleting...' } ) %>
+    or <%= link_to( 'cancel and show details', @record      ) %>
+    or <%= link_to( 'cancel and list tasks',   tasks_path() ) %>.
   </div>
 <% end %>
-
-<p>
-  <%= link_to( 'Cancel and show details', @record      ) %> |
-  <%= link_to( 'Cancel and list tasks',   tasks_path() ) %>
-</p>

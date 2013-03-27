@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class ApplicationController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/application_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">ActionController::Base
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-appctrl_create">#appctrl_create</a>
+    
+    <li><a href="#method-i-appctrl_date_from_params">#appctrl_date_from_params</a>
+    
+    <li><a href="#method-i-appctrl_dates_from_search">#appctrl_dates_from_search</a>
+    
+    <li><a href="#method-i-appctrl_delete">#appctrl_delete</a>
+    
+    <li><a href="#method-i-appctrl_delete_confirm">#appctrl_delete_confirm</a>
+    
+    <li><a href="#method-i-appctrl_edit">#appctrl_edit</a>
+    
+    <li><a href="#method-i-appctrl_index_assist">#appctrl_index_assist</a>
+    
+    <li><a href="#method-i-appctrl_new">#appctrl_new</a>
+    
+    <li><a href="#method-i-appctrl_not_permitted">#appctrl_not_permitted</a>
+    
+    <li><a href="#method-i-appctrl_patch_params_from_js">#appctrl_patch_params_from_js</a>
+    
+    <li><a href="#method-i-appctrl_search_range_sql">#appctrl_search_range_sql</a>
+    
+    <li><a href="#method-i-appctrl_show">#appctrl_show</a>
+    
+    <li><a href="#method-i-appctrl_update">#appctrl_update</a>
+    
+    <li><a href="#method-i-current_user">#current_user</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class ApplicationController</h1>
+
+  <div id="description" class="description">
+    
+<p>Filters added to this controller apply to all controllers in the
+application. Likewise, all the methods added will be available for all
+controllers.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-appctrl_create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_create</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new object following submission of a ‘create’ view form.
+Restricted users can’t do this. Pass the model name as a string.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_create-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_create</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+  <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">model</span>.<span class="ruby-identifier">downcase</span> ], <span class="ruby-ivar">@current_user</span> )
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">save</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;New #{ model.downcase } added&quot;</span>
+    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'new'</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_create-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_create-method -->
+
+    
+      <div id="method-i-appctrl_date_from_params" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_date_from_params</span><span
+            class="method-args">( key )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Given a key for the params hash, construct a date from the value associated
+with the key. If the key is not present or has an emtpy value, or if any
+exception occurs trying to parse the date, the function returns ‘nil’; else
+it returns a Date object instance.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_date_from_params-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 240</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-identifier">key</span> )
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">key</span> ].<span class="ruby-identifier">blank?</span> )
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">key</span> ] )
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-comment"># Do nothing - drop through to have-no-date case</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_date_from_params-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_date_from_params-method -->
+
+    
+      <div id="method-i-appctrl_dates_from_search" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_dates_from_search</span><span
+            class="method-args">( default_start, default_end )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an array giving a start date and end date based on search form
+submission data in the params hash. Pass a default start and end date for
+the case where none has been provided in the params, or the provided value
+is invalid.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_dates_from_search-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 257</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_dates_from_search</span>( <span class="ruby-identifier">default_start</span>, <span class="ruby-identifier">default_end</span> )
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_start</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_start</span>
+  <span class="ruby-identifier">b</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_end</span>   ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_end</span>
+
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-identifier">b</span>, <span class="ruby-identifier">a</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">a</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b</span> ) 
+
+  <span class="ruby-keyword">return</span> [ <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_dates_from_search-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_dates_from_search-method -->
+
+    
+      <div id="method-i-appctrl_delete" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_delete</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prepare to delete an object. Only administrators can do this. Pass the
+model name as a string.</p>
+
+<p>If successful, sets “@record” and renders the view.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_delete-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+  <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_delete-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_delete-method -->
+
+    
+      <div id="method-i-appctrl_delete_confirm" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_delete_confirm</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Destroy an object following confirmation that this is desired. Only
+administrators can do this. Pass the model name as a string.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_delete_confirm-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_delete_confirm</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">destroy</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ model } deleted&quot;</span>
+    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
+
+  <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-node">&quot;Could not destroy #{ model.downcase }: #{ error }&quot;</span>
+    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">home_path</span>() )
+
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_delete_confirm-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_delete_confirm-method -->
+
+    
+      <div id="method-i-appctrl_edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_edit</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prepare to edit an object. Restricted users can’t do this. Pass a model
+name as a string.</p>
+
+<p>If successful, sets “@record” and renders the view.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_edit</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+  <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_edit-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_edit-method -->
+
+    
+      <div id="method-i-appctrl_index_assist" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_index_assist</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Take out some common code for index views. Deals with the pagination and
+sorting parameters. Returns a hash suitable for passing on to the
+paginator. Requires @columns to already be set up; see the index helper
+methods in application_helper.rb for details, or look at the index method
+in the <a href="User.html">User</a> controller as an example. Note that
+parameter “value_method” is required in the columns data even if a helper
+method has been given, for sorting purposes.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_index_assist-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_index_assist</span>( <span class="ruby-identifier">model</span> )
+
+  <span class="ruby-comment"># Set up some default sort and pagination data.</span>
+
+  <span class="ruby-identifier">default_sort</span>      = <span class="ruby-value">-1</span> <span class="ruby-comment"># &quot;-1&quot; =&gt; &quot;unknown&quot;</span>
+  <span class="ruby-identifier">default_direction</span> = <span class="ruby-identifier">model</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SORT_DIRECTION</span>.<span class="ruby-identifier">downcase</span>
+  <span class="ruby-identifier">default_entries</span>   = <span class="ruby-value">10</span>
+  <span class="ruby-identifier">default_page</span>      = <span class="ruby-value">1</span>
+
+  <span class="ruby-comment"># Attempt to read user preferences for sorting and pagination in index</span>
+  <span class="ruby-comment"># views for the given model. Note the heavy use of &quot;try()&quot; to tolerate</span>
+  <span class="ruby-comment"># 'nil' values propagated through, e.g. due to no logged in user, or</span>
+  <span class="ruby-comment"># a user with no control panel (not that this ought to ever happen).</span>
+
+  <span class="ruby-identifier">prefs_prefix</span>      = <span class="ruby-node">&quot;sorting.#{ model.name.downcase }.&quot;</span>
+  <span class="ruby-identifier">cp</span>                = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:control_panel</span> )
+  <span class="ruby-identifier">cp_sort</span>           = <span class="ruby-identifier">cp</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:get_preference</span>, <span class="ruby-node">&quot;#{ prefs_prefix }sort&quot;</span>      )
+  <span class="ruby-identifier">cp_direction</span>      = <span class="ruby-identifier">cp</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:get_preference</span>, <span class="ruby-node">&quot;#{ prefs_prefix }direction&quot;</span> )
+  <span class="ruby-identifier">cp_entries</span>        = <span class="ruby-identifier">cp</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:get_preference</span>, <span class="ruby-node">&quot;#{ prefs_prefix }entries&quot;</span>   )
+
+  <span class="ruby-comment"># For each one, try to read from the parameters; or fall back to the user</span>
+  <span class="ruby-comment"># settings; or fall back to the defaults. If the value so determined is</span>
+  <span class="ruby-comment"># different from the user's current setting, then update that setting.</span>
+
+  <span class="ruby-identifier">sort</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ].<span class="ruby-identifier">try</span>( <span class="ruby-value">:to_i</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">cp_sort</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">default_sort</span>
+  <span class="ruby-identifier">cp</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:set_preference</span>, <span class="ruby-node">&quot;#{ prefs_prefix }sort&quot;</span>, <span class="ruby-identifier">sort</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">cp_sort</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sort</span> )
+
+  <span class="ruby-identifier">direction</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] <span class="ruby-operator">||</span> <span class="ruby-identifier">cp_direction</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">default_direction</span>
+  <span class="ruby-identifier">cp</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:set_preference</span>, <span class="ruby-node">&quot;#{ prefs_prefix }direction&quot;</span>, <span class="ruby-identifier">direction</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">cp_direction</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">direction</span> )
+
+  <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:entries</span> ].<span class="ruby-identifier">try</span>( <span class="ruby-value">:to_i</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">cp_entries</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">default_entries</span>
+  <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">default_entries</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">entries</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">entries</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">500</span> )
+  <span class="ruby-identifier">cp</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:set_preference</span>, <span class="ruby-node">&quot;#{ prefs_prefix }entries&quot;</span>, <span class="ruby-identifier">entries</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">cp_entries</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">entries</span> )
+
+  <span class="ruby-comment"># Establish a page number, then write the final determined values back into</span>
+  <span class="ruby-comment"># the parameters hash as views or plugins may refer to these directly.</span>
+
+  <span class="ruby-identifier">page</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:page</span> ].<span class="ruby-identifier">try</span>( <span class="ruby-value">:to_i</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_page</span>
+
+  <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span>      ] = <span class="ruby-identifier">sort</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] = <span class="ruby-identifier">direction</span>
+  <span class="ruby-identifier">params</span>[ <span class="ruby-value">:entries</span>   ] = <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">params</span>[ <span class="ruby-value">:page</span>      ] = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_s</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">length</span> ).<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">sort</span> )
+
+    <span class="ruby-comment"># Valid sort order requested</span>
+
+    <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@columns</span>[ <span class="ruby-identifier">sort</span> ][ <span class="ruby-value">:sort_by</span> ].<span class="ruby-identifier">nil?</span> )
+      <span class="ruby-identifier">order</span> = <span class="ruby-ivar">@columns</span>[ <span class="ruby-identifier">sort</span> ][ <span class="ruby-value">:sort_by</span> ].<span class="ruby-identifier">dup</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">order</span> = <span class="ruby-ivar">@columns</span>[ <span class="ruby-identifier">sort</span> ][ <span class="ruby-value">:value_method</span> ].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">else</span>
+
+    <span class="ruby-comment"># Default sort order - try to match DEFAULT_SORT_COLUMN against one of</span>
+    <span class="ruby-comment"># the numbered columns.</span>
+
+    <span class="ruby-identifier">order</span> = <span class="ruby-identifier">model</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SORT_COLUMN</span>.<span class="ruby-identifier">dup</span>
+
+    <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">column</span> = <span class="ruby-ivar">@columns</span>[ <span class="ruby-identifier">index</span> ]
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">column</span>[ <span class="ruby-value">:value_method</span> ].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">order</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">column</span>[ <span class="ruby-value">:sort_by</span> ].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">order</span> )
+        <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ] = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">to_s</span>
+        <span class="ruby-keyword">break</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-string">'desc'</span> )
+    <span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' DESC'</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' ASC'</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> { <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">page</span>, <span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">entries</span>, <span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_index_assist-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_index_assist-method -->
+
+    
+      <div id="method-i-appctrl_new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_new</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prepare to create a new object. Restricted users can’t do this. Pass a
+model name as a string.</p>
+
+<p>If successful, sets “@record” and renders the view.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_new-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_new</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+  <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword">nil</span>, <span class="ruby-ivar">@current_user</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_new-method -->
+
+    
+      <div id="method-i-appctrl_not_permitted" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_not_permitted</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If a Controller determines than an action is not permitted, it should call
+here. Redirects to Home with a permissions message.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_not_permitted-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_not_permitted</span>
+  <span class="ruby-identifier">render</span>( { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Action not permitted'</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">403</span> } )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_not_permitted-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_not_permitted-method -->
+
+    
+      <div id="method-i-appctrl_patch_params_from_js" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_patch_params_from_js</span><span
+            class="method-args">( sym, name = :task_ids )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>YUI tree form submission will present selected task IDs as a single string
+in a comma separated list; the non-JS code does it properly as an array of
+IDs. Sort this out by patching the params hash. Pass the item to patch
+(e.g. “:user”, “:control_panel”). An optional second parameter lets you
+override the use of “:task_ids” for the second dimension “params” array
+reference.</p>
+
+<p>[TODO]: Do this in the JS instead? Requires multiple hiddden INPUTs to
+[TODO]: be dynamically created, one for each array entry; slow, complex</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_patch_params_from_js-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 327</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-identifier">sym</span>, <span class="ruby-identifier">name</span> = <span class="ruby-value">:task_ids</span> )
+  <span class="ruby-identifier">task_ids</span> = (<span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ] <span class="ruby-operator">||</span> {} )[ <span class="ruby-identifier">name</span> ] <span class="ruby-operator">||</span> []
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task_ids</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">task_ids</span>[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">String</span> ) )
+    <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ][ <span class="ruby-identifier">name</span> ] = <span class="ruby-identifier">task_ids</span>[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">split</span>( <span class="ruby-string">','</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_patch_params_from_js-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_patch_params_from_js-method -->
+
+    
+      <div id="method-i-appctrl_search_range_sql" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_search_range_sql</span><span
+            class="method-args">( model, field = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an SQL fragment of the form “date-field &gt;= :range_start AND
+date-field &lt;= bar :range_end” where the ranges are dates obtained from
+“<a
+href="ApplicationController.html#method-i-appctrl_dates_from_search">#appctrl_dates_from_search</a>”
+and ‘date-field’ is given as an optional second input parameter. The return
+value includes the ranges which you pass in using named parameter
+substitution when the SQL fragment is included in a wider query.</p>
+
+<p>Pass the model being searched; it must support a ‘used_range’ class method
+that returns a Range of years for all existant instances in the database at
+the time of calling, for the field that is to be searched. The second
+parameter is that field, or if omitted, the model’s USED_RANGE_COLUMN by
+default.</p>
+
+<p>Returns an array (anticipating parallel assignment by the caller) with the
+SQl data, the start Date and the end Date of the range, or an array of
+‘nil’ if there is no usable search data in the parameters hash (or it is
+being explicitly cleared).</p>
+
+<p>Intended side-effect: Makes sure that search parameters are cleared out if
+an explicit ‘search_cancel’ params key has a value.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_search_range_sql-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 287</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-identifier">model</span>, <span class="ruby-identifier">field</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">range_start</span> = <span class="ruby-identifier">range_end</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-identifier">field</span> = <span class="ruby-identifier">model</span><span class="ruby-operator">::</span><span class="ruby-constant">USED_RANGE_COLUMN</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">field</span>.<span class="ruby-identifier">nil?</span> )
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search</span> ].<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">if</span> ( ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search</span> ].<span class="ruby-identifier">blank?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_range_start</span> ].<span class="ruby-identifier">blank?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_range_end</span> ].<span class="ruby-identifier">blank?</span> ) <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_cancel</span> ] )
+      <span class="ruby-identifier">params</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:search</span> )
+      <span class="ruby-identifier">params</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:search_range_start</span> )
+      <span class="ruby-identifier">params</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:search_range_end</span> )
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">range</span>                  = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">used_range</span>()
+      <span class="ruby-identifier">range_start</span>, <span class="ruby-identifier">range_end</span> = <span class="ruby-identifier">appctrl_dates_from_search</span>(
+        <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>    ),     <span class="ruby-comment"># I.e. start year</span>
+        <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">range</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>  <span class="ruby-comment"># I.e. start of year after end year, minus one day; that is, the last day of end year</span>
+      )
+
+      <span class="ruby-comment"># Since SQL date-only queries work on a 'start of the day' basis,</span>
+      <span class="ruby-comment"># we do a &quot;&gt;=&quot; start and a &quot;&lt;&quot; end comparison, setting the end to</span>
+      <span class="ruby-comment"># the beginning of the *next* day.</span>
+
+      <span class="ruby-identifier">range_end</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+
+      <span class="ruby-identifier">sql</span> = <span class="ruby-node">&quot;#{ model.table_name }.#{ field } &gt;= :range_start AND #{ model.table_name }.#{ field } &lt; :range_end AND&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  [ <span class="ruby-identifier">sql</span>, <span class="ruby-identifier">range_start</span>, <span class="ruby-identifier">range_end</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_search_range_sql-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_search_range_sql-method -->
+
+    
+      <div id="method-i-appctrl_show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_show</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Common code for a ‘show’ back-end. Pass a model name as a string. Invokes
+‘is_permitted_for?’ on the instance to check for authority to proceed.</p>
+
+<p>If successful, sets “@record” and renders the view.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_show-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_show</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-ivar">@current_user</span> ) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_show-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_show-method -->
+
+    
+      <div id="method-i-appctrl_update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_update</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Update an object following submission of an ‘edit’ view form. Restricted
+users can’t do this. Pass the model name as a string.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_update-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_update</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+
+  <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">model</span>.<span class="ruby-identifier">downcase</span> ] ) )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ model } details updated&quot;</span>
+    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'edit'</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_update-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_update-method -->
+
+    
+      <div id="method-i-current_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">current_user</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Required by acts_as_audited; returns current user, setting the @<a
+href="ApplicationController.html#method-i-current_user">#current_user</a>
+variable in passing if it is presently unset.</p>
+          
+
+          
+          <div class="method-source-code" id="current_user-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">current_user</span>
+  <span class="ruby-identifier">appctrl_set_user</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@current_user</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- current_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- current_user-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

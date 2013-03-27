@@ -1,6 +1,6 @@
 ########################################################################
 # File::    task_import.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Encapsulate data required for a task import session.
 # ----------------------------------------------------------------------
@@ -239,7 +239,7 @@ class TaskImport
 
         branch_titles.each_index do | level |
           title = branch_titles[ level ]
-          if ( title.nil? || title.empty? )
+          if ( title.blank? )
             branch_titles[ level ] = "Untitled task at level #{ level }"
           end
         end

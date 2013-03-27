@@ -1,6 +1,6 @@
 ########################################################################
 # File::    work_packets_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage WorkPacket objects. See models/work_packet.rb for
 #           more.

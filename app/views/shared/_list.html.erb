@@ -14,23 +14,29 @@
   #                   an array of action names, as described for
   #                   "apphelp_list_row". If omitted, there will be no actions
   #                   column added to the list table.
+  #   index_method:   Optional name of a method to call with 'send' that's used
+  #                   for the form submission path. Defaults to the pluralised
+  #                   model name with "_path" (e.g. "timesheets_path").
+  #   with_reports:   If 'true', a shared partial of "_report_<model>.html.erb"
+  #                   is used to add to the end of the actions list, intended
+  #                   for auto-report generation buttons. Omit or 'false' for
+  #                   no such insertions.
+
+  index_method = "#{ model.pluralize }_path" if defined?( index_method ).nil? || index_method.nil?
 -%>
-<% if ( collection.nil? or collection.empty? ) -%>
+<% if ( collection.blank? ) -%>
       <p class="list_empty">
-        No items <%= ( params[ :search ].nil? or params[ :search ].empty? ) ? "to show" : "found" %>.
+        No items <%= ( params[ :search ].blank? ) ? "to show" : "found" %>.
       </p>
 <% else -%>
-      <table border="0" cellspacing="0" cellpadding="2" width="100%" class="list">
-        <tr>
-          <td colspan="<%= columns.length + 1 %>">
-            <table border="0" cellspacing="0" cellpadding="0" width="100%">
-              <tr valign="middle">
-                <td align="left" class="navigation" width="34%">
-                  <% form_tag( send( "#{ model.pluralize }_path" ), { :method => 'get' } ) do %>
-                    <%= hidden_field_tag( 'sort',      params[ :sort      ] ) %>
-                    <%= hidden_field_tag( 'direction', params[ :direction ] ) %>
-                    <%= hidden_field_tag( 'search',    params[ :search    ] ) %>
-                    <% content_tag( :label ) do %>
+      <table class="list">
+        <tr class="navigation">
+          <td colspan="<%= columns.length + ( actions_method.nil? ? 0 : 1 ) %>">
+            <table>
+              <tr>
+                <td class="navigation_per_page">
+                  <%= form_tag( send( index_method ), { :method => 'get' } ) do %>
+                    <%= content_tag( :label ) do %>
                       Items per page:
 <%=
   select_tag(
@@ -38,31 +44,28 @@
     options_for_select(
       [ '10', '25', '50', '200', '500' ],
       params[ :entries ]
-    )
+    ),
+    :id => nil
   )
 %>
                     <% end %>
                     <%= submit_tag( 'Change', { :name => 'entries_change' } ) %>
                   <% end %>
                 </td>
-                <td align="center" width="32%">
+                <td class="navigation_page_info">
                   <%= page_entries_info( collection ) %>
                 </td>
-                <td align="right" width="34%">
-<% if ( collection.total_pages == 1 ) -%>
-                  Displaying only page
-<% else -%>
+                <td class="navigation_page_selection">
                   <%= will_paginate( collection ) %>
-<% end -%>
                 </td>
               </tr>
             </table>
           </td>
         </tr>
 
-<%= apphelp_list_header( columns, model, actions_method ) %>
+<%= apphelp_list_header( columns, index_method, actions_method ) %>
 <% collection.each do | item | -%>
-<%= apphelp_list_row( columns, item, actions_method ) %>
+<%= apphelp_list_row( columns, item, actions_method, with_reports ) %>
 <% end -%>
       </table>
 <% end -%>

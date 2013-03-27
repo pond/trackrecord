@@ -2,16 +2,16 @@
     
     <h2><%= h( @record.title ) %> (<%= apphelp_commit_label( @record ) %>)</h2>
 
-    <table border="0" cellspacing="0" cellpadding="2" style="margin-left: 1em">
-      <tr align="left">
+    <table class="display_table indented">
+      <tr class="display_row">
         <th>Created at</th>
         <td><%= @record.created_at %></td>
       </tr>
-      <tr align="left">
+      <tr class="display_row">
         <th>Code</th>
         <td><%= apphelp_h( @record.code ) %></td>
       </tr>
-      <tr valign="top" align="left">
+      <tr class="display_row">
         <th>Description</th>
         <td><%= apphelp_h( @record.description ) %></td>
       </tr>
@@ -19,10 +19,10 @@
 
 <% if ( @current_user.privileged? ) -%>
     <p>
-      The customer has <%= pluralize( @record.projects.size, 'associated project' ) %>.
+      The customer has <%= pluralize( @record.projects.count, 'associated project' ) %>.
 <%   unless ( @record.projects.empty? ) -%>
       A summary is given below. For full details, see the
-      <%= link_to( 'report generator', new_report_path() ) %>.
+      <%= link_to( 'report generator', new_user_saved_report_path( @current_user ) ) %>.
 <%   end -%>
     </p>
 
@@ -30,21 +30,21 @@
     <h2 id="item_breakdown_heading">Project list</h2>
     <div id="item_breakdown_contents">
 
-<%     @record.projects.each do | @project | -%>
-      <h3>Project: <%= link_to( h( @project.title ), @project ) %></h3>
+<%     @record.projects.each do | project | -%>
+      <h3>Project: <%= link_to( h( project.title ), project ) %></h3>
 
-      <table border="0" cellspacing="0" cellpadding="2" style="margin-left: 1em">
-        <tr align="left">
+      <table class="display_table indented">
+        <tr class="display_row">
           <th>Project code</th>
-          <td><%= apphelp_h( @project.code ) %></td>
+          <td><%= apphelp_h( project.code ) %></td>
         </tr>
-        <tr valign="top" align="left">
+        <tr class="display_row">
           <th>Tasks</th>
           <td>
-<%       if ( @project.tasks.empty? ) -%>
+<%       if ( project.tasks.empty? ) -%>
             None
 <%       else -%>
-<%         @project.tasks.each do | task | %>
+<%         project.tasks.each do | task | %>
             <%= link_to( h( task.title ), task ) %><br />
 <%         end -%>
 <%       end -%>
@@ -55,13 +55,20 @@
 <%   end -%>
     </div>
 
-<p align="center">
-<%     if ( @current_user.admin? or ( @current_user.manager? and @record.active ) ) %>
-  <%= link_to( 'Edit this customer', edit_customer_path( @record ) ) %>,
-  <%= link_to( 'list customers', customers_path() ) %>
-<%     else -%>
-  <%= link_to( 'List customers', customers_path() ) %>
-<%     end -%>
-  or <%= link_to( 'return home', home_path() ) %>
-</p>
+    <div class="display_actions">
+      <%=
+          render(
+            :partial => 'shared/report_button',
+            :locals  => {
+              :user => @current_user,
+              :item => @record
+            }
+          )
+      %>,
+<%   if ( @current_user.admin? or ( @current_user.manager? and @record.active ) ) %>
+      <%= link_to( 'edit this customer', edit_customer_path( @record ) ) %>,
+<%   end -%>
+      <%= link_to( 'list customers', customers_path() ) %>
+      or <%= link_to( 'return home', home_path() ) %>
+    </div>
 <% end -%>

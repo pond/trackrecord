@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class TaskImport - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/task_import.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-get_tasks_from_xml">::get_tasks_from_xml</a>
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-collapse-3D">#collapse=</a>
+    
+    <li><a href="#method-i-filtered_parent_titles-3D">#filtered_parent_titles=</a>
+    
+    <li><a href="#method-i-filtered_parent_uids-3D">#filtered_parent_uids=</a>
+    
+    <li><a href="#method-i-filtered_tasks-3D">#filtered_tasks=</a>
+    
+    <li><a href="#method-i-generate_filtered_task_list">#generate_filtered_task_list</a>
+    
+    <li><a href="#method-i-max_level">#max_level</a>
+    
+    <li><a href="#method-i-parent_titles-3D">#parent_titles=</a>
+    
+    <li><a href="#method-i-parent_uids-3D">#parent_uids=</a>
+    
+    <li><a href="#method-i-project_id-3D">#project_id=</a>
+    
+    <li><a href="#method-i-tasks-3D">#tasks=</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class TaskImport</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>task_import.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Encapsulate data required for a task import session.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>16-May-2008 (ADH): Created.
+28-Nov-2009 (ADH): Made more model-like with lots of extra
+                   processing code to rationalise unusual
+                   data types used in property assignments.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-collapse" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">collapse</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-filtered_parent_titles" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">filtered_parent_titles</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-filtered_parent_uids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">filtered_parent_uids</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-filtered_tasks" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">filtered_tasks</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-parent_titles" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">parent_titles</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-parent_uids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">parent_uids</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-project_id" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">project_id</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-tasks" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tasks</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-get_tasks_from_xml" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_tasks_from_xml</span><span
+            class="method-args">( doc )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Obtain a task list from the given parsed XML data (a REXML document).
+Returns a hash with key :tasks, containing an array of task objects with
+titles, codes and durations set up; :<a
+href="TaskImport.html#attribute-i-parent_uids">#parent_uids</a>, containing
+an array of arrays of UIDs of the parent tasks (if any) for each entry in
+the :tasks array; and :<a
+href="TaskImport.html#attribute-i-parent_titles">#parent_titles</a>, the
+same thing but holding parent strings for display purposes.</p>
+
+<p>All strings are HTML-safe because they come from XML, so must use character
+entities for sensitive characters just as in HTML. Views should
+<strong>not</strong> further escape them with ERB::Util.h().</p>
+          
+
+          
+          <div class="method-source-code" id="get_tasks_from_xml-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_tasks_from_xml</span>( <span class="ruby-identifier">doc</span> )
+
+  <span class="ruby-comment"># Extract details of every task into a flat array</span>
+
+  <span class="ruby-identifier">tasks</span> = []
+
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">each_element</span>( <span class="ruby-string">'Project/Tasks/Task'</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">tasks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span>( {
+        <span class="ruby-value">:level</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'OutlineLevel'</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_i</span>,
+        <span class="ruby-value">:tid</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'ID'</span>           )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>,
+        <span class="ruby-value">:uid</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'UID'</span>          )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>,
+        <span class="ruby-value">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'Name'</span>         )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
+      } )
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-comment"># Ignore errors; they tend to indicate malformed tasks, or at least,</span>
+      <span class="ruby-comment"># XML file task entries that we do not understand.</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Step through the sorted tasks. Each time we find one where the</span>
+  <span class="ruby-comment"># *next* task has an outline level greater than the current task,</span>
+  <span class="ruby-comment"># then the current task MUST be a summary. Record its name and</span>
+  <span class="ruby-comment"># blank out the task from the array. Otherwise, use whatever</span>
+  <span class="ruby-comment"># summary name was most recently found (if any) as a name prefix.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># At each step, we keep a note of the titles and UIDs in the branch</span>
+  <span class="ruby-comment"># leading up to a given task and push this &quot;history&quot; into a parent</span>
+  <span class="ruby-comment"># title and UID array so that we can implement the 'collapse to level'</span>
+  <span class="ruby-comment"># function later on, without having to refer back to the original</span>
+  <span class="ruby-comment"># file (which is temporary and will have been deleted by then).</span>
+
+  <span class="ruby-identifier">prefix</span>        = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">branch_uids</span>   = []
+  <span class="ruby-identifier">branch_titles</span> = []
+  <span class="ruby-identifier">parent_uids</span>   = []
+  <span class="ruby-identifier">parent_titles</span> = []
+  <span class="ruby-identifier">filled_to</span>     = <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">task</span>      = <span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span>     ]
+    <span class="ruby-identifier">next_task</span> = <span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ]
+
+    <span class="ruby-identifier">branch_uids</span>[   <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span> ] = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">uid</span>
+    <span class="ruby-identifier">branch_titles</span>[ <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span> ] = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">title</span>
+
+    <span class="ruby-comment"># Some XML files only contain tasks at strange levels with gaps -</span>
+    <span class="ruby-comment"># particularly with nothing at level 0. Make sure we always fill these</span>
+    <span class="ruby-comment"># in, else the parent title and collapse/filtering code will generate</span>
+    <span class="ruby-comment"># strange task titles due to nil parent title entries.</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">filled_to</span> )
+      <span class="ruby-identifier">filled_to</span> = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span>
+
+      <span class="ruby-identifier">branch_titles</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">level</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">title</span> = <span class="ruby-identifier">branch_titles</span>[ <span class="ruby-identifier">level</span> ]
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">title</span>.<span class="ruby-identifier">blank?</span> )
+          <span class="ruby-identifier">branch_titles</span>[ <span class="ruby-identifier">level</span> ] = <span class="ruby-node">&quot;Untitled task at level #{ level }&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">next_task</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">next_task</span>.<span class="ruby-identifier">level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span> )
+      <span class="ruby-identifier">prefix</span>         = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">title</span>
+      <span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span> ] = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">top_level</span> = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">top_level</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">top_level</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> )
+
+      <span class="ruby-identifier">parent_uids</span>[   <span class="ruby-identifier">index</span> ] = <span class="ruby-identifier">branch_uids</span>[   <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">top_level</span> ]
+      <span class="ruby-identifier">parent_titles</span>[ <span class="ruby-identifier">index</span> ] = <span class="ruby-identifier">branch_titles</span>[ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">top_level</span> ]
+
+      <span class="ruby-identifier">task</span>.<span class="ruby-identifier">title</span> = <span class="ruby-node">&quot;#{ branch_titles[ top_level ] }: #{ task.title }&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span>.<span class="ruby-identifier">zero?</span> )
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Remove any 'nil' items we ended up with above.</span>
+
+  <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">parent_uids</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">parent_titles</span>.<span class="ruby-identifier">compact!</span>
+
+  <span class="ruby-comment"># Now create a secondary array, where the UID of any given task is</span>
+  <span class="ruby-comment"># the array index at which it can be found. This is just to make</span>
+  <span class="ruby-comment"># looking up tasks by UID really easy, rather than faffing around</span>
+  <span class="ruby-comment"># with &quot;tasks.find { | task | task.uid = &lt;whatever&gt; }&quot;.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># By keeping track of the index in the original array too, we can</span>
+  <span class="ruby-comment"># make sure the ordering (which has relevance in terms of input file</span>
+  <span class="ruby-comment"># structure and the parent UID and title arrays) is maintained later.</span>
+
+  <span class="ruby-identifier">uid_tasks</span> = {} <span class="ruby-comment"># Using a hash means UIDs don't have to be numeric.</span>
+
+  <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">task</span> = <span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span> ]
+    <span class="ruby-identifier">uid_tasks</span>[ <span class="ruby-identifier">task</span>.<span class="ruby-identifier">uid</span> ] = { <span class="ruby-value">:task</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>, <span class="ruby-value">:index</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">index</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># OK, now it's time to parse the assignments into some meaningful</span>
+  <span class="ruby-comment"># array. These will become our timesheet system tasks. Assignments</span>
+  <span class="ruby-comment"># which relate to empty elements in &quot;uid_tasks&quot; or which have zero</span>
+  <span class="ruby-comment"># work are associated with tasks which are either summaries or</span>
+  <span class="ruby-comment"># milestones. Ignore both types.</span>
+
+  <span class="ruby-identifier">real_tasks</span>         = []
+  <span class="ruby-identifier">real_parent_uids</span>   = []
+  <span class="ruby-identifier">real_parent_titles</span> = []
+
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">each_element</span>( <span class="ruby-string">'Project/Assignments/Assignment'</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">assignment</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">task_uid</span> = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'TaskUID'</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
+    <span class="ruby-identifier">data</span>     = <span class="ruby-identifier">uid_tasks</span>[ <span class="ruby-identifier">task_uid</span> ]
+
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> )
+
+    <span class="ruby-identifier">task</span>     = <span class="ruby-identifier">data</span>[ <span class="ruby-value">:task</span>  ]
+    <span class="ruby-identifier">index</span>    = <span class="ruby-identifier">data</span>[ <span class="ruby-value">:index</span> ]
+    <span class="ruby-identifier">work</span>     = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'Work'</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
+
+    <span class="ruby-comment"># Parse the &quot;Work&quot; string: &quot;PT&lt;num&gt;H&lt;num&gt;M&lt;num&gt;S&quot;, but with some</span>
+    <span class="ruby-comment"># leniency to allow any data before or after the H/M/S stuff.</span>
+
+    <span class="ruby-identifier">strs</span> = <span class="ruby-identifier">work</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/.*?(\d+)H(\d+)M(\d+)S.*?/</span>).<span class="ruby-identifier">flatten</span>
+    <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">mins</span>, <span class="ruby-identifier">secs</span> = <span class="ruby-identifier">strs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_i</span> }
+
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">mins</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">secs</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> )
+
+    <span class="ruby-comment"># Woohoo, real task! Store it in 'real_tasks' at the same array index</span>
+    <span class="ruby-comment"># as the item used to hold in the raw 'tasks' array.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># The divide by 3600.0 is VITAL to perform a floating point calculation</span>
+    <span class="ruby-comment"># rather than rounding everything with integer maths.</span>
+
+    <span class="ruby-identifier">task</span>.<span class="ruby-identifier">code</span>     = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">generate_xml_code</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">tid</span> )
+    <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> = ( ( ( <span class="ruby-identifier">hours</span> * <span class="ruby-value">3600</span> ) <span class="ruby-operator">+</span> ( <span class="ruby-identifier">mins</span> * <span class="ruby-value">60</span> ) <span class="ruby-operator">+</span> <span class="ruby-identifier">secs</span> ) <span class="ruby-operator">/</span> <span class="ruby-value">3600.0</span> ).<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> )
+
+    <span class="ruby-identifier">real_tasks</span>[         <span class="ruby-identifier">index</span> ] = <span class="ruby-identifier">task</span>
+    <span class="ruby-identifier">real_parent_uids</span>[   <span class="ruby-identifier">index</span> ] = <span class="ruby-identifier">parent_uids</span>[   <span class="ruby-identifier">index</span> ]
+    <span class="ruby-identifier">real_parent_titles</span>[ <span class="ruby-identifier">index</span> ] = <span class="ruby-identifier">parent_titles</span>[ <span class="ruby-identifier">index</span> ]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Remove &quot;nil&quot; entries which exist beacuse of any tasks in the original</span>
+  <span class="ruby-comment"># 'tasks' array which were discarded for some reason (e.g. no duration).</span>
+
+  <span class="ruby-identifier">real_tasks</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">real_parent_uids</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">real_parent_titles</span>.<span class="ruby-identifier">compact!</span>
+
+  <span class="ruby-keyword">return</span> {
+    <span class="ruby-value">:tasks</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">real_tasks</span>,
+    <span class="ruby-value">:parent_uids</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">real_parent_uids</span>,
+    <span class="ruby-value">:parent_titles</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">real_parent_titles</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_tasks_from_xml-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_tasks_from_xml-method -->
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">( params = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new Import object, optionally from form submission parameters.</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-ivar">@project_id</span>             = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@tasks</span>                  = []
+  <span class="ruby-ivar">@parent_uids</span>            = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@parent_titles</span>          = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@filtered_tasks</span>         = []
+  <span class="ruby-ivar">@filtered_parent_uids</span>   = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@filtered_parent_titles</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@collapse</span>               = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@max_level</span>              = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> )
+
+    <span class="ruby-comment"># Adapted from ActiveRecord::Base &quot;attributes=&quot;, Rails 2.1.0</span>
+    <span class="ruby-comment"># on 29-Jun-2008.</span>
+
+    <span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">stringify_keys!</span>
+    <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-string">'('</span> ) )
+        <span class="ruby-identifier">raise</span>( <span class="ruby-string">&quot;Multi-parameter attributes are not supported.&quot;</span> )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">send</span>( <span class="ruby-identifier">key</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-identifier">value</span> )
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-collapse-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">collapse=</span><span
+            class="method-args">( val )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="collapse-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">collapse=</span>( <span class="ruby-identifier">val</span> )
+  <span class="ruby-ivar">@collapse</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- collapse-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- collapse-3D-method -->
+
+    
+      <div id="method-i-filtered_parent_titles-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filtered_parent_titles=</span><span
+            class="method-args">( titles )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filtered_parent_titles-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filtered_parent_titles=</span>( <span class="ruby-identifier">titles</span> )
+  <span class="ruby-ivar">@filtered_parent_titles</span> = <span class="ruby-identifier">to_nested_array</span>( <span class="ruby-identifier">titles</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- filtered_parent_titles-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- filtered_parent_titles-3D-method -->
+
+    
+      <div id="method-i-filtered_parent_uids-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filtered_parent_uids=</span><span
+            class="method-args">( uids )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filtered_parent_uids-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filtered_parent_uids=</span>( <span class="ruby-identifier">uids</span> )
+  <span class="ruby-ivar">@filtered_parent_uids</span> = <span class="ruby-identifier">to_nested_array</span>( <span class="ruby-identifier">uids</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- filtered_parent_uids-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- filtered_parent_uids-3D-method -->
+
+    
+      <div id="method-i-filtered_tasks-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filtered_tasks=</span><span
+            class="method-args">( tasks )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filtered_tasks-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filtered_tasks=</span>( <span class="ruby-identifier">tasks</span> )
+  <span class="ruby-ivar">@filtered_tasks</span> = <span class="ruby-identifier">to_task_array</span>( <span class="ruby-identifier">tasks</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- filtered_tasks-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- filtered_tasks-3D-method -->
+
+    
+      <div id="method-i-generate_filtered_task_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_filtered_task_list</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Take this object’s (fully set up) task array along with the associated
+parent title and UID arrays; then collapse these using this object’s
+‘collapse’ value and update the internal filtered task, parent title and
+parent UID arrays (“<a
+href="TaskImport.html#attribute-i-filtered_tasks">#filtered_tasks</a>”, “<a
+href="TaskImport.html#attribute-i-filtered_parent_uids">#filtered_parent_uids</a>”
+and “<a
+href="TaskImport.html#attribute-i-filtered_parent_titles">#filtered_parent_titles</a>”).</p>
+          
+
+          
+          <div class="method-source-code" id="generate_filtered_task_list-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_filtered_task_list</span>
+  <span class="ruby-identifier">collapse_level</span>         = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collapse</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">collapsed_tasks</span>        = {}
+  <span class="ruby-identifier">collapsed_uid</span>          = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-identifier">filtered_tasks</span>         = []
+  <span class="ruby-identifier">filtered_parent_uids</span>   = []
+  <span class="ruby-identifier">filtered_parent_titles</span> = []
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+
+    <span class="ruby-identifier">task</span>          = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span> ]
+    <span class="ruby-identifier">collapsed_uid</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_uids</span>[ <span class="ruby-identifier">index</span> ][ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">collapse_level</span> ].<span class="ruby-identifier">join</span>( <span class="ruby-string">','</span> )
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">collapse_level</span> )
+
+      <span class="ruby-comment"># If this real task is already at the collapsing level, then just copy</span>
+      <span class="ruby-comment"># it into the collapsed task hash.</span>
+
+      <span class="ruby-identifier">collapsed_task</span>              = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">collapsed_tasks</span>[ <span class="ruby-identifier">task</span>.<span class="ruby-identifier">uid</span> ] = <span class="ruby-identifier">collapsed_task</span>
+
+      <span class="ruby-comment"># We rely on Ruby storing a reference to the same task structure here,</span>
+      <span class="ruby-comment"># else later changes to the 'duration' field via the &quot;collapsed_tasks&quot;</span>
+      <span class="ruby-comment"># hash won't be reflected in the &quot;filtered_tasks&quot; array.</span>
+
+      <span class="ruby-identifier">filtered_tasks</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">collapsed_task</span>
+      <span class="ruby-identifier">filtered_parent_uids</span>   <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_uids</span>[   <span class="ruby-identifier">index</span> ].<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">filtered_parent_titles</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_titles</span>[ <span class="ruby-identifier">index</span> ].<span class="ruby-identifier">dup</span>
+
+    <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">collapsed_tasks</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-identifier">collapsed_uid</span> ) )
+
+      <span class="ruby-comment"># Have we generated this collapsed task UID before? Yes - just add</span>
+      <span class="ruby-comment"># the current child task's duration to it.</span>
+
+      <span class="ruby-identifier">collapsed_tasks</span>[ <span class="ruby-identifier">collapsed_uid</span> ].<span class="ruby-identifier">duration</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>
+
+    <span class="ruby-keyword">else</span>
+
+      <span class="ruby-comment"># Generate a new collapsed task. Use the last two entries in the</span>
+      <span class="ruby-comment"># titles array (noting Ruby array reference syntax meaning we have to</span>
+      <span class="ruby-comment"># be careful of negative indices) for the new collapsed task's title.</span>
+
+      <span class="ruby-identifier">previous_level</span> = <span class="ruby-identifier">collapse_level</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">previous_level</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">previous_level</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> )
+
+      <span class="ruby-identifier">collapsed_task</span> = <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span>( {
+        <span class="ruby-value">:level</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collapse_level</span>,
+        <span class="ruby-value">:uid</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collapsed_uid</span>, <span class="ruby-comment"># NB: See above - this is a string of one or more integers joined with a comma</span>
+        <span class="ruby-value">:tid</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">tid</span>,
+        <span class="ruby-value">:title</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_titles</span>[ <span class="ruby-identifier">index</span> ][ <span class="ruby-identifier">previous_level</span><span class="ruby-operator">..</span><span class="ruby-identifier">collapse_level</span> ].<span class="ruby-identifier">join</span>( <span class="ruby-string">': '</span> ),
+        <span class="ruby-value">:code</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">generate_xml_code</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">tid</span> ),
+        <span class="ruby-value">:duration</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>
+      } )
+
+      <span class="ruby-identifier">collapsed_tasks</span>[ <span class="ruby-identifier">collapsed_uid</span> ] = <span class="ruby-identifier">collapsed_task</span>
+
+      <span class="ruby-identifier">filtered_tasks</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">collapsed_task</span>
+      <span class="ruby-identifier">filtered_parent_uids</span>   <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_uids</span>[   <span class="ruby-identifier">index</span> ][ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">previous_level</span> ]
+      <span class="ruby-identifier">filtered_parent_titles</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_titles</span>[ <span class="ruby-identifier">index</span> ][ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">previous_level</span> ]
+
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filtered_tasks</span>         = <span class="ruby-identifier">filtered_tasks</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filtered_parent_uids</span>   = <span class="ruby-identifier">filtered_parent_uids</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filtered_parent_titles</span> = <span class="ruby-identifier">filtered_parent_titles</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_filtered_task_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_filtered_task_list-method -->
+
+    
+      <div id="method-i-max_level" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">max_level</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Read the maximum level stored in the ‘tasks’ array. Generated on the fly
+and cached until ‘tasks’ gets reset.</p>
+          
+
+          
+          <div class="method-source-code" id="max_level-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">max_level</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@max_level</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-ivar">@max_level</span> = <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">level</span> }.<span class="ruby-identifier">max</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@max_level</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- max_level-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- max_level-method -->
+
+    
+      <div id="method-i-parent_titles-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parent_titles=</span><span
+            class="method-args">( titles )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="parent_titles-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parent_titles=</span>( <span class="ruby-identifier">titles</span> )
+  <span class="ruby-ivar">@parent_titles</span> = <span class="ruby-identifier">to_nested_array</span>( <span class="ruby-identifier">titles</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- parent_titles-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- parent_titles-3D-method -->
+
+    
+      <div id="method-i-parent_uids-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parent_uids=</span><span
+            class="method-args">( uids )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="parent_uids-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parent_uids=</span>( <span class="ruby-identifier">uids</span> )
+  <span class="ruby-ivar">@parent_uids</span> = <span class="ruby-identifier">to_nested_array</span>( <span class="ruby-identifier">uids</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- parent_uids-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- parent_uids-3D-method -->
+
+    
+      <div id="method-i-project_id-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">project_id=</span><span
+            class="method-args">( val )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Coerce strings to integers for certain properties.</p>
+          
+
+          
+          <div class="method-source-code" id="project_id-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">project_id=</span>( <span class="ruby-identifier">val</span> )
+  <span class="ruby-ivar">@project_id</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- project_id-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- project_id-3D-method -->
+
+    
+      <div id="method-i-tasks-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tasks=</span><span
+            class="method-args">( tasks )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Due to the way the forms are constructed, arrays will usually be encoded as
+a HashWithIndifferentAccess set up with keys containing a string version of
+the index at which we should store the entry and the second element with
+the hash describing the object to store there.</p>
+          
+
+          
+          <div class="method-source-code" id="tasks-3D-source">
+            <pre><span class="ruby-comment"># File app/models/task_import.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tasks=</span>( <span class="ruby-identifier">tasks</span> )
+  <span class="ruby-ivar">@max_level</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@tasks</span>     = <span class="ruby-identifier">to_task_array</span>( <span class="ruby-identifier">tasks</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- tasks-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- tasks-3D-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

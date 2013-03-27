@@ -1,29 +1,29 @@
     <h2>Basic information</h2>
 
-    <table border="0" cellspacing="0" cellpadding="2">
-      <tr align="left">
+    <table class="editing_table">
+      <tr class="editing_row">
         <th>Full name (required)</th>
-        <td><%= @f.text_field( :name ) %></td>
+        <td><%= f.text_field( :name ) %></td>
       </tr>
 
-      <tr align="left">
+      <tr class="editing_row">
         <th>Contact e-mail address (required)</th>
-        <td><%= @f.text_field( :email ) %></td>
+        <td><%= f.text_field( :email ) %></td>
       </tr>
 
-      <tr align="left">
+      <tr class="editing_row">
         <th>User code (leave as-is if unsure)</th>
-        <td><%= @f.text_field( :code ) %></td>
+        <td><%= f.text_field( :code ) %></td>
       </tr>
     </table>
 
-<% unless ( @current_user.nil? or @current_user.name.nil? or @current_user.name.empty? ) -%>
+<% unless ( @current_user.nil? or @current_user.name.blank? ) -%>
     <h2>Configuration</h2>
-<% fields_for :control_panel do | cp | -%>
+<%= fields_for :control_panel do | cp | -%>
     <%= error_messages_for :control_panel %>
 
-    <table border="0" cellspacing="0" cellpadding="2">
-      <tr align="left" valign="top">
+    <table class="editing_table">
+      <tr class="editing_row">
         <th>Tasks added to new timesheets by default</th>
         <td>
 <%=

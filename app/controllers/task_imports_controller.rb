@@ -1,6 +1,6 @@
 ########################################################################
 # File::    task_imports_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Import task definition data from external sources.
 # ----------------------------------------------------------------------
@@ -47,6 +47,7 @@ class TaskImportsController < ApplicationController
         # if that's missing then it's GZip compressed. That's true in the
         # limited case of project files.
 
+        xmlfile = xmlfile.tempfile
         byte = xmlfile.getc()
         xmlfile.rewind()
 
@@ -58,7 +59,7 @@ class TaskImportsController < ApplicationController
         parent_uids   = task_data[ :parent_uids   ]
         parent_titles = task_data[ :parent_titles ]
 
-        if ( tasks.nil? or tasks.empty? )
+        if ( tasks.blank? )
           flash[ :error  ] = 'No usable tasks were found in that file'
 
         else
@@ -129,17 +130,17 @@ class TaskImportsController < ApplicationController
           project = Project.find( project_id )
 
           to_import.each do | source_task |
-            destination_task          = Task.new
-            destination_task.title    = source_task.title
-            destination_task.code     = source_task.code
-            destination_task.duration = source_task.duration
-            destination_task.billable = source_task.billable
-            destination_task.project  = project
-            destination_task.save!
+            Task.new do | destination_task |
+              destination_task.title    = source_task.title
+              destination_task.code     = source_task.code
+              destination_task.duration = source_task.duration
+              destination_task.billable = source_task.billable
+              destination_task.project  = project
+            end.save!
           end
 
           flash[ :notice ] = "#{ to_import.length } #{ to_import.length == 1 ? 'task' : 'tasks' } imported successfully."
-          redirect_to( home_path() ) and return
+          redirect_to( tasks_path() ) and return
         end
 
       rescue => error

@@ -1,17 +1,26 @@
-<% id = "row_#{ @timesheet_row_index }_col_#{ @timesheet_col_index }_section_#{ sections_section_index() }" -%>
+<%
+  # Render with the following local variables:
+  #
+  #   timesheet_row        TimesheetRow instance being edited on this row
+  #   timesheet_row_index  Index of this row in the overall timesheet (0...n)
+  #   work_packet          WorkPacket instance being edited in this cell
+  #   timesheet_col_index  Index of this cell as a column in the overall
+  #                        timesheet (0...6)
+-%>
+<% id = "row_#{ timesheet_row_index }_col_#{ timesheet_col_index }_section_#{ sections_section_index() }" -%>
         <span class="ts_edit_wrapper" id="<%= id %>">
-<% name = "timesheet[timesheet_row_ids][#{ @timesheet_row.id }][work_packet_ids][#{ @work_packet.id }][worked_hours]"
+<% name = "timesheet[timesheet_row_ids][#{ timesheet_row.id }][work_packet_ids][#{ work_packet.id }][worked_hours]"
    id   = name.gsub( /[\[\]]/, '_' ) -%>
 <%
   # Drill down the object hierarchy from timesheet to worked hours
 
   current_value = params[ :timesheet ]
-  current_value = current_value[ :timesheet_row_ids     ] unless current_value.nil?
-  current_value = current_value[ @timesheet_row.id.to_s ] unless current_value.nil?
-  current_value = current_value[ :work_packet_ids       ] unless current_value.nil?
-  current_value = current_value[ @work_packet.id.to_s   ] unless current_value.nil?
-  current_value = current_value[ :worked_hours          ] unless current_value.nil?
+  current_value = current_value[ :timesheet_row_ids    ] unless current_value.nil?
+  current_value = current_value[ timesheet_row.id.to_s ] unless current_value.nil?
+  current_value = current_value[ :work_packet_ids      ] unless current_value.nil?
+  current_value = current_value[ work_packet.id.to_s   ] unless current_value.nil?
+  current_value = current_value[ :worked_hours         ] unless current_value.nil?
   current_value = nil if ( current_value == '0' )
 -%>
-          <input type="text" id="<%= id %>" name="<%= name %>" value="<%= current_value || apphelp_string_hours( @work_packet.worked_hours.to_s, '', current_value ) %>" size="5" maxlength="5" />
+          <input type="text" id="<%= id %>" name="<%= name %>" value="<%= current_value || apphelp_string_hours( work_packet.worked_hours.to_s, '', current_value ) %>" size="5" maxlength="5" />
         </span>

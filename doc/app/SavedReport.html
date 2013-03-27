@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class SavedReport - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/saved_report.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="Rangeable.html">Rangeable</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-generate_report">#generate_report</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class SavedReport</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>saved_report.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2011</p>
+</dd><dt>Purpose
+<dd>
+<p>Describe and record all parameters needed to generate reports.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>13-Oct-2011 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="CUSTOMER_SORT_FIELD_CREATED_AT">CUSTOMER_SORT_FIELD_CREATED_AT
+        
+        <dd class="description">
+        
+      
+        <dt id="CUSTOMER_SORT_FIELD_LIMIT">CUSTOMER_SORT_FIELD_LIMIT
+        
+        <dd class="description">
+        
+      
+        <dt id="CUSTOMER_SORT_FIELD_VALUES">CUSTOMER_SORT_FIELD_VALUES
+        
+        <dd class="description">
+        
+      
+        <dt id="DEFAULT_SORT_COLUMN">DEFAULT_SORT_COLUMN
+        
+        <dd class="description">
+        
+      
+        <dt id="DEFAULT_SORT_DIRECTION">DEFAULT_SORT_DIRECTION
+        
+        <dd class="description">
+        
+      
+        <dt id="DEFAULT_SORT_ORDER">DEFAULT_SORT_ORDER
+        
+        <dd class="description">
+        
+      
+        <dt id="PROJECT_SORT_FIELD_CREATED_AT">PROJECT_SORT_FIELD_CREATED_AT
+        
+        <dd class="description">
+        
+      
+        <dt id="PROJECT_SORT_FIELD_LIMIT">PROJECT_SORT_FIELD_LIMIT
+        
+        <dd class="description">
+        
+      
+        <dt id="PROJECT_SORT_FIELD_VALUES">PROJECT_SORT_FIELD_VALUES
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_FILTER_LIMIT">TASK_FILTER_LIMIT
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_FILTER_NON_BILLABLE">TASK_FILTER_NON_BILLABLE
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_FILTER_VALUES">TASK_FILTER_VALUES
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_GROUPING_BOTH">TASK_GROUPING_BOTH
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_GROUPING_LIMIT">TASK_GROUPING_LIMIT
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_GROUPING_VALUES">TASK_GROUPING_VALUES
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_SORT_FIELD_CREATED_AT">TASK_SORT_FIELD_CREATED_AT
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_SORT_FIELD_LIMIT">TASK_SORT_FIELD_LIMIT
+        
+        <dd class="description">
+        
+      
+        <dt id="TASK_SORT_FIELD_VALUES">TASK_SORT_FIELD_VALUES
+        
+        <dd class="description">
+        
+      
+        <dt id="TITLE_LIMIT">TITLE_LIMIT
+        
+        <dd class="description"><p>Various constants used by the “20111013142252_add_saved_reports_support.rb”
+migration file and various pieces of application code</p>
+        
+      
+        <dt id="USED_RANGE_COLUMN">USED_RANGE_COLUMN
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-generate_report" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_report</span><span
+            class="method-args">( flush_cache = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return (and cache) a <a
+href="TrackRecordReport/Report.html">TrackRecordReport::Report</a> instance
+based on the attributes of this <a href="SavedReport.html">SavedReport</a>
+model instance. The result is cached for later access. If you alter
+attribute values, pass ‘true’ on entry to force a refresh of the cache and
+update the <a
+href="TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+instance.</p>
+          
+
+          
+          <div class="method-source-code" id="generate_report-source">
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_report</span>( <span class="ruby-identifier">flush_cache</span> = <span class="ruby-keyword">false</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">flush_cache</span> )
+    <span class="ruby-comment"># The TrackRecord internal Report object can be created from this</span>
+    <span class="ruby-comment"># instance's attributes directly, except for many-to-many relationships,</span>
+    <span class="ruby-comment"># which are not exposed in that hash and must be assigned manually.</span>
+
+    <span class="ruby-ivar">@report</span>                     = <span class="ruby-constant">TrackRecordReport</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">attributes</span>() )
+    <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">active_task_ids</span>     = <span class="ruby-identifier">active_task_ids</span>
+    <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">inactive_task_ids</span>   = <span class="ruby-identifier">inactive_task_ids</span>
+    <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">reportable_user_ids</span> = <span class="ruby-identifier">reportable_user_ids</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@report</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_report-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_report-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

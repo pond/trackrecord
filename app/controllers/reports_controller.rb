@@ -1,14 +1,22 @@
 ########################################################################
 # File::    reports_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Generate reports describing timesheet entries in various
-#           different ways.
+#           different ways. The ReportsController deals with finding
+#           SavedReport model instances and, using TrackRecordReport's
+#           Report class with its attributes configured from the
+#           SavedReport instance's contents, generating and showing
+#           reports to users.
 # ----------------------------------------------------------------------
 #           09-Feb-2008 (ADH): Created.
+#           19-Oct-2011 (ADH): Functionality split up into this file and
+#                              SavedReportsController.
 ########################################################################
 
 class ReportsController < ApplicationController
+
+  require 'csv'
 
   include TrackRecordReport
   include TrackRecordSections
@@ -18,41 +26,79 @@ class ReportsController < ApplicationController
 
   @@application_helper = Object.new.extend( ApplicationHelper )
 
-  dynamic_actions = { :only => [ :new, :create ] }
-
-  uses_leightbox( dynamic_actions )
-  uses_yui_tree(
-    { :xhr_url_method => :trees_path },
-    dynamic_actions
-  )
-
-  # Prepare for the 'new report' view.
+  # Retrieve saved report parameters from the database and generate a report
+  # using those parameters, restricted by whatever prevailing permissions may
+  # apply to the current user.
   #
-  def new
+  def show
+    @saved_report = SavedReport.find_by_id( params[ :id ] )
+
+    # Legacy report link, or missing / unauthorized report?
+
+    if ( @saved_report.nil? && params.has_key?( :report ) )
+
+      # This is pretty weird as active tasks at the time the link to the
+      # legacy report was generated may have become inactive or vice versa.
+      # Indeed even with a conventionally generated report, another user of
+      # the system may have changed an included task's active flag.
+      #
+      # This means that the report's active_tasks and inactive_tasks lists
+      # may contain a mixture of active and inactive items. Fortunately,
+      # this is all resolved by the TrackRecordReport code when the IDs are
+      # given to the Report instance. It re-finds and re-builds the list of
+      # tasks, assigning them to the correct active/inactive lists as it
+      # does so.
+      #
+      # Really the active-vs-inactive list stuff inside a SavedReport is a
+      # legacy throwback to the old directly generated non-model report
+      # code in TrackRecord v1.x - nothing more.
+
+      params[ :report ][ :reportable_user_ids ] = params[ :report ].delete( :user_ids )
+
+      @saved_report       = SavedReport.new( params[ :report ] )
+      @saved_report.user  = @current_user
+      @saved_report.title = ''
+
+      begin
+        @saved_report.save!()
+        redirect_to( report_path( @saved_report ) )
+
+      rescue
+        flash[ :error ] = "The legacy report could not be generated. An unknown error occurred."
+        redirect_to( home_path() )
+      end
+
+      # NOTE EARLY EXIT!
+
+      return
+
+    elsif ( @saved_report.nil? || ( @saved_report.user_id != @current_user.id && ! @saved_report.shared ) )
+
+      flash[ :error ] = "The requested report was not found; the owner may have deleted it."
+      redirect_to( home_path() ) and return
+
+    end
+
+    # Read parameters related to the 'show' action, which itself contains a
+    # form that submits back to here  fincluding details about CSV export
+    # parameters. For plain old "show report <id>" uses, there are no such
+    # additional parameters.
+
     read_options()
 
-    # [TODO] Make a dummy report object. In future, perhaps reports could
-    # be saved into the database, owned by users.
-
-    @report     = Report.new( @current_user, params[ :report ] )
-    @user_array = @current_user.restricted? ? [ @current_user ] : User.active
-  end
-
-  # Generate a report based on a 'new report' form submission.
-  #
-  def create
-    read_options()
-
-    appctrl_patch_params_from_js( :report, :active_task_ids   )
-    appctrl_patch_params_from_js( :report, :inactive_task_ids )
-
-    @report = Report.new( @current_user, params[ :report ] )
+    @report = @saved_report.generate_report()
     @report.compile()
+
+    if ( @saved_report.title.empty? )
+      flash[ :warning ] = "This report is unnamed. It will be deleted automatically. To save it permanently, use the 'Change report parameters' link underneath the report and give it a name."
+    end
 
     respond_to do | format |
       format.html { render( { :template => 'reports/show' } ) }
       format.csv  { csv_stream_report() }
     end
+
+    flash.delete( :warning ) # Else it shows on the *next* fetched page too
   end
 
 private
@@ -118,7 +164,7 @@ private
 
     # First compile the file.
 
-    whole_csv_file = FasterCSV.generate do | csv |
+    whole_csv_file = CSV.generate do | csv |
       csv << title unless ( @exclude_title )
 
       if ( @is_task_type )
@@ -181,8 +227,8 @@ private
       # New section? Write out the section title and totals if so.
 
       if ( sections_new_section?( task ) )
-        file_row << sections_section_title()
-        file_row << task.project.code << '' << ''
+        file_row << sections_section_title( true )
+        file_row << ( task.project.try( :code ) || '-' ) << '' << ''
 
         row.cells.each_index do | col_index |
           file_row << hours( @report.sections[ sections_section_index() ].cells[ col_index ] )
@@ -275,8 +321,8 @@ private
       # New section? Write out the section title and totals if so.
 
       if ( sections_new_section?( task ) )
-        file_row << sections_section_title()
-        file_row << task.project.code << '' << ''
+        file_row << sections_section_title( true )
+        file_row << ( task.project.try( :code ) || '-' ) << '' << ''
 
         @report.filtered_users.each_index do | user_index |
           file_row << hours( @report.sections[ sections_section_index() ].user_row_totals[ user_index ] )

@@ -1,6 +1,6 @@
 ########################################################################
 # File::    charts_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Use the Gruff library to generate charts in PNG format for
 #           inclusion in HTML reports.
@@ -40,7 +40,7 @@ class ChartsController < ApplicationController
 
     g                  = Gruff::Mini::Pie.new( "#{ width }x#{ width * 0.75 }" )
     g.title            = 'Chart'
-    g.font             = "#{ RAILS_ROOT }/#{ GRAPH_FONT }"
+    g.font             = "#{ Rails.root }/#{ GRAPH_FONT }"
     g.hide_legend      = true
     g.hide_title       = true
     g.marker_font_size = 70

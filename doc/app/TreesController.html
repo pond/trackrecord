@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class TreesController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/trees_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-index">#index</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class TreesController</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>trees_controller.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Collate data for and send data to the YUI tree plugin.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>03-Nov-2009 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Respond to XHR requests from the YUI tree handling task selection. See
+comments inside for details of the required parameters.</p>
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/trees_controller.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">request</span>.<span class="ruby-identifier">xhr?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-value">:tree_parent_id</span> ) )
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">format</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> <span class="ruby-keyword">do</span>
+
+        <span class="ruby-comment"># Discover the restrictions which apply, if any. Understood keys are:</span>
+        <span class="ruby-comment">#</span>
+        <span class="ruby-comment">#   &quot;inactive&quot;   Returns only inactive projects and tasks. Without</span>
+        <span class="ruby-comment">#                this key, returns only active projects and tasks.</span>
+        <span class="ruby-comment">#</span>
+        <span class="ruby-comment">#   &quot;restrict&quot;   Next array entry must be a user ID. Restricts tasks</span>
+        <span class="ruby-comment">#                to those in the user's task list and projects to</span>
+        <span class="ruby-comment">#                those where at least one of the project tasks are</span>
+        <span class="ruby-comment">#                in the user's task list.</span>
+        <span class="ruby-comment">#</span>
+        <span class="ruby-comment">#   &quot;include&quot;    Next array entry must be one or more underscore-</span>
+        <span class="ruby-comment">#                separated IDs. Only tasks in that list will be</span>
+        <span class="ruby-comment">#                included in the tree. Projects or customers which</span>
+        <span class="ruby-comment">#                end up with no included tasks will not be shown.</span>
+        <span class="ruby-comment">#</span>
+        <span class="ruby-comment"># Note that only tasks permitted by the current user will ever be</span>
+        <span class="ruby-comment"># returned. All the above can do is produce subsets. Attempts to</span>
+        <span class="ruby-comment"># bypass user restrictions by generating custom XHR requests will</span>
+        <span class="ruby-comment"># therefore always fail.</span>
+
+        <span class="ruby-identifier">restrictions</span>  = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:data</span> ] <span class="ruby-operator">||</span> <span class="ruby-string">''</span> ).<span class="ruby-identifier">split</span>( <span class="ruby-string">','</span> )
+        <span class="ruby-identifier">index</span>         = <span class="ruby-value">0</span>
+
+        <span class="ruby-identifier">restrict_user</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">include_only</span>  = <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">active</span>        = <span class="ruby-value">:active</span>
+
+        <span class="ruby-keyword">until</span> ( <span class="ruby-identifier">restriction</span> = <span class="ruby-identifier">restrictions</span>[ <span class="ruby-identifier">index</span> ] ).<span class="ruby-identifier">nil?</span>
+          <span class="ruby-keyword">case</span> <span class="ruby-identifier">restriction</span>
+
+            <span class="ruby-keyword">when</span> <span class="ruby-string">'inactive'</span>
+              <span class="ruby-identifier">active</span> = <span class="ruby-value">:inactive</span>
+
+            <span class="ruby-keyword">when</span> <span class="ruby-string">'restrict'</span>
+              <span class="ruby-identifier">restrict_user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">restrictions</span>[ <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ] )
+              <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+
+            <span class="ruby-keyword">when</span> <span class="ruby-string">'include'</span>
+              <span class="ruby-identifier">include_only</span> = <span class="ruby-identifier">restrictions</span>[ <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ].<span class="ruby-identifier">split</span>( <span class="ruby-string">'_'</span> ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_i</span> }
+              <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># Unless the current user is privileged, then always act as if the</span>
+        <span class="ruby-comment"># task list is restricted by them. If the restricted user quoted in</span>
+        <span class="ruby-comment"># the parameters is different then someone is probably trying to hack</span>
+        <span class="ruby-comment"># around with the XHR call! Just override their request.</span>
+
+        <span class="ruby-identifier">restrict_user</span> = <span class="ruby-ivar">@current_user</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+
+        <span class="ruby-comment"># Find the ID of the parent item selected in the tree. This must have</span>
+        <span class="ruby-comment"># a textual prefix of 'C' or 'P' for Customers or Projects. Tasks</span>
+        <span class="ruby-comment"># should never end up causing a call into this code because they are</span>
+        <span class="ruby-comment"># always leaf nodes.</span>
+
+        <span class="ruby-identifier">id</span>       = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:tree_parent_id</span> ]
+        <span class="ruby-identifier">children</span> = []
+
+        <span class="ruby-keyword">case</span> <span class="ruby-identifier">id</span>[ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span> ]
+          <span class="ruby-keyword">when</span> <span class="ruby-string">'C'</span>
+            <span class="ruby-identifier">prefix</span>   = <span class="ruby-string">'P'</span>
+            <span class="ruby-identifier">isLeaf</span>   = <span class="ruby-keyword">false</span>
+            <span class="ruby-identifier">children</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">active</span> ).<span class="ruby-identifier">find_all_by_customer_id</span>( <span class="ruby-identifier">id</span>[ <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span> ] )
+
+            <span class="ruby-comment"># Reject projects if there are no active/inactive tasks; or if we</span>
+            <span class="ruby-comment"># are restricting by a user's permitted task list and the union</span>
+            <span class="ruby-comment"># of the project and user's task list is empty; or if we are</span>
+            <span class="ruby-comment"># restricting by a list of IDs and the union of that list of IDs</span>
+            <span class="ruby-comment"># and the project's task IDs is empty.</span>
+
+            <span class="ruby-identifier">children</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span>
+              <span class="ruby-identifier">project</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">active</span> ).<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> <span class="ruby-operator">||</span> (
+                ( <span class="ruby-operator">!</span> <span class="ruby-identifier">restrict_user</span>.<span class="ruby-identifier">nil?</span> ) <span class="ruby-operator">&amp;&amp;</span> ( <span class="ruby-identifier">project</span>.<span class="ruby-identifier">tasks</span> &amp; <span class="ruby-identifier">restrict_user</span>.<span class="ruby-identifier">tasks</span> ).<span class="ruby-identifier">empty?</span>
+              ) <span class="ruby-operator">||</span> (
+                ( <span class="ruby-operator">!</span> <span class="ruby-identifier">include_only</span>.<span class="ruby-identifier">nil?</span> ) <span class="ruby-operator">&amp;&amp;</span> ( <span class="ruby-identifier">project</span>.<span class="ruby-identifier">task_ids</span> &amp; <span class="ruby-identifier">include_only</span> ).<span class="ruby-identifier">empty?</span>
+              )
+            <span class="ruby-keyword">end</span>
+
+          <span class="ruby-keyword">when</span> <span class="ruby-string">'P'</span>
+            <span class="ruby-identifier">prefix</span>   = <span class="ruby-string">''</span>
+            <span class="ruby-identifier">isLeaf</span>   = <span class="ruby-keyword">true</span>
+            <span class="ruby-identifier">children</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">active</span> ).<span class="ruby-identifier">find_all_by_project_id</span>( <span class="ruby-identifier">id</span>[ <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span> ] )
+            <span class="ruby-identifier">children</span> = <span class="ruby-identifier">children</span> &amp; <span class="ruby-identifier">restrict_user</span>.<span class="ruby-identifier">tasks</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">restrict_user</span>.<span class="ruby-identifier">nil?</span> )
+
+            <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">include_only</span>.<span class="ruby-identifier">nil?</span> )
+              <span class="ruby-identifier">children</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
+                <span class="ruby-keyword">not</span> <span class="ruby-identifier">include_only</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span> )
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">end</span>
+
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">parent</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">children</span>.<span class="ruby-identifier">empty?</span> )
+          <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> []
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">children</span>.<span class="ruby-identifier">map!</span>() <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">child</span> <span class="ruby-operator">|</span>
+            <span class="ruby-constant">YuiTree</span><span class="ruby-operator">::</span><span class="ruby-identifier">make_node_object</span>(
+              <span class="ruby-node">&quot;#{ prefix }#{ child.id }&quot;</span>,
+              <span class="ruby-identifier">child</span>.<span class="ruby-identifier">title</span>,
+              <span class="ruby-identifier">isLeaf</span>,
+              ( <span class="ruby-identifier">child</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Task</span> ) ) <span class="ruby-operator">?</span> <span class="ruby-identifier">@@tasks_helper</span>.<span class="ruby-identifier">taskhelp_billable_class</span>( <span class="ruby-identifier">child</span> ) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+            )
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">children</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span> <span class="ruby-comment"># format.js do</span>
+    <span class="ruby-keyword">end</span>   <span class="ruby-comment"># respond_to do | format |</span>
+  <span class="ruby-keyword">end</span>     <span class="ruby-comment"># if ( request.xhr? ... )</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- index-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- index-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

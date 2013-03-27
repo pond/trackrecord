@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module YuiTree::YuiTreeHelper - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/yui_tree/yui_tree.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-include_yui_tree_if_used">#include_yui_tree_if_used</a>
+    
+    <li><a href="#method-i-using_yui_tree-3F">#using_yui_tree?</a>
+    
+    <li><a href="#method-i-yui_tree">#yui_tree</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="../ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="../ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="../ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="../ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="../QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="../QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="../QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="../QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="../QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="../QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="../YuiTree.html">YuiTree</a>
+  
+    <li><a href="../YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="../YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="../SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="../ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="../AuditsController.html">AuditsController</a>
+  
+    <li><a href="../AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="../ChartsController.html">ChartsController</a>
+  
+    <li><a href="../ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="../ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="../ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="../Customer.html">Customer</a>
+  
+    <li><a href="../CustomersController.html">CustomersController</a>
+  
+    <li><a href="../CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="../EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="../HelpController.html">HelpController</a>
+  
+    <li><a href="../HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="../Project.html">Project</a>
+  
+    <li><a href="../ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="../ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="../Rangeable.html">Rangeable</a>
+  
+    <li><a href="../ReportsController.html">ReportsController</a>
+  
+    <li><a href="../SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="../SavedReport.html">SavedReport</a>
+  
+    <li><a href="../SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="../SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="../SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="../SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="../SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="../SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="../SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="../SessionsController.html">SessionsController</a>
+  
+    <li><a href="../Task.html">Task</a>
+  
+    <li><a href="../TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="../TaskImport.html">TaskImport</a>
+  
+    <li><a href="../TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="../TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="../TasksController.html">TasksController</a>
+  
+    <li><a href="../TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="../TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="../TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="../TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="../TreesController.html">TreesController</a>
+  
+    <li><a href="../User.html">User</a>
+  
+    <li><a href="../UsersController.html">UsersController</a>
+  
+    <li><a href="../UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="../WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="../WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="../WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module YuiTree::YuiTreeHelper</h1>
+
+  <div id="description" class="description">
+    
+<p>The helper module - methods for use within views.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="YUI_MISSING_OPTS_ERROR">YUI_MISSING_OPTS_ERROR
+        
+        <dd class="description">
+        
+      
+        <dt id="YUI_TREE_DEFAULT_BASE_URI">YUI_TREE_DEFAULT_BASE_URI
+        
+        <dd class="description"><p>Default option values should all come from the configuration YAML data, but
+the user may have elected to delete entries or omit the entire file.</p>
+        
+      
+        <dt id="YUI_TREE_DEFAULT_BODY_CLASS">YUI_TREE_DEFAULT_BODY_CLASS
+        
+        <dd class="description">
+        
+      
+        <dt id="YUI_TREE_DEFAULT_DIV_CLASS">YUI_TREE_DEFAULT_DIV_CLASS
+        
+        <dd class="description">
+        
+      
+        <dt id="YUI_TREE_DEFAULT_DIV_ID">YUI_TREE_DEFAULT_DIV_ID
+        
+        <dd class="description">
+        
+      
+        <dt id="YUI_TREE_DEFAULT_LEAF_ONLY">YUI_TREE_DEFAULT_LEAF_ONLY
+        
+        <dd class="description">
+        
+      
+        <dt id="YUI_TREE_DEFAULT_TIMEOUT">YUI_TREE_DEFAULT_TIMEOUT
+        
+        <dd class="description">
+        
+      
+        <dt id="YUI_TREE_DEFAULT_VERSION">YUI_TREE_DEFAULT_VERSION
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-include_yui_tree_if_used" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">include_yui_tree_if_used</span><span
+            class="method-args">( line_prefix = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Include CSS and JavaScript related to the YUI tree if it is used by the
+current view (established by a “<a
+href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>”
+call made within the Controller). Invoke this helper within the HEAD
+section of an XHTML view using, for example, this line of code:</p>
+
+<pre>&lt;%= include_yui_tree_if_used -%&gt;</pre>
+
+<p>Note that a trailing newline <strong>is</strong> output so you can call the
+helper with the “-%&gt;” closing ERB tag (as shown in the previous
+paragraph) to avoid inserting a single blank line into your output in the
+event that the plugin is <strong>not</strong> used by the current view.</p>
+
+<p>If you like to keep indentation in your rendered HTML files, you may want
+any lines output by this plugin to be indented too. Pass an optional string
+to the method to cause all output from this call to be prefixed
+accordingly.</p>
+          
+
+          
+          <div class="method-source-code" id="include_yui_tree_if_used-source">
+            <pre><span class="ruby-comment"># File lib/yui_tree/yui_tree.rb, line 430</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">include_yui_tree_if_used</span>( <span class="ruby-identifier">line_prefix</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-identifier">yui_tree_init</span>( <span class="ruby-identifier">line_prefix</span> ) <span class="ruby-keyword">if</span> <span class="ruby-identifier">using_yui_tree?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- include_yui_tree_if_used-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- include_yui_tree_if_used-method -->
+
+    
+      <div id="method-i-using_yui_tree-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">using_yui_tree?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns ‘true’ if configured to use the YUI tree control for the view
+related to the current request. See the “uses_yui_tree” class method for
+more information.</p>
+          
+
+          
+          <div class="method-source-code" id="using_yui_tree-3F-source">
+            <pre><span class="ruby-comment"># File lib/yui_tree/yui_tree.rb, line 438</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">using_yui_tree?</span>
+  <span class="ruby-operator">!</span> <span class="ruby-ivar">@uses_yui_tree</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- using_yui_tree-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- using_yui_tree-3F-method -->
+
+    
+      <div id="method-i-yui_tree" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">yui_tree</span><span
+            class="method-args">( options )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Build a YUI tree at the point where the method is called - e.g. place
+within the body of an XHTML document using “&lt;%= <a
+href="YuiTreeHelper.html#method-i-yui_tree">#yui_tree</a>(…) %&gt;”. By
+default the tree has no option buttons next to entries and is designed to
+allow the selection of any single item from within it.</p>
+
+<p>An options hash must be passed. It <strong>may</strong> contain any of the
+options specified as available in a call to “<a
+href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>”
+and <strong>must</strong> at least contain values for the following keys
+unless they have been given values in the YAML configuration file
+(uncommon) or the view’s corresponding controller’s call to “<a
+href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>”
+(more common):</p>
+<ul><li>
+<p><code>:xhr_url_method</code></p>
+</li><li>
+<p><code>:target_form_field_id</code></p>
+</li><li>
+<p><code>:select_leaf_only</code></p>
+</li><li>
+<p><code>:root_model</code> <em>or</em> <code>:root_collection</code> (see
+below)</p>
+</li><li>
+<p><code>:root_title_method</code> (perhaps, if using
+<code>:root_model</code>)</p>
+</li><li>
+<p><code>:root_collection</code> - if your model does <strong>not</strong>
+match the characteristics described for option "<code>:root_model</code>"
+in the "<a
+href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>"
+method documentation, then you must provide an array of objects defining
+the roots of the tree. Construct array entries by calling "<a
+href="../YuiTree.html#method-c-make_node_object">YuiTree.make_node_object</a>".
+The resulting collection is later turned into a JavaScript-safe array by a
+wider call to "to_json" on a JavaScript options hash which gets created by
+the YUI tree instantiation helper code; you don't need to worry about HTML
+or JavaScript escaping of any values yourself.</p>
+</li></ul>
+
+<p>The following option values can be specified technically in any of the
+locations described by the documentation for the “<a
+href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>”
+method, but it is very uncommon to use them anywhere other than a call
+here, to “<a href="YuiTreeHelper.html#method-i-yui_tree">#yui_tree</a>”.
+Each of the items is optional and modifies tree behaviour in some way. Some
+of the options work together, so use of one may mean you must also use
+another. Any such relationships are described below:</p>
+<dl class="rdoc-list note-list"><dt><code>:include_blank</code>
+<dd>
+<p>A string if you want that string to be included at the top of the roots of
+the tree as an item that indicates nothing/none/blank - an ID of zero is
+associated with it. This option works whether you use the plugin’s
+generation of the root dataset via “<code>:root_model</code>” or if you
+generate your own dataset and provide it through
+“<code>:root_collection</code>”. Of course, you can always add your own
+blank entry/entries in the latter case, but using the
+“<code>:include_blank</code>” might be more convenient and keep your code
+clean.</p>
+
+<p>The reason you pass a string rather than, say, a boolean is so that you can
+pass any relevant message, including one looked up from an
+internationalisation locale file (assuming Rails &gt;= 2.3.x).</p>
+
+<p>Note that this string is used if a nodes is deselected so that no nodes are
+highlighted and the “<code>:target_name_field_id</code>” option has been
+set up - the string is written as innerHTML of the name field.</p>
+</dd><dt><code>:exclude</code>
+<dd>
+<p>An ID as an integer, or an object with a method ‘id’ which returns its ID
+as an integer, or an array of either of these types (they can be mixed in
+the same array). Specifies items which will not be included in the tree
+even if the Controller returns them at any point. This works at the node
+addition level in JS, so it is *not a security feature*. If you don’t want
+something to be seen by a user, don’t let the Controller send it out in the
+first place. The exclusion feature is useful if using, say, a tree to
+assign a parent to an existing item within a hierarchy - you don’t want to
+let the user try and assign the item <em>itself</em> as a parent, so
+exclude it.</p>
+
+<p>If you exclude a non-leaf item, it will be shown in the tree but will not
+be selectable. This way, children can still be selected. At present the
+code is “sort of” clever enough to know if no children are going to be
+present due to exclusions, in that it will try to fetch child nodes but
+when they all get excluded the Yahoo tree view itself will stop trying
+further and change the node indicator on the parent to being a branch,
+rather than a toggle control. It does mean one technically unnecessary AJAX
+request and associated UI update delay though, but it’s a much simpler
+mechanism than trying to work such things out up-front.</p>
+</dd><dt><code>:expand</code>
+<dd>
+<p>As “<code>:exclude</code>”, but specifies nodes which will be automatically
+expanded whenever they are added to the tree. Node that if you add a
+non-root node to the exclusions list, you must also add any if its parents
+(i.e. its complete set of ancestors) back to the root if you want that
+whole branch to be expanded automatically. Otherwise the branch starting
+from the child will only automatically expand if the user expands the
+parent node which contains it.</p>
+</dd><dt><code>:highlight</code>
+<dd>
+<p>As “<code>:exclude</code>” but only takes a single item not an array;
+specifies an item to be highlighted when the tree is created. Once
+highlighted initially, the item is forgotten and will not be
+auto-highlighted again. If a non-root item then it will only be highlighted
+when the branch containing it is opened; in general you will probably want
+to use the “<code>:expand</code>” option in cojunction with
+“<code>:highlight</code>” for non-root nodes.</p>
+</dd><dt><code>:multiple</code>
+<dd>
+<p>A boolean (defaults to ‘<code>false</code>’) which says that multiple items
+may be selected in the tree. See below for more.</p>
+</dd><dt><code>:form_leaf_nodes_only</code>
+<dd>
+<p>If ‘<code>true</code>’, only the IDs of <em>leaf</em> nodes will be written
+into the form field identified by the mandatory
+“<code>:target_form_field_id</code>” option. Defaults to
+‘<code>false</code>’ so that any selected (highlighted) node is included,
+leaf or otherwise.</p>
+</dd><dt><code>:data_for_xhr_call</code>
+<dd>
+<p>An optional string which if included will be added to the parameters used
+when the XHR call to retrieve more node items is made. If using the
+built-in “<a
+href="ClassMethods.html#method-i-yui_tree_handled_xhr_request-3F">YuiTree::ClassMethods#yui_tree_handled_xhr_request?</a>”
+method then this is of no use, but if you write a custom handler then the
+data string provides a crude but effective way of passing in external data.
+Usually, the data is used as some kind of filter, restricting the range of
+nodes which the XHR handler method would otherwise have returned. Note that
+the string will be run through the ‘j’ helper to make it JS-safe, so some
+characters may not be treated quite how you expect - avoid literal single
+quotes, double quotes and backslashes in particular. The string will appear
+in the params hash under the key “<code>:data</code>”. An empty string
+given here is treated the same way as if the option had been completely
+omitted.</p>
+</dd></dl>
+
+<p>The options hash *must not* contain any of the following keys since this
+would interfere with values set for those same options elsewhere and
+provoke undefined behaviour (one part of your view would disagree with
+another part of your view). If present, these keys will be deleted.</p>
+<ul><li>
+<p><code>:body_class</code></p>
+</li></ul>
+
+<p>Any other YUI tree options not listed above are irrelevant here.</p>
+
+<p>Note that you must *never mix* the use of options
+“<code>:root_model</code>” and “<code>:root_collection</code>” between this
+call and any other places where options may be specified; if you do,
+results will be undefined.</p>
+
+<h2 id="method-i-yui_tree-label-Multiple+selection+trees">Multiple selection trees</h2>
+
+<p>If ‘<code>:multiple</code>’ is ‘<code>true</code>’ the tree allows multiple
+check boxes to be selected. Selecting a child does not cause its parents to
+change state by default - the user is free to choose any collection of
+nodes without constraint - but that can be changed with options listed
+below.</p>
+
+<p>Option key “<code>:highlight</code>” now begins to work as
+“<code>:expand</code>” or “<code>:exclude</code>” in that it can take a
+single item or an array of items to be highlighted. If you use
+“<code>:expand</code>” to auto-expand highlighted nodes, remember that you
+need to specify all ancestors of any non-root node you want expanded.</p>
+
+<p>The form field specified in “<code>:target_form_field_id</code>” has its
+value populated using a comma-separated list of IDs of selected items. The
+container specified in “<code>:target_name_field_id</code>”, if any, will
+have its value populated using a space-separated list of names of selected
+items. You can customise this list of names with the following extra
+options only relevant to multiple selection trees using
+“<code>:target_name_field_id</code>”:</p>
+<dl class="rdoc-list note-list"><dt><code>:name_field_separator</code>
+<dd>
+<p>Text to use as a separator between items in the name field. Defaults to a
+single space. Must be JS single quoted string safe. May be HTML (e.g.
+“&lt;br /&gt;”).</p>
+</dd><dt><code>:name_include_parents</code>
+<dd>
+<p>If you want to include the names of all parent nodes whenever a node’s
+label is used for the name field so that each text entry reflects the whole
+of the branch of the tree used to reach the node in question, then set this
+option to a string which is used as a separator between each of the parent
+items. Must be JS single quoted string safe. May be HTML or even an empty
+string to directly concatenate parent names. By default names of parents
+are not included - only the label of the individual node is added to the
+name field.</p>
+</dd><dt><code>:name_leaf_nodes_only</code>
+<dd>
+<p>If ‘<code>true</code>’, use only labels of leaf nodes for name field text;
+don’t include others. Useful in conjunction with the
+“<code>:name_include_parents</code>” option, since when the latter is in
+use, individual entries in the name field will already indicate the labels
+for the complete branch leading to a node so including names of non-leaf
+items would only lead to duplication. By default names of all nodes are
+included.</p>
+</dd></dl>
+
+<p>Once multiple items are selectable, it becomes desirable to be able to
+control the YUI tree’s highlight propagation features - that is, when a
+node is selected, should its parent and/or child nodes be automatically
+selected as well? The following options control this behaviour. The
+settings apply to every node in the tree.</p>
+<dl class="rdoc-list note-list"><dt><code>:propagate_up</code>
+<dd>
+<p>If ‘<code>true</code>’, selecting any node causes all parent nodes on the
+same branch to be selected, if any. By default this option is disabled.</p>
+</dd><dt><code>:propagate_down</code>
+<dd>
+<p>If ‘<code>true</code>’, selecting any node causes all child nodes in the
+tree below this node, if any, to be selected. By default this option is
+disabled.</p>
+</dd></dl>
+          
+
+          
+          <div class="method-source-code" id="yui_tree-source">
+            <pre><span class="ruby-comment"># File lib/yui_tree/yui_tree.rb, line 637</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">yui_tree</span>( <span class="ruby-identifier">options</span> )
+
+  <span class="ruby-comment"># Reject options which are explicitly not allowed here.</span>
+
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:body_class</span> )
+
+  <span class="ruby-comment"># Merge default from-YAML options, options given in the &quot;uses_yui_tree&quot;</span>
+  <span class="ruby-comment"># call and mandatory passed-in options for this method. We store the view</span>
+  <span class="ruby-comment"># options in the main options store to override previously set defaults.</span>
+
+  <span class="ruby-identifier">defaults</span> = <span class="ruby-constant">YuiTree</span>.<span class="ruby-identifier">default_options</span>.<span class="ruby-identifier">merge</span>( <span class="ruby-ivar">@yui_tree_options</span> <span class="ruby-operator">||</span> {} )
+  <span class="ruby-identifier">options</span>  = <span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">merge</span>( <span class="ruby-identifier">options</span> )
+
+  <span class="ruby-comment"># Extract items of interest for which default values exist.</span>
+
+  <span class="ruby-identifier">xhr_timeout</span>          = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:xhr_timeout_ms</span>       ) <span class="ruby-operator">||</span> <span class="ruby-constant">YUI_TREE_DEFAULT_TIMEOUT</span>
+  <span class="ruby-identifier">body_class</span>           = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:body_class</span>           ) <span class="ruby-operator">||</span> <span class="ruby-constant">YUI_TREE_DEFAULT_BODY_CLASS</span>
+  <span class="ruby-identifier">div_class</span>            = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:div_class</span>            ) <span class="ruby-operator">||</span> <span class="ruby-constant">YUI_TREE_DEFAULT_DIV_CLASS</span>
+  <span class="ruby-identifier">div_id</span>               = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:div_id</span>               ) <span class="ruby-operator">||</span> <span class="ruby-constant">YUI_TREE_DEFAULT_DIV_ID</span>
+  <span class="ruby-identifier">select_leaf_only</span>     = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:select_leaf_only</span>     ) <span class="ruby-operator">||</span> <span class="ruby-constant">YUI_TREE_DEFAULT_LEAF_ONLY</span>
+
+  <span class="ruby-comment"># Extract other options, raising exceptions if anything mandatory has</span>
+  <span class="ruby-comment"># been omitted.</span>
+
+  <span class="ruby-identifier">xhr_url_method</span>       = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:xhr_url_method</span>       ) <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>( <span class="ruby-constant">YUI_MISSING_OPTS_ERROR</span> <span class="ruby-operator">%</span> <span class="ruby-value">:xhr_url_method</span>       )
+  <span class="ruby-identifier">target_form_field_id</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:target_form_field_id</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>( <span class="ruby-constant">YUI_MISSING_OPTS_ERROR</span> <span class="ruby-operator">%</span> <span class="ruby-value">:target_form_field_id</span> )
+  <span class="ruby-identifier">target_name_field_id</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:target_name_field_id</span> )
+  <span class="ruby-identifier">root_model</span>           = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:root_model</span>           )
+  <span class="ruby-identifier">root_title_method</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:root_title_method</span>    ) <span class="ruby-operator">||</span> <span class="ruby-constant">YuiTree</span><span class="ruby-operator">::</span><span class="ruby-constant">YUI_TREE_DEFAULT_TITLE_METHOD</span>
+  <span class="ruby-identifier">root_collection</span>      = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:root_collection</span>      )
+  <span class="ruby-identifier">include_blank</span>        = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:include_blank</span>        )
+  <span class="ruby-identifier">exclude</span>              = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:exclude</span>              )
+  <span class="ruby-identifier">expand</span>               = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:expand</span>               )
+  <span class="ruby-identifier">highlight</span>            = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:highlight</span>            )
+  <span class="ruby-identifier">form_leaf_nodes_only</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:form_leaf_nodes_only</span> ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">data_for_xhr_call</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:data_for_xhr_call</span>    )
+
+  <span class="ruby-identifier">multiple</span>             = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:multiple</span>             ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">propagate_up</span>         = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:propagate_up</span>         ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">propagate_down</span>       = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:propagate_down</span>       ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">name_field_separator</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:name_field_separator</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">' '</span>
+  <span class="ruby-identifier">name_include_parents</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:name_include_parents</span> )
+  <span class="ruby-identifier">name_leaf_nodes_only</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:name_leaf_nodes_only</span> ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
+
+  <span class="ruby-identifier">xhr_url</span> = <span class="ruby-identifier">send</span>( <span class="ruby-identifier">xhr_url_method</span> )
+
+  <span class="ruby-comment"># Allow minor API misuse...</span>
+
+  <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword">true</span>  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">multiple</span> <span class="ruby-operator">==</span> <span class="ruby-value">:true</span>  )
+  <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">multiple</span> <span class="ruby-operator">==</span> <span class="ruby-value">:false</span> )
+
+  <span class="ruby-comment"># Build a root collection if working with the &quot;root_model&quot; option.</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">root_collection</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-identifier">raise</span> ( <span class="ruby-constant">YUI_MISSING_OPTS_ERROR</span> <span class="ruby-operator">%</span> <span class="ruby-string">'root_model&quot; or &quot;:root_collection'</span> )
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">root_collection</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">root_model</span>      = <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">constantize</span>
+    <span class="ruby-identifier">root_instances</span>  = <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">roots</span>()
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">respond_to?</span>( <span class="ruby-value">:apply_default_sort_order</span> ) )
+      <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">apply_default_sort_order</span>( <span class="ruby-identifier">root_instances</span> )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">root_collection</span> = <span class="ruby-identifier">root_instances</span>.<span class="ruby-identifier">map</span>() <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">root_item</span> <span class="ruby-operator">|</span>
+      <span class="ruby-constant">YuiTree</span><span class="ruby-operator">::</span><span class="ruby-identifier">make_node_object</span>(
+        <span class="ruby-identifier">root_item</span>.<span class="ruby-identifier">id</span>,
+        <span class="ruby-identifier">root_item</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">root_title_method</span> ),
+        <span class="ruby-identifier">root_item</span>.<span class="ruby-identifier">leaf?</span>
+      )
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Add in a blank entry if necessary.</span>
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">include_blank</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-identifier">blank_item</span> = <span class="ruby-constant">YuiTree</span><span class="ruby-operator">::</span><span class="ruby-identifier">make_node_object</span>( <span class="ruby-string">'0'</span>, <span class="ruby-identifier">include_blank</span>, <span class="ruby-keyword">true</span> )
+    <span class="ruby-identifier">root_collection</span>.<span class="ruby-identifier">unshift</span>( <span class="ruby-identifier">blank_item</span> )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Build the DIV for the tree then initialise the object for the lengthy</span>
+  <span class="ruby-comment"># script which manages the tree. Compile and return the HTML and JS data.</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">content_tag</span>(
+    <span class="ruby-value">:div</span>,
+    <span class="ruby-string">''</span>,
+    {
+      <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ div_class } ygtv-checkbox&quot;</span>,
+      <span class="ruby-value">:id</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">div_id</span>
+    }
+  ) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+
+  <span class="ruby-identifier">options_hash</span> = {
+
+    <span class="ruby-comment"># Mandatory</span>
+
+    <span class="ruby-value">:divID</span>              =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">div_id</span>,
+    <span class="ruby-value">:multiple</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">multiple</span>,
+    <span class="ruby-value">:rootCollection</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">root_collection</span>,
+    <span class="ruby-value">:xhrURL</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">xhr_url</span>,
+    <span class="ruby-value">:xhrTimeout</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">xhr_timeout</span>,
+    <span class="ruby-value">:exclude</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">coerce_to_array</span>( <span class="ruby-identifier">exclude</span>   ),
+    <span class="ruby-value">:expand</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">coerce_to_array</span>( <span class="ruby-identifier">expand</span>    ),
+    <span class="ruby-value">:highlight</span>          =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">coerce_to_array</span>( <span class="ruby-identifier">highlight</span> ),
+    <span class="ruby-value">:formFieldID</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">target_form_field_id</span>,
+
+    <span class="ruby-comment"># Optional</span>
+
+    <span class="ruby-value">:bodyClass</span>          =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">body_class</span>,
+    <span class="ruby-value">:dataForXHRCall</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data_for_xhr_call</span>,
+    <span class="ruby-value">:selectLeafOnly</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">select_leaf_only</span>,
+    <span class="ruby-value">:propagateUp</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">propagate_up</span>,
+    <span class="ruby-value">:propagateDown</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">propagate_down</span>,
+    <span class="ruby-value">:nameFieldID</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">target_name_field_id</span>,
+    <span class="ruby-value">:nameLeafNodesOnly</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">name_leaf_nodes_only</span>,
+    <span class="ruby-value">:nameFieldSeparator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">name_field_separator</span>,
+    <span class="ruby-value">:nameFieldBlank</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">include_blank</span>,
+    <span class="ruby-value">:nameIncludeParents</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">name_include_parents</span>,
+    <span class="ruby-value">:formLeafNodesOnly</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">form_leaf_nodes_only</span>
+
+  }.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nil?</span> }
+
+  <span class="ruby-comment"># The use of 'to_json' ensures that strange JS characters get properly</span>
+  <span class="ruby-comment"># escaped, among other things.</span>
+
+  <span class="ruby-identifier">js</span> = <span class="ruby-node">&quot;  var options = #{ options_hash.to_json };\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+       <span class="ruby-string">&quot;  new uk_org_pond_yui_tree_support( options );&quot;</span>
+
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_tag</span>( <span class="ruby-identifier">js</span> ) ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- yui_tree-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- yui_tree-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -1,0 +1,58 @@
+      <div class="list_titles">
+        <div class="list_create">
+          <h2><%= link_to( "Create new report", new_user_saved_report_path( @current_user ) ) %></h2>
+        </div>
+        <h1><%= params[ :search ] ? 'Search results' : 'Manage reports' %></h1>
+        <h2>Your reports</h2>
+      </div>
+
+<%=
+  render (
+    {
+      :partial => 'shared/list',
+      :locals  =>
+      {
+        :model          => 'saved_report',
+        :columns        => @columns,
+        :collection     => @user_reports,
+        :actions_method => 'reporthelp_actions',
+        :index_method   => 'user_saved_reports_path',
+        :with_reports   => false
+      }
+    }
+  )
+%>
+
+<% if @current_user.privileged? -%>
+      <h2>All other reports</h2>
+
+<%=
+  render (
+    {
+      :partial => 'shared/list',
+      :locals  =>
+      {
+        :model          => 'saved_report',
+        :columns        => @columns,
+        :collection     => @other_reports,
+        :actions_method => 'reporthelp_actions',
+        :index_method   => 'user_saved_reports_path',
+        :with_reports   => false
+      }
+    }
+  )
+%>
+<% end -%>
+      <h2>Find reports</h2>
+
+<%=
+    render(
+      :partial => 'shared/search',
+      :locals  => {
+        :path    => user_saved_reports_path( @current_user ),
+        :prompt  => @current_user.privileged? ? 'Search report names and owner names' : 'Search report names',
+        :dprompt => 'between report modification date',
+        :years   => SavedReport.used_range()
+      }
+    )
+%>

@@ -1,6 +1,6 @@
 ########################################################################
 # File::    control_panels_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage User settings through a ControlPanel object.
 # ----------------------------------------------------------------------

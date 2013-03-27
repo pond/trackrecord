@@ -7,7 +7,7 @@
         can import any tasks.
       </p>
 <% else -%>
-      <% form_for( :import, { :url => { :action => 'create' }, :html => { :id => 'import', :multipart => true } } ) do | f | %>
+      <%= form_for( :import, { :url => { :action => 'create' }, :html => { :id => 'import', :multipart => true } } ) do | f | %>
 
         <p>
           TrackRecord can import data from XML format project management files which

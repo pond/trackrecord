@@ -4,10 +4,11 @@
       <h2>General options</h2>
 
       <ul>
-        <li><%= link_to( 'Enter timesheets',        new_timesheet_path()            ) %></li>
-        <li><%= link_to( 'Manage timesheets',       timesheets_path()               ) %></li>
-        <li><%= link_to( 'Create a report',         new_report_path()               ) %></li>
-        <li><%= link_to( 'Change account settings', edit_user_path( @current_user ) ) %></li>
+        <li><%= link_to( 'Enter timesheets',                new_timesheet_path()                ) %></li>
+        <li><%= link_to( 'Manage timesheets',                  timesheets_path()                ) %></li>
+        <li><%= link_to( 'Create a report',         new_user_saved_report_path( @current_user ) ) %></li>
+        <li><%= link_to( 'Manage reports',             user_saved_reports_path( @current_user ) ) %></li>
+        <li><%= link_to( 'Change account settings',             edit_user_path( @current_user ) ) %></li>
       </ul>
     </div>
 
@@ -16,8 +17,8 @@
       <h2>Searchable lists</h2>
 
       <ul>
-        <li><%= link_to( 'List assigned tasks',       tasks_path()     ) %></li>
-        <li><%= link_to( 'List associated projects',  projects_path()  ) %></li>
+        <li><%= link_to( 'List assigned tasks',           tasks_path() ) %></li>
+        <li><%= link_to( 'List associated projects',   projects_path() ) %></li>
         <li><%= link_to( 'List associated customers', customers_path() ) %></li>
       </ul>
     </div>
@@ -28,11 +29,11 @@
       <h2>Management options</h2>
 
       <ul>
-        <li><%= link_to( 'Manage tasks',     tasks_path()           ) %></li>
-        <li><%= link_to( 'Manage projects',  projects_path()        ) %></li>
-        <li><%= link_to( 'Manage customers', customers_path()       ) %></li>
-        <li><%= link_to( 'Manage users',     users_path()           ) %></li>
-        <li><%= link_to( 'Bulk task import', new_task_import_path() ) %></li>
+        <li><%= link_to( 'Manage customers',       customers_path() ) %></li>
+        <li><%= link_to( 'Manage projects',         projects_path() ) %></li>
+        <li><%= link_to( 'Manage tasks',               tasks_path() ) %></li>
+        <li><%= link_to( 'Manage users',               users_path() ) %></li>
+        <li><%= link_to( 'Bulk task import', new_task_imports_path() ) %></li>
       </ul>
     
     </div>

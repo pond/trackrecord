@@ -1,0 +1,68 @@
+<%
+  # Shared partial for searchable lists. Render with the following local
+  # variables:
+  #
+  #   path:     The path to which the form should be submitted (as 'GET'),
+  #             e.g. 'timesheets_path()'
+  #   prompt:   The "prompt" text shown by the search form telling the user
+  #             about the sort of things they can search for.
+  #   dprompt:  The "date prompt" text next to the start date field (the
+  #             end date field always says "...and date", so set the start
+  #             prompt text with this in mind) 
+  #   years:    The year range for the popup start/end date calendars.
+  #
+-%>
+      <%= form_tag( path, :method => 'get' ) do %>
+        <table class="display_table">
+          <tr class="display_row">
+            <td class="search_prompt">
+              <%= content_tag :label, h( prompt ) %>
+            </td>
+            <td>
+              <%= text_field_tag :search, params[ :search ] %>
+            </td>
+          </tr>
+          <tr class="display_row">
+            <td class="search_prompt">
+              <%= h( dprompt ) %>
+            </td>
+            <td>
+              <%= calendar_date_select_tag(
+                    :search_range_start,
+                    params[ :search_range_start ],
+                    {
+                      :embedded   => false,
+                      :year_range => years
+                    }
+                  )
+              %>
+            </td>
+          </tr>
+          <tr class="display_row">
+            <td class="search_prompt">
+              ...and date
+            </td>
+            <td>
+              <%= calendar_date_select_tag(
+                    :search_range_end,
+                    params[ :search_range_end ],
+                    {
+                      :embedded   => false,
+                      :year_range => years
+                    }
+                  )
+              %> (inclusive)
+            </td>
+          </tr>
+          <tr class="display_row">
+            <td>
+            </td>
+            <td>
+              <%= submit_tag( 'Go', { :name => 'search_go' } ) %>
+<% if ( params[ :search ] ) -%>
+              <%= submit_tag( 'Clear', { :name => 'search_cancel' } ) %>
+<% end -%>
+            </td>
+          </tr>
+        </table>
+      <% end %>

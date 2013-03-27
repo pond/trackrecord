@@ -1,5 +1,13 @@
-      <% form_for( :import, { :url => { :action => 'update' }, :html => { :id => 'import' } } ) do | f | %>
-
+      <%=
+          form_for(
+            :import,
+            {
+              :url    => task_imports_path(),
+              :html   => { :id     => 'import' },
+              :method => :put
+            }
+          ) do | f |
+      %>
         <p>
           The tasks found in the file are listed below. Only items with a ticked
           check box in the "Import?" column will be imported. The menu below the
@@ -8,21 +16,21 @@
           <%= link_to( 'account settings', edit_user_path( @current_user ) ) %>.
         </p>
 
-        <table border="0" cellspacing="0" cellpadding="2" align="center" class="bulk_task_import">
+        <table class="bulk_task_import">
 
-          <tr valign="middle" align="center" class="info">
-            <th align="left">&nbsp;Name</th>
-            <th align="left">Code</th>
-            <th>&nbsp;Duration&nbsp;<br />(hours)</th>
-            <th>
+          <tr class="info">
+            <th>&nbsp;Name</th>
+            <th>Code</th>
+            <th class="centred">Duration<br />(hours)</th>
+            <th class="centred">
               Billable?<br />
-              <script language="javascript" type="text/javascript">
+              <script type="text/javascript">
                 check_box_toggle_field( 'toggle_billable', 'billable' );
               </script>
             </th>
-            <th>
+            <th class="centred">
               Import?<br />
-              <script language="javascript" type="text/javascript">
+              <script type="text/javascript">
                 check_box_toggle_field( 'toggle_import', 'import' );
               </script>
             </th>
@@ -55,29 +63,29 @@
      if ( breadcrumb != current_breadcrumb )
        breadcrumb = current_breadcrumb
 -%>
-          <tr valign="top" align="center" class="breadcrumb">
-            <td align="left" colspan="5">
+          <tr class="breadcrumb">
+            <td colspan="5">
               <strong>Outline level <%= task.level %></strong><% unless ( breadcrumb.empty? ) -%>&nbsp;&nbsp;<%= breadcrumb %><% end %>
             </td>
           </tr>
 
 <%   end -%>
-          <tr valign="top" align="center" class="<%= cycle( 'even', 'odd' ) -%>">
-            <td align="left" class="task_title">
-              <%= titles[ task.title ] != true ? "<span class=\"dup\">#{ titles[ task.title] }:</span>" : '&nbsp;' %>
+          <tr class="<%= cycle( 'even', 'odd' ) -%>">
+            <td class="task_title">
+              <%= titles[ task.title ] != true ? "<span class=\"dup\">#{ titles[ task.title] }:</span>" : '&nbsp;'.html_safe() %>
               <%= text_field_tag( "import[filtered_tasks][#{ index }][title]", task.title, { :size => 50, :class => 'task_title' } ) %>
               &nbsp;
             </td>
-            <td align="left">
+            <td>
               <%= text_field_tag( "import[filtered_tasks][#{ index }][code]", task.code, { :size => 16 } ) %>
             </td>
-            <td>
-              <%= text_field_tag( "import[filtered_tasks][#{ index }][duration]", task.duration, { :maxlength => 6, :size => 6 } ) %>
+            <td class="centred">
+              <%= text_field_tag( "import[filtered_tasks][#{ index }][duration]", task.duration, { :maxlength => 6, :size => 6, :class => 'centred' } ) %>
             </td>
-            <td>
+            <td class="centred">
               <%= check_box_tag( "import[filtered_tasks][#{ index }][billable]", '1', billable_by_default, { :class => 'checkbox billable' } ) %>
             </td>
-            <td>
+            <td class="centred">
               <%= check_box_tag( "import[filtered_tasks][#{ index }][import]", '1', true, { :class => 'checkbox import' } ) %>
             </td>
           </tr>
@@ -86,7 +94,7 @@
         </table>
 <% if ( dupes > 0 ) -%>
 
-        <p align="center">
+        <p class="centred">
           <strong>Warning!</strong>
           Some task titles are identical. Consider renaming them if importing.
         </p>
@@ -132,10 +140,10 @@
 
         <!-- What next? -->
 
-        <p />
-        <table border="0" cellspacing="0" cellpadding="2" align="center" class="bulk_task_import">
+        <p></p>
+        <table class="bulk_task_import">
           <tr>
-            <th align="right">Now EITHER</th>
+            <th class="right">Now EITHER</th>
             <td>
               Assign all tasks to
 <%= timphelp_project_selector( f, '          ' ) %>
@@ -145,7 +153,7 @@
           </tr>
 <% unless ( @import.max_level.zero? ) -%>
           <tr>
-            <th align="right">OR</th>
+            <th class="right">OR</th>
             <td>
               Collapse tasks above
 <%= timphelp_collapse_selector( f, @import.max_level, '          ' ) %>
@@ -155,13 +163,13 @@
           </tr>
 <% end -%>
           <tr>
-            <th align="right">OR</th>
+            <th class="right">OR</th>
             <td>
-              <%= link_to( 'Cancel and choose another file', new_task_import_path() ) %>   
+              <%= link_to( 'Cancel and choose another file', new_task_imports_path() ) %>   
             </td>
           </tr>
           <tr>
-            <th align="right">OR</th>
+            <th class="right">OR</th>
             <td>
               <%= link_to( 'Cancel and return home', home_path() ) %>   
             </td>

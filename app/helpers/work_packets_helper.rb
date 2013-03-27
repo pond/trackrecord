@@ -1,6 +1,6 @@
 ########################################################################
 # File::    work_packets_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to WorkPacket objects.
 #           See controllers/work_packets_controller.rb for more.

@@ -1,58 +1,68 @@
-ActionController::Routing::Routes.draw do | map |
-
-  # Helper method to make named routes easier (from a RailsCast)
-
-  # def map.controller_actions( controller, actions )
-  #   actions.each do | action |
-  #     self.send(
-  #       "#{controller}_#{action}",
-  #       "#{controller}/#{action}",
-  #       :controller => controller,
-  #       :action => action
-  #     )
-  #   end
-  # end
+Trackrecord::Application.routes.draw do
 
   # Map root to the User account home page. The "root" mapping is so that
   # "root_url" exists, since the open_id_authentication plugin requires it.
 
-  map.root      :controller => 'users', :action => 'home'
-  map.home '/', :controller => 'users', :action => 'home'
+  match '/' => 'users#home'
+  match '/' => 'users#home', :as => :home
 
   # Mapping for the OpenID login system. The signin and signout
   # entries are for more readable paths in views; they're just
   # aliases for 'new' and 'destroy' actions.
 
-  map.open_id_complete '/session', :controller => 'sessions', :action => 'create', :requirements => { :method => :get }
-  map.resource :session
+  get '/session' => 'sessions#create', :as  => :open_id_complete
 
-  map.signin  '/signin',  :controller => 'sessions', :action => 'new'
-  map.signout '/signout', :controller => 'sessions', :action => 'destroy'
+  resource :session
+
+  match '/signin'  => 'sessions#new',     :as => :signin
+  match '/signout' => 'sessions#destroy', :as => :signout
 
   # Allow in-progress account signup to be cancelled
 
-  map.user_cancel '/users/cancel/:id', :controller => 'users', :action => 'cancel'
+  match '/users/cancel/:id' => 'users#cancel', :as => :user_cancel
 
-  # Shortcut GET-style report route for copy-and-paste report-in-a-URI
-  
-  map.report_shortcut '/reports/report.html', :controller => 'reports', :action => 'create', :requirements => { :method => :get }
+  # Get common named routes for our resources. Don't be confused by the rather
+  # esoteric use of Ruby block syntax here - this is just defining some nested
+  # routes; e.g. customers have many tasks, so tasks are defined as resources
+  # within customers. The longhand equivalent would be:
+  #
+  #   resources :customers do
+  #     resources :tasks
+  #   end
+  #
+  # ...and the Rails 2 equivalent used to be:
+  #
+  #  map.resources :customers, :has_many => [ :tasks ]
 
-  # Get common named routes for our resources
+  resources( :customers      ) { resources :tasks                            }
+  resources( :projects       ) { resources :tasks                            }
+  resources( :control_panels ) { resources :tasks                            }
+  resources( :tasks          ) { resources :users; resources :timesheet_rows }
+  resources( :timesheets     ) { resources :timesheet_rows                   }
 
-  map.resources :customers,      :has_many => [ :tasks                  ]
-  map.resources :projects,       :has_many => [ :tasks                  ]
-  map.resources :control_panels, :has_many => [ :tasks                  ]
-  map.resources :users,          :has_many => [ :tasks, :timesheets     ]
-  map.resources :tasks,          :has_many => [ :users, :timesheet_rows ]
-  map.resources :timesheets,     :has_many => [ :timesheet_rows         ]
-  map.resources :audits
-  map.resources :reports
-  map.resources :charts
-  map.resources :task_imports
-  map.resources :trees
+  resources( :users ) do
+    resources :tasks
+    resources :timesheets
+
+    resources :saved_reports
+    resource  :saved_reports_by_task,     :controller => :saved_reports_by_task,     :only => :create
+    resource  :saved_reports_by_project,  :controller => :saved_reports_by_project,  :only => :create
+    resource  :saved_reports_by_customer, :controller => :saved_reports_by_customer, :only => :create
+    resource  :saved_reports_by_user,     :controller => :saved_reports_by_user,     :only => :create
+  end
+
+  resources :audits
+  resources :reports
+  resources :charts
+  resource  :task_imports
+  resources :trees
+
+  resources :help
+
+  resource  :saved_report_auto_title, :only => :show
 
   # Finally, the normal default rules at lowest priority
 
-  map.connect '/:controller/:action/:id'
-  map.connect '/:controller/:action/:id.:format'
+  match '/:controller/:action/:id' => '#index'
+  match '/:controller/:action/:id.:format' => '#index'
 end

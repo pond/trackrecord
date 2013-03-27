@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Thank you for signing up with TrackRecord</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>
+      A new user has signed up for TrackRecord.
+    </p>
+
+    <table>
+      <tr>
+        <th style="text-align: left">User name</th>
+        <td style="text-align: left"><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th style="text-align: left">E-mail address</th>
+        <td style="text-align: left"><%= @user.email %></td>
+      </tr>
+    </table>
+
+    <p>
+      Please configure the account at your earliest convenience by copying
+      this page address into your preferred web browser:
+    </p>
+    
+    <p>
+      <!-- Not clickable - discourage phishing -->
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= @account_url %>
+    </p>
+
+    <p>
+      <em><small>TrackRecord automatic message</small></em>
+    </p>
+  </body>
+</html>

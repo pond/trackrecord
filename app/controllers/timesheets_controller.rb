@@ -1,6 +1,6 @@
 ########################################################################
 # File::    timesheets_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage Timesheet objects. See models/timesheet.rb for more.
 # ----------------------------------------------------------------------
@@ -13,6 +13,7 @@ class TimesheetsController < ApplicationController
 
   dynamic_actions = { :only => [ :edit, :update ] }
 
+  uses_prototype( :only => :index )
   uses_leightbox( dynamic_actions )
   uses_yui_tree(
     { :xhr_url_method => :trees_path },
@@ -27,16 +28,12 @@ class TimesheetsController < ApplicationController
     # application_helper.rb for details.
 
     @columns = [
-      { :header_text  => 'Year',        :value_method => 'year',
-        :header_align => 'center',      :value_align  => 'center'                                                       },
-      { :header_text  => 'Week',        :value_method => 'week_number',
-        :header_align => 'center',      :value_align  => 'center'                                                       },
-      { :header_text  => 'Start day',   :value_method => 'start_day',                 :sort_by => 'year, week_number'   },
-      { :header_text  => 'Owner',       :value_helper => :timesheethelp_owner,        :sort_by => 'users.name'          },
-      { :header_text  => 'Last edited', :value_helper => :timesheethelp_updated_at,   :sort_by => 'updated_at'          },
-      { :header_text  => 'Committed',   :value_helper => :timesheethelp_committed_at, :sort_by => 'committed_at'        },
+      { :header_text  => 'Start day',   :value_method => 'start_day',                 :sort_by => 'start_day_cache'             },
+      { :header_text  => 'Owner',       :value_helper => :timesheethelp_owner,        :sort_by => 'users.name, start_day_cache' },
+      { :header_text  => 'Last edited', :value_helper => :timesheethelp_updated_at,   :sort_by => 'updated_at'                  },
+      { :header_text  => 'Committed',   :value_helper => :timesheethelp_committed_at, :sort_by => 'committed_at'                },
       { :header_text  => 'Hours',       :value_helper => :timesheethelp_hours,
-        :header_align => 'center',      :value_align  => 'center'                                                       },
+        :header_align => 'center',      :value_align  => 'center'                                                               },
     ]
 
     # Get the basic options hash from ApplicationController, then work out
@@ -49,23 +46,22 @@ class TimesheetsController < ApplicationController
     user_conditions_sql  = "WHERE ( timesheets.committed = :committed ) AND ( users.id  = :user_id )\n"
     other_conditions_sql = "WHERE ( timesheets.committed = :committed ) AND ( users.id != :user_id )\n"
 
+    range_sql, search_start, search_end = appctrl_search_range_sql( Timesheet, :start_day_cache )
+
     # If asked to search for something, build extra conditions to do so.
 
-    unless ( params[ :search ].nil? )
-      if ( params[ :search ].empty? or params[ :search_cancel ] )
-        params.delete( :search )
-      else
-        search_num     = params[ :search ].to_i
-        search_str     = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
-        conditions_sql = "AND ( timesheets.year = :search_num OR timesheets.week_number = :search_num OR users.name ILIKE :search_str )"
-        vars           = { :search_num => search_num, :search_str => search_str }
+    unless ( range_sql.nil? )
+      search_num = params[ :search ].to_i
+      search_str = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
 
-        user_conditions_sql  << conditions_sql
-        other_conditions_sql << conditions_sql
+      conditions_sql = "AND #{ range_sql } ( timesheets.year = :search_num OR timesheets.week_number = :search_num OR users.name ILIKE :search_str )"
+      vars           = { :search_num => search_num, :search_str => search_str, :search_start => search_start, :search_end => search_end }
 
-        committed_vars.merge!( vars )
-        not_committed_vars.merge!( vars )
-      end
+      user_conditions_sql  << conditions_sql
+      other_conditions_sql << conditions_sql
+
+      committed_vars.merge!( vars )
+      not_committed_vars.merge!( vars )
     end
 
     # Sort order is already partially compiled in 'options' from the earlier
@@ -73,16 +69,6 @@ class TimesheetsController < ApplicationController
 
     order_sql = "ORDER BY #{ options[ :order ] }"
     options.delete( :order )
-
-    # Compile the main SQL statement. Select all columns of the project, fetching
-    # customers where the project's customer ID matches those customer IDs, with
-    # only projects containing tasks in the user's permitted task list (if any)
-    # are included, returned in the required order.
-    #
-    # Due to restrictions in the way that DISTINCT works, I just cannot figure out
-    # ANY way in SQL to only return unique projects while still matching the task
-    # permitted ID requirement for restricted users. So, fetch duplicates, then
-    # strip them out in Ruby afterwards (ouch).
 
     basic_sql = "SELECT timesheets.* FROM timesheets\n" <<
                 "INNER JOIN users ON ( timesheets.user_id = users.id )"
@@ -155,6 +141,7 @@ class TimesheetsController < ApplicationController
     return appctrl_not_permitted() unless @timesheet.can_be_modified_by?( @current_user )
 
     set_next_prev_week_variables( @timesheet )
+    @selected_rows = []
   end
 
   # Update a timesheet, its rows and work packets.
@@ -434,7 +421,7 @@ private
         appctrl_patch_params_from_js( :timesheet )
         ids = params[ :timesheet ][ :task_ids ]
 
-        if ( ids.nil? or ids.empty? )
+        if ( ids.blank? )
           errors.push( "No tasks selected - first choose one or more tasks from the list, then use the 'Add' button" )
         else
           ids.each do | id |

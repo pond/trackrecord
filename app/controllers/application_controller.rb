@@ -1,6 +1,6 @@
 ########################################################################
 # File::    application_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2007
 #
 # Purpose:: Standard Rails application controller.
 # ----------------------------------------------------------------------
@@ -71,9 +71,7 @@ protected
 
   def appctrl_new( model )
     return appctrl_not_permitted() if ( @current_user.restricted? )
-
-    @record = model.constantize.new
-    @record.assign_defaults( @current_user )
+    @record = model.constantize.new( nil, @current_user )
   end
 
   # Create a new object following submission of a 'create' view form.
@@ -81,8 +79,7 @@ protected
 
   def appctrl_create( model )
     return appctrl_not_permitted() if ( @current_user.restricted? )
-
-    @record = model.constantize.new( params[ model.downcase ] )
+    @record = model.constantize.new( params[ model.downcase ], @current_user )
 
     if ( @record.save )
       flash[ :notice ] = "New #{ model.downcase } added"
@@ -156,19 +153,48 @@ protected
   # method has been given, for sorting purposes.
 
   def appctrl_index_assist( model )
+
+    # Set up some default sort and pagination data.
+
+    default_sort      = -1 # "-1" => "unknown"
     default_direction = model::DEFAULT_SORT_DIRECTION.downcase
     default_entries   = 10
     default_page      = 1
 
-    params[ :sort      ] = "#{ -1                }" if ( params[ :sort      ].nil? )
-    params[ :page      ] = "#{ default_page      }" if ( params[ :page      ].nil? )
-    params[ :entries   ] = "#{ default_entries   }" if ( params[ :entries   ].nil? )
-    params[ :direction ] = "#{ default_direction }" if ( params[ :direction ].nil? )
+    # Attempt to read user preferences for sorting and pagination in index
+    # views for the given model. Note the heavy use of "try()" to tolerate
+    # 'nil' values propagated through, e.g. due to no logged in user, or
+    # a user with no control panel (not that this ought to ever happen).
 
-    sort    = params[ :sort    ].to_i
-    page    = params[ :page    ].to_i
-    entries = params[ :entries ].to_i
+    prefs_prefix      = "sorting.#{ model.name.downcase }."
+    cp                = @current_user.try( :control_panel )
+    cp_sort           = cp.try( :get_preference, "#{ prefs_prefix }sort"      )
+    cp_direction      = cp.try( :get_preference, "#{ prefs_prefix }direction" )
+    cp_entries        = cp.try( :get_preference, "#{ prefs_prefix }entries"   )
+
+    # For each one, try to read from the parameters; or fall back to the user
+    # settings; or fall back to the defaults. If the value so determined is
+    # different from the user's current setting, then update that setting.
+
+    sort = params[ :sort ].try( :to_i ) || cp_sort || default_sort
+    cp.try( :set_preference, "#{ prefs_prefix }sort", sort ) unless ( cp_sort == sort )
+
+    direction = params[ :direction ] || cp_direction || default_direction
+    cp.try( :set_preference, "#{ prefs_prefix }direction", direction ) unless ( cp_direction == direction )
+
+    entries = params[ :entries ].try( :to_i ) || cp_entries || default_entries
     entries = default_entries if ( entries <= 0 or entries > 500 )
+    cp.try( :set_preference, "#{ prefs_prefix }entries", entries ) unless ( cp_entries == entries )
+
+    # Establish a page number, then write the final determined values back into
+    # the parameters hash as views or plugins may refer to these directly.
+
+    page = params[ :page ].try( :to_i ) || default_page
+
+    params[ :sort      ] = sort.to_s
+    params[ :direction ] = direction
+    params[ :entries   ] = entries.to_s
+    params[ :page      ] = page.to_s
 
     if ( 0..@columns.length ).include?( sort )
 
@@ -197,13 +223,95 @@ protected
       end
     end
 
-    if ( params[ :direction ] == 'desc' )
+    if ( direction == 'desc' )
       order << ' DESC'
     else
       order << ' ASC'
     end
 
     return { :page => page, :per_page => entries, :order => order }
+  end
+
+  # Given a key for the params hash, construct a date from the value
+  # associated with the key. If the key is not present or has an emtpy
+  # value, or if any exception occurs trying to parse the date, the
+  # function returns 'nil'; else it returns a Date object instance.
+  #
+  def appctrl_date_from_params( key )
+    unless ( params[ key ].blank? )
+      begin
+        return Date.parse( params[ key ] )
+      rescue
+        # Do nothing - drop through to have-no-date case
+      end
+    end
+
+    nil
+  end
+
+  # Return an array giving a start date and end date based on search
+  # form submission data in the params hash. Pass a default start and
+  # end date for the case where none has been provided in the params,
+  # or the provided value is invalid.
+  #
+  def appctrl_dates_from_search( default_start, default_end )
+    a = appctrl_date_from_params( :search_range_start ) || default_start
+    b = appctrl_date_from_params( :search_range_end   ) || default_end
+
+    a, b = b, a if ( a > b ) 
+
+    return [ a, b ]
+  end
+
+  # Return an SQL fragment of the form "date-field >= :range_start AND
+  # date-field <= bar :range_end" where the ranges are dates obtained
+  # from "appctrl_dates_from_search" and 'date-field' is given as an
+  # optional second input parameter. The return value includes the
+  # ranges which you pass in using named parameter substitution when
+  # the SQL fragment is included in a wider query.
+  #
+  # Pass the model being searched; it must support a 'used_range'
+  # class method that returns a Range of years for all existant
+  # instances in the database at the time of calling, for the field
+  # that is to be searched. The second parameter is that field, or
+  # if omitted, the model's USED_RANGE_COLUMN by default.
+  #
+  # Returns an array (anticipating parallel assignment by the caller)
+  # with the SQl data, the start Date and the end Date of the range,
+  # or an array of 'nil' if there is no usable search data in the
+  # parameters hash (or it is being explicitly cleared).
+  #
+  # Intended side-effect: Makes sure that search parameters are cleared
+  # out if an explicit 'search_cancel' params key has a value.
+  #
+  def appctrl_search_range_sql( model, field = nil )
+    sql = range_start = range_end = nil
+
+    field = model::USED_RANGE_COLUMN if ( field.nil? )
+
+    unless ( params[ :search ].nil? )
+      if ( ( params[ :search ].blank? and params[ :search_range_start ].blank? and params[ :search_range_end ].blank? ) or params[ :search_cancel ] )
+        params.delete( :search )
+        params.delete( :search_range_start )
+        params.delete( :search_range_end )
+      else
+        range                  = model.used_range()
+        range_start, range_end = appctrl_dates_from_search(
+          Date.new( range.first    ),     # I.e. start year
+          Date.new( range.last + 1 ) - 1  # I.e. start of year after end year, minus one day; that is, the last day of end year
+        )
+
+        # Since SQL date-only queries work on a 'start of the day' basis,
+        # we do a ">=" start and a "<" end comparison, setting the end to
+        # the beginning of the *next* day.
+
+        range_end += 1
+
+        sql = "#{ model.table_name }.#{ field } >= :range_start AND #{ model.table_name }.#{ field } < :range_end AND"
+      end
+    end
+
+    [ sql, range_start, range_end ]
   end
 
   # YUI tree form submission will present selected task IDs as a single string
@@ -250,7 +358,7 @@ private
   # redirect back to that form.
 
   def appctrl_ensure_user_name
-    if ( ( not @current_user.nil? ) and @current_user.name.empty? )
+    if ( ( not @current_user.nil? ) and @current_user.name.blank? )
       redirect_to( edit_user_path( @current_user) )
     end
   end

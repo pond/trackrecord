@@ -17,7 +17,8 @@
         :model          => 'timesheet',
         :columns        => @columns,
         :collection     => @user_not_committed_timesheets,
-        :actions_method => 'timesheethelp_actions'
+        :actions_method => 'timesheethelp_actions',
+        :with_reports   => false
       }
     }
   )
@@ -33,7 +34,8 @@
         :model          => 'timesheet',
         :columns        => @columns,
         :collection     => @user_committed_timesheets,
-        :actions_method => 'timesheethelp_actions'
+        :actions_method => 'timesheethelp_actions',
+        :with_reports   => false
       }
     }
   )
@@ -51,7 +53,8 @@
         :model          => 'timesheet',
         :columns        => @columns,
         :collection     => @other_not_committed_timesheets,
-        :actions_method => 'timesheethelp_actions'
+        :actions_method => 'timesheethelp_actions',
+        :with_reports   => false
       }
     }
   )
@@ -67,7 +70,8 @@
         :model          => 'timesheet',
         :columns        => @columns,
         :collection     => @other_committed_timesheets,
-        :actions_method => 'timesheethelp_actions'
+        :actions_method => 'timesheethelp_actions',
+        :with_reports   => false
       }
     }
   )
@@ -76,16 +80,14 @@
 
       <h2>Find timesheets</h2>
 
-      <% form_tag timesheets_path, :method => 'get' do %>
-        <%= hidden_field_tag( 'sort',      params[ :sort      ] ) %>
-        <%= hidden_field_tag( 'direction', params[ :direction ] ) %>
-        <%= hidden_field_tag( 'entries',   params[ :entries   ] ) %>
-        <% content_tag :label do %>
-          Search years, week numbers and owner names (TBD - dates / date ranges):
-          <%= text_field_tag :search, params[ :search ] %>
-          <%= submit_tag( 'Go', { :name => 'search_go' } ) %>
-<% if ( params[ :search ] ) -%>
-          <%= submit_tag( 'Clear', { :name => 'search_cancel' } ) %>
-<% end -%>
-        <% end %>
-      <% end %>
+<%=
+    render(
+      :partial => 'shared/search',
+      :locals  => {
+        :path    => timesheets_path(),
+        :prompt  => @current_user.privileged? ? 'Search years, week numbers and owner names' : 'Search years and week numbers',
+        :dprompt => 'between timesheet start date',
+        :years   => Timesheet.used_range()
+      }
+    )
+%>

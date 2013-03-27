@@ -1,6 +1,6 @@
 ########################################################################
 # File::    email_config.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Configuration data for e-mail notification messages. See
 #           models/email_notifier.rb for more.

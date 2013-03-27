@@ -1,6 +1,6 @@
 ########################################################################
 # File::    users_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to User objects. See
 #           controllers/users_controller.rb for more.
@@ -46,15 +46,15 @@ module UsersHelper
       if ( @current_user.admin? )
         warn    = false
         options = [
-                    [ 'Normal',        'Normal'  ],
-                    [ 'Manager',       'Manager' ],
-                    [ 'Administrator', 'Admin'   ]
+                    [ 'Normal',        User::USER_TYPE_NORMAL  ],
+                    [ 'Manager',       User::USER_TYPE_MANAGER ],
+                    [ 'Administrator', User::USER_TYPE_ADMIN   ]
                   ]
       else
         warn    = true
         options = [
-                    [ 'Normal',  'Normal'  ],
-                    [ 'Manager', 'Manager' ]
+                    [ 'Normal',  User::USER_TYPE_NORMAL  ],
+                    [ 'Manager', User::USER_TYPE_MANAGER ]
                   ]
       end
 
@@ -62,15 +62,15 @@ module UsersHelper
 
       if ( warn and @current_user.id == user.id )
         output << "\n\n"
-        output << "          <p>\n"
+        output << "          <p>\n".html_safe()
         output << "            Note that if you revoke your own account privileges,\n"
         output << "            you will need the help of another manager or an\n"
         output << "            administrator if you want to restore them later.\n"
-        output << "          </p>"
+        output << "          </p>".html_safe()
       end
     end
 
-    return output
+    return output.html_safe()
   end
 
   # Output HTML for the given form and user which produces a selection
@@ -107,18 +107,18 @@ module UsersHelper
 
       if( user.restricted? )
         output << "\n\n"
-        output << "          <p>\n"
+        output << "          <p>\n".html_safe()
         output << "            This list is only relevant to users with a\n"
         output << "            privileged account type because normal users\n"
         output << "            cannot create new tasks.\n"
-        output << "          </p>"
+        output << "          </p>".html_safe()
       end
     else
       output  = "          There are no active projects. Please\n"
-      output << "          #{ link_to( 'create at least one', new_project_path() ) }."
+      output << "          #{ link_to( 'create at least one', new_project_path() ) }.".html_safe()
     end
 
-    return output
+    return output.html_safe()
   end
 
   # Output HTML for the given control panel form (fields_for...) and user
@@ -136,18 +136,18 @@ module UsersHelper
 
       if( user.restricted? )
         output << "\n\n"
-        output << "          <p>\n"
+        output << "          <p>\n".html_safe()
         output << "            This list is only relevant to users with a\n"
         output << "            privileged account type because normal users\n"
         output << "            cannot create new tasks.\n"
-        output << "          </p>"
+        output << "          </p>".html_safe()
       end
     else
       output  = "          There are no active customers. Please\n"
-      output << "          #{ link_to( 'create at least one', new_customer_path() ) }."
+      output << "          #{ link_to( 'create at least one', new_customer_path() ) }.".html_safe()
     end
 
-    return output
+    return output.html_safe()
   end
 
   # List view helper - format the given user's e-mail address as a link; do

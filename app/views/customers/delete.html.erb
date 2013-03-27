@@ -1,22 +1,26 @@
-<h1>Delete customer<%= @record.title.nil? or @record.title.empty? ? '' : " '#{ h( @record.title ) }'" %>?</h1>
+<h1>Delete customer<%= @record.title.blank? ? '' : " '#{ @record.title }'" %>?</h1>
 
-<%= image_tag( 'trackrecord/drawing.png', { :size => '96x84', :align => 'left', :alt => '!', :style => 'padding-right: 5px;' } ) %>
+<%= image_tag( 'trackrecord/warning.png', { :size => '96x84', :alt=>'!', :class=>'warning' } ) %>
 <h2>Warning!</h2>
 
-<% form_for( :customer, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+<%= form_for( :customer, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
 
   Only use the 'delete' button if you are <strong>absolutely sure</strong>
   that you wish to delete the customer and, if the boxes next to the button
   are ticked, <em>all</em> of its associated projects and the tasks associated
   with those projects. <strong>The action cannot be undone.</strong>
 
-  <br clear="all" /><br />
+  <br style="clear: both" /><br />
 
   <%= f.submit( 'Delete customer', { :disable_with => 'Deleting...' } ) %>
-  <%= check_box_tag( 'destroy_projects' ) %>
-  Delete associated projects too?
-  <%= check_box_tag( 'destroy_tasks' ) %>
-  If deleting projects, delete the tasks associated with those projects too?
+  <%= label_tag :destroy_projects do %>
+    <%= check_box_tag( 'destroy_projects' ) %>
+    Delete associated projects too?
+  <% end %>
+  <%= label_tag :destroy_tasks do %>
+    <%= check_box_tag( 'destroy_tasks' ) %>
+    If deleting projects, delete the tasks associated with those projects too?
+  <% end %>
 <% end %>
 
 <p>

@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class TrackRecordReport::Report - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/track_record_report.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="../TrackRecordSections.html">TrackRecordSections</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-label">::label</a>
+    
+    <li><a href="#method-c-labels">::labels</a>
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-active_task_ids-3D">#active_task_ids=</a>
+    
+    <li><a href="#method-i-active_tasks">#active_tasks</a>
+    
+    <li><a href="#method-i-column_heading">#column_heading</a>
+    
+    <li><a href="#method-i-column_title">#column_title</a>
+    
+    <li><a href="#method-i-compile">#compile</a>
+    
+    <li><a href="#method-i-display_range">#display_range</a>
+    
+    <li><a href="#method-i-frequency-3D">#frequency=</a>
+    
+    <li><a href="#method-i-inactive_task_ids-3D">#inactive_task_ids=</a>
+    
+    <li><a href="#method-i-inactive_tasks">#inactive_tasks</a>
+    
+    <li><a href="#method-i-label">#label</a>
+    
+    <li><a href="#method-i-partial_column-3F">#partial_column?</a>
+    
+    <li><a href="#method-i-range_end-3D">#range_end=</a>
+    
+    <li><a href="#method-i-range_month_end-3D">#range_month_end=</a>
+    
+    <li><a href="#method-i-range_month_start-3D">#range_month_start=</a>
+    
+    <li><a href="#method-i-range_start-3D">#range_start=</a>
+    
+    <li><a href="#method-i-range_week_end-3D">#range_week_end=</a>
+    
+    <li><a href="#method-i-range_week_start-3D">#range_week_start=</a>
+    
+    <li><a href="#method-i-reportable_user_ids-3D">#reportable_user_ids=</a>
+    
+    <li><a href="#method-i-task_ids-3D">#task_ids=</a>
+    
+    <li><a href="#method-i-tasks-3D">#tasks=</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="../ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="../ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="../ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="../ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="../QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="../QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="../QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="../QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="../QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="../QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="../YuiTree.html">YuiTree</a>
+  
+    <li><a href="../YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="../YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="../SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="../ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="../AuditsController.html">AuditsController</a>
+  
+    <li><a href="../AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="../ChartsController.html">ChartsController</a>
+  
+    <li><a href="../ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="../ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="../ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="../Customer.html">Customer</a>
+  
+    <li><a href="../CustomersController.html">CustomersController</a>
+  
+    <li><a href="../CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="../EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="../HelpController.html">HelpController</a>
+  
+    <li><a href="../HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="../Project.html">Project</a>
+  
+    <li><a href="../ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="../ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="../Rangeable.html">Rangeable</a>
+  
+    <li><a href="../ReportsController.html">ReportsController</a>
+  
+    <li><a href="../SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="../SavedReport.html">SavedReport</a>
+  
+    <li><a href="../SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="../SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="../SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="../SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="../SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="../SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="../SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="../SessionsController.html">SessionsController</a>
+  
+    <li><a href="../Task.html">Task</a>
+  
+    <li><a href="../TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="../TaskImport.html">TaskImport</a>
+  
+    <li><a href="../TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="../TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="../TasksController.html">TasksController</a>
+  
+    <li><a href="../TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="../TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="../TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="../TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="../TreesController.html">TreesController</a>
+  
+    <li><a href="../User.html">User</a>
+  
+    <li><a href="../UsersController.html">UsersController</a>
+  
+    <li><a href="../UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="../WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="../WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="../WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class TrackRecordReport::Report</h1>
+
+  <div id="description" class="description">
+    
+<p>Class which manages a report.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="FREQUENCY">FREQUENCY
+        
+        <dd class="description"><p>Configure the handlers and human-readable labels for the ways in which
+reports get broken up, in terms of frequency. View code which presents a
+choice of report frequency should obtain the labels for the list with the
+‘label’ method. Use the ‘<a
+href="Report.html#method-i-column_title">#column_title</a>’ method for a
+column “title”, shown alongside or above column headings. Use the ‘<a
+href="Report.html#method-i-column_heading">#column_heading</a>’ method for
+per-column headings.</p>
+
+<p>THESE MUST STAY IN THE SAME ORDER!  If you add new entries, you must</p>
+
+<h6 id="label-add+them+at+the+end+of+the+list.">add them at the end of the list.</h6>
+
+<p>Saved reports specify the reporting frequency by reference to this constant
+and an index into its array of entries. If you produce a new TrackRecord
+version that changes the meaning of any array index rather than merely
+adding new entries, you will have to include a migration that maps old
+indices to new for existing saved report records.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-active_task_ids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">active_task_ids</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-column_count" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">column_count</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Number of columns after all calculations are complete; this is the same as
+the size of the ‘<a
+href="Report.html#attribute-i-column_ranges">#column_ranges</a>’ or ‘<a
+href="Report.html#attribute-i-column_totals">#column_totals</a>’ arrays
+below, but using this explicit property is likely to make code more
+legible.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-column_ranges" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">column_ranges</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Array of ranges, one per column, giving the range for each of the columns
+held within the rows. The indices into this array match indices into the
+rows’ cell arrays.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-column_totals" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">column_totals</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Array of <a href="ReportColumnTotal.html">ReportColumnTotal</a> objects,
+one per column, giving the total hours for that column. The indices into
+this array match indices into the rows’ cell arrays.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-customer_sort_field" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">customer_sort_field</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Sort fields for customers, projects and tasks; grouping options.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-filtered_tasks" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">filtered_tasks</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-filtered_users" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">filtered_users</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-frequency" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">frequency</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>A row from the <a href="Report.html#FREQUENCY">FREQUENCY</a> constant and
+the current index into that array.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-frequency_data" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">frequency_data</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>A row from the <a href="Report.html#FREQUENCY">FREQUENCY</a> constant and
+the current index into that array.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-inactive_task_ids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">inactive_task_ids</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-project_sort_field" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">project_sort_field</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Sort fields for customers, projects and tasks; grouping options.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-range" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">range</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Complete date range for the whole report; array of user IDs used for
+per-user breakdowns; array of task IDs the report will represent.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-range_end" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">range_end</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Range data for the ‘new’ view form. Custom attribute writer methods are
+used to call “rationalise_dates()” whenever a range value is altered.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-range_month_end" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">range_month_end</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-range_month_start" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">range_month_start</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-range_start" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">range_start</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Range data for the ‘new’ view form. Custom attribute writer methods are
+used to call “rationalise_dates()” whenever a range value is altered.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-range_week_end" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">range_week_end</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-range_week_start" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">range_week_start</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-reportable_user_ids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">reportable_user_ids</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-rows" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">rows</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Array of ReportRows making up the report. The row objects contain arrays of
+cells, corresponding to columns of the report.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-sections" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">sections</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Array of <a href="ReportSection.html">ReportSection</a> objects describing
+per-section totals of various kinds. See the <a
+href="ReportSection.html">ReportSection</a> class and <a
+href="../TrackRecordSections.html">TrackRecordSections</a> module for
+details.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-task_filter" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">task_filter</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Handle all (“all”), only billable (“billable”) or only non-billable
+(“non_billable”) tasks?</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-task_grouping" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">task_grouping</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-task_ids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">task_ids</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-task_sort_field" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">task_sort_field</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Sort fields for customers, projects and tasks; grouping options.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-tasks" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tasks</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Read-only array of actual user and task objects based on the IDs. Not all
+users or tasks may be included, depending on security settings.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-total_actual_remaining" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">total_actual_remaining</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Total duration of all tasks in all rows; number of hours remaining (may be
+negative for overrun) after all hours worked in tasks with non-zero
+duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
+‘actual’ value only accounts for committed hours, while the ‘potential’
+value includes both committed and not-committed hours (thus, subject to
+change).</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-total_duration" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">total_duration</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Total duration of all tasks in all rows; number of hours remaining (may be
+negative for overrun) after all hours worked in tasks with non-zero
+duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
+‘actual’ value only accounts for committed hours, while the ‘potential’
+value includes both committed and not-committed hours (thus, subject to
+change).</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-total_potential_remaining" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">total_potential_remaining</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Total duration of all tasks in all rows; number of hours remaining (may be
+negative for overrun) after all hours worked in tasks with non-zero
+duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
+‘actual’ value only accounts for committed hours, while the ‘potential’
+value includes both committed and not-committed hours (thus, subject to
+change).</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-user_column_totals" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">user_column_totals</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Array of <a href="ReportUserColumnTotal.html">ReportUserColumnTotal</a>
+objects, each index corresponding to a user the “users” array at the same
+index. These give the total work done by that user across all rows.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-users" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">users</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Read-only array of actual user and task objects based on the IDs. Not all
+users or tasks may be included, depending on security settings.</p>
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-label" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">label</span><span
+            class="method-args">( frequency )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Class method equivalent of “label” above. Returns the label for the given
+frequency, which must be a valid index into Report::FREQUENCY. See also
+“labels” below.</p>
+          
+
+          
+          <div class="method-source-code" id="label-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 357</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">label</span>( <span class="ruby-identifier">frequency</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">FREQUENCY</span>[ <span class="ruby-identifier">frequency</span> ][ <span class="ruby-value">:label</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- label-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- label-method -->
+
+    
+      <div id="method-c-labels" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">labels</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Class method which returns an array of labels for various report
+frequencies. The index into the array indicates the frequency index.</p>
+          
+
+          
+          <div class="method-source-code" id="labels-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 364</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">labels</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">FREQUENCY</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">f</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[ <span class="ruby-value">:label</span> ] }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- labels-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- labels-method -->
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">( current_user, params = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new <a href="Report.html">Report</a>. In the first parameter, pass
+the current TrackRecord user. In the next parameter pass nothing to use
+default values for a ‘new report’ view form, or pass “params[ :report ]”
+(or similar) to create using a params hash from a ‘new report’ form
+submission.</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-ivar">@current_user</span> = <span class="ruby-identifier">current_user</span>
+
+  <span class="ruby-ivar">@range_start</span>           = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@range_end</span>             = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@range_week_start</span>      = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@range_week_end</span>        = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@range_month_start</span>     = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@range_month_end</span>       = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@frequency</span>             = <span class="ruby-value">0</span>
+
+  <span class="ruby-ivar">@customer_sort_field</span>   = <span class="ruby-string">'title'</span>
+  <span class="ruby-ivar">@project_sort_field</span>    = <span class="ruby-string">'title'</span>
+  <span class="ruby-ivar">@task_sort_field</span>       = <span class="ruby-constant">Task</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SORT_COLUMN</span>
+  <span class="ruby-ivar">@task_grouping</span>         = <span class="ruby-value">:default</span>
+  <span class="ruby-ivar">@task_filter</span>           = <span class="ruby-string">'all'</span>
+
+  <span class="ruby-ivar">@include_totals</span>        = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@include_committed</span>     = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@include_not_committed</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@exclude_zero_rows</span>     = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@exclude_zero_cols</span>     = <span class="ruby-keyword">false</span> <span class="ruby-comment"># Totals only - ignores zero com/non-com columns in CSV exports for total/com/non-com column groups with non-zero totals</span>
+
+  <span class="ruby-ivar">@tasks</span>                 = []
+  <span class="ruby-ivar">@filtered_tasks</span>        = []
+  <span class="ruby-ivar">@task_ids</span>              = []
+  <span class="ruby-ivar">@active_task_ids</span>       = []
+  <span class="ruby-ivar">@inactive_task_ids</span>     = []
+
+  <span class="ruby-ivar">@users</span>                 = []
+  <span class="ruby-ivar">@filtered_users</span>        = []
+  <span class="ruby-ivar">@reportable_user_ids</span>   = []
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> )
+
+    <span class="ruby-comment"># Adapted from ActiveRecord::Base &quot;attributes=&quot;, Rails 2.1.0</span>
+    <span class="ruby-comment"># on 29-Jun-2008.</span>
+
+    <span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">stringify_keys!</span>
+    <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-string">'('</span> ) )
+        <span class="ruby-identifier">raise</span>( <span class="ruby-string">&quot;Multi-parameter attributes are not supported.&quot;</span> )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">begin</span>
+          <span class="ruby-identifier">send</span>( <span class="ruby-identifier">key</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-identifier">value</span> )
+        <span class="ruby-keyword">rescue</span>
+          <span class="ruby-comment"># Ignore errors</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-active_task_ids-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">active_task_ids=</span><span
+            class="method-args">( ids )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Build the ‘tasks’ array if ‘<a
+href="Report.html#attribute-i-active_task_ids">#active_task_ids</a>’ is
+updated externally. The result will be the sum of existing inactive and
+updated active task IDs.</p>
+          
+
+          
+          <div class="method-source-code" id="active_task_ids-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 276</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">active_task_ids=</span>( <span class="ruby-identifier">ids</span> )
+  <span class="ruby-ivar">@provided_active_task_ids</span> = <span class="ruby-identifier">map_raw_ids</span>( <span class="ruby-identifier">ids</span> )
+  <span class="ruby-identifier">assign_actual_tasks_from_provided_ids</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- active_task_ids-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- active_task_ids-3D-method -->
+
+    
+      <div id="method-i-active_tasks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">active_tasks</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Virtual accessor for the active task list, which just filters the master
+task list and returns the result (less RAM than keeping dual lists and not
+speed-critical as not used that often in practice).</p>
+          
+
+          
+          <div class="method-source-code" id="active_tasks-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 248</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">active_tasks</span>
+  <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- active_tasks-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- active_tasks-method -->
+
+    
+      <div id="method-i-column_heading" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">column_heading</span><span
+            class="method-args">( col_index )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Helper method which returns a user-displayable column heading appropriate
+for the report type. Pass the column index.</p>
+          
+
+          
+          <div class="method-source-code" id="column_heading-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 379</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_heading</span>( <span class="ruby-identifier">col_index</span> )
+  <span class="ruby-identifier">col_range</span> = <span class="ruby-ivar">@column_ranges</span>[ <span class="ruby-identifier">col_index</span> ]
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">send</span>( <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:column</span> ], <span class="ruby-identifier">col_range</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- column_heading-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- column_heading-method -->
+
+    
+      <div id="method-i-column_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">column_title</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Helper method which returns a user-displayable column title to be shown
+once, next to or near per-column headings (see “<a
+href="Report.html#method-i-column_heading">#column_heading</a>”),
+appropriate for the report type.</p>
+          
+
+          
+          <div class="method-source-code" id="column_title-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 372</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_title</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:title</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- column_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- column_title-method -->
+
+    
+      <div id="method-i-compile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">compile</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Compile the report.</p>
+          
+
+          
+          <div class="method-source-code" id="compile-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 327</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">compile</span>
+  <span class="ruby-identifier">rationalise_dates</span>()
+  <span class="ruby-identifier">apply_filters</span>()
+  <span class="ruby-identifier">sort_and_group</span>()
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@filtered_tasks</span>.<span class="ruby-identifier">empty?</span> )
+
+  <span class="ruby-identifier">add_rows</span>()
+  <span class="ruby-identifier">add_columns</span>()
+  <span class="ruby-identifier">calculate!</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- compile-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- compile-method -->
+
+    
+      <div id="method-i-display_range" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">display_range</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Helper method which returns a user-displayable range describing the total
+date range for this report.</p>
+          
+
+          
+          <div class="method-source-code" id="display_range-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 349</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">display_range</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">heading_total</span>( <span class="ruby-ivar">@range</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- display_range-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- display_range-method -->
+
+    
+      <div id="method-i-frequency-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">frequency=</span><span
+            class="method-args">( freq )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set the ‘<a
+href="Report.html#attribute-i-frequency_data">#frequency_data</a>’ field
+when ‘frequency’ is updated externally.</p>
+          
+
+          
+          <div class="method-source-code" id="frequency-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 310</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">frequency=</span>( <span class="ruby-identifier">freq</span> )
+  <span class="ruby-ivar">@frequency</span>      = <span class="ruby-identifier">freq</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-ivar">@frequency_data</span> = <span class="ruby-constant">FREQUENCY</span>[ <span class="ruby-ivar">@frequency</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- frequency-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- frequency-3D-method -->
+
+    
+      <div id="method-i-inactive_task_ids-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inactive_task_ids=</span><span
+            class="method-args">( ids )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Build the ‘tasks’ array if ‘<a
+href="Report.html#attribute-i-inactive_task_ids">#inactive_task_ids</a>’ is
+updated externally. The result will be the sum of existing active and
+updated inactive task IDs.</p>
+          
+
+          
+          <div class="method-source-code" id="inactive_task_ids-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inactive_task_ids=</span>( <span class="ruby-identifier">ids</span> )
+  <span class="ruby-ivar">@provided_inactive_task_ids</span> = <span class="ruby-identifier">map_raw_ids</span>( <span class="ruby-identifier">ids</span> )
+  <span class="ruby-identifier">assign_actual_tasks_from_provided_ids</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- inactive_task_ids-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- inactive_task_ids-3D-method -->
+
+    
+      <div id="method-i-inactive_tasks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inactive_tasks</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>As above, but for inactive tasks.</p>
+          
+
+          
+          <div class="method-source-code" id="inactive_tasks-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 254</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inactive_tasks</span>
+  <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- inactive_tasks-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- inactive_tasks-method -->
+
+    
+      <div id="method-i-label" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">label</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Helper method which returns a user-displayable label describing this report
+type. There’s a class method equivalent below.</p>
+          
+
+          
+          <div class="method-source-code" id="label-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 342</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">label</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:label</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- label-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- label-method -->
+
+    
+      <div id="method-i-partial_column-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">partial_column?</span><span
+            class="method-args">( col_index )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Does the column at the given index only contain partial results, because it
+is the first or last column in the overall range and that range starts or
+ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
+          
+
+          
+          <div class="method-source-code" id="partial_column-3F-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 388</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">partial_column?</span>( <span class="ruby-identifier">col_index</span> )
+
+<span class="ruby-comment"># [TODO] Doesn't work, because col_range accurately reflects the column range</span>
+<span class="ruby-comment">#        rather than the quantised range. Getting at the latter is tricky, so</span>
+<span class="ruby-comment">#        leaving this for later. At present the method is only used for display</span>
+<span class="ruby-comment">#        purposes in the column headings.</span>
+
+      <span class="ruby-identifier">col_range</span> = <span class="ruby-ivar">@column_ranges</span>[ <span class="ruby-identifier">col_index</span> ]
+      <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">col_range</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">min</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">col_range</span>.<span class="ruby-identifier">max</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">max</span> )
+    <span class="ruby-keyword">end</span></pre>
+          </div><!-- partial_column-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- partial_column-3F-method -->
+
+    
+      <div id="method-i-range_end-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">range_end=</span><span
+            class="method-args">( value )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="range_end-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 319</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">range_end=</span>( <span class="ruby-identifier">value</span> );         <span class="ruby-ivar">@range_end</span>         = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
+          </div><!-- range_end-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- range_end-3D-method -->
+
+    
+      <div id="method-i-range_month_end-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">range_month_end=</span><span
+            class="method-args">( value )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="range_month_end-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 323</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">range_month_end=</span>( <span class="ruby-identifier">value</span> );   <span class="ruby-ivar">@range_month_end</span>   = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
+          </div><!-- range_month_end-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- range_month_end-3D-method -->
+
+    
+      <div id="method-i-range_month_start-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">range_month_start=</span><span
+            class="method-args">( value )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="range_month_start-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 322</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">range_month_start=</span>( <span class="ruby-identifier">value</span> ); <span class="ruby-ivar">@range_month_start</span> = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
+          </div><!-- range_month_start-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- range_month_start-3D-method -->
+
+    
+      <div id="method-i-range_start-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">range_start=</span><span
+            class="method-args">( value )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Rationalise overall date ranges whenever a related field is updated
+externally.</p>
+          
+
+          
+          <div class="method-source-code" id="range_start-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 318</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">range_start=</span>( <span class="ruby-identifier">value</span> );       <span class="ruby-ivar">@range_start</span>       = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
+          </div><!-- range_start-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- range_start-3D-method -->
+
+    
+      <div id="method-i-range_week_end-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">range_week_end=</span><span
+            class="method-args">( value )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="range_week_end-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 321</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">range_week_end=</span>( <span class="ruby-identifier">value</span> );    <span class="ruby-ivar">@range_week_end</span>    = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
+          </div><!-- range_week_end-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- range_week_end-3D-method -->
+
+    
+      <div id="method-i-range_week_start-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">range_week_start=</span><span
+            class="method-args">( value )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="range_week_start-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 320</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">range_week_start=</span>( <span class="ruby-identifier">value</span> );  <span class="ruby-ivar">@range_week_start</span>  = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
+          </div><!-- range_week_start-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- range_week_start-3D-method -->
+
+    
+      <div id="method-i-reportable_user_ids-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reportable_user_ids=</span><span
+            class="method-args">( ids )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Build the ‘user’ array if ‘<a
+href="Report.html#attribute-i-reportable_user_ids">#reportable_user_ids</a>’
+is updated externally.</p>
+          
+
+          
+          <div class="method-source-code" id="reportable_user_ids-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 291</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reportable_user_ids=</span>( <span class="ruby-identifier">ids</span> )
+  <span class="ruby-identifier">ids</span> <span class="ruby-operator">||=</span> []
+  <span class="ruby-identifier">ids</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">values</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Hash</span> ) <span class="ruby-keyword">or</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">HashWithIndifferentAccess</span> ) )
+  <span class="ruby-ivar">@reportable_user_ids</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_i</span> }
+
+  <span class="ruby-comment"># Security - if the current user is restricted they might try and hack</span>
+  <span class="ruby-comment"># the form to view other user details.</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+    <span class="ruby-ivar">@reportable_user_ids</span> = [ <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> ] <span class="ruby-keyword">unless</span>( <span class="ruby-ivar">@reportable_user_ids</span>.<span class="ruby-identifier">empty?</span> )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Turn the list of (now numeric) user IDs into user objects.</span>
+
+  <span class="ruby-ivar">@users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@reportable_user_ids</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reportable_user_ids-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reportable_user_ids-3D-method -->
+
+    
+      <div id="method-i-task_ids-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">task_ids=</span><span
+            class="method-args">( ids )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Build the ‘tasks’ array if ‘<a
+href="Report.html#attribute-i-task_ids">#task_ids</a>’ is updated
+externally.</p>
+          
+
+          
+          <div class="method-source-code" id="task_ids-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 268</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">task_ids=</span>( <span class="ruby-identifier">ids</span> )
+  <span class="ruby-ivar">@provided_task_ids</span> = <span class="ruby-identifier">map_raw_ids</span>( <span class="ruby-identifier">ids</span> )
+  <span class="ruby-identifier">assign_actual_tasks_from_provided_ids</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- task_ids-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- task_ids-3D-method -->
+
+    
+      <div id="method-i-tasks-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tasks=</span><span
+            class="method-args">( array )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set a task array directly (will always be filtered according to security
+settings for the current user).</p>
+          
+
+          
+          <div class="method-source-code" id="tasks-3D-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 261</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tasks=</span>( <span class="ruby-identifier">array</span> )
+  <span class="ruby-ivar">@tasks</span> = <span class="ruby-identifier">array</span>
+  <span class="ruby-identifier">update_internal_task_lists</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- tasks-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- tasks-3D-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

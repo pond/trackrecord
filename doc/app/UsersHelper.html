@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module UsersHelper - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/helpers/users_helper.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-userhelp_actions">#userhelp_actions</a>
+    
+    <li><a href="#method-i-userhelp_active_selector">#userhelp_active_selector</a>
+    
+    <li><a href="#method-i-userhelp_default_customer_selector">#userhelp_default_customer_selector</a>
+    
+    <li><a href="#method-i-userhelp_default_project_selector">#userhelp_default_project_selector</a>
+    
+    <li><a href="#method-i-userhelp_email">#userhelp_email</a>
+    
+    <li><a href="#method-i-userhelp_identity_url">#userhelp_identity_url</a>
+    
+    <li><a href="#method-i-userhelp_user_type_selector">#userhelp_user_type_selector</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module UsersHelper</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>users_helper.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Support functions for views related to <a href="User.html">User</a>
+objects. See controllers/users_controller.rb for more.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>03-Jan-2008 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-userhelp_actions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">userhelp_actions</span><span
+            class="method-args">( user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return list actions appropriate for the given user</p>
+          
+
+          
+          <div class="method-source-code" id="userhelp_actions-source">
+            <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_actions</span>( <span class="ruby-identifier">user</span> )
+  <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">'edit'</span> ]
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'delete'</span> ) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span>
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'show'</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">actions</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- userhelp_actions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- userhelp_actions-method -->
+
+    
+      <div id="method-i-userhelp_active_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">userhelp_active_selector</span><span
+            class="method-args">( form, user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Output HTML for the given form and user which produces a selection list
+allowing the user’s ‘active’ flag to be changed. It is assumed that the
+caller has permission to edit the user in this way.</p>
+          
+
+          
+          <div class="method-source-code" id="userhelp_active_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_active_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">user</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_select</span>(
+    <span class="ruby-identifier">form</span>,
+    <span class="ruby-value">:active</span>,
+    [
+      [ <span class="ruby-string">'Active'</span>,      <span class="ruby-keyword">true</span>  ],
+      [ <span class="ruby-string">'Deactivated'</span>, <span class="ruby-keyword">false</span> ]
+    ],
+    <span class="ruby-keyword">false</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- userhelp_active_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- userhelp_active_selector-method -->
+
+    
+      <div id="method-i-userhelp_default_customer_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">userhelp_default_customer_selector</span><span
+            class="method-args">( cp, user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Output HTML for the given control panel form (fields_for…) and user which
+lets the user choose the default customer associated with new projects.</p>
+
+<p>The including template should use appropriate container tags for the output
+(e.g. a paragraph or table cell).</p>
+          
+
+          
+          <div class="method-source-code" id="userhelp_default_customer_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_default_customer_selector</span>( <span class="ruby-identifier">cp</span>, <span class="ruby-identifier">user</span> )
+  <span class="ruby-identifier">customers</span> = <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">active</span>
+
+  <span class="ruby-keyword">unless</span>( <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">empty?</span> )
+    <span class="ruby-identifier">output</span> = <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">cp</span>, <span class="ruby-value">:customer_id</span>, <span class="ruby-identifier">customers</span>, <span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-keyword">false</span> )
+
+    <span class="ruby-keyword">if</span>( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">restricted?</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;p&gt;\n&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            This list is only relevant to users with a\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            privileged account type because normal users\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            cannot create new tasks.\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;/p&gt;&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">output</span>  = <span class="ruby-string">&quot;          There are no active customers. Please\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;          #{ link_to( 'create at least one', new_customer_path() ) }.&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- userhelp_default_customer_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- userhelp_default_customer_selector-method -->
+
+    
+      <div id="method-i-userhelp_default_project_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">userhelp_default_project_selector</span><span
+            class="method-args">( user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Output HTML for the given user’s control panel editing section within a
+wider user editing form, which lets the user choose the default project
+associated with new tasks.</p>
+
+<p>The including template should use appropriate container tags for the output
+(e.g. a paragraph or table cell).</p>
+          
+
+          
+          <div class="method-source-code" id="userhelp_default_project_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_default_project_selector</span>( <span class="ruby-identifier">user</span> )
+  <span class="ruby-keyword">unless</span>( <span class="ruby-constant">Project</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
+    <span class="ruby-identifier">output</span> = <span class="ruby-identifier">apphelp_project_selector</span>(
+      <span class="ruby-string">'control_panel_project_id'</span>,
+      <span class="ruby-string">'control_panel[project_id]'</span>,
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">control_panel</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">control_panel</span>.<span class="ruby-identifier">project_id</span>,
+      <span class="ruby-keyword">true</span>
+    )
+
+    <span class="ruby-keyword">if</span>( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">restricted?</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;p&gt;\n&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            This list is only relevant to users with a\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            privileged account type because normal users\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            cannot create new tasks.\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;/p&gt;&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">output</span>  = <span class="ruby-string">&quot;          There are no active projects. Please\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;          #{ link_to( 'create at least one', new_project_path() ) }.&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- userhelp_default_project_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- userhelp_default_project_selector-method -->
+
+    
+      <div id="method-i-userhelp_email" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">userhelp_email</span><span
+            class="method-args">( user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List view helper - format the given user’s e-mail address as a link; do so
+using auto_link so we don’t have to worry about malformed addresses. That’s
+the main reason for doing this in a helper rather than manually, within the
+model.</p>
+          
+
+          
+          <div class="method-source-code" id="userhelp_email-source">
+            <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_email</span>( <span class="ruby-identifier">user</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">auto_link</span>( <span class="ruby-identifier">h</span>( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span> ) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- userhelp_email-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- userhelp_email-method -->
+
+    
+      <div id="method-i-userhelp_identity_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">userhelp_identity_url</span><span
+            class="method-args">( user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>As above, but for the user’s identity URL</p>
+          
+
+          
+          <div class="method-source-code" id="userhelp_identity_url-source">
+            <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_identity_url</span>( <span class="ruby-identifier">user</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">auto_link</span>( <span class="ruby-identifier">h</span>( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">identity_url</span> ) )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- userhelp_identity_url-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- userhelp_identity_url-method -->
+
+    
+      <div id="method-i-userhelp_user_type_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">userhelp_user_type_selector</span><span
+            class="method-args">( form, user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Output HTML for the given form and user which produces a selection list
+allowing the user account type to be chosen. It is assumed that the caller
+has permission to edit the user in this way.</p>
+
+<p>The including template should use appropriate container tags for the output
+(e.g. a paragraph or table cell).</p>
+          
+
+          
+          <div class="method-source-code" id="userhelp_user_type_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_user_type_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">user</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span> )
+
+    <span class="ruby-comment"># You can't change your own account type if you are an administrator.</span>
+    <span class="ruby-comment"># This is an easy way to prevent all administrators losing privilege,</span>
+    <span class="ruby-comment"># leaving no administrator in the system.</span>
+
+    <span class="ruby-identifier">output</span>  = <span class="ruby-string">&quot;          Administrators cannot change account type. If you\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          want to stop being an administrator, first assign\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          administrative rights to another account, then\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          have that user change your account type for you.&quot;</span>
+
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span> )
+
+    <span class="ruby-comment"># If the editing account is administrative but the user is not,</span>
+    <span class="ruby-comment"># then the account type can't be changed (managers can only assign</span>
+    <span class="ruby-comment"># privilege up to manager).</span>
+
+    <span class="ruby-identifier">output</span>  = <span class="ruby-string">&quot;          Administrator. Only another administrator can change\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          this user's account type.\n&quot;</span>
+
+  <span class="ruby-keyword">else</span>
+
+    <span class="ruby-comment"># OK, this is your account and you're not an administrator, or</span>
+    <span class="ruby-comment"># it is someone else's account and they're not an administrator.</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+      <span class="ruby-identifier">warn</span>    = <span class="ruby-keyword">false</span>
+      <span class="ruby-identifier">options</span> = [
+                  [ <span class="ruby-string">'Normal'</span>,        <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span>  ],
+                  [ <span class="ruby-string">'Manager'</span>,       <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> ],
+                  [ <span class="ruby-string">'Administrator'</span>, <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span>   ]
+                ]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">warn</span>    = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span> = [
+                  [ <span class="ruby-string">'Normal'</span>,  <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span>  ],
+                  [ <span class="ruby-string">'Manager'</span>, <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> ]
+                ]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">output</span> = <span class="ruby-identifier">apphelp_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-value">:user_type</span>, <span class="ruby-identifier">options</span>, <span class="ruby-keyword">false</span> )
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">warn</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;p&gt;\n&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            Note that if you revoke your own account privileges,\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            you will need the help of another manager or an\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            administrator if you want to restore them later.\n&quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;/p&gt;&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- userhelp_user_type_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- userhelp_user_type_selector-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

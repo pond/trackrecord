@@ -1,0 +1,19 @@
+<%
+  # Create a form button that creates a report for a specific resource.
+  # Local variables that must be passed are:
+  #
+  #   item:  Item to be used as the basis of report generation. A path of
+  #          the form "user_saved_reports_by_<model-name>" must exist via
+  #          the routes. A form causing a 'create' action in the referenced
+  #          controller is generated around the button.
+  #
+  #   user:  The user for whom the report is to be created.
+-%>
+<div class="report_button">
+  <%= form_for( SavedReport.new,
+                :url => send( "user_saved_reports_by_#{ item.class.model_name.downcase }_path", user ),
+                :html => { :id => "new_saved_report_for_#{ item.id }" } ) do | f | -%>
+    <input type="hidden" name="item" value="<%= item.id %>">
+    <%= f.submit( 'Report', { :disable_with => 'Creating...' } ) %>
+  <% end %>
+</div>

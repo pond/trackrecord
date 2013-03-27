@@ -1,6 +1,6 @@
 ########################################################################
 # File::    reports_helper.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Support functions for views related to report generation.
 #           See controllers/reports_controller.rb for more.
@@ -104,79 +104,72 @@ module ReportsHelper
     attr_reader( :title, :weeks, :months )
   end
 
-  # Use the Calendar Date Select plug-in to generate a selector for
-  # the start time of a report.
-
-  def reporthelp_start_time
-    return calendar_date_select(
-      :report,
+  # Use the Calendar Date Select plug-in to generate a selector for the
+  # start time of a report. Pass the form instance upon which to operate.
+  #
+  def reporthelp_start_time( form )
+    return form.calendar_date_select(
       :range_start,
       {
         :embedded   => false,
-        :year_range => Timesheet.used_range(),
-        :size       => 25
+        :year_range => Timesheet.used_range()
       }
     )
   end
 
-  # Use the Calendar Date Select plug-in to generate a selector for
-  # the end time of a report.
+  # Use the Calendar Date Select plug-in to generate a selector for the
+  # end time of a report. Pass the form instance upon which to operate.
 
-  def reporthelp_end_time
-    return calendar_date_select(
-      :report,
+  def reporthelp_end_time( form )
+    return form.calendar_date_select(
       :range_end,
       {
         :embedded   => false,
-        :year_range => Timesheet.used_range(),
-        :size       => 24
+        :year_range => Timesheet.used_range()
       }
     )
   end
 
   # Return HTML suitable for inclusion in a form which provides
   # a pull-down menu of years for the full permitted time range
-  # subdivided into months. Pass the current item to select or nil
-  # for none, then 'true' for a start time menu, else an end time
-  # menu.
+  # subdivided into months. Pass the form being constructed and
+  # ":range_month_start" or ":range_month_end".
   #
-  def reporthelp_month_selection( to_select, is_start )
-    method = is_start ? :start : :end
-    years  = get_year_array()
+  def reporthelp_month_selection( form, method )
+    start_or_end = ( method == :range_month_start ) ? :start : :end
 
-    data = "<select id=\"report_range_month_#{method}\" name=\"report[range_month_#{method}]\">"
-    data << '<option value="">-</option>'
-    data << option_groups_from_collection_for_select(
-      years,   # Use years for groups
-      :months, # A years's "months" method returns its month list
-      :title,  # Use the year 'title' for the group labels
-      :id,     # A month's "id" method returns the value for an option tag
-      method,  # A month's "start" or "end" method is used for the option contents
-      to_select
+    form.grouped_collection_select(
+      method,
+      get_year_array(), # Use years for groups
+      :months,          # A years's "months" method returns its month list
+      :title,           # Use the year 'title' for the group labels
+      :id,              # A month's "id" method returns the value for an option tag
+      start_or_end,     # A month's "start" or "end" method is used for the option contents
+      {
+        :include_blank => '-'
+      }
     )
-    return data << '</select>'
   end
 
   # Return HTML suitable for inclusion in a form which provides
   # a pull-down menu of years for the full permitted time range
-  # subdivided into weeks. Pass 'true' for a start time menu,
-  # else an end time menu.
+  # subdivided into weeks. Pass the form being constructed and
+  # ":range_week_start" or ":range_week_end".
+  #
+  def reporthelp_week_selection( form, method )
+    start_or_end = ( method == :range_week_start ) ? :start : :end
 
-  def reporthelp_week_selection( to_select, is_start )
-    method = is_start ? :start : :end
-    years  = get_year_array()
-
-    data = "<select id=\"report_range_week_#{method}\" name=\"report[range_week_#{method}]\">"
-    data << '<option value="">-</option>'
-    data << option_groups_from_collection_for_select(
-      years,  # Use years for groups
-      :weeks, # A years's "weeks" method returns its week list
-      :title, # Use the year 'title' for the group labels
-      :id,    # A week's "id" method returns the value for an option tag
-      method, # A week's "start" or "end" method is used for the option contents
-      to_select
+    form.grouped_collection_select(
+      method,
+      get_year_array(), # Use years for groups
+      :weeks,           # A years's "weeks" method returns its week list
+      :title,           # Use the year 'title' for the group labels
+      :id,              # A week's "id" method returns the value for an option tag
+      start_or_end,     # A week's "start" or "end" method is used for the option contents
+      {
+        :include_blank => '-'
+      }
     )
-    return data << '</select>'
   end
 
   # Return HTML suitable for inclusion in the form passed in the
@@ -209,7 +202,7 @@ module ReportsHelper
     else
       return apphelp_collection_select(
         form,
-        'user_ids',
+        'reportable_user_ids',
         users,
         :id,
         :name
@@ -260,9 +253,9 @@ module ReportsHelper
     item = item[ :item ]
 
     if ( item.class == User )
-      return "by #{ h( item.name ) }"
+      return "by #{ h( item.name ) }".html_safe()
     else
-      return "on '#{ h( item.augmented_title ) }'"
+      return "on '#{ h( item.augmented_title ) }'".html_safe()
     end
   end
 
@@ -296,9 +289,9 @@ module ReportsHelper
 
       output << ')' if ( @report.include_totals != false and ( @report.include_committed != false or @report.include_not_committed != false ) )
 
-      return output
+      return output.html_safe()
     else
-      return ( show_zero ? '0' : '&nbsp;' )
+      return ( show_zero ? '0' : '&nbsp;' ).html_safe()
     end
   end
 
@@ -312,48 +305,45 @@ module ReportsHelper
     class_name  = potential < 0 ? 'overrun' : 'no_overrun'
     output     << "<span class=\"#{ class_name }\">#{ apphelp_terse_hours( potential ) }</span></strong>"
 
-    return output
+    return output.html_safe()
   end
 
-  # For a report 'show' view, generate a series of hidden fields that carry all
-  # information about a report so that a 'new' view, or another report creation
-  # operation, can progress with the same parameters as the current item. Pass
-  # the wrapping form object reference ("f" in "form_for :report... do | f |").
+  #############################################################################
+  # LIST VIEWS
+  #############################################################################
 
-  def reporthelp_hidden_fields( form )
-    output  = form.hidden_field( :range_start           )
-    output << form.hidden_field( :range_end             )
-    output << form.hidden_field( :range_week_start      )
-    output << form.hidden_field( :range_week_end        )
-    output << form.hidden_field( :range_month_start     )
-    output << form.hidden_field( :range_month_end       )
-    output << form.hidden_field( :frequency             )
-    output << form.hidden_field( :task_filter           )
-    output << form.hidden_field( :task_grouping         )
-    output << form.hidden_field( :task_sort_field       )
-    output << form.hidden_field( :project_sort_field    )
-    output << form.hidden_field( :customer_sort_field   )
-    output << form.hidden_field( :include_totals        )
-    output << form.hidden_field( :include_committed     )
-    output << form.hidden_field( :include_not_committed )
-    output << form.hidden_field( :exclude_zero_rows     )
-    output << form.hidden_field( :exclude_zero_cols     )
+  # List helper - owner of the given report
 
-    @report.users.each_index do | index |
-      user = @report.users[ index ]
-      output << hidden_field_tag( "report[user_ids][#{ index }]", user.id.to_s )
-    end
-
-    @report.tasks.each_index do | index |
-      task = @report.tasks[ index ]
-      output << hidden_field_tag( "report[task_ids][#{ index }]", task.id.to_s )
-    end
-
-    return output
+  def reporthelp_owner( report )
+    return link_to( report.user.name, user_path( report.user ) )
   end
 
-  def reporthelp_shortcut_path
-    "#{ report_shortcut_path }?#{ { 'report' => params[ 'report' ] } .to_query }"
+  # List helper - formatted 'updated at' date for the given report
+
+  def reporthelp_updated_at( report )
+    return apphelp_date( report.updated_at )
+  end
+
+  # List helper - formatted start date for the given report
+
+  def reporthelp_start_date( report )
+    apphelp_date( report.generate_report().range.min )
+  end
+
+  # List helper - formatted end date for the given report
+
+  def reporthelp_end_date( report )
+    apphelp_date( report.generate_report().range.max )
+  end
+
+  # Return appropriate list view actions for the given report
+
+  def reporthelp_actions( report )
+    if ( @current_user.admin? || report.user_id == @current_user.id )
+      return [ 'edit', 'delete', 'show' ]
+    else
+      return []
+    end
   end
 
 private # Meaninless in a module but put here as a marker

@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module ApplicationHelper - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/helpers/application_helper.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="TrackRecordSections.html">TrackRecordSections</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-apphelp_action_name">#apphelp_action_name</a>
+    
+    <li><a href="#method-i-apphelp_boolean">#apphelp_boolean</a>
+    
+    <li><a href="#method-i-apphelp_collection_select">#apphelp_collection_select</a>
+    
+    <li><a href="#method-i-apphelp_commit_label">#apphelp_commit_label</a>
+    
+    <li><a href="#method-i-apphelp_created_at">#apphelp_created_at</a>
+    
+    <li><a href="#method-i-apphelp_date">#apphelp_date</a>
+    
+    <li><a href="#method-i-apphelp_extra_selection_args">#apphelp_extra_selection_args</a>
+    
+    <li><a href="#method-i-apphelp_flash_messages">#apphelp_flash_messages</a>
+    
+    <li><a href="#method-i-apphelp_generic">#apphelp_generic</a>
+    
+    <li><a href="#method-i-apphelp_h">#apphelp_h</a>
+    
+    <li><a href="#method-i-apphelp_heading">#apphelp_heading</a>
+    
+    <li><a href="#method-i-apphelp_hours">#apphelp_hours</a>
+    
+    <li><a href="#method-i-apphelp_list_header">#apphelp_list_header</a>
+    
+    <li><a href="#method-i-apphelp_list_header_link">#apphelp_list_header_link</a>
+    
+    <li><a href="#method-i-apphelp_list_row">#apphelp_list_row</a>
+    
+    <li><a href="#method-i-apphelp_object_list">#apphelp_object_list</a>
+    
+    <li><a href="#method-i-apphelp_project_selector">#apphelp_project_selector</a>
+    
+    <li><a href="#method-i-apphelp_select">#apphelp_select</a>
+    
+    <li><a href="#method-i-apphelp_sign_or_signed_in">#apphelp_sign_or_signed_in</a>
+    
+    <li><a href="#method-i-apphelp_site_name">#apphelp_site_name</a>
+    
+    <li><a href="#method-i-apphelp_slug">#apphelp_slug</a>
+    
+    <li><a href="#method-i-apphelp_string_hours">#apphelp_string_hours</a>
+    
+    <li><a href="#method-i-apphelp_terse_hours">#apphelp_terse_hours</a>
+    
+    <li><a href="#method-i-apphelp_title">#apphelp_title</a>
+    
+    <li><a href="#method-i-apphelp_view_hint">#apphelp_view_hint</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module ApplicationHelper</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>application_helper.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2007</p>
+</dd><dt>Purpose
+<dd>
+<p>Standard Rails application helper.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>24-Dec-2007 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-apphelp_action_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_action_name</span><span
+            class="method-args">( action, use_default = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an internationalised version of the given action name. If ‘true’ is
+passed in the second parameter, a default fallback of the humanized version
+of the non-internationalised action name will be chosen. If this parameter
+is omitted or ‘false’ is given, the I18n engine’s “missing token” message
+is returned instead (no default string is used).</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_action_name-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_action_name</span>( <span class="ruby-identifier">action</span>, <span class="ruby-identifier">use_default</span> = <span class="ruby-keyword">false</span> )
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">use_default</span> <span class="ruby-operator">?</span> { <span class="ruby-value">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">humanize</span> } <span class="ruby-operator">:</span> {}
+  <span class="ruby-identifier">t</span>( <span class="ruby-node">&quot;uk.org.pond.trackrecord.action_names.#{ action }&quot;</span>, <span class="ruby-identifier">options</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_action_name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_action_name-method -->
+
+    
+      <div id="method-i-apphelp_boolean" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_boolean</span><span
+            class="method-args">( bool )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return ‘yes’ or ‘no’, internationalised, according to the given value,
+which is evaluated as (or should already be) a boolean. Remember that in
+Ruby the boolean evaluation of certain types can be unexpected - e.g.
+integer zero is not “nil”, so it evaluates to ‘true’ in a boolean context.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_boolean-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">bool</span> )
+  <span class="ruby-identifier">apphelp_generic</span>( <span class="ruby-identifier">bool</span> <span class="ruby-operator">?</span> <span class="ruby-value">:yes</span> <span class="ruby-operator">:</span> <span class="ruby-value">:no</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_boolean-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_boolean-method -->
+
+    
+      <div id="method-i-apphelp_collection_select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_collection_select</span><span
+            class="method-args">( form, objfield, collection, colsetfield, colseefield, multiple = true )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Run ‘collection_select’ for the given form with the given arguments for the
+field name of the target object to be updated, the collection, the field
+from within that collection to use for the values to actually set in the
+target object and the field from within that collection to use for the
+values displayed to the user.</p>
+
+<p>A sixth optional boolean parameter, defaulting to ‘true’, says whether or
+not the selection list should allow multiple selections (for this, pass
+‘true’). The function takes care of working out how tall to make the
+selection list (the ‘size’ parameter) internally, which is really the only
+reason to call here rather than calling ‘collection_select’ directly.</p>
+
+<p>Single selection items will include blank entries.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_collection_select-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 245</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">objfield</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">colsetfield</span>, <span class="ruby-identifier">colseefield</span>, <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword">true</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">collection_select</span>(
+    <span class="ruby-identifier">objfield</span>,
+    <span class="ruby-identifier">collection</span>,
+    <span class="ruby-identifier">colsetfield</span>,
+    <span class="ruby-identifier">colseefield</span>,
+    <span class="ruby-identifier">multiple</span> <span class="ruby-operator">?</span> {} <span class="ruby-operator">:</span> { <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'None'</span> },
+    <span class="ruby-identifier">apphelp_extra_selection_args</span>( <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">multiple</span> )
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_collection_select-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_collection_select-method -->
+
+    
+      <div id="method-i-apphelp_commit_label" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_commit_label</span><span
+            class="method-args">( item, active = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Output HTML suitable as a label to show whether or not the given object is
+active or otherwise. The second parameter lets you override the given
+object and force the generation of an active (pass ‘true’) or inactive
+(pass ‘false’) label.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_commit_label-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_commit_label</span>( <span class="ruby-identifier">item</span>, <span class="ruby-identifier">active</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-identifier">active</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">active</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">active</span>.<span class="ruby-identifier">nil?</span> )
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">content_tag</span>(
+    <span class="ruby-value">:span</span>,
+    <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-string">'Active'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'Inactive'</span>,
+    { <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> ( <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-value">:active</span> <span class="ruby-operator">:</span> <span class="ruby-value">:inactive</span> ) }
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_commit_label-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_commit_label-method -->
+
+    
+      <div id="method-i-apphelp_created_at" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_created_at</span><span
+            class="method-args">( obj )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Column formatting helper for creation dates. Pass an object with a
+created_at method. The value returned is used for display.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_created_at-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 587</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_created_at</span>( <span class="ruby-identifier">obj</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">created_at</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_created_at-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_created_at-method -->
+
+    
+      <div id="method-i-apphelp_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_date</span><span
+            class="method-args">( date )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Standard date formatting; pass the date to format. This can be either a
+date-only Date class, or a date-with-time DateTime class.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_date-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">date</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">date</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Date</span> ) )
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">'&lt;span class=&quot;nowrap&quot;&gt;%Y-%m-%d&lt;/span&gt;'</span> )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">'&lt;span class=&quot;nowrap&quot;&gt;%Y-%m-%d&lt;/span&gt; &lt;span class=&quot;nowrap&quot;&gt;%H:%M:%S&lt;/span&gt;'</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_date-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_date-method -->
+
+    
+      <div id="method-i-apphelp_extra_selection_args" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_extra_selection_args</span><span
+            class="method-args">( collection, multiple )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return standard extra arguments for selection lists based on a collection
+(its size is taken) and “multiple” flag</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_extra_selection_args-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_extra_selection_args</span>( <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">multiple</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">multiple</span> <span class="ruby-operator">?</span> { <span class="ruby-value">:multiple</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:size</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">size</span>, <span class="ruby-value">10</span> ].<span class="ruby-identifier">min</span> } <span class="ruby-operator">:</span> {}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_extra_selection_args-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_extra_selection_args-method -->
+
+    
+      <div id="method-i-apphelp_flash_messages" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_flash_messages</span><span
+            class="method-args">( indent = '' )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return any flash messages using class names prefixed by “flash_”, with the
+suffix being the key name from the flash hash. The messages are wrapped by
+a DIV with class ‘messages’. If there are no messages to show, an empty
+string is returned. Optionally pass an indent string to add at the front of
+any non-empty line of output. If a non-empty result is returned, note that
+it will be terminated by “nn”.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_flash_messages-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_flash_messages</span>( <span class="ruby-identifier">indent</span> = <span class="ruby-string">''</span> )
+  <span class="ruby-identifier">output</span> = <span class="ruby-string">''</span>
+
+  <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;div class='flash_#{ h( key ) }'&gt;#{ h( flash[ key ] ) }&lt;/div&gt;&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">output</span>.<span class="ruby-identifier">empty?</span> )
+    <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;#{ indent }#{ content_tag( :div, output.html_safe(), { :class =&gt; 'messages' } ) }\n\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_flash_messages-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_flash_messages-method -->
+
+    
+      <div id="method-i-apphelp_generic" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_generic</span><span
+            class="method-args">( message_name )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Shortcut for long references to “uk.org.pond.trackrecord.generic_messages”
+when reading generic messages from the locale file. Pass the message token
+part (e.g. “yes”, “no”, “confirmation”). Only useful for basic messages
+which require no parameter substitution or default lookup values.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_generic-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_generic</span>( <span class="ruby-identifier">message_name</span> )
+  <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-node">&quot;uk.org.pond.trackrecord.generic_messages.#{ message_name }&quot;</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_generic-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_generic-method -->
+
+    
+      <div id="method-i-apphelp_h" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_h</span><span
+            class="method-args">( value )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Equivalent of ‘h()’, but returns ‘-’ for nil or empty strings.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_h-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_h</span>( <span class="ruby-identifier">value</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">'-'</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">value</span>.<span class="ruby-identifier">blank?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">h</span>( <span class="ruby-identifier">value</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_h-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_h-method -->
+
+    
+      <div id="method-i-apphelp_heading" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_heading</span><span
+            class="method-args">( ctrl = controller, action = nil, default = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an internationalised heading appropriate for a page handling the
+current action for the current controller, or the given controller and
+optional given action name. If you want to use a default string, pass it in
+the optional third parameter. Headings like this can be (and are) also used
+as descriptive action link text.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_heading-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_heading</span>( <span class="ruby-identifier">ctrl</span> = <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">action</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-identifier">action</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">ctrl</span>.<span class="ruby-identifier">action_name</span>
+
+  <span class="ruby-identifier">t</span>(
+    <span class="ruby-node">&quot;uk.org.pond.trackrecord.controllers.#{ ctrl.controller_name }.action_title_#{ action }&quot;</span>,
+    <span class="ruby-value">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_heading-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_heading-method -->
+
+    
+      <div id="method-i-apphelp_hours" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_hours</span><span
+            class="method-args">( hours )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Simple wrapper over ‘pluralize’ to return a string indicating a number of
+hours mathematically rounded to two decimal places.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_hours-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-identifier">hours</span> )
+  <span class="ruby-identifier">pluralize</span>( <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ), <span class="ruby-string">'hour'</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_hours-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_hours-method -->
+
+    
+      <div id="method-i-apphelp_list_header" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_list_header</span><span
+            class="method-args">( structure, index_method, actions_method = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Construct a header row for a list table, returning HTML for it. The table
+outer definition must be included externally. To define the row contents,
+pass an array of hashes. Each array entry corresponds to a cell in the row,
+built in order of appearance in the array. The hashes can contain optional
+property “header_align” to override the row alignment for that cell; the
+property’s value is used directly as a TH “align” value.</p>
+
+<p>Each hash must include property “header_text” giving the heading text for
+that cell. The text is placed in the cell wrapped up in an HTML link which
+will re-fetch the list view with modified search parameters. To achieve
+this requires a second mandatory input parameter, which is the name of the
+method to use for the ‘index’ view - e.g. “users_path” or (for an example
+nested resource) “user_saved_reports_path”.</p>
+
+<p>A blank header cell is placed at the end of the row to appear above an
+actions column if the third optiona parameter is non-nil. If nil, no room
+is made for an actions column.</p>
+
+<p>See also apphelp_list_row.</p>
+
+<p>E.g.:</p>
+
+<pre class="ruby"><span class="ruby-identifier">apphelp_list_header</span>(
+  [
+    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'User name'</span> },
+    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Age'</span>, :<span class="ruby-identifier">header_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'center'</span> },
+    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'E-mail address'</span> }
+  ],
+  <span class="ruby-string">'users_path'</span>
+)
+</pre>
+          
+
+          
+          <div class="method-source-code" id="apphelp_list_header-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 375</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_header</span>( <span class="ruby-identifier">structure</span>, <span class="ruby-identifier">index_method</span>, <span class="ruby-identifier">actions_method</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-identifier">output</span> = <span class="ruby-string">&quot;        &lt;tr class=\&quot;info\&quot;&gt;\n&quot;</span>
+
+  <span class="ruby-identifier">structure</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">entry</span>      = <span class="ruby-identifier">structure</span>[ <span class="ruby-identifier">index</span> ]
+    <span class="ruby-identifier">align</span>      = <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:header_align</span> ]
+    <span class="ruby-identifier">sort_class</span> = <span class="ruby-keyword">nil</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ] <span class="ruby-operator">==</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">to_s</span> )
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">'desc'</span> )
+        <span class="ruby-identifier">sort_class</span> = <span class="ruby-string">&quot;sorted_column_desc&quot;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">sort_class</span> = <span class="ruby-string">&quot;sorted_column_asc&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;th&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; class=\&quot;#{ sort_class }\&quot;&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">sort_class</span>.<span class="ruby-identifier">nil?</span> )
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">align</span>.<span class="ruby-identifier">nil?</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&gt;&quot;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">align</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; style=\&quot;text-align: #{ align }\&quot;&gt;&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:value_method</span> ] <span class="ruby-keyword">or</span> <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:sort_by</span> ] )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_list_header_link</span>( <span class="ruby-identifier">index_method</span>, <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:header_text</span> ], <span class="ruby-identifier">index</span> )
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:header_text</span> ]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;/th&gt;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;th class=\&quot;spacer\&quot;&gt;&amp;nbsp;&lt;/th&gt;\n&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">actions_method</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;        &lt;/tr&gt;\n&quot;</span> ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_list_header-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_list_header-method -->
+
+    
+      <div id="method-i-apphelp_list_header_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_list_header_link</span><span
+            class="method-args">( index_method, text, index )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Support function for apphelp_list_header.</p>
+
+<p>Returns an HTML link based on a URL acquired by calling the given index
+method (e.g. “users_path” or “user_saved_reports_path”) and wrapping the
+link text given in the second parameter with a link to the result of the
+index method call. Pass also the index of the column in the list structure.
+Generates a link with query string attempting to maintain or  set correctly
+the sort and pagination parameters based on the current request parameters
+and given column index.</p>
+
+<p>E.g.:</p>
+
+<pre>apphelp_list_header_link( 'users_path', 'User name', 0 )</pre>
+          
+
+          
+          <div class="method-source-code" id="apphelp_list_header_link-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 427</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_header_link</span>( <span class="ruby-identifier">index_method</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">index</span> )
+
+  <span class="ruby-comment"># When generating the link, there is no point maintaining the</span>
+  <span class="ruby-comment"># current page number - reset to 1. Do maintain the entries count.</span>
+
+  <span class="ruby-identifier">entries</span>   = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">entries</span>   = <span class="ruby-node">&quot;&amp;entries=#{ params[ :entries ] }&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:entries</span> ]
+
+  <span class="ruby-comment"># For the direction, if the current sort index in 'params' matches</span>
+  <span class="ruby-comment"># the index for this column, the link should be used to toggle the</span>
+  <span class="ruby-comment"># sort order; if currently on 'asc', write 'desc' and vice versa.</span>
+  <span class="ruby-comment"># If building a link for a different column, default to 'asc'.</span>
+
+  <span class="ruby-identifier">direction</span> = <span class="ruby-string">''</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ] <span class="ruby-operator">==</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">'asc'</span> )
+    <span class="ruby-identifier">direction</span> = <span class="ruby-string">'&amp;direction=desc'</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">direction</span> = <span class="ruby-string">'&amp;direction=asc'</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Get the base URL using the caller-supplied method and assemble the</span>
+  <span class="ruby-comment"># query string after it.</span>
+
+  <span class="ruby-identifier">base</span> = <span class="ruby-identifier">send</span>( <span class="ruby-identifier">index_method</span> )
+  <span class="ruby-identifier">url</span>  = <span class="ruby-node">&quot;#{ base }?sort=#{ index }#{ direction }&amp;page=1#{ entries }&quot;</span>
+
+  <span class="ruby-keyword">unless</span> ( ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search</span> ].<span class="ruby-identifier">blank?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_range_start</span> ].<span class="ruby-identifier">blank?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_range_end</span> ].<span class="ruby-identifier">blank?</span> ) <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_cancel</span> ] )
+    <span class="ruby-identifier">hash</span> = {
+      <span class="ruby-value">:search</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search</span>             ],
+      <span class="ruby-value">:search_range_start</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_range_start</span> ],
+      <span class="ruby-value">:search_range_end</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_range_end</span>   ],
+    }
+
+    <span class="ruby-identifier">url</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&amp;'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">to_query</span>()
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">text</span>, <span class="ruby-identifier">url</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_list_header_link-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_list_header_link-method -->
+
+    
+      <div id="method-i-apphelp_list_row" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_list_row</span><span
+            class="method-args">( structure, item, actions_method, with_reports = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Construct a body row for a list table, returning HTML for it. The table
+outer definition must be included externally. To define the row contents,
+pass an array of hashes. Each array entry corresponds to a cell in the row,
+built in order of appearance in the array. The hashes can contain optional
+property “value_align” to override the row alignment for that cell; the
+property’s value is used directly as a TD “align” value.</p>
+
+<p>Each hash must include property “value_method”. This method will be invoked
+on the object given in the second function input parameter and must return
+a displayable value for the cell. The output is made safe by wrapping with
+a call to “h()” automatically.</p>
+
+<p>The third input parameter is the name of a helper method which will be
+invoked with the current item as a parameter. It must return the names of
+actions permitted for that item, in an array. Actions will be placed in the
+final cell on the row as normal links. If the parameter is ‘nil’, no
+actions cell will be added onto the rows.</p>
+
+<p>The fourth input parameter is optional. If present and ‘true’, buttons
+linking to auto-generated reports relevant for the resource at hand are
+added in the actions area. For example, a task would link to a report for
+hours on just that task; a user to a user report over all tasks; a project
+to all tasks in that project and so-on.</p>
+
+<p>Since models can’t always generate what you want (e.g. they don’t have
+access to helpers, so creating values with associations’ “show” views
+linked to is difficult), you can specify property “value_helper”. This
+helper method will be called and passed the item. Its return value is used
+instead of the value method, which won’t be called and can be omitted if a
+helper is being used instead. HELPER TEXT IS <strong>NOT</strong> WRAPPED
+BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
+
+<p>See also apphelp_list_header.</p>
+
+<p>E.g.:</p>
+
+<pre class="ruby"><span class="ruby-identifier">apphelp_list_row</span>(
+  [
+    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'name'</span> },
+    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'age'</span>, :<span class="ruby-identifier">value_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'center'</span> },
+    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'email_as_link'</span> } <span class="ruby-comment"># Custom method in User model</span>
+  ],
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( :<span class="ruby-identifier">first</span> )
+)
+</pre>
+          
+
+          
+          <div class="method-source-code" id="apphelp_list_row-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 512</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_row</span>( <span class="ruby-identifier">structure</span>, <span class="ruby-identifier">item</span>, <span class="ruby-identifier">actions_method</span>, <span class="ruby-identifier">with_reports</span> = <span class="ruby-keyword">false</span> )
+  <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;        &lt;tr class=\&quot;#{ cycle( 'even', 'odd' ) }\&quot;&gt;\n&quot;</span>
+
+  <span class="ruby-comment"># Handle the item columns first</span>
+
+  <span class="ruby-identifier">structure</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">structure</span>[ <span class="ruby-identifier">index</span> ]
+    <span class="ruby-identifier">align</span> = <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:value_align</span> ]
+
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;td&quot;</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">align</span>.<span class="ruby-identifier">nil?</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&gt;&quot;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">align</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; style=\&quot;text-align: #{ align }\&quot;&gt;&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">method</span> = <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:value_method</span> ]
+    <span class="ruby-identifier">helper</span> = <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:value_helper</span> ]
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">helper</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">send</span>( <span class="ruby-identifier">helper</span>, <span class="ruby-identifier">item</span> )
+    <span class="ruby-keyword">else</span>
+
+      <span class="ruby-comment"># Restricted users can only edit their own account. Since they are not</span>
+      <span class="ruby-comment"># allowed to list other users on the system, the list view is disabled</span>
+      <span class="ruby-comment"># for them, so there can never be in-place editors in that case. For</span>
+      <span class="ruby-comment"># any other object type, restricted users have no edit permission. The</span>
+      <span class="ruby-comment"># result? Disable all in-place editors for restricted users.</span>
+
+      <span class="ruby-identifier">in_place</span> = <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:value_in_place</span> ] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">privileged?</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">in_place</span> )
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">safe_in_place_editor_field</span>( <span class="ruby-identifier">item</span>, <span class="ruby-identifier">method</span> )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">h</span>( <span class="ruby-identifier">item</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">method</span> ) )
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;/td&gt;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Add the actions cell?</span>
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">actions_method</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-identifier">actions</span> = <span class="ruby-identifier">send</span>( <span class="ruby-identifier">actions_method</span>, <span class="ruby-identifier">item</span> ) <span class="ruby-operator">||</span> []
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;td class=\&quot;list_actions\&quot;&gt;\n&quot;</span>
+    <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            &quot;</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">action</span>.<span class="ruby-identifier">humanize</span>, { <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>, <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span> } )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">with_reports</span> )
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">render</span>(
+                        {
+                          <span class="ruby-value">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'shared/report_button'</span>,
+                          <span class="ruby-value">:locals</span>  =<span class="ruby-operator">&gt;</span>
+                          {
+                            <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_user</span>,
+                            <span class="ruby-value">:item</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">item</span>
+                          }
+                        }
+                      ).<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-string">'            '</span> )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;/td&gt;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;        &lt;/tr&gt;\n&quot;</span> ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_list_row-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_list_row-method -->
+
+    
+      <div id="method-i-apphelp_object_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_object_list</span><span
+            class="method-args">( objects, field = :title )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML representing a human-readable list of the given objects, as
+links to titles for the objects. To list a different field, provide the
+field name as a symbol in the optional second parameter.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_object_list-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 330</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_object_list</span>( <span class="ruby-identifier">objects</span>, <span class="ruby-identifier">field</span> = <span class="ruby-value">:title</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">'None'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">blank?</span> )
+
+  <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">object</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">h</span>( <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">field</span> ) ), <span class="ruby-identifier">object</span> )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">join</span>( <span class="ruby-string">', '</span> ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_object_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_object_list-method -->
+
+    
+      <div id="method-i-apphelp_project_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_project_selector</span><span
+            class="method-args">( select_id, select_name, match, include_none = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML suitable for an edit form, providing a grouped list of projects
+that can be assigned to something. The list is grouped by customer in
+default customer sort order, along with a ‘None’ entry for unassigned
+projects. Pass an ID for the select list, a name for the select list, and
+an ID to match within the list to have one of the entries selected (or omit
+for no pre-selected item). Pass an optional fourth parameter of “true” to
+include a “none” entry, else exclude it (exclusion is the default
+behaviour).</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_project_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_project_selector</span>( <span class="ruby-identifier">select_id</span>, <span class="ruby-identifier">select_name</span>, <span class="ruby-identifier">match</span>, <span class="ruby-identifier">include_none</span> = <span class="ruby-keyword">false</span> )
+
+  <span class="ruby-identifier">customers</span> = []
+
+  <span class="ruby-comment"># Add the &quot;none&quot; entry; but of a hack, this... :-(</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">include_none</span> )
+    <span class="ruby-identifier">dummy_project</span>           = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">dummy_project</span>.<span class="ruby-identifier">id</span>        = <span class="ruby-string">''</span>
+    <span class="ruby-identifier">dummy_project</span>.<span class="ruby-identifier">title</span>     = <span class="ruby-string">'None'</span>
+
+    <span class="ruby-identifier">dummy_customer</span>          = <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">id</span>       = <span class="ruby-string">''</span>
+    <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">title</span>    = <span class="ruby-string">'None'</span>
+    <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">projects</span> = [ <span class="ruby-identifier">dummy_project</span> ]
+
+    <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">dummy_customer</span> )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Create a dummy customer for the unassigned projects.</span>
+
+  <span class="ruby-identifier">dummy_customer</span>          = <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">title</span>    = <span class="ruby-string">'No assigned customer'</span>
+  <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">projects</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">unassigned</span>
+
+  <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">dummy_customer</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">empty?</span> )
+
+  <span class="ruby-comment"># Find all customers and loop through, adding those that have at least</span>
+  <span class="ruby-comment"># one assigned project to the 'customers' array.</span>
+
+  <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">customer</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">customer</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">customer</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-string">'There are no active projects.'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">empty?</span> )
+
+  <span class="ruby-identifier">data</span> = <span class="ruby-node">&quot;&lt;select id=\&quot;#{ select_id }\&quot; name=\&quot;#{ select_name }\&quot;&gt;&quot;</span>
+  <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">option_groups_from_collection_for_select</span>(
+    <span class="ruby-identifier">customers</span>, <span class="ruby-comment"># Use customers for groups</span>
+    <span class="ruby-value">:projects</span>, <span class="ruby-comment"># A customer's &quot;projects&quot; method returns its project list</span>
+    <span class="ruby-value">:title</span>,    <span class="ruby-comment"># Use the customer title for the group labels</span>
+    <span class="ruby-value">:id</span>,       <span class="ruby-comment"># A project's &quot;id&quot; method returns the value for an option tag</span>
+    <span class="ruby-value">:title</span>,    <span class="ruby-comment"># A project's &quot;title&quot; method is used for the option contents</span>
+    <span class="ruby-identifier">match</span>      <span class="ruby-comment"># Match this ID for the selected option item</span>
+  )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/select&gt;'</span> ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_project_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_project_selector-method -->
+
+    
+      <div id="method-i-apphelp_select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_select</span><span
+            class="method-args">( form, objfield, choices, multiple = true )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>As <a
+href="ApplicationHelper.html#method-i-apphelp_collection_select">#apphelp_collection_select</a>,
+but runs ‘select’ rather than ‘collection_select’. The parameters are
+adjusted accordingly.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_select-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 259</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">objfield</span>, <span class="ruby-identifier">choices</span>, <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword">true</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">select</span>(
+    <span class="ruby-identifier">objfield</span>,
+    <span class="ruby-identifier">choices</span>,
+    {},
+    <span class="ruby-identifier">apphelp_extra_selection_args</span>( <span class="ruby-identifier">choices</span>, <span class="ruby-identifier">multiple</span> )
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_select-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_select-method -->
+
+    
+      <div id="method-i-apphelp_sign_or_signed_in" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_sign_or_signed_in</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return ‘sign in’ or ‘you are signed in’ text indicating current status.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_sign_or_signed_in-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_sign_or_signed_in</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span> )
+    <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> )
+      <span class="ruby-identifier">signinfo</span> = <span class="ruby-string">'Creating new account'</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">signinfo</span> = <span class="ruby-node">&quot;You are signed in as #{ h( @current_user.name ) } &amp;ndash; #{ link_to( 'sign out', signout_path() ) } &quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># The Application Controller forces redirection to the sign-in page</span>
+    <span class="ruby-comment"># if the user isn't signed in.</span>
+    <span class="ruby-identifier">signinfo</span> = <span class="ruby-node">&quot;Please #{ link_to( 'sign in', signin_path() ) }&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">signinfo</span>.<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_sign_or_signed_in-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_sign_or_signed_in-method -->
+
+    
+      <div id="method-i-apphelp_site_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_site_name</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an internationalised version of the web site’s name.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_site_name-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_site_name</span>
+  <span class="ruby-identifier">t</span>( <span class="ruby-value">:'uk.org.pond.trackrecord.site_name'</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_site_name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_site_name-method -->
+
+    
+      <div id="method-i-apphelp_slug" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_slug</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return data for the navigation bar (“slug”).</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_slug-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_slug</span>
+  <span class="ruby-identifier">action</span> = <span class="ruby-identifier">h</span>( <span class="ruby-identifier">action_name</span> )
+  <span class="ruby-identifier">ctname</span> = <span class="ruby-identifier">h</span>( <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">controller_name</span> )
+  <span class="ruby-identifier">sep</span>    = <span class="ruby-string">'&amp;nbsp;&amp;raquo;&amp;nbsp;'</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-identifier">slug</span>   = <span class="ruby-identifier">link_to</span>( <span class="ruby-string">'Home'</span>, <span class="ruby-identifier">home_path</span>() ) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sep</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'users'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'home'</span> )
+    <span class="ruby-identifier">slug</span> = <span class="ruby-string">'Home'</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'sessions'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'new'</span> )
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'Sign in'</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'index'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'list'</span> )
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_heading</span>()
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'reports'</span> )
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-string">'Reports'</span>, <span class="ruby-identifier">new_user_saved_report_path</span>( <span class="ruby-ivar">@current_user</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
+            <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span>
+            <span class="ruby-string">'Show report'</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'saved_reports'</span> )
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-string">'Reports'</span>, <span class="ruby-identifier">new_user_saved_report_path</span>( <span class="ruby-ivar">@current_user</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
+            <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span>
+            <span class="ruby-identifier">apphelp_heading</span>()
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">ctname</span>.<span class="ruby-identifier">capitalize</span>(), <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ ctname }_path&quot;</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
+            <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span>
+            <span class="ruby-identifier">apphelp_heading</span>()
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">slug</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_slug-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_slug-method -->
+
+    
+      <div id="method-i-apphelp_string_hours" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_string_hours</span><span
+            class="method-args">( hours, alt_str, empty_str = nil )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pass a string representation of worked hours or a duration and a string to
+show instead of “0.0”, if that’s the duration/worked hours value.
+Optionally, pass in a string to use instead of an empty string, should the
+duration/worked hours value be empty itself.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_string_hours-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">alt_str</span>, <span class="ruby-identifier">empty_str</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">empty_str</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">empty_str</span>.<span class="ruby-identifier">blank?</span> )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">'0.0'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">alt_str</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">hours</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_string_hours-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_string_hours-method -->
+
+    
+      <div id="method-i-apphelp_terse_hours" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_terse_hours</span><span
+            class="method-args">( hours, zero_is_blank = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Terse hours - precision 2, don’t show “.0”, no string suffix. If you want a
+blank string instead of “0”, pass “true” in the second parameter.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_terse_hours-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">zero_is_blank</span> = <span class="ruby-keyword">false</span> )
+  <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'.'</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">''</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">'0'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">zero_is_blank</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">hours</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_terse_hours-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_terse_hours-method -->
+
+    
+      <div id="method-i-apphelp_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_title</span><span
+            class="method-args">( ctrl = controller )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an internationalised title appropriate for a page handling the
+current action for the current controller, or the given controller.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_title-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_title</span>( <span class="ruby-identifier">ctrl</span> = <span class="ruby-identifier">controller</span> )
+  <span class="ruby-node">&quot;#{ apphelp_site_name }: #{ apphelp_heading( ctrl ) }&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_title-method -->
+
+    
+      <div id="method-i-apphelp_view_hint" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">apphelp_view_hint</span><span
+            class="method-args">( hint_name, ctrl = controller, substitutions = {} )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return a controller view hint, based on looking up “view_&lt;foo&gt;” in
+the locale file for the given value of “&lt;foo&gt;” (as a string or
+symbol). The controller handling the current request is consulted by
+default, else pass a reference to the controller of interest in the
+optional second parameter. If the hint includes subsitution tokens, pass
+them in an optional third parameter as a hash.</p>
+          
+
+          
+          <div class="method-source-code" id="apphelp_view_hint-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_view_hint</span>( <span class="ruby-identifier">hint_name</span>, <span class="ruby-identifier">ctrl</span> = <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">substitutions</span> = {} )
+  <span class="ruby-identifier">t</span>(
+    <span class="ruby-node">&quot;uk.org.pond.trackrecord.controllers.#{ ctrl.controller_name }.view_#{ hint_name }&quot;</span>,
+    <span class="ruby-identifier">substitutions</span>
+  ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- apphelp_view_hint-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- apphelp_view_hint-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

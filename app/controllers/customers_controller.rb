@@ -1,6 +1,6 @@
 ########################################################################
 # File::    customers_controller.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2008
 #
 # Purpose:: Manage Customer objects. See models/customer.rb for more.
 # ----------------------------------------------------------------------
@@ -60,22 +60,21 @@ class CustomersController < ApplicationController
 
     # If asked to search for something, build extra conditions to do so.
 
-    unless ( params[ :search ].nil? )
-      if ( params[ :search ].empty? or params[ :search_cancel ] )
-        params.delete( :search )
-      else
-        search = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
-        conditions_sql << "AND ( customers.title ILIKE :search OR customers.code ILIKE :search )\n"
-        vars = { :search => search }
-        active_vars.merge!( vars )
-        inactive_vars.merge!( vars )
-      end
+    range_sql, range_start, range_end = appctrl_search_range_sql( Customer )
+
+    unless ( range_sql.nil? )
+      search = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
+      conditions_sql << "AND #{ range_sql } ( customers.title ILIKE :search OR customers.code ILIKE :search )\n"
+
+      vars = { :search => search, :range_start => range_start, :range_end => range_end }
+      active_vars.merge!( vars )
+      inactive_vars.merge!( vars )
     end
 
     # Sort order is already partially compiled in 'options' from the earlier
     # call to 'ApplicationController.appctrl_index_assist'.
 
-    order_sql = "ORDER BY #{ options[ :order ] }"
+    order_sql = "ORDER BY #{ options[ :order ] }, title ASC, code ASC"
     options.delete( :order )
 
     # Compile the main SQL statement. Select all columns of the project, fetching

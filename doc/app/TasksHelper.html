@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module TasksHelper - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/helpers/tasks_helper.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-taskhelp_actions">#taskhelp_actions</a>
+    
+    <li><a href="#method-i-taskhelp_active_class">#taskhelp_active_class</a>
+    
+    <li><a href="#method-i-taskhelp_active_help">#taskhelp_active_help</a>
+    
+    <li><a href="#method-i-taskhelp_billable_class">#taskhelp_billable_class</a>
+    
+    <li><a href="#method-i-taskhelp_billable_help">#taskhelp_billable_help</a>
+    
+    <li><a href="#method-i-taskhelp_customer">#taskhelp_customer</a>
+    
+    <li><a href="#method-i-taskhelp_degrading_selector">#taskhelp_degrading_selector</a>
+    
+    <li><a href="#method-i-taskhelp_duration">#taskhelp_duration</a>
+    
+    <li><a href="#method-i-taskhelp_overrun">#taskhelp_overrun</a>
+    
+    <li><a href="#method-i-taskhelp_project">#taskhelp_project</a>
+    
+    <li><a href="#method-i-taskhelp_project_selector">#taskhelp_project_selector</a>
+    
+    <li><a href="#method-i-taskhelp_remaining">#taskhelp_remaining</a>
+    
+    <li><a href="#method-i-taskhelp_tree_selector">#taskhelp_tree_selector</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="./ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="./ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="./ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="./ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="./QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="./QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="./QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="./QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="./QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="./YuiTree.html">YuiTree</a>
+  
+    <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./AuditsController.html">AuditsController</a>
+  
+    <li><a href="./AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="./ChartsController.html">ChartsController</a>
+  
+    <li><a href="./ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="./ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="./ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="./HelpController.html">HelpController</a>
+  
+    <li><a href="./HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="./Project.html">Project</a>
+  
+    <li><a href="./ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="./ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="./Rangeable.html">Rangeable</a>
+  
+    <li><a href="./ReportsController.html">ReportsController</a>
+  
+    <li><a href="./SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="./SavedReport.html">SavedReport</a>
+  
+    <li><a href="./SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="./SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="./SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="./SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="./SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="./SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="./SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./Task.html">Task</a>
+  
+    <li><a href="./TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="./TaskImport.html">TaskImport</a>
+  
+    <li><a href="./TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="./TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="./TasksController.html">TasksController</a>
+  
+    <li><a href="./TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="./TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="./TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="./TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="./TreesController.html">TreesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="./WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="./WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="./WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module TasksHelper</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>tasks_helper.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2008</p>
+</dd><dt>Purpose
+<dd>
+<p>Support functions for views related to <a href="Task.html">Task</a>
+objects. See controllers/tasks_controller.rb for more.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>04-Jan-2008 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-taskhelp_actions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_actions</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return list actions appropriate for the given task.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_actions-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_actions</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">or</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">manager?</span> ) )
+    <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">'edit'</span> ]
+    <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'delete'</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">actions</span> = []
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'show'</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">actions</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_actions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_actions-method -->
+
+    
+      <div id="method-i-taskhelp_active_class" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_active_class</span><span
+            class="method-args">( task_or_boolean )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>As <a
+href="TasksHelper.html#method-i-taskhelp_billable_class">#taskhelp_billable_class</a>,
+but for active/inactive tasks.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_active_class-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_active_class</span>( <span class="ruby-identifier">task_or_boolean</span> )
+  <span class="ruby-identifier">task_or_boolean</span> = <span class="ruby-identifier">task_or_boolean</span>.<span class="ruby-identifier">active</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task_or_boolean</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Task</span> ) )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">task_or_boolean</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;task_active&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;task_inactive&quot;</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_active_class-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_active_class-method -->
+
+    
+      <div id="method-i-taskhelp_active_help" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_active_help</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>As <a
+href="TasksHelper.html#method-i-taskhelp_billable_help">#taskhelp_billable_help</a>,
+but for active/inactive tasks.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_active_help-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_active_help</span>
+  <span class="ruby-keyword">return</span> (
+    <span class="ruby-string">&quot;Names of active or inactive tasks are shown as follows: &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_active_class( true  ) }\&quot;&gt;active&lt;/span&gt;', &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_active_class( false ) }\&quot;&gt;inactive&lt;/span&gt;'.&quot;</span>
+  ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_active_help-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_active_help-method -->
+
+    
+      <div id="method-i-taskhelp_billable_class" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_billable_class</span><span
+            class="method-args">( task_or_boolean )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an HTML class name appropriate for a billable or not billable task
+according to the given task or, if given a boolean, the value of that
+boolean where ‘true’ means ‘billable’</p>
+
+<p>Note that an additional class name may be included for active/inactive
+tasks (but not when a boolean is given, obviously!).</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_billable_class-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_billable_class</span>( <span class="ruby-identifier">task_or_boolean</span> )
+  <span class="ruby-identifier">task_or_boolean</span> = <span class="ruby-identifier">task_or_boolean</span>.<span class="ruby-identifier">billable</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task_or_boolean</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Task</span> ) )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">task_or_boolean</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;task_billable&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;task_not_billable&quot;</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_billable_class-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_billable_class-method -->
+
+    
+      <div id="method-i-taskhelp_billable_help" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_billable_help</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return an HTML fragment giving help on billable versus non-billable tasks.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_billable_help-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_billable_help</span>
+  <span class="ruby-keyword">return</span> (
+    <span class="ruby-string">&quot;Names of billable or non-billable tasks are shown as follows: &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_billable_class( true  ) }\&quot;&gt;billable&lt;/span&gt;', &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_billable_class( false ) }\&quot;&gt;not billable&lt;/span&gt;'.&quot;</span>
+  ).<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_billable_help-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_billable_help-method -->
+
+    
+      <div id="method-i-taskhelp_customer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_customer</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return a name of a given task’s associated customer, for use in list views.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_customer-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_customer</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">'-'</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">sections_augmented_link</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_customer-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_customer-method -->
+
+    
+      <div id="method-i-taskhelp_degrading_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_degrading_selector</span><span
+            class="method-args">( reason, options )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a degrading task selector using either a YUI tree or a SELECT list,
+but not both. The latter has high database load. The former has greater
+client requirements.</p>
+
+<p>The use cases for task selectors in Track Record are so varied that very
+specific cases are handled with special-case code and HTML output may
+include extra text to help the user for certain edge conditions, such as a
+lack of any available tasks (in a timesheet editor, this may be because all
+tasks are already added to the timesheet; for a user’s choice of the
+default list of tasks to show in timesheets, this may be because the user
+has no permission to view any tasks; when configuring the tasks which a
+restricted user is able to see, this may be because no active tasks exist).</p>
+
+<p>As a result, pass the reason for calling in the first parameter and an
+options list in the second.</p>
+
+<p>Supported reasons are symbols and listsed in the ‘case’ statement in the
+code below. Each is preceeded by comprehensive comments describing the
+mandatory and (if any) optional key/value pairs which should go into the
+options hash. Please consult these comments for more information.</p>
+
+<p>The following global options are also supported (none are mandatory):</p>
+
+<pre>Key           Value
+=====================================================================
+:line_prefix  A string to insert at the start of each line of output
+              - usually spaces, used if worried about the indentation
+              of the overall view HTML.</pre>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_degrading_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 351</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_degrading_selector</span>( <span class="ruby-identifier">reason</span>, <span class="ruby-identifier">options</span> )
+  <span class="ruby-identifier">output</span> = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">form</span>   = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:form</span> )
+  <span class="ruby-identifier">user</span>   = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:user</span> )
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">reason</span>
+
+    <span class="ruby-comment"># Generate a selector used to add tasks to a given timesheet. Includes a</span>
+    <span class="ruby-comment"># task selector and &quot;add&quot; button which submits to the given form with</span>
+    <span class="ruby-comment"># name &quot;add_row&quot;. The timesheet and form are specified in the options:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   Key         Value</span>
+    <span class="ruby-comment">#   =====================================================================</span>
+    <span class="ruby-comment">#   :form       Prevailing outer form, e.g. the value of &quot;f&quot; in a view</span>
+    <span class="ruby-comment">#               which has enclosed the call in &quot;form_for :foo do | f |&quot;.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#               Leads to &quot;task_ids&quot; being invoked on the model associated</span>
+    <span class="ruby-comment">#               with the form to determine which items, if any, must be</span>
+    <span class="ruby-comment">#               initially selected for lists in the non-JS page version.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   :timesheet  Instance of the timesheet being edited - used to find out</span>
+    <span class="ruby-comment">#               which tasks are already included in the timesheet and</span>
+    <span class="ruby-comment">#               thus which, if any, should be offered in the selector.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># NOTE: An empty string is returned if all tasks are already included in</span>
+    <span class="ruby-comment"># the timesheet.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:timesheet_editor</span>
+      <span class="ruby-identifier">tasks</span> = <span class="ruby-identifier">timesheethelp_tasks_for_addition</span>( <span class="ruby-identifier">options</span>[ <span class="ruby-value">:timesheet</span> ] )
+
+      <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">empty?</span> )
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ].<span class="ruby-identifier">nil?</span> )
+          <span class="ruby-constant">Task</span>.<span class="ruby-identifier">sort_by_augmented_title</span>( <span class="ruby-identifier">tasks</span> )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-value">:task_ids</span>, <span class="ruby-identifier">tasks</span>, <span class="ruby-value">:id</span>, <span class="ruby-value">:augmented_title</span> )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;br /&gt;'</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">submit</span>( <span class="ruby-string">'Add'</span>, { <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'add_row'</span> } )
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taskhelp_tree_selector</span>(
+            <span class="ruby-identifier">form</span>,
+            {
+              <span class="ruby-value">:included_tasks</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tasks</span>,
+              <span class="ruby-value">:change_text</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Choose tasks...'</span>,
+              <span class="ruby-value">:suffix_html</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot; then #{ form.submit( 'add them', { :name =&gt; 'add_row' } ) }\n&quot;</span>
+            }
+          )
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Generate a selector used to add tasks to a given report. The report and</span>
+    <span class="ruby-comment"># form are specified in the following options:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   Key        Value</span>
+    <span class="ruby-comment">#   =====================================================================</span>
+    <span class="ruby-comment">#   :form      Prevailing outer form, e.g. the value of &quot;f&quot; in a view</span>
+    <span class="ruby-comment">#              which has enclosed the call in &quot;form_for :foo do | f |&quot;.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#              Leads to &quot;task_ids&quot; being invoked on the model associated</span>
+    <span class="ruby-comment">#              with the form to determine which items, if any, must be</span>
+    <span class="ruby-comment">#              initially selected for lists in the non-JS page version.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   :report    Instance of the report being created - used to find out</span>
+    <span class="ruby-comment">#              which tasks are already included in the report (for form</span>
+    <span class="ruby-comment">#              resubmissions, e.g. from validation failure).</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   :inactive  If 'true', the selector is generated for inactive tasks</span>
+    <span class="ruby-comment">#              only. If omitted or 'false', only active tasks are shown.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   :name      A name to use instead of &quot;task_ids&quot; in the form submission</span>
+    <span class="ruby-comment">#              - optional, required if you want multiple selectors in the</span>
+    <span class="ruby-comment">#              same form.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># NOTE: All edge case conditions (no tasks, etc.) are handled internally</span>
+    <span class="ruby-comment"># with relevant messages included in the HTML output for individual</span>
+    <span class="ruby-comment"># selectors, but the caller ought to check that at least *some* tasks can</span>
+    <span class="ruby-comment"># be chosen before presenting the user with a report generator form.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:report_generator</span>
+      <span class="ruby-identifier">report</span> =   <span class="ruby-identifier">options</span>[ <span class="ruby-value">:report</span>   ]
+      <span class="ruby-identifier">active</span> = ( <span class="ruby-identifier">options</span>[ <span class="ruby-value">:inactive</span> ] <span class="ruby-operator">!=</span> <span class="ruby-keyword">true</span> )
+      <span class="ruby-identifier">field</span>  = <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-value">:active_task_ids</span> <span class="ruby-operator">:</span> <span class="ruby-value">:inactive_task_ids</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ].<span class="ruby-identifier">nil?</span> )
+        <span class="ruby-identifier">tasks</span> = <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">active</span>() <span class="ruby-operator">:</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">inactive</span>()
+        <span class="ruby-identifier">count</span> = <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">length</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">tasks</span> = <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">active_tasks</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">inactive_tasks</span>
+        <span class="ruby-identifier">count</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">all_permitted_tasks</span>.<span class="ruby-identifier">count</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
+
+        <span class="ruby-identifier">hint</span> = <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-value">:active</span> <span class="ruby-operator">:</span> <span class="ruby-value">:inactive</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;No #{ hint } tasks are available.&quot;</span>
+
+      <span class="ruby-keyword">else</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ].<span class="ruby-identifier">nil?</span> )
+          <span class="ruby-constant">Task</span>.<span class="ruby-identifier">sort_by_augmented_title</span>( <span class="ruby-identifier">tasks</span> )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_collection_select</span>(
+            <span class="ruby-identifier">form</span>,
+            <span class="ruby-identifier">field</span>,
+            <span class="ruby-identifier">tasks</span>,
+            <span class="ruby-value">:id</span>,
+            <span class="ruby-value">:augmented_title</span>
+          )
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taskhelp_tree_selector</span>(
+            <span class="ruby-identifier">form</span>,
+            {
+              <span class="ruby-value">:selected_tasks</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tasks</span>,
+              <span class="ruby-value">:params_name</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">field</span>,
+              <span class="ruby-value">:inactive</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">active</span>
+            }
+          )
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Generate a selector which controls the default task list shown in</span>
+    <span class="ruby-comment"># new timesheets.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   Key    Value</span>
+    <span class="ruby-comment">#   =====================================================================</span>
+    <span class="ruby-comment">#   :user  Instance of User model for the user for whom default timesheet</span>
+    <span class="ruby-comment">#          options are being changed.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   :form  Prevailing outer form, e.g. the value of &quot;f&quot; in a view</span>
+    <span class="ruby-comment">#          which has enclosed the call in &quot;form_for :foo do | f |&quot;.</span>
+    <span class="ruby-comment">#          Typically this is used by a User configuration view, though,</span>
+    <span class="ruby-comment">#          where a nested set of fields are being built via something</span>
+    <span class="ruby-comment">#          like &quot;fields_for :control_panel do | cp |&quot;. In such a case,</span>
+    <span class="ruby-comment">#          use &quot;cp&quot; for the &quot;:form&quot; option's value.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#          This leads to &quot;task_ids&quot; being invoked on the model associated</span>
+    <span class="ruby-comment">#          with the form to determine which items in the selection list,</span>
+    <span class="ruby-comment">#          if any, must be initially selected in the non-JS page version.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># NOTE: All edge case conditions (no tasks, etc.) are handled internally</span>
+    <span class="ruby-comment"># with relevant messages included in the HTML output.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:user_default_task_list</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">active_permitted_tasks</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
+
+        <span class="ruby-comment"># Warn that the user has no permission to see any tasks at all.</span>
+
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;This account does not have permission to view\n&quot;</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;any active tasks.\n&quot;</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n\n&quot;</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;p&gt;\n&quot;</span>
+
+        <span class="ruby-comment"># If the currently logged in user is unrestricted, tell them how to</span>
+        <span class="ruby-comment"># rectify the above problem. Otherwise, tell them to talk to their</span>
+        <span class="ruby-comment"># system administrator.</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  Please contact your system administrator for help.\n&quot;</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  To enable this section, please assign tasks to\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  the user account with the security settings above\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  and save your changes. Then edit the user account\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  again to see the new permitted task list.\n&quot;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;/p&gt;&quot;</span>
+
+      <span class="ruby-keyword">else</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ].<span class="ruby-identifier">nil?</span> )
+          <span class="ruby-identifier">tasks</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">active_permitted_tasks</span>
+          <span class="ruby-constant">Task</span>.<span class="ruby-identifier">sort_by_augmented_title</span>( <span class="ruby-identifier">tasks</span> )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-value">:task_ids</span>, <span class="ruby-identifier">tasks</span>, <span class="ruby-value">:id</span>, <span class="ruby-value">:augmented_title</span> )
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taskhelp_tree_selector</span>(
+            <span class="ruby-identifier">form</span>,
+            {
+              <span class="ruby-value">:restricted_by</span>  =<span class="ruby-operator">&gt;</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-operator">?</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+              <span class="ruby-value">:selected_tasks</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">control_panel</span>.<span class="ruby-identifier">tasks</span>
+            }
+          )
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Generate a selector which controls the list of tasks the user is</span>
+    <span class="ruby-comment"># permitted to see. Mandatory options:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   Key    Value</span>
+    <span class="ruby-comment">#   =====================================================================</span>
+    <span class="ruby-comment">#   :user  Instance of User model for the user to whom task viewing</span>
+    <span class="ruby-comment">#          permission is being granted or revoked.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   :form  Prevailing outer form, e.g. the value of &quot;f&quot; in a view</span>
+    <span class="ruby-comment">#          which has enclosed the call in &quot;form_for :foo do | f |&quot;.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#          This leads to &quot;task_ids&quot; being invoked on the model associated</span>
+    <span class="ruby-comment">#          with the form to determine which items in the selection list,</span>
+    <span class="ruby-comment">#          if any, must be initially selected in the non-JS page version.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># NOTE: All edge case conditions (no tasks, etc.) are handled internally</span>
+    <span class="ruby-comment"># with relevant messages included in the HTML output.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:user_permitted_task_list</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-string">''</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-comment"># Privileged users only!</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Task</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
+
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;There are no tasks currently defined. Please\n&quot;</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ link_to( 'create at least one', new_task_path() ) }.&quot;</span>
+
+      <span class="ruby-keyword">else</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ].<span class="ruby-identifier">nil?</span> )
+          <span class="ruby-identifier">tasks</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">active</span>()
+          <span class="ruby-constant">Task</span>.<span class="ruby-identifier">sort_by_augmented_title</span>( <span class="ruby-identifier">tasks</span> )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-value">:task_ids</span>, <span class="ruby-identifier">tasks</span>, <span class="ruby-value">:id</span>, <span class="ruby-value">:augmented_title</span> )
+        <span class="ruby-keyword">else</span>
+
+          <span class="ruby-comment"># Don't use &quot;user.[foo_]permitted_tasks&quot; here as we *want* an empty</span>
+          <span class="ruby-comment"># list for privileged accounts where no tasks have been set up.</span>
+
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taskhelp_tree_selector</span>(
+            <span class="ruby-identifier">form</span>,
+            { <span class="ruby-value">:selected_tasks</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">tasks</span> }
+          )
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">restricted?</span> )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;p&gt;\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  This list is only enforced for users with a\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  'normal' account type. It is included here\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  in case you are intending to change the account\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  type and want to assign tasks at the same time.\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;/p&gt;&quot;</span>
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># All done. Indent or otherwise add a prefix to each line of output if</span>
+  <span class="ruby-comment"># so required by the options and return the overall result.</span>
+
+  <span class="ruby-identifier">line_prefix</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:line_prefix</span> )
+  <span class="ruby-identifier">output</span>.<span class="ruby-identifier">gsub!</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-identifier">line_prefix</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">output</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">line_prefix</span>.<span class="ruby-identifier">nil?</span> )
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_degrading_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_degrading_selector-method -->
+
+    
+      <div id="method-i-taskhelp_duration" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_duration</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return a formatted duration for the given task, for use in list views.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_duration-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_duration</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">'0'</span>, <span class="ruby-string">'?'</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_duration-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_duration-method -->
+
+    
+      <div id="method-i-taskhelp_overrun" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_overrun</span><span
+            class="method-args">( hours, duration )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML showing the number of hours overrun on a task, or a label
+indicating no overrun. Pass the number of hours and the expected task
+duration.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_overrun-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_overrun</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">duration</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">duration</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">duration</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-identifier">hours</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">duration</span> )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-string">'&lt;span class=&quot;no_overrun&quot;&gt;None&lt;/span&gt;'</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_overrun-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_overrun-method -->
+
+    
+      <div id="method-i-taskhelp_project" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_project</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return a name of a given task’s associated project, for use in list views.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_project-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_project</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">'-'</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">sections_augmented_link</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_project-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_project-method -->
+
+    
+      <div id="method-i-taskhelp_project_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_project_selector</span><span
+            class="method-args">( task )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML suitable for an edit form, providing a grouped list of projects
+that can be assigned to the task. The list is grouped by customer in
+default customer sort order, along with a ‘None’ entry for unassigned
+projects. Pass the task object being edited.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_project_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_project_selector</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_project_selector</span>(
+    <span class="ruby-string">'task_project_id'</span>,
+    <span class="ruby-string">'task[project_id]'</span>,
+    <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project_id</span>,
+    <span class="ruby-keyword">true</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_project_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_project_selector-method -->
+
+    
+      <div id="method-i-taskhelp_remaining" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_remaining</span><span
+            class="method-args">( hours, duration )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return HTML showing the remaining hours on a task, or a label indicating
+overrun. Pass the number of hours and the expected task duration.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_remaining-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_remaining</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">duration</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">duration</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">duration</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-string">'&lt;span class=&quot;overrun&quot;&gt;Overrunning&lt;/span&gt;'</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-value">0</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">duration</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">hours</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_remaining-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_remaining-method -->
+
+    
+      <div id="method-i-taskhelp_tree_selector" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taskhelp_tree_selector</span><span
+            class="method-args">( form, options = {} )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generate a YUI tree task selector. Pass a form builder object in the first
+parameter (e.g. “bar” in “form_for @foo do | bar |”). The “object_name”
+field is used to generate a unique ID and name for a hidden element which
+carries IDs of selected YUI tree nodes, in the form “<a
+href="http://task_ids">name</a>[]” - as used by non-JS SELECT lists
+elsewhere. In the form submission processing code, you must handle the use
+of special IDs in the YUI tree (“P” prefix for Projects, “C” prefix for
+Customers, no prefix for tasks).</p>
+
+<p>In the next parameter optionally pass an options hash with keys and values
+as shown below; any omitted key/value pair results in the described default
+value being used instead.</p>
+
+<pre>Key              Meaning
+=========================================================================
+:inactive        If 'true', only inactive tasks, customers and projects
+                 are shown in the selector. By default, only active items
+                 will be shown.
+
+:restricted_by   The task/project/customer list for currently logged in
+                 users who are restricted is always restricted by that
+                 user's permitted task list no matter what you set here.
+                 If the current user is privileged, though, then passing
+                 in a User object results in restriction by that user's
+                 permitted task list. By default there is no restriction
+                 so for privileged currently logged in users, all tasks
+                 would be shown.
+
+:included_tasks  If you know up-front a full list of tasks to show, then
+                 pass them in here. Only items in the included list will
+                 be shown. IDs get passed to the XHR handler, among other
+                 things. This is NOT a security feature - see
+                 &quot;:restricted_by&quot; for that.
+
+:selected_tasks  An array of tasks to be initially selected in the tree.
+                 May be empty. By default no tasks are selected. Ideally
+                 the list should include no tasks that the current user
+                 or 'restricted_by' key would hide, but if it does, they
+                 simply won't be shown or selected and only the task IDs
+                 will appear in HTML output.
+
+:suffix_html     Beneath the text area gadget listing selected tasks is
+                 a &quot;Change...&quot; link which pops up the Leightbox overlay
+                 containing the YUI tree. If you want any extra HTML
+                 inserted directly after the &quot;&lt;/a&gt;&quot; of this link but
+                 before the (hidden) DIV enclosing the tree, use this
+                 option to include it. To keep things tidy, ensure that
+                 the string is terminated by a newline (&quot;\n&quot;) character.
+
+:change_text     Speaking of the &quot;Change...&quot; link - alter its text with
+                 this option, or omit for the default &quot;Change...&quot; string.
+
+:params_name     Name to use in params instead of &quot;task_ids&quot;, so that
+                 instead of reading &quot;params[form.object_name][:task_ids]&quot;
+                 in the controller handling the form submission, you read
+                 the params entry corresponding to the given name.</pre>
+
+<p>See also “<a
+href="TasksHelper.html#method-i-taskhelp_degrading_selector">#taskhelp_degrading_selector</a>”
+for JS/non-JS degrading code.</p>
+
+<p>Note that projects with no customer, or tasks with no project will not be
+shown in the tree; “unassigned” projects and customers are really just an
+administrative convenience during times when things might be in the process
+of being reassigned, or right at the start when someone is setting up new
+tasks, projects and customers, not necessarily starting with the customer
+definition first.</p>
+          
+
+          
+          <div class="method-source-code" id="taskhelp_tree_selector-source">
+            <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 190</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_tree_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">options</span> = {} )
+
+    <span class="ruby-identifier">inactive</span>       = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:inactive</span>       )
+    <span class="ruby-identifier">restricted_by</span>  = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:restricted_by</span>  )
+    <span class="ruby-identifier">included_tasks</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:included_tasks</span> )
+    <span class="ruby-identifier">selected_tasks</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:selected_tasks</span> ) <span class="ruby-operator">||</span> []
+    <span class="ruby-identifier">suffix_html</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:suffix_html</span>    ) <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
+    <span class="ruby-identifier">change_text</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:change_text</span>    ) <span class="ruby-operator">||</span> <span class="ruby-string">'Change...'</span>
+    <span class="ruby-identifier">params_name</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:params_name</span>    ) <span class="ruby-operator">||</span> <span class="ruby-value">:task_ids</span>
+
+    <span class="ruby-comment"># Callers may generate trees restricted by the current user, but if that</span>
+    <span class="ruby-comment"># user is themselves privileged their restricted task list will be empty</span>
+    <span class="ruby-comment"># (because they can see anything). The simplest way to deal with this is</span>
+    <span class="ruby-comment"># to clear the restricted user field in such cases.</span>
+
+    <span class="ruby-identifier">restricted_by</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">restricted_by</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">restricted_by</span>.<span class="ruby-identifier">restricted?</span> )
+
+    <span class="ruby-comment"># Based on the restricted task list - or otherwise - try to get at the root</span>
+    <span class="ruby-comment"># customer array as easily as possible, trying to avoid pulling all tasks</span>
+    <span class="ruby-comment"># out of the database. This is a bit painful either way, but usually a</span>
+    <span class="ruby-comment"># restricted user will have a relatively small set of tasks assigned to</span>
+    <span class="ruby-comment"># them so doing the array processing in Ruby isn't too big a deal.</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+      <span class="ruby-identifier">permitted_tasks</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">active_permitted_tasks</span>()
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">permitted_tasks</span> = <span class="ruby-identifier">restricted_by</span>.<span class="ruby-identifier">active_permitted_tasks</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">restricted_by</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">included_tasks</span>.<span class="ruby-identifier">nil?</span> )
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">permitted_tasks</span>.<span class="ruby-identifier">nil?</span> )
+        <span class="ruby-identifier">permitted_tasks</span>  = <span class="ruby-identifier">included_tasks</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">permitted_tasks</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-identifier">included_tasks</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">permitted_tasks</span>.<span class="ruby-identifier">nil?</span> )
+      <span class="ruby-identifier">root_customers</span> = <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">root_projects</span>  = <span class="ruby-identifier">permitted_tasks</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>    <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>             }.<span class="ruby-identifier">uniq</span>
+      <span class="ruby-identifier">root_customers</span> = <span class="ruby-identifier">root_projects</span>.<span class="ruby-identifier">map</span>   { <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:customer</span> ) }.<span class="ruby-identifier">uniq</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Reject items with no active / inactive tasks.</span>
+
+    <span class="ruby-identifier">method</span> = <span class="ruby-identifier">inactive</span> <span class="ruby-operator">?</span> <span class="ruby-value">:inactive</span> <span class="ruby-operator">:</span> <span class="ruby-value">:active</span>
+
+    <span class="ruby-identifier">root_customers</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">customer</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">customer</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">customer</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">method</span> ).<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Sort the root list by default order. Related associations are sorted</span>
+    <span class="ruby-comment"># according to declarations made in the model code.</span>
+
+    <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">apply_default_sort_order</span>( <span class="ruby-identifier">root_customers</span> )
+
+    <span class="ruby-comment"># Now take the selected task list and do something similar to get at the</span>
+    <span class="ruby-comment"># selected project and customer IDs so we can build a complete list of the</span>
+    <span class="ruby-comment"># node IDs to be initially expanded and checked in the YUI tree. The</span>
+    <span class="ruby-comment"># customer list is sorted so that when the YUI tree starts expanding nodes,</span>
+    <span class="ruby-comment"># it does it in display order from top to bottom - this looks better than</span>
+    <span class="ruby-comment"># an arbitrary expansion order.</span>
+
+    <span class="ruby-identifier">selected_projects</span>     = <span class="ruby-identifier">selected_tasks</span>.<span class="ruby-identifier">map</span>    { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>    <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>     }.<span class="ruby-identifier">uniq</span>
+    <span class="ruby-identifier">selected_customers</span>    = <span class="ruby-identifier">selected_projects</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span> }.<span class="ruby-identifier">uniq</span>
+
+    <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">apply_default_sort_order</span>( <span class="ruby-identifier">selected_customers</span> )
+
+    <span class="ruby-identifier">selected_task_ids</span>     = <span class="ruby-identifier">selected_tasks</span>.<span class="ruby-identifier">map</span>     { <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span>         }
+    <span class="ruby-identifier">selected_project_ids</span>  = <span class="ruby-identifier">selected_projects</span>.<span class="ruby-identifier">map</span>  { <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span> <span class="ruby-operator">|</span> <span class="ruby-node">&quot;P#{ item.id }&quot;</span> }
+    <span class="ruby-identifier">selected_customer_ids</span> = <span class="ruby-identifier">selected_customers</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span> <span class="ruby-operator">|</span> <span class="ruby-node">&quot;C#{ item.id }&quot;</span> }
+
+    <span class="ruby-identifier">selected_ids</span> = <span class="ruby-identifier">selected_customer_ids</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">selected_project_ids</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">selected_task_ids</span>
+
+    <span class="ruby-comment"># Turn an included task list into IDs too, if present</span>
+
+    <span class="ruby-identifier">included_ids</span> = ( <span class="ruby-identifier">included_tasks</span> <span class="ruby-operator">||</span> [] ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span> }
+
+    <span class="ruby-comment"># Generate the root node data and extra XHR parameters to pass to the tree</span>
+    <span class="ruby-comment"># controller in 'tree_controller.rb'.</span>
+
+    <span class="ruby-identifier">roots</span> = <span class="ruby-identifier">root_customers</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">customer</span> <span class="ruby-operator">|</span>
+      {
+        <span class="ruby-value">:label</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">customer</span>.<span class="ruby-identifier">title</span>,
+        <span class="ruby-value">:isLeaf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>,
+        <span class="ruby-value">:id</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;C#{ customer.id }&quot;</span>
+      }
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">data_for_xhr_call</span>  = []
+    <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'inactive'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">inactive</span> )
+    <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;restrict,#{ restricted_by.id }&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">restricted_by</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;include,#{ included_ids.join( '_' ) }&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">included_ids</span>.<span class="ruby-identifier">empty?</span> )
+
+    <span class="ruby-comment"># Create and (implicitly) return the HTML.</span>
+
+    <span class="ruby-identifier">id</span>   = <span class="ruby-node">&quot;#{ form.object_name }_#{ params_name }&quot;</span>
+    <span class="ruby-identifier">name</span> = <span class="ruby-node">&quot;#{ form.object_name }[#{ params_name }][]&quot;</span>
+    <span class="ruby-identifier">tree</span> = <span class="ruby-identifier">yui_tree</span>(
+      <span class="ruby-value">:multiple</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
+      <span class="ruby-value">:target_form_field_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>,
+      <span class="ruby-value">:target_name_field_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ id }_text&quot;</span>,
+      <span class="ruby-value">:name_field_separator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-comment"># Yes, a literal newline character</span>
+      <span class="ruby-value">:name_include_parents</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">' &amp;raquo; '</span>,
+      <span class="ruby-value">:name_leaf_nodes_only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
+      <span class="ruby-value">:form_leaf_nodes_only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
+      <span class="ruby-value">:expand</span>               =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">selected_ids</span>,
+      <span class="ruby-value">:highlight</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">selected_ids</span>,
+      <span class="ruby-value">:propagate_up</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
+      <span class="ruby-value">:propagate_down</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
+      <span class="ruby-value">:root_collection</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">roots</span>,
+      <span class="ruby-value">:data_for_xhr_call</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data_for_xhr_call</span>.<span class="ruby-identifier">join</span>( <span class="ruby-string">','</span> ),
+      <span class="ruby-value">:div_id</span>               =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'yui_tree_container_'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">id</span>
+    ).<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-string">'  '</span> )
+    <span class="ruby-identifier">html</span> = <span class="ruby-value">&lt;&lt;HTML
+&lt;textarea disabled=&quot;disabled&quot; rows=&quot;5&quot; cols=&quot;60&quot; class=&quot;tree_selector_text&quot; id=&quot;#{ id }_text&quot;&gt;Task data loading...&lt;/textarea&gt;
+&lt;br /&gt;
+&lt;a href=&quot;#leightbox_tree_#{ id }&quot; data-leightbox=&quot;leightbox_tree_#{ id }&quot; class=&quot;lbOn&quot;&gt;#{ change_text }&lt;/a&gt;
+#{ suffix_html }&lt;div id=&quot;leightbox_tree_#{ id }&quot; class=&quot;leightbox&quot;&gt;
+  &lt;a href=&quot;#&quot; class=&quot;lbAction&quot; data-leightbox=&quot;deactivate&quot;&gt;Close&lt;/a&gt;
+  #{ taskhelp_billable_help }
+  &lt;p&gt;&lt;/p&gt;
+  #{ hidden_field_tag( id, selected_task_ids.join( ',' ), { :name =&gt; name } ) }
+#{ tree }
+  &lt;a href=&quot;#&quot; class=&quot;lbAction&quot; data-leightbox=&quot;deactivate&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+HTML</span>
+
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">html</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">end</span></pre>
+          </div><!-- taskhelp_tree_selector-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taskhelp_tree_selector-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -1,6 +1,6 @@
 ########################################################################
 # File::    work_packet.rb
-# (C)::     Hipposoft 2008, 2009
+# (C)::     Hipposoft 2007
 #
 # Purpose:: Describe the behaviour of WorkPacket objects. See below
 #           for more details.
@@ -15,7 +15,7 @@ class WorkPacket < ActiveRecord::Base
   # belongs.
 
   belongs_to( :timesheet_row )
-  named_scope :significant, :conditions => 'worked_hours > 0.0'
+  scope :significant, :conditions => 'worked_hours > 0.0'
 
   # Security controls.
 
