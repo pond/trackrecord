@@ -602,6 +602,7 @@ table.timesheet_chart {
 table.timesheet_chart tr td {
   border-left: 1px solid #444;
   padding: 4px 8px;
+  vertical-align: middle;
 }
 
 table.timesheet_chart tr td:first-child {
