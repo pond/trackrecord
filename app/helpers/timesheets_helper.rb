@@ -52,9 +52,9 @@ module TimesheetsHelper
   def timesheethelp_tasks_for_addition( timesheet )
     tasks = @current_user.active_permitted_tasks - timesheet.tasks
 
-    tasks.reject! do | task |
+    tasks.reject do | task |
       task.project_id.nil? || task.project.customer_id.nil?
-    end || []
+    end
   end
 
   # Return HTML suitable for inclusion in the form passed in the
