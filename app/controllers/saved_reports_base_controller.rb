@@ -20,7 +20,7 @@ private
 
   def confirm_permission
     @user = User.find_by_id( params[ :user_id ] )
-    return appctrl_not_permitted() if ( @user.nil? || ! ( @user.admin? || @user == @current_user ) )
+    return appctrl_not_permitted() if ( @user.nil? || ! ( @current_user.admin? || @user == @current_user ) )
   end
 
   # Get rid of any unnamed reports for the current user. Usually invoked via

@@ -46,7 +46,7 @@ class TimesheetsController < ApplicationController
     user_conditions_sql  = "WHERE ( timesheets.committed = :committed ) AND ( users.id  = :user_id )\n"
     other_conditions_sql = "WHERE ( timesheets.committed = :committed ) AND ( users.id != :user_id )\n"
 
-    range_sql, search_start, search_end = appctrl_search_range_sql( Timesheet, :start_day_cache )
+    range_sql, range_start, range_end = appctrl_search_range_sql( Timesheet, :start_day_cache )
 
     # If asked to search for something, build extra conditions to do so.
 
@@ -55,7 +55,7 @@ class TimesheetsController < ApplicationController
       search_str = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
 
       conditions_sql = "AND #{ range_sql } ( timesheets.year = :search_num OR timesheets.week_number = :search_num OR users.name ILIKE :search_str )"
-      vars           = { :search_num => search_num, :search_str => search_str, :search_start => search_start, :search_end => search_end }
+      vars           = { :search_num => search_num, :search_str => search_str, :range_start => range_start, :range_end => range_end }
 
       user_conditions_sql  << conditions_sql
       other_conditions_sql << conditions_sql

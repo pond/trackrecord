@@ -72,7 +72,7 @@ class ReportsController < ApplicationController
 
       return
 
-    elsif ( @saved_report.nil? || ( @saved_report.user_id != @current_user.id && ! @saved_report.shared ) )
+    elsif ( @saved_report.nil? || ( @saved_report.user_id != @current_user.id && ! @saved_report.shared && ! @current_user.admin? ) )
 
       flash[ :error ] = "The requested report was not found; the owner may have deleted it."
       redirect_to( home_path() ) and return

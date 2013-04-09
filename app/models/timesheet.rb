@@ -489,6 +489,7 @@ private
     self.start_day_cache = self.date_for(
       TimesheetRow::FIRST_DAY,
       true # Return as a Date rather than a String
-    )
+
+    ).to_datetime.in_time_zone( 'UTC' ) # Rails 3 gotcha/bug; auto-conversion to TimeWithZone uses *server's local time zone* rather than UTC+0, contrary to Rails defaults elsewhere; typical result is the cache column ends up in the 'wrong day' unless server is also at UTC +0.
   end
 end

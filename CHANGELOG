@@ -1,3 +1,26 @@
+Version 2.01, 2013-04-09
+========================
+
+Please see the version 2.00 notes later for information about updating from
+earlier version.
+
+This release fixes the following bugs that were found in v2.00:
+
+- Rails 3 converts dates to dates-with-time-and-timezone using the server's
+  local timezone rather than UTC as in Rails 2. This could lead to work
+  packets and timesheets having incorrect cached date-time values. Editing
+  timesheets would show no issues but reports might be wrong. Noticed on
+  the Endurance installation when the server automatically changed from
+  UTC to UTC+1 on April 1st. Fixed.
+
+- Administrator users were unable to show saved reports from other users
+  unless they were shared, even though they could edit them. Administrators
+  can now see all reports.
+
+- Date-based searching in "Manage Timesheets" was broken. Now fixed.
+
+
+
 Version 2.00, 2013-03-27
 ========================
 

@@ -200,7 +200,10 @@ private
   #
   def set_date
     if ( self.timesheet_row and self.timesheet_row.timesheet )
-      self.date = self.timesheet_row.timesheet.date_for( self.day_number, true )
+      self.date = self.timesheet_row.timesheet.date_for(
+        self.day_number,
+        true # Return as a Date rather than a String
+      ).to_datetime.in_time_zone( 'UTC' ) # Rails 3 gotcha/bug; auto-conversion to TimeWithZone uses *server's local time zone* rather than UTC+0, contrary to Rails defaults elsewhere; typical result is the cache column ends up in the 'wrong day' 
     else
       self.date = Time.current
     end

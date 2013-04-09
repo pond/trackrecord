@@ -625,7 +625,7 @@ module TrackRecordReport
       latest   = WorkPacket.find_latest_by_tasks( @task_ids )
 
       # If the earliest or latest work packet value is nil, both should be
-      # nil (obviously) and this means there are no work pckets for the
+      # nil (obviously) and this means there are no work packets for the
       # tasks. In that case we just span 'all of time' so that the user
       # can see explicitly there's no booked time. Generating a report over
       # some single day range just looks odd (user thinks "why hasn't it
