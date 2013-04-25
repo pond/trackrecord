@@ -177,11 +177,8 @@ class TasksController < ApplicationController
     appctrl_delete( 'Task' )
   end
 
-  # Show an 'Are you sure?' prompt. Works via
-  # ApplicationController.appctrl_delete_confirm.
-  #
-  def delete_confirm
-    appctrl_delete_confirm( 'Task' )
+  def destroy
+    appctrl_admin_destroy( Task )
   end
 
 private

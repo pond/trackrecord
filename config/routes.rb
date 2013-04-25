@@ -44,11 +44,14 @@ Trackrecord::Application.routes.draw do
     resources :tasks
     resources :timesheets
 
-    resources :saved_reports
-    resource  :saved_reports_by_task,     :controller => :saved_reports_by_task,     :only => :create
-    resource  :saved_reports_by_project,  :controller => :saved_reports_by_project,  :only => :create
-    resource  :saved_reports_by_customer, :controller => :saved_reports_by_customer, :only => :create
-    resource  :saved_reports_by_user,     :controller => :saved_reports_by_user,     :only => :create
+    resources :saved_reports do
+      get 'delete', :on => :member
+    end
+
+    resource :saved_reports_by_task,     :controller => :saved_reports_by_task,     :only => :create
+    resource :saved_reports_by_project,  :controller => :saved_reports_by_project,  :only => :create
+    resource :saved_reports_by_customer, :controller => :saved_reports_by_customer, :only => :create
+    resource :saved_reports_by_user,     :controller => :saved_reports_by_user,     :only => :create
   end
 
   resources :audits

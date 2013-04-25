@@ -1,3 +1,16 @@
+Version 2.02, 2013-04-25
+========================
+
+Please see the version 2.00 notes later for information about updating from
+earlier version.
+
+This release fixes the following bugs that were found in v2.01:
+
+- Saved reports can now be deleted. Related code tidied up in a few other
+  places too.
+
+
+
 Version 2.01, 2013-04-09
 ========================
 

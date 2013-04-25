@@ -133,6 +133,7 @@ en:
               action_title_create:      *new_title
               action_title_edit:        &edit_title    "Update a report"
               action_title_update:      *edit_title
+              action_title_delete:                     "Delete report"
 
             sessions:
               action_title_new:         &new_title     "Sign in"

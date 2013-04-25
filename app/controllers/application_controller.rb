@@ -127,18 +127,25 @@ protected
 
   # Destroy an object following confirmation that this is desired.
   # Only administrators can do this. Pass the model name as a string.
-
-  def appctrl_delete_confirm( model )
+  #
+  def appctrl_admin_destroy( model )
     return appctrl_not_permitted() unless ( @current_user.admin? )
+    appctrl_destroy( model )
+  end
 
+  # Destroy an object. Pass the model class (e.g. User). Access control
+  # is left up to the caller (or use 'appctrl_admin_destroy' instead).
+  # Optionally pass the path to redirect to upon success.
+  #
+  def appctrl_destroy( model, path = nil )
     begin
-      model.constantize.destroy( params[ :id ] )
+      model.destroy( params[ :id ] )
 
-      flash[ :notice ] = "#{ model } deleted"
-      redirect_to( send( "#{ model.downcase.pluralize }_path" ) )
+      flash[ :notice ] = "#{ model.model_name.human.capitalize } deleted"
+      redirect_to( path || send( "#{ model.model_name.route_key }_path" ) )
 
     rescue => error
-      flash[ :error ] = "Could not destroy #{ model.downcase }: #{ error }"
+      flash[ :error ] = "Could not destroy #{ model.model_name.human }: #{ error }"
       redirect_to( home_path() )
 
     end

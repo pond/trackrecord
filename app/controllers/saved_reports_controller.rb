@@ -134,4 +134,15 @@ class SavedReportsController < SavedReportsBaseController
     saved_report = SavedReport.find( params[ :id ] )
     redirect_to( report_path( saved_report ) )
   end
+
+  # Confirm deletion of and actually delete a saved report.
+  #
+  def delete
+    appctrl_delete( 'SavedReport' )
+  end
+
+  def destroy
+    appctrl_destroy( SavedReport, user_saved_reports_path( @user ) )
+  end
+
 end

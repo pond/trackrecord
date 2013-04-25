@@ -229,8 +229,8 @@ class TimesheetsController < ApplicationController
     appctrl_delete( 'Timesheet' )
   end
 
-  def delete_confirm
-    appctrl_delete_confirm( 'Timesheet' )
+  def destroy
+    appctrl_admin_destroy( Timesheet )
   end
 
 private
