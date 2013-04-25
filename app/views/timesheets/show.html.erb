@@ -45,7 +45,7 @@
 
 <% sections_initialise_sections()
    @row_number   = -1
-   @timesheet.timesheet_rows.each_index do | timesheet_row_index |
+   @timesheet.timesheet_rows.all.each_index do | timesheet_row_index |
      @row_number += 1
      @timesheet_row = @timesheet.timesheet_rows[ timesheet_row_index ] -%>
 <%   if ( sections_new_section?( @timesheet_row.task ) ) -%>

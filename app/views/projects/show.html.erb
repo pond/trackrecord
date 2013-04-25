@@ -34,7 +34,7 @@
     <h2 id="item_breakdown_heading">Task breakdown</h2>
     <div id="item_breakdown_contents">
 
-<%     @record.tasks.each do | task | -%>
+<%     @record.tasks.all.each do | task | -%>
       <h3>Task: <%= link_to( h( task.title ), task ) %></h3>
 
 <%= render( :partial => 'shared/task_info', :locals => { :task => task } ) %>

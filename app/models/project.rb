@@ -31,14 +31,7 @@ class Project < TaskGroup
 
   scope( :unassigned, { :conditions => { :customer_id => nil } } )
 
-  # Unfortunately, Acts As Audited runs on this model (see above) and
-  # uses attr_protected. Rails doesn't allow both, so I have to use
-  # the less-secure attr_protected here too.
-
-  attr_protected(
-    :customer_ids,
-    :control_panel_ids
-  )
+  attr_protected() # Necessary for unknown reasons, Rails issues?
 
   USED_RANGE_COLUMN = 'created_at' # For the Rangeable base class of TaskGroup
 
@@ -56,12 +49,14 @@ class Project < TaskGroup
   def initialize( params = nil, user = nil )
     super( params )
 
-    self.active = true
-    self.code   = "PID%04d" % Project.count
+    if ( params.nil? )
+      self.active = true
+      self.code   = "PID%04d" % Project.count
 
-    if ( user and user.control_panel )
-      cp = user.control_panel
-      self.customer = cp.customer if ( cp.customer and cp.customer.active )
+      if ( user and user.control_panel )
+        cp = user.control_panel
+        self.customer = cp.customer if ( cp.customer and cp.customer.active )
+      end
     end
   end
 
@@ -80,7 +75,7 @@ class Project < TaskGroup
     # If the active flag has changed, deal with repercussions.
 
     if ( update_tasks and attrs[ :active ] != active )
-      self.tasks.each do | task |
+      self.tasks.all.each do | task |
         task.update_with_side_effects!( { :active => attrs[ :active ] } )
       end
     end
@@ -92,7 +87,7 @@ class Project < TaskGroup
   #
   def destroy_with_side_effects( destroy_tasks = true )
     if ( destroy_tasks )
-      self.tasks.each do | task |
+      self.tasks.all.each do | task |
         task.destroy()
       end
     else

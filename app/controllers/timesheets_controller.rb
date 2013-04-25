@@ -345,7 +345,7 @@ private
       # Sort the rows?
 
       if ( params[ :sort ] )
-        row_objects = timesheet.timesheet_rows.dup
+        row_objects = timesheet.timesheet_rows.all.dup
 
         case params[ :sort_by ]
           when 'rows_added'
@@ -455,7 +455,8 @@ private
 
     return errors
 
-  rescue # Don't use 'ensure', because early exits elsewhere may fail then.
+  rescue => error # Don't use 'ensure', because early exits elsewhere may fail then.
+    errors.push( "Timesheet: #{ error.message }" )
     return errors
 
   end
@@ -482,13 +483,13 @@ private
       # because the ordering may have to change too. This code isn't fast
       # but it's clear, simple and reliable.
 
-      timesheet.timesheet_rows.each do | row |
+      timesheet.timesheet_rows.find_each do | row |
         timesheet.timesheet_rows.destroy( row.id )
       end
 
       # Now add rows equivalent to those in the original timesheet.
 
-      original.timesheet_rows.each do | row |
+      original.timesheet_rows.find_each do | row |
         timesheet.add_row( row.task )
       end
 

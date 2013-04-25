@@ -304,7 +304,7 @@ module ApplicationHelper
     # Find all customers and loop through, adding those that have at least
     # one assigned project to the 'customers' array.
 
-    Customer.active.each do | customer |
+    Customer.active.all.each do | customer |
       customers.push( customer ) unless ( customer.projects.active.count.zero? )
     end
 

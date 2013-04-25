@@ -26,10 +26,6 @@ class Customer < TaskGroup
   has_many( :tasks,    { :through => :projects, :uniq => true  } )
   has_many( :control_panels )
 
-  # Unfortunately, Acts As Audited runs on this model (see above) and
-  # uses attr_protected. Rails doesn't allow both, so I have to use
-  # the less-secure attr_protected here too.
-
   attr_protected(
     :project_ids,
     :control_panel_ids
@@ -50,8 +46,10 @@ class Customer < TaskGroup
   def initialize( params = nil, user = nil )
     super( params )
 
-    self.active = true
-    self.code   = "CID%04d" % Customer.count
+    if ( params.nil? )
+      self.active = true
+      self.code   = "CID%04d" % Customer.count
+    end
   end
 
   # Apply a default sort to the given array of customer objects. The array is
@@ -81,7 +79,7 @@ class Customer < TaskGroup
     # If the active flag has changed, deal with repercussions.
 
     if ( update_projects and attrs[ :active ] != active )
-      self.projects.each do | project |
+      self.projects.all.each do | project |
         project.update_with_side_effects!( { :active => attrs[ :active ] }, update_tasks )
       end
     end
@@ -95,7 +93,7 @@ class Customer < TaskGroup
   #
   def destroy_with_side_effects( destroy_projects = true, destroy_tasks = true )
     if ( destroy_projects )
-      self.projects.each do | project |
+      self.projects.all.each do | project |
         project.destroy_with_side_effects( destroy_tasks )
       end
     else

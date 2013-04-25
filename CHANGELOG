@@ -1,13 +1,31 @@
-Version 2.02, 2013-04-25
-========================
+Version 2.02 and 2.03, 2013-04-25
+=================================
 
 Please see the version 2.00 notes later for information about updating from
 earlier version.
 
-This release fixes the following bugs that were found in v2.01:
+Version 2.02 fixes the following bugs that were found in v2.01:
 
 - Saved reports can now be deleted. Related code tidied up in a few other
   places too.
+
+Version 2.03 fixes the following bugs that were found in v2.02 on a live
+deployment, rather than with test data only:
+
+- Sometimes duplicating a timesheet would keep apparently duplicating one
+  or more of its rows more than once. This was actually due to an
+  iterator removing a new timesheet's default rows, as specified in the
+  user's control panel, failing to actually iterate over all objects. It
+  seems an explicit call to "all" is required on associated collections
+  before "each" to reliably iterate across all objects (!). A lot of
+  other files have been updated as a precaution, following the same
+  pattern.
+
+- In passing while testing this fix, noticed that attribute protection
+  code in the Project model was nonsense (copy and paste error); also,
+  the custom initializer override parameters at creation, which were
+  only subsequently correctable by editing the instance. This fault was
+  replicated in Task, Project, User and Customer models; fixed in all.
 
 
 

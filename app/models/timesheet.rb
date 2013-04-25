@@ -37,24 +37,10 @@ class Timesheet < ActiveRecord::Base
   has_many( :tasks,          { :through   => :timesheet_rows               } )
   has_many( :work_packets,   { :through   => :timesheet_rows               } )
 
-  # I want to use attr_accessible as follows:
-  #
-  # attr_accessible(
-  #   :week_number,
-  #   :year,
-  #   :description
-  # )
-  #
-  # Unfortunately, Acts As Audited runs on this model (see above) and
-  # uses attr_protected. Rails doesn't allow both, so I have to use
-  # the less-secure attr_protected here too.
-
-  attr_protected(
-    :user_id,
-    :committed_at,
-    :timesheet_row_ids,
-    :task_ids,
-    :work_packet_ids
+  attr_accessible(
+    :week_number,
+    :year,
+    :description
   )
 
   # Return a range of years allowed for a timesheet. Optionally pass 'true'
@@ -271,7 +257,7 @@ class Timesheet < ActiveRecord::Base
 
     # [TODO] Slow. Surely there's a better way...?
 
-    self.timesheet_rows.each do | timesheet_row |
+    self.timesheet_rows.all.each do | timesheet_row |
       work_packet = WorkPacket.find_by_timesheet_row_id(
         timesheet_row.id,
         :conditions => { :day_number => day_number }
@@ -457,7 +443,7 @@ private
   # timesheet, use "no longer..." wording in the error messages.
   #
   def tasks_are_active_and_permitted
-    self.tasks.each do | task |
+    self.tasks.all.each do | task |
       errors.add( :base, "Task '#{ task.augmented_title }' is no longer active and cannot be included" ) unless task.active
 
       if ( self.user.restricted? )
@@ -469,7 +455,7 @@ private
   # Run via "after_create".
   #
   def add_default_rows
-    User.find( self.user_id ).control_panel.tasks.each do | task |
+    User.find( self.user_id ).control_panel.tasks.all.each do | task |
       add_row( task ) if ( task.active )
     end
   end

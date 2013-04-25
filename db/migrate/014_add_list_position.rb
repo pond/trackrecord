@@ -6,7 +6,7 @@ class AddListPosition < ActiveRecord::Migration
 
     TimesheetRow.reset_column_information
     Timesheet.find_each do | timesheet |
-      timesheet.timesheet_rows.each_with_index do | row, index |
+      timesheet.timesheet_rows.all.each_with_index do | row, index |
         row.position = index + 1
         row.save!
       end

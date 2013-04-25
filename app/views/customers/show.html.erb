@@ -30,7 +30,7 @@
     <h2 id="item_breakdown_heading">Project list</h2>
     <div id="item_breakdown_contents">
 
-<%     @record.projects.each do | project | -%>
+<%     @record.projects.all.each do | project | -%>
       <h3>Project: <%= link_to( h( project.title ), project ) %></h3>
 
       <table class="display_table indented">
@@ -44,7 +44,7 @@
 <%       if ( project.tasks.empty? ) -%>
             None
 <%       else -%>
-<%         project.tasks.each do | task | %>
+<%         project.tasks.all.each do | task | %>
             <%= link_to( h( task.title ), task ) %><br />
 <%         end -%>
 <%       end -%>

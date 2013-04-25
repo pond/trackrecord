@@ -15,7 +15,7 @@ class DestroyPermittedOpenIds < ActiveRecord::Migration
     # Try to rebuild the table based on current users listed in the
     # database.
 
-    User.find( :all ).each do | user |
+    User.all.each do | user |
       poid = PermittedOpenId.new
       poid.identity_url = user.identity_url
       poid.save!

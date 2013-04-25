@@ -50,10 +50,6 @@ class Task < Rangeable
   has_and_belongs_to_many( :control_panels )
   has_and_belongs_to_many( :users          )
 
-  # Unfortunately, Acts As Audited runs on this model (see above) and
-  # uses attr_protected. Rails doesn't allow both, so I have to use
-  # the less-secure attr_protected here too.
-
   attr_protected(
     :timesheet_row_ids,
     :work_packet_ids,
@@ -89,13 +85,15 @@ class Task < Rangeable
   def initialize( params = nil, user = nil )
     super( params )
 
-    self.duration = 0
-    self.active   = true
-    self.code     = "TID%05d" % Task.count
+    if ( params.nil? )
+      self.duration = 0
+      self.active   = true
+      self.code     = "TID%05d" % Task.count
 
-    if ( user and user.control_panel )
-      cp = user.control_panel
-      self.project = cp.project if ( cp.project and cp.project.active )
+      if ( user and user.control_panel )
+        cp = user.control_panel
+        self.project = cp.project if ( cp.project and cp.project.active )
+      end
     end
   end
 
@@ -155,7 +153,7 @@ class Task < Rangeable
     restricted   = []
     unrestricted = []
 
-    self.users.each do | user |
+    self.users.all.each do | user |
       if ( user.restricted? )
         restricted.push( user )
       else
@@ -213,7 +211,7 @@ class Task < Rangeable
   def committed_worked
     sum = 0.0
 
-    self.work_packets.each do | work_packet |
+    self.work_packets.all.each do | work_packet |
       sum += work_packet.worked_hours if ( work_packet.timesheet_row.timesheet.committed )
     end
 
@@ -225,7 +223,7 @@ class Task < Rangeable
   def not_committed_worked
     sum = 0.0
 
-    self.work_packets.each do | work_packet |
+    self.work_packets.all.each do | work_packet |
       sum += work_packet.worked_hours unless ( work_packet.timesheet_row.timesheet.committed )
     end
 

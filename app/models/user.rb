@@ -43,10 +43,6 @@ class User < Rangeable
   has_and_belongs_to_many( :tasks )
   has_many( :timesheets, :dependent => :destroy )
 
-  # Unfortunately, Acts As Audited runs on this model (see above) and
-  # uses attr_protected. Rails doesn't allow both, so I have to use
-  # the less-secure attr_protected here too.
-
   attr_protected(
     :user_type,
     :last_committed,
@@ -88,7 +84,7 @@ class User < Rangeable
   validate( :tasks_are_active )
 
   def tasks_are_active
-    self.tasks.each do | task |
+    self.tasks.all.each do | task |
       errors.add( :base, "Cannot assign task '#{ task.title }' to this user - it is no longer active" ) unless task.active
     end
   end
@@ -115,12 +111,14 @@ class User < Rangeable
   def initialize( params = nil, user = nil )
     super( params )
 
-    self.code         = "UID%04d" % User.count
-    self.active       = true
-    self.name         = ''
-    self.email        = ''
-    self.identity_url = ''
-    self.user_type    = User::USER_TYPE_NORMAL
+    if ( params.nil? )
+      self.code         = "UID%04d" % User.count
+      self.active       = true
+      self.name         = ''
+      self.email        = ''
+      self.identity_url = ''
+      self.user_type    = User::USER_TYPE_NORMAL
+    end
   end
 
   # Find all tasks which this user is permitted to see; only active

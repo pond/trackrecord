@@ -12,7 +12,7 @@ class AddOptimisticLocking < ActiveRecord::Migration
 
     [ Timesheet, Customer, Project, Task, User ].each do | cls |
       cls.reset_column_information
-      cls.find( :all ).each do | obj |
+      cls.all.each do | obj |
         obj.lock_version = 0
         obj.save!
       end
