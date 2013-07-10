@@ -361,7 +361,7 @@ private
         end
 
         row_objects.each_with_index do | row, index |
-          row.position = index + 1
+          row.set_list_position( index + 1 )
           row.save!
         end
 
@@ -490,7 +490,8 @@ private
       # Now add rows equivalent to those in the original timesheet.
 
       original.timesheet_rows.find_each do | row |
-        timesheet.add_row( row.task )
+        new_row = timesheet.add_row( row.task )
+        new_row.set_list_position( row.position )
       end
 
       # Save again, to be sure that the row changes are persisted.

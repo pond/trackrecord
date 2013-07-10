@@ -240,12 +240,20 @@ class Timesheet < ActiveRecord::Base
   # Add a row to the timesheet using the given task object. Does
   # nothing if a row containing that task is already present.
   # The updated timesheet is not saved - the caller must do this.
+  # The new, added timesheet row object is returned, unless the
+  # task is already included in the timesheet, in which case
+  # the method returns 'nil'.
   #
   def add_row( task )
     unless self.tasks.include?( task )
       timesheet_row      = TimesheetRow.new
       timesheet_row.task = task
+
       self.timesheet_rows.push( timesheet_row )
+
+      return timesheet_row
+    else
+      return nil
     end
   end
 
