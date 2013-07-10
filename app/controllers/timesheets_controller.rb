@@ -311,7 +311,7 @@ private
           #  WHERE (timesheet_rows.timesheet_id = 3) AND
           #        (timesheet_id = 3 AND position > 1)
           #  ORDER BY position
-          #  ^^^^^^^^^^^^^^^^^ <-- Huh?
+          #  ^^^^^^^^^^^^^^^^^ <-- That's acts_as_list interfering.
           #
           # We need to find the row explicitly, then destroy it. Upon being
           # destroyed, the SQL is more sane, e.g.:
@@ -326,47 +326,8 @@ private
         end
       end
 
-      # If moving positions, must be careful; when moving rows up, move
-      # the lowest numbered position first (else others are renumbered
-      # when one moves and things go pear shaped); vice versa for moving
-      # rows down.
-
-      if ( params[ :move_row_down ] or params[ :move_row_up ] )
-        down        = params[ :move_row_down ]
-        row_objects = TimesheetRow.find( operate_on_rows, :order => :position )
-        row_objects.reverse! if ( down )
-
-        row_objects.each do | row |
-          down ? row.move_lower() : row.move_higher()
-          row.save!()
-        end
-      end
-
-      # Sort the rows?
-
-      if ( params[ :sort ] )
-        row_objects = timesheet.timesheet_rows.all.dup
-
-        case params[ :sort_by ]
-          when 'rows_added'
-            row_objects.sort! { | a, b | a.id <=> b.id }
-          when 'tasks_added'
-            row_objects.sort! { | a, b | a.task.id <=> b.task.id }
-          when 'task_title'
-            row_objects.sort! { | a, b | a.task.title <=> b.task.title }
-          when 'task_code'
-            row_objects.sort! { | a, b | a.task.code <=> b.task.code }
-          when 'associations'
-            row_objects.sort! { | a, b | a.task.augmented_title <=> b.task.augmented_title }
-        end
-
-        row_objects.each_with_index do | row, index |
-          row.set_list_position( index + 1 )
-          row.save!
-        end
-
-        timesheet.reload
-      end
+      # Deal with main timesheet updates before sorting, so that auto-sort
+      # can apply after row additions, removals and any other updates.
 
       timesheet_hash = params[ :timesheet ]
 
@@ -415,6 +376,29 @@ private
         end
       end
 
+      # If moving rows around, be careful; when moving rows up, move
+      # the lowest numbered position first (else others are renumbered
+      # when one moves and things go pear shaped); vice versa for moving
+      # rows down.
+      #
+      # Manually moving rows defeats auto-sort. Obviously you can't have
+      # some rows manually moved around, then just sort them!
+
+      if ( ( params[ :move_row_down ] or params[ :move_row_up ] ) and not operate_on_rows.empty? )
+
+        timesheet.auto_sort = nil
+        timesheet_hash.delete( :auto_sort )
+
+        down        = params[ :move_row_down ]
+        row_objects = TimesheetRow.find( operate_on_rows, :order => :position )
+        row_objects.reverse! if ( down )
+
+        row_objects.each do | row |
+          down ? row.move_lower() : row.move_higher()
+          row.save!()
+        end
+      end
+
       # Deal with adding rows, if required.
 
       unless ( params[ :add_row ].nil? )
@@ -432,6 +416,47 @@ private
               errors.push( "Adding task '#{ task.title }': #{ error.message }" )
             end
           end
+        end
+      end
+
+      # Now worry about manual one-off or automatic sorting.
+
+      if ( params[ :sort_once ] )
+
+        # Clear auto-sort and retrieve what we treat as a one-off
+        # sort parameter from the timesheet auto-sort form data.
+
+        timesheet.auto_sort = nil
+        sorting             = timesheet_hash[ :auto_sort ]
+
+      else
+
+        # Change or maintain auto-sort and use this for sorting.
+
+        timesheet.auto_sort = timesheet_hash[ :auto_sort ] || timesheet.auto_sort
+        sorting             = timesheet.auto_sort
+
+      end
+
+      if ( sorting )
+        row_objects = timesheet.timesheet_rows.all.dup
+
+        case sorting
+          when 'rows_added'
+            row_objects.sort! { | a, b | a.id <=> b.id }
+          when 'tasks_added'
+            row_objects.sort! { | a, b | a.task.id <=> b.task.id }
+          when 'task_title'
+            row_objects.sort! { | a, b | a.task.title <=> b.task.title }
+          when 'task_code'
+            row_objects.sort! { | a, b | a.task.code <=> b.task.code }
+          when 'associations'
+            row_objects.sort! { | a, b | a.task.augmented_title <=> b.task.augmented_title }
+        end
+
+        row_objects.each_with_index do | row, index |
+          row.set_list_position( index + 1 )
+          row.save!
         end
       end
 
@@ -469,6 +494,7 @@ private
   def clone_timesheet( original, week_number )
     timesheet             = Timesheet.new
     timesheet.user_id     = original.user_id
+    timesheet.auto_sort   = original.auto_sort
     timesheet.year        = original.year
     timesheet.week_number = week_number
 

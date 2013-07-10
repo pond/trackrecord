@@ -161,6 +161,15 @@ en:
               action_title_show:                       "Timesheet details"
               action_title_delete:                     "Delete timesheet"
 
+              view_sort_rows_added:                    "Order rows added"
+              view_sort_tasks_added:                   "Order tasks added"
+              view_sort_task_code:                     "Task code"
+              view_sort_task_title:                    "Task title"
+              view_sort_associations:                  "Customer, project"
+
+              view_sort_once:                          "Sort once"
+              view_sort_always:                        "Auto"
+
             users:
               action_title_home:                       "Home"
               action_title_index:                      "Manage accounts"

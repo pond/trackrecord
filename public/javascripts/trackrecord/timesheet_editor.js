@@ -66,6 +66,9 @@ function pageLoaded( event )
     if ( alreadyInitialised ) return;
     else alreadyInitialised = true;
 
+    handleMoveOrDeleteSection();
+    handleSortSection();
+
     /* We want to create a 2D array of references to input elements,
      * with the first dimension referring to rows and the second to
      * columns. This is achievable because INPUT elements are wrapped
@@ -481,4 +484,131 @@ function fieldKeyDown( event )
             else                    field.setSelectionRange( field.value.length, field.value.length );
         }
     }
+}
+
+/* Self-contained function which should be run when the page is loaded.
+ * Deals with disabling/enabling items in the part of the form related
+ * to manual row movement and deletion.
+ */
+
+function handleMoveOrDeleteSection()
+{
+    /* First get hold of all the document elements we need - note the use
+     * of early-exit returns for simplicitly.
+     */
+
+    var checkboxes = document.getElementsByClassName( 'checkbox' );
+
+    if ( checkboxes.length == 0 ) return;
+
+    var forms = document.getElementsByTagName( 'FORM' );
+
+    if ( ! forms ) return;
+
+    var form       = forms[ 0 ];
+    var upButton   = form.elements[ 'move_row_up'   ];
+    var downButton = form.elements[ 'move_row_down' ];
+    var delButton  = form.elements[ 'remove_row'    ];
+
+    if ( ! upButton || ! downButton || ! delButton ) return;
+
+    /* Define a function that counts all checked checkboxes and either
+     * enables or disables the up/down/delete buttons accordingly.
+     */
+
+    function checkboxChanged()
+    {
+        var count = 0;
+
+        for ( var index in checkboxes )
+        {
+            var checkbox = checkboxes[ index ];
+            if ( checkbox.checked ) count ++;
+        }
+
+        var disable = ( count === 0 );
+
+        upButton.disabled  = disable;
+        downButton.disabled = disable;
+        delButton.disabled  = disable;
+    }
+
+    /* Now add the above as an on-changed handler to every checkbox so
+     * the button state is continuously updated.
+     */
+
+    for ( var index in checkboxes )
+    {
+        var checkbox = checkboxes[ index ];
+
+        if ( checkbox.addEventListener )
+        {
+            checkbox.addEventListener
+            (
+                'change',
+                checkboxChanged,
+                false
+            );
+        }
+    }
+
+    /* Finally, manually run the on-change handler to get the initial
+     * state established.
+     */
+
+    checkboxChanged();
+}
+
+/* Self-contained function which should be run when the page is loaded.
+ * Deals with disabling/enabling items in the part of the form related
+ * to row sorting.
+ */
+
+function handleSortSection()
+{
+    /* First get hold of all the document elements we need - note the use
+     * of early-exit returns for simplicitly.
+     */
+
+    var forms = document.getElementsByTagName( 'FORM' );
+
+    if ( ! forms ) return;
+
+    var form             = forms[ 0 ];
+    var autoSortMenu     = form.elements[ 'timesheet[auto_sort]' ];
+    var sortOnceButton   = form.elements[ 'sort_once'            ];
+    var sortAlwaysButton = form.elements[ 'sort_always'          ];
+
+    if ( ! autoSortMenu || ! sortOnceButton || ! sortAlwaysButton ) return;
+
+    /* Since this function is called at page load time, if the selection
+     * list has only its first item selected - the placeholder - then auto
+     * sorting must be disabled. Otherwise, auto sorting is enabled but
+     * the menu is already showing the current sort order. In both cases,
+     * we need the menu contents to change in order for sorting manually
+     * or automatically to make any sense. To start with then, disable the
+     * buttons and use an on-change handler to enable both.
+     *
+     * For aesthetics we also disable the placeholder entry in the select
+     * list - Rails doesn't do this when generating a with-placeholder list.
+     */
+
+    autoSortMenu.options[ 0 ].disabled = true;
+    sortOnceButton.disabled            = true;
+    sortAlwaysButton.disabled          = true;
+
+    var initiallySelectedIndex = autoSortMenu.selectedIndex;
+
+    autoSortMenu.addEventListener
+    (
+        'change',
+        function()
+        {
+            var disable = ( autoSortMenu.selectedIndex === initiallySelectedIndex );
+
+            sortOnceButton.disabled   = disable;
+            sortAlwaysButton.disabled = disable;
+        },
+        false
+    );
 }

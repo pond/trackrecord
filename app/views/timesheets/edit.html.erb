@@ -50,21 +50,22 @@
         <div style="display: inline-block;">
           <script type="text/javascript">
             check_box_toggle_field( 'toggle_check_boxes', 'checkbox' );
-          </script>
-          <br />
-          <%= submit_tag( raw( '&nbsp;&uarr;&nbsp;' ), { :name => 'move_row_up', :title => 'Move selected rows up' } ) %><%= submit_tag( raw( '&nbsp;&darr;&nbsp;' ), { :name => 'move_row_down', :title => 'Move selected rows down' } ) %><%= submit_tag( 'Del', { :name => 'remove_row', :title => 'Delete selected rows' } ) %>
+          </script><br /><%= submit_tag( raw( '&nbsp;&uarr;&nbsp;' ), { :name => 'move_row_up', :disabled => ! session[ :javascript ].nil?, :title => 'Move selected rows up' } ) %><%= submit_tag( raw( '&nbsp;&darr;&nbsp;' ), { :name => 'move_row_down', :disabled => ! session[ :javascript ].nil?, :title => 'Move selected rows down' } ) %><%= submit_tag( 'Del', { :name => 'remove_row', :disabled => ! session[ :javascript ].nil?, :title => 'Delete selected rows' } ) %>
         </div>
-        <div style="display: inline-block;">
-          <select id="sort_by" name="sort_by">
-            <option value="choose" disabled="disabled" selected="selected">Choose order...</option>
-            <option value="rows_added">Order rows added</option>
-            <option value="tasks_added">Order tasks added</option>
-            <option value="task_code">Task code</option>
-            <option value="task_title">Task title</option>
-            <option value="associations">Customer/project</option>
-          </select>
-          <br />
-          <%= submit_tag( 'Sort ascending', { :name => 'sort' } ) %>
+        <div style="display: inline-block; border-left: 1px solid #ccc; padding-left: 5px;">
+          <%=
+            f.select(
+              :auto_sort,
+              [
+                [ apphelp_view_hint( :sort_rows_added   ), :rows_added   ],
+                [ apphelp_view_hint( :sort_tasks_added  ), :tasks_added  ],
+                [ apphelp_view_hint( :sort_task_code    ), :task_code    ],
+                [ apphelp_view_hint( :sort_task_title   ), :task_title   ],
+                [ apphelp_view_hint( :sort_associations ), :associations ]
+              ],
+              :include_blank => 'Choose sorting...'
+            )
+          %><br /><%= submit_tag( apphelp_view_hint( :sort_once ), { :name => 'sort_once', :disabled => ! session[ :javascript ].nil? } ) %><%= submit_tag( apphelp_view_hint( :sort_always ), { :name => 'sort_always', :disabled => ! session[ :javascript ].nil? } ) %>
         </div>
       </th>
 <% TimesheetRow::DAY_ORDER.each do | day_number | -%>

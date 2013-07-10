@@ -19,11 +19,11 @@ class Timesheet < ActiveRecord::Base
     :start_day_cache
   ] )
 
+  USED_RANGE_COLUMN      = 'start_day_cache'
   DEFAULT_SORT_COLUMN    = 'start_day_cache'
   DEFAULT_SORT_DIRECTION = 'DESC'
   DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
-
-  USED_RANGE_COLUMN      = 'start_day_cache'
+  AUTO_SORT_FIELD_LIMIT  = 16
 
   # Timesheets describe a week of activity by a particular
   # user. They are made up of TimesheetRows, where each row
@@ -40,7 +40,8 @@ class Timesheet < ActiveRecord::Base
   attr_accessible(
     :week_number,
     :year,
-    :description
+    :description,
+    :auto_sort
   )
 
   # Return a range of years allowed for a timesheet. Optionally pass 'true'

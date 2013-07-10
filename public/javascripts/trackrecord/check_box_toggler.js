@@ -62,11 +62,27 @@ SelectionHandler.prototype.handleEvent = function( event )
     (
         function( box )
         {
+            var oldState = box.checked;
+
             switch ( event.currentTarget.selectedIndex )
             {
                 case 1: box.checked = true;          break;
                 case 2: box.checked = false;         break;
                 case 3: box.checked = ! box.checked; break;
+            }
+
+            if ( box.checked != oldState )
+            {
+                /* Other scripts may rely on 'change' events. We
+                 * have to send these manually... :-(
+                 *
+                 * (Couldn't get Prototype's Event.fire() to work,
+                 * so doing it the hard way).
+                 */
+
+                var evt = document.createEvent( 'HTMLEvents');
+                evt.initEvent( 'change', false, false );
+                box.dispatchEvent( evt );
             }
         }
     );

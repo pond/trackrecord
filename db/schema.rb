@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320235805) do
+ActiveRecord::Schema.define(:version => 20130710014436) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -170,16 +170,17 @@ ActiveRecord::Schema.define(:version => 20130320235805) do
   end
 
   create_table "timesheets", :force => true do |t|
-    t.integer  "user_id",                            :null => false
-    t.integer  "week_number",                        :null => false
-    t.integer  "year",                               :null => false
+    t.integer  "user_id",                                          :null => false
+    t.integer  "week_number",                                      :null => false
+    t.integer  "year",                                             :null => false
     t.text     "description"
-    t.boolean  "committed",       :default => false, :null => false
+    t.boolean  "committed",                     :default => false, :null => false
     t.datetime "committed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",    :default => 0
+    t.integer  "lock_version",                  :default => 0
     t.datetime "start_day_cache"
+    t.string   "auto_sort",       :limit => 16
   end
 
   create_table "users", :force => true do |t|
