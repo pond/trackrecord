@@ -491,7 +491,7 @@ private
 
       original.timesheet_rows.find_each do | row |
         new_row = timesheet.add_row( row.task )
-        new_row.set_list_position( row.position )
+        new_row.set_list_position( row.position ) unless new_row.nil?
       end
 
       # Save again, to be sure that the row changes are persisted.
