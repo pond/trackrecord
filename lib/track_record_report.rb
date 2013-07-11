@@ -67,6 +67,8 @@ module TrackRecordReport
 
     include TrackRecordSections
 
+    attr_accessor :title # (Optional)
+
     # Configure the handlers and human-readable labels for the ways in
     # which reports get broken up, in terms of frequency. View code which
     # presents a choice of report frequency should obtain the labels for

@@ -92,6 +92,7 @@ class SavedReport < Rangeable
       # which are not exposed in that hash and must be assigned manually.
 
       @report                     = TrackRecordReport::Report.new( user, attributes() )
+      @report.title               = title
       @report.active_task_ids     = active_task_ids
       @report.inactive_task_ids   = inactive_task_ids
       @report.reportable_user_ids = reportable_user_ids

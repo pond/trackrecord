@@ -1,3 +1,26 @@
+Version 2.04, 2013-07-11
+========================
+
+Please see the version 2.00 notes later for information about updating from
+earlier version.
+
+Version 2.04 fixes the following bugs that were found in v2.03:
+
+- Sometimes sorting a timesheet's rows would not fully sort them - you would
+  have to sort a second time to get the correct result.
+
+- Reordered timesheet rows were not maintained when the timesheet was saved
+  and used as a template for another week; the row order would be reset.
+
+There are the following enhancements:
+
+- Timesheets can now be set to auto-sort their contents when rows are
+  added or removed.
+
+- Report titles, if set, are included in all report output for easier
+  identification.
+
+
 Version 2.02 and 2.03, 2013-04-25
 =================================
 

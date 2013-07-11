@@ -165,7 +165,10 @@ private
     # First compile the file.
 
     whole_csv_file = CSV.generate do | csv |
-      csv << title unless ( @exclude_title )
+      unless ( @exclude_title )
+        csv << [ @report.title ] unless @report.title.empty?
+        csv << title
+      end
 
       if ( @is_task_type )
         csv_report_by_task( csv, headings )
