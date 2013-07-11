@@ -2,7 +2,11 @@ Version 2.04, 2013-07-11
 ========================
 
 Please see the version 2.00 notes later for information about updating from
-earlier version.
+version 1. If upgrading from an earlier version 2, you will need to migrate
+your data; for example, to migrate the production database, run this
+command:
+
+  RAILS_ENV=production rake db:migrate
 
 Version 2.04 fixes the following bugs that were found in v2.03:
 
@@ -25,7 +29,7 @@ Version 2.02 and 2.03, 2013-04-25
 =================================
 
 Please see the version 2.00 notes later for information about updating from
-earlier version.
+earlier versions.
 
 Version 2.02 fixes the following bugs that were found in v2.01:
 
