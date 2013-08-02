@@ -10,12 +10,11 @@
 
 class WorkPacket < ActiveRecord::Base
 
-  # WorkPacket objectallow a User to log a number of hours worked
-  # against the Task in the TimesheetRow to which the WorkPacket
-  # belongs.
+  # Allow a User to log a number of hours worked against the Task in
+  # the TimesheetRow to which the WorkPacket belongs.
 
   belongs_to( :timesheet_row )
-  scope :significant, :conditions => 'worked_hours > 0.0'
+  scope :significant, -> { where( 'worked_hours > 0.0' ) }
 
   # Security controls.
 
@@ -55,6 +54,8 @@ class WorkPacket < ActiveRecord::Base
   # The task and user IDs are optional. All tasks and/or users will be
   # included in the count if the given task and/or user ID is nil. The date
   # range is mandatory.
+  #
+  # Returns an ActiveRecord::Relation instance.
   #
   # IMPORTANT - at the time of writing, Rails 2.1 (and earlier versions) will
   # build a BETWEEN statement in SQL with the given range. Although SQL says
@@ -101,9 +102,9 @@ class WorkPacket < ActiveRecord::Base
   # As find_by_task_user_and_range, but only counts work packets belonging to
   # committed timesheets.
   #
+  # Returns an ActiveRecord::Relation instance.
+  #
   def self.find_committed_by_task_user_and_range( range, task_id = nil, user_id = nil )
-    # TODO: Use with_scope? Can we cope with the 'nil' case cleanly?
-
     return WorkPacket.find_by_task_user_range_and_committed(
       range,
       true,
@@ -114,6 +115,8 @@ class WorkPacket < ActiveRecord::Base
 
   # As find_by_task_user_and_range, but only counts work packets belonging to
   # timesheets which are not committed.
+  #
+  # Returns an ActiveRecord::Relation instance.
   #
   def self.find_not_committed_by_task_user_and_range( range, task_id = nil, user_id = nil )
     return WorkPacket.find_by_task_user_range_and_committed(
@@ -129,38 +132,27 @@ class WorkPacket < ActiveRecord::Base
   # parameter must be set to 'true' to only include work packets from committed
   # timesheets, 'false' for not committed timesheets and 'nil' for either.
   #
+  # Returns an ActiveRecord::Relation instance.
+  #
   def self.find_by_task_user_range_and_committed( range, committed, task_id = nil, user_id = nil )
 
-    # The 'include' part needs some explanation. We include the timesheet rows,
-    # a second order association, because the rows lead to tasks and timesheets.
-    # We need to eager-load tasks because the search is limited by task ID. We
-    # need to eager-load timesheets because they lead to users and the search is
-    # also limited by user ID. Rails supports eager-loading of third and deeper
-    # order associations through passing hashes in as the value to ":include".
-    # Each key's value is the next level of association. So :timesheet_row is
-    # at the second order, pointing to an array giving two third order things;
-    # :task and, itself a hash key, :timesheet; since it is a hash key,
-    # :timesheet's value is the second-order association of timesheets, or the
-    # fourth-order association of the work packets - :user.
-    #
-    # Ultimately eager-loading means LEFT OUTER JOIN in SQL statements. Due to
-    # the way that ActiveRecord assembles the query, using :include rather than
-    # :joins with some hard-coded SQL makes for a very verbose query in the
-    # "find" case; it's nice and compact for "sum", though. In any event, at
-    # least it is a query generated entirely through the database adapter, so
-    # it stands a fighting chance of working fine on multiple database types.
+    # With Rails when joins are specified by a hash, each key's value is the
+    # next level of association. We first include the timesheet rows, a second
+    # order association, because the rows lead to tasks and timesheets. This
+    # key points to an array giving two third order things; :task and, itself
+    # a hash key, :timesheet; since it is a hash key, :timesheet's value is
+    # the second-order association of timesheets, or the fourth-order
+    # association of the work packets - :user.
 
-    conditions = { :date => range }
-    conditions[ 'tasks.id' ] = task_id unless task_id.nil?
-    conditions[ 'users.id' ] = user_id unless user_id.nil?
-    conditions[ 'timesheets.committed' ] = committed unless committed.nil?
+    joins = { :timesheet_row => [ :task, { :timesheet => :user } ] }
+    order = 'date DESC'
 
-    return WorkPacket.all(
-      :include     => { :timesheet_row => [ :task, { :timesheet => :user } ] },
-      :conditions  => conditions,
-      :order       => 'date DESC'
-    )
+    conditions                = { :date      => range     }
+    conditions[ :tasks      ] = { :id        => task_id   } unless task_id.nil?
+    conditions[ :users      ] = { :id        => user_id   } unless user_id.nil?
+    conditions[ :timesheets ] = { :committed => committed } unless committed.nil?
 
+    return WorkPacket.joins( joins ).where( conditions ).order( order )
   end
 
   # Return the earliest (first by date) work packet, either across all tasks
@@ -184,14 +176,15 @@ class WorkPacket < ActiveRecord::Base
   #
   def self.find_first_by_tasks_and_order( task_ids, order )
     if ( task_ids.empty? )
-      return WorkPacket.significant.first( :order => order )
+      return WorkPacket.significant.order( order ).first
+
     else
-      return WorkPacket.significant.first(
-        :include    => [ :timesheet_row ],
-        :conditions => [ 'timesheet_rows.task_id IN (?)', task_ids ],
-        :order      => order
-      )
+      joins      = :timesheet_row
+      conditions = { :timesheet_rows => { :task_id => task_ids } }
+      return WorkPacket.significant.joins( joins ).where( conditions ).order( order ).first
+
     end
+
   end
 
 private

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>module ChartsHelper - Rails Application Documentation</title>
+<title>module ChartsHelper - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -139,6 +139,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -195,6 +199,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -214,6 +220,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -324,9 +334,8 @@ width, check its actual height then use that value from then on.</p>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">image_tag</span>(
     <span class="ruby-identifier">charthelp_image_url</span>( <span class="ruby-identifier">duration</span>, <span class="ruby-identifier">committed</span>, <span class="ruby-identifier">not_committed</span>, <span class="ruby-identifier">width</span> ),
     {
-      <span class="ruby-value">:size</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ width }x#{ height }&quot;</span>,
-      <span class="ruby-value">:alt</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Overview&quot;</span>,
-      <span class="ruby-value">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;left&quot;</span>
+      <span class="ruby-value">:size</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ width }x#{ height }&quot;</span>,
+      <span class="ruby-value">:alt</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Overview&quot;</span>
     }
   )
 <span class="ruby-keyword">end</span></pre>

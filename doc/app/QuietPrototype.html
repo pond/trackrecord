@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>module QuietPrototype - Rails Application Documentation</title>
+<title>module QuietPrototype - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -137,6 +137,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -193,6 +197,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -212,6 +218,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -262,7 +272,9 @@ them.</p>
 </dd></dl>
 <hr style="height: 10px">
 
-<pre>09-Apr-2009 (ADH): Created.</pre>
+<pre>09-Apr-2009 (ADH): Created.
+18-Jul-2013 (ADH): Local modifications for TrackRecord with
+                   the Rails asset pipeline.</pre>
 
   </div><!-- description -->
 
@@ -301,9 +313,9 @@ gets included.</p>
 
           
           <div class="method-source-code" id="included-source">
-            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 29</span>
+            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">included</span>( <span class="ruby-identifier">base</span> )
-  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ClassMethods</span>  )
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ClassMethods</span> )
   <span class="ruby-identifier">base</span>.<span class="ruby-identifier">helper</span>( <span class="ruby-constant">QuietPrototypeHelper</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- included-source -->

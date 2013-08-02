@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportUserData - Rails Application Documentation</title>
+<title>class TrackRecordReport::ReportUserData - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -70,9 +70,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-add_committed_hours">#add_committed_hours</a>
+    <li><a href="#method-i-sum_committed_hours">#sum_committed_hours</a>
     
-    <li><a href="#method-i-add_not_committed_hours">#add_not_committed_hours</a>
+    <li><a href="#method-i-sum_not_committed_hours">#sum_not_committed_hours</a>
     
   </ul>
 </nav>
@@ -145,6 +145,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -201,6 +205,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -220,6 +226,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -284,64 +294,68 @@ the user data total.</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-add_committed_hours" class="method-detail ">
+      <div id="method-i-sum_committed_hours" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">add_committed_hours</span><span
-            class="method-args">( packet )</span>
+          <span class="method-name">sum_committed_hours</span><span
+            class="method-args">( packets )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Add the given work packet’s hours to the internal committed total.</p>
+          <p>Add the given ActiveRecord::Relation instance’s collection of work packets
+to the internal committed total. The relation must specify only those
+packets to be added, precisely, as all are included.</p>
           
 
           
-          <div class="method-source-code" id="add_committed_hours-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1215</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_committed_hours</span>( <span class="ruby-identifier">packet</span> )
-  <span class="ruby-ivar">@committed</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">packet</span>.<span class="ruby-identifier">worked_hours</span>
+          <div class="method-source-code" id="sum_committed_hours-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1352</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sum_committed_hours</span>( <span class="ruby-identifier">packets</span> )
+  <span class="ruby-ivar">@committed</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">packets</span>.<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- add_committed_hours-source -->
+          </div><!-- sum_committed_hours-source -->
           
         </div>
 
         
 
         
-      </div><!-- add_committed_hours-method -->
+      </div><!-- sum_committed_hours-method -->
 
     
-      <div id="method-i-add_not_committed_hours" class="method-detail ">
+      <div id="method-i-sum_not_committed_hours" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">add_not_committed_hours</span><span
-            class="method-args">( packet )</span>
+          <span class="method-name">sum_not_committed_hours</span><span
+            class="method-args">( packets )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Add the given work packet’s hours to the internal not committed total.</p>
+          <p>As “<a
+href="ReportUserData.html#method-i-sum_committed_hours">#sum_committed_hours</a>”,
+but adds to the non-committed total.</p>
           
 
           
-          <div class="method-source-code" id="add_not_committed_hours-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1221</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_not_committed_hours</span>( <span class="ruby-identifier">packet</span> )
-  <span class="ruby-ivar">@not_committed</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">packet</span>.<span class="ruby-identifier">worked_hours</span>
+          <div class="method-source-code" id="sum_not_committed_hours-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1358</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sum_not_committed_hours</span>( <span class="ruby-identifier">packets</span> )
+  <span class="ruby-ivar">@not_committed</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">packets</span>.<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- add_not_committed_hours-source -->
+          </div><!-- sum_not_committed_hours-source -->
           
         </div>
 
         
 
         
-      </div><!-- add_not_committed_hours-method -->
+      </div><!-- sum_not_committed_hours-method -->
 
     
     </section><!-- public-instance-method-details -->

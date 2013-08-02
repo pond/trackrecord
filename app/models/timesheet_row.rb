@@ -37,7 +37,11 @@ class TimesheetRow < ActiveRecord::Base
 
   after_create :add_work_packets
 
-  # Day number order within a row - Monday to Sunday,
+  # Day number order within a row - Monday to Sunday. While
+  # originally this was intended to be potentially mutable,
+  # it became too onerous elsewhere to calculate week numbers
+  # and far simpler/more reliable/faster to just use "cweek"
+  # in Ruby. Thus weeks must always run Monday->Sunday.
 
   DAY_ORDER = [ 1, 2, 3, 4, 5, 6, 0 ]
   FIRST_DAY = DAY_ORDER[ 0 ]

@@ -6,6 +6,8 @@
 #           view requires them.
 # ----------------------------------------------------------------------
 #           09-Apr-2009 (ADH): Created.
+#           18-Jul-2013 (ADH): Local modifications for TrackRecord with
+#                              the Rails asset pipeline.
 ########################################################################
 
 module QuietPrototype
@@ -27,7 +29,7 @@ module QuietPrototype
   # gets included.
   #
   def self.included( base )
-    base.extend( ClassMethods  )
+    base.extend( ClassMethods )
     base.helper( QuietPrototypeHelper )
   end
 
@@ -49,7 +51,19 @@ module QuietPrototype
     #
     def include_prototype_if_used( line_prefix = '' )
       if using_quiet_prototype?
-        "#{ javascript_include_tag( :defaults ).gsub( /^/, line_prefix ) }\n".html_safe()
+
+        # 2013-07-18 (ADH): Even with appropriate configuration data in
+        # "config/application.rb" for the ":defaults" expansion, using it
+        # here results in "assets/defaults.js" being generated. Doh. Since
+        # code here is evaluated before the application starts, presumably
+        # the expansion isn't defined in time. Instead we have to do it
+        # the hard way.
+
+        data          = javascript_include_tag( 'prototype/prototype' )
+        data << "\n" << javascript_include_tag( 'prototype_ujs/rails' )
+        data << "\n" << javascript_include_tag( 'scriptaculous/scriptaculous' )
+
+        return ( data.gsub( /^/, line_prefix ) + "\n" ).html_safe()
       end
     end
 

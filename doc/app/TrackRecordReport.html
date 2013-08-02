@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>module TrackRecordReport - Rails Application Documentation</title>
+<title>module TrackRecordReport - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -127,6 +127,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -183,6 +187,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -202,6 +208,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -239,20 +249,39 @@
   <h1 class="module">module TrackRecordReport</h1>
 
   <div id="description" class="description">
-    <dl class="rdoc-list note-list"><dt>File
-<dd>
-<p>track_record_report.rb</p>
-</dd><dt>(C)
-<dd>
-<p>Hipposoft 2008</p>
-</dd><dt>Purpose
-<dd>
-<p>Mixin providing classes which represent all aspects of a TrackRecord
-report.</p>
-</dd></dl>
-<hr style="height: 10px">
+    
+<p>A container for report code. <a
+href="TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+instances are passed to generators - see <a
+href="TrackRecordReportGenerator.html">TrackRecordReportGenerator</a> for
+details.</p>
 
-<pre>29-Jun-2008 (ADH): Created.</pre>
+<p>A report has property “row”, an array of <a
+href="TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+objects and “filtered_tasks”, an array of the <a href="Task.html">Task</a>
+model instances corresponding to the same-index rows. Each row has property
+“cells”, an array of <a
+href="TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+objects corresponding to the time columns spanned by the report; so a daily
+report would have cells describing a day of worked hours, a weekly report
+would have cells for the weeks and so-on. The report has a “column_ranges”
+property that yields an array of Range objects giving the dates for each
+cell at an equivalent index in a row’s cell array.</p>
+
+<p>User-based information is available through a “filtered_users” report
+property. This gives an array of the <a href="User.html">User</a> model
+instances for reports generated with per-user data included. Each cell has
+a “user_data” property, again an array; each index in the filtered user
+array of the report corresponds to an index in the cell’s user data giving
+the contribution of that user to the hours for that cell.</p>
+
+<p>For examples of how this information can be used, along with where
+precalculated total information is stored and how to generate your own
+totals using report calculator objects yourself, examine the CSV export
+code - see <a
+href="TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+inside
+<code>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb</code>.</p>
 
   </div><!-- description -->
 

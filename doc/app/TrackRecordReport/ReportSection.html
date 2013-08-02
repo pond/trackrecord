@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportSection - Rails Application Documentation</title>
+<title>class TrackRecordReport::ReportSection - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -147,6 +147,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -203,6 +207,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -222,6 +228,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -355,7 +365,7 @@ href="ReportRow.html">ReportRow</a>, but correspond to multiple rows.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1056</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-keyword">super</span>()
   <span class="ruby-ivar">@cells</span>           = []
@@ -397,7 +407,7 @@ produce the multiple- row section totals.</p>
 
           
           <div class="method-source-code" id="add_cell-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1068</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cell</span>( <span class="ruby-identifier">cell</span>, <span class="ruby-identifier">cell_index</span> )
   <span class="ruby-identifier">dup_or_calc</span>( <span class="ruby-ivar">@cells</span>, <span class="ruby-identifier">cell</span>, <span class="ruby-identifier">cell_index</span> )
   <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">cell</span> )
@@ -433,7 +443,7 @@ href="ReportSection.html#method-i-add_cell">#add_cell</a>” above.s</p>
 
           
           <div class="method-source-code" id="add_user_row_total-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1077</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_user_row_total</span>( <span class="ruby-identifier">user_row_total</span>, <span class="ruby-identifier">user_index</span> )
   <span class="ruby-identifier">dup_or_calc</span>( <span class="ruby-ivar">@user_row_totals</span>, <span class="ruby-identifier">user_row_total</span>, <span class="ruby-identifier">user_index</span> )
 <span class="ruby-keyword">end</span></pre>

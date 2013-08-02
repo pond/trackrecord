@@ -19,9 +19,10 @@ module ReportsHelper
       @id    = "#{ year }_#{ week }"
       @start = "#{ week } (starts Mon #{ Timesheet.date_for( year, week, TimesheetRow::FIRST_DAY ) })"
       @end   = "#{ week } (ends Sun #{ Timesheet.date_for( year, week, TimesheetRow::LAST_DAY ) })"
+      @all   = "#{ week }, Mon #{ Timesheet.date_for( year, week, TimesheetRow::FIRST_DAY ) } - Sun #{ Timesheet.date_for( year, week, TimesheetRow::LAST_DAY ) }"
     end
 
-    attr_reader( :start, :end, :id )
+    attr_reader( :start, :end, :all, :id )
   end
 
   # Helper class for ReportYear and reporthelp_month_selection.
@@ -31,9 +32,10 @@ module ReportsHelper
       @id    = "#{ year }_#{ month }"
       @start = "#{ month } (start of #{ Date::MONTHNAMES[ month ] } #{ year })"
       @end   = "#{ month } (end of #{ Date::MONTHNAMES[ month ] } #{ year })"
+      @all   = "#{ month }, #{ Date::MONTHNAMES[ month ] } #{ year }"
     end
 
-    attr_reader( :start, :end, :id )
+    attr_reader( :start, :end, :all, :id )
   end
 
   # Helper class for reporthelp_week_selection and reporthelp_month_selection.
@@ -84,7 +86,7 @@ module ReportsHelper
         @weeks.unshift( ReportWeek.new( year, week ) )
       end
 
-      # Work out hte months, again limited as above.
+      # Work out the months, again limited as above.
 
       ( 1..12 ).each do | month |
 
@@ -172,11 +174,68 @@ module ReportsHelper
     )
   end
 
+  # Return HTML suitable for inclusion in a form which provides
+  # options such as "this month" or "one week ago" in a selection
+  # list. Pass the form being constructed and ":range_one_month"
+  # or ":range_one_week".
+  #
+  def reporthelp_one_selection( form, method )
+    now = DateTime.now.utc
+
+    if ( method == :range_one_week )
+      strings = [
+        apphelp_view_hint( :last_week,     SavedReportsController ),
+        apphelp_view_hint( :this_week,     SavedReportsController ),
+        apphelp_view_hint( :two_weeks_ago, SavedReportsController ),
+      ]
+      dates = [
+        now - 1.week,
+        now,
+        now - 2.weeks
+      ]
+      objects = dates.map do | date |
+        ReportWeek.new( date.year, date.cweek )
+      end
+    else
+      strings = [
+        apphelp_view_hint( :last_month,     SavedReportsController ),
+        apphelp_view_hint( :this_month,     SavedReportsController ),
+        apphelp_view_hint( :two_months_ago, SavedReportsController ),
+      ]
+      dates = [
+        now - 1.month,
+        now,
+        now - 2.months
+      ]
+      objects = dates.map do | date |
+        ReportMonth.new( date.year, date.month )
+      end
+    end
+
+    keys  = [ "last", "this", "two" ]
+    array = strings.map.with_index do | string, index |
+      o       = OpenStruct.new
+      o.value = keys[ index ]
+      o.text  = string % objects[ index ].all # The "all" method on a ReportWeek or ReportMonth gives its name/date in a suitable format
+      o
+    end
+
+    form.collection_select(
+      method,
+      array,
+      :value,
+      :text,
+      {
+        :include_blank => '-'
+      }
+    )
+  end
+
   # Return HTML suitable for inclusion in the form passed in the
   # first parameter (i.e. the 'f' in "form for ... do |f|" ), which
   # provides a selection list allowing the user to choose a report
   # frequency (weekly, monthly etc.).
-
+  #
   def reporthelp_frequency_selection( form )
     collection = []
 
@@ -327,22 +386,65 @@ module ReportsHelper
   # List helper - formatted start date for the given report
 
   def reporthelp_start_date( report )
-    apphelp_date( report.generate_report().range.min )
+    if ( report.range_start_cache.class != Date )
+      apphelp_view_hint( "date_start_#{ report.range_start_cache }" )
+    else
+      apphelp_date( report.range_start_cache )
+    end
   end
 
   # List helper - formatted end date for the given report
 
   def reporthelp_end_date( report )
-    apphelp_date( report.generate_report().range.max )
+    if ( report.range_end_cache.class != Date )
+      apphelp_view_hint( "date_end_#{ report.range_end_cache }" )
+    else
+      apphelp_date( report.range_end_cache )
+    end
   end
 
   # Return appropriate list view actions for the given report
 
   def reporthelp_actions( report )
     if ( @current_user.admin? || report.user_id == @current_user.id )
-      return [ 'edit', 'delete', 'show' ]
+      return [
+        'edit',
+        'delete',
+        'show',
+        {
+          :title => 'Copy',
+          :url   => user_saved_report_copy_path( :user_id => @current_user.id, :saved_report_id => "%s" )
+        }
+      ]
     else
       return []
+    end
+  end
+
+  # Return an input element and label as part of a form used to export
+  # a report. Pass the submodule of TrackRecordReportGenerator for
+  # which options are being generated and the array entry from the
+  # option data the submodule provides in "invocation_options_for".
+  #
+  def reporthelp_export_option( submodule, option )
+    prefix = submodule.name.underscore
+    kind   = option.keys.first
+    data   = option.values.first
+
+    case kind
+      when :checkbox
+        id      = "#{ prefix }[#{ data[ :id ] }]"
+        output  = check_box_tag( id, "1", data[ :checked ] )
+        output << label_tag( id, data[ :label ] )
+
+      when :radio
+        id     = data[ :id ]
+        name   = "#{ prefix }[#{ data[ :name ] }]"
+        output = radio_button_tag( name, id, data[ :checked ] )
+        output << label_tag( "#{ name }_#{ id }", data[ :label ] )
+
+      else
+        ""
     end
   end
 

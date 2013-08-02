@@ -1,6 +1,6 @@
 /************************************************************************
- * File:    application.js                                              *
- *          Hipposoft 2008                                              *
+ * File:    global.js                                                   *
+ *          Hipposoft 2008-2013                                         *
  *                                                                      *
  * Purpose: Various JavaScript patches.                                 *
  *                                                                      *
@@ -13,7 +13,8 @@
  *          state when the 'back' button is used. Attempt to patch      *
  *          around the problem.                                         *
  *                                                                      *
- * History: 09-Mar-2008 (ADH): Created.                                 *
+ * History: 09-Mar-2008 (ADH): Created as "application.js".             *
+ *          18-Jul-2013 (ADH): Moved to "trackrecord/global.js".        *
  ************************************************************************/
 
 /****************************************************************************\
@@ -60,21 +61,6 @@ function pageLoaded()
 
 /* The page is being removed. Check through the buttons remembered in the
  * 'load' handler and restore previous state if there has been a change.
- *
- * - On Firefox 3, you briefly get to see the button(s) change before the new
- *   page loads and if you're very quick, for buttons that are re-enabled, can
- *   click on the button again. Doh. But you have to try pretty hard for that.
- *
- * - On Opera 9, again you briefly see the change but can't click on the
- *   button before the new page loads. Opera resets the button state when the
- *   'back' button is used anyway, but at least the script is harmless.
- *
- * - On Safari 3, the page transition is instantaneous so you don't get to see
- *   the button state being reset. Top marks to WebKit.
- *
- * - On MSIE, this script almost certainly fails because it uses the DOM 2
- *   event model. MSIE doesn't support it. The standard was published in late
- *   2000. That's truly pathetic, Microsoft. MSIE users - upgrade to Firefox.
  */
 
 function pageUnloading()

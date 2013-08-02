@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class Customer - Rails Application Documentation</title>
+<title>class Customer - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -149,6 +149,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -205,6 +209,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -224,6 +230,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -330,7 +340,7 @@ arrays of objects.</p>
 
           
           <div class="method-source-code" id="apply_default_sort_order-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">apply_default_sort_order</span>( <span class="ruby-identifier">array</span> )
   <span class="ruby-identifier">array</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">downcase</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -369,12 +379,14 @@ for the new object in future, though presently this parameter is ignored.</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">super</span>( <span class="ruby-identifier">params</span> )
 
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">code</span>   = <span class="ruby-string">&quot;CID%04d&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">code</span>   = <span class="ruby-string">&quot;CID%04d&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -411,10 +423,10 @@ projects, else ‘false’, with, again, the default being ‘true’.</p>
 
           
           <div class="method-source-code" id="destroy_with_side_effects-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 96</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy_with_side_effects</span>( <span class="ruby-identifier">destroy_projects</span> = <span class="ruby-keyword">true</span>, <span class="ruby-identifier">destroy_tasks</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">destroy_projects</span> )
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span>
       <span class="ruby-identifier">project</span>.<span class="ruby-identifier">destroy_with_side_effects</span>( <span class="ruby-identifier">destroy_tasks</span> )
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
@@ -455,7 +467,7 @@ projects, else ‘false’. Booleans default to ‘true’ if omitted.</p>
 
           
           <div class="method-source-code" id="update_with_side_effects-21-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 77</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_with_side_effects!</span>( <span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">update_projects</span> = <span class="ruby-keyword">true</span>, <span class="ruby-identifier">update_tasks</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-identifier">active</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes!</span>( <span class="ruby-identifier">attrs</span> )
@@ -463,7 +475,7 @@ projects, else ‘false’. Booleans default to ‘true’ if omitted.</p>
   <span class="ruby-comment"># If the active flag has changed, deal with repercussions.</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">update_projects</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">attrs</span>[ <span class="ruby-value">:active</span> ] <span class="ruby-operator">!=</span> <span class="ruby-identifier">active</span> )
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span>
       <span class="ruby-identifier">project</span>.<span class="ruby-identifier">update_with_side_effects!</span>( { <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">attrs</span>[ <span class="ruby-value">:active</span> ] }, <span class="ruby-identifier">update_tasks</span> )
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>

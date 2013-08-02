@@ -122,12 +122,24 @@ class TaskImportsController < ApplicationController
 
       # Right, good to go! Do the import.
 
-      project_id = @import.project_id
-      project    = nil
-
       begin
         Task.transaction do
-          project = Project.find( project_id )
+
+          # Create a new project in passing?
+
+          if params.has_key?( :do_import_new_task )
+            project             = Project.new
+            project.title       = @import.new_project_title
+            project.customer_id = @import.new_project_customer_id
+            project.description = "Created for XML bulk task import on #{ Time.now }"
+            begin
+              project.save!
+            rescue => inner_error
+              raise "Cannot create project: #{ inner_error }"
+            end
+          else
+            project = Project.find( @import.project_id )
+          end
 
           to_import.each do | source_task |
             Task.new do | destination_task |
@@ -159,6 +171,6 @@ private
   # Is the current action permitted?
   #
   def permitted?
-    appctrl_not_permitted() if( @current_user.restricted? )
+    appctrl_not_permitted() if ( @current_user.restricted? )
   end
 end

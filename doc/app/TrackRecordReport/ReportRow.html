@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportRow - Rails Application Documentation</title>
+<title>class TrackRecordReport::ReportRow - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -151,6 +151,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -207,6 +211,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -226,6 +232,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -349,7 +359,7 @@ parent report contains information about that range.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 993</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">task</span> )
   <span class="ruby-keyword">super</span>()
   <span class="ruby-ivar">@cells</span>           = []
@@ -389,7 +399,7 @@ parent report contains information about that range.</p>
 
           
           <div class="method-source-code" id="add_cell-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1003</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cell</span>( <span class="ruby-identifier">cell</span> )
   <span class="ruby-ivar">@cells</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">cell</span> )
   <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">cell</span> )
@@ -423,7 +433,7 @@ array.</p>
 
           
           <div class="method-source-code" id="add_user_row_total-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1018</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_user_row_total</span>( <span class="ruby-identifier">user_row_total</span> )
   <span class="ruby-ivar">@user_row_totals</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">user_row_total</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -454,7 +464,7 @@ array at the given index.</p>
 
           
           <div class="method-source-code" id="delete_cell-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1010</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_cell</span>( <span class="ruby-identifier">index</span> )
   <span class="ruby-identifier">subtract!</span>( <span class="ruby-ivar">@cells</span>[ <span class="ruby-identifier">index</span> ] )
   <span class="ruby-ivar">@cells</span>.<span class="ruby-identifier">delete_at</span>( <span class="ruby-identifier">index</span> )
@@ -485,7 +495,7 @@ array at the given index.</p>
 
           
           <div class="method-source-code" id="delete_user_row_total-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1024</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_user_row_total</span>( <span class="ruby-identifier">index</span> )
   <span class="ruby-ivar">@user_row_totals</span>.<span class="ruby-identifier">delete_at</span>( <span class="ruby-identifier">index</span> )
 <span class="ruby-keyword">end</span></pre>

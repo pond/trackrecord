@@ -18,6 +18,9 @@ class AddSavedReportsSupport < ActiveRecord::Migration
       # set in the six optional range mechanisms. Consolidation is done via
       # TrackRecordReport::Report by giving a Report the three ranges and
       # asking it for the resulting equivalent minimum and maximum dates.
+      #
+      # See also 20130712004910_add_new_report_date_range_types.rb for more
+      # date range options.
 
       t.date        :range_start
       t.string      :range_week_start,  :limit => 7

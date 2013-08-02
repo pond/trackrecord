@@ -139,7 +139,7 @@ class Timesheet < ActiveRecord::Base
   # in as ":conditions => <given value>").
   #
   def find_mine( conditions = {} )
-    Timesheet.find_all_by_user_id( self.user_id, :conditions => conditions )
+    Timesheet.where( :user_id => self.user_id ).where( conditions )
   end
 
   # Instance method which returns an array of all committed
@@ -164,9 +164,7 @@ class Timesheet < ActiveRecord::Base
   #
   def unused_weeks()
     timesheets = find_mine( :year => self.year )
-    used_weeks = timesheets.collect do | hash |
-      hash[ :week_number ]
-    end
+    used_weeks = timesheets.select( :week_number ).map( &:week_number )
 
     range        = 1..Timesheet.get_last_week_number( self.year )
     unused_weeks = ( range.to_a - used_weeks )
@@ -311,7 +309,7 @@ class Timesheet < ActiveRecord::Base
         # If we encounter a date in the previous year which has a week
         # number > 1, then that's the last week of the previous year. If
         # we're on Dec 31st that means that week 1 started on Jan 1st,
-        # else in December on
+        # else in December.
 
         if ( date.cweek > 1 )
           return ( day == 31 ? Date.new( year, 1, 1 ) : Date.new( year - 1, 12, day + 1 ) )
@@ -393,9 +391,9 @@ class Timesheet < ActiveRecord::Base
   # Return a date string representing this timesheet on the given
   # day number. Day numbers are odd - 0 = Sunday at the *end* of this
   # timesheet's week, while 1-6 = Monday at the *start* of the week
-  # through to Saturday inclusive (although this may be changed; see
-  # the TimesheetRow model). If an optional second parameter is
-  # 'true', returns a Date object rather than a string.
+  # through to Saturday inclusive (aligning with Ruby "cweek"). If an
+  # optional second parameter is 'true', returns a Date object rather
+  # than a string.
   #
   def date_for( day_number, as_date = false )
     Timesheet.date_for( self.year, self.week_number, day_number, as_date )

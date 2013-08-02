@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class Timesheet - Rails Application Documentation</title>
+<title>class Timesheet - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -181,6 +181,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -237,6 +241,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -256,6 +262,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -324,6 +334,11 @@ See below for more details.</p>
       <h3 class="section-header">Constants</h3>
       <dl>
       
+        <dt id="AUTO_SORT_FIELD_LIMIT">AUTO_SORT_FIELD_LIMIT
+        
+        <dd class="description">
+        
+      
         <dt id="DEFAULT_SORT_COLUMN">DEFAULT_SORT_COLUMN
         
         <dd class="description">
@@ -373,7 +388,7 @@ you want an actual Date object range rather than just a year range.</p>
 
           
           <div class="method-source-code" id="allowed_range-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">allowed_range</span>( <span class="ruby-identifier">accurate</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
     <span class="ruby-identifier">range</span> = ( <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>.<span class="ruby-identifier">year</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span> )<span class="ruby-operator">..</span>( <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>.<span class="ruby-identifier">year</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span> )
@@ -417,7 +432,7 @@ string.</p>
 
           
           <div class="method-source-code" id="date_for-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 413</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 406</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">date_for</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">week_number</span>, <span class="ruby-identifier">day_number</span>, <span class="ruby-identifier">as_date</span> = <span class="ruby-keyword">false</span> )
 
   <span class="ruby-comment"># Get the date of Monday, week 1 in this timesheet's year.</span>
@@ -467,7 +482,7 @@ weeks (Mon-&gt;Sun). Returns a Date.</p>
 
           
           <div class="method-source-code" id="get_first_week_start-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 303</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 296</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_first_week_start</span>( <span class="ruby-identifier">year</span> )
 
   <span class="ruby-comment"># Is Jan 1st already in week 1?</span>
@@ -484,7 +499,7 @@ weeks (Mon-&gt;Sun). Returns a Date.</p>
       <span class="ruby-comment"># If we encounter a date in the previous year which has a week</span>
       <span class="ruby-comment"># number &gt; 1, then that's the last week of the previous year. If</span>
       <span class="ruby-comment"># we're on Dec 31st that means that week 1 started on Jan 1st,</span>
-      <span class="ruby-comment"># else in December on</span>
+      <span class="ruby-comment"># else in December.</span>
 
       <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">date</span>.<span class="ruby-identifier">cweek</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> )
         <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">day</span> <span class="ruby-operator">==</span> <span class="ruby-value">31</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">year</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span> ) <span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">year</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>, <span class="ruby-value">12</span>, <span class="ruby-identifier">day</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ) )
@@ -529,7 +544,7 @@ commercial weeks (Mon-&gt;Sun). Returns a Date.</p>
 
           
           <div class="method-source-code" id="get_last_week_end-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 341</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 334</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_last_week_end</span>( <span class="ruby-identifier">year</span> )
 
   <span class="ruby-comment"># Is Dec 31st already in week 1 for the next year?</span>
@@ -586,7 +601,7 @@ This is usually 52, but is 53 for some years.</p>
 
           
           <div class="method-source-code" id="get_last_week_number-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 374</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 367</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_last_week_number</span>( <span class="ruby-identifier">year</span> )
 
   <span class="ruby-comment"># Is Dec 31st already in week 1 for the next year?</span>
@@ -638,7 +653,7 @@ you want an actual Date object range rather than just a year range.</p>
 
           
           <div class="method-source-code" id="used_range-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">used_range</span>( <span class="ruby-identifier">accurate</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">allowed_range</span>( <span class="ruby-identifier">accurate</span> ) <span class="ruby-keyword">if</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span>
 
@@ -680,17 +695,24 @@ you want an actual Date object range rather than just a year range.</p>
           
           <p>Add a row to the timesheet using the given task object. Does nothing if a
 row containing that task is already present. The updated timesheet is not
-saved - the caller must do this.</p>
+saved - the caller must do this. The new, added timesheet row object is
+returned, unless the task is already included in the timesheet, in which
+case the method returns ‘nil’.</p>
           
 
           
           <div class="method-source-code" id="add_row-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 258</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_row</span>( <span class="ruby-identifier">task</span> )
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">task</span> )
     <span class="ruby-identifier">timesheet_row</span>      = <span class="ruby-constant">TimesheetRow</span>.<span class="ruby-identifier">new</span>
     <span class="ruby-identifier">timesheet_row</span>.<span class="ruby-identifier">task</span> = <span class="ruby-identifier">task</span>
+
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">timesheet_rows</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">timesheet_row</span> )
+
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">timesheet_row</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- add_row-source -->
@@ -719,7 +741,7 @@ saved - the caller must do this.</p>
 
           
           <div class="method-source-code" id="can_be_modified_by-3F-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 144</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_modified_by?</span>( <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>  <span class="ruby-keyword">if</span>     ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-identifier">user</span> ) )
@@ -752,13 +774,13 @@ Monday to Saturday.</p>
 
           
           <div class="method-source-code" id="column_sum-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 269</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 262</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">column_sum</span>( <span class="ruby-identifier">day_number</span> )
   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
 
   <span class="ruby-comment"># [TODO] Slow. Surely there's a better way...?</span>
 
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">timesheet_rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">timesheet_row</span> <span class="ruby-operator">|</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">timesheet_rows</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">timesheet_row</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">work_packet</span> = <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_timesheet_row_id</span>(
       <span class="ruby-identifier">timesheet_row</span>.<span class="ruby-identifier">id</span>,
       <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:day_number</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">day_number</span> }
@@ -793,14 +815,14 @@ Monday to Saturday.</p>
           <p>Return a date string representing this timesheet on the given day number.
 Day numbers are odd - 0 = Sunday at the <strong>end</strong> of this
 timesheet’s week, while 1-6 = Monday at the <strong>start</strong> of the
-week through to Saturday inclusive (although this may be changed; see the
-<a href="TimesheetRow.html">TimesheetRow</a> model). If an optional second
-parameter is ‘true’, returns a Date object rather than a string.</p>
+week through to Saturday inclusive (aligning with Ruby “cweek”). If an
+optional second parameter is ‘true’, returns a Date object rather than a
+string.</p>
           
 
           
           <div class="method-source-code" id="date_for-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 405</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 398</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">date_for</span>( <span class="ruby-identifier">day_number</span>, <span class="ruby-identifier">as_date</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">date_for</span>( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">year</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">week_number</span>, <span class="ruby-identifier">day_number</span>, <span class="ruby-identifier">as_date</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -835,7 +857,7 @@ week.</p>
 
           
           <div class="method-source-code" id="discover_week-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 221</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">discover_week</span>( <span class="ruby-identifier">nextweek</span> )
   <span class="ruby-identifier">year</span>  = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">year</span>
   <span class="ruby-identifier">owner</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_id</span>
@@ -902,7 +924,7 @@ them).</p>
 
           
           <div class="method-source-code" id="editable_week-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 201</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">editable_week</span>( <span class="ruby-identifier">nextweek</span> )
   <span class="ruby-identifier">discover_week</span>( <span class="ruby-identifier">nextweek</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">timesheet</span> <span class="ruby-operator">|</span>
     ( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
@@ -936,9 +958,9 @@ Pass an optional conditions hash (will be sent in as “:conditions =&gt;
 
           
           <div class="method-source-code" id="find_mine-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 154</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_mine</span>( <span class="ruby-identifier">conditions</span> = {} )
-  <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">find_all_by_user_id</span>( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_id</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">conditions</span> )
+  <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_id</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- find_mine-source -->
           
@@ -967,7 +989,7 @@ this user.</p>
 
           
           <div class="method-source-code" id="find_mine_committed-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 161</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_mine_committed</span>( <span class="ruby-identifier">conditions</span> = {} )
   <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">find_mine</span>( <span class="ruby-identifier">conditions</span> )
@@ -999,7 +1021,7 @@ by this user.</p>
 
           
           <div class="method-source-code" id="find_mine_uncommitted-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 169</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_mine_uncommitted</span>( <span class="ruby-identifier">conditions</span> = {} )
   <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">find_mine</span>( <span class="ruby-identifier">conditions</span> )
@@ -1030,7 +1052,7 @@ by this user.</p>
 
           
           <div class="method-source-code" id="is_permitted_for-3F-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 138</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">privileged?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -1062,7 +1084,7 @@ owned by the current user already exists.</p>
 
           
           <div class="method-source-code" id="showable_week-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 210</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 195</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">showable_week</span>( <span class="ruby-identifier">nextweek</span> )
   <span class="ruby-identifier">discover_week</span>( <span class="ruby-identifier">nextweek</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">timesheet</span> <span class="ruby-operator">|</span>
     ( <span class="ruby-keyword">not</span> <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">nil?</span> )
@@ -1095,7 +1117,7 @@ with week number for display purposes.</p>
 
           
           <div class="method-source-code" id="start_day-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 295</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 288</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start_day</span>()
   <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{ self.date_for( TimesheetRow::FIRST_DAY ) } (week #{ self.week_number })&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1125,7 +1147,7 @@ with week number for display purposes.</p>
 
           
           <div class="method-source-code" id="total_sum-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 288</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total_sum</span>()
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -1156,12 +1178,10 @@ Includes the current timesheet’s already allocated week.</p>
 
           
           <div class="method-source-code" id="unused_weeks-source">
-            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 178</span>
+            <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 165</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unused_weeks</span>()
   <span class="ruby-identifier">timesheets</span> = <span class="ruby-identifier">find_mine</span>( <span class="ruby-value">:year</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">year</span> )
-  <span class="ruby-identifier">used_weeks</span> = <span class="ruby-identifier">timesheets</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">hash</span>[ <span class="ruby-value">:week_number</span> ]
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">used_weeks</span> = <span class="ruby-identifier">timesheets</span>.<span class="ruby-identifier">select</span>( <span class="ruby-value">:week_number</span> ).<span class="ruby-identifier">map</span>( &amp;<span class="ruby-value">:week_number</span> )
 
   <span class="ruby-identifier">range</span>        = <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">get_last_week_number</span>( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">year</span> )
   <span class="ruby-identifier">unused_weeks</span> = ( <span class="ruby-identifier">range</span>.<span class="ruby-identifier">to_a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">used_weeks</span> )

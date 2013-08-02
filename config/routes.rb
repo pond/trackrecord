@@ -46,6 +46,14 @@ Trackrecord::Application.routes.draw do
 
     resources :saved_reports do
       get 'delete', :on => :member
+
+      # This route is rather confusing and was determined by trial and error.
+      # The intention is to get a variant of "new" which takes an ID, for the
+      # "copy a report" case. The below achieves it (see "rake routes" and
+      # look for "saved_reports#new" - it appears twice in different forms).
+      # It also creates "user_saved_report_copy_<foo>()" methods.
+
+      get 'new', :to => 'saved_reports#new', :as => 'copy'
     end
 
     resource :saved_reports_by_task,     :controller => :saved_reports_by_task,     :only => :create
@@ -63,6 +71,7 @@ Trackrecord::Application.routes.draw do
   resources :help
 
   resource  :saved_report_auto_title, :only => :show
+  resource  :timesheet_force_commit,  :only => [ :new, :create ]
 
   # Finally, the normal default rules at lowest priority
 

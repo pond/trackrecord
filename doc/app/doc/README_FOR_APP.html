@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>README_FOR_APP - Rails Application Documentation</title>
+<title>README_FOR_APP - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -109,6 +109,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -165,6 +169,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -184,6 +190,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -226,10 +236,23 @@ format. If you are reading it in a text editor, you should instead look at
 ‘doc/app/index.html’ in your preferred web browser.</p>
 
 <p>If you want to learn more about the TrackRecord internal structure,
-consider getting an idea of the methods defined in the Application
-Controller and Application Helper components first. I recommend then
-looking at the models, so you become familiar with the application’s
-underlying data structures.</p>
+consider getting an idea of the methods defined in the <a
+href="../ApplicationController.html">ApplicationController</a> and <a
+href="../ApplicationHelper.html">ApplicationHelper</a> components first. I
+recommend then looking at the models, so you become familiar with the
+application’s underlying data structures.</p>
+
+<h2 id="label-Extensions">Extensions</h2>
+
+<p>Aside from the usual mechanisms offered by Ruby and the Rails framework,
+TrackRecord supports plug-in report generators. These take a raw report
+object and render it in some format, perhaps (re)processing the report’s
+numerical data along the way. The CSV export function is implemented as
+such a generator.</p>
+
+<p>For more information, please see the <a
+href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+module.</p>
 
 <h2 id="label-Regenerating+the+documentation">Regenerating the documentation</h2>
 
@@ -250,8 +273,8 @@ too, the most obvious being ImageMagick. Font “PetitaBold.ttf” is kept in
 the root of the application for graph text; change this by editing the
 value of “GRAPH_FONT” in file “config/initializers/general_config.rb”.</p>
 
-<p>To fetch an example stand-alone image as a test, visit your site with the
-following path:</p>
+<p>With the above steps completed, fetch an example stand-alone image as a
+test by visiting your site with the following path:</p>
 
 <pre>/charts/0?committed=128&amp;duration=168&amp;not_committed=4&amp;width=128</pre>
 

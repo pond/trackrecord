@@ -47,9 +47,8 @@ module ChartsHelper
     return image_tag(
       charthelp_image_url( duration, committed, not_committed, width ),
       {
-        :size  => "#{ width }x#{ height }",
-        :alt   => "Overview",
-        :align => "left"
+        :size => "#{ width }x#{ height }",
+        :alt  => "Overview"
       }
     )
   end

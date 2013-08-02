@@ -37,7 +37,6 @@ module HelpHelper
         'trackrecord/blank.png',
         :size  => '16x16',
         :alt   => '?',
-        :align => 'top',
         :class => 'help'
       ),
       url,

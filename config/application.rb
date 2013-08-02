@@ -29,6 +29,15 @@ module Trackrecord
     # So remind me why the framework suddenly decided to stop doing this itself
     # again? Just to make developers jump through yet *more* pointless hoops
     # for the gratification of the core team? Sigh, sigh, and thrice sigh.
+    #
+    # 2013-07-26 (ADH): More sighing! This still doesn't eager-load classes in
+    # the library folder, so when trying to implement plugin report generators
+    # via the TrackRecordReportGenerator* class hierarchy, subclasses would not
+    # be loaded and attempts to enumerate them through Base's ".subclasses"
+    # would fail. Thus in addition to the line below, please note that there's
+    # an "eager_load_report_generators.rb" patch inside "config/initializers".
+    # Rails 4 introduces eager loading formally. Facepalm.
+    #
     config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/"]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -52,10 +61,8 @@ module Trackrecord
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    # Disable the asset pipeline and use Prototype.js as a JavaScript library
-    # (Rails 2 heritage application).
-    config.assets.enabled = false
-    config.action_view.javascript_expansions[:defaults] = %w(prototype.js scriptaculous.js rails.js)
+    # Enable the asset pipeline
+    config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TaskImportsController - Rails Application Documentation</title>
+<title>class TaskImportsController - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -145,6 +145,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -201,6 +205,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -220,6 +226,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -433,12 +443,24 @@ re-process the input file if necessary.</p>
 
     <span class="ruby-comment"># Right, good to go! Do the import.</span>
 
-    <span class="ruby-identifier">project_id</span> = <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">project_id</span>
-    <span class="ruby-identifier">project</span>    = <span class="ruby-keyword">nil</span>
-
     <span class="ruby-keyword">begin</span>
       <span class="ruby-constant">Task</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
-        <span class="ruby-identifier">project</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">project_id</span> )
+
+        <span class="ruby-comment"># Create a new project in passing?</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-value">:do_import_new_task</span> )
+          <span class="ruby-identifier">project</span>             = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">project</span>.<span class="ruby-identifier">title</span>       = <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">new_project_title</span>
+          <span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer_id</span> = <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">new_project_customer_id</span>
+          <span class="ruby-identifier">project</span>.<span class="ruby-identifier">description</span> = <span class="ruby-node">&quot;Created for XML bulk task import on #{ Time.now }&quot;</span>
+          <span class="ruby-keyword">begin</span>
+            <span class="ruby-identifier">project</span>.<span class="ruby-identifier">save!</span>
+          <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">inner_error</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Cannot create project: #{ inner_error }&quot;</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">project</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>( <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">project_id</span> )
+        <span class="ruby-keyword">end</span>
 
         <span class="ruby-identifier">to_import</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">source_task</span> <span class="ruby-operator">|</span>
           <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">destination_task</span> <span class="ruby-operator">|</span>

@@ -1,3 +1,5 @@
+      <h1><%= apphelp_heading() %></h1>
+
       <%=
           form_for(
             :import,
@@ -151,9 +153,42 @@
               <%= f.submit( 'import selected tasks', { :name => 'do_import', :disable_with => 'Importing...' } ) %>
             </td>
           </tr>
-<% unless ( @import.max_level.zero? ) -%>
           <tr>
             <th class="right">OR</th>
+            <td>
+              <table class="bulk_task_import">
+                <tr>
+                  <td class="right">Create new project with title:&nbsp;</td>
+                  <td>
+                    <%= f.text_field( :new_project_title ) %>
+                  </td>
+                </tr>
+<%          unless ( ( customers = Customer.active ).empty? ) -%>
+                <tr>
+                  <td class="right narrow">for customer:&nbsp;</td>
+                  <td>
+                    <%= f.collection_select(
+                      :new_project_customer_id,
+                      customers,
+                      :id,
+                      :title,
+                      { :size => [ customers.size, 10 ].min, :include_blank => 'None' }
+                    ) %>
+                  </td>
+                </tr>
+<%          end -%>
+                <tr>
+                  <td class="right narrow">and:&nbsp;</td>
+                  <td>
+                    <%= f.submit( 'import into new project', { :name => 'do_import_new_task', :disable_with => 'Importing...' } ) %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+<% unless ( @import.max_level.zero? ) -%>
+          <tr>
+            <th class="right narrow">OR</th>
             <td>
               Collapse tasks above
 <%= timphelp_collapse_selector( f, @import.max_level, '          ' ) %>

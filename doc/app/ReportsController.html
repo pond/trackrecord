@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class ReportsController - Rails Application Documentation</title>
+<title>class ReportsController - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -159,6 +159,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -215,6 +219,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -234,6 +240,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -282,9 +292,11 @@
 <p>Generate reports describing timesheet entries in various different ways.
 The <a href="ReportsController.html">ReportsController</a> deals with
 finding <a href="SavedReport.html">SavedReport</a> model instances and,
-using TrackRecordReport’s Report class with its attributes configured from
-the <a href="SavedReport.html">SavedReport</a> instance’s contents,
-generating and showing reports to users.</p>
+using the <a
+href="TrackRecordReport/Report.html">TrackRecordReport::Report</a> class
+with its attributes configured from the <a
+href="SavedReport.html">SavedReport</a> instance’s contents, generating and
+showing reports to users.</p>
 </dd></dl>
 <hr style="height: 10px">
 
@@ -373,7 +385,7 @@ apply to the current user.</p>
 
     <span class="ruby-keyword">return</span>
 
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">shared</span> ) )
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">shared</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> ) )
 
     <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&quot;The requested report was not found; the owner may have deleted it.&quot;</span>
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">home_path</span>() ) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
@@ -394,12 +406,62 @@ apply to the current user.</p>
     <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:warning</span> ] = <span class="ruby-string">&quot;This report is unnamed. It will be deleted automatically. To save it permanently, use the 'Change report parameters' link underneath the report and give it a name.&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">format</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reports/show'</span> } ) }
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">csv</span>  { <span class="ruby-identifier">csv_stream_report</span>() }
+  <span class="ruby-comment"># Everything's ready to render the report in @report, but should we</span>
+  <span class="ruby-comment"># actually be running a generator instead?</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-value">:generator</span> ) )
+
+    <span class="ruby-comment"># Generate a report via a plugin generator. Need to figure out which</span>
+    <span class="ruby-comment"># one to use and get its parameters sent over.</span>
+
+    <span class="ruby-identifier">supported_types</span> = [ <span class="ruby-value">:task</span>, <span class="ruby-value">:user</span>, <span class="ruby-value">:comprehensive</span> ]
+
+    <span class="ruby-constant">TrackRecordReportGenerator</span>.<span class="ruby-identifier">submodules</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">submodule</span> <span class="ruby-operator">|</span>
+
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-identifier">submodule</span> )
+
+      <span class="ruby-identifier">params_key</span> = <span class="ruby-identifier">submodule</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">underscore</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-identifier">params_key</span> ) )
+        <span class="ruby-identifier">generator_params</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">params_key</span> ]
+        <span class="ruby-identifier">report_type</span>      = <span class="ruby-identifier">supported_types</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">supported_type</span> <span class="ruby-operator">|</span>
+          <span class="ruby-identifier">generator_params</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-identifier">supported_type</span> )
+        <span class="ruby-keyword">end</span>.<span class="ruby-identifier">first</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">understands?</span>( <span class="ruby-identifier">report_type</span> ) )
+          <span class="ruby-identifier">generator_params</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-identifier">report_type</span> )
+          <span class="ruby-identifier">result</span> = <span class="ruby-identifier">generate</span>( <span class="ruby-identifier">report_type</span>, <span class="ruby-ivar">@report</span>, <span class="ruby-identifier">generator_params</span> )
+
+          <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span> )
+            <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reports/show'</span> } )
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-keyword">break</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">else</span>
+
+    <span class="ruby-comment"># Simple render.</span>
+    <span class="ruby-comment"># </span>
+    <span class="ruby-comment"># SO NEXT STEP: Check for debugging or commentary code and remove.</span>
+    <span class="ruby-comment"># Make a new test exporter which does a template render to check how</span>
+    <span class="ruby-comment"># that's done. Update comments in the &quot;base class&quot;-like module to</span>
+    <span class="ruby-comment"># explain how to write correct submodules &amp; include code samples.</span>
+    <span class="ruby-comment"># Generate docs &amp; check they render OK.</span>
+    <span class="ruby-comment"># </span>
+    <span class="ruby-comment"># Also should test the error reporting pathway as that's not been</span>
+    <span class="ruby-comment"># run yet.</span>
+    <span class="ruby-comment"># </span>
+
+
+    <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reports/show'</span> } )
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:warning</span> ) <span class="ruby-comment"># Else it shows on the *next* fetched page too</span>
+  <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:error</span>   )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- show-source -->
           

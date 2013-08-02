@@ -1,3 +1,5 @@
+<h1><%= apphelp_heading() %></h1>
+
 <%= error_messages_for :record %>
 <%= form_for( @record ) do | f | %>
   <%= f.hidden_field( :lock_version ) %>

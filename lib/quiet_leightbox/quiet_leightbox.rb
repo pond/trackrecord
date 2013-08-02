@@ -49,8 +49,25 @@ module QuietLeightbox
     def include_leightbox_if_used( line_prefix = '' )
       return unless using_quiet_leightbox?
 
-      data          = javascript_include_tag( :defaults )
-      data << "\n" << javascript_include_tag( 'leightbox/leightbox' )
+      data = ""
+
+      # 2013-07-18 (ADH): Even with appropriate configuration data in
+      # "config/application.rb" for the ":defaults" expansion, using it
+      # here results in "assets/defaults.js" being generated. Doh. Since
+      # code here is evaluated before the application starts, presumably
+      # the expansion isn't defined in time. Instead we have to do it
+      # the hard way.
+      #
+      # In addition, cooperate with the "Quiet Prototype" plugin.
+
+      unless ( respond_to?( :using_quiet_prototype? ) && using_quiet_prototype?() )
+        data         << javascript_include_tag( 'prototype/prototype' )
+        data << "\n" << javascript_include_tag( 'prototype_ujs/rails' )
+        data << "\n" << javascript_include_tag( 'scriptaculous/scriptaculous' )
+        data << "\n"
+      end
+
+      data         << javascript_include_tag( 'leightbox/leightbox' )
       data << "\n" << stylesheet_link_tag( 'leightbox/leightbox' )
 
       return ( data.gsub( /^/, line_prefix ) + "\n" ).html_safe()

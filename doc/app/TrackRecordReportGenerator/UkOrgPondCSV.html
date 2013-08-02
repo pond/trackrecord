@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module TrackRecordReportGenerator::UkOrgPondCSV - YOUR_TITLE</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-extended">::extended</a>
+    
+    <li><a href="#method-i-generate">#generate</a>
+    
+    <li><a href="#method-i-invocation_button_title_for">#invocation_button_title_for</a>
+    
+    <li><a href="#method-i-invocation_options_for">#invocation_options_for</a>
+    
+    <li><a href="#method-i-understands-3F">#understands?</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
+  
+    <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
+  
+    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+  
+    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+  
+    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  
+    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+  
+    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+  
+    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li><a href="../ReportsHelper.html">ReportsHelper</a>
+  
+    <li><a href="../ReportsHelper/ReportMonth.html">ReportsHelper::ReportMonth</a>
+  
+    <li><a href="../ReportsHelper/ReportWeek.html">ReportsHelper::ReportWeek</a>
+  
+    <li><a href="../ReportsHelper/ReportYear.html">ReportsHelper::ReportYear</a>
+  
+    <li><a href="../QuietLeightbox.html">QuietLeightbox</a>
+  
+    <li><a href="../QuietLeightbox/ClassMethods.html">QuietLeightbox::ClassMethods</a>
+  
+    <li><a href="../QuietLeightbox/QuietLeightboxHelper.html">QuietLeightbox::QuietLeightboxHelper</a>
+  
+    <li><a href="../QuietPrototype.html">QuietPrototype</a>
+  
+    <li><a href="../QuietPrototype/ClassMethods.html">QuietPrototype::ClassMethods</a>
+  
+    <li><a href="../QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
+  
+    <li><a href="../YuiTree.html">YuiTree</a>
+  
+    <li><a href="../YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
+  
+    <li><a href="../YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="../SafeInPlaceEditing.html">SafeInPlaceEditing</a>
+  
+    <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
+    <li><a href="../ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="../AuditsController.html">AuditsController</a>
+  
+    <li><a href="../AuditsHelper.html">AuditsHelper</a>
+  
+    <li><a href="../ChartsController.html">ChartsController</a>
+  
+    <li><a href="../ChartsHelper.html">ChartsHelper</a>
+  
+    <li><a href="../ControlPanel.html">ControlPanel</a>
+  
+    <li><a href="../ControlPanelsController.html">ControlPanelsController</a>
+  
+    <li><a href="../Customer.html">Customer</a>
+  
+    <li><a href="../CustomersController.html">CustomersController</a>
+  
+    <li><a href="../CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="../EmailNotifier.html">EmailNotifier</a>
+  
+    <li><a href="../HelpController.html">HelpController</a>
+  
+    <li><a href="../HelpHelper.html">HelpHelper</a>
+  
+    <li><a href="../Project.html">Project</a>
+  
+    <li><a href="../ProjectsController.html">ProjectsController</a>
+  
+    <li><a href="../ProjectsHelper.html">ProjectsHelper</a>
+  
+    <li><a href="../Rangeable.html">Rangeable</a>
+  
+    <li><a href="../ReportsController.html">ReportsController</a>
+  
+    <li><a href="../SafeInPlaceEditingHelper.html">SafeInPlaceEditingHelper</a>
+  
+    <li><a href="../SavedReport.html">SavedReport</a>
+  
+    <li><a href="../SavedReportAutoTitlesController.html">SavedReportAutoTitlesController</a>
+  
+    <li><a href="../SavedReportsBaseController.html">SavedReportsBaseController</a>
+  
+    <li><a href="../SavedReportsByCustomerController.html">SavedReportsByCustomerController</a>
+  
+    <li><a href="../SavedReportsByProjectController.html">SavedReportsByProjectController</a>
+  
+    <li><a href="../SavedReportsByTaskController.html">SavedReportsByTaskController</a>
+  
+    <li><a href="../SavedReportsByUserController.html">SavedReportsByUserController</a>
+  
+    <li><a href="../SavedReportsController.html">SavedReportsController</a>
+  
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
+    <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
+  
+    <li><a href="../SessionsController.html">SessionsController</a>
+  
+    <li><a href="../Task.html">Task</a>
+  
+    <li><a href="../TaskGroup.html">TaskGroup</a>
+  
+    <li><a href="../TaskImport.html">TaskImport</a>
+  
+    <li><a href="../TaskImportsController.html">TaskImportsController</a>
+  
+    <li><a href="../TaskImportsHelper.html">TaskImportsHelper</a>
+  
+    <li><a href="../TasksController.html">TasksController</a>
+  
+    <li><a href="../TasksHelper.html">TasksHelper</a>
+  
+    <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
+  
+    <li><a href="../TimesheetRow.html">TimesheetRow</a>
+  
+    <li><a href="../TimesheetRowsController.html">TimesheetRowsController</a>
+  
+    <li><a href="../TimesheetRowsHelper.html">TimesheetRowsHelper</a>
+  
+    <li><a href="../TimesheetsController.html">TimesheetsController</a>
+  
+    <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
+  
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
+  
+    <li><a href="../TreesController.html">TreesController</a>
+  
+    <li><a href="../User.html">User</a>
+  
+    <li><a href="../UsersController.html">UsersController</a>
+  
+    <li><a href="../UsersHelper.html">UsersHelper</a>
+  
+    <li><a href="../WorkPacket.html">WorkPacket</a>
+  
+    <li><a href="../WorkPacketsController.html">WorkPacketsController</a>
+  
+    <li><a href="../WorkPacketsHelper.html">WorkPacketsHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module TrackRecordReportGenerator::UkOrgPondCSV</h1>
+
+  <div id="description" class="description">
+    <dl class="rdoc-list note-list"><dt>File
+<dd>
+<p>track_record_report_generator_uk_org_pond_csv.rb</p>
+</dd><dt>(C)
+<dd>
+<p>Hipposoft 2013</p>
+</dd><dt>Purpose
+<dd>
+<p>Generate CSV format reports and send the data to browsers.</p>
+</dd></dl>
+<hr style="height: 10px">
+
+<pre>25-Jul-2013 (ADH): Created.</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-extended" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">extended</span><span
+            class="method-args">( base )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Private methods are contained herein. Note the prefixes used on all method
+names to avoid <a href="../ReportsController.html">ReportsController</a>
+collisions.</p>
+
+<p>See the namespace documentation of the base <a
+href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+module for more details.</p>
+          
+
+          
+          <div class="method-source-code" id="extended-source">
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">extended</span>( <span class="ruby-identifier">base</span> )
+  <span class="ruby-keyword">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">base</span>
+  <span class="ruby-identifier">private</span>
+
+    <span class="ruby-comment"># Send a by-task CSV format report through the given CSV output stream using</span>
+    <span class="ruby-comment"># the given TrackRecordReport::Report instance. Pass also a headings array that</span>
+    <span class="ruby-comment"># gives the heading suffices for each of the kinds of numbers that &quot;hours&quot; will</span>
+    <span class="ruby-comment"># output based on prevailing instance variables (see that function for details).</span>
+    <span class="ruby-comment"># The last parameter is a &quot;comprehensive report&quot; flag, forcing per-user</span>
+    <span class="ruby-comment"># breakdown on the assumption that a report is appropriate compiled.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">uk_org_pond_csv_report_by_task</span>( <span class="ruby-identifier">csv</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">headings</span>, <span class="ruby-identifier">comprehensive</span> )
+      <span class="ruby-comment"># Assemble the heading row.</span>
+
+      <span class="ruby-identifier">file_row</span> = [ <span class="ruby-identifier">report</span>.<span class="ruby-identifier">column_title</span>, <span class="ruby-string">'Code'</span>, <span class="ruby-string">'Billable?'</span>, <span class="ruby-string">'Active?'</span> ]
+
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">column_ranges</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">col_index</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">partial</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">partial_column?</span>( <span class="ruby-identifier">col_index</span> ) <span class="ruby-operator">?</span> <span class="ruby-string">' (partial)'</span> <span class="ruby-operator">:</span> <span class="ruby-string">''</span>
+        <span class="ruby-identifier">headings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">heading</span> <span class="ruby-operator">|</span>
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ report.column_heading( col_index ) }#{ partial }#{ heading }&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">headings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">heading</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Row total#{ heading }&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">empty?</span> )
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'Duration'</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'Remaining (actual)'</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'Remaining (potential)'</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+
+      <span class="ruby-comment"># Section and task list, date range breakdown.</span>
+
+      <span class="ruby-identifier">sections_initialise_sections</span>()
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">row_index</span> <span class="ruby-operator">|</span>
+
+        <span class="ruby-identifier">row</span>      = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>[ <span class="ruby-identifier">row_index</span> ]
+        <span class="ruby-identifier">task</span>     = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_tasks</span>[ <span class="ruby-identifier">row_index</span> ]
+        <span class="ruby-identifier">file_row</span> = []
+
+        <span class="ruby-comment"># New section? Write out the section title and totals if so.</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">sections_new_section?</span>( <span class="ruby-identifier">task</span> ) )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sections_section_title</span>( <span class="ruby-keyword">true</span> )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:code</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">'-'</span> ) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
+
+          <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cells</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">col_index</span> <span class="ruby-operator">|</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ].<span class="ruby-identifier">cells</span>[ <span class="ruby-identifier">col_index</span> ] )
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ] )
+
+          <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">empty?</span> )
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+          <span class="ruby-identifier">file_row</span> = []
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># Task title, data and summary information</span>
+
+        <span class="ruby-identifier">application_helper</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ApplicationHelper</span> )
+
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -- #{ task.title }&quot;</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">code</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">billable</span> )
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span>   )
+
+        <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cells</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">cell</span> <span class="ruby-operator">|</span>
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">cell</span> )
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">row</span> )
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">empty?</span> )
+          <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> <span class="ruby-operator">==</span> <span class="ruby-value">0.0</span> )
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">committed</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">total</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">comprehensive</span> )
+          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+            <span class="ruby-identifier">user</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>[ <span class="ruby-identifier">index</span> ]
+            <span class="ruby-identifier">user_total</span> = <span class="ruby-constant">TrackRecordReport</span><span class="ruby-operator">::</span><span class="ruby-constant">ReportColumnTotal</span>.<span class="ruby-identifier">new</span>
+
+            <span class="ruby-identifier">file_row</span> = [ <span class="ruby-node">&quot; ---- #{ user.name }&quot;</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span> ]
+
+            <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cells</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">cell</span> <span class="ruby-operator">|</span>
+              <span class="ruby-identifier">user_total</span>.<span class="ruby-identifier">add_cell</span>( <span class="ruby-identifier">cell</span> )
+              <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">cell</span>.<span class="ruby-identifier">user_data</span>[ <span class="ruby-identifier">index</span> ] )
+            <span class="ruby-keyword">end</span>
+
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">user_total</span> )
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Column totals.</span>
+
+      <span class="ruby-identifier">file_row</span> = [ <span class="ruby-string">'Column total'</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span> ]
+
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">column_totals</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">total</span> )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span> )
+
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">empty?</span> )
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">total_duration</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">total_actual_remaining</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">total_potential_remaining</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># As &quot;uk_org_pond_csv_report_by_task&quot;, but generates a per-user report.</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">uk_org_pond_csv_report_by_user</span>( <span class="ruby-identifier">csv</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">headings</span> )
+
+      <span class="ruby-comment"># Assemble the heading row.</span>
+
+      <span class="ruby-identifier">file_row</span> = [ <span class="ruby-string">''</span>, <span class="ruby-string">'Code'</span>, <span class="ruby-string">'Billable?'</span>, <span class="ruby-string">'Active?'</span> ]
+
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">headings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">heading</span> <span class="ruby-operator">|</span>
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ user.name }#{ heading }&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">headings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">heading</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Row total#{ heading }&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+
+      <span class="ruby-comment"># Section and task list, user breakdown.</span>
+
+      <span class="ruby-identifier">sections_initialise_sections</span>()
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">row_index</span> <span class="ruby-operator">|</span>
+
+        <span class="ruby-identifier">row</span>      = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>[ <span class="ruby-identifier">row_index</span> ]
+        <span class="ruby-identifier">task</span>     = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_tasks</span>[ <span class="ruby-identifier">row_index</span> ]
+        <span class="ruby-identifier">file_row</span> = []
+
+        <span class="ruby-comment"># New section? Write out the section title and totals if so.</span>
+
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">sections_new_section?</span>( <span class="ruby-identifier">task</span> ) )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sections_section_title</span>( <span class="ruby-keyword">true</span> )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:code</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">'-'</span> ) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
+
+          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user_index</span> <span class="ruby-operator">|</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ].<span class="ruby-identifier">user_row_totals</span>[ <span class="ruby-identifier">user_index</span> ] )
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ] )
+
+          <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+          <span class="ruby-identifier">file_row</span> = []
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># Task title, data and summary information</span>
+
+        <span class="ruby-identifier">application_helper</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ApplicationHelper</span> )
+
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -- #{ task.title }&quot;</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">code</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">billable</span> )
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span>   )
+
+        <span class="ruby-identifier">row</span>.<span class="ruby-identifier">user_row_totals</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user_row_total</span> <span class="ruby-operator">|</span>
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">user_row_total</span> )
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">row</span> )
+        <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Column totals.</span>
+
+      <span class="ruby-identifier">file_row</span> = [ <span class="ruby-string">'Column total'</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span> ]
+
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">user_column_totals</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user_column_total</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">user_column_total</span> )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span> )
+      <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Return an array with total, committed and not committed hours based</span>
+    <span class="ruby-comment"># on the given TrackRecordReport::Report instance's configuration and a</span>
+    <span class="ruby-comment"># TrackRecordReport::ReportElementaryCalculator object.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">calculator</span> )
+      <span class="ruby-identifier">a</span> = []
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">total</span>         ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_totals</span>         )
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">committed</span>     ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_committed</span>      )
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">not_committed</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_not_committed</span>  )
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">a</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Terse hours - return a given float number of hours to 2d.p. or the</span>
+    <span class="ruby-comment"># smallest possible form (e.g. &quot;0.0&quot; becomes &quot;0&quot;).</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">hours</span> )
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'.'</span> )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Return a form element ID to use for a given report type.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">uk_org_pond_id_for_type</span>( <span class="ruby-identifier">type</span> )
+      <span class="ruby-node">&quot;include_title_for_#{ type }&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">end</span> <span class="ruby-comment"># class &lt;&lt; base</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- extended-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- extended-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-generate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate</span><span
+            class="method-args">( report_type, report, options = {} )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <h6 id="method-i-generate-label-"></h6>
+
+<p>See module <a
+href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+for details.</p>
+          
+
+          
+          <div class="method-source-code" id="generate-source">
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate</span>( <span class="ruby-identifier">report_type</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">options</span> = {} )
+
+  <span class="ruby-identifier">include_title</span> = ( <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">uk_org_pond_id_for_type</span>( <span class="ruby-identifier">report_type</span> ) ] <span class="ruby-operator">==</span> <span class="ruby-string">'1'</span> )
+
+  <span class="ruby-identifier">headings</span> = []
+  <span class="ruby-identifier">headings</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' (total)'</span>    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_totals</span>        )
+  <span class="ruby-identifier">headings</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' (com.)'</span>     <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_committed</span>     )
+  <span class="ruby-identifier">headings</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' (not com.)'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_not_committed</span> )
+
+  <span class="ruby-comment"># Old-style streaming has becomes unreliable lately; the v1.0 approach as</span>
+  <span class="ruby-comment"># per &quot;http://oldwiki.rubyonrails.org/rails/pages/HowtoExportDataAsCSV&quot;</span>
+  <span class="ruby-comment"># often failed with Rails 2.3 and/or certain FasterCSV versions (I never</span>
+  <span class="ruby-comment"># did find out exactly what caused the problem though).</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># The simplest solution is to use the ActiveRecord::Streaming &quot;send_data&quot;</span>
+  <span class="ruby-comment"># call, putting all the load on the Rails framework. Unfortunately this</span>
+  <span class="ruby-comment"># means the whole CSV file ends up in RAM before being sent - inefficient.</span>
+
+  <span class="ruby-identifier">label</span>     = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">label</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-string">' '</span>, <span class="ruby-string">'_'</span> )
+  <span class="ruby-identifier">sformat</span>   = <span class="ruby-string">'%Y%m%d'</span>   <span class="ruby-comment"># Compressed ISO-style</span>
+  <span class="ruby-identifier">fformat</span>   = <span class="ruby-string">'%Y-%m-%d'</span> <span class="ruby-comment"># Less compressed ISO-style</span>
+  <span class="ruby-identifier">stoday</span>    = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
+  <span class="ruby-identifier">ftoday</span>    = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
+  <span class="ruby-identifier">sstart_at</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
+  <span class="ruby-identifier">fstart_at</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
+  <span class="ruby-identifier">send_at</span>   = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
+  <span class="ruby-identifier">fend_at</span>   = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
+  <span class="ruby-identifier">filename</span>  = <span class="ruby-node">&quot;report_#{ label }_on_#{ stoday }_for_#{ sstart_at }_to_#{ send_at }.csv&quot;</span>
+  <span class="ruby-identifier">title</span>     = [
+    <span class="ruby-node">&quot;#{ report_type.to_s.capitalize } report on #{ ftoday }&quot;</span>,
+    <span class="ruby-node">&quot;From #{ fstart_at }&quot;</span>,
+    <span class="ruby-node">&quot;To #{ fend_at }&quot;</span>,
+    <span class="ruby-string">'(inclusive)'</span>
+  ]
+
+  <span class="ruby-comment"># First compile the file.</span>
+
+  <span class="ruby-identifier">whole_csv_file</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span> <span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">include_title</span> )
+      <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">report</span>.<span class="ruby-identifier">title</span> ] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">title</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">report_type</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-value">:user</span>
+        <span class="ruby-identifier">uk_org_pond_csv_report_by_user</span>( <span class="ruby-identifier">csv</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">headings</span> )
+      <span class="ruby-keyword">when</span> <span class="ruby-value">:comprehensive</span>
+        <span class="ruby-identifier">uk_org_pond_csv_report_by_task</span>( <span class="ruby-identifier">csv</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">headings</span>, <span class="ruby-keyword">true</span> )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">uk_org_pond_csv_report_by_task</span>( <span class="ruby-identifier">csv</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">headings</span>, <span class="ruby-keyword">false</span> )
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Next send the data all in one go.</span>
+
+  <span class="ruby-identifier">send_data</span>(
+    <span class="ruby-identifier">whole_csv_file</span>,
+    {
+      <span class="ruby-value">:type</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'text/csv'</span>,
+      <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'attachment'</span>,
+      <span class="ruby-value">:filename</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">filename</span>
+    }
+  )
+
+  <span class="ruby-comment"># Indicate success.</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate-method -->
+
+    
+      <div id="method-i-invocation_button_title_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">invocation_button_title_for</span><span
+            class="method-args">( type )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <h6 id="method-i-invocation_button_title_for-label-"></h6>
+
+<p>See module <a
+href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+for details.</p>
+          
+
+          
+          <div class="method-source-code" id="invocation_button_title_for-source">
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">invocation_button_title_for</span>( <span class="ruby-identifier">type</span> )
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:user</span>
+      <span class="ruby-string">&quot;Export user report in CSV format&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:task</span>
+      <span class="ruby-string">&quot;Export task report in CSV format&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:comprehensive</span>
+      <span class="ruby-string">&quot;Export comprehensive report in CSV format&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- invocation_button_title_for-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- invocation_button_title_for-method -->
+
+    
+      <div id="method-i-invocation_options_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">invocation_options_for</span><span
+            class="method-args">( type )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <h6 id="method-i-invocation_options_for-label-"></h6>
+
+<p>See module <a
+href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+for details.</p>
+          
+
+          
+          <div class="method-source-code" id="invocation_options_for-source">
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">invocation_options_for</span>( <span class="ruby-identifier">type</span> )
+  [
+    {
+      <span class="ruby-value">:checkbox</span> =<span class="ruby-operator">&gt;</span>
+      {
+        <span class="ruby-value">:label</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Add title to first row&quot;</span>,
+        <span class="ruby-value">:checked</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
+        <span class="ruby-value">:id</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">uk_org_pond_id_for_type</span>( <span class="ruby-identifier">type</span> )
+      }
+    }
+  ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- invocation_options_for-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- invocation_options_for-method -->
+
+    
+      <div id="method-i-understands-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">understands?</span><span
+            class="method-args">( type )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <h6 id="method-i-understands-3F-label-"></h6>
+
+<p>See module <a
+href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+for details.</p>
+          
+
+          
+          <div class="method-source-code" id="understands-3F-source">
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">understands?</span>( <span class="ruby-identifier">type</span> )
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:user</span>, <span class="ruby-value">:task</span>, <span class="ruby-value">:comprehensive</span>
+      <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- understands-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- understands-3F-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

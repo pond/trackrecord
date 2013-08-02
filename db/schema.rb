@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710014436) do
+ActiveRecord::Schema.define(:version => 20130718235640) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -112,6 +112,9 @@ ActiveRecord::Schema.define(:version => 20130710014436) do
     t.string   "task_grouping",         :limit => 16,  :default => "default"
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
+    t.string   "range_one_month",       :limit => 7
+    t.string   "range_one_week",        :limit => 7
+    t.boolean  "user_details"
   end
 
   add_index "saved_reports", ["user_id"], :name => "index_saved_reports_on_user_id"

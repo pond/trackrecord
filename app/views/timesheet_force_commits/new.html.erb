@@ -1,0 +1,87 @@
+      <h1><%= apphelp_heading() %></h1>
+
+<% if @timesheets.count.zero? -%>
+      <p>
+        Bulk timesheet committing is only allowed for timesheets that are old
+        enough to be unlikely to need editing. Currently, the cut off date
+        is <%= apphelp_date( @earliest ) %> and either all timesheets before
+        this point are committed already, or none have been submitted.
+      </p>
+<% else -%>
+      <p>
+        Users should commit timesheets when finished with them, indicating that
+        the hours are "final" and preventing retrospective changes to entries that
+        might have been used for analysis purposes. Nobody's perfect and users
+        sometimes forget the commit stage, so use the controls below to commit
+        timesheets en masse. Take care! You can only undo the process manually,
+        for individual timesheets.
+      </p>
+
+      <p>
+        To instead commit only carefully chosen timesheets, use the
+        <%= link_to( "Manage Timesheets", timesheets_path() ) %> page and edit
+        individual items.
+      </p>
+
+      <%= form_for @object, :url => { :action => :create } do | f | %>
+        <table class="display_table">
+          <tr class="display_row">
+            <th class="nowrap">Start date:</th>
+            <td>
+              <%=
+                f.calendar_date_select(
+                  :earliest,
+                  {
+                    :embedded   => false,
+                    :year_range => ( @timesheets.first.start_day_cache.year )..( @timesheets.last.start_day_cache.year )
+                  }
+                ) 
+              %>
+              <br />
+              <ul>
+                <li><small>Earliest inclusive start day in UTC timezone</small></li>
+                <li><small>Uncommitted timesheets starting on or after this date
+                    will be committed</small></li>
+                <li><small>Timesheets starting before this date
+                    will <em>not</em> be changed</small></li>
+                <li><small>Earliest uncommitted timesheet date is <%= apphelp_date( @timesheets.first.start_day_cache.to_date ) %></small></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="display_row">
+            <th class="nowrap">End date:</th>
+            <td>
+              <%=
+                f.calendar_date_select(
+                  :latest,
+                  {
+                    :embedded   => false,
+                    :year_range => ( @timesheets.first.start_day_cache.year )..( @timesheets.last.start_day_cache.year )
+                  }
+                ) 
+              %>
+              <br />
+              <ul>
+                <li><small>Latest inclusive end day in UTC timezone</small></li>
+                <li><small>Uncommitted timesheets ending on or before this date
+                    will be committed</small></li>
+                <li><small>Timesheets ending after this date
+                    will <em>not</em> be changed</small></li>
+                <li><small>Latest allowed date is <%= apphelp_date( @timesheets.last.start_day_cache.to_date + 6.days ) %></small></li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="display_row">
+            <th class="nowrap">&nbsp;</th>
+            <td>
+              <%= f.submit apphelp_view_hint( :commit ) %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+<% end -%>
+
+<p class="centred">
+  <%= link_to( apphelp_view_hint( :return_home ), home_path() ) %>
+</p>

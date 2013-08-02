@@ -5,14 +5,27 @@ format. If you are reading it in a text editor, you should instead look at
 'doc/app/index.html' in your preferred web browser.
 
 If you want to learn more about the TrackRecord internal structure, consider
-getting an idea of the methods defined in the Application Controller and
-Application Helper components first. I recommend then looking at the models,
+getting an idea of the methods defined in the ApplicationController and
+ApplicationHelper components first. I recommend then looking at the models,
 so you become familiar with the application's underlying data structures.
+
+
+== Extensions
+
+Aside from the usual mechanisms offered by Ruby and the Rails framework,
+TrackRecord supports plug-in report generators. These take a raw report
+object and render it in some format, perhaps (re)processing the report's
+numerical data along the way. The CSV export function is implemented as
+such a generator.
+
+For more information, please see the TrackRecordReportGenerator module.
+
 
 == Regenerating the documentation
 
 Run "rake doc:reapp" to regenerate all files. See also the main application
 README file at the top level.
+
 
 == Charts controller
 
@@ -28,7 +41,7 @@ the most obvious being ImageMagick. Font "PetitaBold.ttf" is kept in the root
 of the application for graph text; change this by editing the value of
 "GRAPH_FONT" in file "config/initializers/general_config.rb".
 
-To fetch an example stand-alone image as a test, visit your site with the
-following path:
+With the above steps completed, fetch an example stand-alone image as a test
+by visiting your site with the following path:
 
   /charts/0?committed=128&duration=168&not_committed=4&width=128

@@ -115,6 +115,13 @@ en:
               view_report_share_help_2:                "A viewer's security restrictions always apply. There may be task or user details they are not permitted to see. As a result, the report you share may look different when viewed by other people."
               view_report_share_help_3:                "If you need to share a report <em>precisely</em>, export it to a CSV file or, if your operating system or browser supports it, save the report web page as a PDF file. Bear in mind that this <em>bypasses security restrictions</em> since you can send that full report to anybody. Take care to only send it to users who are allowed to view all of its contents."
 
+              view_xml_import_help_1:                  "XML file projects and tasks are mapped to TrackRecord projects and tasks as follows:"
+              view_xml_import_help_2:                  "Any tasks with non-zero work time assigned are included."
+              view_xml_import_help_3:                  "TrackRecord task names are generated from the name of each XML file task, with the name of its most immediate grouping parent summary added as a prefix."
+              view_xml_import_help_4:                  "Assigned work time in the XML data is converted to TrackRecord project durations in hours, mathematically rounded to two decimal places if need be."
+              view_xml_import_help_5:                  "Task codes are created from the current date and the task ID, this being typically directly related to position in which the task is listed in most graphical project plan editors."
+              view_xml_import_help_6:                  "Tasks are imported \"flat\" since TrackRecord does not support hierarchical task structures."
+
             projects:
               action_title_index:                      "Manage projects"
               action_title_new:         &new_title     "Add project"
@@ -135,6 +142,29 @@ en:
               action_title_update:      *edit_title
               action_title_delete:                     "Delete report"
 
+              view_this_week:                          "This week (currently week %s)"
+              view_last_week:                          "Last week (currently week %s)"
+              view_two_weeks_ago:                      "Two weeks ago (currently week %s)"
+              view_this_month:                         "This month (currently month %s)"
+              view_last_month:                         "Last month (currently month %s)"
+              view_two_months_ago:                     "Two months ago (currently month %s)"
+
+              view_date_start_all:                     "Start of records"
+              view_date_start_this_week:               "This week"
+              view_date_start_last_week:               "Last week"
+              view_date_start_two_week:                "2 weeks ago"
+              view_date_start_this_month:              "This month"
+              view_date_start_last_month:              "Last month"
+              view_date_start_two_month:               "2 months ago"
+
+              view_date_end_all:                       "End of records"
+              view_date_end_this_week:                 "This week"
+              view_date_end_last_week:                 "Last week"
+              view_date_end_two_week:                  "2 weeks ago"
+              view_date_end_this_month:                "This month"
+              view_date_end_last_month:                "Last month"
+              view_date_end_two_month:                 "2 months ago"
+
             sessions:
               action_title_new:         &new_title     "Sign in"
               action_title_create:      *new_title
@@ -142,6 +172,7 @@ en:
             task_imports:
               action_title_new:         &new_title     "Bulk task import"
               action_title_create:      *new_title
+              action_title_update:      *new_title
 
             tasks:
               action_title_index:                      "Manage tasks"
@@ -151,6 +182,14 @@ en:
               action_title_update:      *edit_title
               action_title_show:                       "Task details"
               action_title_delete:                     "Delete task"
+
+            timesheet_force_commits:
+              action_title_new:         &new_title     "Bulk timesheet commit"
+              action_title_create:      *new_title
+
+              view_commit:                             "Commit indicated timesheets"
+              view_cancel:                             "Cancel"
+              view_return_home:                        "Cancel and return home"
 
             timesheets:
               action_title_index:                      "Manage timesheets"

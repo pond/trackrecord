@@ -5,8 +5,8 @@
   Please enter your OpenID into the text field below.
 </p>
 
-<table class="openid" border="0">
-  <tr valign="bottom">
+<table class="openid">
+  <tr>
     <td><%= image_tag( 'trackrecord/openid_med_logo_text.png', { :size => '84x28', :alt => 'OpenID logo' } ) %></td>
     <td>
       <%= form_for( :session, { :url => { :action => 'create' } } ) do %>
@@ -29,24 +29,21 @@
     password for such sites &ndash; just use your OpenID.
   </p>
 
-  <p>
-    If you already have an OpenID, sign up by entering it into the form above.
-    You must have told your system administrator about your OpenID first as
-    only people previously authorised by the administrator are allowed access.
-  </p>
-
-  <h3>How to get an OpenID</h3>
-
-  <p>
-    You can get an OpenID from one of several providers &ndash; the choice is
-    entirely up to you:
-  </p>
-
   <ul>
-    <li>MyOpenID: <%= auto_link( 'https://www.myopenid.com/' ) %></li>
-    <li>LiveJournal: <%= auto_link( 'http://www.livejournal.com/' ) %></li>
-    <li>VeriSign Personal Identity Provider: <%= auto_link( 'http://pip.verisignlabs.com/' ) %></li>
-    <li><%= link_to( 'Others...', 'http://openid.net/wiki/index.php/Public_OpenID_providers' ) %></li>
+    <li>
+      <p>
+        If you already have an OpenID, sign up by entering it into the form above.
+        You must have told your system administrator about your OpenID first as
+        <strong>only people previously authorised by the administrator are allowed
+        access</strong>.
+      </p>
+    </li>
+    <li>
+      <p>
+        If you need to obtain an OpenID, you can use various providers - see
+        <%= auto_link( 'http://openid.net/get-an-openid/' ) %> for details.
+      </p>
+    </li>
   </ul>
 
   <h3>For life, not just for Christmas!</h3>
@@ -78,12 +75,6 @@
   <h3>Further information</h3>
 
   <p>
-    For more information about OpenID, have a look at the following:
+    Please visit the OpenID web site at <%= auto_link( 'http://openid.net/' ) %>.
   </p>
-
-  <ul>
-    <li>The OpenID site: <%= auto_link( 'http://openid.net/' ) %></li>
-    <li>Simon Willison's excellent screencast: <%= auto_link( 'http://simonwillison.net/2006/openid-screencast/' ) %></li>
-    <li>The Rails Wiki: <%= auto_link( 'http://wiki.rubyonrails.org/rails/pages/OpenID' ) %></li>
-  </ul>
 </div>

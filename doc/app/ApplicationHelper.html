@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>module ApplicationHelper - Rails Application Documentation</title>
+<title>module ApplicationHelper - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -197,6 +197,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -253,6 +257,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -272,6 +278,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -439,7 +449,7 @@ reason to call here rather than calling ‘collection_select’ directly.</p>
 
           
           <div class="method-source-code" id="apphelp_collection_select-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 245</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">objfield</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">colsetfield</span>, <span class="ruby-identifier">colseefield</span>, <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">collection_select</span>(
     <span class="ruby-identifier">objfield</span>,
@@ -479,7 +489,7 @@ object and force the generation of an active (pass ‘true’) or inactive
 
           
           <div class="method-source-code" id="apphelp_commit_label-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 172</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_commit_label</span>( <span class="ruby-identifier">item</span>, <span class="ruby-identifier">active</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-identifier">active</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">active</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">active</span>.<span class="ruby-identifier">nil?</span> )
 
@@ -516,7 +526,7 @@ created_at method. The value returned is used for display.</p>
 
           
           <div class="method-source-code" id="apphelp_created_at-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 587</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 592</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_created_at</span>( <span class="ruby-identifier">obj</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">created_at</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -547,12 +557,12 @@ date-only Date class, or a date-with-time DateTime class.</p>
 
           
           <div class="method-source-code" id="apphelp_date-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 211</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">date</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">date</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Date</span> ) )
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">'&lt;span class=&quot;nowrap&quot;&gt;%Y-%m-%d&lt;/span&gt;'</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">'&lt;span class=&quot;nowrap&quot;&gt;%Y-%m-%d&lt;/span&gt;'</span> ).<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">'&lt;span class=&quot;nowrap&quot;&gt;%Y-%m-%d&lt;/span&gt; &lt;span class=&quot;nowrap&quot;&gt;%H:%M:%S&lt;/span&gt;'</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">'&lt;span class=&quot;nowrap&quot;&gt;%Y-%m-%d&lt;/span&gt; &lt;span class=&quot;nowrap&quot;&gt;%H:%M:%S&lt;/span&gt;'</span> ).<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_date-source -->
@@ -582,7 +592,7 @@ date-only Date class, or a date-with-time DateTime class.</p>
 
           
           <div class="method-source-code" id="apphelp_extra_selection_args-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 226</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_extra_selection_args</span>( <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">multiple</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">multiple</span> <span class="ruby-operator">?</span> { <span class="ruby-value">:multiple</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:size</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">size</span>, <span class="ruby-value">10</span> ].<span class="ruby-identifier">min</span> } <span class="ruby-operator">:</span> {}
 <span class="ruby-keyword">end</span></pre>
@@ -612,12 +622,13 @@ suffix being the key name from the flash hash. The messages are wrapped by
 a DIV with class ‘messages’. If there are no messages to show, an empty
 string is returned. Optionally pass an indent string to add at the front of
 any non-empty line of output. If a non-empty result is returned, note that
-it will be terminated by “nn”.</p>
+it will be terminated by “nn”. Result contains HTML but is safe and marked
+as such.</p>
           
 
           
           <div class="method-source-code" id="apphelp_flash_messages-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 134</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_flash_messages</span>( <span class="ruby-identifier">indent</span> = <span class="ruby-string">''</span> )
   <span class="ruby-identifier">output</span> = <span class="ruby-string">''</span>
 
@@ -761,7 +772,7 @@ hours mathematically rounded to two decimal places.</p>
 
           
           <div class="method-source-code" id="apphelp_hours-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 185</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-identifier">hours</span> )
   <span class="ruby-identifier">pluralize</span>( <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ), <span class="ruby-string">'hour'</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -821,7 +832,7 @@ is made for an actions column.</p>
 
           
           <div class="method-source-code" id="apphelp_list_header-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 375</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 376</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_header</span>( <span class="ruby-identifier">structure</span>, <span class="ruby-identifier">index_method</span>, <span class="ruby-identifier">actions_method</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&quot;        &lt;tr class=\&quot;info\&quot;&gt;\n&quot;</span>
 
@@ -897,7 +908,7 @@ and given column index.</p>
 
           
           <div class="method-source-code" id="apphelp_list_header_link-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 427</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 428</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_header_link</span>( <span class="ruby-identifier">index_method</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">index</span> )
 
   <span class="ruby-comment"># When generating the link, there is no point maintaining the</span>
@@ -1007,7 +1018,7 @@ BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
 
           
           <div class="method-source-code" id="apphelp_list_row-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 512</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 513</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_row</span>( <span class="ruby-identifier">structure</span>, <span class="ruby-identifier">item</span>, <span class="ruby-identifier">actions_method</span>, <span class="ruby-identifier">with_reports</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;        &lt;tr class=\&quot;#{ cycle( 'even', 'odd' ) }\&quot;&gt;\n&quot;</span>
 
@@ -1057,7 +1068,11 @@ BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;td class=\&quot;list_actions\&quot;&gt;\n&quot;</span>
     <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">|</span>
       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;            &quot;</span>
-      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">action</span>.<span class="ruby-identifier">humanize</span>, { <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>, <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span> } )
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">action</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Hash</span> )
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">action</span>[ <span class="ruby-value">:title</span> ], <span class="ruby-identifier">action</span>[ <span class="ruby-value">:url</span> ] <span class="ruby-operator">%</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">action</span>.<span class="ruby-identifier">humanize</span>, { <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>, <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span> } )
+      <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
     <span class="ruby-keyword">end</span>
 
@@ -1107,7 +1122,7 @@ field name as a symbol in the optional second parameter.</p>
 
           
           <div class="method-source-code" id="apphelp_object_list-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 330</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 331</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_object_list</span>( <span class="ruby-identifier">objects</span>, <span class="ruby-identifier">field</span> = <span class="ruby-value">:title</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-string">'None'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">blank?</span> )
 
@@ -1150,7 +1165,7 @@ behaviour).</p>
 
           
           <div class="method-source-code" id="apphelp_project_selector-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 277</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_project_selector</span>( <span class="ruby-identifier">select_id</span>, <span class="ruby-identifier">select_name</span>, <span class="ruby-identifier">match</span>, <span class="ruby-identifier">include_none</span> = <span class="ruby-keyword">false</span> )
 
   <span class="ruby-identifier">customers</span> = []
@@ -1181,7 +1196,7 @@ behaviour).</p>
   <span class="ruby-comment"># Find all customers and loop through, adding those that have at least</span>
   <span class="ruby-comment"># one assigned project to the 'customers' array.</span>
 
-  <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">customer</span> <span class="ruby-operator">|</span>
+  <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">customer</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">customer</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">customer</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
   <span class="ruby-keyword">end</span>
 
@@ -1227,7 +1242,7 @@ adjusted accordingly.</p>
 
           
           <div class="method-source-code" id="apphelp_select-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 259</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 260</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">objfield</span>, <span class="ruby-identifier">choices</span>, <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">select</span>(
     <span class="ruby-identifier">objfield</span>,
@@ -1262,7 +1277,7 @@ adjusted accordingly.</p>
 
           
           <div class="method-source-code" id="apphelp_sign_or_signed_in-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 151</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_sign_or_signed_in</span>
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span> )
     <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> )
@@ -1345,7 +1360,7 @@ adjusted accordingly.</p>
     <span class="ruby-identifier">slug</span> = <span class="ruby-string">'Home'</span>
   <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'sessions'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'new'</span> )
     <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'Sign in'</span>
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'index'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'list'</span> )
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'index'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'list'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'timesheet_force_commits'</span> )
     <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_heading</span>()
   <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'reports'</span> )
     <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-string">'Reports'</span>, <span class="ruby-identifier">new_user_saved_report_path</span>( <span class="ruby-ivar">@current_user</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
@@ -1392,7 +1407,7 @@ duration/worked hours value be empty itself.</p>
 
           
           <div class="method-source-code" id="apphelp_string_hours-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 203</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">alt_str</span>, <span class="ruby-identifier">empty_str</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">empty_str</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">empty_str</span>.<span class="ruby-identifier">blank?</span> )
   <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">'0.0'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">alt_str</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">hours</span> )
@@ -1424,7 +1439,7 @@ blank string instead of “0”, pass “true” in the second parameter.</p>
 
           
           <div class="method-source-code" id="apphelp_terse_hours-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 192</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">zero_is_blank</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'.'</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-string">''</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">'0'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">zero_is_blank</span> )

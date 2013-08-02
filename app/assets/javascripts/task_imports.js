@@ -1,0 +1,1 @@
+//= require trackrecord/check_box_toggler

@@ -7,9 +7,11 @@
 
     <title><%= apphelp_title() %></title>
 
+    <%= javascript_include_tag( "application" ) %>
 <%= include_prototype_if_used( '    ' ) -%>
 <%= include_leightbox_if_used( '    ' ) -%>
 <%= include_yui_tree_if_used( '    ' ) -%>
+<%= raw( javascript_include_tag( controller.controller_name ).gsub( /^/, '    ' ) ) if Rails.application.assets.find_asset( "#{ controller.controller_name }.js" ) %>
 <% if ( controller.controller_name == 'timesheets' ) -%>
 <%   if ( action_name == 'show' ) -%>
     <%= javascript_include_tag( 'trackrecord/timesheet_viewer'  ) %>
@@ -17,28 +19,18 @@
     <%= javascript_include_tag( 'trackrecord/timesheet_editor'  ) %>
     <%= javascript_include_tag( 'trackrecord/check_box_toggler' ) %>
 <%   end -%>
-<% elsif ( controller.controller_name == 'task_imports' ) -%>
-    <%= javascript_include_tag( 'trackrecord/check_box_toggler' ) %>
-<% elsif ( controller.controller_name == 'projects' || controller.controller_name == 'customers' ) -%>
-    <%= javascript_include_tag( 'trackrecord/section_revealer' ) %>
-<% elsif ( controller.controller_name == 'sessions' && action_name == 'new' ) -%>
-    <%= javascript_include_tag( 'prototype'                        ) %>
-    <%= javascript_include_tag( 'builder'                          ) %>
-    <%= javascript_include_tag( 'trackrecord/check_for_javascript' ) %>
-    <%= javascript_include_tag( 'trackrecord/section_revealer'     ) %>
 <% end -%>
 <% if ( action_name == 'index' ) -%>
     <%= javascript_include_tag( 'safe_in_place_editing/safe_in_place_editing' ) %>
 <% end -%>
-<% if ( controller.controller_name == 'saved_reports' || action_name == 'index' ) -%>
+<% if ( controller.controller_name == 'saved_reports' || controller.controller_name == 'timesheet_force_commits' || action_name == 'index' ) -%>
 <%= raw( calendar_date_select_includes().gsub( /^/, '    ' ) ) %>
 <% end -%>
-
     <%= stylesheet_link_tag( 'scaffold',          :media => :all   )%>
     <%= stylesheet_link_tag( 'trackrecord_all',   :media => :all   )%>
     <%= stylesheet_link_tag( 'trackrecord_print', :media => :print )%>
 
-    <link rel="shortcut icon" href="<%= image_path( '/favicon.ico' ) %>" />
+    <link href="<%= image_path( '/favicon.ico' ) %>" rel="shortcut icon" type="image/vnd.microsoft.icon" />
   </head>
 
   <body><div id="container">
@@ -47,7 +39,7 @@
 
     <div id="header">
       <div id="title">
-        <h1>TrackRecord <span class="version">v2.04</span></h1>
+        <h1>TrackRecord <span class="version">v2.10</span></h1>
         <span class="slug"><%= raw( apphelp_slug() ) %></span>
       </div>
       <div id="navbar">
@@ -74,8 +66,10 @@
     <!-- Main page content -->
 
     <div id="main_page_content">
-<%= raw( apphelp_flash_messages( '      ' ) ) -%>
+
+<%= apphelp_flash_messages() -%>
 <%= yield %>
+
     </div>
 
     <!-- Footer -->

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class WorkPacket - Rails Application Documentation</title>
+<title>class WorkPacket - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -155,6 +155,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -211,6 +215,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -230,6 +236,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -322,6 +332,8 @@ work packet date, descending.</p>
 in the count if the given task and/or user ID is nil. The date range is
 mandatory.</p>
 
+<p>Returns an ActiveRecord::Relation instance.</p>
+
 <p>IMPORTANT - at the time of writing, Rails 2.1 (and earlier versions) will
 build a BETWEEN statement in SQL with the given range. Although SQL says
 that the values on either side of BETWEEN should be treated as inclusive,
@@ -360,7 +372,7 @@ with id ‘1’ (or between 1 and 1) in this case.</p>
 
           
           <div class="method-source-code" id="find_by_task_user_and_range-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 92</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_by_task_user_and_range</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>(
     <span class="ruby-identifier">range</span>,
@@ -397,43 +409,32 @@ href="WorkPacket.html#method-c-find_committed_by_task_user_and_range">::find_com
 and find_not_committed_by_task_user_and_range. An extra mandatory second
 parameter must be set to ‘true’ to only include work packets from committed
 timesheets, ‘false’ for not committed timesheets and ‘nil’ for either.</p>
+
+<p>Returns an ActiveRecord::Relation instance.</p>
           
 
           
           <div class="method-source-code" id="find_by_task_user_range_and_committed-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 132</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">committed</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
 
-  <span class="ruby-comment"># The 'include' part needs some explanation. We include the timesheet rows,</span>
-  <span class="ruby-comment"># a second order association, because the rows lead to tasks and timesheets.</span>
-  <span class="ruby-comment"># We need to eager-load tasks because the search is limited by task ID. We</span>
-  <span class="ruby-comment"># need to eager-load timesheets because they lead to users and the search is</span>
-  <span class="ruby-comment"># also limited by user ID. Rails supports eager-loading of third and deeper</span>
-  <span class="ruby-comment"># order associations through passing hashes in as the value to &quot;:include&quot;.</span>
-  <span class="ruby-comment"># Each key's value is the next level of association. So :timesheet_row is</span>
-  <span class="ruby-comment"># at the second order, pointing to an array giving two third order things;</span>
-  <span class="ruby-comment"># :task and, itself a hash key, :timesheet; since it is a hash key,</span>
-  <span class="ruby-comment"># :timesheet's value is the second-order association of timesheets, or the</span>
-  <span class="ruby-comment"># fourth-order association of the work packets - :user.</span>
-  <span class="ruby-comment">#</span>
-  <span class="ruby-comment"># Ultimately eager-loading means LEFT OUTER JOIN in SQL statements. Due to</span>
-  <span class="ruby-comment"># the way that ActiveRecord assembles the query, using :include rather than</span>
-  <span class="ruby-comment"># :joins with some hard-coded SQL makes for a very verbose query in the</span>
-  <span class="ruby-comment"># &quot;find&quot; case; it's nice and compact for &quot;sum&quot;, though. In any event, at</span>
-  <span class="ruby-comment"># least it is a query generated entirely through the database adapter, so</span>
-  <span class="ruby-comment"># it stands a fighting chance of working fine on multiple database types.</span>
+  <span class="ruby-comment"># With Rails when joins are specified by a hash, each key's value is the</span>
+  <span class="ruby-comment"># next level of association. We first include the timesheet rows, a second</span>
+  <span class="ruby-comment"># order association, because the rows lead to tasks and timesheets. This</span>
+  <span class="ruby-comment"># key points to an array giving two third order things; :task and, itself</span>
+  <span class="ruby-comment"># a hash key, :timesheet; since it is a hash key, :timesheet's value is</span>
+  <span class="ruby-comment"># the second-order association of timesheets, or the fourth-order</span>
+  <span class="ruby-comment"># association of the work packets - :user.</span>
 
-  <span class="ruby-identifier">conditions</span> = { <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range</span> }
-  <span class="ruby-identifier">conditions</span>[ <span class="ruby-string">'tasks.id'</span> ] = <span class="ruby-identifier">task_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">task_id</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">conditions</span>[ <span class="ruby-string">'users.id'</span> ] = <span class="ruby-identifier">user_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">conditions</span>[ <span class="ruby-string">'timesheets.committed'</span> ] = <span class="ruby-identifier">committed</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">committed</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">joins</span> = { <span class="ruby-value">:timesheet_row</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-value">:task</span>, { <span class="ruby-value">:timesheet</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:user</span> } ] }
+  <span class="ruby-identifier">order</span> = <span class="ruby-string">'date DESC'</span>
 
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">all</span>(
-    <span class="ruby-value">:include</span>     =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:timesheet_row</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-value">:task</span>, { <span class="ruby-value">:timesheet</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:user</span> } ] },
-    <span class="ruby-value">:conditions</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">conditions</span>,
-    <span class="ruby-value">:order</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'date DESC'</span>
-  )
+  <span class="ruby-identifier">conditions</span>                = { <span class="ruby-value">:date</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range</span>     }
+  <span class="ruby-identifier">conditions</span>[ <span class="ruby-value">:tasks</span>      ] = { <span class="ruby-value">:id</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task_id</span>   } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">task_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">conditions</span>[ <span class="ruby-value">:users</span>      ] = { <span class="ruby-value">:id</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user_id</span>   } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">conditions</span>[ <span class="ruby-value">:timesheets</span> ] = { <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">committed</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">committed</span>.<span class="ruby-identifier">nil?</span>
 
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">order</span>( <span class="ruby-identifier">order</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- find_by_task_user_range_and_committed-source -->
           
@@ -459,14 +460,14 @@ timesheets, ‘false’ for not committed timesheets and ‘nil’ for either.</
           <p>As <a
 href="WorkPacket.html#method-c-find_by_task_user_and_range">::find_by_task_user_and_range</a>,
 but only counts work packets belonging to committed timesheets.</p>
+
+<p>Returns an ActiveRecord::Relation instance.</p>
           
 
           
           <div class="method-source-code" id="find_committed_by_task_user_and_range-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 104</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_committed_by_task_user_and_range</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
-  <span class="ruby-comment"># TODO: Use with_scope? Can we cope with the 'nil' case cleanly?</span>
-
   <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>(
     <span class="ruby-identifier">range</span>,
     <span class="ruby-keyword">true</span>,
@@ -502,7 +503,7 @@ The work packet may be in either a not committed or committed timesheet.</p>
 
           
           <div class="method-source-code" id="find_earliest_by_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 170</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 162</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_earliest_by_tasks</span>( <span class="ruby-identifier">task_ids</span> = [] )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">'date ASC'</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -535,17 +536,18 @@ fragment, e.g. “date ASC”).</p>
 
           
           <div class="method-source-code" id="find_first_by_tasks_and_order-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 185</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-identifier">order</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task_ids</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">first</span>( <span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">order</span>( <span class="ruby-identifier">order</span> ).<span class="ruby-identifier">first</span>
+
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">first</span>(
-      <span class="ruby-value">:include</span>    =<span class="ruby-operator">&gt;</span> [ <span class="ruby-value">:timesheet_row</span> ],
-      <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-string">'timesheet_rows.task_id IN (?)'</span>, <span class="ruby-identifier">task_ids</span> ],
-      <span class="ruby-value">:order</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order</span>
-    )
+    <span class="ruby-identifier">joins</span>      = <span class="ruby-value">:timesheet_row</span>
+    <span class="ruby-identifier">conditions</span> = { <span class="ruby-value">:timesheet_rows</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:task_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task_ids</span> } }
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">order</span>( <span class="ruby-identifier">order</span> ).<span class="ruby-identifier">first</span>
+
   <span class="ruby-keyword">end</span>
+
 <span class="ruby-keyword">end</span></pre>
           </div><!-- find_first_by_tasks_and_order-source -->
           
@@ -575,7 +577,7 @@ packet may be in either a not committed or committed timesheet.</p>
 
           
           <div class="method-source-code" id="find_latest_by_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 178</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_latest_by_tasks</span>( <span class="ruby-identifier">task_ids</span> = [] )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">'date DESC'</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -604,11 +606,13 @@ packet may be in either a not committed or committed timesheet.</p>
 href="WorkPacket.html#method-c-find_by_task_user_and_range">::find_by_task_user_and_range</a>,
 but only counts work packets belonging to timesheets which are not
 committed.</p>
+
+<p>Returns an ActiveRecord::Relation instance.</p>
           
 
           
           <div class="method-source-code" id="find_not_committed_by_task_user_and_range-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 118</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_not_committed_by_task_user_and_range</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>(
     <span class="ruby-identifier">range</span>,

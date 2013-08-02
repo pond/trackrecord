@@ -1,4 +1,4 @@
-    <h1><%= apphelp_heading() %></h1>
+<h1><%= apphelp_heading() %></h1>
 
 <%
    # Render as follows:
@@ -31,165 +31,135 @@
 <%   end  -%>
 <% else -%>
   <%= form_for( [ @saved_report.user, @saved_report ] ) do | f | -%><%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %>:
+    <%= f.text_field :title, :size => 50, :maxlength => SavedReport::TITLE_LIMIT %>
+    <%= help_link( :report_title ) %>
+
+    &nbsp;
+
+    <%= f.check_box( :shared ) %><%= f.label( :shared ) %>
+    <%= help_link( :report_share ) %>
+  </p>
+
+  <script type="text/javascript">
+    //<![CDATA[
+      ukOrgPondTrackRecordSavedReportEditorObserveShareFlag();
+    //]]>
+  </script>
+
+  <table class="report_edit_wrapper"><tbody>
+  <!-- ==================================================================== -->
+  <tr><td class="odd"><div class="report_edit_section">
+
+    <h2>When?</h2>
+
     <table class="editing_table">
       <tr class="editing_row">
-        <th colspan="3">
-          <%= f.label :title %>:
-        </th>
-        <td>&nbsp;&nbsp;</td>
-        <th>
-          &nbsp;
+        <td>
+          <input type="radio" id="when_radio_when_one_month" name="when_radio" class="when_one_month" style="display: none">
+        </td>
+        <th colspan="2">
+          <label for="when_radio_when_one_month">Single month</label>
         </th>
       </tr>
-
-      <tr class="editing_row">
-        <td colspan="3">
-          <%= f.text_field :title, :size => 60, :maxlength => SavedReport::TITLE_LIMIT %>
-          <%= help_link( :report_title ) %>
-        </td>
-        <td>&nbsp;&nbsp;</td>
-        <td>
-          <%= f.check_box( :shared ) %><%= f.label( :shared ) %>
-          <%= help_link( :report_share ) %>
-
-          <script type="text/javascript">
-            //<![CDATA[
-              Event.observe
-              (
-                window,
-                'load',
-                function()
-                {
-                  var inputFieldAutoValue;
-
-                  var inputField = $( 'saved_report_title'  );
-                  var checkBox   = $( 'saved_report_shared' );
-
-                  checkBox.observe
-                  (
-                    'click',
-                    function()
-                    {
-                      var inputFieldCurrentValue = inputField.getValue();
-
-                      if ( checkBox.getValue() )
-                      {
-                        /* Check box set. If the input field is empty, set it
-                         * to the automatically determined value, which will
-                         * need to be fetched from the server the first time.
-                         */
-
-                        if ( inputFieldCurrentValue == '' )
-                        {
-                          if ( inputFieldAutoValue )
-                          {
-                            inputField.setValue( inputFieldAutoValue );
-                          }
-                          else
-                          {
-                            inputField.disable();
-                            inputField.setValue( "…" );
-
-                            new Ajax.Request
-                            (
-                              '<%= j( saved_report_auto_title_path() ) =%>',
-                              {
-                                method:    'get',
-                                onSuccess: function( response )
-                                {
-                                  inputFieldAutoValue = response.responseText;
-                                  inputField.enable();
-                                  inputField.setValue( inputFieldAutoValue );
-                                }
-                              }
-                            );
-                          }
-                        }
-                      }
-                      else if ( inputFieldCurrentValue == inputFieldAutoValue )
-                      {
-                        /* Check box unset. If the input field value seems to
-                         * have been set automatically, clear the value.
-                         */
-
-                        inputField.setValue( '' );
-                      }
-                    }
-                  );
-                }
-              );
-            //]]>
-          </script>
+      <tr class="editing_row when_one_month">
+        <td></td>
+        <td colspan="2">
+<%= reporthelp_one_selection( f, :range_one_month ) %>
         </td>
       </tr>
 
-      <tr><td colspan="5">&nbsp;</td></tr>
-
-      <tr class="editing_row">
-        <th>Start date (UTC, inclusive):</th>
-        <td>&nbsp;&nbsp;</td>
-        <th>End date (UTC, inclusive):</th>
-        <td>&nbsp;&nbsp;</td>
-        <th>Column duration:</th>
-      </tr>
-
-      <tr class="editing_row">
-        <td>Select by start of month:</td>
-        <td>&nbsp;&nbsp;</td>
-        <td>Select by end of month:</td>
-        <td>&nbsp;&nbsp;</td>
-        <td>&nbsp;&nbsp;</td>
-      </tr>
       <tr class="editing_row">
         <td>
+          <input type="radio" id="when_radio_when_month_range" name="when_radio" class="when_month_range" style="display: none">
+        </td>
+        <th colspan="2">
+          <noscript>
+            <br>
+          </noscript>
+          <label for="when_radio_when_month_range">Range of months</label>
+        </th>
+      </tr>
+      <tr class="editing_row when_month_range">
+        <td></td>
+        <td>
+          Start of month:<br>
 <%= reporthelp_month_selection( f, :range_month_start ) %>
         </td>
-        <td>&nbsp;&nbsp;</td>
         <td>
+          End of month:<br>
 <%= reporthelp_month_selection( f, :range_month_end ) %>
-        </td>
-        <td>&nbsp;&nbsp;</td>
-        <td>
-<%= reporthelp_frequency_selection( f ) %>
         </td>
       </tr>
 
       <tr class="editing_row">
-        <td><strong>OR</strong> select by start of week:</td>
-        <td>&nbsp;&nbsp;</td>
-        <td><strong>OR</strong> select by end of week:</td>
-        <td rowspan="5">&nbsp;&nbsp;</td>
-        <td rowspan="5">
-          <small>
-            Reports are presented in columns adding up to the requested date
-            range. Dates chosen in the middle of a column (e.g. mid-week
-            for a weekly report) are <em><strong>not rounded</strong></em>
-            &ndash; the exact requested range is obeyed.
-          </small>
+        <td>
+          <input type="radio" id="when_radio_when_one_week" name="when_radio" class="when_one_week" style="display: none">
+        </td>
+        <th colspan="2">
+          <noscript>
+            <br>
+          </noscript>
+          <label for="when_radio_when_one_week">Single week</label>
+        </th>
+      </tr>
+      <tr class="editing_row when_one_week">
+        <td></td>
+        <td colspan="2">
+<%= reporthelp_one_selection( f, :range_one_week ) %>
         </td>
       </tr>
+
       <tr class="editing_row">
         <td>
+          <input type="radio" id="when_radio_when_week_range" name="when_radio" class="when_week_range" style="display: none">
+        </td>
+        <th colspan="2">
+          <noscript>
+            <br>
+          </noscript>
+          <label for="when_radio_when_week_range">Range of weeks</label>
+        </th>
+      </tr>
+      <tr class="editing_row when_week_range">
+        <td></td>
+        <td>
+          Start of week:<br>
 <%= reporthelp_week_selection( f, :range_week_start ) %>
         </td>
-        <td>&nbsp;&nbsp;</td>
         <td>
+          End of week:<br>
 <%= reporthelp_week_selection( f, :range_week_end ) %>
         </td>
       </tr>
 
       <tr class="editing_row">
-        <td><strong>OR</strong> choose an exact date:</td>
-        <td>&nbsp;&nbsp;</td>
-        <td><strong>OR</strong> choose an exact date:</td>
+        <td>
+          <input type="radio" id="when_radio_when_exact_dates" name="when_radio" class="when_exact_dates" style="display: none">
+        </td>
+        <th colspan="2">
+          <noscript>
+            <br>
+          </noscript>
+          <label for="when_radio_when_exact_dates">Exact dates</label>
+        </th>
       </tr>
-      <tr class="editing_row">
-        <td nowrap="nowrap"><%= reporthelp_start_time( f ) %></td>
-        <td>&nbsp;&nbsp;</td>
-        <td nowrap="nowrap"><%= reporthelp_end_time( f ) %></td>
+      <tr class="editing_row when_exact_dates">
+        <td></td>
+        <td class="nowrap">
+          Start:<br>
+<%= reporthelp_start_time( f ) %>
+        </td>
+        <td class="nowrap wide">
+          End:<br>
+<%= reporthelp_end_time( f ) %>
+        </td>
       </tr>
-      <tr class="editing_row">
-        <td colspan="3">
+      <tr class="editing_row when_exact_dates">
+        <td></td>
+        <td colspan="2">
           <small>
             You can type in dates by hand too. Selecting no date gives "from
             earliest work packet" or "to latest work packet" for the tasks
@@ -198,21 +168,79 @@
         </td>
       </tr>
 
-      <tr><td colspan="5">&nbsp;</td></tr>
-
       <tr class="editing_row">
-        <th colspan="3">
-<% unless ( active_task_count.zero? ) -%>
-          Report data for following <em>active</em> tasks:
-<% end -%>
+        <td>
+          <input type="radio" id="when_radio_when_all_time" name="when_radio" class="when_all_time" style="display: none">
+        </td>
+        <th colspan="2">
+          <noscript>
+            <br>
+          </noscript>
+          <label for="when_radio_when_all_time">All recorded time</label>
         </th>
-        <td>&nbsp;&nbsp;</td>
-        <th>Only calculate for these users:</th>
       </tr>
+      <tr class="editing_row when_all_time">
+        <td></td>
+        <td colspan="2">
+          <noscript>
+            <small>
+              Just leave all of the menus and entry fields above empty -
+              select no ranges - to calculate over all recorded time.
+            </small>
+            <br><br>
+          </noscript>
+          <small>
+            <strong>Use with caution.</strong>
+            Depending on the column duration chosen below, the number of
+            users entering timesheets and the number of months/years of
+            entry, "all recorded time" may span a huge data set and
+            report generation may take a very long time.
+          </small>
+        </td>
+      </tr>
+    </table>
 
-      <tr class="editing_row">
-        <td colspan="3">
+    <script type="text/javascript">
+      //<![CDATA[
+        ukOrgPondTrackRecordSavedReportEditorObserveSectionRadios();
+      //]]>
+    </script>
+
+    <p>
+      <small>
+        All dates are <strong>inclusive</strong> and interpreted
+        in the <strong>UTC timezone</strong>.
+      </small>
+    </p>
+
+    <table class="editing_table">
+      <tr>
+        <td><strong>Column duration:</strong></td>
+        <td>
+<%= reporthelp_frequency_selection( f ) %>
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      <small>
+        Reports are presented in columns adding up to the requested date
+        range. Dates chosen in the middle of a column (e.g. mid-week
+        for a weekly report) are <em><strong>not rounded</strong></em>
+        &ndash; the exact requested range is obeyed.
+      </small>
+    </p>
+
+  </div></td>
+  <!-- ==================================================================== -->
+  <td class="even"><div class="report_edit_section">
+
+    <h2>What?</h2>
+
 <% unless ( active_task_count.zero? ) -%>
+    <p>
+      <strong>Report data for following <em>active</em> tasks:</strong>
+    </p>
 <%=
   taskhelp_degrading_selector(
     :report_generator,
@@ -224,30 +252,10 @@
   )
 %>
 <% end -%>
-        </td>
-        <td rowspan="4">&nbsp;&nbsp;</td>
-        <td rowspan="4">
-<%=    reporthelp_user_selection( f, @user_array ) %>
-          <br /><br />
-          <small>
-            Select specific users to produce a report
-            calculated only for those users. Select no
-            users for full task analysis.
-          </small>
-        </td>
-      </tr>
-
-      <tr class="editing_row">
-        <th colspan="3">
 <% unless ( inactive_task_count.zero? ) -%>
-          Report data for following <em>inactive</em> tasks:
-<% end -%>
-        </th>
-      </tr>
-
-      <tr class="editing_row">
-        <td colspan="3">
-<% unless ( inactive_task_count.zero? ) -%>
+    <p>
+      <strong>Report data for following <em>inactive</em> tasks:</strong>
+    </p>
 <%=
   taskhelp_degrading_selector(
     :report_generator,
@@ -260,88 +268,117 @@
   )
 %>
 <% end -%>
-        </td>
-       </tr>
 
-      <tr class="editing_row">
-        <td colspan="3">
-          <small>
+    <p>
+      <small>
 <% if ( inactive_task_count.zero? ) -%>
-            Select nothing in the list above to automatically include
-            <em>all active</em> tasks.
+        Select nothing in the list above to automatically include
+        <em>all active</em> tasks.
 <% elsif ( active_task_count.zero? ) -%>
-            You must select at least one task to generate a report.
+        You must select at least one task to generate a report.
 <% else -%>
-            Select nothing in the two lists above to automatically include
-            <em>all active</em> tasks.
+        Select nothing in the two lists above to automatically include
+        <em>all active</em> tasks.
 <% end -%>
-          </small>
-        </td>
-      </tr>
+      </small>
+    </p>
 
-      <tr><td colspan="5">&nbsp;</td></tr>
+    <p>
+      <strong>From the above tasks, show:</strong>
+    </p>
 
-      <tr class="editing_row">
-        <th>From the above tasks, show:</th>
-        <td>&nbsp;&nbsp;</td>
-        <th>Calculation options:</th>
-        <td>&nbsp;&nbsp;</td>
-        <th>Sorting and grouping:</td>
-      </tr>
+    <p>
+      <%= f.radio_button( 'task_filter', 'all'          ) %><%= f.label( 'task_filter_all',          'All selected tasks'      ) %><br>
+      <%= f.radio_button( 'task_filter', 'billable'     ) %><%= f.label( 'task_filter_billable',     'Only billable tasks'     ) %><br>
+      <%= f.radio_button( 'task_filter', 'non_billable' ) %><%= f.label( 'task_filter_non_billable', 'Only non-billable tasks' ) %>
+    </p>
 
-      <tr class="editing_row">
+  </div></td></tr>
+  <!-- ==================================================================== -->
+  <tr><td class="even"><div class="report_edit_section">
+
+    <h2>Who?</h2>
+
+    <p>
+      <strong>Calculate for these users only:</strong>
+    </p>
+
+<%= reporthelp_user_selection( f, @user_array ) %>
+
+    <p>
+      <%= f.check_box( :user_details ) %><%= f.label( 'user_details', 'Per-user breakdown for all task hours', :id => 'saved_report_user_details_label' ) %>
+    </p>
+
+    <script type="text/javascript">
+      //<![CDATA[
+        ukOrgPondTrackRecordSavedReportEditorObserveUserList();
+      //]]>
+    </script>
+
+    <p>
+      <small>
+        Select users to produce a report calculated with
+        <strong>only their timesheets</strong> and either a
+        summary table of their overall hours, or with
+        per-task per-user hours shown. Select <strong>no
+        users</strong> for <strong>full time timesheet
+        analysis</strong> without per-user information.
+      </small>
+    </p>
+
+  </div></td>
+  <!-- ==================================================================== -->
+  <td class="odd"><div class="report_edit_section">
+
+    <h2>Settings</h2>
+
+    <p>
+      <%= f.check_box( :include_totals        ) %><%= f.label( 'include_totals',        'Show total hours'         ) %><br>
+      <%= f.check_box( :include_committed     ) %><%= f.label( 'include_committed',     'Show committed hours'     ) %><br>
+      <%= f.check_box( :include_not_committed ) %><%= f.label( 'include_not_committed', 'Show not committed hours' ) %><br>
+      <%= f.check_box( :exclude_zero_rows     ) %><%= f.label( 'exclude_zero_rows',     'Hide zero total rows'     ) %><br>
+      <%= f.check_box( :exclude_zero_cols     ) %><%= f.label( 'exclude_zero_cols',     'Hide zero total columns'  ) %><br>
+    </p>
+
+    <table class="editing_table">
+      <tr>
+        <td><strong>Customers:</strong></td>
         <td>
-          <%= f.radio_button( 'task_filter', 'all'          ) %><%= f.label( 'task_filter_all',          'All selected tasks'          ) %><br />
-          <%= f.radio_button( 'task_filter', 'billable'     ) %><%= f.label( 'task_filter_billable',     'Only the billable tasks'     ) %><br />
-          <%= f.radio_button( 'task_filter', 'non_billable' ) %><%= f.label( 'task_filter_non_billable', 'Only the non-billable tasks' ) %>
-        </td>
-        <td>&nbsp;&nbsp;</td>
-        <td>
-          <%= f.check_box( :include_totals        ) %><%= f.label( 'include_totals',        'Show total hours'         ) %><br />
-          <%= f.check_box( :include_committed     ) %><%= f.label( 'include_committed',     'Show committed hours'     ) %><br />
-          <%= f.check_box( :include_not_committed ) %><%= f.label( 'include_not_committed', 'Show not committed hours' ) %><br />
-          <%= f.check_box( :exclude_zero_rows     ) %><%= f.label( 'exclude_zero_rows',     'Hide zero total rows'     ) %><br />
-          <%= f.check_box( :exclude_zero_cols     ) %><%= f.label( 'exclude_zero_cols',     'Hide zero total columns'  ) %><br />
-        </td>
-        <td>&nbsp;&nbsp;</td>
-        <td>
-          <table class="editing_table">
-            <tr>
-              <td>Customers:&nbsp;</td>
-              <td>
 <%= reporthelp_sorting_selector( f, :customer_sort_field ) %>
-              </td>
-            </tr>
-            <tr>
-              <td>Projects:&nbsp;</td>
-              <td>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Projects:</strong></td>
+        <td>
 <%= reporthelp_sorting_selector( f, :project_sort_field ) %>
-              </td>
-            </tr>
-            <tr>
-              <td>Tasks:&nbsp;</td>
-              <td>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Tasks:</strong></td>
+        <td>
 <%= reporthelp_sorting_selector( f, :task_sort_field ) %>
-              </td>
-            </tr>
-            <tr>
-              <td>Grouping:&nbsp;</td>
-              <td>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Grouping:</strong></td>
+        <td>
 <%= reporthelp_grouping_selector( f ) %>
-              </td>
-            </tr>
-          </table>
         </td>
       </tr>
     </table>
+    <p></p>
 
-    <p>
+  </div></td></tr>
+  <!-- ==================================================================== -->
+  </tbody></table>
+
+  <p class="centred float_clear">
 <% if ( action == :create ) -%>
-      <%= f.submit( 'Create report', { :disable_with => 'Creating...' } ) %>
+    <%= f.submit( 'Create report', { :disable_with => 'Creating...' } ) %>
 <% else -%>
-      <%= f.submit( 'Update report', { :disable_with => 'Updating...' } ) %>
+    <%= f.submit( 'Update report', { :disable_with => 'Updating...' } ) %>
 <% end -%>
-      or <%= link_to 'cancel', home_path %>.
-    </p>
-    <% end %>
+    or <%= link_to 'cancel', home_path %>.
+  </p>
+  <% end %>
 <% end -%>

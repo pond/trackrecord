@@ -96,7 +96,7 @@ module ApplicationHelper
       slug = 'Home'
     elsif ( ctname == 'sessions' and action == 'new' )
       slug << 'Sign in'
-    elsif ( action == 'index' or action == 'list' )
+    elsif ( action == 'index' or action == 'list' or ctname == 'timesheet_force_commits' )
       slug << apphelp_heading()
     elsif ( ctname == 'reports' )
       slug << link_to( 'Reports', new_user_saved_report_path( @current_user ) ) <<
@@ -129,7 +129,8 @@ module ApplicationHelper
   # are wrapped by a DIV with class 'messages'. If there are no messages
   # to show, an empty string is returned. Optionally pass an indent string
   # to add at the front of any non-empty line of output. If a non-empty
-  # result is returned, note that it will be terminated by "\n\n".
+  # result is returned, note that it will be terminated by "\n\n". Result
+  # contains HTML but is safe and marked as such.
   #
   def apphelp_flash_messages( indent = '' )
     output = ''
@@ -210,9 +211,9 @@ module ApplicationHelper
   #
   def apphelp_date( date )
     if ( date.is_a?( Date ) )
-      return date.strftime( '<span class="nowrap">%Y-%m-%d</span>' )
+      return date.strftime( '<span class="nowrap">%Y-%m-%d</span>' ).html_safe()
     else
-      return date.strftime( '<span class="nowrap">%Y-%m-%d</span> <span class="nowrap">%H:%M:%S</span>' )
+      return date.strftime( '<span class="nowrap">%Y-%m-%d</span> <span class="nowrap">%H:%M:%S</span>' ).html_safe()
     end
   end
 
@@ -558,7 +559,11 @@ module ApplicationHelper
       output << "          <td class=\"list_actions\">\n"
       actions.each do | action |
         output << "            "
-        output << link_to( action.humanize, { :action => action, :id => item.id } )
+        if ( action.class == Hash )
+          output << link_to( action[ :title ], action[ :url ] % item.id.to_s )
+        else
+          output << link_to( action.humanize, { :action => action, :id => item.id } )
+        end
         output << "\n"
       end
 

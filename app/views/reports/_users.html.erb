@@ -1,0 +1,93 @@
+<%-
+# Based on "@report", render a user summary report with 'export' button.
+# Produces no visible output if the report isn't configured to generate
+# per-user summaries.
+-%>
+<% if ( @report.filtered_tasks.empty? or @report.filtered_users.empty? ) -%>
+<%   if ( @report.filtered_users.empty? and not @report.users.empty? ) -%>
+    <h2 class="report_subtitle">User summaries for <%= @report.display_range %></h2>
+    
+    <p>
+      None of the selected users booked any hours against the reportable tasks
+      within the time range specified.
+    <p>
+<%   end -%>
+<% else %>
+    <!-- Per-user summaries -->
+
+    <h2 class="report_subtitle">User summaries for <%= @report.display_range %></h2>
+
+    <table class="report display_table ts_show_table">
+
+      <!-- Heading - show user names -->
+
+      <tr class="info">
+        <th class="total">Name:</th>
+
+<%   @report.filtered_users.each do | user | -%>
+        <th><%= h( user.name ) %></th>
+<%   end -%>
+
+        <th>Row total</th>
+      </tr>
+
+      <!-- Section and task list, user breakdown -->
+
+<%   sections_initialise_sections()
+     @report.rows.each_index do | row_index |
+
+       row  = @report.rows[ row_index ]
+       task = @report.filtered_tasks[ row_index ]
+
+       if ( sections_new_section?( task ) )
+         row_class = cycle( 'even', 'odd' ) -%>
+      <!-- New section -->
+
+      <tr class="<%= row_class %>">
+        <th class="ts_show_heading"><%= sections_section_title() %></th>
+<%       @report.filtered_users.each_index do | user_index | -%>
+        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( @report.sections[ sections_section_index() ].user_row_totals[ user_index ] ) %></th>
+<%       end -%>
+        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( @report.sections[ sections_section_index() ], true ) %></th>
+      </tr>
+<%     end -%>
+<%     if ( sections_new_group?( task ) ) -%>
+      <!-- New group -->
+
+      <tr class="even group_gap">
+        <th colspan="<%= @report.filtered_users.size + 2 %>"></th>
+      </tr>
+
+<%     end -%>
+      <!-- Task data -->
+
+      <tr class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
+        <td class="ts_show_task <%= taskhelp_billable_class( task ) %> <%= taskhelp_active_class( task ) %>"><%= h( task.title ) %></td>
+
+        <!-- Per-user breakdown -->
+
+<%     row.user_row_totals.each do | user_row_total | -%>
+        <td class="ts_show_work"><%= reporthelp_hours( user_row_total ) %></td>
+<%     end -%>
+
+        <!-- Task total -->
+
+        <th class="ts_show_total total"><%= reporthelp_hours( row, true ) %></th>
+      </tr>
+<%   end -%>
+
+      <!-- Column totals -->
+
+      <tr class="<%= cycle( 'even', 'odd' ) %>">
+        <th class="total">Column total:</th>
+
+<%   @report.user_column_totals.each do | user_column_total | -%>
+        <td class="total"><%= reporthelp_hours( user_column_total, true ) %></td>
+<%   end -%>
+
+        <td class="overall_total"><%= reporthelp_hours( @report, true ) %></td>
+      </tr>
+    </table>
+
+<%= render( { :partial => 'export_elements', :locals  => { :form_type => :user } } ) %>
+<% end -%>

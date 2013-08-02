@@ -1,3 +1,64 @@
+Version 2.10, 2013-08-02
+========================
+
+Please see the version 2.00 notes later for information about updating
+from version 1. You will need to migrate your data to upgrade from any
+previous v2.x release; for example, to migrate the production database,
+run this command:
+
+  RAILS_ENV=production rake db:migrate
+
+Version 2.10 fixes the following bugs that were found in v2.04:
+
+- Errors made in a timesheet editor grid (e.g. non-numerical hours) would
+  cause validation to fail correctly, but changes made elsewhere would be
+  reset when the form was presented back with errors listed. Changes to
+  the timesheet's week, description and/or commit flag are now maintained.
+
+- Sign-in page updated with new text, fixing outdated links.
+
+- A few minor comment typing errors fixed, some HTML validation fixes,
+  further improvements to internationalisation.
+
+- The prototype.js library version is updated to version 1.7.1 (with a
+  very large number of alterations despite the minor version change).
+
+- Moved to using the Rails 3 asset pipeline and fixed up issue related to
+  this in various plugins. This is a relatively significant change to the
+  internal organisation of the software and is the main reason for the
+  TrackRecord version number jump.  
+
+There are the following enhancements:
+
+- Added "relative week" and "relative month" report ranges. You can
+  now for example set a report to work for "last month" and whenever
+  it is generated, an appropriate time range is chosen. To support
+  this and additional new options, the report editor page has been
+  redesigned, hopefully making it easier and faster to use.
+
+- Added a comprehensive report type. This is similar to the by-task
+  standard report, but adds user breakdowns showing the contribution of
+  selected users to the total hours for each task at each column of the
+  report. This is in addition to the by-task and user summary reports.
+
+- Saved reports can now be copied, thus acting as report templates.
+
+- Extensible report generator mechanism. CSV export now runs as a plugin,
+  allowing other report manipulation and export mechanisms to be added
+  easily by third parties.
+
+- Inline project creation for bulk task import - users reported often
+  going through the import process only to realise that they hadn't added
+  a project to contain the new tasks. Now both can be done simultaneously.
+
+- Administrators can now bulk-commit timesheets over a given date range.
+
+- Efficiency improvements by using ActiveRecord::Relation better, avoiding
+  loading objects into RAM where possible, doing more in the database and
+  less inside Ruby code.
+
+
+
 Version 2.04, 2013-07-11
 ========================
 
@@ -23,6 +84,7 @@ There are the following enhancements:
 
 - Report titles, if set, are included in all report output for easier
   identification.
+
 
 
 Version 2.02 and 2.03, 2013-04-25

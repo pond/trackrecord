@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>module QuietLeightbox::QuietLeightboxHelper - Rails Application Documentation</title>
+<title>module QuietLeightbox::QuietLeightboxHelper - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -139,6 +139,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -195,6 +199,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -214,6 +220,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -304,8 +314,25 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">include_leightbox_if_used</span>( <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">''</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">using_quiet_leightbox?</span>
 
-  <span class="ruby-identifier">data</span>          = <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-value">:defaults</span> )
-  <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'leightbox/leightbox'</span> )
+  <span class="ruby-identifier">data</span> = <span class="ruby-string">&quot;&quot;</span>
+
+  <span class="ruby-comment"># 2013-07-18 (ADH): Even with appropriate configuration data in</span>
+  <span class="ruby-comment"># &quot;config/application.rb&quot; for the &quot;:defaults&quot; expansion, using it</span>
+  <span class="ruby-comment"># here results in &quot;assets/defaults.js&quot; being generated. Doh. Since</span>
+  <span class="ruby-comment"># code here is evaluated before the application starts, presumably</span>
+  <span class="ruby-comment"># the expansion isn't defined in time. Instead we have to do it</span>
+  <span class="ruby-comment"># the hard way.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># In addition, cooperate with the &quot;Quiet Prototype&quot; plugin.</span>
+
+  <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">respond_to?</span>( <span class="ruby-value">:using_quiet_prototype?</span> ) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">using_quiet_prototype?</span>() )
+    <span class="ruby-identifier">data</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype/prototype'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype_ujs/rails'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/scriptaculous'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">data</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'leightbox/leightbox'</span> )
   <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">stylesheet_link_tag</span>( <span class="ruby-string">'leightbox/leightbox'</span> )
 
   <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-identifier">line_prefix</span> ) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> ).<span class="ruby-identifier">html_safe</span>()
@@ -338,7 +365,7 @@ more information.</p>
 
           
           <div class="method-source-code" id="using_quiet_leightbox-3F-source">
-            <pre><span class="ruby-comment"># File lib/quiet_leightbox/quiet_leightbox.rb, line 63</span>
+            <pre><span class="ruby-comment"># File lib/quiet_leightbox/quiet_leightbox.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">using_quiet_leightbox?</span>
   <span class="ruby-operator">!</span> <span class="ruby-ivar">@uses_leightbox</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>

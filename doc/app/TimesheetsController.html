@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TimesheetsController - Rails Application Documentation</title>
+<title>class TimesheetsController - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -74,7 +74,7 @@
     
     <li><a href="#method-i-delete">#delete</a>
     
-    <li><a href="#method-i-delete_confirm">#delete_confirm</a>
+    <li><a href="#method-i-destroy">#destroy</a>
     
     <li><a href="#method-i-edit">#edit</a>
     
@@ -157,6 +157,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -213,6 +217,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -232,6 +238,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -392,10 +402,10 @@ this.</p>
       </div><!-- delete-method -->
 
     
-      <div id="method-i-delete_confirm" class="method-detail ">
+      <div id="method-i-destroy" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">delete_confirm</span><span
+          <span class="method-name">destroy</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -407,19 +417,19 @@ this.</p>
           
 
           
-          <div class="method-source-code" id="delete_confirm-source">
+          <div class="method-source-code" id="destroy-source">
             <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 232</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_confirm</span>
-  <span class="ruby-identifier">appctrl_delete_confirm</span>( <span class="ruby-string">'Timesheet'</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">appctrl_admin_destroy</span>( <span class="ruby-constant">Timesheet</span> )
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- delete_confirm-source -->
+          </div><!-- destroy-source -->
           
         </div>
 
         
 
         
-      </div><!-- delete_confirm-method -->
+      </div><!-- destroy-method -->
 
     
       <div id="method-i-edit" class="method-detail ">
@@ -498,7 +508,7 @@ automatically. Rows and work packets are included in the editing form.</p>
   <span class="ruby-identifier">user_conditions_sql</span>  = <span class="ruby-string">&quot;WHERE ( timesheets.committed = :committed ) AND ( users.id  = :user_id )\n&quot;</span>
   <span class="ruby-identifier">other_conditions_sql</span> = <span class="ruby-string">&quot;WHERE ( timesheets.committed = :committed ) AND ( users.id != :user_id )\n&quot;</span>
 
-  <span class="ruby-identifier">range_sql</span>, <span class="ruby-identifier">search_start</span>, <span class="ruby-identifier">search_end</span> = <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-constant">Timesheet</span>, <span class="ruby-value">:start_day_cache</span> )
+  <span class="ruby-identifier">range_sql</span>, <span class="ruby-identifier">range_start</span>, <span class="ruby-identifier">range_end</span> = <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-constant">Timesheet</span>, <span class="ruby-value">:start_day_cache</span> )
 
   <span class="ruby-comment"># If asked to search for something, build extra conditions to do so.</span>
 
@@ -507,7 +517,7 @@ automatically. Rows and work packets are included in the editing form.</p>
     <span class="ruby-identifier">search_str</span> = <span class="ruby-node">&quot;%#{ params[ :search ] }%&quot;</span> <span class="ruby-comment"># SQL wildcards either side of the search string</span>
 
     <span class="ruby-identifier">conditions_sql</span> = <span class="ruby-node">&quot;AND #{ range_sql } ( timesheets.year = :search_num OR timesheets.week_number = :search_num OR users.name ILIKE :search_str )&quot;</span>
-    <span class="ruby-identifier">vars</span>           = { <span class="ruby-value">:search_num</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_num</span>, <span class="ruby-value">:search_str</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_str</span>, <span class="ruby-value">:search_start</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_start</span>, <span class="ruby-value">:search_end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_end</span> }
+    <span class="ruby-identifier">vars</span>           = { <span class="ruby-value">:search_num</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_num</span>, <span class="ruby-value">:search_str</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_str</span>, <span class="ruby-value">:range_start</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range_start</span>, <span class="ruby-value">:range_end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range_end</span> }
 
     <span class="ruby-identifier">user_conditions_sql</span>  <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>
     <span class="ruby-identifier">other_conditions_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>

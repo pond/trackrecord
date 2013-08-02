@@ -1,0 +1,45 @@
+<%
+  # Render an 'export as CSV' form for a task. Render with the following local
+  # variables:
+  #
+  #   form_type: Must be ":task", to export the task summary report, ":user",
+  #              to export the user summary report - only valid if the report
+  #              contains a non-empty user list - or ":comprehensive" for a
+  #              per-user, per-task report - also only valid if the report
+  #              contains a non-empty user list.
+
+  generators = []
+
+  TrackRecordReportGenerator.submodules.each do | submodule |
+    generator = controller.dup.extend( submodule )
+
+    if ( generator.understands?( form_type ) )
+      generators << { generator: generator, submodule: submodule }
+    end
+  end
+
+  unless ( generators.empty? )
+-%>
+    <br />
+    <table class="display_table report_actions">
+<%  generators.each do | item |
+      submodule = item[ :submodule ]
+      generator = item[ :generator ]
+      options   = generator.invocation_options_for( form_type ) -%>
+      <tr class="display_row <%= cycle( 'odd', 'even' ) %>">
+        <td>
+          <%= submit_tag( generator.invocation_button_title_for( form_type ) || "Export", :name => "#{ submodule.name.underscore }[#{ form_type }]" ) %>
+        </td>
+        <td class="wide">
+<%    if ( options.nil? || options.empty? ) -%>
+          &nbsp;
+<%    else -%>
+<%      options.each do | option | -%>
+          <%= reporthelp_export_option( submodule, option )%><%= option == options.last ? '' : tag( :br ) %>
+<%      end -%>
+<%    end -%>
+        </td>
+      </tr>
+<%  end -%>
+    </table>
+<% end -%>

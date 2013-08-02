@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class ReportsHelper::ReportMonth - Rails Application Documentation</title>
+<title>class ReportsHelper::ReportMonth - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -143,6 +143,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -199,6 +203,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -218,6 +224,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -276,6 +286,19 @@ reporthelp_month_selection.</p>
     <section id="attribute-method-details" class="method-section section">
       <h3 class="section-header">Attributes</h3>
 
+      
+      <div id="attribute-i-all" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">all</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
       
       <div id="attribute-i-end" class="method-detail">
         <div class="method-heading attribute-method-heading">
@@ -341,11 +364,12 @@ reporthelp_month_selection.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span> )
   <span class="ruby-ivar">@id</span>    = <span class="ruby-node">&quot;#{ year }_#{ month }&quot;</span>
   <span class="ruby-ivar">@start</span> = <span class="ruby-node">&quot;#{ month } (start of #{ Date::MONTHNAMES[ month ] } #{ year })&quot;</span>
   <span class="ruby-ivar">@end</span>   = <span class="ruby-node">&quot;#{ month } (end of #{ Date::MONTHNAMES[ month ] } #{ year })&quot;</span>
+  <span class="ruby-ivar">@all</span>   = <span class="ruby-node">&quot;#{ month }, #{ Date::MONTHNAMES[ month ] } #{ year }&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           

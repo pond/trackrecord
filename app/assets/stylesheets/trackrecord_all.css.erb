@@ -51,9 +51,19 @@ tr.top {
   vertical-align: top;
 }
 
-/* Heading font */
+.wide {
+  width: 100%;
+}
 
-h1, h2, h3, h4, h5, h6 {
+.narrow {
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Heading font (and navigation bar feature area) */
+
+h1, h2, h3, h4, h5, h6,
+div#header * {
   font-family: "Trebuchet MS", sans-serif;
   font-weight: bold;
 }
@@ -72,7 +82,6 @@ div#header {
   background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
   background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
   
   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow:    0px 5px 5px rgba(0, 0, 0, 0.3);
@@ -103,8 +112,6 @@ div#header span.version {
 }
 
 div#header h1, div#navbar a {
-  font-family: "Trebuchet MS", sans-serif;
-  font-weight: bold;
   margin: 0;
 }
 
@@ -155,7 +162,6 @@ div#navbar li.current {
   background: -o-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* IE10+ */
   background: linear-gradient(to bottom, #1d6721 0%,#81ff81 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d6721', endColorstr='#81ff81',GradientType=0 ); /* IE6-9 */
 
   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow:    0px 5px 5px rgba(0, 0, 0, 0.3);
@@ -169,7 +175,7 @@ div#navbar li.current a {
 
 /* Float management */
 
-div.float_clear {
+.float_clear {
   clear: both;
 }
 
@@ -203,7 +209,6 @@ div#footer {
   background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
   background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
     
   -webkit-box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow:    0px -5px 5px rgba(0, 0, 0, 0.3);
@@ -266,7 +271,7 @@ table.openid form {
 
 table.openid input#openid_url {
   font-size: 100%;
-  background: url( ../images/trackrecord/openid_small_logo.png ) 2px 50% no-repeat; 
+  background: url( <%= asset_path( "trackrecord/openid_small_logo.png" ) %> ) 2px 50% no-repeat; 
   padding-left: 22px;
   display: inline;
 }
@@ -280,7 +285,7 @@ table.openid input#commit {
 div#home_general,
 div#home_management,
 div#home_admin {
-  float:left;
+  float: left;
   width: 32%;
 }
 
@@ -367,7 +372,6 @@ table.list th.sorted_column_asc {
   background: -o-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* IE10+ */
   background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
 }
 
 table.list th.sorted_column_desc {
@@ -378,15 +382,14 @@ table.list th.sorted_column_desc {
   background: -o-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* IE10+ */
   background: linear-gradient(to bottom, #03a929 0%,#028f22 44%,#006d19 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03a929', endColorstr='#006d19',GradientType=0 ); /* IE6-9 */
 }
 
 table.list th.sorted_column_asc a:before {
-  content: url( ../images/trackrecord/up.png );
+  content: url( <%= asset_path( "trackrecord/up.png" ) %> );
 }
 
 table.list th.sorted_column_desc a:before {
-  content: url( ../images/trackrecord/down.png );
+  content: url( <%= asset_path( "trackrecord/down.png" ) %> );
 }
 
 /* Navigation links within list tables (overriding some styles above) */
@@ -462,7 +465,6 @@ tr.info {
   background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
   background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
 
   color: #fff;
   white-space: nowrap;
@@ -620,7 +622,6 @@ table.timesheet_chart th {
   background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
   background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
 
   font-weight: normal;
   color: #fff;
@@ -663,6 +664,60 @@ table.report {
   white-space: nowrap;
 }
 
+table.report_edit_wrapper {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+table.report_edit_wrapper > tbody > tr {
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+}
+
+table.report_edit_wrapper > tbody > tr > td {
+  width: 50%;
+  padding: 0;
+  margin: 0;
+}
+
+table.report_edit_wrapper > tbody > tr > td.odd {
+  background: #f8f8f8;
+}
+
+table.report_edit_wrapper > tbody > tr > td.even {
+  background: #f0f0f0;
+}
+
+div.report_edit_section {
+  padding: 1px 15px; /* 1px to work around accidental/buggy collapse on WebKit with 0 of *all* padding at top/bottom edges, including elements that have their own padding set, such as headings */
+  margin: 0;
+  height: 100%;
+}
+
+div.report_edit_section textarea,
+div.report_edit_section select[ multiple~=multiple ] {
+  width: 100%;
+}
+
+h2.report_subtitle {
+  margin-top: 3em;
+}
+
+table.display_table.report_actions {
+  border: none;
+  margin: none;
+  border-collapse: collapse;
+}
+
+table.display_table.report_actions td {
+  padding: 5px;
+  vertical-align: baseline;
+}
+
 /* Timesheet editor and display grids; reports also use some of
  * these styles.
  */
@@ -693,8 +748,33 @@ table.ts_edit_table td.ts_edit_task {
   padding: 0 2px;
 }
 
+table.ts_edit_table td.ts_edit_task table,
+table.ts_edit_table td.ts_edit_task tr,
+table.ts_edit_table td.ts_edit_task td {
+  margin: 0;
+}
+
 table.ts_show_table td.ts_show_task {
   padding: 2px 2px 2px 6px;
+}
+
+td.ts_task_user_detail {
+  font-size: 85%;
+  color: #888;
+}
+
+tr.odd td.ts_task_user_detail {
+  border-top: 1px solid #d4d4d4;
+}
+
+tr.even td.ts_task_user_detail {
+  border-top: 1px solid #c3c3c3;
+}
+
+td.ts_work_user_detail,
+th.ts_total_user_detail {
+  font-size: 85%;
+  opacity: 0.5;
 }
 
 table.ts_edit_table td a,
@@ -730,7 +810,7 @@ td.ts_edit_work input {
 table.ts_edit_table th.ts_edit_heading,
 table.ts_show_table th.ts_show_heading {
   padding: 4px 2px 4px 6px;
-  font-size: 90%;
+  font-size: 100%;
   text-align: left;
   background: #c8c8c8;
 }
@@ -744,7 +824,7 @@ table.ts_show_table .total,
 table.ts_edit_table .overall_total,
 table.ts_show_table .overall_total {
   text-align: center;
-  padding: 0 2px;
+  padding: 2px;
 }
 
 table.ts_edit_table .total:first-child,
@@ -772,6 +852,14 @@ table.bulk_task_import {
   border-collapse: collapse;
 }
 
+table.bulk_task_import tr {
+  vertical-align: baseline;
+}
+
+table.bulk_task_import tr td {
+  padding-left: 5px;
+}
+
 table.bulk_task_import td.task_title {
   width: 100%;
 }
@@ -789,6 +877,15 @@ table.bulk_task_import tr.breadcrumb {
 table.bulk_task_import tr.breadcrumb td {
   padding: 5px 7px;
   border-top: 7px solid white;
+}
+
+table.bulk_task_import tr td table.bulk_task_import {
+  margin: 0;
+  width: auto;
+}
+
+table.bulk_task_import tr td table.bulk_task_import tr td {
+  padding-left: 0;
 }
 
 /* Committed / not committed timesheet labels; active / not active
@@ -846,10 +943,11 @@ dt {
 
 img.help {
   position: relative;
+  vertical-align: top;
   padding: 2px 1px 1px 1px;
   top: 0px;
 
-  background: url( ../images/trackrecord/help_sprite.png ) 1px 2px no-repeat;
+  background: url( <%= asset_path( "trackrecord/help_sprite.png" ) %> ) 1px 2px no-repeat;
 }
 
 a:hover img.help {
@@ -881,6 +979,10 @@ textarea.tree_selector_text {
 .ygtv-checkbox .ygtv-highlight1 .ygtvcontent,
 .ygtv-checkbox .ygtv-highlight2 .ygtvcontent {
   padding-left: 17px; /* Check box image is 16px wide with some built-in padding and text labels rarely precisely abut their left edge due to the shapes of characters and anti-aliasing; default '1em' leaves check box too close to text for my liking */
+}
+
+a.ygtvspacer:hover {
+  background: none; /* Override default a:hover rule in scaffold.css */
 }
 
 /* Leightbox links */

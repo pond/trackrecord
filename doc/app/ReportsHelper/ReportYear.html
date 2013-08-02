@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class ReportsHelper::ReportYear - Rails Application Documentation</title>
+<title>class ReportsHelper::ReportYear - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -143,6 +143,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -199,6 +203,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -218,6 +224,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -354,7 +364,7 @@ must do so manually.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 55</span>
+            <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">date_range</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-ivar">@title</span>  = <span class="ruby-identifier">year</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-ivar">@weeks</span>  = []
@@ -387,7 +397,7 @@ must do so manually.</p>
     <span class="ruby-ivar">@weeks</span>.<span class="ruby-identifier">unshift</span>( <span class="ruby-constant">ReportWeek</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">week</span> ) )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Work out hte months, again limited as above.</span>
+  <span class="ruby-comment"># Work out the months, again limited as above.</span>
 
   ( <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">12</span> ).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">|</span>
 

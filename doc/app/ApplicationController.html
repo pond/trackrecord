@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class ApplicationController - Rails Application Documentation</title>
+<title>class ApplicationController - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -70,6 +70,8 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-i-appctrl_admin_destroy">#appctrl_admin_destroy</a>
+    
     <li><a href="#method-i-appctrl_create">#appctrl_create</a>
     
     <li><a href="#method-i-appctrl_date_from_params">#appctrl_date_from_params</a>
@@ -78,7 +80,7 @@
     
     <li><a href="#method-i-appctrl_delete">#appctrl_delete</a>
     
-    <li><a href="#method-i-appctrl_delete_confirm">#appctrl_delete_confirm</a>
+    <li><a href="#method-i-appctrl_destroy">#appctrl_destroy</a>
     
     <li><a href="#method-i-appctrl_edit">#appctrl_edit</a>
     
@@ -169,6 +171,10 @@
   
     <li><a href="./SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
@@ -225,6 +231,8 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -244,6 +252,10 @@
     <li><a href="./TasksHelper.html">TasksHelper</a>
   
     <li><a href="./Timesheet.html">Timesheet</a>
+  
+    <li><a href="./TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="./TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="./TimesheetRow.html">TimesheetRow</a>
   
@@ -306,6 +318,38 @@ controllers.</p>
       <h3 class="section-header">Protected Instance Methods</h3>
 
     
+      <div id="method-i-appctrl_admin_destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_admin_destroy</span><span
+            class="method-args">( model )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Destroy an object following confirmation that this is desired. Only
+administrators can do this. Pass the model name as a string.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_admin_destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_admin_destroy</span>( <span class="ruby-identifier">model</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+  <span class="ruby-identifier">appctrl_destroy</span>( <span class="ruby-identifier">model</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_admin_destroy-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_admin_destroy-method -->
+
+    
       <div id="method-i-appctrl_create" class="method-detail ">
         
         <div class="method-heading">
@@ -364,7 +408,7 @@ it returns a Date object instance.</p>
 
           
           <div class="method-source-code" id="appctrl_date_from_params-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 240</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-identifier">key</span> )
   <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">key</span> ].<span class="ruby-identifier">blank?</span> )
     <span class="ruby-keyword">begin</span>
@@ -405,7 +449,7 @@ is invalid.</p>
 
           
           <div class="method-source-code" id="appctrl_dates_from_search-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 257</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 264</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_dates_from_search</span>( <span class="ruby-identifier">default_start</span>, <span class="ruby-identifier">default_end</span> )
   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_start</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_start</span>
   <span class="ruby-identifier">b</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_end</span>   ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_end</span>
@@ -458,47 +502,48 @@ model name as a string.</p>
       </div><!-- appctrl_delete-method -->
 
     
-      <div id="method-i-appctrl_delete_confirm" class="method-detail ">
+      <div id="method-i-appctrl_destroy" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">appctrl_delete_confirm</span><span
-            class="method-args">( model )</span>
+          <span class="method-name">appctrl_destroy</span><span
+            class="method-args">( model, path = nil )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Destroy an object following confirmation that this is desired. Only
-administrators can do this. Pass the model name as a string.</p>
+          <p>Destroy an object. Pass the model class (e.g. <a
+href="User.html">User</a>). Access control is left up to the caller (or use
+‘<a
+href="ApplicationController.html#method-i-appctrl_admin_destroy">#appctrl_admin_destroy</a>’
+instead). Optionally pass the path to redirect to upon success.</p>
           
 
           
-          <div class="method-source-code" id="appctrl_delete_confirm-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_delete_confirm</span>( <span class="ruby-identifier">model</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
-
+          <div class="method-source-code" id="appctrl_destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_destroy</span>( <span class="ruby-identifier">model</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">destroy</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+    <span class="ruby-identifier">model</span>.<span class="ruby-identifier">destroy</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
 
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ model } deleted&quot;</span>
-    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ model.model_name.human.capitalize } deleted&quot;</span>
+    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">path</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.model_name.route_key }_path&quot;</span> ) )
 
   <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-node">&quot;Could not destroy #{ model.downcase }: #{ error }&quot;</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-node">&quot;Could not destroy #{ model.model_name.human }: #{ error }&quot;</span>
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">home_path</span>() )
 
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- appctrl_delete_confirm-source -->
+          </div><!-- appctrl_destroy-source -->
           
         </div>
 
         
 
         
-      </div><!-- appctrl_delete_confirm-method -->
+      </div><!-- appctrl_destroy-method -->
 
     
       <div id="method-i-appctrl_edit" class="method-detail ">
@@ -557,7 +602,7 @@ method has been given, for sorting purposes.</p>
 
           
           <div class="method-source-code" id="appctrl_index_assist-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 162</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_index_assist</span>( <span class="ruby-identifier">model</span> )
 
   <span class="ruby-comment"># Set up some default sort and pagination data.</span>
@@ -736,7 +781,7 @@ reference.</p>
 
           
           <div class="method-source-code" id="appctrl_patch_params_from_js-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 327</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 334</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-identifier">sym</span>, <span class="ruby-identifier">name</span> = <span class="ruby-value">:task_ids</span> )
   <span class="ruby-identifier">task_ids</span> = (<span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ] <span class="ruby-operator">||</span> {} )[ <span class="ruby-identifier">name</span> ] <span class="ruby-operator">||</span> []
 
@@ -790,7 +835,7 @@ an explicit ‘search_cancel’ params key has a value.</p>
 
           
           <div class="method-source-code" id="appctrl_search_range_sql-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 287</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 294</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-identifier">model</span>, <span class="ruby-identifier">field</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">range_start</span> = <span class="ruby-identifier">range_end</span> = <span class="ruby-keyword">nil</span>
 

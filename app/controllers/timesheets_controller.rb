@@ -160,15 +160,15 @@ class TimesheetsController < ApplicationController
     end
 
     @timesheet.reload()
+    set_next_prev_week_variables( @timesheet )
 
     if ( @errors.empty? )
       flash[ :notice ] = "Week #{ @timesheet.week_number } changes saved."
     else
+      restore_errant_form_data()
       render( :action => :edit )
       return
     end
-
-    set_next_prev_week_variables( @timesheet )
 
     # Save and edit next or previous editable week, creating a clone
     # timesheet for a previously unused week if need be?
@@ -469,19 +469,19 @@ private
       begin
         timesheet.save!
       rescue => error
-        errors.push( "Timesheet: #{ error.message }" )
+        errors.push( "Timesheet: #{ error }" )
       end
 
       # If there were any errors handled internally that did not go via
       # an exception, the transaction won't roll back. Force it to do so.
 
-      raise( "Rollback" ) unless( errors.empty? )
+      raise( "Changes cannot be saved" ) unless( errors.empty? )
     end
 
     return errors
 
   rescue => error # Don't use 'ensure', because early exits elsewhere may fail then.
-    errors.push( "Timesheet: #{ error.message }" )
+    errors.push( "Timesheet: #{ error }" )
     return errors
 
   end
@@ -533,4 +533,16 @@ private
 
   end
 
+  # In the event of an error, a timesheet is rolled back. Individual
+  # work packets are maintained if not errant, but other data is not.
+  # Restore any timesheet non-associated data - errant or otherwise -
+  # so the user sees what they tried to submit back in the editor form.
+  #
+  def restore_errant_form_data
+    timesheet_hash = params[ :timesheet ]
+
+    @timesheet.week_number = timesheet_hash[ :week_number ]
+    @timesheet.description = timesheet_hash[ :description ]
+    @timesheet.committed   = timesheet_hash[ :committed   ]
+  end
 end

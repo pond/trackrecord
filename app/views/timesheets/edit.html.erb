@@ -167,13 +167,10 @@
     </tr>
 
     <tr class="top">
-      <th class="left">Description of week</th>
+      <th class="left">Description of week<br><small>(optional)</small></b></th>
       <td>&nbsp;&nbsp;</td>
       <td class="left">
-        <%= f.text_area( :description, { :cols => 80, :rows => 4 } ) %><br />
-        <small>
-          &nbsp;Descriptions are recommended but not mandatory.
-        </small>
+        <%= f.text_area( :description, { :cols => 80, :rows => 4 } ) %>
       </td>
     </tr>
 
@@ -182,11 +179,18 @@
     </tr>
 
     <tr class="top">
-      <th class="left">Committed?</th>
+      <th class="left">Commit?</th>
       <td>&nbsp;&nbsp;</td>
       <td class="left">
 <%= f.select( :committed, [ [ 'Yes', true ], [ 'No', false ] ] ) %>
-        <b><i>Warning</i></b> &ndash; once committed, a timesheet cannot be edited again.
+        <p>
+          <small>
+            Always commit a timesheet once you have finished
+            with it, indicating that the hours booked are final.
+            <br />
+            <strong>Once committed, a timesheet cannot be edited again.</strong>
+          </small>
+        </p>
       </td>
     </tr>
   </table>

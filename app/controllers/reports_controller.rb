@@ -4,10 +4,10 @@
 #
 # Purpose:: Generate reports describing timesheet entries in various
 #           different ways. The ReportsController deals with finding
-#           SavedReport model instances and, using TrackRecordReport's
-#           Report class with its attributes configured from the
-#           SavedReport instance's contents, generating and showing
-#           reports to users.
+#           SavedReport model instances and, using the
+#           TrackRecordReport::Report class with its attributes
+#           configured from the SavedReport instance's contents,
+#           generating and showing reports to users.
 # ----------------------------------------------------------------------
 #           09-Feb-2008 (ADH): Created.
 #           19-Oct-2011 (ADH): Functionality split up into this file and
@@ -93,12 +93,52 @@ class ReportsController < ApplicationController
       flash[ :warning ] = "This report is unnamed. It will be deleted automatically. To save it permanently, use the 'Change report parameters' link underneath the report and give it a name."
     end
 
-    respond_to do | format |
-      format.html { render( { :template => 'reports/show' } ) }
-      format.csv  { csv_stream_report() }
+    # Everything's ready to render the report in @report, but should we
+    # actually be running a generator instead?
+
+    if ( params.has_key?( :generator ) )
+
+      # Generate a report via a plugin generator. Need to figure out which
+      # one to use and get its parameters sent over.
+
+      supported_types = [ :task, :user, :comprehensive ]
+
+      TrackRecordReportGenerator.submodules.each do | submodule |
+
+        self.extend( submodule )
+
+        params_key = submodule.name.underscore
+
+        if ( params.has_key?( params_key ) )
+          generator_params = params[ params_key ]
+          report_type      = supported_types.select do | supported_type |
+            generator_params.has_key?( supported_type )
+          end.first
+
+          if ( understands?( report_type ) )
+            generator_params.delete( report_type )
+            result = generate( report_type, @report, generator_params )
+
+            unless ( result.nil? )
+              flash[ :error ] = result.to_s
+              render( { :template => 'reports/show' } )
+            end
+
+            break
+          end
+        end
+      end
+
+    else
+
+      # Simple render.
+
+      render( { :template => 'reports/show' } )
+
     end
 
     flash.delete( :warning ) # Else it shows on the *next* fetched page too
+    flash.delete( :error   )
   end
 
 private
@@ -108,18 +148,25 @@ private
   #
   #   Name            Meaning
   #   =========================================================================
-  #   @is_task_type   If 'true' a CSV format report should provide a task-based
-  #                   breakdown of time, else a user-based breakdown. Undefined
-  #                   for non-CSV reports.
+  #   @report_type    :task - task-based report, no per-user details;
+  #                   :user - user-summary report, no per-task details;
+  #                   :comprehensive - per-task, per-user full report.
   #
   #   @exclude_title  If 'true' a title row should be excluded in a CSV format
   #                   report. Undefined for non-CSV reports.
   #
   def read_options
     if ( request.format.csv? )
-      @is_task_type  = params[ :user_report ].nil?
-      type           = @is_task_type ? 'task' : 'user'
-      @exclude_title = ! ( params[ "include_title_#{ type }" ] == '1' )
+
+      if ( params.has_key?( :user_report ) )
+        @report_type = :user
+      elsif ( params.has_key?( :comprehensive_report ) )
+        @report_type = :comprehensive
+      else
+        @report_type = :task
+      end
+
+      @exclude_title = ! ( params[ "include_title_#{ @report_type }" ] == '1' )
     end
   end
 
@@ -133,8 +180,6 @@ private
     headings << ' (total)'    if ( @report.include_totals        )
     headings << ' (com.)'     if ( @report.include_committed     )
     headings << ' (not com.)' if ( @report.include_not_committed )
-
-    @is_task_type = params[ :user_report ].nil?
 
     # Old-style streaming has becomes unreliable lately; the v1.0 approach as
     # per "http://oldwiki.rubyonrails.org/rails/pages/HowtoExportDataAsCSV"
@@ -156,7 +201,7 @@ private
     fend_at   = @report.range.last.strftime( fformat )
     filename  = "report_#{ label }_on_#{ stoday }_for_#{ sstart_at }_to_#{ send_at }.csv"
     title     = [
-      "#{ @is_task_type ? 'Task' : 'User' } report on #{ ftoday }",
+      "#{ @report_type.to_s.capitalize } report on #{ ftoday }",
       "From #{ fstart_at }",
       "To #{ fend_at }",
       '(inclusive)'
@@ -170,10 +215,13 @@ private
         csv << title
       end
 
-      if ( @is_task_type )
-        csv_report_by_task( csv, headings )
-      else
-        csv_report_by_user( csv, headings )
+      case @report_type
+        when :user
+          csv_report_by_user( csv, headings )
+        when :comprehensive
+          csv_report_by_task( csv, headings, true )
+        else
+          csv_report_by_task( csv, headings, false )
       end
     end
 
@@ -194,7 +242,11 @@ private
   # of numbers that "hours" will output based on prevailing instance variables
   # (see that function for details).
   #
-  def csv_report_by_task( csv, headings )
+  # The third parameter is a "comprehensive report" flag, forcing per-user
+  # breakdown on the assumption that a report is appropriate compiled. Otherwise
+  # omit the parameter to obey the report's own flags.
+  #
+  def csv_report_by_task( csv, headings, comprehensive = @report.user_details )
     # Assemble the heading row.
 
     file_row = [ @report.column_title, 'Code', 'Billable?', 'Active?' ]
@@ -271,6 +323,24 @@ private
       end
 
       csv << file_row.flatten
+
+      if ( comprehensive )
+        @report.filtered_users.each_index do | index |
+          user = @report.filtered_users[ index ]
+          user_total = TrackRecordReport::ReportColumnTotal.new
+
+          file_row = [ " ---- #{ user.name }", '', '', '' ]
+
+          row.cells.each do | cell |
+            user_total.add_cell( cell )
+            file_row << hours( cell.user_data[ index ] )
+          end
+
+          file_row << hours( user_total )
+        end
+
+        csv << file_row.flatten
+      end
     end
 
     # Column totals.

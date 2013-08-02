@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>Table of Contents - Rails Application Documentation</title>
+<title>Table of Contents - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -21,7 +21,7 @@
 
 
 <body class="indexpage">
-<h1>Table of Contents - Rails Application Documentation</h1>
+<h1>Table of Contents - YOUR_TITLE</h1>
 
 <h2>Pages</h2>
 <ul>
@@ -31,6 +31,7 @@
     <img class="toc-toggle" src="images/transparent.png" alt="" title="toggle headings">
     <ul class="initially-hidden">
       <li><a href="doc/README_FOR_APP.html#label-Welcome+to+the+TrackRecord+API+documentation">Welcome to the TrackRecord API documentation</a>
+      <li><a href="doc/README_FOR_APP.html#label-Extensions">Extensions</a>
       <li><a href="doc/README_FOR_APP.html#label-Regenerating+the+documentation">Regenerating the documentation</a>
       <li><a href="doc/README_FOR_APP.html#label-Charts+controller">Charts controller</a>
     </ul>
@@ -114,6 +115,23 @@
   </li>
     <li class="module">
     <a href="SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
+  </li>
+    <li class="module">
+    <a href="TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+
+    <img class="toc-toggle" src="images/transparent.png" alt="" title="toggle headings">
+    <ul class="initially-hidden">
+      <li><a href="TrackRecordReportGenerator.html#label-Namespacing">Namespacing</a>
+      <li><a href="TrackRecordReportGenerator.html#label-Implementation">Implementation</a>
+      <li><a href="TrackRecordReportGenerator.html#label-Execution+context">Execution context</a>
+      <li><a href="TrackRecordReportGenerator.html#label-Internationalisation">Internationalisation</a>
+      <li><a href="TrackRecordReportGenerator.html#label-View+templates">View templates</a>
+      <li><a href="TrackRecordReportGenerator.html#label-Troubleshooting">Troubleshooting</a>
+      <li><a href="TrackRecordReportGenerator.html#label-Double+render+errors">Double render errors</a>
+    </ul>
+  </li>
+    <li class="module">
+    <a href="TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
   </li>
     <li class="class">
     <a href="ApplicationController.html">ApplicationController</a>
@@ -199,6 +217,9 @@
     <li class="class">
     <a href="SavedReportsController.html">SavedReportsController</a>
   </li>
+    <li class="class">
+    <a href="SavedReportsCopyController.html">SavedReportsCopyController</a>
+  </li>
     <li class="module">
     <a href="SavedReportsHelper.html">SavedReportsHelper</a>
   </li>
@@ -228,6 +249,12 @@
   </li>
     <li class="class">
     <a href="Timesheet.html">Timesheet</a>
+  </li>
+    <li class="class">
+    <a href="TimesheetForceCommit.html">TimesheetForceCommit</a>
+  </li>
+    <li class="class">
+    <a href="TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   </li>
     <li class="class">
     <a href="TimesheetRow.html">TimesheetRow</a>
@@ -280,6 +307,10 @@
   
     <li class="method"><a href="Timesheet.html#method-c-date_for">::date_for &mdash; Timesheet</a>
   
+    <li class="method"><a href="TrackRecordReportGenerator/UkOrgPondCSV.html#method-c-extended">::extended &mdash; TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator.html#method-c-extended">::extended &mdash; TrackRecordReportGenerator</a>
+  
     <li class="method"><a href="WorkPacket.html#method-c-find_by_task_user_and_range">::find_by_task_user_and_range &mdash; WorkPacket</a>
   
     <li class="method"><a href="WorkPacket.html#method-c-find_by_task_user_range_and_committed">::find_by_task_user_range_and_committed &mdash; WorkPacket</a>
@@ -306,9 +337,9 @@
   
     <li class="method"><a href="TaskImport.html#method-c-get_tasks_from_xml">::get_tasks_from_xml &mdash; TaskImport</a>
   
-    <li class="method"><a href="QuietLeightbox.html#method-c-included">::included &mdash; QuietLeightbox</a>
-  
     <li class="method"><a href="QuietPrototype.html#method-c-included">::included &mdash; QuietPrototype</a>
+  
+    <li class="method"><a href="QuietLeightbox.html#method-c-included">::included &mdash; QuietLeightbox</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-c-label">::label &mdash; TrackRecordReport::Report</a>
   
@@ -318,37 +349,39 @@
   
     <li class="method"><a href="TaskImport.html#method-c-new">::new &mdash; TaskImport</a>
   
-    <li class="method"><a href="ReportsHelper/ReportWeek.html#method-c-new">::new &mdash; ReportsHelper::ReportWeek</a>
-  
-    <li class="method"><a href="TrackRecordReport/ReportRow.html#method-c-new">::new &mdash; TrackRecordReport::ReportRow</a>
+    <li class="method"><a href="TrackRecordReport/ReportElementaryCalculator.html#method-c-new">::new &mdash; TrackRecordReport::ReportElementaryCalculator</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-c-new">::new &mdash; TrackRecordReport::Report</a>
   
-    <li class="method"><a href="User.html#method-c-new">::new &mdash; User</a>
+    <li class="method"><a href="TimesheetForceCommit.html#method-c-new">::new &mdash; TimesheetForceCommit</a>
   
-    <li class="method"><a href="Customer.html#method-c-new">::new &mdash; Customer</a>
+    <li class="method"><a href="TrackRecordReport/ReportSection.html#method-c-new">::new &mdash; TrackRecordReport::ReportSection</a>
+  
+    <li class="method"><a href="Project.html#method-c-new">::new &mdash; Project</a>
+  
+    <li class="method"><a href="ReportsHelper/ReportWeek.html#method-c-new">::new &mdash; ReportsHelper::ReportWeek</a>
   
     <li class="method"><a href="Task.html#method-c-new">::new &mdash; Task</a>
   
-    <li class="method"><a href="TrackRecordReport/ReportSection.html#method-c-new">::new &mdash; TrackRecordReport::ReportSection</a>
+    <li class="method"><a href="TrackRecordReport/ReportRow.html#method-c-new">::new &mdash; TrackRecordReport::ReportRow</a>
+  
+    <li class="method"><a href="User.html#method-c-new">::new &mdash; User</a>
+  
+    <li class="method"><a href="ReportsHelper/ReportMonth.html#method-c-new">::new &mdash; ReportsHelper::ReportMonth</a>
+  
+    <li class="method"><a href="Customer.html#method-c-new">::new &mdash; Customer</a>
   
     <li class="method"><a href="ReportsHelper/ReportYear.html#method-c-new">::new &mdash; ReportsHelper::ReportYear</a>
   
     <li class="method"><a href="TrackRecordReport/ReportCell.html#method-c-new">::new &mdash; TrackRecordReport::ReportCell</a>
   
-    <li class="method"><a href="TrackRecordReport/ReportElementaryCalculator.html#method-c-new">::new &mdash; TrackRecordReport::ReportElementaryCalculator</a>
-  
-    <li class="method"><a href="ReportsHelper/ReportMonth.html#method-c-new">::new &mdash; ReportsHelper::ReportMonth</a>
-  
-    <li class="method"><a href="Project.html#method-c-new">::new &mdash; Project</a>
-  
     <li class="method"><a href="User.html#method-c-rationalise_id">::rationalise_id &mdash; User</a>
   
     <li class="method"><a href="Task.html#method-c-sort_by_augmented_title">::sort_by_augmented_title &mdash; Task</a>
   
-    <li class="method"><a href="Timesheet.html#method-c-used_range">::used_range &mdash; Timesheet</a>
-  
     <li class="method"><a href="Rangeable.html#method-c-used_range">::used_range &mdash; Rangeable</a>
+  
+    <li class="method"><a href="Timesheet.html#method-c-used_range">::used_range &mdash; Timesheet</a>
   
     <li class="method"><a href="User.html#method-i-active_permitted_tasks">#active_permitted_tasks &mdash; User</a>
   
@@ -360,27 +393,25 @@
   
     <li class="method"><a href="TrackRecordReport/ReportRow.html#method-i-add_cell">#add_cell &mdash; TrackRecordReport::ReportRow</a>
   
-    <li class="method"><a href="TrackRecordReport/ReportSection.html#method-i-add_cell">#add_cell &mdash; TrackRecordReport::ReportSection</a>
-  
     <li class="method"><a href="TrackRecordReport/ReportColumnTotal.html#method-i-add_cell">#add_cell &mdash; TrackRecordReport::ReportColumnTotal</a>
   
-    <li class="method"><a href="TrackRecordReport/ReportUserData.html#method-i-add_committed_hours">#add_committed_hours &mdash; TrackRecordReport::ReportUserData</a>
-  
-    <li class="method"><a href="TrackRecordReport/ReportUserData.html#method-i-add_not_committed_hours">#add_not_committed_hours &mdash; TrackRecordReport::ReportUserData</a>
+    <li class="method"><a href="TrackRecordReport/ReportSection.html#method-i-add_cell">#add_cell &mdash; TrackRecordReport::ReportSection</a>
   
     <li class="method"><a href="Timesheet.html#method-i-add_row">#add_row &mdash; Timesheet</a>
   
     <li class="method"><a href="TrackRecordReport/ReportCell.html#method-i-add_user_data">#add_user_data &mdash; TrackRecordReport::ReportCell</a>
   
-    <li class="method"><a href="TrackRecordReport/ReportRow.html#method-i-add_user_row_total">#add_user_row_total &mdash; TrackRecordReport::ReportRow</a>
-  
     <li class="method"><a href="TrackRecordReport/ReportSection.html#method-i-add_user_row_total">#add_user_row_total &mdash; TrackRecordReport::ReportSection</a>
+  
+    <li class="method"><a href="TrackRecordReport/ReportRow.html#method-i-add_user_row_total">#add_user_row_total &mdash; TrackRecordReport::ReportRow</a>
   
     <li class="method"><a href="User.html#method-i-admin-3F">#admin? &mdash; User</a>
   
     <li class="method"><a href="EmailNotifier.html#method-i-admin_update_notification">#admin_update_notification &mdash; EmailNotifier</a>
   
     <li class="method"><a href="User.html#method-i-all_permitted_tasks">#all_permitted_tasks &mdash; User</a>
+  
+    <li class="method"><a href="ApplicationController.html#method-i-appctrl_admin_destroy">#appctrl_admin_destroy &mdash; ApplicationController</a>
   
     <li class="method"><a href="ApplicationController.html#method-i-appctrl_create">#appctrl_create &mdash; ApplicationController</a>
   
@@ -390,7 +421,7 @@
   
     <li class="method"><a href="ApplicationController.html#method-i-appctrl_delete">#appctrl_delete &mdash; ApplicationController</a>
   
-    <li class="method"><a href="ApplicationController.html#method-i-appctrl_delete_confirm">#appctrl_delete_confirm &mdash; ApplicationController</a>
+    <li class="method"><a href="ApplicationController.html#method-i-appctrl_destroy">#appctrl_destroy &mdash; ApplicationController</a>
   
     <li class="method"><a href="ApplicationController.html#method-i-appctrl_edit">#appctrl_edit &mdash; ApplicationController</a>
   
@@ -464,21 +495,21 @@
   
     <li class="method"><a href="AuditsHelper.html#method-i-audithelp_user_name">#audithelp_user_name &mdash; AuditsHelper</a>
   
-    <li class="method"><a href="TaskGroup.html#method-i-augmented_title">#augmented_title &mdash; TaskGroup</a>
-  
     <li class="method"><a href="Task.html#method-i-augmented_title">#augmented_title &mdash; Task</a>
   
-    <li class="method"><a href="TrackRecordReport/ReportUserRowTotal.html#method-i-calculate-21">#calculate! &mdash; TrackRecordReport::ReportUserRowTotal</a>
+    <li class="method"><a href="TaskGroup.html#method-i-augmented_title">#augmented_title &mdash; TaskGroup</a>
   
     <li class="method"><a href="TrackRecordReport/ReportCell.html#method-i-calculate-21">#calculate! &mdash; TrackRecordReport::ReportCell</a>
   
     <li class="method"><a href="TrackRecordReport/ReportUserColumnTotal.html#method-i-calculate-21">#calculate! &mdash; TrackRecordReport::ReportUserColumnTotal</a>
   
+    <li class="method"><a href="TrackRecordReport/ReportUserRowTotal.html#method-i-calculate-21">#calculate! &mdash; TrackRecordReport::ReportUserRowTotal</a>
+  
+    <li class="method"><a href="Timesheet.html#method-i-can_be_modified_by-3F">#can_be_modified_by? &mdash; Timesheet</a>
+  
     <li class="method"><a href="Task.html#method-i-can_be_modified_by-3F">#can_be_modified_by? &mdash; Task</a>
   
     <li class="method"><a href="TaskGroup.html#method-i-can_be_modified_by-3F">#can_be_modified_by? &mdash; TaskGroup</a>
-  
-    <li class="method"><a href="Timesheet.html#method-i-can_be_modified_by-3F">#can_be_modified_by? &mdash; Timesheet</a>
   
     <li class="method"><a href="UsersController.html#method-i-cancel">#cancel &mdash; UsersController</a>
   
@@ -498,29 +529,31 @@
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-compile">#compile &mdash; TrackRecordReport::Report</a>
   
-    <li class="method"><a href="UsersController.html#method-i-create">#create &mdash; UsersController</a>
-  
-    <li class="method"><a href="SavedReportsController.html#method-i-create">#create &mdash; SavedReportsController</a>
-  
-    <li class="method"><a href="SavedReportsByCustomerController.html#method-i-create">#create &mdash; SavedReportsByCustomerController</a>
-  
-    <li class="method"><a href="SessionsController.html#method-i-create">#create &mdash; SessionsController</a>
+    <li class="method"><a href="SavedReportsByProjectController.html#method-i-create">#create &mdash; SavedReportsByProjectController</a>
   
     <li class="method"><a href="TimesheetsController.html#method-i-create">#create &mdash; TimesheetsController</a>
   
-    <li class="method"><a href="TaskImportsController.html#method-i-create">#create &mdash; TaskImportsController</a>
-  
-    <li class="method"><a href="ProjectsController.html#method-i-create">#create &mdash; ProjectsController</a>
-  
-    <li class="method"><a href="CustomersController.html#method-i-create">#create &mdash; CustomersController</a>
-  
-    <li class="method"><a href="SavedReportsByUserController.html#method-i-create">#create &mdash; SavedReportsByUserController</a>
+    <li class="method"><a href="TasksController.html#method-i-create">#create &mdash; TasksController</a>
   
     <li class="method"><a href="SavedReportsByTaskController.html#method-i-create">#create &mdash; SavedReportsByTaskController</a>
   
-    <li class="method"><a href="SavedReportsByProjectController.html#method-i-create">#create &mdash; SavedReportsByProjectController</a>
+    <li class="method"><a href="SavedReportsController.html#method-i-create">#create &mdash; SavedReportsController</a>
   
-    <li class="method"><a href="TasksController.html#method-i-create">#create &mdash; TasksController</a>
+    <li class="method"><a href="CustomersController.html#method-i-create">#create &mdash; CustomersController</a>
+  
+    <li class="method"><a href="TimesheetForceCommitsController.html#method-i-create">#create &mdash; TimesheetForceCommitsController</a>
+  
+    <li class="method"><a href="SavedReportsByUserController.html#method-i-create">#create &mdash; SavedReportsByUserController</a>
+  
+    <li class="method"><a href="ProjectsController.html#method-i-create">#create &mdash; ProjectsController</a>
+  
+    <li class="method"><a href="TaskImportsController.html#method-i-create">#create &mdash; TaskImportsController</a>
+  
+    <li class="method"><a href="UsersController.html#method-i-create">#create &mdash; UsersController</a>
+  
+    <li class="method"><a href="SessionsController.html#method-i-create">#create &mdash; SessionsController</a>
+  
+    <li class="method"><a href="SavedReportsByCustomerController.html#method-i-create">#create &mdash; SavedReportsByCustomerController</a>
   
     <li class="method"><a href="ApplicationController.html#method-i-current_user">#current_user &mdash; ApplicationController</a>
   
@@ -528,47 +561,55 @@
   
     <li class="method"><a href="Timesheet.html#method-i-date_for">#date_for &mdash; Timesheet</a>
   
-    <li class="method"><a href="CustomersController.html#method-i-delete">#delete &mdash; CustomersController</a>
-  
     <li class="method"><a href="ProjectsController.html#method-i-delete">#delete &mdash; ProjectsController</a>
   
-    <li class="method"><a href="TimesheetsController.html#method-i-delete">#delete &mdash; TimesheetsController</a>
-  
-    <li class="method"><a href="UsersController.html#method-i-delete">#delete &mdash; UsersController</a>
+    <li class="method"><a href="CustomersController.html#method-i-delete">#delete &mdash; CustomersController</a>
   
     <li class="method"><a href="TasksController.html#method-i-delete">#delete &mdash; TasksController</a>
   
+    <li class="method"><a href="UsersController.html#method-i-delete">#delete &mdash; UsersController</a>
+  
+    <li class="method"><a href="SavedReportsController.html#method-i-delete">#delete &mdash; SavedReportsController</a>
+  
+    <li class="method"><a href="TimesheetsController.html#method-i-delete">#delete &mdash; TimesheetsController</a>
+  
     <li class="method"><a href="TrackRecordReport/ReportRow.html#method-i-delete_cell">#delete_cell &mdash; TrackRecordReport::ReportRow</a>
   
-    <li class="method"><a href="TasksController.html#method-i-delete_confirm">#delete_confirm &mdash; TasksController</a>
+    <li class="method"><a href="ProjectsController.html#method-i-delete_confirm">#delete_confirm &mdash; ProjectsController</a>
   
     <li class="method"><a href="UsersController.html#method-i-delete_confirm">#delete_confirm &mdash; UsersController</a>
-  
-    <li class="method"><a href="TimesheetsController.html#method-i-delete_confirm">#delete_confirm &mdash; TimesheetsController</a>
-  
-    <li class="method"><a href="ProjectsController.html#method-i-delete_confirm">#delete_confirm &mdash; ProjectsController</a>
   
     <li class="method"><a href="CustomersController.html#method-i-delete_confirm">#delete_confirm &mdash; CustomersController</a>
   
     <li class="method"><a href="TrackRecordReport/ReportRow.html#method-i-delete_user_row_total">#delete_user_row_total &mdash; TrackRecordReport::ReportRow</a>
   
+    <li class="method"><a href="TimesheetsController.html#method-i-destroy">#destroy &mdash; TimesheetsController</a>
+  
     <li class="method"><a href="SessionsController.html#method-i-destroy">#destroy &mdash; SessionsController</a>
   
-    <li class="method"><a href="Customer.html#method-i-destroy_with_side_effects">#destroy_with_side_effects &mdash; Customer</a>
+    <li class="method"><a href="TasksController.html#method-i-destroy">#destroy &mdash; TasksController</a>
+  
+    <li class="method"><a href="SavedReportsController.html#method-i-destroy">#destroy &mdash; SavedReportsController</a>
   
     <li class="method"><a href="Project.html#method-i-destroy_with_side_effects">#destroy_with_side_effects &mdash; Project</a>
+  
+    <li class="method"><a href="Customer.html#method-i-destroy_with_side_effects">#destroy_with_side_effects &mdash; Customer</a>
   
     <li class="method"><a href="Timesheet.html#method-i-discover_week">#discover_week &mdash; Timesheet</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-display_range">#display_range &mdash; TrackRecordReport::Report</a>
   
-    <li class="method"><a href="UsersController.html#method-i-edit">#edit &mdash; UsersController</a>
+    <li class="method"><a href="TimesheetForceCommit.html#method-i-earliest_limit-3D">#earliest_limit= &mdash; TimesheetForceCommit</a>
   
     <li class="method"><a href="TimesheetsController.html#method-i-edit">#edit &mdash; TimesheetsController</a>
+  
+    <li class="method"><a href="UsersController.html#method-i-edit">#edit &mdash; UsersController</a>
   
     <li class="method"><a href="SavedReportsController.html#method-i-edit">#edit &mdash; SavedReportsController</a>
   
     <li class="method"><a href="Timesheet.html#method-i-editable_week">#editable_week &mdash; Timesheet</a>
+  
+    <li class="method"><a href="TimesheetForceCommit.html#method-i-effectively_empty">#effectively_empty &mdash; TimesheetForceCommit</a>
   
     <li class="method"><a href="TaskImport.html#method-i-filtered_parent_titles-3D">#filtered_parent_titles= &mdash; TaskImport</a>
   
@@ -583,6 +624,10 @@
     <li class="method"><a href="Timesheet.html#method-i-find_mine_uncommitted">#find_mine_uncommitted &mdash; Timesheet</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-frequency-3D">#frequency= &mdash; TrackRecordReport::Report</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator.html#method-i-generate">#generate &mdash; TrackRecordReportGenerator</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator/UkOrgPondCSV.html#method-i-generate">#generate &mdash; TrackRecordReportGenerator::UkOrgPondCSV</a>
   
     <li class="method"><a href="TaskImport.html#method-i-generate_filtered_task_list">#generate_filtered_task_list &mdash; TaskImport</a>
   
@@ -610,45 +655,59 @@
   
     <li class="method"><a href="YuiTree/YuiTreeHelper.html#method-i-include_yui_tree_if_used">#include_yui_tree_if_used &mdash; YuiTree::YuiTreeHelper</a>
   
-    <li class="method"><a href="TimesheetsController.html#method-i-index">#index &mdash; TimesheetsController</a>
-  
-    <li class="method"><a href="CustomersController.html#method-i-index">#index &mdash; CustomersController</a>
-  
-    <li class="method"><a href="UsersController.html#method-i-index">#index &mdash; UsersController</a>
-  
     <li class="method"><a href="TreesController.html#method-i-index">#index &mdash; TreesController</a>
-  
-    <li class="method"><a href="AuditsController.html#method-i-index">#index &mdash; AuditsController</a>
-  
-    <li class="method"><a href="ProjectsController.html#method-i-index">#index &mdash; ProjectsController</a>
   
     <li class="method"><a href="TasksController.html#method-i-index">#index &mdash; TasksController</a>
   
+    <li class="method"><a href="AuditsController.html#method-i-index">#index &mdash; AuditsController</a>
+  
+    <li class="method"><a href="UsersController.html#method-i-index">#index &mdash; UsersController</a>
+  
     <li class="method"><a href="SavedReportsController.html#method-i-index">#index &mdash; SavedReportsController</a>
   
-    <li class="method"><a href="Timesheet.html#method-i-is_permitted_for-3F">#is_permitted_for? &mdash; Timesheet</a>
+    <li class="method"><a href="CustomersController.html#method-i-index">#index &mdash; CustomersController</a>
   
-    <li class="method"><a href="TaskGroup.html#method-i-is_permitted_for-3F">#is_permitted_for? &mdash; TaskGroup</a>
+    <li class="method"><a href="TimesheetsController.html#method-i-index">#index &mdash; TimesheetsController</a>
+  
+    <li class="method"><a href="ProjectsController.html#method-i-index">#index &mdash; ProjectsController</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator.html#method-i-invocation_button_title_for">#invocation_button_title_for &mdash; TrackRecordReportGenerator</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator/UkOrgPondCSV.html#method-i-invocation_button_title_for">#invocation_button_title_for &mdash; TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator.html#method-i-invocation_options_for">#invocation_options_for &mdash; TrackRecordReportGenerator</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator/UkOrgPondCSV.html#method-i-invocation_options_for">#invocation_options_for &mdash; TrackRecordReportGenerator::UkOrgPondCSV</a>
   
     <li class="method"><a href="Task.html#method-i-is_permitted_for-3F">#is_permitted_for? &mdash; Task</a>
   
+    <li class="method"><a href="TaskGroup.html#method-i-is_permitted_for-3F">#is_permitted_for? &mdash; TaskGroup</a>
+  
+    <li class="method"><a href="Timesheet.html#method-i-is_permitted_for-3F">#is_permitted_for? &mdash; Timesheet</a>
+  
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-label">#label &mdash; TrackRecordReport::Report</a>
+  
+    <li class="method"><a href="TimesheetForceCommit.html#method-i-latest_limit-3D">#latest_limit= &mdash; TimesheetForceCommit</a>
   
     <li class="method"><a href="User.html#method-i-manager-3F">#manager? &mdash; User</a>
   
     <li class="method"><a href="TaskImport.html#method-i-max_level">#max_level &mdash; TaskImport</a>
   
-    <li class="method"><a href="TimesheetsController.html#method-i-new">#new &mdash; TimesheetsController</a>
+    <li class="method"><a href="TasksController.html#method-i-new">#new &mdash; TasksController</a>
   
     <li class="method"><a href="SessionsController.html#method-i-new">#new &mdash; SessionsController</a>
   
-    <li class="method"><a href="SavedReportsController.html#method-i-new">#new &mdash; SavedReportsController</a>
+    <li class="method"><a href="TimesheetsController.html#method-i-new">#new &mdash; TimesheetsController</a>
   
-    <li class="method"><a href="TasksController.html#method-i-new">#new &mdash; TasksController</a>
+    <li class="method"><a href="TimesheetForceCommitsController.html#method-i-new">#new &mdash; TimesheetForceCommitsController</a>
   
     <li class="method"><a href="CustomersController.html#method-i-new">#new &mdash; CustomersController</a>
   
     <li class="method"><a href="UsersController.html#method-i-new">#new &mdash; UsersController</a>
+  
+    <li class="method"><a href="SavedReportsCopyController.html#method-i-new">#new &mdash; SavedReportsCopyController</a>
+  
+    <li class="method"><a href="SavedReportsController.html#method-i-new">#new &mdash; SavedReportsController</a>
   
     <li class="method"><a href="ProjectsController.html#method-i-new">#new &mdash; ProjectsController</a>
   
@@ -662,6 +721,8 @@
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-partial_column-3F">#partial_column? &mdash; TrackRecordReport::Report</a>
   
+    <li class="method"><a href="TimesheetForceCommit.html#method-i-persisted-3F">#persisted? &mdash; TimesheetForceCommit</a>
+  
     <li class="method"><a href="User.html#method-i-privileged-3F">#privileged? &mdash; User</a>
   
     <li class="method"><a href="TaskImport.html#method-i-project_id-3D">#project_id= &mdash; TaskImport</a>
@@ -672,19 +733,27 @@
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_end-3D">#range_end= &mdash; TrackRecordReport::Report</a>
   
+    <li class="method"><a href="SavedReport.html#method-i-range_end_cache">#range_end_cache &mdash; SavedReport</a>
+  
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_month_end-3D">#range_month_end= &mdash; TrackRecordReport::Report</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_month_start-3D">#range_month_start= &mdash; TrackRecordReport::Report</a>
   
+    <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_one_month-3D">#range_one_month= &mdash; TrackRecordReport::Report</a>
+  
+    <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_one_week-3D">#range_one_week= &mdash; TrackRecordReport::Report</a>
+  
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_start-3D">#range_start= &mdash; TrackRecordReport::Report</a>
+  
+    <li class="method"><a href="SavedReport.html#method-i-range_start_cache">#range_start_cache &mdash; SavedReport</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_week_end-3D">#range_week_end= &mdash; TrackRecordReport::Report</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-range_week_start-3D">#range_week_start= &mdash; TrackRecordReport::Report</a>
   
-    <li class="method"><a href="User.html#method-i-remove_inactive_tasks">#remove_inactive_tasks &mdash; User</a>
-  
     <li class="method"><a href="ControlPanel.html#method-i-remove_inactive_tasks">#remove_inactive_tasks &mdash; ControlPanel</a>
+  
+    <li class="method"><a href="User.html#method-i-remove_inactive_tasks">#remove_inactive_tasks &mdash; User</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-reportable_user_ids-3D">#reportable_user_ids= &mdash; TrackRecordReport::Report</a>
   
@@ -696,6 +765,8 @@
   
     <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_end_time">#reporthelp_end_time &mdash; ReportsHelper</a>
   
+    <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_export_option">#reporthelp_export_option &mdash; ReportsHelper</a>
+  
     <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_frequency_selection">#reporthelp_frequency_selection &mdash; ReportsHelper</a>
   
     <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_grouping_selector">#reporthelp_grouping_selector &mdash; ReportsHelper</a>
@@ -703,6 +774,8 @@
     <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_hours">#reporthelp_hours &mdash; ReportsHelper</a>
   
     <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_month_selection">#reporthelp_month_selection &mdash; ReportsHelper</a>
+  
+    <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_one_selection">#reporthelp_one_selection &mdash; ReportsHelper</a>
   
     <li class="method"><a href="ReportsHelper.html#method-i-reporthelp_owner">#reporthelp_owner &mdash; ReportsHelper</a>
   
@@ -750,25 +823,25 @@
   
     <li class="method"><a href="ControlPanel.html#method-i-set_preference-21">#set_preference! &mdash; ControlPanel</a>
   
+    <li class="method"><a href="SavedReportAutoTitlesController.html#method-i-show">#show &mdash; SavedReportAutoTitlesController</a>
+  
+    <li class="method"><a href="ReportsController.html#method-i-show">#show &mdash; ReportsController</a>
+  
     <li class="method"><a href="ProjectsController.html#method-i-show">#show &mdash; ProjectsController</a>
   
-    <li class="method"><a href="TimesheetsController.html#method-i-show">#show &mdash; TimesheetsController</a>
+    <li class="method"><a href="UsersController.html#method-i-show">#show &mdash; UsersController</a>
   
     <li class="method"><a href="HelpController.html#method-i-show">#show &mdash; HelpController</a>
   
     <li class="method"><a href="SavedReportsController.html#method-i-show">#show &mdash; SavedReportsController</a>
   
+    <li class="method"><a href="CustomersController.html#method-i-show">#show &mdash; CustomersController</a>
+  
     <li class="method"><a href="TasksController.html#method-i-show">#show &mdash; TasksController</a>
   
+    <li class="method"><a href="TimesheetsController.html#method-i-show">#show &mdash; TimesheetsController</a>
+  
     <li class="method"><a href="ChartsController.html#method-i-show">#show &mdash; ChartsController</a>
-  
-    <li class="method"><a href="ReportsController.html#method-i-show">#show &mdash; ReportsController</a>
-  
-    <li class="method"><a href="UsersController.html#method-i-show">#show &mdash; UsersController</a>
-  
-    <li class="method"><a href="SavedReportAutoTitlesController.html#method-i-show">#show &mdash; SavedReportAutoTitlesController</a>
-  
-    <li class="method"><a href="CustomersController.html#method-i-show">#show &mdash; CustomersController</a>
   
     <li class="method"><a href="Timesheet.html#method-i-showable_week">#showable_week &mdash; Timesheet</a>
   
@@ -782,7 +855,11 @@
   
     <li class="method"><a href="TrackRecordReport/ReportElementaryCalculator.html#method-i-subtract-21">#subtract! &mdash; TrackRecordReport::ReportElementaryCalculator</a>
   
+    <li class="method"><a href="TrackRecordReport/ReportUserData.html#method-i-sum_committed_hours">#sum_committed_hours &mdash; TrackRecordReport::ReportUserData</a>
+  
     <li class="method"><a href="Task.html#method-i-sum_hours_over_range">#sum_hours_over_range &mdash; Task</a>
+  
+    <li class="method"><a href="TrackRecordReport/ReportUserData.html#method-i-sum_not_committed_hours">#sum_not_committed_hours &mdash; TrackRecordReport::ReportUserData</a>
   
     <li class="method"><a href="TrackRecordReport/Report.html#method-i-task_ids-3D">#task_ids= &mdash; TrackRecordReport::Report</a>
   
@@ -844,33 +921,39 @@
   
     <li class="method"><a href="TaskImportsHelper.html#method-i-timphelp_project_selector">#timphelp_project_selector &mdash; TaskImportsHelper</a>
   
+    <li class="method"><a href="TimesheetForceCommit.html#method-i-to_date">#to_date &mdash; TimesheetForceCommit</a>
+  
     <li class="method"><a href="TrackRecordReport/ReportElementaryCalculator.html#method-i-total">#total &mdash; TrackRecordReport::ReportElementaryCalculator</a>
   
     <li class="method"><a href="Timesheet.html#method-i-total_sum">#total_sum &mdash; Timesheet</a>
   
     <li class="method"><a href="Task.html#method-i-total_worked">#total_worked &mdash; Task</a>
   
+    <li class="method"><a href="TrackRecordReportGenerator/UkOrgPondCSV.html#method-i-understands-3F">#understands? &mdash; TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
+    <li class="method"><a href="TrackRecordReportGenerator.html#method-i-understands-3F">#understands? &mdash; TrackRecordReportGenerator</a>
+  
     <li class="method"><a href="Timesheet.html#method-i-unused_weeks">#unused_weeks &mdash; Timesheet</a>
   
     <li class="method"><a href="TaskImportsController.html#method-i-update">#update &mdash; TaskImportsController</a>
+  
+    <li class="method"><a href="TimesheetsController.html#method-i-update">#update &mdash; TimesheetsController</a>
+  
+    <li class="method"><a href="UsersController.html#method-i-update">#update &mdash; UsersController</a>
+  
+    <li class="method"><a href="ProjectsController.html#method-i-update">#update &mdash; ProjectsController</a>
+  
+    <li class="method"><a href="SavedReportsController.html#method-i-update">#update &mdash; SavedReportsController</a>
   
     <li class="method"><a href="CustomersController.html#method-i-update">#update &mdash; CustomersController</a>
   
     <li class="method"><a href="TasksController.html#method-i-update">#update &mdash; TasksController</a>
   
-    <li class="method"><a href="UsersController.html#method-i-update">#update &mdash; UsersController</a>
-  
-    <li class="method"><a href="SavedReportsController.html#method-i-update">#update &mdash; SavedReportsController</a>
-  
-    <li class="method"><a href="TimesheetsController.html#method-i-update">#update &mdash; TimesheetsController</a>
-  
-    <li class="method"><a href="ProjectsController.html#method-i-update">#update &mdash; ProjectsController</a>
+    <li class="method"><a href="Project.html#method-i-update_with_side_effects-21">#update_with_side_effects! &mdash; Project</a>
   
     <li class="method"><a href="Customer.html#method-i-update_with_side_effects-21">#update_with_side_effects! &mdash; Customer</a>
   
     <li class="method"><a href="Task.html#method-i-update_with_side_effects-21">#update_with_side_effects! &mdash; Task</a>
-  
-    <li class="method"><a href="Project.html#method-i-update_with_side_effects-21">#update_with_side_effects! &mdash; Project</a>
   
     <li class="method"><a href="UsersHelper.html#method-i-userhelp_actions">#userhelp_actions &mdash; UsersHelper</a>
   

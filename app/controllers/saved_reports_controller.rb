@@ -2,7 +2,7 @@
 # File::    saved_reports_controller.rb
 # (C)::     Hipposoft 2011
 #
-# Purpose:: Managed saved collections of parameters used to generate
+# Purpose:: Manage saved collections of parameters used to generate
 #           reports.
 # ----------------------------------------------------------------------
 #           19-Oct-2011 (ADH): Created.
@@ -25,12 +25,12 @@ class SavedReportsController < SavedReportsBaseController
     # application_helper.rb for details.
 
     @columns = [
-      { :header_text => 'Name',        :value_method => 'title',                 :value_in_place => true, :sort_by => 'title'      },
-      { :header_text => 'Shared',      :value_method => 'shared',                :value_in_place => true, :sort_by => 'shared'     },
-      { :header_text => 'Last edited', :value_helper => 'reporthelp_updated_at',                          :sort_by => 'updated_at' },
-      { :header_text => 'Start date',  :value_helper => 'reporthelp_start_date'                                                    },
-      { :header_text => 'End date',    :value_helper => 'reporthelp_end_date'                                                      },
-      { :header_text => 'Owner',       :value_helper => 'reporthelp_owner',                               :sort_by => 'users.name' }
+      { :header_text => 'Name',        :value_method => 'title',                 :value_in_place => true, :sort_by => 'title'             },
+      { :header_text => 'Shared',      :value_method => 'shared',                :value_in_place => true, :sort_by => 'shared'            },
+      { :header_text => 'Last edited', :value_helper => 'reporthelp_updated_at',                          :sort_by => 'updated_at'        },
+      { :header_text => 'Start date',  :value_helper => 'reporthelp_start_date',                          :sort_by => 'range_start_cache' },
+      { :header_text => 'End date',    :value_helper => 'reporthelp_end_date',                            :sort_by => 'range_end_cache'   },
+      { :header_text => 'Owner',       :value_helper => 'reporthelp_owner',                               :sort_by => 'users.name'        }
     ]
 
     options = appctrl_index_assist( SavedReport )
@@ -84,9 +84,30 @@ class SavedReportsController < SavedReportsBaseController
   # Prepare for the 'new report' view.
   #
   def new
-    @saved_report      = SavedReport.new
-    @saved_report.user = @user
-    @user_array        = @current_user.restricted? ? [ @current_user ] : User.active
+
+    # Implement copying; this could've been done in a new controller
+    # but no matter how you look at it, "new-with-an-ID" does not map
+    # cleanly to Rails REST and doing such an action in a separate
+    # controller just leads to code duplication and difficulties with
+    # the concept of "current controller" etc. in the view (we end up
+    # wanting to render the SavedReportsController edit view anyway).
+
+    @saved_report = nil
+
+    if ( params.has_key?( :saved_report_id ) )
+      @saved_report = SavedReport.find_by_id( params[ :saved_report_id ] ) # No exception raised if record is not found
+
+      unless ( @saved_report.nil? )
+        @saved_report.title << " (copy)"
+      end
+    end
+
+    if ( @saved_report.nil? )
+      @saved_report      = SavedReport.new
+      @saved_report.user = @user
+    end
+
+    @user_array = @current_user.restricted? ? [ @current_user ] : User.active
   end
 
   # Generate a report based on a 'new report' form submission.

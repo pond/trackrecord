@@ -19,6 +19,8 @@ class TaskImport
   attr_reader( :tasks, :parent_uids, :parent_titles, :project_id, :collapse )
   attr_reader( :filtered_tasks, :filtered_parent_uids, :filtered_parent_titles )
 
+  attr_accessor( :new_project_title, :new_project_customer_id )
+
   # Create a new Import object, optionally from form submission parameters.
   #
   def initialize( params = nil )

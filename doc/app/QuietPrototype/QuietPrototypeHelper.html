@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>module QuietPrototype::QuietPrototypeHelper - Rails Application Documentation</title>
+<title>module QuietPrototype::QuietPrototypeHelper - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -139,6 +139,10 @@
   
     <li><a href="../SafeInPlaceEditing/ClassMethods.html">SafeInPlaceEditing::ClassMethods</a>
   
+    <li><a href="../TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="../TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
+  
     <li><a href="../ApplicationController.html">ApplicationController</a>
   
     <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
@@ -195,6 +199,8 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
+    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
+  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -214,6 +220,10 @@
     <li><a href="../TasksHelper.html">TasksHelper</a>
   
     <li><a href="../Timesheet.html">Timesheet</a>
+  
+    <li><a href="../TimesheetForceCommit.html">TimesheetForceCommit</a>
+  
+    <li><a href="../TimesheetForceCommitsController.html">TimesheetForceCommitsController</a>
   
     <li><a href="../TimesheetRow.html">TimesheetRow</a>
   
@@ -300,10 +310,22 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
 
           
           <div class="method-source-code" id="include_prototype_if_used-source">
-            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 50</span>
+            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">include_prototype_if_used</span>( <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">''</span> )
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">using_quiet_prototype?</span>
-    <span class="ruby-node">&quot;#{ javascript_include_tag( :defaults ).gsub( /^/, line_prefix ) }\n&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+
+    <span class="ruby-comment"># 2013-07-18 (ADH): Even with appropriate configuration data in</span>
+    <span class="ruby-comment"># &quot;config/application.rb&quot; for the &quot;:defaults&quot; expansion, using it</span>
+    <span class="ruby-comment"># here results in &quot;assets/defaults.js&quot; being generated. Doh. Since</span>
+    <span class="ruby-comment"># code here is evaluated before the application starts, presumably</span>
+    <span class="ruby-comment"># the expansion isn't defined in time. Instead we have to do it</span>
+    <span class="ruby-comment"># the hard way.</span>
+
+    <span class="ruby-identifier">data</span>          = <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype/prototype'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype_ujs/rails'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/scriptaculous'</span> )
+
+    <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-identifier">line_prefix</span> ) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> ).<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- include_prototype_if_used-source -->
@@ -334,7 +356,7 @@ more information.</p>
 
           
           <div class="method-source-code" id="using_quiet_prototype-3F-source">
-            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 60</span>
+            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">using_quiet_prototype?</span>
   <span class="ruby-operator">!</span> <span class="ruby-ivar">@uses_prototype</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>

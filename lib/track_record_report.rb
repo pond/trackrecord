@@ -8,6 +8,32 @@
 #           29-Jun-2008 (ADH): Created.
 ########################################################################
 
+# A container for report code. TrackRecordReport::Report instances are
+# passed to generators - see TrackRecordReportGenerator for details.
+#
+# A report has property "row", an array of TrackRecordReport::ReportRow
+# objects and "filtered_tasks", an array of the Task model instances
+# corresponding to the same-index rows. Each row has property "cells",
+# an array of TrackRecordReport::ReportCell objects corresponding to the
+# time columns spanned by the report; so a daily report would have cells
+# describing a day of worked hours, a weekly report would have cells for
+# the weeks and so-on. The report has a "column_ranges" property that
+# yields an array of Range objects giving the dates for each cell at an
+# equivalent index in a row's cell array.
+#
+# User-based information is available through a "filtered_users" report
+# property. This gives an array of the User model instances for reports
+# generated with per-user data included. Each cell has a "user_data"
+# property, again an array; each index in the filtered user array of the
+# report corresponds to an index in the cell's user data giving the
+# contribution of that user to the hours for that cell.
+#
+# For examples of how this information can be used, along with where
+# precalculated total information is stored and how to generate your own
+# totals using report calculator objects yourself, examine the CSV
+# export code - see TrackRecordReportGenerator::UkOrgPondCSV inside
+# <tt>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb</tt>.
+#
 module TrackRecordReport
 
   # Very simple base class used to store some common properties and
@@ -61,7 +87,7 @@ module TrackRecordReport
   # CALCULATION SUPPORT - MAIN REPORT OBJECT
   #############################################################################
 
-  # Class which manages a report.
+  # Class which manages a report. See module TrackRecordReport for an overview.
   #
   class Report < ReportElementaryCalculator
 
@@ -76,8 +102,9 @@ module TrackRecordReport
     # a column "title", shown alongside or above column headings. Use the
     # 'column_heading' method for per-column headings.
     #
-    # THESE MUST STAY IN THE SAME ORDER!  If you add new entries, you must
-    # ==================================  add them at the end of the list.
+    # THESE MUST STAY IN THE SAME ORDER!
+    #
+    # If you add new entries, you must add them at the end of the list.
     #
     # Saved reports specify the reporting frequency by reference to this
     # constant and an index into its array of entries. If you produce a new
@@ -109,11 +136,18 @@ module TrackRecordReport
     attr_accessor :range
     attr_reader   :reportable_user_ids, :task_ids, :active_task_ids, :inactive_task_ids # Bespoke "writer" methods are defined later
 
+    # "Cacheable" range values. If a report's start or end date is fixed,
+    # returns the date. If the start or end date are start/end-of-all-time,
+    # one or both returns :all. If the report is being generated for a
+    # relative month or week, returns "last_", "this_" or "two_" with a
+    # suffix of "month" or "week", as a symbol, for both start and end.
+    attr_reader :cacheable_start_indicator, :cacheable_end_indicator
+
     # Range data for the 'new' view form. Custom attribute writer methods are
     # used to call "rationalise_dates()" whenever a range value is altered.
     attr_reader :range_start, :range_end
-    attr_reader :range_week_start, :range_week_end
-    attr_reader :range_month_start, :range_month_end
+    attr_reader :range_week_start, :range_week_end, :range_one_week
+    attr_reader :range_month_start, :range_month_end, :range_one_month
 
     # Handle all ("all"), only billable ("billable") or only non-billable
     # ("non_billable") tasks?
@@ -123,8 +157,10 @@ module TrackRecordReport
     attr_accessor :customer_sort_field, :project_sort_field, :task_sort_field
     attr_accessor :task_grouping
 
-    # Inclusions and exclusions.
+    # Show per-user detailed breakdowns for all tasks or just user summaries,
+    # assuming any users are selected for such; inclusions and exclusions.
     [
+      :user_details,
       :include_totals,
       :include_committed,
       :include_not_committed,
@@ -321,8 +357,10 @@ module TrackRecordReport
     def range_end=( value );         @range_end         = value; rationalise_dates(); end
     def range_week_start=( value );  @range_week_start  = value; rationalise_dates(); end
     def range_week_end=( value );    @range_week_end    = value; rationalise_dates(); end
+    def range_one_week=( value );    @range_one_week    = value; rationalise_dates(); end
     def range_month_start=( value ); @range_month_start = value; rationalise_dates(); end
     def range_month_end=( value );   @range_month_end   = value; rationalise_dates(); end
+    def range_one_month=( value );   @range_one_month   = value; rationalise_dates(); end
 
     # Compile the report.
     #
@@ -459,6 +497,39 @@ module TrackRecordReport
       return rstr.split( '_' ).collect() { | str | str.to_i() }
     end
 
+    # Return the current month, 1 month ago or two months ago as an array
+    # with year and month number. Pass what you want to use as 'now' as a
+    # DateTime instance, then "last" for last month, "two" for two
+    # months ago, else returns this month (and year).
+    #
+    def relative_month_to( now, distanceAsAWord )
+      date = case distanceAsAWord
+        when "last"
+          now - 1.month
+        when "two"
+          now - 2.months
+        else
+          now
+      end
+
+      [ date.year, date.month ]
+    end
+
+    # As "relative_month_to" but returns commercial week numbers.
+    #
+    def relative_week_to( now, distanceAsAWord )
+      date = case distanceAsAWord
+        when "last"
+          now - 1.week
+        when "two"
+          now - 2.weeks
+        else
+          now
+      end
+
+      [ date.year, date.cweek ]
+    end
+
     # Apply task selection filters to @tasks thus initialising @filtered_tasks.
     #
     def apply_filters
@@ -532,7 +603,7 @@ module TrackRecordReport
     def complex_sort( task_a, task_b, options )
 
       # Implement grouping by billable and/or active flags by using these as
-      # sort paramneters. The order of the checks means that if grouping by both
+      # sort parameters. The order of the checks means that if grouping by both
       # flags we'll get a sort order of billable/active, billable/inactive,
       # non-billable/active, non-billable/inactive.
 
@@ -572,34 +643,83 @@ module TrackRecordReport
     # any errors, use defaults instead.
     #
     def rationalise_dates
-      default_range = date_range()
+      default_range              = date_range()
+      @cacheable_start_indicator = nil
+      @cacheable_end_indicator   = nil
+
+      # The "range_one_..." entries are unusual, storing a string that
+      # indicates a date relative to 'this instant in time' - "last"
+      # for a last week/month/etc., "two" for two weeks/months/etc. ago,
+      # else default to the current week/month/etc. instead.
+      #
+      # Order of precedence: Relative month; specific month; relative
+      # week; specific week; exact date; fall back to all-time.
+      #
+      # We take a shapshot of "now" before doing any range calculations
+      # using it to avoid any chance of the clock rolling over to a new
+      # date mid-way through (that'd be incredibly unlucky, but it is
+      # still technically possible if we re-read the clock each time).
+
+      now = DateTime.now.utc
 
       begin
-        if ( not @range_month_start.blank? )
+        if ( not @range_one_month.blank? )
+          year, month = relative_month_to( now, @range_one_month )
+          range_start = Date.new( year, month )
+          @cacheable_start_indicator = "#{ @range_one_month }_month".to_sym
+
+        elsif ( not @range_month_start.blank? )
           year, month = unpack_string( @range_month_start )
           range_start = Date.new( year, month )
+
+        elsif ( not @range_one_week.blank? )
+          year, week = relative_week_to( now, @range_one_week )
+          range_start = Timesheet.date_for( year, week, TimesheetRow::FIRST_DAY, true )
+          @cacheable_start_indicator = "#{ @range_one_week }_week".to_sym
+
         elsif ( not @range_week_start.blank? )
           year, week = unpack_string( @range_week_start )
           range_start = Timesheet.date_for( year, week, TimesheetRow::FIRST_DAY, true )
+
         else
-          range_start = Date.parse( @range_start )
+          range_start = Date.parse( @range_start.to_s ) # Forces an exception if range_start is nil, to fall back to all-time; else harmlessly re-parses date.
+
         end
+
       rescue
         range_start = default_range.min
+        @cacheable_start_indicator = :all
+
       end
 
       begin
-        if ( not @range_month_end.blank? )
+        if ( not @range_one_month.blank? )
+          year, month = relative_month_to( now, @range_one_month )
+          range_end = Date.new( year, month ).at_end_of_month()
+          @cacheable_end_indicator = "#{ @range_one_month }_month".to_sym
+
+        elsif ( not @range_month_end.blank? )
           year, month = unpack_string( @range_month_end )
           range_end = Date.new( year, month ).at_end_of_month()
+
+        elsif ( not @range_one_week.blank? )
+          year, week = relative_week_to( now, @range_one_week )
+          range_end = Timesheet.date_for( year, week, TimesheetRow::LAST_DAY, true )
+          @cacheable_end_indicator = "#{ @range_one_week }_week".to_sym
+
         elsif ( not @range_week_end.blank? )
           year, week = unpack_string( @range_week_end )
           range_end = Timesheet.date_for( year, week, TimesheetRow::LAST_DAY, true )
+
         else
-          range_end = Date.parse( @range_end )
+          range_end = Date.parse( @range_end.to_s ) # Forces an exception if range_start is nil, to fall back to all-time; else harmlessly re-parses date.
+
         end
+
       rescue
         range_end = default_range.max
+        @cacheable_end_indicator = :all
+
       end
 
       if ( range_end < range_start )
@@ -607,6 +727,9 @@ module TrackRecordReport
       else
         @range = range_start..range_end
       end
+
+      @cacheable_start_indicator ||= @range.first
+      @cacheable_end_indicator   ||= @range.last
 
       # Hard-coded range throttle to 32 days (just over a "longest month") for
       # daily reports to avoid excessive server load.
@@ -753,9 +876,6 @@ module TrackRecordReport
 
         # Work out the total for this cell, which will take care of per-user
         # totals in passing.
-
-        committed     =
-        not_committed =
 
         cell_data.calculate!(
           range,
@@ -1139,7 +1259,7 @@ module TrackRecordReport
       @user_data = []
 
       reportable_user_ids.each_index do | user_index |
-        @user_data[ user_index ]= ReportUserData.new
+        @user_data[ user_index ] = ReportUserData.new
       end
 
       # Start and the end of the committed packets array. For anything within
@@ -1150,7 +1270,7 @@ module TrackRecordReport
         range,
         committed,
         reportable_user_ids,
-        :add_committed_hours
+        :sum_committed_hours
       )
 
       # Same again, but for not committed hours.
@@ -1159,32 +1279,45 @@ module TrackRecordReport
         range,
         not_committed,
         reportable_user_ids,
-        :add_not_committed_hours
+        :sum_not_committed_hours
       )
     end
 
   private
 
-    # For the given array of work packets sorted by date descending, check the
-    # last entry and see if it is in the given range. If it is, include its
-    # worked hours in a running total and pop the item off the array. Pass an
-    # array of user IDs also and a method to call on an entry in the @user_data
-    # array; if the work packet's associated user ID is in the array then the
-    # user data object at the corresponding index in @user_data will have the
-    # given method called and passed the packet.
+    # Count the hours over the given range included in the given work packets.
+    # Packets outside the range are ignored. The range may be inclusive or
+    # exclusive; work packets *MUST* be passed as an ActiveRecord::Relation
+    # instance because ActiveRecord is used to sum the worked hours.
+    #
+    # In addition, and applying only to work packets that fall under the range
+    # already specified, pass an array of user IDs and a method to call on an 
+    # entry in the @user_data array. For each user ID entry, a @user_data array
+    # entry at the same index is called with the method you specify and is
+    # passed all work packets owned by the relevant user, again as a Relation
+    # (the Relation instance might yield no packets when resolved). The user
+    # data method might, say, use the Relation to count the hours involved.
     #
     def sum( range, packets, reportable_user_ids, user_data_method )
-      total  = 0.0
-      packet = packets[ -1 ]
 
-      while ( ( not packets.empty? ) and ( range.include?( packet.date.to_date ) ) )
-        total += packet.worked_hours
+      # As noted in the WorkPacket model's code (at the time of writing) for
+      # class method 'find_by_task_user_and_range', when using ranges as
+      # ActiveRecord conditions, inclusive ranges should always be used for
+      # safety as ActiveRecord may not otherwise protect from database quirks.
+      #
+      # We then use the database to do the calculation over the relevant range
+      # rather than using Ruby. This should be much faster, especially for
+      # large numbers of work packets - they never get loaded into RAM by Ruby.
 
-        index = reportable_user_ids.index( packet.timesheet_row.timesheet.user_id )
-        @user_data[ index ].send( user_data_method, packet ) unless ( index.nil? )
+      range   = Range.new( range.min, range.max ) if ( range.exclude_end? )
+      packets = packets.where( :date => range )
+      total   = packets.sum( :worked_hours )
 
-        packets.pop()
-        packet = packets[ -1 ]
+      # Don't forget to run the per-user calculations.
+
+      reportable_user_ids.each_with_index do | user_id, user_index |
+        user_packets = packets.where( :users => { :id => user_id } )
+        @user_data[ user_index ].send( user_data_method, user_packets ) 
       end
 
       return total
@@ -1212,16 +1345,18 @@ module TrackRecordReport
   #
   class ReportUserData < ReportElementaryCalculator
 
-    # Add the given work packet's hours to the internal committed total.
+    # Add the given ActiveRecord::Relation instance's collection of work
+    # packets to the internal committed total. The relation must specify
+    # only those packets to be added, precisely, as all are included.
     #
-    def add_committed_hours( packet )
-      @committed += packet.worked_hours
+    def sum_committed_hours( packets )
+      @committed += packets.sum( :worked_hours )
     end
-
-    # Add the given work packet's hours to the internal not committed total.
+    
+    # As "sum_committed_hours", but adds to the non-committed total.
     #
-    def add_not_committed_hours( packet )
-      @not_committed += packet.worked_hours
+    def sum_not_committed_hours( packets )
+      @not_committed += packets.sum( :worked_hours )
     end
   end
 
