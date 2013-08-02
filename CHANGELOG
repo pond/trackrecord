@@ -8,6 +8,17 @@ run this command:
 
   RAILS_ENV=production rake db:migrate
 
+Use of the Rails asset pipeline and updated gems, including Rails 3.2.14,
+mean you will also need to update your Gem bundle and precompile assets
+for production:
+
+  bundle install
+  rake assets:precompile
+
+This can be a fraught process and the best I can do is recommend you do
+web searches for any of the huge range of problems this process seems
+prone to throwing up; but with luck, it'll just work.
+
 Version 2.10 fixes the following bugs that were found in v2.04:
 
 - Errors made in a timesheet editor grid (e.g. non-numerical hours) would
