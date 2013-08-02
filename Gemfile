@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 # http://gembundler.com/v1.2/whats_new.html
 ruby '1.9.3'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -14,11 +14,12 @@ gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.
-# group :assets do
-#   gem 'sass-rails', "  ~> 3.1.0"
-#   gem 'coffee-rails', "~> 3.1.0"
-#   gem 'uglifier'
-# end
+group :assets do
+  gem 'therubyracer'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+end
 
 gem 'prototype-rails'
 
@@ -64,4 +65,4 @@ gem 'dynamic_form'
 # Visualisation aid - for more information, see:
 # http://railroady.prestonlee.com/
 
-gem 'railroady'
+# gem 'railroady'
