@@ -13,11 +13,14 @@ mean you will also need to update your Gem bundle and precompile assets
 for production:
 
   bundle install
-  rake assets:precompile
+  RAILS_ENV=production bundle exec rake assets:precompile
 
 This can be a fraught process and the best I can do is recommend you do
 web searches for any of the huge range of problems this process seems
-prone to throwing up; but with luck, it'll just work.
+prone to throwing up; but with luck, it'll just work. IMPORTANT: If you
+run the application from a subdirectory rather than the root of your
+domain, even if it's done transparently with Passenger, you have to take
+extra steps. See after the change details below for more.
 
 Version 2.10 fixes the following bugs that were found in v2.04:
 
@@ -67,6 +70,29 @@ There are the following enhancements:
 - Efficiency improvements by using ActiveRecord::Relation better, avoiding
   loading objects into RAM where possible, doing more in the database and
   less inside Ruby code.
+
+
+Deploying in a subdirectory
+---------------------------
+
+Rails asset precompilation is somewhat broken in that it doesn't understand
+applications deployed into subdirectories. If you are not using Heroku, you
+can fix this by adding the following into config/environments/production.rb:
+
+  config.assets.initialize_on_precompile = true
+  config.relative_url_root = '/<your-app-subdir>'
+
+...then precompile the assets. If already compiled, delete the folder
+'public/assets' then precompile again (see earlier for the command).
+
+On Heroku, the 'initialize' flag must be 'false'. The following link may
+provide some insight about what to do:
+
+  https://github.com/rails/rails/issues/8941
+
+I apologise for the inconvenience, but I can't do much about a bug like
+this that's been in Rails for at least two years, especially now that (at
+the time of writing) Rails 4 is out so a Rails 3 fix is even more unlikely.
 
 
 

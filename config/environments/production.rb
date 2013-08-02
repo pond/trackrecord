@@ -45,6 +45,9 @@ Trackrecord::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # 2013-08-02 (ADH): See:
   # http://stackoverflow.com/questions/10097993/rails-config-assets-precompile-setting-to-process-all-css-and-js-files-in-app-as
+  # ...and thus Rails Guides on precompilation for all assets. Of course their code
+  # doesn't work; you end up with 500 errors in production mode anyway; so use one
+  # from the StackOverflow page.
   config.assets.precompile << Proc.new { |path|
     if path =~ /\.(css|js)\z/
       full_path = Rails.application.assets.resolve(path).to_path
