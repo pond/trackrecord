@@ -61,7 +61,9 @@ module QuietPrototype
 
         data          = javascript_include_tag( 'prototype/prototype' )
         data << "\n" << javascript_include_tag( 'prototype_ujs/rails' )
-        data << "\n" << javascript_include_tag( 'scriptaculous/scriptaculous' )
+        data << "\n" << javascript_include_tag( 'scriptaculous/effects' )
+        data << "\n" << javascript_include_tag( 'scriptaculous/dragdrop' )
+        data << "\n" << javascript_include_tag( 'scriptaculous/controls' )
 
         return ( data.gsub( /^/, line_prefix ) + "\n" ).html_safe()
       end

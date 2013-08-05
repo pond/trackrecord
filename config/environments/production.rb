@@ -1,6 +1,15 @@
 Trackrecord::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # If you are not running in the root of your domain, set this variable
+  # to indicate the location. You must do this for asset precompilation
+  # to work properly, even if you are using something like Passenger which
+  # takes care of such things for you normally.
+  #
+  # So for example, if running from "http://www.test.com/trackrecord/", set
+  # a value of '/trackrecord'.
+  config.relative_url_root = ''
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -9,6 +18,9 @@ Trackrecord::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
+  # - to test precompiled assets under Webrick or similar ("rails s") set this
+  # to "true" and run the in production mode (e.g. "rails s -e production" or
+  # an equivalent command, "RAILS_ENV=production rails s")
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
@@ -42,28 +54,18 @@ Trackrecord::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # 2013-08-02 (ADH): See:
-  # http://stackoverflow.com/questions/10097993/rails-config-assets-precompile-setting-to-process-all-css-and-js-files-in-app-as
-  # ...and thus Rails Guides on precompilation for all assets. Of course their code
-  # doesn't work; you end up with 500 errors in production mode anyway; so use one
-  # from the StackOverflow page.
-  config.assets.precompile << Proc.new { |path|
-    if path =~ /\.(css|js)\z/
-      full_path = Rails.application.assets.resolve(path).to_path
-      app_assets_path = Rails.root.join('app', 'assets').to_path
-      vendor_assets_path = Rails.root.join('vendor', 'assets').to_path
+  # Make sure asset precompilation is aware of environment settings
+  config.assets.initialize_on_precompile = true
 
-      if ((full_path.starts_with? app_assets_path) || (full_path.starts_with? vendor_assets_path)) && (!path.starts_with? '_')
-        puts "\t" + full_path.slice(Rails.root.to_path.size..-1)
-        true
-      else
-        false
-      end
-    else
-      false
-    end
-  }
+  # Precompile *all* assets, except those that start with underscore. See:
+  #
+  #   http://blog.55minutes.com/2012/02/untangling-the-rails-asset-pipeline-part-3-configuration/
+  #
+  # Precompile with this rather convulted command:
+  #
+  #   RAILS_ENV=production bundle exec rake assets:precompile
+  #
+  config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

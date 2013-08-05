@@ -1,3 +1,52 @@
+Version 2.11, 2013-08-05
+========================
+
+The procedure to upgrade from any v2.x release or to install anew is the
+same, though upgraders may already have completed some steps:
+
+- INSTALLING:
+  If you are not using 'rvm' to manage your Ruby environment, I strongly
+  recommend getting that set up, though it's not essential. See:
+
+    https://rvm.io
+
+- INSTALLING:
+  If you haven't already, copy "config/database_blank.yml" as
+  "config/database.yml" and fill in the details for your database.
+  TrackRecord is tested on PostgreSQL 8 though others should work too.
+
+    http://www.postgresql.org
+
+- FOR UPGRADING OR INSTALLING v2.11:
+  Update config/production.rb with a path prefix if necessary. This step
+  is required because of a very long standing Rails bug.
+
+  See the comments above the "config.relative_url_root" line for details.
+  This is vital for anyone running TrackRecord in a non-root location,
+  even if you use something like Phusion Passenger and normally expect
+  to need no such configuration changes.
+
+    https://www.phusionpassenger.com
+
+- FOR UPGRADING OR INSTALLING v2.11:
+  Set up, or update your gem bundle, make sure your database is up to
+  date and make sure all the static assets (stylesheets etc.) are
+  precompiled fully:
+
+    bundle install
+    RAILS_ENV=production rake db:migrate
+    RAILS_ENV=production rake assets:clean
+    RAILS_ENV=production bundle exec rake assets:precompile
+
+Please do all of the upgrade steps if running any version 2 release prior
+to v2.11. If upgrading from version 1, please see the version 2.00 change
+log details towards the end of this file.
+
+Version 2.11 of TrackRecord fixes issues with the asset pipeline
+migration introduced in version 2.10 and clears up documentation to make
+installing and upgrading easier. There are no other changes or fixes.
+
+
 Version 2.10, 2013-08-02
 ========================
 
