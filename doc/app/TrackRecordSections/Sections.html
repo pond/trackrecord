@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportSection - YOUR_TITLE</title>
+<title>class TrackRecordSections::Sections - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/track_record_report.rb
+    <li>lib/track_record_sections.rb
   </ul>
 </nav>
 
@@ -59,11 +59,23 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  <p class="link">Object
   
 </nav>
 
-    
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
+  
+  
+  </ul>
+</nav>
+
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
@@ -71,10 +83,6 @@
   <ul class="link-list">
     
     <li><a href="#method-c-new">::new</a>
-    
-    <li><a href="#method-i-add_cell">#add_cell</a>
-    
-    <li><a href="#method-i-add_user_row_total">#add_user_row_total</a>
     
   </ul>
 </nav>
@@ -99,23 +107,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -207,8 +223,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -243,8 +257,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -266,31 +278,20 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class TrackRecordReport::ReportSection</h1>
+  <h1 class="class">class TrackRecordSections::Sections</h1>
 
   <div id="description" class="description">
     
-<p>Rows are grouped into sections. Whenever the customer or project of the
-currently processed row differs from a previously processed row, a new
-section is declared. The report’s “sections” array should be accessed by
-section index (see module <a
-href="../TrackRecordSections.html">TrackRecordSections</a> for details).</p>
+<p>The <a href="Sections.html">Sections</a> class processes an array of <a
+href="../Task.html">Task</a> instances provided by the instantiating
+caller. It determines where new <a href="Section.html">Section</a> or <a
+href="Group.html">Group</a> instances apply, in the context of running
+through the given <a href="../Task.html">Task</a> array in order from first
+element to last.</p>
 
-<p>Section objects contain an array of <a
-href="ReportCell.html">ReportCell</a> objects, just like a row, only this
-time each cell records the total hours in the column spanning all rows
-within the section. There is also a “<a
-href="ReportSection.html#attribute-i-user_row_totals">#user_row_totals</a>”
-array, again recording the hours for the user across the whole report time
-range and across all rows in the section.</p>
-
-<p>The <a href="ReportSection.html">ReportSection</a> object’s own hour totals
-give the sum of all hours by anybody across the whole report time range and
-all rows in the section. This is analogous to a <a
-href="ReportRow.html">ReportRow</a> object’s totals.</p>
-
-<p>Section totals are best calculated after the main per-row and per-column
-report data has been worked out for all rows and columns.</p>
+<p>Iterators and direct accessors are provided to get at processed <a
+href="Section.html">Section</a> and <a href="Group.html">Group</a>
+information.</p>
 
   </div><!-- description -->
 
@@ -305,43 +306,6 @@ report data has been worked out for all rows and columns.</p>
     
 
     
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
-
-      
-      <div id="attribute-i-cells" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">cells</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of <a href="ReportCell.html">ReportCell</a> objects. Analogous to the
-same-name array in a <a href="ReportRow.html">ReportRow</a>, but each cell
-corresponds to all rows in this section.</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-user_row_totals" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">user_row_totals</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of <a href="ReportUserRowTotal.html">ReportUserRowTotal</a> objects.
-Again, analogous to the same-name array in a <a
-href="ReportRow.html">ReportRow</a>, but correspond to multiple rows.</p>
-        
-        </div>
-      </div>
-      
-    </section><!-- attribute-method-details -->
-    
 
     <!-- Methods -->
     
@@ -353,7 +317,7 @@ href="ReportRow.html">ReportRow</a>, but correspond to multiple rows.</p>
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">()</span>
+            class="method-args">( tasks )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -365,11 +329,9 @@ href="ReportRow.html">ReportRow</a>, but correspond to multiple rows.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1178</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-keyword">super</span>()
-  <span class="ruby-ivar">@cells</span>           = []
-  <span class="ruby-ivar">@user_row_totals</span> = []
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 347</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">tasks</span> )
+  <span class="ruby-identifier">initialize_sections</span>( <span class="ruby-identifier">tasks</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -382,82 +344,6 @@ href="ReportRow.html">ReportRow</a>, but correspond to multiple rows.</p>
 
     
     </section><!-- public-class-method-details -->
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Instance Methods</h3>
-
-    
-      <div id="method-i-add_cell" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">add_cell</span><span
-            class="method-args">( cell, cell_index )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Add the given <a href="ReportCell.html">ReportCell</a> to the “@cells”
-array at the given cell index. If there is already a cell at this index,
-then add the hours to that cell. This makes it easy to iterate over rows
-and their cells, then add those hours progressively to the section cells to
-produce the multiple- row section totals.</p>
-          
-
-          
-          <div class="method-source-code" id="add_cell-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1190</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cell</span>( <span class="ruby-identifier">cell</span>, <span class="ruby-identifier">cell_index</span> )
-  <span class="ruby-identifier">dup_or_calc</span>( <span class="ruby-ivar">@cells</span>, <span class="ruby-identifier">cell</span>, <span class="ruby-identifier">cell_index</span> )
-  <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">cell</span> )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- add_cell-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- add_cell-method -->
-
-    
-      <div id="method-i-add_user_row_total" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">add_user_row_total</span><span
-            class="method-args">( user_row_total, user_index )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Call to add <a href="ReportUserRowTotal.html">ReportUserRowTotal</a>
-objects to the row’s @<a
-href="ReportSection.html#attribute-i-user_row_totals">#user_row_totals</a>
-array at the given user index. Again, multiple calls for the same index
-cause hours to be added, as with “<a
-href="ReportSection.html#method-i-add_cell">#add_cell</a>” above.s</p>
-          
-
-          
-          <div class="method-source-code" id="add_user_row_total-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1199</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_user_row_total</span>( <span class="ruby-identifier">user_row_total</span>, <span class="ruby-identifier">user_index</span> )
-  <span class="ruby-identifier">dup_or_calc</span>( <span class="ruby-ivar">@user_row_totals</span>, <span class="ruby-identifier">user_row_total</span>, <span class="ruby-identifier">user_index</span> )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- add_user_row_total-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- add_user_row_total-method -->
-
-    
-    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportCell - YOUR_TITLE</title>
+<title>class TrackRecordReport::CalculatorWithUsers - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -59,7 +59,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  <p class="link"><a href="Calculator.html">TrackRecordReport::Calculator</a>
   
 </nav>
 
@@ -72,9 +72,9 @@
     
     <li><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-add_user_data">#add_user_data</a>
+    <li><a href="#method-i-user_total">#user_total</a>
     
-    <li><a href="#method-i-calculate-21">#calculate!</a>
+    <li><a href="#method-i-user_total-21">#user_total!</a>
     
   </ul>
 </nav>
@@ -99,23 +99,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -207,8 +215,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -243,8 +249,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -266,27 +270,13 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class TrackRecordReport::ReportCell</h1>
+  <h1 class="class">class TrackRecordReport::CalculatorWithUsers</h1>
 
   <div id="description" class="description">
     
-<p>Store information about a specific task over a column’s date range.</p>
-
-<p>The object does not store the task or range data since this would be
-redundant across potentially numerous instances leading to significant RAM
-wastage. Instead:</p>
-<ul><li>
-<p>The <a href="ReportCell.html">ReportCell</a> objects are stored in a <a
-href="ReportRow.html">ReportRow</a> “cells” array. The array indices
-correspond directly to array indices of the Report’s “ranges” array,
-compiled as the first row of the report gets built.</p>
-</li><li>
-<p>The ReportRows’ “task” property gives the task object for that row.</p>
-</li></ul>
-
-<p>So - to find task and range, you need to know the row index of the <a
-href="ReportRow.html">ReportRow</a> and the column index of the <a
-href="ReportCell.html">ReportCell</a> this contains.</p>
+<p>A <a href="Calculator.html">Calculator</a> subclass which adds support for
+a hash of per-user <a href="Calculator.html">Calculator</a> instances
+accessed via user ID, as a string.</p>
 
   </div><!-- description -->
 
@@ -300,26 +290,6 @@ href="ReportCell.html">ReportCell</a> this contains.</p>
 
     
 
-    
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
-
-      
-      <div id="attribute-i-user_data" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">user_data</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p><a href="../User.html">User</a> breakdown for this cell</p>
-        
-        </div>
-      </div>
-      
-    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
@@ -344,10 +314,10 @@ href="ReportCell.html">ReportCell</a> this contains.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>()
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-keyword">super</span>()
-  <span class="ruby-ivar">@user_data</span> = []
+  <span class="ruby-ivar">@user_totals</span> = {}
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -365,101 +335,67 @@ href="ReportCell.html">ReportCell</a> this contains.</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-add_user_data" class="method-detail ">
+      <div id="method-i-user_total" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">add_user_data</span><span
-            class="method-args">( data )</span>
+          <span class="method-name">user_total</span><span
+            class="method-args">( user_id_str )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Add the given <a href="ReportUserData.html">ReportUserData</a> object to
-the “@<a href="ReportCell.html#attribute-i-user_data">#user_data</a>” array
-and add it to the internal running hourly count.</p>
+          <p>Return a <a href="Calculator.html">Calculator</a> object for the given user
+(as a string database ID), or nil if there is no such user record for this
+cell.</p>
           
 
           
-          <div class="method-source-code" id="add_user_data-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1242</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_user_data</span>( <span class="ruby-identifier">data</span> )
-  <span class="ruby-ivar">@user_data</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">data</span> )
-  <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">data</span> )
+          <div class="method-source-code" id="user_total-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">user_total</span>( <span class="ruby-identifier">user_id_str</span> )
+  <span class="ruby-ivar">@user_totals</span>[ <span class="ruby-identifier">user_id_str</span> ]
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- add_user_data-source -->
+          </div><!-- user_total-source -->
           
         </div>
 
         
 
         
-      </div><!-- add_user_data-method -->
+      </div><!-- user_total-method -->
 
     
-      <div id="method-i-calculate-21" class="method-detail ">
+      <div id="method-i-user_total-21" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">calculate!</span><span
-            class="method-args">( range, committed, not_committed, reportable_user_ids = [] )</span>
+          <span class="method-name">user_total!</span><span
+            class="method-args">( user_id_str )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Pass a date range, an array of committed work packets sorted by date
-descending, an array of not committed work packets sorted by date
-descending and an optional user IDs array. Hours are summed for work
-packets across the given range. Any work packets falling within the range
-are removed from the arrays. Separate totals for each of the users in the
-given array are maintained in the @<a
-href="ReportCell.html#attribute-i-user_data">#user_data</a> array.</p>
+          <p>Return a <a href="Calculator.html">Calculator</a> object for the given user
+(as a string database ID), lazy-creating a new instance if need be.</p>
           
 
           
-          <div class="method-source-code" id="calculate-21-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1254</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">calculate!</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">committed</span>, <span class="ruby-identifier">not_committed</span>, <span class="ruby-identifier">reportable_user_ids</span> = [] )
-  <span class="ruby-comment"># Reset internal calculations and pre-allocate ReportUserData objects for</span>
-  <span class="ruby-comment"># each user (if any).</span>
-
-  <span class="ruby-identifier">reset!</span>()
-  <span class="ruby-ivar">@user_data</span> = []
-
-  <span class="ruby-identifier">reportable_user_ids</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user_index</span> <span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@user_data</span>[ <span class="ruby-identifier">user_index</span> ] = <span class="ruby-constant">ReportUserData</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># Start and the end of the committed packets array. For anything within</span>
-  <span class="ruby-comment"># the given range, add the hours to the internal total and add to the</span>
-  <span class="ruby-comment"># relevant user</span>
-
-  <span class="ruby-ivar">@committed</span> = <span class="ruby-identifier">sum</span>(
-    <span class="ruby-identifier">range</span>,
-    <span class="ruby-identifier">committed</span>,
-    <span class="ruby-identifier">reportable_user_ids</span>,
-    <span class="ruby-value">:sum_committed_hours</span>
-  )
-
-  <span class="ruby-comment"># Same again, but for not committed hours.</span>
-
-  <span class="ruby-ivar">@not_committed</span> = <span class="ruby-identifier">sum</span>(
-    <span class="ruby-identifier">range</span>,
-    <span class="ruby-identifier">not_committed</span>,
-    <span class="ruby-identifier">reportable_user_ids</span>,
-    <span class="ruby-value">:sum_not_committed_hours</span>
-  )
+          <div class="method-source-code" id="user_total-21-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">user_total!</span>( <span class="ruby-identifier">user_id_str</span> )
+  <span class="ruby-ivar">@user_totals</span>[ <span class="ruby-identifier">user_id_str</span> ] <span class="ruby-operator">||=</span> <span class="ruby-constant">Calculator</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- calculate-21-source -->
+          </div><!-- user_total-21-source -->
           
         </div>
 
         
 
         
-      </div><!-- calculate-21-method -->
+      </div><!-- user_total-21-method -->
 
     
     </section><!-- public-instance-method-details -->

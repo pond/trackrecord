@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportElementaryCalculator - YOUR_TITLE</title>
+<title>class TrackRecordReport::Calculator - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -72,13 +72,7 @@
     
     <li><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-add-21">#add!</a>
-    
     <li><a href="#method-i-has_hours-3F">#has_hours?</a>
-    
-    <li><a href="#method-i-reset-21">#reset!</a>
-    
-    <li><a href="#method-i-subtract-21">#subtract!</a>
     
     <li><a href="#method-i-total">#total</a>
     
@@ -105,23 +99,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -213,8 +215,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -249,8 +249,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -272,12 +270,16 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class TrackRecordReport::ReportElementaryCalculator</h1>
+  <h1 class="class">class TrackRecordReport::Calculator</h1>
 
   <div id="description" class="description">
     
-<p>Very simple base class used to store some common properties and methods for
-objects which deal with worked hours.</p>
+<p>Basic object containing a committed and not-committed hour count, with some
+simple related helper methods.</p>
+
+<p>Clients manipulate the committed/not-committed values directly. They’re
+BigDecimals starting at zero. Higher levels of abstraction cause too great
+a performance hit.</p>
 
   </div><!-- description -->
 
@@ -305,7 +307,7 @@ objects which deal with worked hours.</p>
 
         <div class="method-description">
         
-        <p>Committed, not committed hours (floats)</p>
+        
         
         </div>
       </div>
@@ -318,7 +320,7 @@ objects which deal with worked hours.</p>
 
         <div class="method-description">
         
-        <p>Committed, not committed hours (floats)</p>
+        
         
         </div>
       </div>
@@ -348,9 +350,9 @@ objects which deal with worked hours.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-identifier">reset!</span>()
+  <span class="ruby-ivar">@committed</span> = <span class="ruby-ivar">@not_committed</span> = <span class="ruby-constant">BigDecimal</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">0</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -366,38 +368,6 @@ objects which deal with worked hours.</p>
   
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
-
-    
-      <div id="method-i-add-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">add!</span><span
-            class="method-args">( calculator )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Add the given calculator’s committed and not committed hours to this
-calculator’s hours.</p>
-          
-
-          
-          <div class="method-source-code" id="add-21-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 66</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">calculator</span> )
-  <span class="ruby-ivar">@committed</span>     <span class="ruby-operator">+=</span> <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">committed</span>
-  <span class="ruby-ivar">@not_committed</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">not_committed</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- add-21-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- add-21-method -->
 
     
       <div id="method-i-has_hours-3F" class="method-detail ">
@@ -416,9 +386,9 @@ calculator’s hours.</p>
 
           
           <div class="method-source-code" id="has_hours-3F-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 59</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_hours?</span>
-  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">total</span>() <span class="ruby-operator">&gt;</span> <span class="ruby-value">0.0</span> )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">total</span>() <span class="ruby-operator">&gt;</span> <span class="ruby-constant">BigDecimal</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">0</span> ) )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- has_hours-3F-source -->
           
@@ -428,68 +398,6 @@ calculator’s hours.</p>
 
         
       </div><!-- has_hours-3F-method -->
-
-    
-      <div id="method-i-reset-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">reset!</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Reset the object’s hour counts.</p>
-          
-
-          
-          <div class="method-source-code" id="reset-21-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 80</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">reset!</span>
-  <span class="ruby-ivar">@committed</span>     = <span class="ruby-value">0.0</span>
-  <span class="ruby-ivar">@not_committed</span> = <span class="ruby-value">0.0</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- reset-21-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- reset-21-method -->
-
-    
-      <div id="method-i-subtract-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">subtract!</span><span
-            class="method-args">( calculator )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Opposite of ‘add!’.</p>
-          
-
-          
-          <div class="method-source-code" id="subtract-21-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subtract!</span>( <span class="ruby-identifier">calculator</span> )
-  <span class="ruby-ivar">@committed</span>     <span class="ruby-operator">-=</span> <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">committed</span>
-  <span class="ruby-ivar">@not_committed</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">not_committed</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- subtract-21-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- subtract-21-method -->
 
     
       <div id="method-i-total" class="method-detail ">
@@ -508,7 +416,7 @@ calculator’s hours.</p>
 
           
           <div class="method-source-code" id="total-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 53</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total</span>
   <span class="ruby-keyword">return</span> ( <span class="ruby-ivar">@committed</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@not_committed</span> )
 <span class="ruby-keyword">end</span></pre>

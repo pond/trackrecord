@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportUserColumnTotal - YOUR_TITLE</title>
+<title>module TrackRecordSections::SectionMixin - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
+<body id="top" class="module">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/track_record_report.rb
+    <li>lib/track_record_sections.rb
   </ul>
 </nav>
 
@@ -56,13 +56,7 @@
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
-  
-  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
-  
-</nav>
-
+    
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -70,7 +64,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-calculate-21">#calculate!</a>
+    <li><a href="#method-i-initialize_section">#initialize_section</a>
+    
+    <li><a href="#method-i-title">#title</a>
     
   </ul>
 </nav>
@@ -95,23 +91,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -203,8 +207,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -239,8 +241,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -262,14 +262,14 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class TrackRecordReport::ReportUserColumnTotal</h1>
+  <h1 class="module">module TrackRecordSections::SectionMixin</h1>
 
   <div id="description" class="description">
     
-<p>Analogous to <a href="ReportUserRowTotal.html">ReportUserRowTotal</a>, but
-sums across all rows. The objects should be added to the <a
-href="Report.html">Report</a> object @user_column_totals array in the order
-of appearance in the Report’s @users array.</p>
+<p>All the guts of a <a href="Section.html">Section</a> class inside a module,
+so multiple inheritance-like behaviour can be used for Reports which need
+both Section-like and Row &lt; Calculator-like objects to keep per-section
+totals.</p>
 
   </div><!-- description -->
 
@@ -284,6 +284,52 @@ of appearance in the Report’s @users array.</p>
     
 
     
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-customer" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">customer</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-identifier" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">identifier</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-project" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">project</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
     <!-- Methods -->
     
@@ -291,40 +337,93 @@ of appearance in the Report’s @users array.</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-calculate-21" class="method-detail ">
+      <div id="method-i-initialize_section" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">calculate!</span><span
-            class="method-args">( rows, user_index )</span>
+          <span class="method-name">initialize_section</span><span
+            class="method-args">( identifier, project )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Pass an array of <a href="ReportRow.html">ReportRow</a> objects to sum over
-and the index in the row user summary arrays of the user in which you have
-an interest.</p>
+          <p>Initialize a section by passing in a unique identifier of your choice and a
+<a href="../Project.html">Project</a> instance (may be nil if this section
+has no project or customer).</p>
           
 
           
-          <div class="method-source-code" id="calculate-21-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1394</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">calculate!</span>( <span class="ruby-identifier">rows</span>, <span class="ruby-identifier">user_index</span> )
-  <span class="ruby-identifier">reset!</span>()
-
-  <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">row</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">user_row_totals</span>[ <span class="ruby-identifier">user_index</span> ] )
-  <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="initialize_section-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_section</span>( <span class="ruby-identifier">identifier</span>, <span class="ruby-identifier">project</span> )
+  <span class="ruby-ivar">@identifier</span> = <span class="ruby-identifier">identifier</span>
+  <span class="ruby-ivar">@project</span>    = <span class="ruby-identifier">project</span>
+  <span class="ruby-ivar">@customer</span>   = <span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:customer</span> )
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- calculate-21-source -->
+          </div><!-- initialize_section-source -->
           
         </div>
 
         
 
         
-      </div><!-- calculate-21-method -->
+      </div><!-- initialize_section-method -->
+
+    
+      <div id="method-i-title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">title</span><span
+            class="method-args">( context, plain_text = false )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a representation of the section title, based on the customer and
+project data passed to the constructor. Returns HTML-safe HTML data by
+default, or pass ‘true’ in the optional second parameter to return plain
+text only with no escaping (e.g. for CSV output, or any other non-HTML
+format).</p>
+
+<p>The method requires access to helper functions, such as “link_to” or
+“ApplicationHelper”. This is done via a context object you pass in via the
+mandatory first parameter. If you’re calling here from ERB code in a view,
+simply pass “self” here:</p>
+
+<pre>&lt;%= section.title( self ) %&gt;</pre>
+          
+
+          
+          <div class="method-source-code" id="title-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>( <span class="ruby-identifier">context</span>, <span class="ruby-identifier">plain_text</span> = <span class="ruby-keyword">false</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">return</span> <span class="ruby-string">'No customer, no project'</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@customer</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">plain_text</span> )
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;(No customer) #{ @project.title }&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;(No customer) #{ context.apphelp_augmented_link( @project ) }&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">plain_text</span> )
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;Customer #{ @customer.title } - #{ @project.title }&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;Customer #{ context.apphelp_augmented_link( @customer ) } - #{ context.apphelp_augmented_link( @project ) }&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- title-method -->
 
     
     </section><!-- public-instance-method-details -->

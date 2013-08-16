@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportUserData - YOUR_TITLE</title>
+<title>class TrackRecordReport::Row - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -59,7 +59,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  <p class="link"><a href="CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
   
 </nav>
 
@@ -70,9 +70,13 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-sum_committed_hours">#sum_committed_hours</a>
+    <li><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-sum_not_committed_hours">#sum_not_committed_hours</a>
+    <li><a href="#method-i-cell">#cell</a>
+    
+    <li><a href="#method-i-cell-21">#cell!</a>
+    
+    <li><a href="#method-i-has_cells-3F">#has_cells?</a>
     
   </ul>
 </nav>
@@ -97,23 +101,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -205,8 +217,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -241,8 +251,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -264,15 +272,14 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class TrackRecordReport::ReportUserData</h1>
+  <h1 class="class">class TrackRecordReport::Row</h1>
 
   <div id="description" class="description">
     
-<p>Store information about a user’s worked hours for a specific cell - that
-is, a specific task and date range. <a
-href="ReportUserData.html">ReportUserData</a> objects are associated with
-ReportCells, and those cells deal with passing over hours to be included in
-the user data total.</p>
+<p>A <a href="Row.html">Row</a> stores an array of Cells accessed by a
+date-based key of the caller’s choosing (just be consistent in your
+choices). It maintains its own running totals of the amounts in its cells,
+complete with per-user totals for the contributions to the row.</p>
 
   </div><!-- description -->
 
@@ -290,72 +297,139 @@ the user data total.</p>
 
     <!-- Methods -->
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-keyword">super</span>()
+
+  <span class="ruby-identifier">task_actual_remaining</span> = <span class="ruby-identifier">task_potential_remaining</span> = <span class="ruby-constant">BigDecimal</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">0</span> )
+  <span class="ruby-ivar">@cells</span> = {}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-sum_committed_hours" class="method-detail ">
+      <div id="method-i-cell" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">sum_committed_hours</span><span
-            class="method-args">( packets )</span>
+          <span class="method-name">cell</span><span
+            class="method-args">( date_based_key )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Add the given ActiveRecord::Relation instance’s collection of work packets
-to the internal committed total. The relation must specify only those
-packets to be added, precisely, as all are included.</p>
+          <p>Return the <a href="Cell.html">Cell</a> for the given date-based key, or
+‘nil’ if there is no such cell record for this row.</p>
           
 
           
-          <div class="method-source-code" id="sum_committed_hours-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1352</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sum_committed_hours</span>( <span class="ruby-identifier">packets</span> )
-  <span class="ruby-ivar">@committed</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">packets</span>.<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
+          <div class="method-source-code" id="cell-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cell</span>( <span class="ruby-identifier">date_based_key</span> )
+  <span class="ruby-ivar">@cells</span>[ <span class="ruby-identifier">date_based_key</span> ]
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- sum_committed_hours-source -->
+          </div><!-- cell-source -->
           
         </div>
 
         
 
         
-      </div><!-- sum_committed_hours-method -->
+      </div><!-- cell-method -->
 
     
-      <div id="method-i-sum_not_committed_hours" class="method-detail ">
+      <div id="method-i-cell-21" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">sum_not_committed_hours</span><span
-            class="method-args">( packets )</span>
+          <span class="method-name">cell!</span><span
+            class="method-args">( date_based_key )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>As “<a
-href="ReportUserData.html#method-i-sum_committed_hours">#sum_committed_hours</a>”,
-but adds to the non-committed total.</p>
+          <p>Return the <a href="Cell.html">Cell</a> for the given date-based key,
+lazy-creating a new instance if need be.</p>
           
 
           
-          <div class="method-source-code" id="sum_not_committed_hours-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1358</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sum_not_committed_hours</span>( <span class="ruby-identifier">packets</span> )
-  <span class="ruby-ivar">@not_committed</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">packets</span>.<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
+          <div class="method-source-code" id="cell-21-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cell!</span>( <span class="ruby-identifier">date_based_key</span> )
+  <span class="ruby-ivar">@cells</span>[ <span class="ruby-identifier">date_based_key</span> ] <span class="ruby-operator">||=</span> <span class="ruby-constant">Cell</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- sum_not_committed_hours-source -->
+          </div><!-- cell-21-source -->
           
         </div>
 
         
 
         
-      </div><!-- sum_not_committed_hours-method -->
+      </div><!-- cell-21-method -->
+
+    
+      <div id="method-i-has_cells-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_cells?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns ‘true’ if there are any cells on this row, else ‘false’.</p>
+          
+
+          
+          <div class="method-source-code" id="has_cells-3F-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_cells?</span>
+  <span class="ruby-keyword">not</span> <span class="ruby-ivar">@cells</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- has_cells-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- has_cells-3F-method -->
 
     
     </section><!-- public-instance-method-details -->

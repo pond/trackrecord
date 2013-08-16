@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportRow - YOUR_TITLE</title>
+<title>class TrackRecordSections::Group - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/track_record_report.rb
+    <li>lib/track_record_sections.rb
   </ul>
 </nav>
 
@@ -59,11 +59,23 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  <p class="link">Object
   
 </nav>
 
-    
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="GroupMixin.html">TrackRecordSections::GroupMixin</a>
+  
+  
+  </ul>
+</nav>
+
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
@@ -71,14 +83,6 @@
   <ul class="link-list">
     
     <li><a href="#method-c-new">::new</a>
-    
-    <li><a href="#method-i-add_cell">#add_cell</a>
-    
-    <li><a href="#method-i-add_user_row_total">#add_user_row_total</a>
-    
-    <li><a href="#method-i-delete_cell">#delete_cell</a>
-    
-    <li><a href="#method-i-delete_user_row_total">#delete_user_row_total</a>
     
   </ul>
 </nav>
@@ -103,23 +107,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -211,8 +223,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -247,8 +257,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -270,12 +278,14 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class TrackRecordReport::ReportRow</h1>
+  <h1 class="class">class TrackRecordSections::Group</h1>
 
   <div id="description" class="description">
     
-<p>Store information about a specific task over a full report date range. The
-parent report contains information about that range.</p>
+<p>Represent a single report, timesheet etc. group. Usually instantiation is
+done only by the <a href="Sections.html">Sections</a> class. Callers obtain
+references to instances only by enumeration or access methods again in the
+<a href="Sections.html">Sections</a> class.</p>
 
   </div><!-- description -->
 
@@ -289,52 +299,6 @@ parent report contains information about that range.</p>
 
     
 
-    
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
-
-      
-      <div id="attribute-i-cells" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">cells</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of <a href="ReportCell.html">ReportCell</a> objects</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-task" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">task</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p><a href="../Task.html">Task</a> for which this row exists</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-user_row_totals" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">user_row_totals</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of <a href="ReportUserRowTotal.html">ReportUserRowTotal</a> objects</p>
-        
-        </div>
-      </div>
-      
-    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
@@ -359,12 +323,9 @@ parent report contains information about that range.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1115</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">task</span> )
-  <span class="ruby-keyword">super</span>()
-  <span class="ruby-ivar">@cells</span>           = []
-  <span class="ruby-ivar">@user_row_totals</span> = []
-  <span class="ruby-ivar">@task</span>            = <span class="ruby-identifier">task</span>
+  <span class="ruby-identifier">initialize_group</span>( <span class="ruby-identifier">task</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -377,139 +338,6 @@ parent report contains information about that range.</p>
 
     
     </section><!-- public-class-method-details -->
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Instance Methods</h3>
-
-    
-      <div id="method-i-add_cell" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">add_cell</span><span
-            class="method-args">( cell )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Add the given <a href="ReportCell.html">ReportCell</a> object to the
-“@cells” array and increment the internal running total for the row.</p>
-          
-
-          
-          <div class="method-source-code" id="add_cell-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cell</span>( <span class="ruby-identifier">cell</span> )
-  <span class="ruby-ivar">@cells</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">cell</span> )
-  <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">cell</span> )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- add_cell-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- add_cell-method -->
-
-    
-      <div id="method-i-add_user_row_total" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">add_user_row_total</span><span
-            class="method-args">( user_row_total )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Call to add <a href="ReportUserRowTotal.html">ReportUserRowTotal</a>
-objects to the row’s @<a
-href="ReportRow.html#attribute-i-user_row_totals">#user_row_totals</a>
-array.</p>
-          
-
-          
-          <div class="method-source-code" id="add_user_row_total-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_user_row_total</span>( <span class="ruby-identifier">user_row_total</span> )
-  <span class="ruby-ivar">@user_row_totals</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">user_row_total</span> )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- add_user_row_total-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- add_user_row_total-method -->
-
-    
-      <div id="method-i-delete_cell" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">delete_cell</span><span
-            class="method-args">( index )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Delete a <a href="ReportCell.html">ReportCell</a> object from the “@cells”
-array at the given index.</p>
-          
-
-          
-          <div class="method-source-code" id="delete_cell-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_cell</span>( <span class="ruby-identifier">index</span> )
-  <span class="ruby-identifier">subtract!</span>( <span class="ruby-ivar">@cells</span>[ <span class="ruby-identifier">index</span> ] )
-  <span class="ruby-ivar">@cells</span>.<span class="ruby-identifier">delete_at</span>( <span class="ruby-identifier">index</span> )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- delete_cell-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- delete_cell-method -->
-
-    
-      <div id="method-i-delete_user_row_total" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">delete_user_row_total</span><span
-            class="method-args">( index )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Call to delete a row total from a specific index.</p>
-          
-
-          
-          <div class="method-source-code" id="delete_user_row_total-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_user_row_total</span>( <span class="ruby-identifier">index</span> )
-  <span class="ruby-ivar">@user_row_totals</span>.<span class="ruby-identifier">delete_at</span>( <span class="ruby-identifier">index</span> )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- delete_user_row_total-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- delete_user_row_total-method -->
-
-    
-    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

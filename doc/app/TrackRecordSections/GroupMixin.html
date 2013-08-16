@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class TrackRecordReport::ReportUserRowTotal - YOUR_TITLE</title>
+<title>module TrackRecordSections::GroupMixin - YOUR_TITLE</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
 
 
-<body id="top" class="class">
+<body id="top" class="module">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/track_record_report.rb
+    <li>lib/track_record_sections.rb
   </ul>
 </nav>
 
@@ -56,13 +56,7 @@
 
   <div id="class-metadata">
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
-  
-  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
-  
-</nav>
-
+    
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -70,7 +64,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-calculate-21">#calculate!</a>
+    <li><a href="#method-i-initialize_group">#initialize_group</a>
+    
+    <li><a href="#method-i-title">#title</a>
     
   </ul>
 </nav>
@@ -95,23 +91,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -203,8 +207,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -239,8 +241,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -262,16 +262,14 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class TrackRecordReport::ReportUserRowTotal</h1>
+  <h1 class="module">module TrackRecordSections::GroupMixin</h1>
 
   <div id="description" class="description">
     
-<p>Analogous to <a href="ReportUserData.html">ReportUserData</a>, but records
-the a user’s total worked hours for the whole row. <a
-href="ReportUserRowTotal.html">ReportUserRowTotal</a> objects should be
-added to a UserRow in the order the users appear in the Report’s @users
-array so that indices match between user data arrays in cells and the row
-user total arrays.</p>
+<p>All the guts of a <a href="Group.html">Group</a> class inside a module,
+mostly for consistency of implementation compared with the <a
+href="Section.html">Section</a> and <a href="Sections.html">Sections</a>
+classes.</p>
 
   </div><!-- description -->
 
@@ -286,6 +284,26 @@ user total arrays.</p>
     
 
     
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-task" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">task</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
     <!-- Methods -->
     
@@ -293,41 +311,70 @@ user total arrays.</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-calculate-21" class="method-detail ">
+      <div id="method-i-initialize_group" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">calculate!</span><span
-            class="method-args">( row, user_index )</span>
+          <span class="method-name">initialize_group</span><span
+            class="method-args">( task )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Pass a <a href="ReportRow.html">ReportRow</a> object containing user data
-to count and the index in the cell user data arrays of the user in which
-you have an interest.</p>
+          <p>Initialize a group by passing in a non-nil <a href="../Task.html">Task</a>
+instance.</p>
           
 
           
-          <div class="method-source-code" id="calculate-21-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 1374</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">calculate!</span>( <span class="ruby-identifier">row</span>, <span class="ruby-identifier">user_index</span> )
-  <span class="ruby-identifier">reset!</span>()
-
-  <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cells</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">cell</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">user_data</span> = <span class="ruby-identifier">cell</span>.<span class="ruby-identifier">user_data</span>[ <span class="ruby-identifier">user_index</span> ]
-    <span class="ruby-identifier">add!</span>( <span class="ruby-identifier">user_data</span> )
-  <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="initialize_group-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_group</span>( <span class="ruby-identifier">task</span> )
+  <span class="ruby-ivar">@task</span> = <span class="ruby-identifier">task</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- calculate-21-source -->
+          </div><!-- initialize_group-source -->
           
         </div>
 
         
 
         
-      </div><!-- calculate-21-method -->
+      </div><!-- initialize_group-method -->
+
+    
+      <div id="method-i-title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">title</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the group title, in plain text.</p>
+          
+
+          
+          <div class="method-source-code" id="title-source">
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
+  <span class="ruby-identifier">this_group</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">task_title</span> = <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
+  <span class="ruby-identifier">colon</span>      = <span class="ruby-identifier">task_title</span>.<span class="ruby-identifier">index</span>( <span class="ruby-string">':'</span> )
+  <span class="ruby-identifier">this_group</span> = <span class="ruby-identifier">task_title</span>[ <span class="ruby-value">0</span><span class="ruby-operator">..</span>( <span class="ruby-identifier">colon</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> ) ] <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">colon</span>.<span class="ruby-identifier">nil?</span> )
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">this_group</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- title-method -->
 
     
     </section><!-- public-instance-method-details -->
