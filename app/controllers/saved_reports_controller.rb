@@ -95,9 +95,14 @@ class SavedReportsController < SavedReportsBaseController
     @saved_report = nil
 
     if ( params.has_key?( :saved_report_id ) )
-      @saved_report = SavedReport.find_by_id( params[ :saved_report_id ] ) # No exception raised if record is not found
+      found_report = SavedReport.find_by_id( params[ :saved_report_id ] ) # No exception raised if record is not found
 
-      unless ( @saved_report.nil? )
+      unless ( found_report.nil? )
+        @saved_report                  = found_report.dup
+        @saved_report.active_tasks     = found_report.active_tasks
+        @saved_report.inactive_tasks   = found_report.inactive_tasks
+        @saved_report.reportable_users = found_report.reportable_users
+
         @saved_report.title << " (copy)"
       end
     end
@@ -142,7 +147,7 @@ class SavedReportsController < SavedReportsBaseController
     appctrl_patch_params_from_js( :saved_report, :inactive_task_ids )
 
     if ( saved_report.update_attributes( params[ :saved_report ] ) )
-      flash[ :notice ] = "Report details updated"
+      flash[ :notice ] = "Report details updated."
       redirect_to( report_path( saved_report ) )
     else
       render( :action => :edit )

@@ -9,7 +9,7 @@ gem 'rails', '3.2.14'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', '>=0.16' # 0.16 or later is essential if using PostgreSQL with TrackRecord as it means PostgreSQL 0.8.4 or later are present; for more on this or using other databases, see doc/README_FOR_APP.
 gem 'json'
 
 # Gems used only for assets and not required

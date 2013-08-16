@@ -6,9 +6,17 @@
 
     <%= form_for( :report, { :url => { :action => 'show' }, :method => :get } ) do | f | %><%= hidden_field_tag( :generator, "1" ) %>
 
+<% if ( @report.user_details ) -%> 
 <%= render :partial => 'comprehensive' %>
+<%= render( { :partial => 'export_elements', :locals  => { :form_type => :comprehensive } } ) %>
+<% end -%>
 <%= render :partial => 'tasks' %>
+<%= render( { :partial => 'export_elements', :locals  => { :form_type => :task } } ) %>
+<% unless ( @report.users.empty? ) -%>
 <%= render :partial => 'users' %>
+<%= render( { :partial => 'export_elements', :locals  => { :form_type => :user } } ) %>
+<% end -%>
+
 <%= "    " %><% end %>
 
     <!-- Form to modify report, make new report, cancel -->

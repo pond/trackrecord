@@ -1,13 +1,14 @@
 <%
   # Render with the following local variables:
   #
+  #   section              Current TrackRecordSections::Section instance
   #   timesheet_row        TimesheetRow instance being edited on this row
   #   timesheet_row_index  Index of this row in the overall timesheet (0...n)
   #   work_packet          WorkPacket instance being edited in this cell
   #   timesheet_col_index  Index of this cell as a column in the overall
   #                        timesheet (0...6)
 -%>
-<% id = "row_#{ timesheet_row_index }_col_#{ timesheet_col_index }_section_#{ sections_section_index() }" -%>
+<% id = "row_#{ timesheet_row_index }_col_#{ timesheet_col_index }_section_#{ section.identifier }" -%>
         <span class="ts_edit_wrapper" id="<%= id %>">
 <% name = "timesheet[timesheet_row_ids][#{ timesheet_row.id }][work_packet_ids][#{ work_packet.id }][worked_hours]"
    id   = name.gsub( /[\[\]]/, '_' ) -%>

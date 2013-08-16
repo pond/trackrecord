@@ -326,8 +326,7 @@ module ReportsHelper
   # to show "0.0" rather than "&nbsp;" in the zero hours total case.
   #
   def reporthelp_hours( calculator, show_zero = false )
-
-    if ( calculator.has_hours? )
+    if ( calculator.try( :has_hours? ) )
       output  = ''
       output << apphelp_terse_hours( calculator.total ) if ( @report.include_totals != false )
       output << ' (' if ( @report.include_totals != false and ( @report.include_committed != false or @report.include_not_committed != false ) )
@@ -408,13 +407,22 @@ module ReportsHelper
   def reporthelp_actions( report )
     if ( @current_user.admin? || report.user_id == @current_user.id )
       return [
-        'edit',
-        'delete',
-        'show',
         {
-          :title => 'Copy',
-          :url   => user_saved_report_copy_path( :user_id => @current_user.id, :saved_report_id => "%s" )
-        }
+          :title => :delete,
+          :url   => delete_user_saved_report_path( :user_id => report.user_id, :id => "%s" )
+        },
+        {
+          :title => :edit,
+          :url   => edit_user_saved_report_path( :user_id => report.user_id, :id => "%s" )
+        },
+        {
+          :title => :copy,
+          :url   => user_saved_report_copy_path( :user_id => report.user_id, :saved_report_id => "%s" )
+        },
+        {
+          :title => :show,
+          :url   => user_saved_report_path( :user_id => report.user_id, :id => "%s" )
+        },
       ]
     else
       return []

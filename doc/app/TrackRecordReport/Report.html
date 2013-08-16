@@ -59,7 +59,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+  <p class="link"><a href="CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
   
 </nav>
 
@@ -70,7 +70,7 @@
   <ul class="link-list">
   
   
-    <li><a class="include" href="../TrackRecordSections.html">TrackRecordSections</a>
+    <li><a class="include" href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
   
   </ul>
@@ -92,15 +92,37 @@
     
     <li><a href="#method-i-active_tasks">#active_tasks</a>
     
+    <li><a href="#method-i-column_count">#column_count</a>
+    
     <li><a href="#method-i-column_heading">#column_heading</a>
     
     <li><a href="#method-i-column_title">#column_title</a>
+    
+    <li><a href="#method-i-column_total">#column_total</a>
+    
+    <li><a href="#method-i-column_total-21">#column_total!</a>
     
     <li><a href="#method-i-compile">#compile</a>
     
     <li><a href="#method-i-display_range">#display_range</a>
     
+    <li><a href="#method-i-each_cell_for">#each_cell_for</a>
+    
+    <li><a href="#method-i-each_cell_for_user_on_row">#each_cell_for_user_on_row</a>
+    
+    <li><a href="#method-i-each_column_range">#each_column_range</a>
+    
+    <li><a href="#method-i-each_column_total">#each_column_total</a>
+    
+    <li><a href="#method-i-each_row">#each_row</a>
+    
+    <li><a href="#method-i-each_user">#each_user</a>
+    
+    <li><a href="#method-i-each_user_on_row">#each_user_on_row</a>
+    
     <li><a href="#method-i-frequency-3D">#frequency=</a>
+    
+    <li><a href="#method-i-has_rows-3F">#has_rows?</a>
     
     <li><a href="#method-i-inactive_task_ids-3D">#inactive_task_ids=</a>
     
@@ -128,9 +150,15 @@
     
     <li><a href="#method-i-reportable_user_ids-3D">#reportable_user_ids=</a>
     
+    <li><a href="#method-i-row">#row</a>
+    
+    <li><a href="#method-i-row-21">#row!</a>
+    
     <li><a href="#method-i-task_ids-3D">#task_ids=</a>
     
     <li><a href="#method-i-tasks-3D">#tasks=</a>
+    
+    <li><a href="#method-i-user_count">#user_count</a>
     
   </ul>
 </nav>
@@ -155,23 +183,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -263,8 +299,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -299,8 +333,6 @@
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="../TreesController.html">TreesController</a>
   
     <li><a href="../User.html">User</a>
@@ -326,8 +358,9 @@
 
   <div id="description" class="description">
     
-<p>Class which manages a report. See module <a
-href="../TrackRecordReport.html">TrackRecordReport</a> for an overview.</p>
+<p>A <a href="Report.html">Report</a> object queries the database for a set of
+numbers and compiles them into a set of Sections, Rows and Cells which can
+be queried via a accessors and enumerators provided herein.</p>
 
   </div><!-- description -->
 
@@ -356,7 +389,7 @@ column “title”, shown alongside or above column headings. Use the ‘<a
 href="Report.html#method-i-column_heading">#column_heading</a>’ method for
 per-column headings.</p>
 
-<p>THESE MUST STAY IN THE SAME ORDER!</p>
+<p><em>These must stay in the same order!</em></p>
 
 <p>If you add new entries, you must add them at the end of the list.</p>
 
@@ -365,6 +398,115 @@ and an index into its array of entries. If you produce a new TrackRecord
 version that changes the meaning of any array index rather than merely
 adding new entries, you will have to include a migration that maps old
 indices to new for existing saved report records.</p>
+
+<h2 id="label-IMPORTANT%21+Database+dependence">IMPORTANT! Database dependence</h2>
+
+<p><em>Executive summary: Reports are fast on PostgreSQL and slow on anything
+else, unless you take steps to make sure they run quickly.</em></p>
+
+<p>To run report sums in the database quickly, with minimum queries, the
+database is asked to group its calculations. When we can group using
+something that matches the columns of a report, we can get the database to
+in effect calculate the entire body of the report in one query. So for
+example, a monthly report would group by year and month number; any given
+date produces a unique year and month.</p>
+
+<p>To do this, the SQL ‘EXTRACT’ function is used by default.</p>
+<ul><li>
+<p><a
+href="http://www.postgresql.org/docs/8.3/static/functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT">www.postgresql.org/docs/8.3/static/functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT</a></p>
+</li><li>
+<p><a
+href="http://www.w3schools.com/sql/func_extract.asp">www.w3schools.com/sql/func_extract.asp</a></p>
+</li><li>
+<p><a
+href="http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions050.htm">docs.oracle.com/cd/B19306_01/server.102/b14200/functions050.htm</a></p>
+</li></ul>
+
+<p>With the standard report generator implementation, TrackRecord reports rely
+on being able to extract:</p>
+<ul><li>
+<p>YEAR (must match Ruby Date#year, i.e. numeric, four digit standard calendar
+year)</p>
+</li><li>
+<p>QUARTER (must match Ruby Date#quarter, i.e. numeric 1-4, simple 3 full
+month splits)</p>
+</li><li>
+<p>MONTH (must match Ruby Date#month, i.e. numeric 1-12)</p>
+</li><li>
+<p><em>WEEK - see below - so also ISOYEAR (PostgreSQL v8.3+ specific)</em></p>
+<ul><li>
+<p>Ruby mirrors ISOYEAR with Date#cwyear. PostgreSQL v8.3 and later also</p>
+</li></ul>
+
+<p>provide ISODOW (day-of-week), equivalent to Ruby’s Date#cwday, but that is
+not needed by TrackRecord.</p>
+</li></ul>
+
+<p>Weekly reports are thorny, because that requires grouping by some idea of a
+unique numbered week. The commercial week number is the obvious choice.
+MySQL and PostgreSQL provide a WEEK parameter for this in EXTRACT, but
+<em>Oracle does not offer this and can’t be used</em> without changing the
+TrackRecord report generator’s <a
+href="Report.html#FREQUENCY">FREQUENCY</a> constant for weekly reports, or
+disabling weekly reports entirely.</p>
+
+<p>In any case, even that is insufficient. The 31st December 2012 marks the
+start of commercial week number 1 for the commercial year 2013; but the
+date itself is in calendar year 2012. January 1st 2006 is actually the last
+day of commercial week 52 in the commercial year 2005, despite the date
+being in calendar year 2006. If we were to just use a standard calendar
+year, we’d get into trouble - 2012 would appear to contain week 1 twice,
+leading to numbers from entirely different time periods being combined in
+the report calculations.</p>
+
+<p>Thus <em>&lt;strong&gt;weekly reports will only function if you use
+PostgreSQL version 8.3 or later&lt;/strong&gt;</em> unless you modify the
+report code. Without modifications, Oracle and MySQL should work (but are
+not tested). Note that SQLite will <em>&lt;strong&gt;not work at
+all&lt;/strong&gt;</em> as it has no support for EXTRACT at all - you need
+to use ‘strftime’ instead, and this provides easily enough flexibility to
+support weekly reports too:</p>
+<ul><li>
+<p><a
+href="http://www.sqlite.org/lang_datefunc.html">www.sqlite.org/lang_datefunc.html</a></p>
+</li><li>
+<p><a
+href="http://stackoverflow.com/questions/9624601/activerecord-find-by-year-day-or-month-on-a-date-field">stackoverflow.com/questions/9624601/activerecord-find-by-year-day-or-month-on-a-date-field</a></p>
+</li></ul>
+
+<p>To modify <a href="Report.html#FREQUENCY">FREQUENCY</a> for a different
+database:</p>
+<ol><li>
+<p>Change “config/initializers/can_database_do_fast_reports.rb” so that the
+SLOW_DATABASE_ALTERNATIVE constant value is “false” for your database.
+Without this, you won’t be able to test your modifications to <a
+href="Report.html#FREQUENCY">FREQUENCY</a> as a “safe mode” fallback is
+active.</p>
+</li><li>
+<p>Change the “:grouping” key to the equivalent of the EXTRACT already
+present, noting that it shoudld always be an array, even if there’s only
+one group. Ensure that whatever you group by will lead to one group for
+every single unique column for the intended report, e.g. uniquely
+identifies months across many years, or weeks across awkward end-of-year
+boundaries.</p>
+</li><li>
+<p>Change the “:date_to_key” proc so that Ruby generates an array that matches
+the grouping keys returned by the database when it runs the query that
+calculates the report data. To find out that bit of the puzzle, search in
+“lib/track_record_report.rb” (i.e. this file) for the string
+“*date_based_key”. You’ll see a line of code that assigns this from a
+variable. Underneath that line, add in: “raise date_based_key.inspect” and
+generate a report of the column duration you are modifying, while in
+development mode. The raised exception will show in your browser the form
+of the value that the date-to-key proc must return.</p>
+</li></ol>
+
+<p>Also look at the code below the assignment of <a
+href="Report.html#FREQUENCY">FREQUENCY</a> to see how the slow “safe mode”
+is done. You could always create those values inside <a
+href="Report.html#FREQUENCY">FREQUENCY</a> by hand for report types you
+can’t generate in the database.</p>
         
       
       </dl>
@@ -420,54 +562,6 @@ the date. If the start or end date are start/end-of-all-time, one or both
 returns :all. If the report is being generated for a relative month or
 week, returns “last_”, “this_” or “two_” with a suffix of “month” or
 “week”, as a symbol, for both start and end.</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-column_count" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">column_count</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Number of columns after all calculations are complete; this is the same as
-the size of the ‘<a
-href="Report.html#attribute-i-column_ranges">#column_ranges</a>’ or ‘<a
-href="Report.html#attribute-i-column_totals">#column_totals</a>’ arrays
-below, but using this explicit property is likely to make code more
-legible.</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-column_ranges" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">column_ranges</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of ranges, one per column, giving the range for each of the columns
-held within the rows. The indices into this array match indices into the
-rows’ cell arrays.</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-column_totals" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">column_totals</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of <a href="ReportColumnTotal.html">ReportColumnTotal</a> objects,
-one per column, giving the total hours for that column. The indices into
-this array match indices into the rows’ cell arrays.</p>
         
         </div>
       </div>
@@ -588,7 +682,7 @@ per-user breakdowns; array of task IDs the report will represent.</p>
         <div class="method-description">
         
         <p>Range data for the ‘new’ view form. Custom attribute writer methods are
-used to call “rationalise_dates()” whenever a range value is altered.</p>
+used to call “rationalise_dates” whenever a range value is altered.</p>
         
         </div>
       </div>
@@ -654,7 +748,7 @@ used to call “rationalise_dates()” whenever a range value is altered.</p>
         <div class="method-description">
         
         <p>Range data for the ‘new’ view form. Custom attribute writer methods are
-used to call “rationalise_dates()” whenever a range value is altered.</p>
+used to call “rationalise_dates” whenever a range value is altered.</p>
         
         </div>
       </div>
@@ -694,37 +788,6 @@ used to call “rationalise_dates()” whenever a range value is altered.</p>
         <div class="method-description">
         
         
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-rows" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">rows</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of ReportRows making up the report. The row objects contain arrays of
-cells, corresponding to columns of the report.</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-sections" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">sections</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        <p>Array of <a href="ReportSection.html">ReportSection</a> objects describing
-per-section totals of various kinds. See the <a
-href="ReportSection.html">ReportSection</a> class and <a
-href="../TrackRecordSections.html">TrackRecordSections</a> module for
-details.</p>
         
         </div>
       </div>
@@ -796,6 +859,26 @@ users or tasks may be included, depending on security settings.</p>
         </div>
       </div>
       
+      <div id="attribute-i-throttled" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">throttled</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>A report’s total date span may be restricted to avoid generating giant
+reports which would swamp a server (for example, a daily report over
+hundreds or thousands of days would be a bad idea). If not done, this holds
+‘nil’, else the Date giving the <strong>original</strong> start date (the
+limited, actual start date used is in the “range” property).</p>
+
+<p>Views/generators can use it to include warnings that the start date was
+limited, should they so wish.</p>
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-title" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">title</span><span
@@ -804,7 +887,7 @@ users or tasks may be included, depending on security settings.</p>
 
         <div class="method-description">
         
-        
+        <p>Optional report title.</p>
         
         </div>
       </div>
@@ -823,6 +906,10 @@ duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
 ‘actual’ value only accounts for committed hours, while the ‘potential’
 value includes both committed and not-committed hours (thus, subject to
 change).</p>
+
+<p>A report that hides zero total rows will not include task durations on
+those rows. A report that shows them <strong>will</strong> include task
+durations on those rows.</p>
         
         </div>
       </div>
@@ -841,6 +928,10 @@ duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
 ‘actual’ value only accounts for committed hours, while the ‘potential’
 value includes both committed and not-committed hours (thus, subject to
 change).</p>
+
+<p>A report that hides zero total rows will not include task durations on
+those rows. A report that shows them <strong>will</strong> include task
+durations on those rows.</p>
         
         </div>
       </div>
@@ -859,21 +950,10 @@ duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
 ‘actual’ value only accounts for committed hours, while the ‘potential’
 value includes both committed and not-committed hours (thus, subject to
 change).</p>
-        
-        </div>
-      </div>
-      
-      <div id="attribute-i-user_column_totals" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">user_column_totals</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
 
-        <div class="method-description">
-        
-        <p>Array of <a href="ReportUserColumnTotal.html">ReportUserColumnTotal</a>
-objects, each index corresponding to a user the “users” array at the same
-index. These give the total work done by that user across all rows.</p>
+<p>A report that hides zero total rows will not include task durations on
+those rows. A report that shows them <strong>will</strong> include task
+durations on those rows.</p>
         
         </div>
       </div>
@@ -913,13 +993,14 @@ users or tasks may be included, depending on security settings.</p>
         <div class="method-description">
           
           <p>Class method equivalent of “label” above. Returns the label for the given
-frequency, which must be a valid index into Report::FREQUENCY. See also
-“labels” below.</p>
+frequency, which must be a valid index into the array defined by the <a
+href="Report.html#FREQUENCY">FREQUENCY</a> constant. See also “labels”
+below.</p>
           
 
           
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 397</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 899</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">label</span>( <span class="ruby-identifier">frequency</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">FREQUENCY</span>[ <span class="ruby-identifier">frequency</span> ][ <span class="ruby-value">:label</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -950,7 +1031,7 @@ frequencies. The index into the array indicates the frequency index.</p>
 
           
           <div class="method-source-code" id="labels-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 404</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 906</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">labels</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">FREQUENCY</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">f</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[ <span class="ruby-value">:label</span> ] }
 <span class="ruby-keyword">end</span></pre>
@@ -984,9 +1065,12 @@ submission.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 228</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 496</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span> )
-  <span class="ruby-ivar">@current_user</span> = <span class="ruby-identifier">current_user</span>
+
+  <span class="ruby-keyword">super</span>()
+
+  <span class="ruby-ivar">@current_user</span>          = <span class="ruby-identifier">current_user</span>
 
   <span class="ruby-ivar">@range_start</span>           = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@range_end</span>             = <span class="ruby-keyword">nil</span>
@@ -1008,8 +1092,13 @@ submission.</p>
   <span class="ruby-ivar">@exclude_zero_rows</span>     = <span class="ruby-keyword">false</span>
   <span class="ruby-ivar">@exclude_zero_cols</span>     = <span class="ruby-keyword">false</span> <span class="ruby-comment"># Totals only - ignores zero com/non-com columns in CSV exports for total/com/non-com column groups with non-zero totals</span>
 
-  <span class="ruby-ivar">@tasks</span>                 = []
-  <span class="ruby-ivar">@filtered_tasks</span>        = []
+  <span class="ruby-ivar">@rows</span>                  = {}
+  <span class="ruby-ivar">@column_totals</span>         = {}
+  <span class="ruby-ivar">@column_ranges</span>         = []
+  <span class="ruby-ivar">@column_keys</span>           = []
+
+  <span class="ruby-ivar">@tasks</span>                 = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">scoped</span>
+  <span class="ruby-ivar">@filtered_tasks</span>        = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">scoped</span>
   <span class="ruby-ivar">@task_ids</span>              = []
   <span class="ruby-ivar">@active_task_ids</span>       = []
   <span class="ruby-ivar">@inactive_task_ids</span>     = []
@@ -1073,7 +1162,7 @@ updated active task IDs.</p>
 
           
           <div class="method-source-code" id="active_task_ids-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 314</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 595</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_task_ids=</span>( <span class="ruby-identifier">ids</span> )
   <span class="ruby-ivar">@provided_active_task_ids</span> = <span class="ruby-identifier">map_raw_ids</span>( <span class="ruby-identifier">ids</span> )
   <span class="ruby-identifier">assign_actual_tasks_from_provided_ids</span>()
@@ -1106,9 +1195,9 @@ speed-critical as not used that often in practice).</p>
 
           
           <div class="method-source-code" id="active_tasks-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 286</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 562</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_tasks</span>
-  <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span> }
+  <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- active_tasks-source -->
           
@@ -1120,11 +1209,44 @@ speed-critical as not used that often in practice).</p>
       </div><!-- active_tasks-method -->
 
     
+      <div id="method-i-column_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">column_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Returns the number of columns the report generated, taking into account
+zero total columns and the “hide zero columns” flag.</p>
+          
+
+          
+          <div class="method-source-code" id="column_count-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 813</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_count</span>
+  <span class="ruby-ivar">@relevant_column_keys</span>.<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- column_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- column_count-method -->
+
+    
       <div id="method-i-column_heading" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">column_heading</span><span
-            class="method-args">( col_index )</span>
+            class="method-args">( range, plain_text = false )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -1132,15 +1254,18 @@ speed-critical as not used that often in practice).</p>
         <div class="method-description">
           
           <p>Helper method which returns a user-displayable column heading appropriate
-for the report type. Pass the column index.</p>
+for the report type. Pass a column range (see e.g. “<a
+href="Report.html#method-i-each_column_range">#each_column_range</a>”).
+Optionally pass “true” to replace “&lt;br /&gt;” with a space (if present)
+in the heading, for a plain text alternative.</p>
           
 
           
           <div class="method-source-code" id="column_heading-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 419</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_heading</span>( <span class="ruby-identifier">col_index</span> )
-  <span class="ruby-identifier">col_range</span> = <span class="ruby-ivar">@column_ranges</span>[ <span class="ruby-identifier">col_index</span> ]
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">send</span>( <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:column</span> ], <span class="ruby-identifier">col_range</span> )
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 923</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_heading</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">plain_text</span> = <span class="ruby-keyword">false</span> )
+  <span class="ruby-identifier">heading</span> = <span class="ruby-identifier">send</span>( <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:column</span> ], <span class="ruby-identifier">range</span> )
+  <span class="ruby-identifier">plain_text</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">heading</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-string">&quot;&lt;br /&gt;&quot;</span>, <span class="ruby-string">&quot; &quot;</span> ) <span class="ruby-operator">:</span> <span class="ruby-identifier">heading</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- column_heading-source -->
           
@@ -1171,7 +1296,7 @@ appropriate for the report type.</p>
 
           
           <div class="method-source-code" id="column_title-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 412</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 914</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">column_title</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:title</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -1183,6 +1308,79 @@ appropriate for the report type.</p>
 
         
       </div><!-- column_title-method -->
+
+    
+      <div id="method-i-column_total" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">column_total</span><span
+            class="method-args">( date_based_key )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return the total value as a <a href="Calculator.html">Calculator</a>
+subclass instance for the column identified by the given date-based key.</p>
+
+<p>Will return ‘nil’ if no such non-zero total column exists (yet). Only
+really useful if the report has been compiled by calling “compile”.</p>
+          
+
+          
+          <div class="method-source-code" id="column_total-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 672</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_total</span>( <span class="ruby-identifier">date_based_key</span> )
+  <span class="ruby-ivar">@column_totals</span>[ <span class="ruby-identifier">date_based_key</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- column_total-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- column_total-method -->
+
+    
+      <div id="method-i-column_total-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">column_total!</span><span
+            class="method-args">( date_based_key )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return the total value as a <a href="Cell.html">Cell</a> instance for the
+column identified by the given date-based key. A <a
+href="Cell.html">Cell</a> class is used so that per-user column totals can
+be maintained. Think of each column total as a cell in an extra total-based
+row of the report.</p>
+
+<p>Will create an empty zero-hour <a href="Cell.html">Cell</a> subclass
+instance in passing if necessary. Usually only useful during the process of
+report compilation (see “compile”) but may have specialist external uses
+too.</p>
+          
+
+          
+          <div class="method-source-code" id="column_total-21-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 686</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_total!</span>( <span class="ruby-identifier">date_based_key</span> )
+  <span class="ruby-ivar">@column_totals</span>[ <span class="ruby-identifier">date_based_key</span> ] <span class="ruby-operator">||=</span> <span class="ruby-constant">Cell</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- column_total-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- column_total-21-method -->
 
     
       <div id="method-i-compile" class="method-detail ">
@@ -1201,17 +1399,17 @@ appropriate for the report type.</p>
 
           
           <div class="method-source-code" id="compile-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 367</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 869</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">compile</span>
-  <span class="ruby-identifier">rationalise_dates</span>()
   <span class="ruby-identifier">apply_filters</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@filtered_tasks</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> ) <span class="ruby-comment"># Nothing to do...</span>
+
+  <span class="ruby-identifier">rationalise_dates</span>()
+  <span class="ruby-identifier">set_columns</span>()
   <span class="ruby-identifier">sort_and_group</span>()
+  <span class="ruby-identifier">initialize_sections</span>( <span class="ruby-ivar">@filtered_tasks</span>, <span class="ruby-constant">Section</span> ) <span class="ruby-comment"># TrackRecordSections::SectionsMixin</span>
 
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@filtered_tasks</span>.<span class="ruby-identifier">empty?</span> )
-
-  <span class="ruby-identifier">add_rows</span>()
-  <span class="ruby-identifier">add_columns</span>()
-  <span class="ruby-identifier">calculate!</span>()
+  <span class="ruby-identifier">calculate</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- compile-source -->
           
@@ -1240,7 +1438,7 @@ date range for this report.</p>
 
           
           <div class="method-source-code" id="display_range-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 389</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 891</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">display_range</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">heading_total</span>( <span class="ruby-ivar">@range</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -1252,6 +1450,326 @@ date range for this report.</p>
 
         
       </div><!-- display_range-method -->
+
+    
+      <div id="method-i-each_cell_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_cell_for</span><span
+            class="method-args">( row ) { |cell| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Iterate over the cells in a given <a href="Row.html">Row</a> or <a
+href="Row.html">Row</a> subclass. Calls a caller-supplied block, passing
+the cell instance. Will pass ‘nil’ for cells with a zero hour total (it is
+much faster to check for ‘nil’ many times than instantiate a useless cell
+object with zero values for its hours).</p>
+
+<p>A ‘nil’ input parameter value is allowed. The caller block will be invoked
+with ‘nil’ for each cell that <strong>would</strong> have been on the row
+if it existed.</p>
+          
+
+          
+          <div class="method-source-code" id="each_cell_for-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 729</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_cell_for</span>( <span class="ruby-identifier">row</span> ) <span class="ruby-comment"># :yields: cell</span>
+
+  <span class="ruby-comment"># We use zero column total values to indicate that an associated entry</span>
+  <span class="ruby-comment"># in the column ranges should be omitted.</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-ivar">@relevant_column_keys</span>.<span class="ruby-identifier">each</span> { <span class="ruby-keyword">yield</span>( <span class="ruby-keyword">nil</span> ) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@relevant_column_keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">date_based_key</span> <span class="ruby-operator">|</span>
+      <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cell</span>( <span class="ruby-identifier">date_based_key</span> ) )
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- each_cell_for-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- each_cell_for-method -->
+
+    
+      <div id="method-i-each_cell_for_user_on_row" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_cell_for_user_on_row</span><span
+            class="method-args">( user, row ) { |cell_for_user| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Results of calling here are undefined unless the report parameters tell it
+to include per-user details during compilation.</p>
+
+<p>For a given user and row, return cells for that row giving the column based
+totals for just that specific user. Zero columns are skipped if “hide zero
+columns” is enabled.</p>
+
+<p>This is similar to just doing “<a
+href="Report.html#method-i-each_cell_for">#each_cell_for</a>( row )” and
+calling the cell’s “user_total” method manually for whatever your current
+<a href="../User.html">User</a> of interest happens to be, but calling here
+takes care of that for you and deals with ‘nil’ cleanly in passing.</p>
+
+<p>The given <a href="../User.html">User</a> instance must be valid. The given
+<a href="Row.html">Row</a> instance may be ‘nil’. If so, either the block
+is called with ‘nil’ for each column if “hide zero rows” is disabled, else
+it isn’t called at all.</p>
+          
+
+          
+          <div class="method-source-code" id="each_cell_for_user_on_row-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 796</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_cell_for_user_on_row</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">row</span> ) <span class="ruby-comment"># :yields: cell_for_user</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-ivar">@relevant_column_keys</span>.<span class="ruby-identifier">each</span> { <span class="ruby-keyword">yield</span>( <span class="ruby-keyword">nil</span> ) } <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@exclude_zero_rows</span> )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">user_id_str</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-ivar">@relevant_column_keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">date_based_key</span> <span class="ruby-operator">|</span>
+      <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cell</span>( <span class="ruby-identifier">date_based_key</span> ).<span class="ruby-identifier">try</span>( <span class="ruby-value">:user_total</span>, <span class="ruby-identifier">user_id_str</span> ) )
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- each_cell_for_user_on_row-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- each_cell_for_user_on_row-method -->
+
+    
+      <div id="method-i-each_column_range" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_column_range</span><span
+            class="method-args">() { |column_range| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Iterate over all columns, calling a caller-supplied block with a Range
+object describing the Date range for each one, inclusive of column
+start/end. Always calls with a valid Range, never ‘nil’.</p>
+          
+
+          
+          <div class="method-source-code" id="each_column_range-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 836</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_column_range</span> <span class="ruby-comment"># :yields: column_range</span>
+
+  <span class="ruby-comment"># We use zero column total values to indicate that an associated entry</span>
+  <span class="ruby-comment"># in the column ranges should be omitted.</span>
+
+  <span class="ruby-ivar">@column_keys</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">date_based_key</span>, <span class="ruby-identifier">linear_column_index</span> <span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@exclude_zero_cols</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@column_totals</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-identifier">date_based_key</span> ) )
+    <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@column_ranges</span>[ <span class="ruby-identifier">linear_column_index</span> ]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- each_column_range-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- each_column_range-method -->
+
+    
+      <div id="method-i-each_column_total" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_column_total</span><span
+            class="method-args">() { |column_total| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Iterate over all column totals, calling the caller-supplied block with a <a
+href="Calculator.html">Calculator</a> subclass describing the total for
+that column. If the total is zero and ‘hide zero columns’ is disabled, your
+block will be called with ‘nil’ for that column.</p>
+          
+
+          
+          <div class="method-source-code" id="each_column_total-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 824</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_column_total</span> <span class="ruby-comment"># :yields: column_total</span>
+  <span class="ruby-ivar">@relevant_column_keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">date_based_key</span> <span class="ruby-operator">|</span>
+    <span class="ruby-keyword">yield</span>( <span class="ruby-ivar">@column_totals</span>[ <span class="ruby-identifier">date_based_key</span> ] )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- each_column_total-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- each_column_total-method -->
+
+    
+      <div id="method-i-each_row" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_row</span><span
+            class="method-args">() { |row, task| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Iterate over all defined rows, yielding a caller supplied block passing it
+the row and task in task list order. If “hide zero rows” is set, only
+defined rows and tasks with non-zero totals will be sent. Otherwise, you
+will be called with a row value of ‘nil’ and the task for which the row
+total was zero (it is much faster to check for ‘nil’ many times than
+instantiate a useless row object with zero values for its hours).</p>
+          
+
+          
+          <div class="method-source-code" id="each_row-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 710</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_row</span> <span class="ruby-comment"># :yields: row, task</span>
+  <span class="ruby-ivar">@filtered_tasks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">row</span> = <span class="ruby-ivar">@rows</span>[ <span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> ]
+    <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">row</span>, <span class="ruby-identifier">task</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@exclude_zero_rows</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- each_row-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- each_row-method -->
+
+    
+      <div id="method-i-each_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_user</span><span
+            class="method-args">() { |user| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Iterate over the list of users passed in the constructor, calling a
+caller-supplied block with the <a href="../User.html">User</a> instances in
+the order they were originally given. If “hide zero columns” is set, then
+only users with a non-zero overall total will be included.</p>
+          
+
+          
+          <div class="method-source-code" id="each_user-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 863</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_user</span> <span class="ruby-comment"># :yields: user</span>
+  <span class="ruby-ivar">@filtered_users</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">user</span> ) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- each_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- each_user-method -->
+
+    
+      <div id="method-i-each_user_on_row" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_user_on_row</span><span
+            class="method-args">( row ) { |user, user_total_for_row| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Results of calling here are undefined unless the report parameters tell it
+to include per-user details during compilation.</p>
+
+<p>For each user associated with a row, call the caller’s block with the <a
+href="../User.html">User</a> instance and the <a
+href="Calculator.html">Calculator</a> subclass giving the user’s total on
+that row. Will call with “nil” for each user in the row is “nil”, unless
+“hide zero rows” is enabled, in which case if given nil it will not call
+the block at all.</p>
+
+<p>The block is only called for a non-nil row if a user has a non-zero total,
+or if “hide zero rows” is disabled, in which case the user total instance
+may be ‘nil’ (but the <a href="../User.html">User</a> is always valid).</p>
+
+<p>See also “<a
+href="Report.html#method-i-each_cell_for_user_on_row">#each_cell_for_user_on_row</a>”.</p>
+          
+
+          
+          <div class="method-source-code" id="each_user_on_row-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 760</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_user_on_row</span>( <span class="ruby-identifier">row</span> ) <span class="ruby-comment"># :yields: user, user_total_for_row</span>
+
+  <span class="ruby-comment"># Not 'filtered_users' - those are aimed at the columns in reports</span>
+  <span class="ruby-comment"># where each *column* represents a user, so hide-zero-columns will</span>
+  <span class="ruby-comment"># result in hidden users. Here, we're looking at the per-user</span>
+  <span class="ruby-comment"># breakdown for a single task on a row. If hide-zero-cols is set</span>
+  <span class="ruby-comment"># but hide-zero-rows is not, we don't want to hide users here.</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-ivar">@users</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">user</span>, <span class="ruby-keyword">nil</span> ) } <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@exclude_zero_rows</span> )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">user_total_for_row</span> = <span class="ruby-identifier">row</span>.<span class="ruby-identifier">user_total</span>( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> )
+      <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">user_total_for_row</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@exclude_zero_rows</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">user_total_for_row</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- each_user_on_row-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- each_user_on_row-method -->
 
     
       <div id="method-i-frequency-3D" class="method-detail ">
@@ -1272,7 +1790,7 @@ when ‘frequency’ is updated externally.</p>
 
           
           <div class="method-source-code" id="frequency-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 348</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 629</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">frequency=</span>( <span class="ruby-identifier">freq</span> )
   <span class="ruby-ivar">@frequency</span>      = <span class="ruby-identifier">freq</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-ivar">@frequency_data</span> = <span class="ruby-constant">FREQUENCY</span>[ <span class="ruby-ivar">@frequency</span> ]
@@ -1285,6 +1803,40 @@ when ‘frequency’ is updated externally.</p>
 
         
       </div><!-- frequency-3D-method -->
+
+    
+      <div id="method-i-has_rows-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_rows?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Returns ‘true’ if the report has any non-zero hours counted for any of its
+rows, else ‘false’ (all tasks counted to zero hours within the other report
+constraints/parameters).</p>
+          
+
+          
+          <div class="method-source-code" id="has_rows-3F-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 696</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_rows?</span>
+  <span class="ruby-keyword">not</span> <span class="ruby-ivar">@rows</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- has_rows-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- has_rows-3F-method -->
 
     
       <div id="method-i-inactive_task_ids-3D" class="method-detail ">
@@ -1306,7 +1858,7 @@ updated inactive task IDs.</p>
 
           
           <div class="method-source-code" id="inactive_task_ids-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 322</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 603</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inactive_task_ids=</span>( <span class="ruby-identifier">ids</span> )
   <span class="ruby-ivar">@provided_inactive_task_ids</span> = <span class="ruby-identifier">map_raw_ids</span>( <span class="ruby-identifier">ids</span> )
   <span class="ruby-identifier">assign_actual_tasks_from_provided_ids</span>()
@@ -1337,9 +1889,9 @@ updated inactive task IDs.</p>
 
           
           <div class="method-source-code" id="inactive_tasks-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 292</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 568</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inactive_tasks</span>
-  <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span> }
+  <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- inactive_tasks-source -->
           
@@ -1368,7 +1920,7 @@ type. There’s a class method equivalent below.</p>
 
           
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 382</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 884</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:label</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -1386,7 +1938,7 @@ type. There’s a class method equivalent below.</p>
         
         <div class="method-heading">
           <span class="method-name">partial_column?</span><span
-            class="method-args">( col_index )</span>
+            class="method-args">( range )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -1400,17 +1952,16 @@ ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
 
           
           <div class="method-source-code" id="partial_column-3F-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 428</span>
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">partial_column?</span>( <span class="ruby-identifier">col_index</span> )
-
-<span class="ruby-comment"># [TODO] Doesn't work, because col_range accurately reflects the column range</span>
-<span class="ruby-comment">#        rather than the quantised range. Getting at the latter is tricky, so</span>
-<span class="ruby-comment">#        leaving this for later. At present the method is only used for display</span>
-<span class="ruby-comment">#        purposes in the column headings.</span>
-
-      <span class="ruby-identifier">col_range</span> = <span class="ruby-ivar">@column_ranges</span>[ <span class="ruby-identifier">col_index</span> ]
-      <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">col_range</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">min</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">col_range</span>.<span class="ruby-identifier">max</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">max</span> )
-    <span class="ruby-keyword">end</span></pre>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 932</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">partial_column?</span>( <span class="ruby-identifier">range</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">range</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@column_ranges</span>.<span class="ruby-identifier">first</span> )
+    <span class="ruby-ivar">@column_first_partial</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">range</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@column_ranges</span>.<span class="ruby-identifier">last</span> )
+    <span class="ruby-ivar">@column_last_partial</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
           </div><!-- partial_column-3F-source -->
           
         </div>
@@ -1437,7 +1988,7 @@ ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
 
           
           <div class="method-source-code" id="range_end-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 357</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 638</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_end=</span>( <span class="ruby-identifier">value</span> );         <span class="ruby-ivar">@range_end</span>         = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_end-3D-source -->
           
@@ -1465,7 +2016,7 @@ ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
 
           
           <div class="method-source-code" id="range_month_end-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 362</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 643</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_month_end=</span>( <span class="ruby-identifier">value</span> );   <span class="ruby-ivar">@range_month_end</span>   = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_month_end-3D-source -->
           
@@ -1493,7 +2044,7 @@ ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
 
           
           <div class="method-source-code" id="range_month_start-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 361</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 642</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_month_start=</span>( <span class="ruby-identifier">value</span> ); <span class="ruby-ivar">@range_month_start</span> = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_month_start-3D-source -->
           
@@ -1521,7 +2072,7 @@ ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
 
           
           <div class="method-source-code" id="range_one_month-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 363</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 644</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_one_month=</span>( <span class="ruby-identifier">value</span> );   <span class="ruby-ivar">@range_one_month</span>   = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_one_month-3D-source -->
           
@@ -1549,7 +2100,7 @@ ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
 
           
           <div class="method-source-code" id="range_one_week-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 360</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 641</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_one_week=</span>( <span class="ruby-identifier">value</span> );    <span class="ruby-ivar">@range_one_week</span>    = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_one_week-3D-source -->
           
@@ -1578,7 +2129,7 @@ externally.</p>
 
           
           <div class="method-source-code" id="range_start-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 356</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 637</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_start=</span>( <span class="ruby-identifier">value</span> );       <span class="ruby-ivar">@range_start</span>       = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_start-3D-source -->
           
@@ -1606,7 +2157,7 @@ externally.</p>
 
           
           <div class="method-source-code" id="range_week_end-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 359</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 640</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_week_end=</span>( <span class="ruby-identifier">value</span> );    <span class="ruby-ivar">@range_week_end</span>    = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_week_end-3D-source -->
           
@@ -1634,7 +2185,7 @@ externally.</p>
 
           
           <div class="method-source-code" id="range_week_start-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 358</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 639</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_week_start=</span>( <span class="ruby-identifier">value</span> );  <span class="ruby-ivar">@range_week_start</span>  = <span class="ruby-identifier">value</span>; <span class="ruby-identifier">rationalise_dates</span>(); <span class="ruby-keyword">end</span></pre>
           </div><!-- range_week_start-3D-source -->
           
@@ -1664,7 +2215,7 @@ is updated externally.</p>
 
           
           <div class="method-source-code" id="reportable_user_ids-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 329</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 610</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reportable_user_ids=</span>( <span class="ruby-identifier">ids</span> )
   <span class="ruby-identifier">ids</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-identifier">ids</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">values</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Hash</span> ) <span class="ruby-keyword">or</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">HashWithIndifferentAccess</span> ) )
@@ -1691,6 +2242,73 @@ is updated externally.</p>
       </div><!-- reportable_user_ids-3D-method -->
 
     
+      <div id="method-i-row" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">row</span><span
+            class="method-args">( task_id_str )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return the row defined for the given task ID, specified as a string.</p>
+
+<p>Will return ‘nil’ if no such row exists. Only really useful if the report
+has been compiled by calling “compile”.</p>
+          
+
+          
+          <div class="method-source-code" id="row-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 651</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">row</span>( <span class="ruby-identifier">task_id_str</span> )
+  <span class="ruby-ivar">@rows</span>[ <span class="ruby-identifier">task_id_str</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- row-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- row-method -->
+
+    
+      <div id="method-i-row-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">row!</span><span
+            class="method-args">( task_id_str )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return the row defined for the given task ID, specified as a string.</p>
+
+<p>Will create an empty <a href="Row.html">Row</a> instance in passing if
+necessary. Usually only useful during the process of report compilation
+(see “compile”) but may have specialist external uses too.</p>
+          
+
+          
+          <div class="method-source-code" id="row-21-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 661</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">row!</span>( <span class="ruby-identifier">task_id_str</span> )
+  <span class="ruby-ivar">@rows</span>[ <span class="ruby-identifier">task_id_str</span> ] <span class="ruby-operator">||=</span> <span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- row-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- row-21-method -->
+
+    
       <div id="method-i-task_ids-3D" class="method-detail ">
         
         <div class="method-heading">
@@ -1709,7 +2327,7 @@ externally.</p>
 
           
           <div class="method-source-code" id="task_ids-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 306</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 587</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">task_ids=</span>( <span class="ruby-identifier">ids</span> )
   <span class="ruby-ivar">@provided_task_ids</span> = <span class="ruby-identifier">map_raw_ids</span>( <span class="ruby-identifier">ids</span> )
   <span class="ruby-identifier">assign_actual_tasks_from_provided_ids</span>()
@@ -1741,9 +2359,14 @@ settings for the current user).</p>
 
           
           <div class="method-source-code" id="tasks-3D-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 299</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 575</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tasks=</span>( <span class="ruby-identifier">array</span> )
-  <span class="ruby-ivar">@tasks</span> = <span class="ruby-identifier">array</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span>
+    <span class="ruby-ivar">@tasks</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">array</span> )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@tasks</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">scoped</span>
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">update_internal_task_lists</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- tasks-3D-source -->
@@ -1754,6 +2377,39 @@ settings for the current user).</p>
 
         
       </div><!-- tasks-3D-method -->
+
+    
+      <div id="method-i-user_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">user_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Only useful for compiled reports - see “compile”.</p>
+
+<p>Returns the number of users the report considered, taking into account zero
+total users and the “hide zero columns” flag.</p>
+          
+
+          
+          <div class="method-source-code" id="user_count-source">
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 852</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">user_count</span>
+  <span class="ruby-ivar">@filtered_users</span>.<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- user_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- user_count-method -->
 
     
     </section><!-- public-instance-method-details -->

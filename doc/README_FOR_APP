@@ -10,6 +10,21 @@ ApplicationHelper components first. I recommend then looking at the models,
 so you become familiar with the application's underlying data structures.
 
 
+== Database requirements
+
+TrackRecord uses reasonably complex database queries from time to time but
+does so through Rails as far as possible, so ActiveRecord should take care
+of it - just choose your preferred adapter gem instead of e.g. "pg" in the
+Gemfile and run "bundle install", then set up "config/database.yml".
+
+<em><strong>However, the strong exception is for reports.</em></strong>
+See the documentation on TrackRecordReport::FREQUENCY for details.
+<em><strong>This is essential reading</strong></em> if changing databases,
+as by default on non-PostgreSQL databases, TrackRecord automatically
+enters a 'database safe mode' for reports and report generation is likely
+to run <em>extremely</em> slowly!
+
+
 == Extensions
 
 Aside from the usual mechanisms offered by Ruby and the Rails framework,

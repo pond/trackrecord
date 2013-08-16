@@ -15,7 +15,7 @@ module ProjectsHelper
 
   def projecthelp_customer( project )
     return '-'.html_safe() if ( project.customer.nil? )
-    return sections_augmented_link( project.customer )
+    return apphelp_augmented_link( project.customer )
   end
 
   # Return list actions appropriate for the given project

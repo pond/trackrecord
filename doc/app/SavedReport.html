@@ -99,23 +99,31 @@
   
     <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="./TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="./TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="./TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="./TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="./TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="./TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="./TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="./TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="./TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="./TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="./TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="./ReportsHelper.html">ReportsHelper</a>
   
@@ -207,8 +215,6 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -242,8 +248,6 @@
     <li><a href="./TimesheetsController.html">TimesheetsController</a>
   
     <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
-  
-    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
   
     <li><a href="./TreesController.html">TreesController</a>
   
@@ -472,6 +476,7 @@ instance.</p>
     <span class="ruby-comment"># which are not exposed in that hash and must be assigned manually.</span>
 
     <span class="ruby-ivar">@report</span>                     = <span class="ruby-constant">TrackRecordReport</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">attributes</span>() )
+
     <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">title</span>               = <span class="ruby-identifier">title</span>
     <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">active_task_ids</span>     = <span class="ruby-identifier">active_task_ids</span>
     <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">inactive_task_ids</span>   = <span class="ruby-identifier">inactive_task_ids</span>
@@ -510,7 +515,7 @@ instance.</p>
 
           
           <div class="method-source-code" id="range_end_cache-source">
-            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 123</span>
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_end_cache</span>
   <span class="ruby-identifier">raw_attr_val</span> = <span class="ruby-keyword">self</span>[ <span class="ruby-value">:range_end_cache</span> ]
   <span class="ruby-constant">CACHED_REVERSE_RANGE_MAP</span>[ <span class="ruby-identifier">raw_attr_val</span> ] <span class="ruby-operator">||</span> <span class="ruby-identifier">raw_attr_val</span>
@@ -549,7 +554,7 @@ last month/week, this month/week or two months/weeks ago, respectively
 
           
           <div class="method-source-code" id="range_start_cache-source">
-            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 118</span>
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_start_cache</span>
   <span class="ruby-identifier">raw_attr_val</span> = <span class="ruby-keyword">self</span>[ <span class="ruby-value">:range_start_cache</span> ]
   <span class="ruby-constant">CACHED_REVERSE_RANGE_MAP</span>[ <span class="ruby-identifier">raw_attr_val</span> ] <span class="ruby-operator">||</span> <span class="ruby-identifier">raw_attr_val</span>

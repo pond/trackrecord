@@ -175,7 +175,7 @@ class WorkPacket < ActiveRecord::Base
   # of task IDs and a sort order (SQL fragment, e.g. "date ASC").
   #
   def self.find_first_by_tasks_and_order( task_ids, order )
-    if ( task_ids.empty? )
+    if ( task_ids.count.zero? )
       return WorkPacket.significant.order( order ).first
 
     else

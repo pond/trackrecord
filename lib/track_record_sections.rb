@@ -3,142 +3,349 @@
 # (C)::     Hipposoft 2008
 #
 # Purpose:: Mixin providing abstract section handling for various bits
-#           of TrackRecord code.
+#           of TrackRecord code. Sections are defined in terms of an
+#           array of tasks in some pre-sorted order. Going from one task
+#           to the next, in order, may cause a new project and / or
+#           customer to be encountered related to that task; in such a
+#           case, the task is deemed to mark the start of a new section.
+#
+#           A similar concept is used for groups, but groups are based
+#           on task names. If a task title includes a colon character,
+#           then its group name is the title up to but excluding the
+#           first colon; else the group name is the whole task title.
+#           This is most often useful when used with bulk task import.
+#
+#           Both sections and groups are typically used for visual
+#           purposes when showing things like reports or timesheets. The
+#           calling code can associate data with group and section info,
+#           allowing it to independently maintain related information
+#           (such as as per-section worked hour totals in reports) if
+#           so required.
 # ----------------------------------------------------------------------
 #           30-Jun-2008 (ADH): Created.
+#           09-Aug-2013 (ADH): Complete API redesign to fit new fast
+#                              report mechanism. Much cleaner now.
 ########################################################################
 
 module TrackRecordSections
 
-  # Initialise the section discovery mechanism. Call this before processing
-  # rows. Then, for each row, call "new_section?" to find out if a new
-  # section has been entered with the given row, "section_title" to discover
-  # its title, then "new_group?" to find out if there is also a new group
-  # within the section (if you wish to make such a distinction).
+  # All the guts of a Section class inside a module, so multiple
+  # inheritance-like behaviour can be used for Reports which need
+  # both Section-like and Row < Calculator-like objects to keep
+  # per-section totals.
   #
-  # Instance variables are used to record progress across calls. These are:
-  #
-  #   @sections_last_customer (internal state)
-  #   @sections_last_project  (internal state)
-  #   @sections_last_group    (internal state)
-  #   @sections_current_index (internal state)
-  #
-  # Calling code must avoid these variable names.
-  #
-  # Each new section is given a monotonically rising index value, starting at
-  # zero. Use the "section_index" method to read the current section's index.
-  #
-  def sections_initialise_sections
-    @sections_last_customer = false
-    @sections_last_project  = false
-    @sections_last_group    = false
-    @sections_current_index = -1
-  end
+  module SectionMixin
+    attr_reader :project, :customer, :identifier
 
-  # For an object with a 'title', 'code' and 'description' attribute, make
-  # a link to that object showing its title as the link text, with a link
-  # title attribute consisting of the code and description (where either,
-  # both or neither may be an empty string or even nil). Returns the link.
-  #
-  def sections_augmented_link( obj )
-    title = ""
-    title << obj.code unless obj.try( :code ).blank?
-    title << "\n" unless title.empty? or obj.try( :description ).blank?
-    title << obj.description unless obj.try( :description ).blank?
-
-    content_tag(
-      :span,
-      link_to( h( obj.title ), obj ),
-      :title => title
-    )
-  end
-
-  # See "initialise_sections" for details; call here, passing a task related
-  # to the currently processed row, to find out if this task (and therefore
-  # its associated row) are the first row in a new section. Returns 'true' if
-  # so, else 'false'.
-  #
-  def sections_new_section?( task )
-    this_project  = task.project
-    this_customer = this_project.nil? ? nil : this_project.customer
-
-    changed = ( this_customer != @sections_last_customer or this_project != @sections_last_project )
-
-    if ( changed )
-      @sections_last_customer  = this_customer
-      @sections_last_project   = this_project
-      @sections_last_group     = sections_group_title( task )
-      @sections_current_index += 1
+    # Initialize a section by passing in a unique identifier of your choice
+    # and a Project instance (may be nil if this section has no project or
+    # customer).
+    #
+    def initialize_section( identifier, project )
+      @identifier = identifier
+      @project    = project
+      @customer   = project.try( :customer )
     end
 
-    return changed
-  end
-
-  # If "new_section?" returns 'true', call here to return a title appropriate
-  # for this section (it'll be based on customer and project name set up by
-  # the prior call to "new_section?"). Assumes an HTML view for the caller and
-  # may return HTML data (HTML safe, unescaped where necessary, might have
-  # links to things); however if you pass 'true' in the optional input
-  # parameter then plain text is returned with no escaping (e.g. for CSV).
-  #
-  def sections_section_title( plain_text = false ) 
-    if ( @sections_last_project.nil? )
-      return 'No customer, no project'
-    elsif ( @sections_last_customer.nil? )
-      if ( plain_text )
-        return "(No customer) #{ @sections_last_project.title }"
+    # Returns a representation of the section title, based on the customer and
+    # project data passed to the constructor. Returns HTML-safe HTML data by
+    # default, or pass 'true' in the optional second parameter to return plain
+    # text only with no escaping (e.g. for CSV output, or any other non-HTML
+    # format).
+    #
+    # The method requires access to helper functions, such as "link_to" or
+    # "ApplicationHelper". This is done via a context object you pass in via
+    # the mandatory first parameter. If you're calling here from ERB code in a
+    # view, simply pass "self" here:
+    #
+    #   <%= section.title( self ) %>
+    #
+    def title( context, plain_text = false )
+      if ( @project.nil? )
+        return 'No customer, no project'
+      elsif ( @customer.nil? )
+        if ( plain_text )
+          return "(No customer) #{ @project.title }"
+        else
+          return "(No customer) #{ context.apphelp_augmented_link( @project ) }".html_safe()
+        end
       else
-        return "(No customer) #{ sections_augmented_link( @sections_last_project ) }".html_safe()
-      end
-    else
-      if ( plain_text )
-        return "Customer #{ @sections_last_customer.title } - #{ @sections_last_project.title }"
-      else
-        return "Customer #{ sections_augmented_link( @sections_last_customer ) } - #{ sections_augmented_link( @sections_last_project ) }".html_safe()
+        if ( plain_text )
+          return "Customer #{ @customer.title } - #{ @project.title }"
+        else
+          return "Customer #{ context.apphelp_augmented_link( @customer ) } - #{ context.apphelp_augmented_link( @project ) }".html_safe()
+        end
       end
     end
   end
 
-  # Return the section index of the current section. Call any time after at
-  # least on prior call to "new_section?" (regardless of the return value of
-  # that prior call).
+  # Represent a single report, timesheet etc. section. Usually instantiation
+  # is done only by the Sections class. Callers obtain references to instances
+  # only by enumeration or access methods again in the Sections class.
   #
-  def sections_section_index
-    return @sections_current_index
+  class Section
+    include SectionMixin
+
+    def initialize( identifier, project )
+      initialize_section( identifier, project )
+    end
   end
 
-  # Similar to "new_section?", except returns 'true' when the task title
-  # indicates a group. A task title includes a group name if the title has at
-  # least one ":" (colon) character in it. Any part of the title before the
-  # first colon is considered a group name. View code usually makes only a
-  # subtle disctinction for changes in group, e.g. an extra vertical spacer,
-  # but if you want to explicitly show new group names then you can do so by
-  # calling "group_title" to recover the name string.
+  # All the guts of a Group class inside a module, mostly for consistency of
+  # implementation compared with the Section and Sections classes.
   #
-  # Unlike sections, groups are not given unique indices.
-  #
-  def sections_new_group?( task )
-    this_group = sections_group_title( task )
+  module GroupMixin
+    attr_reader :task
 
-    changed = ( this_group != @sections_last_group )
-    @sections_last_group = this_group if changed
+    # Initialize a group by passing in a non-nil Task instance.
+    #
+    def initialize_group( task )
+      @task = task
+    end
 
-    return changed
+    # Returns the group title, in plain text.
+    #
+    def title
+      this_group = nil
+      task_title = @task.title || ''
+      colon      = task_title.index( ':' )
+      this_group = task_title[ 0..( colon - 1 ) ] unless ( colon.nil? )
+
+      return this_group
+    end
   end
 
-  # Return the group name inferred from the given task title, or 'nil' for no
-  # apparent group name in the task title. See "new_group?" for details. The
-  # method is called "group_title" rather than "group_name" for symmetry with
-  # "section_title" - it's more natural when writing caller code to remember
-  # (or guess at!) a name of "group_title".
+  # Represent a single report, timesheet etc. group. Usually instantiation
+  # is done only by the Sections class. Callers obtain references to instances
+  # only by enumeration or access methods again in the Sections class.
   #
-  def sections_group_title( task )
-    this_group = nil
-    task_title = task.title || ''
-    colon      = task_title.index( ':' )
-    this_group = task_title[ 0..( colon - 1 ) ] unless ( colon.nil? )
+  class Group
+    include GroupMixin
 
-    return this_group
+    def initialize( task )
+      initialize_group( task )
+    end
   end
 
+  # All the guts of a Sections class inside a module, so multiple
+  # inheritance-like behaviour can be used for Reports which expose
+  # the Sections interface herein, along with their own Calculator
+  # interface for overall totals.
+  #
+  module SectionsMixin
+    attr_reader :sectionable_tasks
+
+    # Initialize by passing in the array of non-nil Task instances that 
+    # will be used for group and section processing. This must already
+    # be in an order that makes sense for such processing, e.g. sorted
+    # by project, customer, task title.
+    #
+    # Ideally, pass an ActiveRecord::Relation instance that'll return a
+    # set of appropriately sorted objects for most efficient operation.
+    #
+    # In the optional section parameter, pass a Class which will be
+    # instantiated instead of TrackRecordSections::Section whenever a
+    # new section is being defined. The class must include SectionMixin
+    # along with whatever other behaviour it might define (which is of
+    # interest only to the caller and ignored herein). The custom
+    # class constructor must have the same signature as, and must call
+    # module method "initialize_section()".
+    #
+    def initialize_sections( tasks, optionalClass = Section )
+
+      # Take care not to cause this to get reordered; it may be a
+      # sorted ActiveRecord::Relation.
+
+      @sectionable_tasks = tasks || []
+
+      # Create new Section objects and a map between task IDs and
+      # those objects, so we can get to them quickly.
+      #
+      # We run through the tasks in the array order. Whether or
+      # not a task needs a new Section object instance, because
+      # it represents a hithertoo unencountered project/customer
+      # combination, tells us that this task's row will sit at
+      # the top of a new section in e.g. a generated report. Keep
+      # track of that flag in another task-keyed hash as it'll be
+      # very useful for section-aware generators or similar views.
+      #
+      # Groups are also handled in this loop, creating a set of
+      # flags, but not needing new section objects. While sections
+      # are uniquely identified by a combination of project and
+      # customer, groups are uniquely identified by title. Group
+      # titles are based upon the presence of colon characters in
+      # task names (everything up to the first colon).
+
+      @task_to_section_map = {}
+      @task_starts_section = {}
+      @sections            = {}
+      section_identifier   = 0
+
+      # Groups are harder as we have to consider the no-colon-in-title
+      # "ungrouped" tasks and how we need to treat it as a group change
+      # if we change from ungrouped to group task, or vice versa.
+
+      @task_to_group_map   = {}
+      @task_starts_group   = {}
+      @groups              = {}
+      previous_group_id    = nil # Intentional potential first-row match to "ungrouped" task
+
+      tasks.each do | task |
+        task_id_str = task.id.to_s
+
+        project_id  = task.project.try( :id ) || '-'
+        customer_id = task.project.try( :customer ).try( :id ) || '-'
+        section_id  = "#{ customer_id }_#{ project_id }"
+        found       = @sections[ section_id ]
+
+        if ( found.nil? )
+          @task_starts_section[ task_id_str ] = true
+          @task_to_section_map[ task_id_str ] = @sections[ section_id ] = optionalClass.new( section_identifier += 1, task.project )
+        else
+          @task_starts_section[ task_id_str ] = false
+          @task_to_section_map[ task_id_str ] = found
+        end
+
+        group    = Group.new( task )
+        group_id = group.title()
+        found    = @groups[ group_id ]
+
+        if ( found.nil? )
+          @task_starts_group[ task_id_str ] = true
+          @task_to_group_map[ task_id_str ] = @groups[ group_id ] = group
+        else
+          @task_starts_group[ task_id_str ] = ( previous_group_id != group_id )
+          @task_to_group_map[ task_id_str ] = found
+        end
+
+        previous_group_id = group_id
+      end
+    end
+
+    # Obtain a Section instance related to the given task, specified as
+    # a task ID in string form.
+    #
+    def section( task_id_str )
+      @task_to_section_map[ task_id_str ]
+    end
+
+    # Returns 'true' if the given task, specified as a task ID in string
+    # form, starts a new Section.
+    #
+    def starts_new_section?( task_id_str )
+      @task_starts_section[ task_id_str ]
+    end
+
+    # Obtain a Group instance related to the given task, specified as
+    # a task ID in string form.
+    #
+    def group( task_id_str )
+      @task_to_group_map[ task_id_str ]
+    end
+    
+    # Returns 'true' if the given task, specified as a task ID in string
+    # form, starts a new Group.
+    #
+    def starts_new_group?( task_id_str )
+      @task_starts_group[ task_id_str ]
+    end
+
+    # For the given task, which must be an instance present in the array
+    # of tasks given in the constructor, retrieve an array containing in
+    # order first to last index: a Section, a flag indicating that the
+    # task started a new Section if true, a Group and a flag indicating
+    # that the task started a new Group if true.
+    #
+    # The task must be specified by its ID, as a string.
+    #
+    def retrieve( task_id_str )
+      [
+        @task_to_section_map[ task_id_str ],
+        @task_starts_section[ task_id_str ],
+        @task_to_group_map  [ task_id_str ],
+        @task_starts_group  [ task_id_str ]
+      ]
+    end
+
+    # Iterate over the tasks provided in the constructor, in the same
+    # order as provided in the construtor. The caller's block is invoked
+    # with parameters of the task, a Section, a flag indicating that the
+    # task started a new Section if true, a Group and a flag indicating
+    # that the task started a new Group if true.
+    #
+    def each_task
+      tasks.each do | task |
+        section, is_new_section, group, is_new_group = retrieve( task.id.to_s )
+        yield( task, section, is_new_section, group, is_new_group )
+      end
+    end
+
+    # Retrieve all Sections, perhaps in order to assign caller data.
+    # Call with a block, invoked with a Section instance at each iteration.
+    # The returned Section order is arbitrary. Use e.g. "iterate()" for
+    # deterministic ordering.
+    #
+    def each_section
+      @sections.each_value do | section |
+        yield( section )
+      end
+    end
+
+    # As "each_section()", but for Groups.
+    #
+    def each_group
+      @groups.each_value do | group |
+        yield( group )
+      end
+    end
+
+    # If you want to change the task list at some later time, with some
+    # tasks omitted, call here to retain all section and group data but
+    # reasses the "this task starts a new section/group" flag settings
+    # in view of the new task list.
+    #
+    # The new task list can be a reordered version of the original and
+    # can have tasks omitted from the original, but may contain no new
+    # tasks. Results are undefined in such a case.
+    #
+    # The internal record of the task list is necessarily updated (else
+    # it would mismatch the flags) so the "each_task" enumerator will,
+    # after calling here, return the new tasks list, not the original.
+    #
+    def reassess_start_flags_using( tasks )
+      @sectionable_tasks = tasks || []
+
+      previous_section = nil
+      previous_group   = nil
+
+      tasks.each do | task |
+        task_id_str = task.id.to_s
+        s           = section( task_id_str )
+        g           = group( task_id_str )
+
+        @task_starts_section[ task_id_str ] = ( s != previous_section )
+        @task_starts_group  [ task_id_str ] = ( g != previous_group   )
+
+        previous_section = s
+        previous_group   = g
+      end
+    end
+
+  end
+
+  # The Sections class processes an array of Task instances provided by
+  # the instantiating caller. It determines where new Section or Group
+  # instances apply, in the context of running through the given Task
+  # array in order from first element to last.
+  #
+  # Iterators and direct accessors are provided to get at processed
+  # Section and Group information.
+  #
+  class Sections
+    include SectionsMixin
+
+    def initialize( tasks )
+      initialize_sections( tasks )
+    end
+  end
 end

@@ -79,10 +79,10 @@ module TrackRecordReportGenerator::UkOrgPondCSV
     fformat   = '%Y-%m-%d' # Less compressed ISO-style
     stoday    = Date.current.strftime( sformat )
     ftoday    = Date.current.strftime( fformat )
-    sstart_at = report.range.first.strftime( sformat )
-    fstart_at = report.range.first.strftime( fformat )
-    send_at   = report.range.last.strftime( sformat )
-    fend_at   = report.range.last.strftime( fformat )
+    sstart_at = report.range.min.strftime( sformat )
+    fstart_at = report.range.min.strftime( fformat )
+    send_at   = report.range.max.strftime( sformat )
+    fend_at   = report.range.max.strftime( fformat )
     filename  = "report_#{ label }_on_#{ stoday }_for_#{ sstart_at }_to_#{ send_at }.csv"
     title     = [
       "#{ report_type.to_s.capitalize } report on #{ ftoday }",
@@ -147,10 +147,10 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
         file_row = [ report.column_title, 'Code', 'Billable?', 'Active?' ]
 
-        report.column_ranges.each_index do | col_index |
-          partial = report.partial_column?( col_index ) ? ' (partial)' : ''
+        report.each_column_range do | range |
+          partial = report.partial_column?( range ) ? ' (partial)' : ''
           headings.each do | heading |
-            file_row << "#{ report.column_heading( col_index ) }#{ partial }#{ heading }"
+            file_row << "#{ report.column_heading( range, true ) }#{ partial }#{ heading }"
           end
         end
 
@@ -168,24 +168,24 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
         # Section and task list, date range breakdown.
 
-        sections_initialise_sections()
-        report.rows.each_index do | row_index |
+        application_helper = Object.new.extend( ApplicationHelper )
 
-          row      = report.rows[ row_index ]
-          task     = report.filtered_tasks[ row_index ]
+        report.each_row do | row, task |
+
+          section, is_new_section, group, is_new_group = @report.retrieve( task.id.to_s )
           file_row = []
 
           # New section? Write out the section title and totals if so.
 
-          if ( sections_new_section?( task ) )
-            file_row << sections_section_title( true )
+          if ( is_new_section )
+            file_row << section.title( nil, true )
             file_row << ( task.project.try( :code ) || '-' ) << '' << ''
 
-            row.cells.each_index do | col_index |
-              file_row << uk_org_pond_hours( report, report.sections[ sections_section_index() ].cells[ col_index ] )
+            report.each_cell_for( section ) do | section_cell |
+              file_row << uk_org_pond_hours( report, section_cell )
             end
 
-            file_row << uk_org_pond_hours( report, report.sections[ sections_section_index() ] )
+            file_row << uk_org_pond_hours( report, section )
 
             if ( report.filtered_users.empty? )
               file_row << '' << '' << ''
@@ -197,14 +197,12 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
           # Task title, data and summary information
 
-          application_helper = Object.new.extend( ApplicationHelper )
-
           file_row << " -- #{ task.title }"
           file_row << task.code
           file_row << application_helper.apphelp_boolean( task.billable )
           file_row << application_helper.apphelp_boolean( task.active   )
 
-          row.cells.each do | cell |
+          report.each_cell_for( row ) do | cell |
             file_row << uk_org_pond_hours( report, cell )
           end
 
@@ -215,26 +213,23 @@ module TrackRecordReportGenerator::UkOrgPondCSV
               file_row << '' << '' << ''
             else
               file_row << task.duration
-              file_row << task.duration - row.committed
-              file_row << task.duration - row.total
+              file_row << task.duration - ( row.try( :committed ) || 0 )
+              file_row << task.duration - ( row.try( :total     ) || 0 )
             end
           end
 
           csv << file_row.flatten
 
           if ( comprehensive )
-            report.filtered_users.each_index do | index |
-              user = report.filtered_users[ index ]
-              user_total = TrackRecordReport::ReportColumnTotal.new
+            report.each_user_on_row( row ) do | user, row_total_for_user |
 
               file_row = [ " ---- #{ user.name }", '', '', '' ]
 
-              row.cells.each do | cell |
-                user_total.add_cell( cell )
-                file_row << uk_org_pond_hours( report, cell.user_data[ index ] )
+              report.each_cell_for_user_on_row( user, row ) do | cell_for_user |
+                file_row << uk_org_pond_hours( report, cell_for_user )
               end
 
-              file_row << uk_org_pond_hours( report, user_total )
+              file_row << uk_org_pond_hours( report, row_total_for_user )
             end
 
             csv << file_row.flatten
@@ -245,7 +240,7 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
         file_row = [ 'Column total', '', '', '' ]
 
-        report.column_totals.each do | total |
+        report.each_column_total do | total |
           file_row << uk_org_pond_hours( report, total )
         end
 
@@ -268,7 +263,7 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
         file_row = [ '', 'Code', 'Billable?', 'Active?' ]
 
-        report.filtered_users.each do | user |
+        report.each_user do | user |
           headings.each do | heading |
             file_row << "#{ user.name }#{ heading }"
           end
@@ -282,24 +277,24 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
         # Section and task list, user breakdown.
 
-        sections_initialise_sections()
-        report.rows.each_index do | row_index |
+        application_helper = Object.new.extend( ApplicationHelper )
 
-          row      = report.rows[ row_index ]
-          task     = report.filtered_tasks[ row_index ]
+        report.each_row do | row, task |
+
+          section, is_new_section, group, is_new_group = @report.retrieve( task.id.to_s )
           file_row = []
 
           # New section? Write out the section title and totals if so.
 
-          if ( sections_new_section?( task ) )
-            file_row << sections_section_title( true )
+          if ( is_new_section )
+            file_row << section.title( nil, true )
             file_row << ( task.project.try( :code ) || '-' ) << '' << ''
 
-            report.filtered_users.each_index do | user_index |
-              file_row << uk_org_pond_hours( report, report.sections[ sections_section_index() ].user_row_totals[ user_index ] )
+            report.each_user do | user |
+              file_row << uk_org_pond_hours( report, section.try( :user_total, user.id.to_s ) )
             end
 
-            file_row << uk_org_pond_hours( report, report.sections[ sections_section_index() ] )
+            file_row << uk_org_pond_hours( report, section )
 
             csv << file_row.flatten
             file_row = []
@@ -307,15 +302,13 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
           # Task title, data and summary information
 
-          application_helper = Object.new.extend( ApplicationHelper )
-
           file_row << " -- #{ task.title }"
           file_row << task.code
           file_row << application_helper.apphelp_boolean( task.billable )
           file_row << application_helper.apphelp_boolean( task.active   )
 
-          row.user_row_totals.each do | user_row_total |
-            file_row << uk_org_pond_hours( report, user_row_total )
+          report.each_user do | user |
+            file_row << uk_org_pond_hours( report, row.try( :user_total, user.id.to_s ) )
           end
 
           file_row << uk_org_pond_hours( report, row )
@@ -326,8 +319,8 @@ module TrackRecordReportGenerator::UkOrgPondCSV
 
         file_row = [ 'Column total', '', '', '' ]
 
-        report.user_column_totals.each do | user_column_total |
-          file_row << uk_org_pond_hours( report, user_column_total )
+        report.each_user do | user |
+          file_row << uk_org_pond_hours( report, report.try( :user_total, user.id.to_s ) )
         end
 
         file_row << uk_org_pond_hours( report, report )
@@ -340,9 +333,9 @@ module TrackRecordReportGenerator::UkOrgPondCSV
       #
       def uk_org_pond_hours( report, calculator )
         a = []
-        a << uk_org_pond_terse_hours( calculator.total         ) if ( report.include_totals         )
-        a << uk_org_pond_terse_hours( calculator.committed     ) if ( report.include_committed      )
-        a << uk_org_pond_terse_hours( calculator.not_committed ) if ( report.include_not_committed  )
+        a << uk_org_pond_terse_hours( calculator.try( :total         ) || 0 ) if ( report.include_totals         )
+        a << uk_org_pond_terse_hours( calculator.try( :committed     ) || 0 ) if ( report.include_committed      )
+        a << uk_org_pond_terse_hours( calculator.try( :not_committed ) || 0 ) if ( report.include_not_committed  )
         return a
       end
 

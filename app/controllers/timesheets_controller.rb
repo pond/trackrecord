@@ -141,6 +141,8 @@ class TimesheetsController < ApplicationController
     return appctrl_not_permitted() unless @timesheet.can_be_modified_by?( @current_user )
 
     set_next_prev_week_variables( @timesheet )
+    set_sections( @timesheet )
+
     @selected_rows = []
   end
 
@@ -160,7 +162,9 @@ class TimesheetsController < ApplicationController
     end
 
     @timesheet.reload()
+
     set_next_prev_week_variables( @timesheet )
+    set_sections( @timesheet )
 
     if ( @errors.empty? )
       flash[ :notice ] = "Week #{ @timesheet.week_number } changes saved."
@@ -220,6 +224,7 @@ class TimesheetsController < ApplicationController
     return appctrl_not_permitted() unless ( @timesheet and ( @current_user.privileged? or @timesheet.user_id == @current_user.id ) )
 
     set_next_prev_week_variables_for_show( @timesheet )
+    set_sections( @timesheet )
   end
 
   # Timesheets should not normally be destroyed. Only administrators
@@ -254,6 +259,14 @@ private
   def set_next_prev_week_variables_for_show( timesheet )
     @next_week = timesheet.showable_week( true  )
     @prev_week = timesheet.showable_week( false )
+  end
+
+  # Set "@sections" to a TrackRecordSections::Sections instance for the
+  # given timesheet's tasks (as defined by its in-position-order rows).
+  #
+  def set_sections( timesheet )
+    tasks = timesheet.tasks.reorder( '"timesheet_rows"."position"' )
+    @sections = TrackRecordSections::Sections.new( tasks )
   end
 
   # Back-end method that takes the complex form submission of an

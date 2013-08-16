@@ -1,18 +1,20 @@
 <%-
-# Based on "@report", render a comprehensive per-task, per-user report
-# with 'export' button. Produces no visible output if the report isn't
-# configured to generate comprehensive data.
+# Based on "@report", render a comprehensive per-task, per-user report.
+# Only render if the report's "user_details" flag is set.
 -%>
 <% if ( @report.filtered_tasks.empty? or @report.filtered_users.empty? ) -%>
-<%   if ( @report.filtered_users.empty? and not @report.users.empty? ) -%>
     <h2 class="report_subtitle">
       Comprehensive report for <%= @report.display_range %>
     </h2>
-
+<%   if ( @report.filtered_users.empty? and not @report.users.empty? ) -%>
     <p>
       None of the selected users booked any hours against the reportable tasks
       within the time range specified.
     <p>
+<%   else -%>
+    <p>
+      Cannot find any tasks or users for this report.
+    </p>
 <%   end -%>
 <% elsif ( @report.user_details ) %>
     <!-- Per-task, per-user fully detailed report -->
@@ -26,7 +28,7 @@
     <p>
       No tasks matching your report&rsquo;s specification can be found.
     </p>
-<%   elsif ( @report.rows.empty? ) -%>
+<%   elsif ( not @report.has_rows? ) -%>
     <p>
       There are no non-zero totals for rows in the requested report.
     </p>
@@ -39,12 +41,16 @@
       <tr class="info">
         <th>&nbsp;</th>
 
-<%     @report.column_ranges.each_index do | col_index | -%>
-<%       if ( @report.partial_column?( col_index ) ) -%>
-        <th><%= @report.column_heading( col_index ) %> (partial)</th>
-<%       else -%>
-        <th><%= @report.column_heading( col_index ) %></th>
+<%     @report.each_column_range do | range | -%>
+        <th>
+          <span title="<%= apphelp_range_plain( range ) %>">
+            <%= @report.column_heading( range ) %>
+<%       if ( @report.partial_column?( range ) ) -%>
+            <br />
+            <em>(partial)</em>
 <%       end -%>
+          </span>
+        </th>
 <%     end -%>
 
         <th>Row total</th>
@@ -52,30 +58,27 @@
 
       <!-- Section and task list, date range breakdown -->
 
-<%     sections_initialise_sections()
-       @report.rows.each_index do | row_index |
-      
-         row  = @report.rows[ row_index ]
-         task = @report.filtered_tasks[ row_index ]
-      
-         if ( sections_new_section?( task ) )
-           row_class = cycle( 'even', 'odd' ) -%>
+<%
+       @report.each_row do | row, task |
+         section, is_new_section, group, is_new_group = @report.retrieve( task.id.to_s )
+
+         if ( is_new_section )
+           row_class = cycle( 'even', 'odd' )
+-%>
       <!-- New section -->
 
       <tr class="<%= row_class %>">
-        <th class="ts_show_heading"><%= sections_section_title() %></th>
-<%         row.cells.each_index do | col_index | -%>
-        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( @report.sections[ sections_section_index() ].cells[ col_index ] ) %></th>
+        <th class="ts_show_heading"><%= section.title( self ) %></th>
+<%         @report.each_cell_for( section ) do | section_cell | -%>
+        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( section_cell ) %></th>
 <%         end -%>
-        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( @report.sections[ sections_section_index() ], true ) %></th>
+        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( section, true ) %></th>
       </tr>
-<%       end -%>
-
-<%       if ( sections_new_group?( task ) ) -%>
+<%       elsif ( is_new_group ) -%>
       <!-- New group -->
 
       <tr class="even group_gap">
-        <th colspan="<%= @report.column_count + 2 %>"></th>
+        <th colspan="<%= @report.column_count() + 2 %>"></th>
       </tr>
 
 <%       end -%>
@@ -84,12 +87,12 @@
 <%       row_class = cycle( 'even', 'odd' ) -%>
       <tr class="ts_show_row <%= row_class %>">
         <td class="ts_show_task <%= taskhelp_billable_class( task ) %> <%= taskhelp_active_class( task ) %>">
-          <%= sections_augmented_link( task ) %>
+          <%= apphelp_augmented_link( task ) %>
         </td>
 
         <!-- Task cross-user breakdown -->
 
-<%       row.cells.each do | cell | -%>
+<%       @report.each_cell_for( row ) do | cell | -%>
         <td class="ts_show_work"><%= reporthelp_hours( cell ) %></td>
 <%       end -%>
 
@@ -100,24 +103,21 @@
 
       <!-- Task per-user data -->
 
-<%       @report.filtered_users.each_index do | index |
-           user = @report.filtered_users[ index ]
-           user_total = TrackRecordReport::ReportColumnTotal.new -%>
+<%       @report.each_user_on_row( row ) do | user, row_total_for_user | -%>
       <tr class="ts_show_row <%= row_class %>">
-        <td class="ts_show_task ts_task_user_detail <%= taskhelp_billable_class( task ) %> <%= taskhelp_active_class( task ) %>">
+        <td class="ts_show_task ts_task_user_detail">
           &nbsp;&mdash;&nbsp;<%= user.name %>
         </td>
 
         <!-- Task per-user breakdown -->
 
-<%         row.cells.each do | cell |
-             user_total.add_cell( cell ) -%>
-        <td class="ts_show_work ts_work_user_detail"><%= reporthelp_hours( cell.user_data[ index ] ) %></td>
+<%         @report.each_cell_for_user_on_row( user, row ) do | cell_for_user | -%>
+        <td class="ts_show_work ts_work_user_detail"><%= reporthelp_hours( cell_for_user ) %></td>
 <%         end -%>
 
         <!-- Task per-user total -->
 
-        <th class="ts_show_total ts_total_user_detail total"><%= reporthelp_hours( user_total, true ) %></th>
+        <th class="ts_show_total ts_total_user_detail total"><%= reporthelp_hours( row_total_for_user, true ) %></th>
       </tr>
 <%       end -%>
 <%     end -%>
@@ -127,7 +127,7 @@
       <tr class="<%= cycle( 'even', 'odd' ) %>">
         <th class="total">Column total:</th>
 
-<%     @report.column_totals.each do | total | -%>
+<%     @report.each_column_total do | total | -%>
         <td class="total"><%= reporthelp_hours( total, true ) %></td>
 <%     end -%>
 
@@ -135,6 +135,5 @@
       </tr>
     </table>
 
-<%=    render( { :partial => 'export_elements', :locals  => { :form_type => :comprehensive } } ) %>
 <%   end -%>
 <% end -%>

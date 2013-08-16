@@ -328,8 +328,10 @@ protected
   # override the use of ":task_ids" for the second dimension "params" array
   # reference.
   #
+  #--
   # [TODO]: Do this in the JS instead? Requires multiple hiddden INPUTs to
   # [TODO]: be dynamically created, one for each array entry; slow, complex
+  #++
   #
   def appctrl_patch_params_from_js( sym, name = :task_ids )
     task_ids = (params[ sym ] || {} )[ name ] || []

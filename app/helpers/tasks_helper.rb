@@ -53,14 +53,14 @@ module TasksHelper
 
   def taskhelp_project( task )
     return '-'.html_safe() if ( task.project.nil? )
-    return sections_augmented_link( task.project )
+    return apphelp_augmented_link( task.project )
   end
 
   # Return a name of a given task's associated customer, for use in list views.
 
   def taskhelp_customer( task )
     return '-'.html_safe() if ( task.project.nil? or task.project.customer.nil? )
-    return sections_augmented_link( task.project.customer )
+    return apphelp_augmented_link( task.project.customer )
   end
 
   # Return a formatted duration for the given task, for use in list views.

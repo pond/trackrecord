@@ -79,23 +79,31 @@
   
     <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="./TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="./TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="./TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="./TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="./TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="./TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="./TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="./TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="./TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="./TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="./TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="./ReportsHelper.html">ReportsHelper</a>
   
@@ -187,8 +195,6 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -223,8 +229,6 @@
   
     <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
   
-    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
-  
     <li><a href="./TreesController.html">TreesController</a>
   
     <li><a href="./User.html">User</a>
@@ -256,32 +260,86 @@ instances are passed to generators - see <a
 href="TrackRecordReportGenerator.html">TrackRecordReportGenerator</a> for
 details.</p>
 
-<p>A report has property “row”, an array of <a
-href="TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
-objects and “filtered_tasks”, an array of the <a href="Task.html">Task</a>
-model instances corresponding to the same-index rows. Each row has property
-“cells”, an array of <a
-href="TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
-objects corresponding to the time columns spanned by the report; so a daily
-report would have cells describing a day of worked hours, a weekly report
-would have cells for the weeks and so-on. The report has a “column_ranges”
-property that yields an array of Range objects giving the dates for each
-cell at an equivalent index in a row’s cell array.</p>
+<p>A compilable <a href="TrackRecordReport/Report.html">Report</a> sets
+attributes from parameters passed in, which might be the result of a Rails
+form submission for a potentially new or edited <a
+href="SavedReport.html">SavedReport</a> instance - or more commonly, the
+“attributes()” call result on an existing <a
+href="SavedReport.html">SavedReport</a> instance. Either way, all the
+attributes are copied internally with extra processing and filtering, so
+you can read things like the saved report “range_start_cache” and
+“range_start_cache” attributes, or instead use the compilable report’s
+computed “range” property - a Range instance giving the two inclusive Dates
+for the report start and end.</p>
 
-<p>User-based information is available through a “filtered_users” report
-property. This gives an array of the <a href="User.html">User</a> model
-instances for reports generated with per-user data included. Each cell has
-a “user_data” property, again an array; each index in the filtered user
-array of the report corresponds to an index in the cell’s user data giving
-the contribution of that user to the hours for that cell.</p>
+<p>Once compiled with “compile”, a report can be queried by first iterating
+over its rows with “each_row”. Discover cells within rows with
+“each_cell_for”. If parameters tell the report to include per-user data
+during compilation, then for each row call “each_user_on_row” to enumerate
+users with relevant data on that row, then for each such user within the
+row, “each_cell_for_user_on_row” to enumerate the cells giving totals for
+each user in that row and column (you can also do this manually with
+“each_cell_for” and the <a href="TrackRecordReport/Cell.html">Cell</a>
+“user_total” method).</p>
 
-<p>For examples of how this information can be used, along with where
+<p>Ranges of columns for an x-axis-is-date report can be iterated over with
+“each_column_range” and human-readable headings generated using
+“column_heading”. Overall totals for all rows can be obtained with the
+“each_column_total” iterator. For each object returned, per-user data can
+be discovered via the “user_total” method if required.</p>
+
+<p>A <a href="TrackRecordReport/Report.html">Report</a> mixes in behaviour
+from <a href="TrackRecordSections.html">TrackRecordSections</a> so that as
+well as providing report data, it provides section and group information
+with per-section/per-section-per-user calculations all integrated. You can
+use the section interface via the report just as you might use the
+interface directly via <a
+href="TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>.</p>
+
+<p>If you want to get the sorted array of tasks a compiled report covers, use
+the “filtered_tasks” property. To see if a report includes per-user
+details, see if the array in its “users” property is empty. If not, the
+list of users with non-zero totals for a compiled report can be found in
+the “filtered_users” array.</p>
+
+<p>Note that if the “filtered_tasks” array is empty after compilation, the
+report determined that it could perform no useful calculations. Proceed as
+if the report was never compiled in the first place - don’t attempt to
+iterate over its rows for example - and just let the user know that the
+report is ‘empty’ / has no useful data.</p>
+
+<p>A <a href="TrackRecordReport/Report.html">Report</a> itself is a
+calculation object (see the <a
+href="TrackRecordReport/Calculator.html">Calculator</a> and <a
+href="TrackRecordReport/CalculatorWithUsers.html">CalculatorWithUsers</a>
+classes) and its own committed and not-committed hour values represent the
+overall report total. The rows and cells and various other calculated
+portions are similarly subclassed. Additonally a final pass over the
+report’s non-zero hour tasks is made and three numbers generated to
+indicate overall task results: “total_duration” is a BigDecimal giving the
+total task duration (for tasks with that set), “total_actual_remaining” is
+the total duration minus all committed hours (only meaningful if all your
+reported tasks have valid durations) and “total_potential_remaining”
+further subtracts not-committed hours, in timesheets which may yet be
+edited by their owners - hence it is an indication of potential, rather
+than definite remaining time.</p>
+
+<p>For examples of how all this information can be used, along with where
 precalculated total information is stored and how to generate your own
 totals using report calculator objects yourself, examine the CSV export
 code - see <a
 href="TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
 inside
-<code>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb</code>.</p>
+<code>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb</code>.
+You can also consult <code>app/views/reports</code> partials for various
+report types, though the mixture of ERb code and HTML therein can make it
+harder to see what’s going on.</p>
+
+<h2 id="label-Database+dependence">Database dependence</h2>
+
+<p>For information about this, please see the documentation for <a
+href="TrackRecordReport/Report.html">TrackRecordReport::Report</a> and the
+FREQUENCY constant.</p>
 
   </div><!-- description -->
 

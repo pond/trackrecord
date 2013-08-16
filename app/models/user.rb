@@ -141,7 +141,7 @@ class User < Rangeable
   # inactive tasks.
   #
   def all_permitted_tasks
-    ( self.restricted? ) ? self.tasks : Task.all
+    ( self.restricted? ) ? self.tasks.scoped : Task.scoped
   end
 
   # Remove inactive tasks from a user's tasks list. The caller is

@@ -91,23 +91,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -199,8 +207,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -234,8 +240,6 @@
     <li><a href="../TimesheetsController.html">TimesheetsController</a>
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
-  
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
     <li><a href="../TreesController.html">TreesController</a>
   
@@ -323,7 +327,9 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
 
     <span class="ruby-identifier">data</span>          = <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype/prototype'</span> )
     <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype_ujs/rails'</span> )
-    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/scriptaculous'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/effects'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/dragdrop'</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/controls'</span> )
 
     <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-identifier">line_prefix</span> ) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> ).<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
@@ -356,7 +362,7 @@ more information.</p>
 
           
           <div class="method-source-code" id="using_quiet_prototype-3F-source">
-            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">using_quiet_prototype?</span>
   <span class="ruby-operator">!</span> <span class="ruby-ivar">@uses_prototype</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>

@@ -111,23 +111,31 @@
   
     <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="./TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="./TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="./TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="./TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="./TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="./TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="./TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="./TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="./TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="./TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="./TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="./ReportsHelper.html">ReportsHelper</a>
   
@@ -219,8 +227,6 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -254,8 +260,6 @@
     <li><a href="./TimesheetsController.html">TimesheetsController</a>
   
     <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
-  
-    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
   
     <li><a href="./TreesController.html">TreesController</a>
   
@@ -387,23 +391,30 @@ apply to the current user.</p>
 
   <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">shared</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> ) )
 
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&quot;The requested report was not found; the owner may have deleted it.&quot;</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_view_hint</span>( <span class="ruby-value">:not_found_error</span> )
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">home_path</span>() ) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
 
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Read parameters related to the 'show' action, which itself contains a</span>
-  <span class="ruby-comment"># form that submits back to here  fincluding details about CSV export</span>
-  <span class="ruby-comment"># parameters. For plain old &quot;show report &lt;id&gt;&quot; uses, there are no such</span>
-  <span class="ruby-comment"># additional parameters.</span>
-
-  <span class="ruby-identifier">read_options</span>()
+  <span class="ruby-comment"># Generate a compilable report from the saved parameters and compile</span>
+  <span class="ruby-comment"># the report data into an easily understood form for report generators.</span>
 
   <span class="ruby-ivar">@report</span> = <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">generate_report</span>()
   <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">compile</span>()
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:warning</span> ] = <span class="ruby-string">&quot;This report is unnamed. It will be deleted automatically. To save it permanently, use the 'Change report parameters' link underneath the report and give it a name.&quot;</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:warning</span> ] = <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_view_hint</span>( <span class="ruby-value">:unnamed_warning</span> )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">throttled</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_view_hint</span>(
+      <span class="ruby-value">:throttle_warning</span>,
+      <span class="ruby-constant">ReportsController</span>,
+      {
+        <span class="ruby-value">:original</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_date</span>( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">throttled</span> ),
+        <span class="ruby-value">:actual</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_date</span>( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">min</span> )
+      }
+    )
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Everything's ready to render the report in @report, but should we</span>
@@ -445,22 +456,12 @@ apply to the current user.</p>
   <span class="ruby-keyword">else</span>
 
     <span class="ruby-comment"># Simple render.</span>
-    <span class="ruby-comment"># </span>
-    <span class="ruby-comment"># SO NEXT STEP: Check for debugging or commentary code and remove.</span>
-    <span class="ruby-comment"># Make a new test exporter which does a template render to check how</span>
-    <span class="ruby-comment"># that's done. Update comments in the &quot;base class&quot;-like module to</span>
-    <span class="ruby-comment"># explain how to write correct submodules &amp; include code samples.</span>
-    <span class="ruby-comment"># Generate docs &amp; check they render OK.</span>
-    <span class="ruby-comment"># </span>
-    <span class="ruby-comment"># Also should test the error reporting pathway as that's not been</span>
-    <span class="ruby-comment"># run yet.</span>
-    <span class="ruby-comment"># </span>
-
 
     <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reports/show'</span> } )
+
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:warning</span> ) <span class="ruby-comment"># Else it shows on the *next* fetched page too</span>
+  <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:warning</span> ) <span class="ruby-comment"># Else these show on the *next* fetched page too</span>
   <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:error</span>   )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- show-source -->

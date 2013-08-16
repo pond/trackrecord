@@ -1,5 +1,5 @@
 <%-
-# Based on "@report", render a per-task report with 'export' button.
+# Based on "@report", render a per-task report.
 -%>
     <h2 class="report_subtitle">
       Task data for <%= @report.display_range %>
@@ -10,7 +10,7 @@
     <p>
       No tasks matching your report&rsquo;s specification can be found.
     </p>
-<% elsif ( @report.rows.empty? ) -%>
+<% elsif ( not @report.has_rows? ) -%>
     <p>
       There are no non-zero totals for rows in the requested report.
     </p>
@@ -23,12 +23,16 @@
       <tr class="info">
         <th>&nbsp;</th>
 
-<%   @report.column_ranges.each_index do | col_index | -%>
-<%     if ( @report.partial_column?( col_index ) ) -%>
-        <th><%= @report.column_heading( col_index ) %> (partial)</th>
-<%     else -%>
-        <th><%= @report.column_heading( col_index ) %></th>
+<%   @report.each_column_range do | range | -%>
+        <th>
+          <span title="<%= apphelp_range_plain( range ) %>">
+            <%= @report.column_heading( range ) %>
+<%     if ( @report.partial_column?( range ) ) -%>
+            <br />
+            <em>(partial)</em>
 <%     end -%>
+          </span>
+        </th>
 <%   end -%>
 
         <th>Row total</th>
@@ -40,46 +44,45 @@
 
       <!-- Section and task list, date range breakdown -->
 
-<%   sections_initialise_sections()
-     @report.rows.each_index do | row_index |
+<%
+     @report.each_row do | row, task |
+       section, is_new_section, group, is_new_group = @report.retrieve( task.id.to_s )
 
-       row  = @report.rows[ row_index ]
-       task = @report.filtered_tasks[ row_index ]
-
-       if ( sections_new_section?( task ) )
-         row_class = cycle( 'even', 'odd' ) -%>
+       if ( is_new_section )
+         row_class = cycle( 'even', 'odd' )
+-%>
       <!-- New section -->
 
       <tr class="<%= row_class %>">
-        <th class="ts_show_heading"><%= sections_section_title() %></th>
-<%       row.cells.each_index do | col_index | -%>
-        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( @report.sections[ sections_section_index() ].cells[ col_index ] ) %></th>
+        <th class="ts_show_heading"><%= section.title( self ) %></th>
+<%       @report.each_cell_for( section ) do | section_cell | -%>
+        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( section_cell ) %></th>
 <%       end -%>
-        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( @report.sections[ sections_section_index() ], true ) %></th>
+        <th class="ts_show_heading ts_show_work"><%= reporthelp_hours( section, true ) %></th>
 <%       if ( @report.filtered_users.empty? ) -%>
-        <th class="ts_show_heading" colspan="2">&nbsp;</th>
+        <th class="ts_show_heading ts_show_work">&nbsp;</th>
+        <th class="ts_show_heading ts_show_work">&nbsp;</th>
 <%       end -%>
       </tr>
-<%     end -%>
-
-<%     if ( sections_new_group?( task ) ) -%>
+<%     elsif ( is_new_group ) -%>
       <!-- New group -->
 
       <tr class="even group_gap">
-        <th colspan="<%= @report.column_count + ( @report.filtered_users.empty? ? 4 : 2 ) %>"></th>
+        <th colspan="<%= @report.column_count() + 2 %>"></th>
       </tr>
 
 <%     end -%>
       <!-- Task data -->
 
-      <tr class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
+<%       row_class = cycle( 'even', 'odd' ) -%>
+      <tr class="ts_show_row <%= row_class %>">
         <td class="ts_show_task <%= taskhelp_billable_class( task ) %> <%= taskhelp_active_class( task ) %>">
-          <%= sections_augmented_link( task ) %>
+          <%= apphelp_augmented_link( task ) %>
         </td>
 
         <!-- Task breakdown -->
 
-<%     row.cells.each do | cell | -%>
+<%     @report.each_cell_for( row ) do | cell | -%>
         <td class="ts_show_work"><%= reporthelp_hours( cell ) %></td>
 <%     end -%>
 
@@ -93,10 +96,12 @@
 <%        else -%>
         <td class="ts_show_work"><%= apphelp_terse_hours( task.duration ) %></td>
         <td class="ts_show_work">
-          <%= reporthelp_decorated_hours( task.duration - row.committed, task.duration - row.total ) %>
+          <%= reporthelp_decorated_hours( task.duration - ( row.try( :committed ) || 0 ),
+                                          task.duration - ( row.try( :total     ) || 0 ) ) %>
         </td>
 <%       end -%>
 <%     end -%>
+
       </tr>
 <%   end -%>
 
@@ -105,9 +110,9 @@
       <tr class="<%= cycle( 'even', 'odd' ) %>">
         <th class="total">Column total:</th>
 
-<%   @report.column_totals.each do | total | -%>
+<%     @report.each_column_total do | total | -%>
         <td class="total"><%= reporthelp_hours( total, true ) %></td>
-<%   end -%>
+<%     end -%>
 
         <td class="overall_total"><%= reporthelp_hours( @report, true ) %></td>
 <%   if ( @report.filtered_users.empty? ) -%>
@@ -125,5 +130,4 @@
       </tr>
     </table>
 
-<%=  render( { :partial => 'export_elements', :locals  => { :form_type => :task } } ) %>
 <% end -%>

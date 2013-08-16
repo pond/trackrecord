@@ -8,44 +8,97 @@
 #           29-Jun-2008 (ADH): Created.
 ########################################################################
 
+require 'track_record_sections'
+
 # A container for report code. TrackRecordReport::Report instances are
 # passed to generators - see TrackRecordReportGenerator for details.
 #
-# A report has property "row", an array of TrackRecordReport::ReportRow
-# objects and "filtered_tasks", an array of the Task model instances
-# corresponding to the same-index rows. Each row has property "cells",
-# an array of TrackRecordReport::ReportCell objects corresponding to the
-# time columns spanned by the report; so a daily report would have cells
-# describing a day of worked hours, a weekly report would have cells for
-# the weeks and so-on. The report has a "column_ranges" property that
-# yields an array of Range objects giving the dates for each cell at an
-# equivalent index in a row's cell array.
+# A compilable Report sets attributes from parameters passed in, which
+# might be the result of a Rails form submission for a potentially new
+# or edited SavedReport instance - or more commonly, the "attributes()"
+# call result on an existing SavedReport instance. Either way, all the
+# attributes are copied internally with extra processing and filtering,
+# so you can read things like the saved report "range_start_cache" and
+# "range_start_cache" attributes, or instead use the compilable report's
+# computed "range" property - a Range instance giving the two inclusive
+# Dates for the report start and end.
 #
-# User-based information is available through a "filtered_users" report
-# property. This gives an array of the User model instances for reports
-# generated with per-user data included. Each cell has a "user_data"
-# property, again an array; each index in the filtered user array of the
-# report corresponds to an index in the cell's user data giving the
-# contribution of that user to the hours for that cell.
+# Once compiled with "compile", a report can be queried by first
+# iterating over its rows with "each_row". Discover cells within rows
+# with "each_cell_for". If parameters tell the report to include per-user
+# data during compilation, then for each row call "each_user_on_row" to
+# enumerate users with relevant data on that row, then for each such
+# user within the row, "each_cell_for_user_on_row" to enumerate the cells
+# giving totals for each user in that row and column (you can also do
+# this manually with "each_cell_for" and the Cell "user_total" method).
 #
-# For examples of how this information can be used, along with where
+# Ranges of columns for an x-axis-is-date report can be iterated over
+# with "each_column_range" and human-readable headings generated using
+# "column_heading". Overall totals for all rows can be obtained with the
+# "each_column_total" iterator. For each object returned, per-user data
+# can be discovered via the "user_total" method if required.
+#
+# A Report mixes in behaviour from TrackRecordSections so that as well as
+# providing report data, it provides section and group information with
+# per-section/per-section-per-user calculations all integrated. You can
+# use the section interface via the report just as you might use the
+# interface directly via TrackRecordSections::Sections.
+#
+# If you want to get the sorted array of tasks a compiled report covers,
+# use the "filtered_tasks" property. To see if a report includes per-user
+# details, see if the array in its "users" property is empty. If not, the
+# list of users with non-zero totals for a compiled report can be found
+# in the "filtered_users" array.
+#
+# Note that if the "filtered_tasks" array is empty after compilation, the
+# report determined that it could perform no useful calculations. Proceed
+# as if the report was never compiled in the first place - don't attempt
+# to iterate over its rows for example - and just let the user know that
+# the report is 'empty' / has no useful data.
+#
+# A Report itself is a calculation object (see the Calculator and
+# CalculatorWithUsers classes) and its own committed and not-committed
+# hour values represent the overall report total. The rows and cells and
+# various other calculated portions are similarly subclassed. Additonally
+# a final pass over the report's non-zero hour tasks is made and three
+# numbers generated to indicate overall task results: "total_duration" is
+# a BigDecimal giving the total task duration (for tasks with that set),
+# "total_actual_remaining" is the total duration minus all committed
+# hours (only meaningful if all your reported tasks have valid durations)
+# and "total_potential_remaining" further subtracts not-committed hours,
+# in timesheets which may yet be edited by their owners - hence it is an
+# indication of potential, rather than definite remaining time.
+#
+# For examples of how all this information can be used, along with where
 # precalculated total information is stored and how to generate your own
 # totals using report calculator objects yourself, examine the CSV
 # export code - see TrackRecordReportGenerator::UkOrgPondCSV inside
 # <tt>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb</tt>.
+# You can also consult <tt>app/views/reports</tt> partials for various
+# report types, though the mixture of ERb code and HTML therein can make
+# it harder to see what's going on.
+#
+# == Database dependence
+#
+# For information about this, please see the documentation for
+# TrackRecordReport::Report and the FREQUENCY constant.
 #
 module TrackRecordReport
 
-  # Very simple base class used to store some common properties and
-  # methods for objects which deal with worked hours.
+  ###########################################################################
+  # Basic object containing a committed and not-committed hour count,
+  # with some simple related helper methods.
   #
-  class ReportElementaryCalculator
-
-    # Committed, not committed hours (floats)
-    attr_accessor :committed, :not_committed
+  # Clients manipulate the committed/not-committed values directly.
+  # They're BigDecimals starting at zero. Higher levels of abstraction
+  # cause too great a performance hit.
+  #
+  class Calculator
+    attr_accessor :committed
+    attr_accessor :not_committed
 
     def initialize
-      reset!()
+      @committed = @not_committed = BigDecimal.new( 0 )
     end
 
     # Returns total worked hours (committed plus not committed).
@@ -57,43 +110,114 @@ module TrackRecordReport
     # Returns 'true' if the object records > 0 total hours, else 'false'.
     #
     def has_hours?
-      return ( total() > 0.0 )
-    end
-
-    # Add the given calculator's committed and not committed hours to this
-    # calculator's hours.
-    #
-    def add!( calculator )
-      @committed     += calculator.committed
-      @not_committed += calculator.not_committed
-    end
-
-    # Opposite of 'add!'.
-    #
-    def subtract!( calculator )
-      @committed     -= calculator.committed
-      @not_committed -= calculator.not_committed
-    end
-
-    # Reset the object's hour counts.
-    #
-    def reset!
-      @committed     = 0.0
-      @not_committed = 0.0
+      return ( total() > BigDecimal.new( 0 ) )
     end
   end
 
-  #############################################################################
-  # CALCULATION SUPPORT - MAIN REPORT OBJECT
-  #############################################################################
-
-  # Class which manages a report. See module TrackRecordReport for an overview.
+  ###########################################################################
+  # A Calculator subclass which adds support for a hash of per-user
+  # Calculator instances accessed via user ID, as a string.
   #
-  class Report < ReportElementaryCalculator
+  class CalculatorWithUsers < Calculator
+    def initialize
+      super()
+      @user_totals = {}
+    end
 
-    include TrackRecordSections
+    # Return a Calculator object for the given user (as a string database
+    # ID), or nil if there is no such user record for this cell.
+    #
+    def user_total( user_id_str )
+      @user_totals[ user_id_str ]
+    end
 
-    attr_accessor :title # (Optional)
+    # Return a Calculator object for the given user (as a string database
+    # ID), lazy-creating a new instance if need be.
+    #
+    def user_total!( user_id_str )
+      @user_totals[ user_id_str ] ||= Calculator.new
+    end
+  end
+
+  ###########################################################################
+  # A Cell stores its own total and an array of the per-user contributions
+  # making up that total.
+  #
+  class Cell < CalculatorWithUsers
+    # No specialisations needed currently.
+  end
+
+  ###########################################################################
+  # A Row stores an array of Cells accessed by a date-based key of
+  # the caller's choosing (just be consistent in your choices). It
+  # maintains its own running totals of the amounts in its cells,
+  # complete with per-user totals for the contributions to the row.
+  #
+  class Row < CalculatorWithUsers
+
+    def initialize
+      super()
+
+      task_actual_remaining = task_potential_remaining = BigDecimal.new( 0 )
+      @cells = {}
+    end
+
+    # Return the Cell for the given date-based key, or 'nil' if
+    # there is no such cell record for this row.
+    #
+    def cell( date_based_key )
+      @cells[ date_based_key ]
+    end
+
+    # Return the Cell for the given date-based key, lazy-creating
+    # a new instance if need be.
+    #
+    def cell!( date_based_key )
+      @cells[ date_based_key ] ||= Cell.new
+    end
+
+    # Returns 'true' if there are any cells on this row, else 'false'.
+    #
+    def has_cells?
+      not @cells.empty?
+    end
+  end
+
+  ###########################################################################
+  # A Section object keeps track of per-column totals within a set of
+  # Rows, along with an overall section total.
+  #
+  # There may be many Rows that refer back to a given Section, the caller
+  # being responsible for maintaining the mapping and count as they best
+  # see fit.
+  #
+  # Section objects can maintain per-user contribution counts just as in
+  # Rows, but callers may choose not to use that feature.
+  #
+  # In terms of API, a report's Section inherits from Row and incorporates
+  # a TrackRecordSection module's Section behaviour too. This is basically
+  # a direct subtitute, in this class's case, for multiple inheritance. We
+  # want a report to expose a section/group interface and to support
+  # calculation within section details at the same time.
+  #
+  class Section < Row
+
+    include TrackRecordSections::SectionMixin # Note singular "Section"
+
+    def initialize( identifier, project )
+      super()
+      initialize_section( identifier, project ) # TrackRecordSections::SectionMixin
+    end
+  end
+
+  ###########################################################################
+  # A Report object queries the database for a set of numbers and
+  # compiles them into a set of Sections, Rows and Cells which can be
+  # queried via a accessors and enumerators provided herein.
+  #
+  class Report < CalculatorWithUsers
+
+    include TrackRecordSections::SectionsMixin # Note plural "Sections"
 
     # Configure the handlers and human-readable labels for the ways in
     # which reports get broken up, in terms of frequency. View code which
@@ -102,7 +226,7 @@ module TrackRecordReport
     # a column "title", shown alongside or above column headings. Use the
     # 'column_heading' method for per-column headings.
     #
-    # THESE MUST STAY IN THE SAME ORDER!
+    # <em>These must stay in the same order!</em>
     #
     # If you add new entries, you must add them at the end of the list.
     #
@@ -112,24 +236,183 @@ module TrackRecordReport
     # than merely adding new entries, you will have to include a migration
     # that maps old indices to new for existing saved report records.
     #
-    FREQUENCY = [
-      { :label => 'Totals only',      :title => '',                  :column => :heading_total,             :generator => :totals_report                                          },
-      { :label => 'UK tax year',      :title => 'UK tax year:',      :column => :heading_tax_year,          :generator => :periodic_report, :generator_arg => :end_of_uk_tax_year },
-      { :label => 'Calendar year',    :title => 'Year:',             :column => :heading_calendar_year,     :generator => :periodic_report, :generator_arg => :end_of_year        },
-      { :label => 'Calendar quarter', :title => 'Quarter starting:', :column => :heading_quarter_and_month, :generator => :periodic_report, :generator_arg => :end_of_quarter     },
-      { :label => 'Monthly',          :title => 'Month:',            :column => :heading_quarter_and_month, :generator => :periodic_report, :generator_arg => :end_of_month       },
-      { :label => 'Weekly',           :title => 'Week starting:',    :column => :heading_weekly,            :generator => :periodic_report, :generator_arg => :end_of_week        },
+    # == IMPORTANT! Database dependence
+    #
+    # <em>Executive summary: Reports are fast on PostgreSQL and slow on
+    # anything else, unless you take steps to make sure they run quickly.</em>
+    #
+    # To run report sums in the database quickly, with minimum queries, the
+    # database is asked to group its calculations. When we can group using
+    # something that matches the columns of a report, we can get the
+    # database to in effect calculate the entire body of the report in one
+    # query. So for example, a monthly report would group by year and month
+    # number; any given date produces a unique year and month.
+    #
+    # To do this, the SQL 'EXTRACT' function is used by default.
+    #
+    # * http://www.postgresql.org/docs/8.3/static/functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT
+    # * http://www.w3schools.com/sql/func_extract.asp
+    # * http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions050.htm
+    #
+    # With the standard report generator implementation, TrackRecord reports
+    # rely on being able to extract:
+    #
+    # * YEAR (must match Ruby Date#year, i.e. numeric, four digit standard calendar year)
+    # * QUARTER (must match Ruby Date#quarter, i.e. numeric 1-4, simple 3 full month splits)
+    # * MONTH (must match Ruby Date#month, i.e. numeric 1-12)
+    # * <em>WEEK - see below - so also ISOYEAR (PostgreSQL v8.3+ specific)</em>
+    #   - Ruby mirrors ISOYEAR with Date#cwyear. PostgreSQL v8.3 and later also
+    #   provide ISODOW (day-of-week), equivalent to Ruby's Date#cwday, but that
+    #   is not needed by TrackRecord. 
+    #
+    # Weekly reports are thorny, because that requires grouping by some idea of
+    # a unique numbered week. The commercial week number is the obvious choice.
+    # MySQL and PostgreSQL provide a WEEK parameter for this in EXTRACT, but
+    # <em>Oracle does not offer this and can't be used</em> without changing the
+    # TrackRecord report generator's FREQUENCY constant for weekly reports, or
+    # disabling weekly reports entirely.
+    #
+    # In any case, even that is insufficient. The 31st December 2012 marks the
+    # start of commercial week number 1 for the commercial year 2013; but the
+    # date itself is in calendar year 2012. January 1st 2006 is actually the
+    # last day of commercial week 52 in the commercial year 2005, despite the
+    # date being in calendar year 2006. If we were to just use a standard
+    # calendar year, we'd get into trouble - 2012 would appear to contain week
+    # 1 twice, leading to numbers from entirely different time periods being
+    # combined in the report calculations.
+    #
+    # Thus <em><strong>weekly reports will only function if you use PostgreSQL
+    # version 8.3 or later</strong></em> unless you modify the report code.
+    # Without modifications, Oracle and MySQL should work (but are not tested).
+    # Note that SQLite will <em><strong>not work at all</strong></em> as it has
+    # no support for EXTRACT at all - you need to use 'strftime' instead, and
+    # this provides easily enough flexibility to support weekly reports too:
+    #
+    # * http://www.sqlite.org/lang_datefunc.html
+    # * http://stackoverflow.com/questions/9624601/activerecord-find-by-year-day-or-month-on-a-date-field
+    #
+    # To modify FREQUENCY for a different database:
+    #
+    # 1. Change "config/initializers/can_database_do_fast_reports.rb" so
+    #    that the SLOW_DATABASE_ALTERNATIVE constant value is "false" for
+    #    your database. Without this, you won't be able to test your
+    #    modifications to FREQUENCY as a "safe mode" fallback is active.
+    #
+    # 2. Change the ":grouping" key to the equivalent of the EXTRACT already
+    #    present, noting that it shoudld always be an array, even if there's
+    #    only one group. Ensure that whatever you group by will lead to one
+    #    group for every single unique column for the intended report,
+    #    e.g. uniquely identifies months across many years, or weeks across
+    #    awkward end-of-year boundaries.
+    #
+    # 3. Change the ":date_to_key" proc so that Ruby generates an array that
+    #    matches the grouping keys returned by the database when it runs the
+    #    query that calculates the report data. To find out that bit of the
+    #    puzzle, search in "lib/track_record_report.rb" (i.e. this file) for
+    #    the string "*date_based_key". You'll see a line of code that
+    #    assigns this from a variable. Underneath that line, add in:
+    #    "raise date_based_key.inspect" and generate a report of the column
+    #    duration you are modifying, while in development mode. The raised
+    #    exception will show in your browser the form of the value that the
+    #    date-to-key proc must return.
+    #
+    # Also look at the code below the assignment of FREQUENCY to see how the
+    # slow "safe mode" is done. You could always create those values inside
+    # FREQUENCY by hand for report types you can't generate in the database.
+    #
+    FREQUENCY =
+    [
+      #total:
+      {
+        :label           => 'Totals only',
+        :title           => '',
+        :column          => :heading_total,
+        :start_of_period => :all,
+        :end_of_period   => :all
+      },
 
-      # Daily reports are harmful since they can cause EXTREMELY large reports
-      # to be generated and this can take longer than the web browser will wait
-      # before timing out. In the mean time, Rails keeps building the report...
-      #
-      # Previously daily reports were disabled to work around this. Now, a hard
-      # coded date throttle stops the generation of daily reports for more than
-      # a 60 day period before the end date.
+      #tax_year:
+      {
+        :label           => 'UK tax year',
+        :title           => 'UK tax year:',
+        :column          => :heading_tax_year,
+        :manual_columns  => true,
+        :date_to_key     => ->( date ) { date },
+        :start_of_period => :beginning_of_uk_tax_year,
+        :end_of_period   => :end_of_uk_tax_year
+      },
 
-      { :label => 'Daily',            :title => 'Date:',             :column => :heading_daily,             :generator => :daily_report                                           },
+      #calendar_year:
+      {
+        :label           => 'Calendar year',
+        :title           => 'Year:',
+        :column          => :heading_calendar_year,
+        :grouping        => [ 'EXTRACT(YEAR FROM date)' ],
+        :date_to_key     => ->( date ) { [ date.year.to_s ] },
+        :start_of_period => :beginning_of_year,
+        :end_of_period   => :end_of_year
+      },
+
+      #calendar_quarter:
+      {
+        :label           => 'Calendar quarter',
+        :title           => 'Quarter starting:',
+        :column          => :heading_quarter,
+        :grouping        => [ 'EXTRACT(YEAR FROM date)', 'EXTRACT(QUARTER FROM date)' ],
+        :date_to_key     => ->( date ) { [ date.year.to_s, ( ( ( date.month - 1 ) / 3 ) + 1 ).to_s ] },
+        :start_of_period => :beginning_of_quarter,
+        :end_of_period   => :end_of_quarter
+      },
+
+      #calendar_month:
+      {
+        :label           => 'Monthly',
+        :title           => 'Month:',
+        :column          => :heading_month,
+        :grouping        => [ 'EXTRACT(YEAR FROM date)', 'EXTRACT(MONTH FROM date)' ],
+        :date_to_key     => ->( date ) { [ date.year.to_s, date.month.to_s ] },
+        :start_of_period => :beginning_of_month,
+        :end_of_period   => :end_of_month,
+        :throttle        => :months
+      },
+
+      #calendar_week:
+      {
+        :label           => 'Weekly',
+        :title           => 'Week starting:',
+        :column          => :heading_weekly,
+        :grouping        => [ 'EXTRACT(ISOYEAR FROM date)', 'EXTRACT(WEEK FROM date)' ],
+        :date_to_key     => ->( date ) { [ date.cwyear.to_s, date.cweek.to_s ] },
+        :start_of_period => :beginning_of_week,
+        :end_of_period   => :end_of_week,
+        :throttle        => :weeks
+      },
+
+      #day:
+      {
+        :label           => 'Daily',
+        :title           => 'Date:',
+        :column          => :heading_daily,
+        :grouping        => [ '"work_packets"."date"' ],
+        :date_to_key     => ->( date ) { [ date.strftime( '%Y-%m-%d 00:00:00' ) ] },
+        :start_of_period => :beginning_of_day,
+        :end_of_period   => :end_of_day,
+        :throttle        => :days
+      }
     ]
+
+    if ( SLOW_DATABASE_ALTERATIVE ) # config/initializers/can_database_do_fast_reports.rb
+      FREQUENCY.each do | frequency |
+        if ( frequency[ :grouping ] )
+          frequency.delete( :grouping )
+          frequency[ :date_to_key ] = ->( date ) { date }
+          frequency[ :manual_columns ] = true
+        end
+      end
+    end
+
+    # Optional report title.
+    attr_accessor :title
 
     # Complete date range for the whole report; array of user IDs used for
     # per-user breakdowns; array of task IDs the report will represent.
@@ -143,8 +426,18 @@ module TrackRecordReport
     # suffix of "month" or "week", as a symbol, for both start and end.
     attr_reader :cacheable_start_indicator, :cacheable_end_indicator
 
+    # A report's total date span may be restricted to avoid generating giant
+    # reports which would swamp a server (for example, a daily report over
+    # hundreds or thousands of days would be a bad idea). If not done, this
+    # holds 'nil', else the Date giving the *original* start date (the
+    # limited, actual start date used is in the "range" property).
+    #
+    # Views/generators can use it to include warnings that the start date was
+    # limited, should they so wish.
+    attr_reader :throttled
+
     # Range data for the 'new' view form. Custom attribute writer methods are
-    # used to call "rationalise_dates()" whenever a range value is altered.
+    # used to call "rationalise_dates" whenever a range value is altered.
     attr_reader :range_start, :range_end
     attr_reader :range_week_start, :range_week_end, :range_one_week
     attr_reader :range_month_start, :range_month_end, :range_one_month
@@ -184,41 +477,16 @@ module TrackRecordReport
     attr_accessor :filtered_tasks # Only valid after the "compile" method has been called.
     attr_accessor :filtered_users # Only valid after the "compile" method has been called.
 
-    # Array of ReportRows making up the report. The row objects contain
-    # arrays of cells, corresponding to columns of the report.
-    attr_reader :rows
-
-    # Array of ReportSection objects describing per-section totals of various
-    # kinds. See the ReportSection class and TrackRecordSections module for
-    # details.
-    attr_reader :sections
-
-    # Number of columns after all calculations are complete; this is the same
-    # as the size of the 'column_ranges' or 'column_totals' arrays below, but
-    # using this explicit property is likely to make code more legible.
-    attr_reader :column_count
-
-    # Array of ranges, one per column, giving the range for each of
-    # the columns held within the rows. The indices into this array match
-    # indices into the rows' cell arrays.
-    attr_reader :column_ranges
-
-    # Array of ReportColumnTotal objects, one per column, giving the total
-    # hours for that column. The indices into this array match indices into
-    # the rows' cell arrays.
-    attr_reader :column_totals
-
     # Total duration of all tasks in all rows; number of hours remaining (may
     # be negative for overrun) after all hours worked in tasks with non-zero
     # duration. If 'nil', *all* tasks had zero duration. The 'actual' value
     # only accounts for committed hours, while the 'potential' value includes
     # both committed and not-committed hours (thus, subject to change).
+    #
+    # A report that hides zero total rows will not include task durations on
+    # those rows. A report that shows them *will* include task durations on
+    # those rows.
     attr_reader :total_duration, :total_actual_remaining, :total_potential_remaining
-
-    # Array of ReportUserColumnTotal objects, each index corresponding to a
-    # user the "users" array at the same index. These give the total work done
-    # by that user across all rows.
-    attr_reader :user_column_totals
 
     # Create a new Report. In the first parameter, pass the current TrackRecord
     # user. In the next parameter pass nothing to use default values for a 'new
@@ -226,7 +494,10 @@ module TrackRecordReport
     # using a params hash from a 'new report' form submission.
     #
     def initialize( current_user, params = nil )
-      @current_user = current_user
+
+      super()
+
+      @current_user          = current_user
 
       @range_start           = nil
       @range_end             = nil
@@ -248,8 +519,13 @@ module TrackRecordReport
       @exclude_zero_rows     = false
       @exclude_zero_cols     = false # Totals only - ignores zero com/non-com columns in CSV exports for total/com/non-com column groups with non-zero totals
 
-      @tasks                 = []
-      @filtered_tasks        = []
+      @rows                  = {}
+      @column_totals         = {}
+      @column_ranges         = []
+      @column_keys           = []
+
+      @tasks                 = Task.scoped
+      @filtered_tasks        = Task.scoped
       @task_ids              = []
       @active_task_ids       = []
       @inactive_task_ids     = []
@@ -284,20 +560,25 @@ module TrackRecordReport
     # not speed-critical as not used that often in practice).
     #
     def active_tasks
-      @tasks.select { | task | task.active }
+      @tasks.where( :active => true )
     end
 
     # As above, but for inactive tasks.
     #
     def inactive_tasks
-      @tasks.select { | task | ! task.active }
+      @tasks.where( :active => false )
     end
 
     # Set a task array directly (will always be filtered according to security
     # settings for the current user).
     #
     def tasks=( array )
-      @tasks = array
+      unless array.nil? || array.count.zero?
+        @tasks = Task.where( :id => array )
+      else
+        @tasks = Task.scoped
+      end
+
       update_internal_task_lists()
     end
 
@@ -362,18 +643,239 @@ module TrackRecordReport
     def range_month_end=( value );   @range_month_end   = value; rationalise_dates(); end
     def range_one_month=( value );   @range_one_month   = value; rationalise_dates(); end
 
+    # Return the row defined for the given task ID, specified as a string.
+    #
+    # Will return 'nil' if no such row exists. Only really useful if the
+    # report has been compiled by calling "compile".
+    #
+    def row( task_id_str )
+      @rows[ task_id_str ]
+    end
+
+    # Return the row defined for the given task ID, specified as a string.
+    #
+    # Will create an empty Row instance in passing if necessary. Usually
+    # only useful during the process of report compilation (see "compile")
+    # but may have specialist external uses too.
+    #
+    def row!( task_id_str )
+      @rows[ task_id_str ] ||= Row.new
+    end
+
+    # Return the total value as a Calculator subclass instance for the
+    # column identified by the given date-based key.
+    #
+    # Will return 'nil' if no such non-zero total column exists (yet).
+    # Only really useful if the report has been compiled by calling
+    # "compile".
+    #
+    def column_total( date_based_key )
+      @column_totals[ date_based_key ]
+    end
+
+    # Return the total value as a Cell instance for the column identified
+    # by the given date-based key. A Cell class is used so that per-user
+    # column totals can be maintained. Think of each column total as a
+    # cell in an extra total-based row of the report.
+    #
+    # Will create an empty zero-hour Cell subclass instance in passing if
+    # necessary. Usually only useful during the process of report
+    # compilation (see "compile") but may have specialist external uses
+    # too.
+    #
+    def column_total!( date_based_key )
+      @column_totals[ date_based_key ] ||= Cell.new
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Returns 'true' if the report has any non-zero hours counted for any
+    # of its rows, else 'false' (all tasks counted to zero hours within the
+    # other report constraints/parameters).
+    #
+    def has_rows?
+      not @rows.empty?
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Iterate over all defined rows, yielding a caller supplied block
+    # passing it the row and task in task list order. If "hide zero rows"
+    # is set, only defined rows and tasks with non-zero totals will be
+    # sent. Otherwise, you will be called with a row value of 'nil' and
+    # the task for which the row total was zero (it is much faster to
+    # check for 'nil' many times than instantiate a useless row object
+    # with zero values for its hours).
+    #
+    def each_row # :yields: row, task
+      @filtered_tasks.each do | task |
+        row = @rows[ task.id.to_s ]
+        yield( row, task ) unless ( @exclude_zero_rows and row.nil? )
+      end
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Iterate over the cells in a given Row or Row subclass. Calls a
+    # caller-supplied block, passing the cell instance. Will pass 'nil'
+    # for cells with a zero hour total (it is much faster to check for
+    # 'nil' many times than instantiate a useless cell object with zero
+    # values for its hours).
+    #
+    # A 'nil' input parameter value is allowed. The caller block will
+    # be invoked with 'nil' for each cell that *would* have been on the
+    # row if it existed.
+    #
+    def each_cell_for( row ) # :yields: cell
+
+      # We use zero column total values to indicate that an associated entry
+      # in the column ranges should be omitted.
+
+      if ( row.nil? )
+        @relevant_column_keys.each { yield( nil ) }
+      else
+        @relevant_column_keys.each do | date_based_key |
+          yield( row.cell( date_based_key ) )
+        end
+      end
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Results of calling here are undefined unless the report parameters
+    # tell it to include per-user details during compilation.
+    #
+    # For each user associated with a row, call the caller's block with the
+    # User instance and the Calculator subclass giving the user's total on
+    # that row. Will call with "nil" for each user in the row is "nil",
+    # unless "hide zero rows" is enabled, in which case if given nil it will
+    # not call the block at all.
+    #
+    # The block is only called for a non-nil row if a user has a non-zero
+    # total, or if "hide zero rows" is disabled, in which case the user
+    # total instance may be 'nil' (but the User is always valid).
+    #
+    # See also "each_cell_for_user_on_row".
+    #
+    def each_user_on_row( row ) # :yields: user, user_total_for_row
+
+      # Not 'filtered_users' - those are aimed at the columns in reports
+      # where each *column* represents a user, so hide-zero-columns will
+      # result in hidden users. Here, we're looking at the per-user
+      # breakdown for a single task on a row. If hide-zero-cols is set
+      # but hide-zero-rows is not, we don't want to hide users here.
+
+      if ( row.nil? )
+        @users.each { | user | yield( user, nil ) } unless ( @exclude_zero_rows )
+      else
+        @users.each do | user |
+          user_total_for_row = row.user_total( user.id.to_s )
+          yield( user, user_total_for_row ) unless ( @exclude_zero_rows and user_total_for_row.nil? )
+        end
+      end
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Results of calling here are undefined unless the report parameters
+    # tell it to include per-user details during compilation.
+    #
+    # For a given user and row, return cells for that row giving the column
+    # based totals for just that specific user. Zero columns are skipped if
+    # "hide zero columns" is enabled.
+    #
+    # This is similar to just doing "each_cell_for( row )" and calling the
+    # cell's "user_total" method manually for whatever your current User of
+    # interest happens to be, but calling here takes care of that for you
+    # and deals with 'nil' cleanly in passing.
+    #
+    # The given User instance must be valid. The given Row instance may be
+    # 'nil'. If so, either the block is called with 'nil' for each column
+    # if "hide zero rows" is disabled, else it isn't called at all.
+    #
+    def each_cell_for_user_on_row( user, row ) # :yields: cell_for_user
+      if ( row.nil? )
+        @relevant_column_keys.each { yield( nil ) } unless ( @exclude_zero_rows )
+      else
+        user_id_str = user.id.to_s
+
+        @relevant_column_keys.each do | date_based_key |
+          yield( row.cell( date_based_key ).try( :user_total, user_id_str ) )
+        end
+      end
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Returns the number of columns the report generated, taking into account
+    # zero total columns and the "hide zero columns" flag.
+    #
+    def column_count
+      @relevant_column_keys.count
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Iterate over all column totals, calling the caller-supplied block
+    # with a Calculator subclass describing the total for that column. If
+    # the total is zero and 'hide zero columns' is disabled, your block
+    # will be called with 'nil' for that column.
+    #
+    def each_column_total # :yields: column_total
+      @relevant_column_keys.each do | date_based_key |
+        yield( @column_totals[ date_based_key ] )
+      end
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Iterate over all columns, calling a caller-supplied block with a
+    # Range object describing the Date range for each one, inclusive of
+    # column start/end. Always calls with a valid Range, never 'nil'.
+    #
+    def each_column_range # :yields: column_range
+
+      # We use zero column total values to indicate that an associated entry
+      # in the column ranges should be omitted.
+
+      @column_keys.each_with_index do | date_based_key, linear_column_index |
+        next if ( @exclude_zero_cols and not @column_totals.has_key?( date_based_key ) )
+        yield @column_ranges[ linear_column_index ]
+      end
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Returns the number of users the report considered, taking into account
+    # zero total users and the "hide zero columns" flag.
+    #
+    def user_count
+      @filtered_users.count
+    end
+
+    # Only useful for compiled reports - see "compile".
+    #
+    # Iterate over the list of users passed in the constructor, calling a
+    # caller-supplied block with the User instances in the order they were
+    # originally given. If "hide zero columns" is set, then only users
+    # with a non-zero overall total will be included.
+    #
+    def each_user # :yields: user
+      @filtered_users.each { | user | yield( user ) }
+    end
+
     # Compile the report.
     #
     def compile
-      rationalise_dates()
       apply_filters()
+      return if ( @filtered_tasks.count.zero? ) # Nothing to do...
+
+      rationalise_dates()
+      set_columns()
       sort_and_group()
+      initialize_sections( @filtered_tasks, Section ) # TrackRecordSections::SectionsMixin
 
-      return if ( @filtered_tasks.empty? )
-
-      add_rows()
-      add_columns()
-      calculate!()
+      calculate()
     end
 
     # Helper method which returns a user-displayable label describing this
@@ -391,8 +893,8 @@ module TrackRecordReport
     end
 
     # Class method equivalent of "label" above. Returns the label for the
-    # given frequency, which must be a valid index into Report::FREQUENCY.
-    # See also "labels" below.
+    # given frequency, which must be a valid index into the array defined
+    # by the FREQUENCY constant. See also "labels" below.
     #
     def self.label( frequency )
       return Report::FREQUENCY[ frequency ][ :label ]
@@ -414,29 +916,79 @@ module TrackRecordReport
     end
 
     # Helper method which returns a user-displayable column heading appropriate
-    # for the report type. Pass the column index.
+    # for the report type. Pass a column range (see e.g. "each_column_range").
+    # Optionally pass "true" to replace "<br />" with a space (if present) in
+    # the heading, for a plain text alternative.
     #
-    def column_heading( col_index )
-      col_range = @column_ranges[ col_index ]
-      return send( @frequency_data[ :column ], col_range )
+    def column_heading( range, plain_text = false )
+      heading = send( @frequency_data[ :column ], range )
+      plain_text ? heading.gsub( "<br />", " " ) : heading
     end
 
     # Does the column at the given index only contain partial results, because
     # it is the first or last column in the overall range and that range starts
     # or ends somewhere in the middle? Returns 'true' if so, else 'false'.
     #
-    def partial_column?( col_index )
-
-# [TODO] Doesn't work, because col_range accurately reflects the column range
-#        rather than the quantised range. Getting at the latter is tricky, so
-#        leaving this for later. At present the method is only used for display
-#        purposes in the column headings.
-
-      col_range = @column_ranges[ col_index ]
-      return ( col_range.min < @range.min or col_range.max > @range.max )
+    def partial_column?( range )
+      if ( range == @column_ranges.first )
+        @column_first_partial
+      elsif ( range == @column_ranges.last )
+        @column_last_partial
+      else
+        false
+      end
     end
 
+  # =========================================================================
+
   private
+
+  # =========================================================================
+
+    # Internal helpers returning user-displayable column headings for various
+    # different report types. Pass the date range to display and, for some of
+    # the methods, optional format strings for date formatting.
+    #
+    # These methods are referred to by the ':column' keys in 'FREQUENCY'.
+
+    def heading_total( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      "#{ heading_start( range, format ) } to #{ heading_end( range, format ) }"
+    end
+
+    def heading_start( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      "#{ range.min.strftime( format ) }"
+    end
+
+    def heading_end( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      "#{ range.max.strftime( format ) }"
+    end
+
+    def heading_tax_year( range )
+      year = range.min.beginning_of_uk_tax_year.year
+      return "#{ year } / #{ year + 1 }"
+    end
+
+    def heading_calendar_year( range )
+      return range.min.year.to_s
+    end
+
+    def heading_month( range, format = '%b %Y' ) # Mth-YYYY
+      return range.min.strftime( format )
+    end
+
+    def heading_quarter( range )
+      date    = range.min
+      quarter = ( ( date.month - 1 ) / 3 ) + 1
+      return "Q#{ quarter } #{ date.year }"
+    end
+
+    def heading_weekly( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      return "#{ range.min.strftime( '%d %b' ) }<br />#{ range.min.year }: #{ range.min.cweek }".html_safe()
+    end
+
+    def heading_daily( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
+      return range.min.strftime( format )
+    end
 
     # Map raw ID values, supplied as an array or hash values and individually
     # as strings or integers, to an array of integers, returning the result.
@@ -466,6 +1018,8 @@ module TrackRecordReport
     #
     def update_internal_task_lists
 
+      @tasks = @tasks.all # Collapse relation to a real query.
+
       # Security - discard tasks the user should not be able to see.
 
       if ( @current_user.restricted? )
@@ -488,6 +1042,10 @@ module TrackRecordReport
         @active_task_ids   << task.id if     ( task.active )
         @inactive_task_ids << task.id unless ( task.active )
       end
+
+      # Convert back to an association for further conditional use later.
+
+      @tasks = Task.where( :id => @task_ids )
     end
 
     # Unpack a string of the form "number_number[_number...]" and return the
@@ -533,15 +1091,17 @@ module TrackRecordReport
     # Apply task selection filters to @tasks thus initialising @filtered_tasks.
     #
     def apply_filters
-      @filtered_tasks = ( @tasks.empty? ) ? @current_user.all_permitted_tasks : @tasks.dup
+      @filtered_tasks = ( @tasks.count.zero? ) ? @current_user.all_permitted_tasks : @tasks.dup
 
       case @task_filter
         when 'billable'
-          @filtered_tasks.reject! { | task | ! task.billable }
+          conditions = { :billable => false }
 
         when 'non_billable'
-          @filtered_tasks.reject! { | task |   task.billable }
+          conditions = { :billable => true }
       end
+
+      @filtered_tasks = @filtered_tasks.where( conditions )
     end
 
     # Apply sorting and grouping to the filtered tasks list. Method
@@ -552,19 +1112,25 @@ module TrackRecordReport
       @project_sort_field  = validate_sort_field( @project_sort_field  )
       @task_sort_field     = validate_sort_field( @task_sort_field     )
 
-      @filtered_tasks.sort! do | task_a, task_b |
-        complex_sort(
-          task_a,
-          task_b,
-          {
-            :group_by_billable   => ( @task_grouping == 'billable' || @task_grouping == 'both' ),
-            :group_by_active     => ( @task_grouping == 'active'   || @task_grouping == 'both' ),
-            :customer_sort_field => @customer_sort_field,
-            :project_sort_field  => @project_sort_field,
-            :task_sort_field     => @task_sort_field
-          }
-        )
+      # So always sort by customer, then project; then collect by the
+      # active/billable groups if requested; then finally sort by the
+      # requested task sort field. This must come last else it overrides
+      # the active/billable grouping specification (e.g. we'd ask the
+      # database to sort by task name, *then* by billable/active - too
+      # late - we want a grouping effect, sorting by those flags first).
+
+      @filtered_tasks = @filtered_tasks.reorder( "\"customers\".\"#{ @customer_sort_field }\" ASC" ).
+                                          order( "\"projects\".\"#{ @project_sort_field }\" ASC" )
+
+      if ( @task_grouping == 'billable' || @task_grouping == 'both' )
+        @filtered_tasks = @filtered_tasks.order( '"tasks"."billable" ASC' )
       end
+
+      if ( @task_grouping == 'active' || @task_grouping == 'both' )
+        @filtered_tasks = @filtered_tasks.order( '"tasks"."active" ASC' )
+      end
+
+      @filtered_tasks = @filtered_tasks.order( "\"tasks\".\"#{ @task_sort_field }\" ASC" )
     end
 
     # Make sure a sort field variable is valid (users may try to hack in other
@@ -731,11 +1297,93 @@ module TrackRecordReport
       @cacheable_start_indicator ||= @range.first
       @cacheable_end_indicator   ||= @range.last
 
-      # Hard-coded range throttle to 32 days (just over a "longest month") for
-      # daily reports to avoid excessive server load.
+      # Does this report type throttle its date range?
 
-      if ( @frequency_data[ :generator ] == :daily_report )
-        @range = ( @range.last - 32.days )..( @range.last ) if ( @range.last.to_time - @range.first.to_time > 32.days )
+      throttle        = nil
+      throttle_method = @frequency_data[ :throttle ]
+
+      if ( throttle_method )
+        throttle_value  = REPORT_MAX_COLUMNS # config/initializers/general_config.rb
+        throttle_value /= 2 if ( @user_details ) # Twice the columns as there are two reports, so half the limit in each
+
+        throttle = throttle_value.send( throttle_method )
+      end
+
+      if ( throttle && @range.last.to_time - @range.first.to_time > throttle )
+        @throttled = @range.first
+        @range     = ( @range.last - throttle )..( @range.last )
+      end
+    end
+
+    # Based on the current value of "@range", calculate the column
+    # ranges and date-based keys into columns recovered from a raw
+    # database query that extracts grouped report data.
+    #
+    # Usually, "rationalise_dates" is called before calling here.
+    #
+    def set_columns
+
+      # Create an array containing every column's date range
+      # given the report's overall range and it's column
+      # duration (AKA frequency). For speed, for each start
+      # date in each range, cache a set of the hash index keys
+      # used to retrieve e.g. cells in rows; these must match
+      # the equivalent data retrieved from the database in the
+      # raw grouped query. The report's frequency-based
+      # generator data provides the information needed to do
+      # all of this.
+
+      start_of_period_method = @frequency_data[ :start_of_period ]
+      end_of_period_method   = @frequency_data[ :end_of_period   ]
+      date_to_key_proc       = @frequency_data[ :date_to_key     ]
+      period_start_day       = range.min # (implicitly inclusive)
+      report_end_day         = range.max # (".max" not ".last" => inclusive)
+
+      if ( end_of_period_method == :all )
+
+        # Since there are no subgroups for an "all" total report,
+        # the date-based key arising from the raw database results
+        # ends up as an empty array; so simply set that here, so
+        # we can index the single full-range column of results
+        # using that same key.
+
+        @column_ranges.push( range )
+        @column_keys.push( [] )
+        @column_first_partial = @column_last_partial = false
+
+      else
+
+        # First work out the "is a partial column?" flags.
+
+        first_column_quantised_start = period_start_day.send( start_of_period_method ).to_date
+        last_column_quantised_end    = report_end_day.send( end_of_period_method ).to_date
+
+        @column_first_partial = ( first_column_quantised_start < period_start_day )
+        @column_last_partial  = ( last_column_quantised_end    > report_end_day   )
+
+        # Then work out the individual column ranges while respecting the true
+        # report date range for the first and last columns.
+
+        begin
+
+          column_end_day = period_start_day.send( end_of_period_method ).to_date
+          period_end_day = [ column_end_day, report_end_day ].min
+
+          @column_ranges.push( period_start_day..period_end_day )
+            @column_keys.push( date_to_key_proc.call( period_start_day ) )
+
+          period_start_day = period_end_day + 1
+
+        end while ( period_start_day <= report_end_day )
+
+        # Sanity check in case anyone modifies the column key procs for a new
+        # database, or I make changes and screw them up :-)
+
+        if ( @column_keys.count != @column_keys.uniq.count )
+          message = "\nInside lib/track_record_report.rb:\nColumn keys are not unique - check the documentation for the FREQUENCY constant and make sure the date-to-key procs are operating properly\n"
+          Rails.logger.fatal( message )
+          raise( message )
+        end
       end
     end
 
@@ -763,640 +1411,254 @@ module TrackRecordReport
       return ( start_of_range..end_of_range )
     end
 
-    # Create row objects for the report as a first stage of report compilation.
+    # With all other pre-compilation steps completed, such as date
+    # rationalisation, task sorting and grouping and so-on, call here
+    # to calculate the report's numerical data.
     #
-    def add_rows
-      @rows = []
-      @filtered_tasks.each do | task |
-        row = ReportRow.new( task )
-        @rows.push( row )
-      end
-    end
+    def calculate
 
-    # Once all rows are added with add_rows, they need populating with columns.
-    # Call here to do this. The Report's user information, task information
-    # etc. will all be used to populate the rows with cells describing the
-    # worked hours condition for that row and column.
-    #
-    # Each cell added onto a row's array of cells has its date range stored at
-    # the same index in the @column_ranges array and a ReportColumnTotal object
-    # stored at the same index in the @column_totals array.
-    #
-    def add_columns
-      @column_ranges = []
-      @column_totals = []
+      # First run the numbers - simple for report types that can be
+      # column-width-grouped by the database, tricky for things such as
+      # "UK tax year".
 
-      # Earlier versions of the report generator asked the database for very
-      # specific groups of work packets for date ranges across individual
-      # columns. Separate queries were made for per-user breakdowns. This got
-      # very, very slow far too easily. There's a big RAM penalty for reading
-      # in all work packets in one go, but doing this and iterating over the
-      # required items on each column within Ruby is much faster overall.
-
-      @committed_work_packets     = []
-      @not_committed_work_packets = []
-      reportable_user_ids         = @reportable_user_ids.empty? ? nil : @reportable_user_ids
-
-      @filtered_tasks.each_index do | index |
-        task_id = @filtered_tasks[ index ]
-
-        @committed_work_packets[ index ] = WorkPacket.find_committed_by_task_user_and_range(
-            @range,
-            task_id,
-            reportable_user_ids
-        )
-
-        @not_committed_work_packets[ index ] = WorkPacket.find_not_committed_by_task_user_and_range(
-            @range,
-            task_id,
-            reportable_user_ids
-        )
-      end
-
-      # Generate the report by calling the generator in the FREQUENCY constant.
-      # Generators iterate over the report's date range, calling add_column
-      # (note singular name) for each iteration.
-
-      send( @frequency_data[ :generator ], @frequency_data[ :generator_arg ] )
-
-      # Finish off by filling in the column count property.
-
-      @column_count = @column_totals.size()
-    end
-
-    # Add columns to the report, with each column spanning one day of the total
-    # report date range.
-    #
-    def daily_report( report, ignored = nil )
-      @range.each do | day |
-        add_column( day..day )
-      end
-    end
-
-    # Add columns to the report, with each column spanning one period the total
-    # report date range. The period is determined by the second parameter. This
-    # must be a method name that, when invoked on a Date object, returns the end
-    # of a period given a date within that period. For example, method names
-    # ":end_of_week" or ":end_of_quarter" would result in one column per week or
-    # one column per quarter, respectively.
-    #
-    # If the report's total date range starts or ends part way through a column,
-    # then that column will contain only data from the report range. That is, the
-    # range is *not* quantised to a column boundary.
-    #
-    def periodic_report( end_of_period_method )
-      period_start_day = @range.min
-      report_end_day   = @range.max
-
-      begin
-        column_end_day = period_start_day.send( end_of_period_method )
-        period_end_day = [ column_end_day, report_end_day ].min
-
-        add_column( period_start_day..period_end_day )
-        period_start_day = period_end_day + 1
-      end while ( @range.include?( period_start_day ) )
-    end
-
-    # Add a single column to the given report spanning the total report date
-    # range.
-    #
-    def totals_report( ignored = nil )
-      add_column( @range )
-    end
-
-    # Add a column containing data for the given range of Date objects.
-    #
-    def add_column( range )
-      col_total = ReportColumnTotal.new
-
-      @filtered_tasks.each_index do | task_index |
-        task      = @filtered_tasks[ task_index ]
-        row       = @rows[ task_index ]
-        cell_data = ReportCell.new
-
-        # Work out the total for this cell, which will take care of per-user
-        # totals in passing.
-
-        cell_data.calculate!(
-          range,
-          @committed_work_packets[ task_index ],
-          @not_committed_work_packets[ task_index ],
-          @reportable_user_ids
-        )
-
-        # Include the cell in this row and the running column total.
-
-        row.add_cell( cell_data )
-        col_total.add_cell( cell_data )
-      end
-
-      @column_ranges.push( range )
-      @column_totals.push( col_total )
-    end
-
-    # Compute row, column and overall totals for the report. You must have
-    # run 'add_columns' beforehand.
-    #
-    def calculate!
-
-      # Set up variables used by the remove zero rows/columns feature.
-
-      if ( @include_totals || ( @include_committed && @include_non_committed ))
-        zero_check_method = :total
-      elsif ( @include_committed )
-        zero_check_method = :committed
+      if ( @frequency_data[ :manual_columns ] )
+        @column_ranges.each_with_index do | range |
+          run_sums_for_range( range, range.min )
+        end
       else
-        zero_check_method = :not_committed
+        run_sums_for_range( @range )
       end
 
-      # Remove zero total rows if asked to do so.
+      # Now set up a few things based on the result of report calculation.
+      #
+      # If zero-total rows are being omitted, the Section engine will end
+      # up reporting incorrect values for start-of-group/section, should
+      # that start-of-<x> task lie in a row that has a zero total and will
+      # thus be omitted. We must take steps to fix that. It's easy enough
+      # since rows only exist at this point if their total is non-zero
+      # anyway, so we just iterate over existing rows to get the non-zero
+      # task list.
+      #
+      # We can use the same loop to work out the task statistics while we
+      # are here - the total task duration, the remaining time based on
+      # committed hours and the potential remaining based on not committed
+      # hours as well.
+
+      non_zero_tasks             = []
+      @total_duration            = BigDecimal.new( 0 );
+      @total_actual_remaining    = BigDecimal.new( 0 );
+      @total_potential_remaining = BigDecimal.new( 0 );
+
+      each_row do | row, task |
+        non_zero_tasks << task
+
+        @total_duration += task.duration
+
+        unless task.duration.zero?
+          task_actual_remaining    = task.duration - ( row.try( :committed ) || 0 )
+          task_potential_remaining = task.duration - ( row.try( :total     ) || 0 )
+
+          @total_actual_remaining    += task_actual_remaining
+          @total_potential_remaining += task_potential_remaining
+        end
+      end
 
       if ( @exclude_zero_rows )
-        row_removals = []
-
-        @rows.each_index do | index |
-          row = @rows[ index ]
-          row_removals << index if ( row.send( zero_check_method ).zero? )
-        end
-
-        row_removals.reverse.each do | index |
-          @rows.delete_at( index )
-          @filtered_tasks.delete_at( index )
-        end
+        reassess_start_flags_using( non_zero_tasks ) # TrackRecordSections::SectionsMixin
       end
 
-      # Remove zero total columns if asked to do so.
+      # Cache the non-zero column date based keys to speed up column
+      # iterators. If hiding zero columns, only columns defined in the
+      # 'column_totals' hash should be used, so iterate via its set of
+      # keys; else iterate over all available column keys.
+      #
+      # Can't just use e.g. "@column_keys.keys.sort" to try and get at an
+      # ordered set of non-zero column keys, as the keys don't sort quite
+      # how we expect (e.g. ["2013","30"] comes before ["2013","4"], with
+      # effects similarly variable for all the different, unpredictable
+      # column keys that FREQUENCY can produce).
+
+      @relevant_column_keys = if @exclude_zero_cols
+        @column_keys.select do | key |
+          @column_totals.has_key?( key )
+        end
+      else
+        @column_keys
+      end
+
+      # A similar thing happens for zero columns in user-based reports.
+      # The "@user_totals" hash comes in via the inheritance from the
+      # CalculatorWithUsers class.
 
       if ( @exclude_zero_cols )
-
-        # Compile a list of column indices for removal, then delete elements
-        # in arrays corresponding to this column but running backwards through
-        # the list so that lower numbered indices remain valid as we delete
-        # entries in higher numbered indices.
-
-        column_removals = []
-
-        @column_totals.each_index do | index |
-          column_removals << index if ( @column_totals[ index ].send( zero_check_method ).zero? )
-        end
-
-        column_removals.reverse.each do | index |
-          @rows.each do | row |
-            row.delete_cell( index )
-          end
-          @column_ranges.delete_at( index )
-          @column_totals.delete_at( index )
-        end
-      end
-
-      # Calculate total task duration.
-
-      @total_duration = 0.0
-
-      @filtered_tasks.each do | task |
-        @total_duration += task.duration
-      end
-
-      # Reset the task summary totals.
-
-      @total_actual_remaining = @total_potential_remaining = nil
-
-      # Calculate the grand total across all rows.
-
-      reset!()
-
-      @rows.each_index do | row_index |
-        row  = @rows[ row_index ]
-        task = @filtered_tasks[ row_index ]
-
-        add!( row )
-
-        if ( task.duration > 0 )
-          @total_actual_remaining    ||= @total_duration
-          @total_potential_remaining ||= @total_duration
-
-          @total_actual_remaining    -= row.committed
-          @total_potential_remaining -= row.total
-        end
-      end
-
-      # Work out the row totals for individual users.
-
-      @users.each_index do | user_index |
-        @rows.each do | row |
-          user_row_total = ReportUserRowTotal.new
-          user_row_total.calculate!( row, user_index )
-          row.add_user_row_total( user_row_total )
-        end
-      end
-
-      # Use that to generate the overall user totals.
-
-      @user_column_totals = []
-
-      @users.each_index do | user_index |
-        user_column_total = ReportUserColumnTotal.new
-        user_column_total.calculate!( @rows, user_index )
-        @user_column_totals[ user_index ] = user_column_total
-      end
-
-      # Remove zero total columns if asked to do so.
-
-      if ( @exclude_zero_cols )
-        @filtered_users = []
-        column_removals = []
-
-        @users.each_index do | user_index |
-          if ( @user_column_totals[ user_index ].send( zero_check_method ).zero? )
-            column_removals << user_index
-          else
-            @filtered_users << @users[ user_index ]
-          end
-        end
-
-        column_removals.reverse.each do | index |
-          @rows.each do | row |
-            row.delete_user_row_total( index )
-          end
-          @user_column_totals.delete_at( index )
-        end
-
+        @filtered_users = User.where( :id => @user_totals.keys ) unless @users.count.zero?
       else
         @filtered_users = @users.dup
-
       end
 
-      # Now move on to section calculations.
+      # Finally, collapse all internal relations to the actual lists of
+      # objects. Downstream report clients are many and varied and will
+      # iterate over this data in all sorts of ways; benchmarking shows
+      # that leaving these as relations in perpetuity results in
+      # significantly worse performance (e.g. one example heavy test
+      # case reduced request time from around 1600ms to 1350ms).
 
-      sections_initialise_sections()
-
-      @sections       = []
-      current_section = nil
-
-      @rows.each_index do | row_index |
-        row  = @rows[ row_index ]
-        task = @filtered_tasks[ row_index ]
-
-        if ( sections_new_section?( task ) )
-          current_section = ReportSection.new
-          @sections.push( current_section )
-        end
-
-        raise( "Section calculation failure in report module" ) if ( current_section.nil? )
-
-        row.cells.each_index do | cell_index |
-          cell = row.cells[ cell_index ]
-          current_section.add_cell( cell, cell_index )
-        end
-
-        row.user_row_totals.each_index do | user_index |
-          user_row_total = row.user_row_totals[ user_index ]
-          current_section.add_user_row_total( user_row_total, user_index )
-        end
-      end
-
+               @tasks =          @tasks.try( :all ) if (          @tasks.is_a? ActiveRecord::Relation )
+               @users =          @users.try( :all ) if (          @users.is_a? ActiveRecord::Relation )
+      @filtered_tasks = @filtered_tasks.try( :all ) if ( @filtered_tasks.is_a? ActiveRecord::Relation )
+      @filtered_users = @filtered_users.try( :all ) if ( @filtered_users.is_a? ActiveRecord::Relation )
     end
 
-    # Helper methods which return a user-displayable column heading for various
-    # different report types. Pass the date range to display and, for some of
-    # the methods, optional format strings for date formatting.
-
-    def heading_total( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
-      "#{ heading_start( range, format ) } to #{ heading_end( range, format ) }"
-    end
-
-    def heading_start( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
-      "#{ range.min.strftime( format ) }"
-    end
-
-    def heading_end( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
-      "#{ range.max.strftime( format ) }"
-    end
-
-    def heading_tax_year( range )
-      year = range.min.beginning_of_uk_tax_year.year
-      return "#{ year } / #{ year + 1 }"
-    end
-
-    def heading_calendar_year( range )
-      return range.min.year.to_s
-    end
-
-    def heading_quarter_and_month( range, format = '%b %Y' ) # Mth-YYYY
-      return range.min.strftime( format )
-    end
-
-    def heading_weekly( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
-      return "#{ range.min.strftime( '%d %b' ) }<br />#{ range.min.year }: #{ range.min.cweek }".html_safe()
-    end
-
-    def heading_daily( range, format = '%d-%b-%Y' ) # DD-Mth-YYYY
-      return range.min.strftime( format )
-    end
-  end
-
-  #############################################################################
-  # CALCULATION SUPPORT - OBJECTS FOR ROWS, CELLS, TOTALS
-  #############################################################################
-
-  # Store information about a specific task over a full report date range.
-  # The parent report contains information about that range.
-  #
-  class ReportRow < ReportElementaryCalculator
-    # Array of ReportCell objects
-    attr_reader :cells
-
-    # Array of ReportUserRowTotal objects
-    attr_reader :user_row_totals
-
-    # Task for which this row exists
-    attr_reader :task
-
-    def initialize( task )
-      super()
-      @cells           = []
-      @user_row_totals = []
-      @task            = task
-    end
-
-    # Add the given ReportCell object to the "@cells" array and increment
-    # the internal running total for the row.
+    # Back-end to "calculate". Runs the calculation engine using all th
+    # normal database constraints, over a given range.
     #
-    def add_cell( cell )
-      @cells.push( cell )
-      add!( cell )
-    end
+    def run_sums_for_range( range, override_key = nil )
 
-    # Delete a ReportCell object from the "@cells" array at the given index.
-    #
-    def delete_cell( index )
-      subtract!( @cells[ index ] )
-      @cells.delete_at( index )
-    end
+      joins  = { :timesheet_row => [ :task, { :timesheet => :user } ] }
+      groups = [
+        '"tasks"."id"',
+        '"users"."id"',
+        '"timesheets"."committed"'
+      ]
 
-    # Call to add ReportUserRowTotal objects to the row's @user_row_totals
-    # array.
-    #
-    def add_user_row_total( user_row_total )
-      @user_row_totals.push( user_row_total )
-    end
+      non_zero             = [ 'worked_hours > ?', BigDecimal.new( 0 ) ]
+      conditions           = { :date => range }
+      conditions[ :tasks ] = { :id   => @tasks } unless @tasks.count.zero?
+      conditions[ :users ] = { :id   => @users } unless @users.count.zero?
 
-    # Call to delete a row total from a specific index.
-    #
-    def delete_user_row_total( index )
-      @user_row_totals.delete_at( index )
-    end
-  end
+      grouping = @frequency_data[ :grouping ]
+      groups  += grouping unless ( grouping.nil? )
 
-  # Rows are grouped into sections. Whenever the customer or project of the
-  # currently processed row differs from a previously processed row, a new
-  # section is declared. The report's "sections" array should be accessed by
-  # section index (see module TrackRecordSections for details).
-  #
-  # Section objects contain an array of ReportCell objects, just like a row,
-  # only this time each cell records the total hours in the column spanning
-  # all rows within the section. There is also a "user_row_totals" array, again
-  # recording the hours for the user across the whole report time range and
-  # across all rows in the section.
-  #
-  # The ReportSection object's own hour totals give the sum of all hours by
-  # anybody across the whole report time range and all rows in the section.
-  # This is analogous to a ReportRow object's totals.
-  #
-  # Section totals are best calculated after the main per-row and per-column
-  # report data has been worked out for all rows and columns.
-  #
-  class ReportSection < ReportElementaryCalculator
-    # Array of ReportCell objects. Analogous to the same-name array in a
-    # ReportRow, but each cell corresponds to all rows in this section.
-    attr_reader :cells
+      # This does all the database leg work, pulling in summed work packets
+      # for all of the assembled conditions, grouped into a hash keyed by
+      # data that depends upon 'groups', with BigDecimal sum result values.
 
-    # Array of ReportUserRowTotal objects. Again, analogous to the same-name
-    # array in a ReportRow, but correspond to multiple rows.
-    attr_reader :user_row_totals
+      assoc = WorkPacket.joins( joins ).where( conditions ).where( non_zero ).order( groups )
+      sums  = assoc.sum( :worked_hours, :group => groups )
 
-    def initialize
-      super()
-      @cells           = []
-      @user_row_totals = []
-    end
-
-    # Add the given ReportCell to the "@cells" array at the given cell index.
-    # If there is already a cell at this index, then add the hours to that
-    # cell. This makes it easy to iterate over rows and their cells, then add
-    # those hours progressively to the section cells to produce the multiple-
-    # row section totals.
-    #
-    def add_cell( cell, cell_index )
-      dup_or_calc( @cells, cell, cell_index )
-      add!( cell )
-    end
-
-    # Call to add ReportUserRowTotal objects to the row's @user_row_totals
-    # array at the given user index. Again, multiple calls for the same index
-    # cause hours to be added, as with "add_cell" above.s
-    #
-    def add_user_row_total( user_row_total, user_index )
-      dup_or_calc( @user_row_totals, user_row_total, user_index )
-    end
-
-  private
-
-    # To the given array, add a duplicate of the given object at the given
-    # index should the array not contain anything at that index, else add
-    # the hours from the object to whatever is already in the array.
-
-    def dup_or_calc( array, object, index )
-      array[ index ] = object.class.new if ( array[ index ].nil? )
-      array[ index ].add!( object )
-    end
-  end
-
-  # Store information about a specific task over a column's date range.
-  #
-  # The object does not store the task or range data since this would be
-  # redundant across potentially numerous instances leading to significant
-  # RAM wastage. Instead:
-  #
-  # - The ReportCell objects are stored in a ReportRow "cells" array. The
-  #   array indices correspond directly to array indices of the Report's
-  #   "ranges" array, compiled as the first row of the report gets built.
-  #
-  # - The ReportRows' "task" property gives the task object for that row.
-  #
-  # So - to find task and range, you need to know the row index of the
-  # ReportRow and the column index of the ReportCell this contains.
-  #
-  class ReportCell < ReportElementaryCalculator
-    # User breakdown for this cell
-    attr_reader :user_data
-
-    def initialize()
-      super()
-      @user_data = []
-    end
-
-    # Add the given ReportUserData object to the "@user_data" array and
-    # add it to the internal running hourly count.
-    #
-    def add_user_data( data )
-      @user_data.push( data )
-      add!( data )
-    end
-
-    # Pass a date range, an array of committed work packets sorted by date
-    # descending, an array of not committed work packets sorted by date
-    # descending and an optional user IDs array. Hours are summed for work
-    # packets across the given range. Any work packets falling within the range
-    # are removed from the arrays. Separate totals for each of the users in the
-    # given array are maintained in the @user_data array.
-    #
-    def calculate!( range, committed, not_committed, reportable_user_ids = [] )
-      # Reset internal calculations and pre-allocate ReportUserData objects for
-      # each user (if any).
-
-      reset!()
-      @user_data = []
-
-      reportable_user_ids.each_index do | user_index |
-        @user_data[ user_index ] = ReportUserData.new
-      end
-
-      # Start and the end of the committed packets array. For anything within
-      # the given range, add the hours to the internal total and add to the
-      # relevant user
-
-      @committed = sum(
-        range,
-        committed,
-        reportable_user_ids,
-        :sum_committed_hours
-      )
-
-      # Same again, but for not committed hours.
-
-      @not_committed = sum(
-        range,
-        not_committed,
-        reportable_user_ids,
-        :sum_not_committed_hours
-      )
-    end
-
-  private
-
-    # Count the hours over the given range included in the given work packets.
-    # Packets outside the range are ignored. The range may be inclusive or
-    # exclusive; work packets *MUST* be passed as an ActiveRecord::Relation
-    # instance because ActiveRecord is used to sum the worked hours.
-    #
-    # In addition, and applying only to work packets that fall under the range
-    # already specified, pass an array of user IDs and a method to call on an 
-    # entry in the @user_data array. For each user ID entry, a @user_data array
-    # entry at the same index is called with the method you specify and is
-    # passed all work packets owned by the relevant user, again as a Relation
-    # (the Relation instance might yield no packets when resolved). The user
-    # data method might, say, use the Relation to count the hours involved.
-    #
-    def sum( range, packets, reportable_user_ids, user_data_method )
-
-      # As noted in the WorkPacket model's code (at the time of writing) for
-      # class method 'find_by_task_user_and_range', when using ranges as
-      # ActiveRecord conditions, inclusive ranges should always be used for
-      # safety as ActiveRecord may not otherwise protect from database quirks.
+      # The raw data needs to be assembled into a useful report.
       #
-      # We then use the database to do the calculation over the relevant range
-      # rather than using Ruby. This should be much faster, especially for
-      # large numbers of work packets - they never get loaded into RAM by Ruby.
+      # It may seem like a lot of effort counting up all the sums from the
+      # database, especially for the per-user totals. However, we must avoid
+      # hitting the database multiple times - each call executes quickly at
+      # the "other end" but RPC calls are extremely slow compared to local
+      # arithmetic, even in Ruby on BigDecimal objects.
+      #
+      # Simply assigning a BigDecimal value is about ten times faster than
+      # adding one. So we might consider doing two database sums - one split
+      # by user ID, one not; at least that would eliminate the per-cell user
+      # additions. However, over a test sample of around 50,000 objects, the
+      # in-Ruby overhead down in Rails for taking the database response and
+      # building the big hash of results is pretty huge - this in fact takes
+      # up the lion's share of the time spent herein. It easily eclipsed any
+      # savings made from subsequent assign-instead-of-add in benchmark
+      # tests during development.
+      #
+      # Thus this simple approach is surprisingly good - one single big
+      # database call, a large hash of slow built but fast-to-process raw
+      # data and a counted, totalled, object orientated representation
+      # constructed quickly from there.
+      #
+      # Incidentally best-guess memory analysis on a 64-bit platform seems
+      # to indicate a < 256K stored RAM requirement for the raw data object
+      # in Ruby using the 50,000 work packet data set. So even for really
+      # very large reports by TrackRecord standards (imagine a 50,000 cell
+      # HTML table!) the RAM overhead of even our more structured OOP
+      # representation is surprisingly small.
 
-      range   = Range.new( range.min, range.max ) if ( range.exclude_end? )
-      packets = packets.where( :date => range )
-      total   = packets.sum( :worked_hours )
+      sums.each do | key, value |
 
-      # Don't forget to run the per-user calculations.
+        # Key is array of task ID, user ID, "t"/"f" indication of
+        # committed/not-committed all as strings, then group-dependent
+        # extra data that uniquely identifies the date-related column.
+        #
+        # Unpack the array into more easily understood variables. Note
+        # how "date" collects the remaining values in "key" and will
+        # be an array even if it only ends up with one array entry.
 
-      reportable_user_ids.each_with_index do | user_id, user_index |
-        user_packets = packets.where( :users => { :id => user_id } )
-        @user_data[ user_index ].send( user_data_method, user_packets ) 
+        if ( override_key )
+          task_id_str, user_id_str, flag_str = key
+          date_based_key = override_key
+        else
+          task_id_str, user_id_str, flag_str, *date_based_key = key
+        end
+
+        # The current row's overall total and its per-user breakdown.
+        # In a standard task report, this would appear on the right of
+        # each row.
+
+        current_row             = row!( task_id_str )
+        user_row_total          = current_row.user_total!( user_id_str )
+
+        # The cell within the current row and its per-user breakdown.
+        # In a standard task report, these appear as the report body.
+
+        current_cell            = current_row.cell!( date_based_key )
+        user_cell_total         = current_cell.user_total!( user_id_str )
+
+        # The total for the column the cell lies in and that column's
+        # per-user breakdown. In a standard task report, these appear
+        # along the bottom for each of the date based columns.
+
+        column_total            = column_total!( date_based_key )
+        user_column_total       = column_total.user_total!( user_id_str )
+
+        # Overall report per-user total (part of 'self'). In a standard
+        # task report, this appears in the bottom right corner. The
+        # overall cross-user total, also in the bottom right, is
+        # calculated below directly via 'self'/'@[not_]committed'.
+
+        user_overall_total      = user_total!( user_id_str )
+
+        # The total for all rows within the current section and the
+        # section's per-user breakdown for all of those rows. In a
+        # standard task report, this appears on the right of the
+        # section's header row.
+
+        row_section             = section( task_id_str ) # TrackRecordSections::SectionsMixin
+        user_section_total      = row_section.user_total!( user_id_str )
+
+        # The total for each column over the rows within the current
+        # section and each column's per-user breakdown. In a standard
+        # task report, these appear along the section header row, for
+        # each of the date based columns.
+
+        section_cell            = row_section.cell!( date_based_key )
+        user_section_cell_total = section_cell.user_total!( user_id_str )
+
+        if ( flag_str === 't' )
+                  user_cell_total.committed      = value
+                     current_cell.committed     += value
+                   user_row_total.committed     += value
+                      current_row.committed     += value
+                user_column_total.committed     += value
+                     column_total.committed     += value
+
+               user_overall_total.committed     += value # Per-user part of "self"
+                                 @committed     += value # The "self" overall total
+
+          user_section_cell_total.committed     += value
+                     section_cell.committed     += value
+               user_section_total.committed     += value
+                      row_section.committed     += value
+        else
+                  user_cell_total.not_committed  = value
+                     current_cell.not_committed += value
+                   user_row_total.not_committed += value
+                      current_row.not_committed += value
+                     column_total.not_committed += value
+                user_column_total.not_committed += value
+
+                                 @not_committed += value
+               user_overall_total.not_committed += value
+
+                      row_section.not_committed += value
+               user_section_total.not_committed += value
+                     section_cell.not_committed += value
+          user_section_cell_total.not_committed += value
+        end
       end
-
-      return total
     end
-  end
 
-  # Object used to handle running column totals. The Report object creates
-  # one each time it adds a column. For each cell that is calculated, call
-  # the ReportColumnTotal's "add_cell" method to increment the running
-  # total for the column.
-  #
-  class ReportColumnTotal < ReportElementaryCalculator
-
-    # See above.
-    #
-    def add_cell( cell_data )
-      add!( cell_data )
-    end
-  end
-
-  # Store information about a user's worked hours for a specific cell - that
-  # is, a specific task and date range. ReportUserData objects are associated
-  # with ReportCells, and those cells deal with passing over hours to be
-  # included in the user data total.
-  #
-  class ReportUserData < ReportElementaryCalculator
-
-    # Add the given ActiveRecord::Relation instance's collection of work
-    # packets to the internal committed total. The relation must specify
-    # only those packets to be added, precisely, as all are included.
-    #
-    def sum_committed_hours( packets )
-      @committed += packets.sum( :worked_hours )
-    end
-    
-    # As "sum_committed_hours", but adds to the non-committed total.
-    #
-    def sum_not_committed_hours( packets )
-      @not_committed += packets.sum( :worked_hours )
-    end
-  end
-
-  # Analogous to ReportUserData, but records the a user's total worked hours
-  # for the whole row. ReportUserRowTotal objects should be added to a UserRow
-  # in the order the users appear in the Report's @users array so that indices
-  # match between user data arrays in cells and the row user total arrays.
-  #
-  class ReportUserRowTotal < ReportElementaryCalculator
-
-    # Pass a ReportRow object containing user data to count and the index
-    # in the cell user data arrays of the user in which you have an
-    # interest.
-    #
-    def calculate!( row, user_index )
-      reset!()
-
-      row.cells.each do | cell |
-        user_data = cell.user_data[ user_index ]
-        add!( user_data )
-      end
-    end
-  end
-
-  # Analogous to ReportUserRowTotal, but sums across all rows. The objects
-  # should be added to the Report object @user_column_totals array in the order
-  # of appearance in the Report's @users array.
-  #
-  class ReportUserColumnTotal < ReportElementaryCalculator
-
-    # Pass an array of ReportRow objects to sum over and the index
-    # in the row user summary arrays of the user in which you have an
-    # interest.
-    #
-    def calculate!( rows, user_index )
-      reset!()
-
-      rows.each do | row |
-        add!( row.user_row_totals[ user_index ] )
-      end
-    end
-  end
-end
+  end # 'class Report < CalculatorWithUsers'
+end   # 'module TrackRecordReport'

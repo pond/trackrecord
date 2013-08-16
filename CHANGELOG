@@ -1,3 +1,45 @@
+Version 2.20, 2013-08-16
+========================
+
+Please see the version 2.11 change details later in this file for very
+important details about upgrading from an earlier version or installing
+anew. If you're already running version 2.11, there are few extra steps
+to take - just update your TrackRecord files with the new release. You
+then need to run "bundle install" to get updated required gems.
+
+THIS RELEASE WORKS BEST ON POSTGRESQL. If you are using another
+database, please see the HTML documentation in "doc/app/index.html" for
+details about other database configurations. TrackRecord should work on
+other databases, but report performance will be poor.
+
+Version 2.20 fixes the following bugs that were found in v2.11:
+
+- The report generator was often slower than v2.04, which it was supposed
+  to improve upon. The new report generator is much faster than both in
+  all circumstances.
+  
+  THE TrackRecordReprot API HAS NECESSARILY CHANGED AS A RESULT - just
+  after I'd said it would be stable for report generators...! Hopefully
+  the v2.10/v2.11 series were sufficiently short lived that nobody wrote
+  code against that API. There was no other way to improve performance.
+
+  The TrackRecordSection API has changed too. See "doc/app/index.html"
+  for API documentation.
+
+  This complete rewrite of the report engine leads to the version number
+  bump to v2.20. There are no database changes or migrations, so if you
+  are nervous about the changes, you can always roll back the
+  TrackRecord files via e.g. Git.
+
+- The "copy report" feature now actually copies reports (!).
+
+- The list of saved reports uses the correct user ID for URLs in the view
+  (a technical level fix that users shouldn't notice much).
+
+The only user-facing enhancements are the performance improvements
+described above.
+
+
 Version 2.11, 2013-08-05
 ========================
 

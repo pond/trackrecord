@@ -23,6 +23,9 @@ class Task < Rangeable
 
   USED_RANGE_COLUMN      = 'created_at' # For Rangeable base class
 
+  # Set a default order; note also the default eager-loading scope
+  # added later.
+
   default_scope( { :order => DEFAULT_SORT_ORDER } )
 
   scope( :active,     :conditions => { :active     => true  } )
@@ -35,9 +38,15 @@ class Task < Rangeable
   # time worked against the project by any User. WorkPacket objects are
   # held within TimesheetRow objects, each related to a specific task.
   #
-  # Every Task has an expected duration stored as a number of hours.
+  # Every Task has an expected duration stored as a number of hours. It
+  # is exceptionally common for a task's project and customer (if any)
+  # to be looked up, so eager loading those at all times ends up saving
+  # on database overhead on average. The default scope set here will
+  # combine with the order-related scope set earlier.
 
   belongs_to( :project )
+
+  default_scope( includes( { :project => :customer } ) )
 
   has_many( :timesheet_rows, { :dependent => :destroy        } )
   has_many( :work_packets,   { :through   => :timesheet_rows } )

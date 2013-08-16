@@ -97,23 +97,31 @@
   
     <li><a href="../TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="../TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="../TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="../TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="../TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="../TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="../TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="../TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="../TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="../TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="../TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="../TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="../TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="../TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="../TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="../TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="../TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="../TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="../TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="../ReportsHelper.html">ReportsHelper</a>
   
@@ -205,8 +213,6 @@
   
     <li><a href="../SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="../SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="../SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="../SessionsController.html">SessionsController</a>
@@ -240,8 +246,6 @@
     <li><a href="../TimesheetsController.html">TimesheetsController</a>
   
     <li><a href="../TimesheetsHelper.html">TimesheetsHelper</a>
-  
-    <li><a href="../TrackRecordSections.html">TrackRecordSections</a>
   
     <li><a href="../TreesController.html">TreesController</a>
   
@@ -340,10 +344,10 @@ module for more details.</p>
 
       <span class="ruby-identifier">file_row</span> = [ <span class="ruby-identifier">report</span>.<span class="ruby-identifier">column_title</span>, <span class="ruby-string">'Code'</span>, <span class="ruby-string">'Billable?'</span>, <span class="ruby-string">'Active?'</span> ]
 
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">column_ranges</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">col_index</span> <span class="ruby-operator">|</span>
-        <span class="ruby-identifier">partial</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">partial_column?</span>( <span class="ruby-identifier">col_index</span> ) <span class="ruby-operator">?</span> <span class="ruby-string">' (partial)'</span> <span class="ruby-operator">:</span> <span class="ruby-string">''</span>
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_column_range</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">range</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">partial</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">partial_column?</span>( <span class="ruby-identifier">range</span> ) <span class="ruby-operator">?</span> <span class="ruby-string">' (partial)'</span> <span class="ruby-operator">:</span> <span class="ruby-string">''</span>
         <span class="ruby-identifier">headings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">heading</span> <span class="ruby-operator">|</span>
-          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ report.column_heading( col_index ) }#{ partial }#{ heading }&quot;</span>
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ report.column_heading( range, true ) }#{ partial }#{ heading }&quot;</span>
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
 
@@ -361,24 +365,24 @@ module for more details.</p>
 
       <span class="ruby-comment"># Section and task list, date range breakdown.</span>
 
-      <span class="ruby-identifier">sections_initialise_sections</span>()
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">row_index</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">application_helper</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ApplicationHelper</span> )
 
-        <span class="ruby-identifier">row</span>      = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>[ <span class="ruby-identifier">row_index</span> ]
-        <span class="ruby-identifier">task</span>     = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_tasks</span>[ <span class="ruby-identifier">row_index</span> ]
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_row</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>, <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
+
+        <span class="ruby-identifier">section</span>, <span class="ruby-identifier">is_new_section</span>, <span class="ruby-identifier">group</span>, <span class="ruby-identifier">is_new_group</span> = <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">retrieve</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> )
         <span class="ruby-identifier">file_row</span> = []
 
         <span class="ruby-comment"># New section? Write out the section title and totals if so.</span>
 
-        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">sections_new_section?</span>( <span class="ruby-identifier">task</span> ) )
-          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sections_section_title</span>( <span class="ruby-keyword">true</span> )
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">is_new_section</span> )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">section</span>.<span class="ruby-identifier">title</span>( <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">true</span> )
           <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:code</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">'-'</span> ) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
 
-          <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cells</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">col_index</span> <span class="ruby-operator">|</span>
-            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ].<span class="ruby-identifier">cells</span>[ <span class="ruby-identifier">col_index</span> ] )
+          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_cell_for</span>( <span class="ruby-identifier">section</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">section_cell</span> <span class="ruby-operator">|</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">section_cell</span> )
           <span class="ruby-keyword">end</span>
 
-          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ] )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">section</span> )
 
           <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">empty?</span> )
             <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
@@ -390,14 +394,12 @@ module for more details.</p>
 
         <span class="ruby-comment"># Task title, data and summary information</span>
 
-        <span class="ruby-identifier">application_helper</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ApplicationHelper</span> )
-
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -- #{ task.title }&quot;</span>
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">code</span>
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">billable</span> )
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span>   )
 
-        <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cells</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">cell</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_cell_for</span>( <span class="ruby-identifier">row</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">cell</span> <span class="ruby-operator">|</span>
           <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">cell</span> )
         <span class="ruby-keyword">end</span>
 
@@ -408,26 +410,23 @@ module for more details.</p>
             <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
           <span class="ruby-keyword">else</span>
             <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>
-            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">committed</span>
-            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">total</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> ( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:committed</span> ) <span class="ruby-operator">||</span> <span class="ruby-value">0</span> )
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> ( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:total</span>     ) <span class="ruby-operator">||</span> <span class="ruby-value">0</span> )
           <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
 
         <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">comprehensive</span> )
-          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
-            <span class="ruby-identifier">user</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>[ <span class="ruby-identifier">index</span> ]
-            <span class="ruby-identifier">user_total</span> = <span class="ruby-constant">TrackRecordReport</span><span class="ruby-operator">::</span><span class="ruby-constant">ReportColumnTotal</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_user_on_row</span>( <span class="ruby-identifier">row</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">row_total_for_user</span> <span class="ruby-operator">|</span>
 
             <span class="ruby-identifier">file_row</span> = [ <span class="ruby-node">&quot; ---- #{ user.name }&quot;</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span> ]
 
-            <span class="ruby-identifier">row</span>.<span class="ruby-identifier">cells</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">cell</span> <span class="ruby-operator">|</span>
-              <span class="ruby-identifier">user_total</span>.<span class="ruby-identifier">add_cell</span>( <span class="ruby-identifier">cell</span> )
-              <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">cell</span>.<span class="ruby-identifier">user_data</span>[ <span class="ruby-identifier">index</span> ] )
+            <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_cell_for_user_on_row</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">row</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">cell_for_user</span> <span class="ruby-operator">|</span>
+              <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">cell_for_user</span> )
             <span class="ruby-keyword">end</span>
 
-            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">user_total</span> )
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">row_total_for_user</span> )
           <span class="ruby-keyword">end</span>
 
           <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
@@ -438,7 +437,7 @@ module for more details.</p>
 
       <span class="ruby-identifier">file_row</span> = [ <span class="ruby-string">'Column total'</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span> ]
 
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">column_totals</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_column_total</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">|</span>
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">total</span> )
       <span class="ruby-keyword">end</span>
 
@@ -461,7 +460,7 @@ module for more details.</p>
 
       <span class="ruby-identifier">file_row</span> = [ <span class="ruby-string">''</span>, <span class="ruby-string">'Code'</span>, <span class="ruby-string">'Billable?'</span>, <span class="ruby-string">'Active?'</span> ]
 
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_user</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span>
         <span class="ruby-identifier">headings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">heading</span> <span class="ruby-operator">|</span>
           <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ user.name }#{ heading }&quot;</span>
         <span class="ruby-keyword">end</span>
@@ -475,24 +474,24 @@ module for more details.</p>
 
       <span class="ruby-comment"># Section and task list, user breakdown.</span>
 
-      <span class="ruby-identifier">sections_initialise_sections</span>()
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">row_index</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">application_helper</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ApplicationHelper</span> )
 
-        <span class="ruby-identifier">row</span>      = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">rows</span>[ <span class="ruby-identifier">row_index</span> ]
-        <span class="ruby-identifier">task</span>     = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_tasks</span>[ <span class="ruby-identifier">row_index</span> ]
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_row</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>, <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
+
+        <span class="ruby-identifier">section</span>, <span class="ruby-identifier">is_new_section</span>, <span class="ruby-identifier">group</span>, <span class="ruby-identifier">is_new_group</span> = <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">retrieve</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> )
         <span class="ruby-identifier">file_row</span> = []
 
         <span class="ruby-comment"># New section? Write out the section title and totals if so.</span>
 
-        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">sections_new_section?</span>( <span class="ruby-identifier">task</span> ) )
-          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sections_section_title</span>( <span class="ruby-keyword">true</span> )
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">is_new_section</span> )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">section</span>.<span class="ruby-identifier">title</span>( <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">true</span> )
           <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:code</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">'-'</span> ) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">''</span>
 
-          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">filtered_users</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user_index</span> <span class="ruby-operator">|</span>
-            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ].<span class="ruby-identifier">user_row_totals</span>[ <span class="ruby-identifier">user_index</span> ] )
+          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_user</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span>
+            <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">section</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:user_total</span>, <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> ) )
           <span class="ruby-keyword">end</span>
 
-          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">sections</span>[ <span class="ruby-identifier">sections_section_index</span>() ] )
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">section</span> )
 
           <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file_row</span>.<span class="ruby-identifier">flatten</span>
           <span class="ruby-identifier">file_row</span> = []
@@ -500,15 +499,13 @@ module for more details.</p>
 
         <span class="ruby-comment"># Task title, data and summary information</span>
 
-        <span class="ruby-identifier">application_helper</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>( <span class="ruby-constant">ApplicationHelper</span> )
-
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -- #{ task.title }&quot;</span>
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">code</span>
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">billable</span> )
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">application_helper</span>.<span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span>   )
 
-        <span class="ruby-identifier">row</span>.<span class="ruby-identifier">user_row_totals</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user_row_total</span> <span class="ruby-operator">|</span>
-          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">user_row_total</span> )
+        <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_user</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span>
+          <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">row</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:user_total</span>, <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> ) )
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">row</span> )
@@ -519,8 +516,8 @@ module for more details.</p>
 
       <span class="ruby-identifier">file_row</span> = [ <span class="ruby-string">'Column total'</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span>, <span class="ruby-string">''</span> ]
 
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">user_column_totals</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user_column_total</span> <span class="ruby-operator">|</span>
-        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">user_column_total</span> )
+      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_user</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:user_total</span>, <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> ) )
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">file_row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">report</span> )
@@ -533,9 +530,9 @@ module for more details.</p>
     <span class="ruby-comment">#</span>
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">uk_org_pond_hours</span>( <span class="ruby-identifier">report</span>, <span class="ruby-identifier">calculator</span> )
       <span class="ruby-identifier">a</span> = []
-      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">total</span>         ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_totals</span>         )
-      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">committed</span>     ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_committed</span>      )
-      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">not_committed</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_not_committed</span>  )
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:total</span>         ) <span class="ruby-operator">||</span> <span class="ruby-value">0</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_totals</span>         )
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:committed</span>     ) <span class="ruby-operator">||</span> <span class="ruby-value">0</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_committed</span>      )
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uk_org_pond_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:not_committed</span> ) <span class="ruby-operator">||</span> <span class="ruby-value">0</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">report</span>.<span class="ruby-identifier">include_not_committed</span>  )
       <span class="ruby-keyword">return</span> <span class="ruby-identifier">a</span>
     <span class="ruby-keyword">end</span>
 
@@ -614,10 +611,10 @@ for details.</p>
   <span class="ruby-identifier">fformat</span>   = <span class="ruby-string">'%Y-%m-%d'</span> <span class="ruby-comment"># Less compressed ISO-style</span>
   <span class="ruby-identifier">stoday</span>    = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
   <span class="ruby-identifier">ftoday</span>    = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
-  <span class="ruby-identifier">sstart_at</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
-  <span class="ruby-identifier">fstart_at</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
-  <span class="ruby-identifier">send_at</span>   = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
-  <span class="ruby-identifier">fend_at</span>   = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
+  <span class="ruby-identifier">sstart_at</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">min</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
+  <span class="ruby-identifier">fstart_at</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">min</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
+  <span class="ruby-identifier">send_at</span>   = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">max</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">sformat</span> )
+  <span class="ruby-identifier">fend_at</span>   = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">range</span>.<span class="ruby-identifier">max</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">fformat</span> )
   <span class="ruby-identifier">filename</span>  = <span class="ruby-node">&quot;report_#{ label }_on_#{ stoday }_for_#{ sstart_at }_to_#{ send_at }.csv&quot;</span>
   <span class="ruby-identifier">title</span>     = [
     <span class="ruby-node">&quot;#{ report_type.to_s.capitalize } report on #{ ftoday }&quot;</span>,

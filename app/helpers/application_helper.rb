@@ -39,6 +39,14 @@ module ApplicationHelper
     t( "uk.org.pond.trackrecord.action_names.#{ action }", options )
   end
 
+  # Return a brief internationalised version of the given action. Only a
+  # limited subset is supported (see the "brief_action_names" list in
+  # "config/locales/en.yml" for details). Intended for list views typically.
+  #
+  def apphelp_brief_action_name( action )
+    t( "uk.org.pond.trackrecord.brief_action_names.#{ action }" )
+  end
+
   # Return an internationalised heading appropriate for a page handling the
   # current action for the current controller, or the given controller and
   # optional given action name. If you want to use a default string, pass it
@@ -78,7 +86,7 @@ module ApplicationHelper
   # optional third parameter as a hash.
   #
   def apphelp_view_hint( hint_name, ctrl = controller, substitutions = {} )
-    t(
+    I18n::t(
       "uk.org.pond.trackrecord.controllers.#{ ctrl.controller_name }.view_#{ hint_name }",
       substitutions
     ).html_safe()
@@ -207,14 +215,82 @@ module ApplicationHelper
   end
 
   # Standard date formatting; pass the date to format. This can be either a
-  # date-only Date class, or a date-with-time DateTime class.
+  # date-only Date class, or a date-with-time DateTime class. Returns HTML,
+  # marked HTML safe.
   #
   def apphelp_date( date )
+    date_strfmt = I18n::t( 'uk.org.pond.trackrecord.generic_messages.date' )
+    date_format = "<span class=\"nowrap\">#{ date_strfmt }</span>"
+
     if ( date.is_a?( Date ) )
-      return date.strftime( '<span class="nowrap">%Y-%m-%d</span>' ).html_safe()
+      return date.strftime( date_format ).html_safe()
     else
-      return date.strftime( '<span class="nowrap">%Y-%m-%d</span> <span class="nowrap">%H:%M:%S</span>' ).html_safe()
+      time_strfmt = I18n::t( 'uk.org.pond.trackrecord.generic_messages.time' )
+      time_format = "<span class=\"nowrap\">#{ time_strfmt }</span>"
+      return date.strftime(
+        I18n::t(
+          "uk.org.pond.trackrecord.generic_messages.date_and_time",
+          { :date => date_format, :time => time_format }
+        )
+      ).html_safe()
     end
+  end
+
+  # As "apphelp_date", but plain text only (done as a separate method
+  # rather than via extra parameters and conditionals for speed).
+  #
+  def apphelp_date_plain( date )
+    date_strfmt = I18n::t( 'uk.org.pond.trackrecord.generic_messages.date' )
+
+    if ( date.is_a?( Date ) )
+      return date.strftime( date_strfmt )
+    else
+      time_strfmt = I18n::t( 'uk.org.pond.trackrecord.generic_messages.time' )
+      return date.strftime(
+        I18n::t(
+          "uk.org.pond.trackrecord.generic_messages.date_and_time",
+          { :date => date_strfmt, :time => time_strfmt }
+        )
+      )
+    end
+  end
+
+  # As "apphelp_date", but returns a representation of a range of two
+  # dates, inclusive.
+  #
+  def apphelp_range( range )
+    I18n::t(
+      "uk.org.pond.trackrecord.generic_messages.range",
+      { :start => apphelp_date( range.min ), :finish => apphelp_date( range.max ) }
+    ).html_safe()
+  end
+
+  # As "apphelp_date_plain", but returns a representation of a range of
+  # two dates, inclusive.
+  #
+  def apphelp_range_plain( range )
+    I18n::t(
+      "uk.org.pond.trackrecord.generic_messages.range",
+      { :start => apphelp_date_plain( range.min ), :finish => apphelp_date_plain( range.max ) }
+    )
+  end
+    
+  # For an object with a 'title', 'code' and 'description' attribute, make
+  # a link to that object showing its title as the link text, with a link
+  # title attribute consisting of the code and description (where either,
+  # both or neither may be an empty string or even nil). Returns the link.
+  #
+  def apphelp_augmented_link( obj )
+    title = ""
+    title << obj.code unless obj.try( :code ).blank?
+    title << "\n" unless title.empty? or obj.try( :description ).blank?
+    title << obj.description unless obj.try( :description ).blank?
+
+    content_tag(
+      :span,
+      link_to( obj.title, obj ),
+      :title => title
+    )
   end
 
   #############################################################################
@@ -560,9 +636,11 @@ module ApplicationHelper
       actions.each do | action |
         output << "            "
         if ( action.class == Hash )
-          output << link_to( action[ :title ], action[ :url ] % item.id.to_s )
+          title = apphelp_brief_action_name( action[ :title ] )
+          output << link_to( title, action[ :url ] % item.id.to_s )
         else
-          output << link_to( action.humanize, { :action => action, :id => item.id } )
+          title = apphelp_brief_action_name( action )
+          output << link_to( title, { :action => action, :id => item.id } )
         end
         output << "\n"
       end

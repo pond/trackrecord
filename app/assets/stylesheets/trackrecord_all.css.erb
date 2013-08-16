@@ -187,6 +187,24 @@ div#main_page_content {
   font-size: 10.5pt;
 }
 
+div#main_page_content h1,
+div#main_page_content h2,
+div#main_page_content h3,
+div#main_page_content h4,
+div#main_page_content h5,
+div#main_page_content h6 {
+
+  /* Prevents breakage caused by a scaffold.css 130% line height
+   * rule on various elements that cascades into headings from
+   * containing lines and causes them to actually be below 100%,
+   * so if they wrap, the lines overlap vertically. The scaffold
+   * rule is needed elsewhere, so just override this one case.
+   */
+
+  line-height: normal;
+}
+
+
 input[ type="checkbox" ],
 input[ type="radio" ] {
   margin-right: 5px;
@@ -704,7 +722,7 @@ div.report_edit_section select[ multiple~=multiple ] {
 }
 
 h2.report_subtitle {
-  margin-top: 3em;
+  margin-top: 2.5em;
 }
 
 table.display_table.report_actions {
@@ -716,6 +734,11 @@ table.display_table.report_actions {
 table.display_table.report_actions td {
   padding: 5px;
   vertical-align: baseline;
+}
+
+table.report tr.info th {
+  padding-left: 0.25em;
+  padding-right: 0.25em;
 }
 
 /* Timesheet editor and display grids; reports also use some of

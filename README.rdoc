@@ -1,4 +1,4 @@
-== Welcome to TrackRecord v2.11
+== Welcome to TrackRecord v2.20
 
 TrackRecord is a timesheet system written for the Ruby On Rails web
 development framework. More information can be found at:

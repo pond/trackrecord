@@ -1,15 +1,22 @@
+<%
+  # Render with the following local variables:
+  #
+  #   section              Current TrackRecordSections::Section instance
+  #   timesheet_row        TimesheetRow instance being shown on this row
+  #   timesheet_row_index  Index of this row in the overall timesheet (0...n)
+-%>
         <tr class="ts_show_row <%= cycle( 'even', 'odd' ) %>">
-          <td class="ts_show_task <%= taskhelp_billable_class( @timesheet_row.task ) %> <%= taskhelp_active_class( @timesheet_row.task ) %>">
-            <%= sections_augmented_link( @timesheet_row.task ) %>
+          <td class="ts_show_task <%= taskhelp_billable_class( timesheet_row.task ) %> <%= taskhelp_active_class( timesheet_row.task ) %>">
+            <%= apphelp_augmented_link( timesheet_row.task ) %>
           </td>
 
 <% TimesheetRow::DAY_ORDER.each do | day_number |
-   @work_packet = WorkPacket.find_by_timesheet_row_id( @timesheet_row.id, :conditions => { :day_number => day_number } )
+   work_packet = WorkPacket.where( :timesheet_row_id => timesheet_row.id, :day_number => day_number ).first
 -%>
-          <td class="ts_show_work"><%= render( :partial => 'work_packets/show.html.erb' ) %></td>
+          <td class="ts_show_work"><%= apphelp_string_hours( work_packet.worked_hours.to_s, '' ) %></td>
 <% end -%>
 
-          <td class="ts_show_total total" id="row_total_<%= sections_section_index() %>_<%= @row_number %>">
-            <%= @timesheet_row.row_sum() %>
+          <td class="ts_show_total total" id="row_total_<%= section.identifier %>_<%= timesheet_row_index %>">
+            <%= timesheet_row.row_sum() %>
           </td>
         </tr>

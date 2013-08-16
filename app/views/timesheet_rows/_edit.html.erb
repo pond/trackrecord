@@ -1,6 +1,7 @@
 <%
   # Render with the following local variables:
   #
+  #   section              Current TrackRecordSections::Section instance
   #   timesheet_row        TimesheetRow instance being edited on this row
   #   timesheet_row_index  Index of this row in the overall timesheet (0...n)
   #   selected_rows        Optional array of row indices (0...n) at which the
@@ -24,7 +25,7 @@
               <%=
                 label_tag(
                   "operate_on_row_#{ timesheet_row.id }",
-                  sections_augmented_link( timesheet_row.task )
+                  apphelp_augmented_link( timesheet_row.task )
                 )
               %>
             </td>
@@ -45,6 +46,7 @@
     render(
       :partial => 'work_packets/edit',
       :locals  => {
+        :section             => section,
         :timesheet_row       => timesheet_row,
         :timesheet_row_index => timesheet_row_index,
         :work_packet         => work_packet,

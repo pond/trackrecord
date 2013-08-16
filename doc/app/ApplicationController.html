@@ -123,23 +123,31 @@
   
     <li><a href="./TrackRecordReport.html">TrackRecordReport</a>
   
+    <li><a href="./TrackRecordReport/Calculator.html">TrackRecordReport::Calculator</a>
+  
+    <li><a href="./TrackRecordReport/CalculatorWithUsers.html">TrackRecordReport::CalculatorWithUsers</a>
+  
+    <li><a href="./TrackRecordReport/Cell.html">TrackRecordReport::Cell</a>
+  
     <li><a href="./TrackRecordReport/Report.html">TrackRecordReport::Report</a>
   
-    <li><a href="./TrackRecordReport/ReportCell.html">TrackRecordReport::ReportCell</a>
+    <li><a href="./TrackRecordReport/Row.html">TrackRecordReport::Row</a>
   
-    <li><a href="./TrackRecordReport/ReportColumnTotal.html">TrackRecordReport::ReportColumnTotal</a>
+    <li><a href="./TrackRecordReport/Section.html">TrackRecordReport::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportElementaryCalculator.html">TrackRecordReport::ReportElementaryCalculator</a>
+    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
   
-    <li><a href="./TrackRecordReport/ReportRow.html">TrackRecordReport::ReportRow</a>
+    <li><a href="./TrackRecordSections/Group.html">TrackRecordSections::Group</a>
   
-    <li><a href="./TrackRecordReport/ReportSection.html">TrackRecordReport::ReportSection</a>
+    <li><a href="./TrackRecordSections/GroupMixin.html">TrackRecordSections::GroupMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserColumnTotal.html">TrackRecordReport::ReportUserColumnTotal</a>
+    <li><a href="./TrackRecordSections/Section.html">TrackRecordSections::Section</a>
   
-    <li><a href="./TrackRecordReport/ReportUserData.html">TrackRecordReport::ReportUserData</a>
+    <li><a href="./TrackRecordSections/SectionMixin.html">TrackRecordSections::SectionMixin</a>
   
-    <li><a href="./TrackRecordReport/ReportUserRowTotal.html">TrackRecordReport::ReportUserRowTotal</a>
+    <li><a href="./TrackRecordSections/Sections.html">TrackRecordSections::Sections</a>
+  
+    <li><a href="./TrackRecordSections/SectionsMixin.html">TrackRecordSections::SectionsMixin</a>
   
     <li><a href="./ReportsHelper.html">ReportsHelper</a>
   
@@ -231,8 +239,6 @@
   
     <li><a href="./SavedReportsController.html">SavedReportsController</a>
   
-    <li><a href="./SavedReportsCopyController.html">SavedReportsCopyController</a>
-  
     <li><a href="./SavedReportsHelper.html">SavedReportsHelper</a>
   
     <li><a href="./SessionsController.html">SessionsController</a>
@@ -266,8 +272,6 @@
     <li><a href="./TimesheetsController.html">TimesheetsController</a>
   
     <li><a href="./TimesheetsHelper.html">TimesheetsHelper</a>
-  
-    <li><a href="./TrackRecordSections.html">TrackRecordSections</a>
   
     <li><a href="./TreesController.html">TreesController</a>
   
@@ -774,14 +778,11 @@ IDs. Sort this out by patching the params hash. Pass the item to patch
 (e.g. “:user”, “:control_panel”). An optional second parameter lets you
 override the use of “:task_ids” for the second dimension “params” array
 reference.</p>
-
-<p>[TODO]: Do this in the JS instead? Requires multiple hiddden INPUTs to
-[TODO]: be dynamically created, one for each array entry; slow, complex</p>
           
 
           
           <div class="method-source-code" id="appctrl_patch_params_from_js-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 334</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 336</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-identifier">sym</span>, <span class="ruby-identifier">name</span> = <span class="ruby-value">:task_ids</span> )
   <span class="ruby-identifier">task_ids</span> = (<span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ] <span class="ruby-operator">||</span> {} )[ <span class="ruby-identifier">name</span> ] <span class="ruby-operator">||</span> []
 
