@@ -74,7 +74,11 @@ class ReportsController < ApplicationController
 
     elsif ( @saved_report.nil? || ( @saved_report.user_id != @current_user.id && ! @saved_report.shared && ! @current_user.admin? ) )
 
-      flash[ :error ] = @@application_helper.apphelp_view_hint( :not_found_error )
+      flash[ :error ] = @@application_helper.apphelp_view_hint(
+        :not_found_error,
+        ReportsController
+      )
+
       redirect_to( home_path() ) and return
 
     end
@@ -86,7 +90,10 @@ class ReportsController < ApplicationController
     @report.compile()
 
     if ( @saved_report.title.empty? )
-      flash[ :warning ] = @@application_helper.apphelp_view_hint( :unnamed_warning )
+      flash[ :warning ] = @@application_helper.apphelp_view_hint(
+        :unnamed_warning,
+        ReportsController
+      )
     end
 
     if ( @report.throttled )

@@ -1,3 +1,20 @@
+Version 2.21, 2013-08-19
+========================
+
+Please see version 2.20's change information below for details. In
+particular, please check the database/PostgreSQL notes therein.
+
+Version 2.20 fixes the following bugs that were found in v2.20:
+
+- Fixed a helper call-through usage bug in ReportsController that
+  showed up in a live deployment. With every new release,
+  https://github.com/pond/trackrecord/issues/6 becomes more urgent.
+
+- Satisfactory reports performance in that context, thus reduced
+  production application log level down to normal (not really a bug
+  so much as an in-passing note!).
+
+
 Version 2.20, 2013-08-16
 ========================
 
