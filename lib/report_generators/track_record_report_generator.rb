@@ -212,6 +212,9 @@ module TrackRecordReportGenerator
   #                   the options hash in "generate" as a key of the given
   #                   name and a value of the ID given for the selected item.
   #
+  #   :gap            A gap that visually separates collections of options.
+  #                   Use a value of "true".
+  #
   # Options are displayed to the user in a vertical column in the same order
   # as in the array (first array entry shown topmost).
   #
