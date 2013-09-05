@@ -1,10 +1,22 @@
+Version 2.22, 2013-09-05
+========================
+
+Please see version 2.20's change information below for details. In
+particular, please check the database/PostgreSQL notes therein.
+
+Version 2.22 fixes the following bugs that were found in v2.21:
+
+- Manager-type users couldn't edit their profile details due to a
+  typing error ("@f" instead of just "f").
+
+
 Version 2.21, 2013-08-19
 ========================
 
 Please see version 2.20's change information below for details. In
 particular, please check the database/PostgreSQL notes therein.
 
-Version 2.20 fixes the following bugs that were found in v2.20:
+Version 2.21 fixes the following bugs that were found in v2.20:
 
 - Fixed a helper call-through usage bug in ReportsController that
   showed up in a live deployment. With every new release,
