@@ -1095,10 +1095,10 @@ module TrackRecordReport
 
       case @task_filter
         when 'billable'
-          conditions = { :billable => false }
+          conditions = { :billable => true }
 
         when 'non_billable'
-          conditions = { :billable => true }
+          conditions = { :billable => false }
       end
 
       @filtered_tasks = @filtered_tasks.where( conditions )
@@ -1523,8 +1523,8 @@ module TrackRecordReport
 
       non_zero             = [ 'worked_hours > ?', BigDecimal.new( 0 ) ]
       conditions           = { :date => range }
-      conditions[ :tasks ] = { :id   => @tasks } unless @tasks.count.zero?
-      conditions[ :users ] = { :id   => @users } unless @users.count.zero?
+      conditions[ :tasks ] = { :id   => @filtered_tasks.map( &:id ) } unless @filtered_tasks.count.zero?
+      conditions[ :users ] = { :id   =>          @users.map( &:id ) } unless          @users.count.zero?
 
       grouping = @frequency_data[ :grouping ]
       groups  += grouping unless ( grouping.nil? )

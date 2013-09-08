@@ -1,3 +1,17 @@
+Version 2.23, 2013-09-09
+========================
+
+Please see version 2.20's change information below for important
+notes about database requirements.
+
+Version 2.23 fixes the following bugs that were found in v2.22:
+
+- Fixes Issue #22, reported by Arpel (with thanks).
+
+- Fixes billable/non-billable radio selection in report generator
+  (the reported flag value was the opposite of that intended).
+
+
 Version 2.22, 2013-09-05
 ========================
 
