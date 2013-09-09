@@ -1583,6 +1583,14 @@ module TrackRecordReport
           task_id_str, user_id_str, flag_str, *date_based_key = key
         end
 
+        # Some databases return grouped data with integer IDs (e.g.
+        # sqlite) and Rails doesn't do anything about it; make sure
+        # IDs are coerced to strings (we don't coerce to numbers as
+        # some databases might not use purely numeric IDs).
+
+        task_id_str = task_id_str.to_s
+        user_id_str = user_id_str.to_s
+
         # The current row's overall total and its per-user breakdown.
         # In a standard task report, this would appear on the right of
         # each row.
