@@ -29,11 +29,13 @@ class Project < TaskGroup
   has_many( :tasks )
   has_many( :control_panels )
 
-  scope( :unassigned, { :conditions => { :customer_id => nil } } )
+  scope :unassigned, -> { where( :customer_id => nil ) }
 
   attr_protected() # Necessary for unknown reasons, Rails issues?
 
   USED_RANGE_COLUMN = 'created_at' # For the Rangeable base class of TaskGroup
+
+  validate( :customer_is_active )
 
   # Some default properties are dynamic, so assign these here rather than
   # as defaults in a migration.
@@ -95,5 +97,15 @@ class Project < TaskGroup
     end
 
     self.destroy()
+  end
+
+private
+
+  # Run via "validate".
+  #
+  def customer_is_active()
+    unless ( ( not self.active ) or self.customer.nil? or self.customer.active )
+      errors.add( :base, 'Active projects can only be associated with active customers' )
+    end
   end
 end

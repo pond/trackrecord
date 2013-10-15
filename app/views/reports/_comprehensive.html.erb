@@ -2,10 +2,16 @@
 # Based on "@report", render a comprehensive per-task, per-user report.
 # Only render if the report's "user_details" flag is set.
 -%>
+
 <% if ( @report.filtered_tasks.empty? or @report.filtered_users.empty? ) -%>
     <h2 class="report_subtitle">
       Comprehensive report for <%= @report.display_range %>
+
+      <div class="floated_link">
+        <%= link_to( 'Alter report', edit_user_saved_report_path( :id => @saved_report.id, :user_id => @saved_report.user_id ) ) %>
+      </div>
     </h2>
+
 <%   if ( @report.filtered_users.empty? and not @report.users.empty? ) -%>
     <p>
       None of the selected users booked any hours against the reportable tasks
@@ -22,6 +28,10 @@
     <h2 class="report_subtitle">
       Comprehensive report for <%= @report.display_range %>
       <%= ( @report.filtered_users.empty? ) ? '(all users)' : '(selected users only)' %>
+
+      <div class="floated_link">
+        <%= link_to( 'Alter report', edit_user_saved_report_path( :id => @saved_report.id, :user_id => @saved_report.user_id ) ) %>
+      </div>
     </h2>
 
 <%   if ( @report.filtered_tasks.empty? ) -%>

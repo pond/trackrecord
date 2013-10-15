@@ -35,14 +35,14 @@ gem 'prototype-rails'
 # https://github.com/timcharper/calendar_date_select (original, but not Rails 3 compatible)
 #       http://github.com/paneq/calendar_date_select (Rails 3 fork)
 # https://github.com/openid/ruby-openid
-# https://github.com/rails/open_id_authentication
+# https://github.com/grosser/open_id_authentication
 # https://github.com/mislav/will_paginate/
 # https://github.com/collectiveidea/audited
 # https://github.com/swanandp/acts_as_list
 
 gem 'calendar_date_select',   '~> 1.6', :git => 'http://github.com/paneq/calendar_date_select'
-gem 'ruby-openid',            '~> 2.2'     
-gem 'open_id_authentication'
+gem 'ruby-openid',            '~> 2.3'     
+gem 'open_id_authentication', '~> 1.2'
 gem 'will_paginate',          '~> 3.0'
 gem 'audited-activerecord',   '~> 3.0'
 gem 'acts_as_list'

@@ -371,7 +371,7 @@ current date.</p>
 
           
           <div class="method-source-code" id="generate_xml_code-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 128</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_xml_code</span>( <span class="ruby-identifier">id</span> )
   <span class="ruby-identifier">today</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>
   <span class="ruby-node">&quot;XML-%04d%02d%02d-#{ id }&quot;</span> <span class="ruby-operator">%</span> [ <span class="ruby-identifier">today</span>.<span class="ruby-identifier">year</span>, <span class="ruby-identifier">today</span>.<span class="ruby-identifier">month</span>, <span class="ruby-identifier">today</span>.<span class="ruby-identifier">day</span> ]
@@ -411,7 +411,7 @@ control panel data, if available.</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 94</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">super</span>( <span class="ruby-identifier">params</span> )
 
@@ -453,7 +453,7 @@ isn’t done by the database, it’s slow.</p>
 
           
           <div class="method-source-code" id="sort_by_augmented_title-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 151</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort_by_augmented_title</span>( <span class="ruby-identifier">list</span> )
   <span class="ruby-identifier">list</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">augmented_title</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">augmented_title</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -490,7 +490,7 @@ and customer names appended if available.</p>
 
           
           <div class="method-source-code" id="augmented_title-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 136</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">augmented_title</span>
   <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">project</span> )
     <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span> )
@@ -530,7 +530,7 @@ still active.</p>
 
           
           <div class="method-source-code" id="can_be_modified_by-3F-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 119</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_modified_by?</span>( <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">restricted?</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span>      )
@@ -562,15 +562,12 @@ still active.</p>
 
           
           <div class="method-source-code" id="committed_worked-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 220</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">committed_worked</span>
-  <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
+  <span class="ruby-identifier">joins</span>      = { <span class="ruby-value">:timesheet_row</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheet</span> }
+  <span class="ruby-identifier">conditions</span> = { <span class="ruby-value">:timesheets</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> } }
 
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">work_packet</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">work_packet</span>.<span class="ruby-identifier">worked_hours</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">work_packet</span>.<span class="ruby-identifier">timesheet_row</span>.<span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">sum</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- committed_worked-source -->
           
@@ -598,7 +595,7 @@ still active.</p>
 
           
           <div class="method-source-code" id="is_permitted_for-3F-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 111</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">privileged?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-keyword">self</span> ) )
 <span class="ruby-keyword">end</span></pre>
@@ -628,15 +625,12 @@ still active.</p>
 
           
           <div class="method-source-code" id="not_committed_worked-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 232</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">not_committed_worked</span>
-  <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
+  <span class="ruby-identifier">joins</span>      = { <span class="ruby-value">:timesheet_row</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheet</span> }
+  <span class="ruby-identifier">conditions</span> = { <span class="ruby-value">:timesheets</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> } }
 
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">work_packet</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">work_packet</span>.<span class="ruby-identifier">worked_hours</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">work_packet</span>.<span class="ruby-identifier">timesheet_row</span>.<span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">sum</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- not_committed_worked-source -->
           
@@ -668,7 +662,7 @@ find restricted types.</p>
 
           
           <div class="method-source-code" id="split_user_types-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 161</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">split_user_types</span>
   <span class="ruby-identifier">restricted</span>   = []
   <span class="ruby-identifier">unrestricted</span> = []
@@ -715,25 +709,19 @@ for those types of hours.</p>
 
           
           <div class="method-source-code" id="sum_hours_over_range-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 250</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sum_hours_over_range</span>( <span class="ruby-identifier">date_range</span>, <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span> )
-  <span class="ruby-identifier">committed_sum</span>     = <span class="ruby-value">0.0</span>
-  <span class="ruby-identifier">not_committed_sum</span> = <span class="ruby-value">0.0</span>
-  <span class="ruby-identifier">work_packets</span>      = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">all</span>( <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">date_range</span> } )
+  <span class="ruby-identifier">joins</span>         = { <span class="ruby-value">:timesheet_row</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:timesheet</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:user</span> } }
+  <span class="ruby-identifier">committed</span>     = { <span class="ruby-value">:timesheets</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>  } }
+  <span class="ruby-identifier">not_committed</span> = { <span class="ruby-value">:timesheets</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> } }
+  <span class="ruby-identifier">conditions</span>    = { <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">date_range</span> }
 
-  <span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">work_packet</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">timesheet</span> = <span class="ruby-identifier">work_packet</span>.<span class="ruby-identifier">timesheet_row</span>.<span class="ruby-identifier">timesheet</span>
+  <span class="ruby-identifier">conditions</span>[ <span class="ruby-value">:users</span> ] = { <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span>
 
-    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span> )
-      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
-        <span class="ruby-identifier">committed_sum</span>     <span class="ruby-operator">+=</span> <span class="ruby-identifier">work_packet</span>.<span class="ruby-identifier">worked_hours</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">not_committed_sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">work_packet</span>.<span class="ruby-identifier">worked_hours</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">return</span> { <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">committed_sum</span>, <span class="ruby-value">:not_committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">not_committed_sum</span> }
+  <span class="ruby-keyword">return</span> {
+        <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>(     <span class="ruby-identifier">committed</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> ),
+    <span class="ruby-value">:not_committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">not_committed</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
+  }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- sum_hours_over_range-source -->
           
@@ -761,9 +749,9 @@ for those types of hours.</p>
 
           
           <div class="method-source-code" id="total_worked-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 214</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 216</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total_worked</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> ) <span class="ruby-operator">||</span> <span class="ruby-value">0.0</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work_packets</span>.<span class="ruby-identifier">sum</span>( <span class="ruby-value">:worked_hours</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- total_worked-source -->
           
@@ -795,7 +783,7 @@ around a call to this method. There is no need to call here unless the
 
           
           <div class="method-source-code" id="update_with_side_effects-21-source">
-            <pre><span class="ruby-comment"># File app/models/task.rb, line 182</span>
+            <pre><span class="ruby-comment"># File app/models/task.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_with_side_effects!</span>( <span class="ruby-identifier">attrs</span> )
   <span class="ruby-identifier">active</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes!</span>( <span class="ruby-identifier">attrs</span> )

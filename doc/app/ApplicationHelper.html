@@ -614,7 +614,7 @@ created_at method. The value returned is used for display.</p>
 
           
           <div class="method-source-code" id="apphelp_created_at-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 670</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 678</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_created_at</span>( <span class="ruby-identifier">obj</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">created_at</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -1166,6 +1166,15 @@ BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_row</span>( <span class="ruby-identifier">structure</span>, <span class="ruby-identifier">item</span>, <span class="ruby-identifier">actions_method</span>, <span class="ruby-identifier">with_reports</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;        &lt;tr class=\&quot;#{ cycle( 'even', 'odd' ) }\&quot;&gt;\n&quot;</span>
 
+  <span class="ruby-comment"># It's assumed that admins can always modify things, but otherwise,</span>
+  <span class="ruby-comment"># we will only allow in-place editors if the model instance can tell</span>
+  <span class="ruby-comment"># us that editing is allowed by the current user.</span>
+
+  <span class="ruby-identifier">can_edit</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-operator">||</span> (
+               <span class="ruby-identifier">item</span>.<span class="ruby-identifier">respond_to?</span>( <span class="ruby-value">:can_be_modified_by?</span> ) <span class="ruby-operator">&amp;&amp;</span>
+               <span class="ruby-identifier">item</span>.<span class="ruby-identifier">can_be_modified_by?</span>( <span class="ruby-ivar">@current_user</span> )
+             )
+
   <span class="ruby-comment"># Handle the item columns first</span>
 
   <span class="ruby-identifier">structure</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
@@ -1187,18 +1196,17 @@ BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">send</span>( <span class="ruby-identifier">helper</span>, <span class="ruby-identifier">item</span> )
     <span class="ruby-keyword">else</span>
 
-      <span class="ruby-comment"># Restricted users can only edit their own account. Since they are not</span>
-      <span class="ruby-comment"># allowed to list other users on the system, the list view is disabled</span>
-      <span class="ruby-comment"># for them, so there can never be in-place editors in that case. For</span>
-      <span class="ruby-comment"># any other object type, restricted users have no edit permission. The</span>
-      <span class="ruby-comment"># result? Disable all in-place editors for restricted users.</span>
-
-      <span class="ruby-identifier">in_place</span> = <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:value_in_place</span> ] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">privileged?</span>
+      <span class="ruby-identifier">in_place</span> = <span class="ruby-identifier">entry</span>[ <span class="ruby-value">:value_in_place</span> ] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">can_edit</span>
 
       <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">in_place</span> )
         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">safe_in_place_editor_field</span>( <span class="ruby-identifier">item</span>, <span class="ruby-identifier">method</span> )
       <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">h</span>( <span class="ruby-identifier">item</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">method</span> ) )
+        <span class="ruby-identifier">value</span>   = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">method</span> )
+        <span class="ruby-identifier">safestr</span> = ( <span class="ruby-identifier">value</span> <span class="ruby-operator">===</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">===</span> <span class="ruby-keyword">false</span> ) <span class="ruby-operator">?</span>
+                               <span class="ruby-identifier">apphelp_boolean</span>( <span class="ruby-identifier">value</span> ) <span class="ruby-operator">:</span>
+                                             <span class="ruby-identifier">h</span>( <span class="ruby-identifier">value</span> )
+
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">safestr</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 

@@ -53,8 +53,11 @@ class SessionsController < ApplicationController
     if ( not identity_url.nil? and identity_url.empty? )
       failed_login( 'You must provide an ID.')
     else
-      identity_url = User.rationalise_id( identity_url )
-      session[ :javascript ] = params[ :javascript ] unless ( identity_url.nil? )
+      unless ( identity_url.nil? )
+        identity_url = User.rationalise_id( identity_url )
+        session[ :javascript ] = params[ :javascript ]
+      end
+
       open_id_authentication()
     end
 

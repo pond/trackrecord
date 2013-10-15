@@ -1,19 +1,4453 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  project_id: 1
-  title: MyString
-  code: MyString
-  description: MyString
-  duration: 1
-  committed: 1
-  active: 1
-
-two:
-  project_id: 1
-  title: MyString
-  code: MyString
-  description: MyString
-  duration: 1
-  committed: 1
-  active: 1
+---
+tasks_001:
+  id: '1'
+  project_id: '13'
+  active: t
+  title: Test task 327
+  code: TID00327
+  description: Description for test task 327
+  duration: '7.0'
+  created_at: '2013-10-09 06:21:22.865137'
+  updated_at: '2013-10-09 06:21:22.865137'
+  lock_version: '0'
+  billable: t
+tasks_002:
+  id: '2'
+  project_id: '62'
+  active: t
+  title: Test task 476
+  code: TID00476
+  description: Description for test task 476
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.874168'
+  updated_at: '2013-10-09 06:21:22.874168'
+  lock_version: '0'
+  billable: f
+tasks_003:
+  id: '3'
+  project_id: '64'
+  active: f
+  title: Test task 279
+  code: TID00279
+  description: Description for test task 279
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.880931'
+  updated_at: '2013-10-09 06:21:22.880931'
+  lock_version: '0'
+  billable: t
+tasks_004:
+  id: '4'
+  project_id: '53'
+  active: f
+  title: Test task 232
+  code: TID00232
+  description: Description for test task 232
+  duration: '41.0'
+  created_at: '2013-10-09 06:21:22.887913'
+  updated_at: '2013-10-09 06:21:22.887913'
+  lock_version: '0'
+  billable: t
+tasks_005:
+  id: '5'
+  project_id: '53'
+  active: f
+  title: Test task 272
+  code: TID00272
+  description: Description for test task 272
+  duration: '2310.25'
+  created_at: '2013-10-09 06:21:22.895004'
+  updated_at: '2013-10-09 06:21:22.895004'
+  lock_version: '0'
+  billable: t
+tasks_006:
+  id: '6'
+  project_id: '79'
+  active: t
+  title: Test task 35
+  code: TID00035
+  description: Description for test task 35
+  duration: '152.75'
+  created_at: '2013-10-09 06:21:22.904002'
+  updated_at: '2013-10-09 06:21:22.904002'
+  lock_version: '0'
+  billable: t
+tasks_007:
+  id: '7'
+  project_id: '79'
+  active: t
+  title: Test task 351
+  code: TID00351
+  description: Description for test task 351
+  duration: '2285.75'
+  created_at: '2013-10-09 06:21:22.910112'
+  updated_at: '2013-10-09 06:21:22.910112'
+  lock_version: '0'
+  billable: t
+tasks_008:
+  id: '8'
+  project_id: '83'
+  active: t
+  title: Test task 464
+  code: TID00464
+  description: Description for test task 464
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.916509'
+  updated_at: '2013-10-09 06:21:22.916509'
+  lock_version: '0'
+  billable: f
+tasks_009:
+  id: '9'
+  project_id: '83'
+  active: t
+  title: Test task 185
+  code: TID00185
+  description: Description for test task 185
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.923839'
+  updated_at: '2013-10-09 06:21:22.923839'
+  lock_version: '0'
+  billable: f
+tasks_010:
+  id: '10'
+  project_id: '83'
+  active: t
+  title: Test task 385
+  code: TID00385
+  description: Description for test task 385
+  duration: '1493.0'
+  created_at: '2013-10-09 06:21:22.931013'
+  updated_at: '2013-10-09 06:21:22.931013'
+  lock_version: '0'
+  billable: f
+tasks_011:
+  id: '11'
+  project_id: '65'
+  active: f
+  title: Test task 269
+  code: TID00269
+  description: Description for test task 269
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.937162'
+  updated_at: '2013-10-09 06:21:22.937162'
+  lock_version: '0'
+  billable: t
+tasks_012:
+  id: '12'
+  project_id: '107'
+  active: t
+  title: Test task 195
+  code: TID00195
+  description: Description for test task 195
+  duration: '146.75'
+  created_at: '2013-10-09 06:21:22.943399'
+  updated_at: '2013-10-09 06:21:22.943399'
+  lock_version: '0'
+  billable: t
+tasks_013:
+  id: '13'
+  project_id: '74'
+  active: f
+  title: Test task 356
+  code: TID00356
+  description: Description for test task 356
+  duration: '18.0'
+  created_at: '2013-10-09 06:21:22.949780'
+  updated_at: '2013-10-09 06:21:22.949780'
+  lock_version: '0'
+  billable: t
+tasks_014:
+  id: '14'
+  project_id: '19'
+  active: f
+  title: Test task 330
+  code: TID00330
+  description: Description for test task 330
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.956619'
+  updated_at: '2013-10-09 06:21:22.956619'
+  lock_version: '0'
+  billable: f
+tasks_015:
+  id: '15'
+  project_id: '22'
+  active: f
+  title: Test task 242
+  code: TID00242
+  description: Description for test task 242
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.963022'
+  updated_at: '2013-10-09 06:21:22.963022'
+  lock_version: '0'
+  billable: f
+tasks_016:
+  id: '16'
+  project_id: '120'
+  active: f
+  title: Test task 108
+  code: TID00108
+  description: Description for test task 108
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:22.971633'
+  updated_at: '2013-10-09 06:21:22.971633'
+  lock_version: '0'
+  billable: t
+tasks_017:
+  id: '17'
+  project_id: '58'
+  active: t
+  title: Test task 19
+  code: TID00019
+  description: Description for test task 19
+  duration: '634.5'
+  created_at: '2013-10-09 06:21:22.979189'
+  updated_at: '2013-10-09 06:21:22.979189'
+  lock_version: '0'
+  billable: t
+tasks_018:
+  id: '18'
+  project_id: '58'
+  active: t
+  title: Test task 462
+  code: TID00462
+  description: Description for test task 462
+  duration: '1286.75'
+  created_at: '2013-10-09 06:21:22.985581'
+  updated_at: '2013-10-09 06:21:22.985581'
+  lock_version: '0'
+  billable: t
+tasks_019:
+  id: '19'
+  project_id: '69'
+  active: f
+  title: Test task 468
+  code: TID00468
+  description: Description for test task 468
+  duration: '49.5'
+  created_at: '2013-10-09 06:21:22.992048'
+  updated_at: '2013-10-09 06:21:22.992048'
+  lock_version: '0'
+  billable: t
+tasks_020:
+  id: '20'
+  project_id: '81'
+  active: t
+  title: Test task 484
+  code: TID00484
+  description: Description for test task 484
+  duration: '318.0'
+  created_at: '2013-10-09 06:21:22.998640'
+  updated_at: '2013-10-09 06:21:22.998640'
+  lock_version: '0'
+  billable: t
+tasks_021:
+  id: '21'
+  project_id: '81'
+  active: t
+  title: Test task 458
+  code: TID00458
+  description: Description for test task 458
+  duration: '2044.0'
+  created_at: '2013-10-09 06:21:23.006264'
+  updated_at: '2013-10-09 06:21:23.006264'
+  lock_version: '0'
+  billable: t
+tasks_022:
+  id: '22'
+  project_id: '31'
+  active: t
+  title: Test task 431
+  code: TID00431
+  description: Description for test task 431
+  duration: '133.25'
+  created_at: '2013-10-09 06:21:23.012987'
+  updated_at: '2013-10-09 06:21:23.012987'
+  lock_version: '0'
+  billable: t
+tasks_023:
+  id: '23'
+  project_id: '31'
+  active: t
+  title: Test task 360
+  code: TID00360
+  description: Description for test task 360
+  duration: '683.75'
+  created_at: '2013-10-09 06:21:23.019475'
+  updated_at: '2013-10-09 06:21:23.019475'
+  lock_version: '0'
+  billable: t
+tasks_024:
+  id: '24'
+  project_id: '111'
+  active: f
+  title: Test task 2
+  code: TID00002
+  description: Description for test task 2
+  duration: '115.5'
+  created_at: '2013-10-09 06:21:23.026355'
+  updated_at: '2013-10-09 06:21:23.026355'
+  lock_version: '0'
+  billable: t
+tasks_025:
+  id: '25'
+  project_id: '6'
+  active: f
+  title: Test task 419
+  code: TID00419
+  description: Description for test task 419
+  duration: '8.5'
+  created_at: '2013-10-09 06:21:23.032866'
+  updated_at: '2013-10-09 06:21:23.032866'
+  lock_version: '0'
+  billable: t
+tasks_026:
+  id: '26'
+  project_id: '6'
+  active: f
+  title: Test task 345
+  code: TID00345
+  description: Description for test task 345
+  duration: '866.25'
+  created_at: '2013-10-09 06:21:23.040117'
+  updated_at: '2013-10-09 06:21:23.040117'
+  lock_version: '0'
+  billable: t
+tasks_027:
+  id: '27'
+  project_id: '35'
+  active: f
+  title: Test task 24
+  code: TID00024
+  description: Description for test task 24
+  duration: '16.25'
+  created_at: '2013-10-09 06:21:23.047268'
+  updated_at: '2013-10-09 06:21:23.047268'
+  lock_version: '0'
+  billable: t
+tasks_028:
+  id: '28'
+  project_id: '65'
+  active: f
+  title: Test task 340
+  code: TID00340
+  description: Description for test task 340
+  duration: '7.5'
+  created_at: '2013-10-09 06:21:23.057131'
+  updated_at: '2013-10-09 06:21:23.057131'
+  lock_version: '0'
+  billable: t
+tasks_029:
+  id: '29'
+  project_id: '17'
+  active: t
+  title: Test task 148
+  code: TID00148
+  description: Description for test task 148
+  duration: '152.5'
+  created_at: '2013-10-09 06:21:23.065008'
+  updated_at: '2013-10-09 06:21:23.065008'
+  lock_version: '0'
+  billable: t
+tasks_030:
+  id: '30'
+  project_id: '39'
+  active: t
+  title: Test task 240
+  code: TID00240
+  description: Description for test task 240
+  duration: '14.5'
+  created_at: '2013-10-09 06:21:23.071390'
+  updated_at: '2013-10-09 06:21:23.071390'
+  lock_version: '0'
+  billable: t
+tasks_031:
+  id: '31'
+  project_id: '39'
+  active: t
+  title: Test task 255
+  code: TID00255
+  description: Description for test task 255
+  duration: '2220.25'
+  created_at: '2013-10-09 06:21:23.078050'
+  updated_at: '2013-10-09 06:21:23.078050'
+  lock_version: '0'
+  billable: t
+tasks_032:
+  id: '32'
+  project_id: '43'
+  active: t
+  title: Test task 538
+  code: TID00538
+  description: Description for test task 538
+  duration: '79.5'
+  created_at: '2013-10-09 06:21:23.084653'
+  updated_at: '2013-10-09 06:21:23.084653'
+  lock_version: '0'
+  billable: t
+tasks_033:
+  id: '33'
+  project_id: '110'
+  active: f
+  title: Test task 170
+  code: TID00170
+  description: Description for test task 170
+  duration: '151.0'
+  created_at: '2013-10-09 06:21:23.091233'
+  updated_at: '2013-10-09 06:21:23.091233'
+  lock_version: '0'
+  billable: t
+tasks_034:
+  id: '34'
+  project_id: '114'
+  active: f
+  title: Test task 140
+  code: TID00140
+  description: Description for test task 140
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.097730'
+  updated_at: '2013-10-09 06:21:23.097730'
+  lock_version: '0'
+  billable: f
+tasks_035:
+  id: '35'
+  project_id: '69'
+  active: f
+  title: Test task 158
+  code: TID00158
+  description: Description for test task 158
+  duration: '155.5'
+  created_at: '2013-10-09 06:21:23.104351'
+  updated_at: '2013-10-09 06:21:23.104351'
+  lock_version: '0'
+  billable: t
+tasks_036:
+  id: '36'
+  project_id: '39'
+  active: t
+  title: Test task 236
+  code: TID00236
+  description: Description for test task 236
+  duration: '79.5'
+  created_at: '2013-10-09 06:21:23.110652'
+  updated_at: '2013-10-09 06:21:23.110652'
+  lock_version: '0'
+  billable: t
+tasks_037:
+  id: '37'
+  project_id: '39'
+  active: t
+  title: Test task 307
+  code: TID00307
+  description: Description for test task 307
+  duration: '1623.75'
+  created_at: '2013-10-09 06:21:23.121015'
+  updated_at: '2013-10-09 06:21:23.121015'
+  lock_version: '0'
+  billable: t
+tasks_038:
+  id: '38'
+  project_id: '111'
+  active: f
+  title: Test task 175
+  code: TID00175
+  description: Description for test task 175
+  duration: '12.5'
+  created_at: '2013-10-09 06:21:23.127301'
+  updated_at: '2013-10-09 06:21:23.127301'
+  lock_version: '0'
+  billable: t
+tasks_039:
+  id: '39'
+  project_id: '62'
+  active: t
+  title: Test task 449
+  code: TID00449
+  description: Description for test task 449
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.133589'
+  updated_at: '2013-10-09 06:21:23.133589'
+  lock_version: '0'
+  billable: f
+tasks_040:
+  id: '40'
+  project_id: '62'
+  active: t
+  title: Test task 165
+  code: TID00165
+  description: Description for test task 165
+  duration: '2395.0'
+  created_at: '2013-10-09 06:21:23.201774'
+  updated_at: '2013-10-09 06:21:23.201774'
+  lock_version: '0'
+  billable: f
+tasks_041:
+  id: '41'
+  project_id: '80'
+  active: f
+  title: Test task 78
+  code: TID00078
+  description: Description for test task 78
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.211916'
+  updated_at: '2013-10-09 06:21:23.211916'
+  lock_version: '0'
+  billable: f
+tasks_042:
+  id: '42'
+  project_id: '80'
+  active: f
+  title: Test task 193
+  code: TID00193
+  description: Description for test task 193
+  duration: '186.75'
+  created_at: '2013-10-09 06:21:23.222446'
+  updated_at: '2013-10-09 06:21:23.222446'
+  lock_version: '0'
+  billable: f
+tasks_043:
+  id: '43'
+  project_id: '49'
+  active: f
+  title: Test task 178
+  code: TID00178
+  description: Description for test task 178
+  duration: '7.5'
+  created_at: '2013-10-09 06:21:23.229061'
+  updated_at: '2013-10-09 06:21:23.229061'
+  lock_version: '0'
+  billable: t
+tasks_044:
+  id: '44'
+  project_id: '69'
+  active: f
+  title: Test task 72
+  code: TID00072
+  description: Description for test task 72
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.236091'
+  updated_at: '2013-10-09 06:21:23.236091'
+  lock_version: '0'
+  billable: t
+tasks_045:
+  id: '45'
+  project_id: '69'
+  active: f
+  title: Test task 461
+  code: TID00461
+  description: Description for test task 461
+  duration: '1614.25'
+  created_at: '2013-10-09 06:21:23.243607'
+  updated_at: '2013-10-09 06:21:23.243607'
+  lock_version: '0'
+  billable: t
+tasks_046:
+  id: '46'
+  project_id: '105'
+  active: t
+  title: Test task 149
+  code: TID00149
+  description: Description for test task 149
+  duration: '14.5'
+  created_at: '2013-10-09 06:21:23.250973'
+  updated_at: '2013-10-09 06:21:23.250973'
+  lock_version: '0'
+  billable: t
+tasks_047:
+  id: '47'
+  project_id: '105'
+  active: t
+  title: Test task 126
+  code: TID00126
+  description: Description for test task 126
+  duration: '2385.0'
+  created_at: '2013-10-09 06:21:23.259360'
+  updated_at: '2013-10-09 06:21:23.259360'
+  lock_version: '0'
+  billable: t
+tasks_048:
+  id: '48'
+  project_id: '61'
+  active: f
+  title: Test task 233
+  code: TID00233
+  description: Description for test task 233
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.265419'
+  updated_at: '2013-10-09 06:21:23.265419'
+  lock_version: '0'
+  billable: t
+tasks_049:
+  id: '49'
+  project_id: '68'
+  active: t
+  title: Test task 502
+  code: TID00502
+  description: Description for test task 502
+  duration: '16.25'
+  created_at: '2013-10-09 06:21:23.272768'
+  updated_at: '2013-10-09 06:21:23.272768'
+  lock_version: '0'
+  billable: t
+tasks_050:
+  id: '50'
+  project_id: '68'
+  active: t
+  title: Test task 306
+  code: TID00306
+  description: Description for test task 306
+  duration: '86.0'
+  created_at: '2013-10-09 06:21:23.279782'
+  updated_at: '2013-10-09 06:21:23.279782'
+  lock_version: '0'
+  billable: t
+tasks_051:
+  id: '51'
+  project_id: '100'
+  active: f
+  title: Test task 142
+  code: TID00142
+  description: Description for test task 142
+  duration: '8.25'
+  created_at: '2013-10-09 06:21:23.286156'
+  updated_at: '2013-10-09 06:21:23.286156'
+  lock_version: '0'
+  billable: t
+tasks_052:
+  id: '52'
+  project_id: '23'
+  active: f
+  title: Test task 540
+  code: TID00540
+  description: Description for test task 540
+  duration: '9.5'
+  created_at: '2013-10-09 06:21:23.292595'
+  updated_at: '2013-10-09 06:21:23.292595'
+  lock_version: '0'
+  billable: t
+tasks_053:
+  id: '53'
+  project_id: '35'
+  active: f
+  title: Test task 67
+  code: TID00067
+  description: Description for test task 67
+  duration: '34.75'
+  created_at: '2013-10-09 06:21:23.298767'
+  updated_at: '2013-10-09 06:21:23.298767'
+  lock_version: '0'
+  billable: t
+tasks_054:
+  id: '54'
+  project_id: '22'
+  active: f
+  title: Test task 382
+  code: TID00382
+  description: Description for test task 382
+  duration: '7.5'
+  created_at: '2013-10-09 06:21:23.304976'
+  updated_at: '2013-10-09 06:21:23.304976'
+  lock_version: '0'
+  billable: t
+tasks_055:
+  id: '55'
+  project_id: '69'
+  active: f
+  title: Test task 95
+  code: TID00095
+  description: Description for test task 95
+  duration: '24.0'
+  created_at: '2013-10-09 06:21:23.311274'
+  updated_at: '2013-10-09 06:21:23.311274'
+  lock_version: '0'
+  billable: t
+tasks_056:
+  id: '56'
+  project_id: '3'
+  active: t
+  title: Test task 66
+  code: TID00066
+  description: Description for test task 66
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.318435'
+  updated_at: '2013-10-09 06:21:23.318435'
+  lock_version: '0'
+  billable: t
+tasks_057:
+  id: '57'
+  project_id: '75'
+  active: f
+  title: Test task 303
+  code: TID00303
+  description: Description for test task 303
+  duration: '120.5'
+  created_at: '2013-10-09 06:21:23.324981'
+  updated_at: '2013-10-09 06:21:23.324981'
+  lock_version: '0'
+  billable: t
+tasks_058:
+  id: '58'
+  project_id: '75'
+  active: f
+  title: Test task 7
+  code: TID00007
+  description: Description for test task 7
+  duration: '523.5'
+  created_at: '2013-10-09 06:21:23.331336'
+  updated_at: '2013-10-09 06:21:23.331336'
+  lock_version: '0'
+  billable: t
+tasks_059:
+  id: '59'
+  project_id: '38'
+  active: f
+  title: Test task 335
+  code: TID00335
+  description: Description for test task 335
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.337915'
+  updated_at: '2013-10-09 06:21:23.337915'
+  lock_version: '0'
+  billable: t
+tasks_060:
+  id: '60'
+  project_id: '38'
+  active: f
+  title: Test task 16
+  code: TID00016
+  description: Description for test task 16
+  duration: '36.75'
+  created_at: '2013-10-09 06:21:23.345362'
+  updated_at: '2013-10-09 06:21:23.345362'
+  lock_version: '0'
+  billable: t
+tasks_061:
+  id: '61'
+  project_id: '62'
+  active: t
+  title: Test task 349
+  code: TID00349
+  description: Description for test task 349
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.351912'
+  updated_at: '2013-10-09 06:21:23.351912'
+  lock_version: '0'
+  billable: f
+tasks_062:
+  id: '62'
+  project_id: '65'
+  active: f
+  title: Test task 517
+  code: TID00517
+  description: Description for test task 517
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.359146'
+  updated_at: '2013-10-09 06:21:23.359146'
+  lock_version: '0'
+  billable: t
+tasks_063:
+  id: '63'
+  project_id: '65'
+  active: f
+  title: Test task 75
+  code: TID00075
+  description: Description for test task 75
+  duration: '2433.5'
+  created_at: '2013-10-09 06:21:23.365473'
+  updated_at: '2013-10-09 06:21:23.365473'
+  lock_version: '0'
+  billable: t
+tasks_064:
+  id: '64'
+  project_id: '71'
+  active: f
+  title: Test task 403
+  code: TID00403
+  description: Description for test task 403
+  duration: '8.5'
+  created_at: '2013-10-09 06:21:23.371455'
+  updated_at: '2013-10-09 06:21:23.371455'
+  lock_version: '0'
+  billable: t
+tasks_065:
+  id: '65'
+  project_id: '101'
+  active: t
+  title: Test task 65
+  code: TID00065
+  description: Description for test task 65
+  duration: '32.25'
+  created_at: '2013-10-09 06:21:23.377493'
+  updated_at: '2013-10-09 06:21:23.377493'
+  lock_version: '0'
+  billable: t
+tasks_066:
+  id: '66'
+  project_id: '91'
+  active: f
+  title: Test task 312
+  code: TID00312
+  description: Description for test task 312
+  duration: '237.0'
+  created_at: '2013-10-09 06:21:23.383589'
+  updated_at: '2013-10-09 06:21:23.383589'
+  lock_version: '0'
+  billable: t
+tasks_067:
+  id: '67'
+  project_id: '119'
+  active: f
+  title: Test task 390
+  code: TID00390
+  description: Description for test task 390
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.390788'
+  updated_at: '2013-10-09 06:21:23.390788'
+  lock_version: '0'
+  billable: t
+tasks_068:
+  id: '68'
+  project_id: '39'
+  active: t
+  title: Test task 271
+  code: TID00271
+  description: Description for test task 271
+  duration: '27.25'
+  created_at: '2013-10-09 06:21:23.397949'
+  updated_at: '2013-10-09 06:21:23.397949'
+  lock_version: '0'
+  billable: t
+tasks_069:
+  id: '69'
+  project_id: '39'
+  active: t
+  title: Test task 432
+  code: TID00432
+  description: Description for test task 432
+  duration: '1860.25'
+  created_at: '2013-10-09 06:21:23.404767'
+  updated_at: '2013-10-09 06:21:23.404767'
+  lock_version: '0'
+  billable: t
+tasks_070:
+  id: '70'
+  project_id: '100'
+  active: f
+  title: Test task 101
+  code: TID00101
+  description: Description for test task 101
+  duration: '33.75'
+  created_at: '2013-10-09 06:21:23.411234'
+  updated_at: '2013-10-09 06:21:23.411234'
+  lock_version: '0'
+  billable: t
+tasks_071:
+  id: '71'
+  project_id: '113'
+  active: t
+  title: Test task 374
+  code: TID00374
+  description: Description for test task 374
+  duration: '39.5'
+  created_at: '2013-10-09 06:21:23.420020'
+  updated_at: '2013-10-09 06:21:23.420020'
+  lock_version: '0'
+  billable: t
+tasks_072:
+  id: '72'
+  project_id: '113'
+  active: t
+  title: Test task 231
+  code: TID00231
+  description: Description for test task 231
+  duration: '428.25'
+  created_at: '2013-10-09 06:21:23.427724'
+  updated_at: '2013-10-09 06:21:23.427724'
+  lock_version: '0'
+  billable: t
+tasks_073:
+  id: '73'
+  project_id: '38'
+  active: f
+  title: Test task 383
+  code: TID00383
+  description: Description for test task 383
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.435109'
+  updated_at: '2013-10-09 06:21:23.435109'
+  lock_version: '0'
+  billable: t
+tasks_074:
+  id: '74'
+  project_id: '56'
+  active: t
+  title: Test task 499
+  code: TID00499
+  description: Description for test task 499
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.441994'
+  updated_at: '2013-10-09 06:21:23.441994'
+  lock_version: '0'
+  billable: f
+tasks_075:
+  id: '75'
+  project_id: '45'
+  active: t
+  title: Test task 442
+  code: TID00442
+  description: Description for test task 442
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:23.448464'
+  updated_at: '2013-10-09 06:21:23.448464'
+  lock_version: '0'
+  billable: t
+tasks_076:
+  id: '76'
+  project_id: '69'
+  active: f
+  title: Test task 430
+  code: TID00430
+  description: Description for test task 430
+  duration: '30.0'
+  created_at: '2013-10-09 06:21:23.455162'
+  updated_at: '2013-10-09 06:21:23.455162'
+  lock_version: '0'
+  billable: t
+tasks_077:
+  id: '77'
+  project_id: '13'
+  active: t
+  title: Test task 27
+  code: TID00027
+  description: Description for test task 27
+  duration: '3.75'
+  created_at: '2013-10-09 06:21:23.462846'
+  updated_at: '2013-10-09 06:21:23.462846'
+  lock_version: '0'
+  billable: t
+tasks_078:
+  id: '78'
+  project_id: '73'
+  active: f
+  title: Test task 444
+  code: TID00444
+  description: Description for test task 444
+  duration: '27.5'
+  created_at: '2013-10-09 06:21:23.469984'
+  updated_at: '2013-10-09 06:21:23.469984'
+  lock_version: '0'
+  billable: t
+tasks_079:
+  id: '79'
+  project_id: '97'
+  active: f
+  title: Test task 497
+  code: TID00497
+  description: Description for test task 497
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.476882'
+  updated_at: '2013-10-09 06:21:23.476882'
+  lock_version: '0'
+  billable: t
+tasks_080:
+  id: '80'
+  project_id: '97'
+  active: f
+  title: Test task 212
+  code: TID00212
+  description: Description for test task 212
+  duration: '1306.0'
+  created_at: '2013-10-09 06:21:23.483227'
+  updated_at: '2013-10-09 06:21:23.483227'
+  lock_version: '0'
+  billable: t
+tasks_081:
+  id: '81'
+  project_id: '52'
+  active: f
+  title: Test task 52
+  code: TID00052
+  description: Description for test task 52
+  duration: '142.25'
+  created_at: '2013-10-09 06:21:23.489938'
+  updated_at: '2013-10-09 06:21:23.489938'
+  lock_version: '0'
+  billable: t
+tasks_082:
+  id: '82'
+  project_id: '52'
+  active: f
+  title: Test task 29
+  code: TID00029
+  description: Description for test task 29
+  duration: '148.75'
+  created_at: '2013-10-09 06:21:23.496222'
+  updated_at: '2013-10-09 06:21:23.496222'
+  lock_version: '0'
+  billable: t
+tasks_083:
+  id: '83'
+  project_id: '43'
+  active: t
+  title: Test task 41
+  code: TID00041
+  description: Description for test task 41
+  duration: '7.75'
+  created_at: '2013-10-09 06:21:23.502288'
+  updated_at: '2013-10-09 06:21:23.502288'
+  lock_version: '0'
+  billable: t
+tasks_084:
+  id: '84'
+  project_id: '35'
+  active: f
+  title: Test task 470
+  code: TID00470
+  description: Description for test task 470
+  duration: '36.5'
+  created_at: '2013-10-09 06:21:23.508237'
+  updated_at: '2013-10-09 06:21:23.508237'
+  lock_version: '0'
+  billable: t
+tasks_085:
+  id: '85'
+  project_id: '63'
+  active: f
+  title: Test task 493
+  code: TID00493
+  description: Description for test task 493
+  duration: '306.5'
+  created_at: '2013-10-09 06:21:23.514564'
+  updated_at: '2013-10-09 06:21:23.514564'
+  lock_version: '0'
+  billable: t
+tasks_086:
+  id: '86'
+  project_id: '63'
+  active: f
+  title: Test task 136
+  code: TID00136
+  description: Description for test task 136
+  duration: '2041.25'
+  created_at: '2013-10-09 06:21:23.521259'
+  updated_at: '2013-10-09 06:21:23.521259'
+  lock_version: '0'
+  billable: t
+tasks_087:
+  id: '87'
+  project_id: '103'
+  active: f
+  title: Test task 457
+  code: TID00457
+  description: Description for test task 457
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.527791'
+  updated_at: '2013-10-09 06:21:23.527791'
+  lock_version: '0'
+  billable: t
+tasks_088:
+  id: '88'
+  project_id: '62'
+  active: t
+  title: Test task 509
+  code: TID00509
+  description: Description for test task 509
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.534201'
+  updated_at: '2013-10-09 06:21:23.534201'
+  lock_version: '0'
+  billable: f
+tasks_089:
+  id: '89'
+  project_id: '40'
+  active: f
+  title: Test task 102
+  code: TID00102
+  description: Description for test task 102
+  duration: '15.75'
+  created_at: '2013-10-09 06:21:23.540460'
+  updated_at: '2013-10-09 06:21:23.540460'
+  lock_version: '0'
+  billable: t
+tasks_090:
+  id: '90'
+  project_id: '39'
+  active: t
+  title: Test task 405
+  code: TID00405
+  description: Description for test task 405
+  duration: '38.0'
+  created_at: '2013-10-09 06:21:23.546929'
+  updated_at: '2013-10-09 06:21:23.546929'
+  lock_version: '0'
+  billable: t
+tasks_091:
+  id: '91'
+  project_id: '39'
+  active: t
+  title: Test task 167
+  code: TID00167
+  description: Description for test task 167
+  duration: '1474.25'
+  created_at: '2013-10-09 06:21:23.553694'
+  updated_at: '2013-10-09 06:21:23.553694'
+  lock_version: '0'
+  billable: t
+tasks_092:
+  id: '92'
+  project_id: '69'
+  active: f
+  title: Test task 266
+  code: TID00266
+  description: Description for test task 266
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.559763'
+  updated_at: '2013-10-09 06:21:23.559763'
+  lock_version: '0'
+  billable: t
+tasks_093:
+  id: '93'
+  project_id: '69'
+  active: f
+  title: Test task 235
+  code: TID00235
+  description: Description for test task 235
+  duration: '709.0'
+  created_at: '2013-10-09 06:21:23.566021'
+  updated_at: '2013-10-09 06:21:23.566021'
+  lock_version: '0'
+  billable: t
+tasks_094:
+  id: '94'
+  project_id: '105'
+  active: t
+  title: Test task 215
+  code: TID00215
+  description: Description for test task 215
+  duration: '35.0'
+  created_at: '2013-10-09 06:21:23.572858'
+  updated_at: '2013-10-09 06:21:23.572858'
+  lock_version: '0'
+  billable: t
+tasks_095:
+  id: '95'
+  project_id: '105'
+  active: t
+  title: Test task 129
+  code: TID00129
+  description: Description for test task 129
+  duration: '30.0'
+  created_at: '2013-10-09 06:21:23.579030'
+  updated_at: '2013-10-09 06:21:23.579030'
+  lock_version: '0'
+  billable: t
+tasks_096:
+  id: '96'
+  project_id: '69'
+  active: f
+  title: Test task 220
+  code: TID00220
+  description: Description for test task 220
+  duration: '3.5'
+  created_at: '2013-10-09 06:21:23.585170'
+  updated_at: '2013-10-09 06:21:23.585170'
+  lock_version: '0'
+  billable: t
+tasks_097:
+  id: '97'
+  project_id: '69'
+  active: f
+  title: Test task 58
+  code: TID00058
+  description: Description for test task 58
+  duration: '1903.5'
+  created_at: '2013-10-09 06:21:23.591381'
+  updated_at: '2013-10-09 06:21:23.591381'
+  lock_version: '0'
+  billable: t
+tasks_098:
+  id: '98'
+  project_id: '100'
+  active: f
+  title: Test task 257
+  code: TID00257
+  description: Description for test task 257
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.597783'
+  updated_at: '2013-10-09 06:21:23.597783'
+  lock_version: '0'
+  billable: f
+tasks_099:
+  id: '99'
+  project_id: '51'
+  active: f
+  title: Test task 74
+  code: TID00074
+  description: Description for test task 74
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.605341'
+  updated_at: '2013-10-09 06:21:23.605341'
+  lock_version: '0'
+  billable: t
+tasks_100:
+  id: '100'
+  project_id: '51'
+  active: f
+  title: Test task 160
+  code: TID00160
+  description: Description for test task 160
+  duration: '2007.75'
+  created_at: '2013-10-09 06:21:23.612091'
+  updated_at: '2013-10-09 06:21:23.612091'
+  lock_version: '0'
+  billable: t
+tasks_101:
+  id: '101'
+  project_id: '62'
+  active: t
+  title: Test task 297
+  code: TID00297
+  description: Description for test task 297
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.618239'
+  updated_at: '2013-10-09 06:21:23.618239'
+  lock_version: '0'
+  billable: f
+tasks_102:
+  id: '102'
+  project_id: '58'
+  active: t
+  title: Test task 51
+  code: TID00051
+  description: Description for test task 51
+  duration: '38.0'
+  created_at: '2013-10-09 06:21:23.625066'
+  updated_at: '2013-10-09 06:21:23.625066'
+  lock_version: '0'
+  billable: t
+tasks_103:
+  id: '103'
+  project_id: '58'
+  active: t
+  title: Test task 280
+  code: TID00280
+  description: Description for test task 280
+  duration: '1848.0'
+  created_at: '2013-10-09 06:21:23.631315'
+  updated_at: '2013-10-09 06:21:23.631315'
+  lock_version: '0'
+  billable: t
+tasks_104:
+  id: '104'
+  project_id: '88'
+  active: t
+  title: Test task 106
+  code: TID00106
+  description: Description for test task 106
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.637302'
+  updated_at: '2013-10-09 06:21:23.637302'
+  lock_version: '0'
+  billable: t
+tasks_105:
+  id: '105'
+  project_id: '12'
+  active: f
+  title: Test task 63
+  code: TID00063
+  description: Description for test task 63
+  duration: '3.75'
+  created_at: '2013-10-09 06:21:23.643190'
+  updated_at: '2013-10-09 06:21:23.643190'
+  lock_version: '0'
+  billable: t
+tasks_106:
+  id: '106'
+  project_id: '22'
+  active: f
+  title: Test task 326
+  code: TID00326
+  description: Description for test task 326
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.649304'
+  updated_at: '2013-10-09 06:21:23.649304'
+  lock_version: '0'
+  billable: t
+tasks_107:
+  id: '107'
+  project_id: '16'
+  active: f
+  title: Test task 518
+  code: TID00518
+  description: Description for test task 518
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:23.655964'
+  updated_at: '2013-10-09 06:21:23.655964'
+  lock_version: '0'
+  billable: t
+tasks_108:
+  id: '108'
+  project_id: '16'
+  active: f
+  title: Test task 89
+  code: TID00089
+  description: Description for test task 89
+  duration: '1924.0'
+  created_at: '2013-10-09 06:21:23.662108'
+  updated_at: '2013-10-09 06:21:23.662108'
+  lock_version: '0'
+  billable: t
+tasks_109:
+  id: '109'
+  project_id: '11'
+  active: t
+  title: Test task 47
+  code: TID00047
+  description: Description for test task 47
+  duration: '17.75'
+  created_at: '2013-10-09 06:21:23.668489'
+  updated_at: '2013-10-09 06:21:23.668489'
+  lock_version: '0'
+  billable: t
+tasks_110:
+  id: '110'
+  project_id: '11'
+  active: t
+  title: Test task 113
+  code: TID00113
+  description: Description for test task 113
+  duration: '828.5'
+  created_at: '2013-10-09 06:21:23.674446'
+  updated_at: '2013-10-09 06:21:23.674446'
+  lock_version: '0'
+  billable: t
+tasks_111:
+  id: '111'
+  project_id: '62'
+  active: t
+  title: Test task 401
+  code: TID00401
+  description: Description for test task 401
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.680555'
+  updated_at: '2013-10-09 06:21:23.680555'
+  lock_version: '0'
+  billable: f
+tasks_112:
+  id: '112'
+  project_id: '62'
+  active: t
+  title: Test task 34
+  code: TID00034
+  description: Description for test task 34
+  duration: '1361.5'
+  created_at: '2013-10-09 06:21:23.686849'
+  updated_at: '2013-10-09 06:21:23.686849'
+  lock_version: '0'
+  billable: f
+tasks_113:
+  id: '113'
+  project_id: '35'
+  active: f
+  title: Test task 472
+  code: TID00472
+  description: Description for test task 472
+  duration: '20.25'
+  created_at: '2013-10-09 06:21:23.693333'
+  updated_at: '2013-10-09 06:21:23.693333'
+  lock_version: '0'
+  billable: t
+tasks_114:
+  id: '114'
+  project_id: '35'
+  active: f
+  title: Test task 339
+  code: TID00339
+  description: Description for test task 339
+  duration: '2115.75'
+  created_at: '2013-10-09 06:21:23.699648'
+  updated_at: '2013-10-09 06:21:23.699648'
+  lock_version: '0'
+  billable: t
+tasks_115:
+  id: '115'
+  project_id: '52'
+  active: f
+  title: Test task 23
+  code: TID00023
+  description: Description for test task 23
+  duration: '34.25'
+  created_at: '2013-10-09 06:21:23.705694'
+  updated_at: '2013-10-09 06:21:23.705694'
+  lock_version: '0'
+  billable: t
+tasks_116:
+  id: '116'
+  project_id: '3'
+  active: t
+  title: Test task 128
+  code: TID00128
+  description: Description for test task 128
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.711664'
+  updated_at: '2013-10-09 06:21:23.711664'
+  lock_version: '0'
+  billable: t
+tasks_117:
+  id: '117'
+  project_id: '97'
+  active: f
+  title: Test task 224
+  code: TID00224
+  description: Description for test task 224
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.717721'
+  updated_at: '2013-10-09 06:21:23.717721'
+  lock_version: '0'
+  billable: t
+tasks_118:
+  id: '118'
+  project_id: '109'
+  active: t
+  title: Test task 378
+  code: TID00378
+  description: Description for test task 378
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.724322'
+  updated_at: '2013-10-09 06:21:23.724322'
+  lock_version: '0'
+  billable: f
+tasks_119:
+  id: '119'
+  project_id: '109'
+  active: t
+  title: Test task 350
+  code: TID00350
+  description: Description for test task 350
+  duration: '1711.0'
+  created_at: '2013-10-09 06:21:23.730923'
+  updated_at: '2013-10-09 06:21:23.730923'
+  lock_version: '0'
+  billable: f
+tasks_120:
+  id: '120'
+  project_id: '111'
+  active: f
+  title: Test task 119
+  code: TID00119
+  description: Description for test task 119
+  duration: '28.0'
+  created_at: '2013-10-09 06:21:23.737089'
+  updated_at: '2013-10-09 06:21:23.737089'
+  lock_version: '0'
+  billable: t
+tasks_121:
+  id: '121'
+  project_id: '111'
+  active: f
+  title: Test task 524
+  code: TID00524
+  description: Description for test task 524
+  duration: '1823.75'
+  created_at: '2013-10-09 06:21:23.743080'
+  updated_at: '2013-10-09 06:21:23.743080'
+  lock_version: '0'
+  billable: t
+tasks_122:
+  id: '122'
+  project_id: '118'
+  active: f
+  title: Test task 97
+  code: TID00097
+  description: Description for test task 97
+  duration: '3.75'
+  created_at: '2013-10-09 06:21:23.749483'
+  updated_at: '2013-10-09 06:21:23.749483'
+  lock_version: '0'
+  billable: t
+tasks_123:
+  id: '123'
+  project_id: '118'
+  active: f
+  title: Test task 409
+  code: TID00409
+  description: Description for test task 409
+  duration: '721.0'
+  created_at: '2013-10-09 06:21:23.758432'
+  updated_at: '2013-10-09 06:21:23.758432'
+  lock_version: '0'
+  billable: t
+tasks_124:
+  id: '124'
+  project_id: '72'
+  active: f
+  title: Test task 239
+  code: TID00239
+  description: Description for test task 239
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.764763'
+  updated_at: '2013-10-09 06:21:23.764763'
+  lock_version: '0'
+  billable: t
+tasks_125:
+  id: '125'
+  project_id: '72'
+  active: f
+  title: Test task 353
+  code: TID00353
+  description: Description for test task 353
+  duration: '2089.0'
+  created_at: '2013-10-09 06:21:23.834077'
+  updated_at: '2013-10-09 06:21:23.834077'
+  lock_version: '0'
+  billable: t
+tasks_126:
+  id: '126'
+  project_id: '27'
+  active: f
+  title: Test task 227
+  code: TID00227
+  description: Description for test task 227
+  duration: '8.5'
+  created_at: '2013-10-09 06:21:23.843315'
+  updated_at: '2013-10-09 06:21:23.843315'
+  lock_version: '0'
+  billable: t
+tasks_127:
+  id: '127'
+  project_id: '16'
+  active: f
+  title: Test task 498
+  code: TID00498
+  description: Description for test task 498
+  duration: '15.0'
+  created_at: '2013-10-09 06:21:23.849764'
+  updated_at: '2013-10-09 06:21:23.849764'
+  lock_version: '0'
+  billable: t
+tasks_128:
+  id: '128'
+  project_id: '111'
+  active: f
+  title: Test task 300
+  code: TID00300
+  description: Description for test task 300
+  duration: '146.0'
+  created_at: '2013-10-09 06:21:23.856679'
+  updated_at: '2013-10-09 06:21:23.856679'
+  lock_version: '0'
+  billable: t
+tasks_129:
+  id: '129'
+  project_id: '79'
+  active: t
+  title: Test task 359
+  code: TID00359
+  description: Description for test task 359
+  duration: '66.25'
+  created_at: '2013-10-09 06:21:23.862903'
+  updated_at: '2013-10-09 06:21:23.862903'
+  lock_version: '0'
+  billable: t
+tasks_130:
+  id: '130'
+  project_id: '112'
+  active: f
+  title: Test task 428
+  code: TID00428
+  description: Description for test task 428
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.869304'
+  updated_at: '2013-10-09 06:21:23.869304'
+  lock_version: '0'
+  billable: f
+tasks_131:
+  id: '131'
+  project_id: '99'
+  active: f
+  title: Test task 157
+  code: TID00157
+  description: Description for test task 157
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.880402'
+  updated_at: '2013-10-09 06:21:23.880402'
+  lock_version: '0'
+  billable: f
+tasks_132:
+  id: '132'
+  project_id: '99'
+  active: f
+  title: Test task 39
+  code: TID00039
+  description: Description for test task 39
+  duration: '1644.0'
+  created_at: '2013-10-09 06:21:23.886938'
+  updated_at: '2013-10-09 06:21:23.886938'
+  lock_version: '0'
+  billable: f
+tasks_133:
+  id: '133'
+  project_id: '66'
+  active: f
+  title: Test task 117
+  code: TID00117
+  description: Description for test task 117
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.893171'
+  updated_at: '2013-10-09 06:21:23.893171'
+  lock_version: '0'
+  billable: f
+tasks_134:
+  id: '134'
+  project_id: '35'
+  active: f
+  title: Test task 64
+  code: TID00064
+  description: Description for test task 64
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.899369'
+  updated_at: '2013-10-09 06:21:23.899369'
+  lock_version: '0'
+  billable: f
+tasks_135:
+  id: '135'
+  project_id: '62'
+  active: t
+  title: Test task 205
+  code: TID00205
+  description: Description for test task 205
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.905522'
+  updated_at: '2013-10-09 06:21:23.905522'
+  lock_version: '0'
+  billable: f
+tasks_136:
+  id: '136'
+  project_id: '112'
+  active: f
+  title: Test task 433
+  code: TID00433
+  description: Description for test task 433
+  duration: '26.0'
+  created_at: '2013-10-09 06:21:23.911661'
+  updated_at: '2013-10-09 06:21:23.911661'
+  lock_version: '0'
+  billable: t
+tasks_137:
+  id: '137'
+  project_id: '112'
+  active: f
+  title: Test task 535
+  code: TID00535
+  description: Description for test task 535
+  duration: '1424.75'
+  created_at: '2013-10-09 06:21:23.921060'
+  updated_at: '2013-10-09 06:21:23.921060'
+  lock_version: '0'
+  billable: t
+tasks_138:
+  id: '138'
+  project_id: '52'
+  active: f
+  title: Test task 99
+  code: TID00099
+  description: Description for test task 99
+  duration: '27.25'
+  created_at: '2013-10-09 06:21:23.927506'
+  updated_at: '2013-10-09 06:21:23.927506'
+  lock_version: '0'
+  billable: t
+tasks_139:
+  id: '139'
+  project_id: '77'
+  active: f
+  title: Test task 121
+  code: TID00121
+  description: Description for test task 121
+  duration: '152.25'
+  created_at: '2013-10-09 06:21:23.933842'
+  updated_at: '2013-10-09 06:21:23.933842'
+  lock_version: '0'
+  billable: t
+tasks_140:
+  id: '140'
+  project_id: '9'
+  active: f
+  title: Test task 425
+  code: TID00425
+  description: Description for test task 425
+  duration: '419.25'
+  created_at: '2013-10-09 06:21:23.940976'
+  updated_at: '2013-10-09 06:21:23.940976'
+  lock_version: '0'
+  billable: t
+tasks_141:
+  id: '141'
+  project_id: '9'
+  active: f
+  title: Test task 522
+  code: TID00522
+  description: Description for test task 522
+  duration: '701.0'
+  created_at: '2013-10-09 06:21:23.947977'
+  updated_at: '2013-10-09 06:21:23.947977'
+  lock_version: '0'
+  billable: t
+tasks_142:
+  id: '142'
+  project_id: '84'
+  active: f
+  title: Test task 441
+  code: TID00441
+  description: Description for test task 441
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.954936'
+  updated_at: '2013-10-09 06:21:23.954936'
+  lock_version: '0'
+  billable: t
+tasks_143:
+  id: '143'
+  project_id: '8'
+  active: t
+  title: Test task 270
+  code: TID00270
+  description: Description for test task 270
+  duration: '109.0'
+  created_at: '2013-10-09 06:21:23.961335'
+  updated_at: '2013-10-09 06:21:23.961335'
+  lock_version: '0'
+  billable: t
+tasks_144:
+  id: '144'
+  project_id: '35'
+  active: f
+  title: Test task 201
+  code: TID00201
+  description: Description for test task 201
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:23.967705'
+  updated_at: '2013-10-09 06:21:23.967705'
+  lock_version: '0'
+  billable: t
+tasks_145:
+  id: '145'
+  project_id: '112'
+  active: f
+  title: Test task 60
+  code: TID00060
+  description: Description for test task 60
+  duration: '29.25'
+  created_at: '2013-10-09 06:21:23.976410'
+  updated_at: '2013-10-09 06:21:23.976410'
+  lock_version: '0'
+  billable: t
+tasks_146:
+  id: '146'
+  project_id: '62'
+  active: t
+  title: Test task 283
+  code: TID00283
+  description: Description for test task 283
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:23.982953'
+  updated_at: '2013-10-09 06:21:23.982953'
+  lock_version: '0'
+  billable: f
+tasks_147:
+  id: '147'
+  project_id: '18'
+  active: f
+  title: Test task 309
+  code: TID00309
+  description: Description for test task 309
+  duration: '35.5'
+  created_at: '2013-10-09 06:21:23.989847'
+  updated_at: '2013-10-09 06:21:23.989847'
+  lock_version: '0'
+  billable: t
+tasks_148:
+  id: '148'
+  project_id: '89'
+  active: t
+  title: Test task 176
+  code: TID00176
+  description: Description for test task 176
+  duration: '218.5'
+  created_at: '2013-10-09 06:21:23.995926'
+  updated_at: '2013-10-09 06:21:23.995926'
+  lock_version: '0'
+  billable: t
+tasks_149:
+  id: '149'
+  project_id: '6'
+  active: f
+  title: Test task 133
+  code: TID00133
+  description: Description for test task 133
+  duration: '21.25'
+  created_at: '2013-10-09 06:21:24.002325'
+  updated_at: '2013-10-09 06:21:24.002325'
+  lock_version: '0'
+  billable: t
+tasks_150:
+  id: '150'
+  project_id: '91'
+  active: f
+  title: Test task 500
+  code: TID00500
+  description: Description for test task 500
+  duration: '21.5'
+  created_at: '2013-10-09 06:21:24.008661'
+  updated_at: '2013-10-09 06:21:24.008661'
+  lock_version: '0'
+  billable: t
+tasks_151:
+  id: '151'
+  project_id: '73'
+  active: f
+  title: Test task 467
+  code: TID00467
+  description: Description for test task 467
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.014820'
+  updated_at: '2013-10-09 06:21:24.014820'
+  lock_version: '0'
+  billable: t
+tasks_152:
+  id: '152'
+  project_id: '94'
+  active: f
+  title: Test task 501
+  code: TID00501
+  description: Description for test task 501
+  duration: '22.75'
+  created_at: '2013-10-09 06:21:24.024378'
+  updated_at: '2013-10-09 06:21:24.024378'
+  lock_version: '0'
+  billable: t
+tasks_153:
+  id: '153'
+  project_id: '69'
+  active: f
+  title: Test task 247
+  code: TID00247
+  description: Description for test task 247
+  duration: '118.0'
+  created_at: '2013-10-09 06:21:24.030860'
+  updated_at: '2013-10-09 06:21:24.030860'
+  lock_version: '0'
+  billable: t
+tasks_154:
+  id: '154'
+  project_id: '2'
+  active: t
+  title: Test task 410
+  code: TID00410
+  description: Description for test task 410
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:24.037274'
+  updated_at: '2013-10-09 06:21:24.037274'
+  lock_version: '0'
+  billable: t
+tasks_155:
+  id: '155'
+  project_id: '2'
+  active: t
+  title: Test task 506
+  code: TID00506
+  description: Description for test task 506
+  duration: '677.75'
+  created_at: '2013-10-09 06:21:24.043536'
+  updated_at: '2013-10-09 06:21:24.043536'
+  lock_version: '0'
+  billable: t
+tasks_156:
+  id: '156'
+  project_id: '106'
+  active: t
+  title: Test task 281
+  code: TID00281
+  description: Description for test task 281
+  duration: '3.75'
+  created_at: '2013-10-09 06:21:24.050171'
+  updated_at: '2013-10-09 06:21:24.050171'
+  lock_version: '0'
+  billable: t
+tasks_157:
+  id: '157'
+  project_id: '106'
+  active: t
+  title: Test task 447
+  code: TID00447
+  description: Description for test task 447
+  duration: '557.0'
+  created_at: '2013-10-09 06:21:24.056694'
+  updated_at: '2013-10-09 06:21:24.056694'
+  lock_version: '0'
+  billable: t
+tasks_158:
+  id: '158'
+  project_id: '111'
+  active: f
+  title: Test task 88
+  code: TID00088
+  description: Description for test task 88
+  duration: '93.25'
+  created_at: '2013-10-09 06:21:24.062804'
+  updated_at: '2013-10-09 06:21:24.062804'
+  lock_version: '0'
+  billable: t
+tasks_159:
+  id: '159'
+  project_id: '52'
+  active: f
+  title: Test task 445
+  code: TID00445
+  description: Description for test task 445
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.069031'
+  updated_at: '2013-10-09 06:21:24.069031'
+  lock_version: '0'
+  billable: f
+tasks_160:
+  id: '160'
+  project_id: '52'
+  active: f
+  title: Test task 259
+  code: TID00259
+  description: Description for test task 259
+  duration: '1182.5'
+  created_at: '2013-10-09 06:21:24.075053'
+  updated_at: '2013-10-09 06:21:24.075053'
+  lock_version: '0'
+  billable: f
+tasks_161:
+  id: '161'
+  project_id: '111'
+  active: f
+  title: Test task 123
+  code: TID00123
+  description: Description for test task 123
+  duration: '119.5'
+  created_at: '2013-10-09 06:21:24.082705'
+  updated_at: '2013-10-09 06:21:24.082705'
+  lock_version: '0'
+  billable: t
+tasks_162:
+  id: '162'
+  project_id: '39'
+  active: t
+  title: Test task 503
+  code: TID00503
+  description: Description for test task 503
+  duration: '7.75'
+  created_at: '2013-10-09 06:21:24.089360'
+  updated_at: '2013-10-09 06:21:24.089360'
+  lock_version: '0'
+  billable: t
+tasks_163:
+  id: '163'
+  project_id: '39'
+  active: t
+  title: Test task 369
+  code: TID00369
+  description: Description for test task 369
+  duration: '1474.25'
+  created_at: '2013-10-09 06:21:24.095500'
+  updated_at: '2013-10-09 06:21:24.095500'
+  lock_version: '0'
+  billable: t
+tasks_164:
+  id: '164'
+  project_id: '71'
+  active: f
+  title: Test task 289
+  code: TID00289
+  description: Description for test task 289
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.102120'
+  updated_at: '2013-10-09 06:21:24.102120'
+  lock_version: '0'
+  billable: t
+tasks_165:
+  id: '165'
+  project_id: '71'
+  active: f
+  title: Test task 490
+  code: TID00490
+  description: Description for test task 490
+  duration: '298.5'
+  created_at: '2013-10-09 06:21:24.108036'
+  updated_at: '2013-10-09 06:21:24.108036'
+  lock_version: '0'
+  billable: t
+tasks_166:
+  id: '166'
+  project_id: '62'
+  active: t
+  title: Test task 48
+  code: TID00048
+  description: Description for test task 48
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.114195'
+  updated_at: '2013-10-09 06:21:24.114195'
+  lock_version: '0'
+  billable: f
+tasks_167:
+  id: '167'
+  project_id: '62'
+  active: t
+  title: Test task 241
+  code: TID00241
+  description: Description for test task 241
+  duration: '1022.0'
+  created_at: '2013-10-09 06:21:24.120851'
+  updated_at: '2013-10-09 06:21:24.120851'
+  lock_version: '0'
+  billable: f
+tasks_168:
+  id: '168'
+  project_id: '10'
+  active: f
+  title: Test task 125
+  code: TID00125
+  description: Description for test task 125
+  duration: '89.5'
+  created_at: '2013-10-09 06:21:24.126963'
+  updated_at: '2013-10-09 06:21:24.126963'
+  lock_version: '0'
+  billable: t
+tasks_169:
+  id: '169'
+  project_id: '67'
+  active: t
+  title: Test task 145
+  code: TID00145
+  description: Description for test task 145
+  duration: '282.5'
+  created_at: '2013-10-09 06:21:24.133362'
+  updated_at: '2013-10-09 06:21:24.133362'
+  lock_version: '0'
+  billable: t
+tasks_170:
+  id: '170'
+  project_id: '67'
+  active: t
+  title: Test task 186
+  code: TID00186
+  description: Description for test task 186
+  duration: '1575.0'
+  created_at: '2013-10-09 06:21:24.139389'
+  updated_at: '2013-10-09 06:21:24.139389'
+  lock_version: '0'
+  billable: t
+tasks_171:
+  id: '171'
+  project_id: '121'
+  active: t
+  title: Test task 268
+  code: TID00268
+  description: Description for test task 268
+  duration: '6.75'
+  created_at: '2013-10-09 06:21:24.145533'
+  updated_at: '2013-10-09 06:21:24.145533'
+  lock_version: '0'
+  billable: t
+tasks_172:
+  id: '172'
+  project_id: '69'
+  active: f
+  title: Test task 336
+  code: TID00336
+  description: Description for test task 336
+  duration: '7.5'
+  created_at: '2013-10-09 06:21:24.152112'
+  updated_at: '2013-10-09 06:21:24.152112'
+  lock_version: '0'
+  billable: t
+tasks_173:
+  id: '173'
+  project_id: '65'
+  active: f
+  title: Test task 169
+  code: TID00169
+  description: Description for test task 169
+  duration: '49.25'
+  created_at: '2013-10-09 06:21:24.158487'
+  updated_at: '2013-10-09 06:21:24.158487'
+  lock_version: '0'
+  billable: t
+tasks_174:
+  id: '174'
+  project_id: '46'
+  active: f
+  title: Test task 341
+  code: TID00341
+  description: Description for test task 341
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.164868'
+  updated_at: '2013-10-09 06:21:24.164868'
+  lock_version: '0'
+  billable: t
+tasks_175:
+  id: '175'
+  project_id: '69'
+  active: f
+  title: Test task 251
+  code: TID00251
+  description: Description for test task 251
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.171027'
+  updated_at: '2013-10-09 06:21:24.171027'
+  lock_version: '0'
+  billable: t
+tasks_176:
+  id: '176'
+  project_id: '69'
+  active: f
+  title: Test task 122
+  code: TID00122
+  description: Description for test task 122
+  duration: '113.0'
+  created_at: '2013-10-09 06:21:24.177008'
+  updated_at: '2013-10-09 06:21:24.177008'
+  lock_version: '0'
+  billable: t
+tasks_177:
+  id: '177'
+  project_id: '57'
+  active: f
+  title: Test task 459
+  code: TID00459
+  description: Description for test task 459
+  duration: '17.75'
+  created_at: '2013-10-09 06:21:24.183258'
+  updated_at: '2013-10-09 06:21:24.183258'
+  lock_version: '0'
+  billable: t
+tasks_178:
+  id: '178'
+  project_id: '57'
+  active: f
+  title: Test task 37
+  code: TID00037
+  description: Description for test task 37
+  duration: '1406.0'
+  created_at: '2013-10-09 06:21:24.189895'
+  updated_at: '2013-10-09 06:21:24.189895'
+  lock_version: '0'
+  billable: t
+tasks_179:
+  id: '179'
+  project_id: '46'
+  active: f
+  title: Test task 110
+  code: TID00110
+  description: Description for test task 110
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.196006'
+  updated_at: '2013-10-09 06:21:24.196006'
+  lock_version: '0'
+  billable: t
+tasks_180:
+  id: '180'
+  project_id: '46'
+  active: f
+  title: Test task 252
+  code: TID00252
+  description: Description for test task 252
+  duration: '654.25'
+  created_at: '2013-10-09 06:21:24.202520'
+  updated_at: '2013-10-09 06:21:24.202520'
+  lock_version: '0'
+  billable: t
+tasks_181:
+  id: '181'
+  project_id: '6'
+  active: f
+  title: Test task 434
+  code: TID00434
+  description: Description for test task 434
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.208544'
+  updated_at: '2013-10-09 06:21:24.208544'
+  lock_version: '0'
+  billable: f
+tasks_182:
+  id: '182'
+  project_id: '6'
+  active: f
+  title: Test task 508
+  code: TID00508
+  description: Description for test task 508
+  duration: '414.5'
+  created_at: '2013-10-09 06:21:24.214492'
+  updated_at: '2013-10-09 06:21:24.214492'
+  lock_version: '0'
+  billable: f
+tasks_183:
+  id: '183'
+  project_id: '16'
+  active: f
+  title: Test task 12
+  code: TID00012
+  description: Description for test task 12
+  duration: '23.0'
+  created_at: '2013-10-09 06:21:24.220907'
+  updated_at: '2013-10-09 06:21:24.220907'
+  lock_version: '0'
+  billable: t
+tasks_184:
+  id: '184'
+  project_id: '16'
+  active: f
+  title: Test task 402
+  code: TID00402
+  description: Description for test task 402
+  duration: '1008.0'
+  created_at: '2013-10-09 06:21:24.227174'
+  updated_at: '2013-10-09 06:21:24.227174'
+  lock_version: '0'
+  billable: t
+tasks_185:
+  id: '185'
+  project_id: '33'
+  active: f
+  title: Test task 112
+  code: TID00112
+  description: Description for test task 112
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.233445'
+  updated_at: '2013-10-09 06:21:24.233445'
+  lock_version: '0'
+  billable: t
+tasks_186:
+  id: '186'
+  project_id: '33'
+  active: f
+  title: Test task 207
+  code: TID00207
+  description: Description for test task 207
+  duration: '1380.0'
+  created_at: '2013-10-09 06:21:24.239785'
+  updated_at: '2013-10-09 06:21:24.239785'
+  lock_version: '0'
+  billable: t
+tasks_187:
+  id: '187'
+  project_id: '16'
+  active: f
+  title: Test task 45
+  code: TID00045
+  description: Description for test task 45
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.247073'
+  updated_at: '2013-10-09 06:21:24.247073'
+  lock_version: '0'
+  billable: t
+tasks_188:
+  id: '188'
+  project_id: '16'
+  active: f
+  title: Test task 6
+  code: TID00006
+  description: Description for test task 6
+  duration: '1324.75'
+  created_at: '2013-10-09 06:21:24.254296'
+  updated_at: '2013-10-09 06:21:24.254296'
+  lock_version: '0'
+  billable: t
+tasks_189:
+  id: '189'
+  project_id: '79'
+  active: t
+  title: Test task 514
+  code: TID00514
+  description: Description for test task 514
+  duration: '4.0'
+  created_at: '2013-10-09 06:21:24.260751'
+  updated_at: '2013-10-09 06:21:24.260751'
+  lock_version: '0'
+  billable: t
+tasks_190:
+  id: '190'
+  project_id: '59'
+  active: t
+  title: Test task 93
+  code: TID00093
+  description: Description for test task 93
+  duration: '16.0'
+  created_at: '2013-10-09 06:21:24.266934'
+  updated_at: '2013-10-09 06:21:24.266934'
+  lock_version: '0'
+  billable: t
+tasks_191:
+  id: '191'
+  project_id: '69'
+  active: f
+  title: Test task 168
+  code: TID00168
+  description: Description for test task 168
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:24.273078'
+  updated_at: '2013-10-09 06:21:24.273078'
+  lock_version: '0'
+  billable: t
+tasks_192:
+  id: '192'
+  project_id: '69'
+  active: f
+  title: Test task 254
+  code: TID00254
+  description: Description for test task 254
+  duration: '1942.5'
+  created_at: '2013-10-09 06:21:24.279215'
+  updated_at: '2013-10-09 06:21:24.279215'
+  lock_version: '0'
+  billable: t
+tasks_193:
+  id: '193'
+  project_id: '15'
+  active: f
+  title: Test task 486
+  code: TID00486
+  description: Description for test task 486
+  duration: '146.0'
+  created_at: '2013-10-09 06:21:24.286008'
+  updated_at: '2013-10-09 06:21:24.286008'
+  lock_version: '0'
+  billable: t
+tasks_194:
+  id: '194'
+  project_id: '15'
+  active: f
+  title: Test task 399
+  code: TID00399
+  description: Description for test task 399
+  duration: '2175.75'
+  created_at: '2013-10-09 06:21:24.292551'
+  updated_at: '2013-10-09 06:21:24.292551'
+  lock_version: '0'
+  billable: t
+tasks_195:
+  id: '195'
+  project_id: '69'
+  active: f
+  title: Test task 473
+  code: TID00473
+  description: Description for test task 473
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.298983'
+  updated_at: '2013-10-09 06:21:24.298983'
+  lock_version: '0'
+  billable: f
+tasks_196:
+  id: '196'
+  project_id: '124'
+  active: t
+  title: Test task 504
+  code: TID00504
+  description: Description for test task 504
+  duration: '14.5'
+  created_at: '2013-10-09 06:21:24.305418'
+  updated_at: '2013-10-09 06:21:24.305418'
+  lock_version: '0'
+  billable: t
+tasks_197:
+  id: '197'
+  project_id: '124'
+  active: t
+  title: Test task 225
+  code: TID00225
+  description: Description for test task 225
+  duration: '520.0'
+  created_at: '2013-10-09 06:21:24.311438'
+  updated_at: '2013-10-09 06:21:24.311438'
+  lock_version: '0'
+  billable: t
+tasks_198:
+  id: '198'
+  project_id: '92'
+  active: f
+  title: Test task 161
+  code: TID00161
+  description: Description for test task 161
+  duration: '21.5'
+  created_at: '2013-10-09 06:21:24.317455'
+  updated_at: '2013-10-09 06:21:24.317455'
+  lock_version: '0'
+  billable: t
+tasks_199:
+  id: '199'
+  project_id: '69'
+  active: f
+  title: Test task 221
+  code: TID00221
+  description: Description for test task 221
+  duration: '15.25'
+  created_at: '2013-10-09 06:21:24.326364'
+  updated_at: '2013-10-09 06:21:24.326364'
+  lock_version: '0'
+  billable: t
+tasks_200:
+  id: '200'
+  project_id: '69'
+  active: f
+  title: Test task 22
+  code: TID00022
+  description: Description for test task 22
+  duration: '1556.0'
+  created_at: '2013-10-09 06:21:24.332777'
+  updated_at: '2013-10-09 06:21:24.332777'
+  lock_version: '0'
+  billable: t
+tasks_201:
+  id: '201'
+  project_id: '40'
+  active: f
+  title: Test task 68
+  code: TID00068
+  description: Description for test task 68
+  duration: '11.75'
+  created_at: '2013-10-09 06:21:24.341072'
+  updated_at: '2013-10-09 06:21:24.341072'
+  lock_version: '0'
+  billable: t
+tasks_202:
+  id: '202'
+  project_id: '40'
+  active: f
+  title: Test task 267
+  code: TID00267
+  description: Description for test task 267
+  duration: '1328.5'
+  created_at: '2013-10-09 06:21:24.348300'
+  updated_at: '2013-10-09 06:21:24.348300'
+  lock_version: '0'
+  billable: t
+tasks_203:
+  id: '203'
+  project_id: '8'
+  active: t
+  title: Test task 344
+  code: TID00344
+  description: Description for test task 344
+  duration: '6.75'
+  created_at: '2013-10-09 06:21:24.355269'
+  updated_at: '2013-10-09 06:21:24.355269'
+  lock_version: '0'
+  billable: t
+tasks_204:
+  id: '204'
+  project_id: '45'
+  active: t
+  title: Test task 511
+  code: TID00511
+  description: Description for test task 511
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:24.361413'
+  updated_at: '2013-10-09 06:21:24.361413'
+  lock_version: '0'
+  billable: t
+tasks_205:
+  id: '205'
+  project_id: '45'
+  active: t
+  title: Test task 424
+  code: TID00424
+  description: Description for test task 424
+  duration: '28.5'
+  created_at: '2013-10-09 06:21:24.370069'
+  updated_at: '2013-10-09 06:21:24.370069'
+  lock_version: '0'
+  billable: t
+tasks_206:
+  id: '206'
+  project_id: '33'
+  active: t
+  title: Test task 379
+  code: TID00379
+  description: Description for test task 379
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.377956'
+  updated_at: '2013-10-09 06:21:24.377956'
+  lock_version: '0'
+  billable: t
+tasks_207:
+  id: '207'
+  project_id: '98'
+  active: f
+  title: Test task 286
+  code: TID00286
+  description: Description for test task 286
+  duration: '103.25'
+  created_at: '2013-10-09 06:21:24.384638'
+  updated_at: '2013-10-09 06:21:24.384638'
+  lock_version: '0'
+  billable: t
+tasks_208:
+  id: '208'
+  project_id: '41'
+  active: f
+  title: Test task 362
+  code: TID00362
+  description: Description for test task 362
+  duration: '37.5'
+  created_at: '2013-10-09 06:21:24.391308'
+  updated_at: '2013-10-09 06:21:24.391308'
+  lock_version: '0'
+  billable: t
+tasks_209:
+  id: '209'
+  project_id: '41'
+  active: f
+  title: Test task 109
+  code: TID00109
+  description: Description for test task 109
+  duration: '2160.0'
+  created_at: '2013-10-09 06:21:24.397722'
+  updated_at: '2013-10-09 06:21:24.397722'
+  lock_version: '0'
+  billable: t
+tasks_210:
+  id: '210'
+  project_id: '100'
+  active: f
+  title: Test task 166
+  code: TID00166
+  description: Description for test task 166
+  duration: '32.25'
+  created_at: '2013-10-09 06:21:24.470547'
+  updated_at: '2013-10-09 06:21:24.470547'
+  lock_version: '0'
+  billable: t
+tasks_211:
+  id: '211'
+  project_id: '100'
+  active: f
+  title: Test task 256
+  code: TID00256
+  description: Description for test task 256
+  duration: '1437.75'
+  created_at: '2013-10-09 06:21:24.479815'
+  updated_at: '2013-10-09 06:21:24.479815'
+  lock_version: '0'
+  billable: t
+tasks_212:
+  id: '212'
+  project_id: '19'
+  active: f
+  title: Test task 298
+  code: TID00298
+  description: Description for test task 298
+  duration: '15.25'
+  created_at: '2013-10-09 06:21:24.486943'
+  updated_at: '2013-10-09 06:21:24.486943'
+  lock_version: '0'
+  billable: t
+tasks_213:
+  id: '213'
+  project_id: '54'
+  active: t
+  title: Test task 311
+  code: TID00311
+  description: Description for test task 311
+  duration: '236.0'
+  created_at: '2013-10-09 06:21:24.493168'
+  updated_at: '2013-10-09 06:21:24.493168'
+  lock_version: '0'
+  billable: t
+tasks_214:
+  id: '214'
+  project_id: '54'
+  active: t
+  title: Test task 26
+  code: TID00026
+  description: Description for test task 26
+  duration: '1225.75'
+  created_at: '2013-10-09 06:21:24.499524'
+  updated_at: '2013-10-09 06:21:24.499524'
+  lock_version: '0'
+  billable: t
+tasks_215:
+  id: '215'
+  project_id: '65'
+  active: f
+  title: Test task 443
+  code: TID00443
+  description: Description for test task 443
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:24.505525'
+  updated_at: '2013-10-09 06:21:24.505525'
+  lock_version: '0'
+  billable: t
+tasks_216:
+  id: '216'
+  project_id: '38'
+  active: f
+  title: Test task 515
+  code: TID00515
+  description: Description for test task 515
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.512727'
+  updated_at: '2013-10-09 06:21:24.512727'
+  lock_version: '0'
+  billable: f
+tasks_217:
+  id: '217'
+  project_id: '35'
+  active: f
+  title: Test task 325
+  code: TID00325
+  description: Description for test task 325
+  duration: '7.0'
+  created_at: '2013-10-09 06:21:24.520176'
+  updated_at: '2013-10-09 06:21:24.520176'
+  lock_version: '0'
+  billable: t
+tasks_218:
+  id: '218'
+  project_id: '10'
+  active: f
+  title: Test task 453
+  code: TID00453
+  description: Description for test task 453
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.526897'
+  updated_at: '2013-10-09 06:21:24.526897'
+  lock_version: '0'
+  billable: t
+tasks_219:
+  id: '219'
+  project_id: '18'
+  active: f
+  title: Test task 218
+  code: TID00218
+  description: Description for test task 218
+  duration: '19.5'
+  created_at: '2013-10-09 06:21:24.535674'
+  updated_at: '2013-10-09 06:21:24.535674'
+  lock_version: '0'
+  billable: t
+tasks_220:
+  id: '220'
+  project_id: '18'
+  active: f
+  title: Test task 46
+  code: TID00046
+  description: Description for test task 46
+  duration: '87.75'
+  created_at: '2013-10-09 06:21:24.541855'
+  updated_at: '2013-10-09 06:21:24.541855'
+  lock_version: '0'
+  billable: t
+tasks_221:
+  id: '221'
+  project_id: '69'
+  active: f
+  title: Test task 386
+  code: TID00386
+  description: Description for test task 386
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.548361'
+  updated_at: '2013-10-09 06:21:24.548361'
+  lock_version: '0'
+  billable: f
+tasks_222:
+  id: '222'
+  project_id: '69'
+  active: f
+  title: Test task 531
+  code: TID00531
+  description: Description for test task 531
+  duration: '1749.25'
+  created_at: '2013-10-09 06:21:24.554894'
+  updated_at: '2013-10-09 06:21:24.554894'
+  lock_version: '0'
+  billable: f
+tasks_223:
+  id: '223'
+  project_id: '40'
+  active: f
+  title: Test task 314
+  code: TID00314
+  description: Description for test task 314
+  duration: '24.0'
+  created_at: '2013-10-09 06:21:24.561548'
+  updated_at: '2013-10-09 06:21:24.561548'
+  lock_version: '0'
+  billable: t
+tasks_224:
+  id: '224'
+  project_id: '98'
+  active: f
+  title: Test task 295
+  code: TID00295
+  description: Description for test task 295
+  duration: '37.5'
+  created_at: '2013-10-09 06:21:24.568004'
+  updated_at: '2013-10-09 06:21:24.568004'
+  lock_version: '0'
+  billable: t
+tasks_225:
+  id: '225'
+  project_id: '16'
+  active: f
+  title: Test task 198
+  code: TID00198
+  description: Description for test task 198
+  duration: '22.5'
+  created_at: '2013-10-09 06:21:24.574225'
+  updated_at: '2013-10-09 06:21:24.574225'
+  lock_version: '0'
+  billable: t
+tasks_226:
+  id: '226'
+  project_id: '65'
+  active: f
+  title: Test task 397
+  code: TID00397
+  description: Description for test task 397
+  duration: '34.5'
+  created_at: '2013-10-09 06:21:24.580279'
+  updated_at: '2013-10-09 06:21:24.580279'
+  lock_version: '0'
+  billable: t
+tasks_227:
+  id: '227'
+  project_id: '6'
+  active: f
+  title: Test task 488
+  code: TID00488
+  description: Description for test task 488
+  duration: '26.25'
+  created_at: '2013-10-09 06:21:24.587148'
+  updated_at: '2013-10-09 06:21:24.587148'
+  lock_version: '0'
+  billable: t
+tasks_228:
+  id: '228'
+  project_id: '20'
+  active: f
+  title: Test task 163
+  code: TID00163
+  description: Description for test task 163
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.593629'
+  updated_at: '2013-10-09 06:21:24.593629'
+  lock_version: '0'
+  billable: f
+tasks_229:
+  id: '229'
+  project_id: '20'
+  active: f
+  title: Test task 376
+  code: TID00376
+  description: Description for test task 376
+  duration: '995.0'
+  created_at: '2013-10-09 06:21:24.600469'
+  updated_at: '2013-10-09 06:21:24.600469'
+  lock_version: '0'
+  billable: f
+tasks_230:
+  id: '230'
+  project_id: '62'
+  active: t
+  title: Test task 94
+  code: TID00094
+  description: Description for test task 94
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.609027'
+  updated_at: '2013-10-09 06:21:24.609027'
+  lock_version: '0'
+  billable: f
+tasks_231:
+  id: '231'
+  project_id: '92'
+  active: f
+  title: Test task 342
+  code: TID00342
+  description: Description for test task 342
+  duration: '32.0'
+  created_at: '2013-10-09 06:21:24.615203'
+  updated_at: '2013-10-09 06:21:24.615203'
+  lock_version: '0'
+  billable: t
+tasks_232:
+  id: '232'
+  project_id: '65'
+  active: f
+  title: Test task 32
+  code: TID00032
+  description: Description for test task 32
+  duration: '16.0'
+  created_at: '2013-10-09 06:21:24.621821'
+  updated_at: '2013-10-09 06:21:24.621821'
+  lock_version: '0'
+  billable: t
+tasks_233:
+  id: '233'
+  project_id: '44'
+  active: f
+  title: Test task 293
+  code: TID00293
+  description: Description for test task 293
+  duration: '36.0'
+  created_at: '2013-10-09 06:21:24.628051'
+  updated_at: '2013-10-09 06:21:24.628051'
+  lock_version: '0'
+  billable: t
+tasks_234:
+  id: '234'
+  project_id: '85'
+  active: t
+  title: Test task 214
+  code: TID00214
+  description: Description for test task 214
+  duration: '29.0'
+  created_at: '2013-10-09 06:21:24.634556'
+  updated_at: '2013-10-09 06:21:24.634556'
+  lock_version: '0'
+  billable: t
+tasks_235:
+  id: '235'
+  project_id: '85'
+  active: t
+  title: Test task 84
+  code: TID00084
+  description: Description for test task 84
+  duration: '233.0'
+  created_at: '2013-10-09 06:21:24.641117'
+  updated_at: '2013-10-09 06:21:24.641117'
+  lock_version: '0'
+  billable: t
+tasks_236:
+  id: '236'
+  project_id: '35'
+  active: f
+  title: Test task 144
+  code: TID00144
+  description: Description for test task 144
+  duration: '27.25'
+  created_at: '2013-10-09 06:21:24.648751'
+  updated_at: '2013-10-09 06:21:24.648751'
+  lock_version: '0'
+  billable: t
+tasks_237:
+  id: '237'
+  project_id: '69'
+  active: f
+  title: Test task 8
+  code: TID00008
+  description: Description for test task 8
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:24.656651'
+  updated_at: '2013-10-09 06:21:24.656651'
+  lock_version: '0'
+  billable: t
+tasks_238:
+  id: '238'
+  project_id: '73'
+  active: f
+  title: Test task 469
+  code: TID00469
+  description: Description for test task 469
+  duration: '20.75'
+  created_at: '2013-10-09 06:21:24.664137'
+  updated_at: '2013-10-09 06:21:24.664137'
+  lock_version: '0'
+  billable: t
+tasks_239:
+  id: '239'
+  project_id: '106'
+  active: t
+  title: Test task 512
+  code: TID00512
+  description: Description for test task 512
+  duration: '45.5'
+  created_at: '2013-10-09 06:21:24.670645'
+  updated_at: '2013-10-09 06:21:24.670645'
+  lock_version: '0'
+  billable: t
+tasks_240:
+  id: '240'
+  project_id: '69'
+  active: f
+  title: Test task 21
+  code: TID00021
+  description: Description for test task 21
+  duration: '8.5'
+  created_at: '2013-10-09 06:21:24.676808'
+  updated_at: '2013-10-09 06:21:24.676808'
+  lock_version: '0'
+  billable: t
+tasks_241:
+  id: '241'
+  project_id: '40'
+  active: f
+  title: Test task 85
+  code: TID00085
+  description: Description for test task 85
+  duration: '10.25'
+  created_at: '2013-10-09 06:21:24.683690'
+  updated_at: '2013-10-09 06:21:24.683690'
+  lock_version: '0'
+  billable: t
+tasks_242:
+  id: '242'
+  project_id: '40'
+  active: f
+  title: Test task 275
+  code: TID00275
+  description: Description for test task 275
+  duration: '341.75'
+  created_at: '2013-10-09 06:21:24.692112'
+  updated_at: '2013-10-09 06:21:24.692112'
+  lock_version: '0'
+  billable: t
+tasks_243:
+  id: '243'
+  project_id: '65'
+  active: f
+  title: Test task 408
+  code: TID00408
+  description: Description for test task 408
+  duration: '7.75'
+  created_at: '2013-10-09 06:21:24.698324'
+  updated_at: '2013-10-09 06:21:24.698324'
+  lock_version: '0'
+  billable: t
+tasks_244:
+  id: '244'
+  project_id: '33'
+  active: f
+  title: Test task 116
+  code: TID00116
+  description: Description for test task 116
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.704464'
+  updated_at: '2013-10-09 06:21:24.704464'
+  lock_version: '0'
+  billable: t
+tasks_245:
+  id: '245'
+  project_id: '33'
+  active: t
+  title: Test task 173
+  code: TID00173
+  description: Description for test task 173
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.710437'
+  updated_at: '2013-10-09 06:21:24.710437'
+  lock_version: '0'
+  billable: t
+tasks_246:
+  id: '246'
+  project_id: '71'
+  active: f
+  title: Test task 308
+  code: TID00308
+  description: Description for test task 308
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:24.716308'
+  updated_at: '2013-10-09 06:21:24.716308'
+  lock_version: '0'
+  billable: t
+tasks_247:
+  id: '247'
+  project_id: '9'
+  active: f
+  title: Test task 526
+  code: TID00526
+  description: Description for test task 526
+  duration: '428.75'
+  created_at: '2013-10-09 06:21:24.723024'
+  updated_at: '2013-10-09 06:21:24.723024'
+  lock_version: '0'
+  billable: t
+tasks_248:
+  id: '248'
+  project_id: '11'
+  active: t
+  title: Test task 103
+  code: TID00103
+  description: Description for test task 103
+  duration: '17.5'
+  created_at: '2013-10-09 06:21:24.730337'
+  updated_at: '2013-10-09 06:21:24.730337'
+  lock_version: '0'
+  billable: t
+tasks_249:
+  id: '249'
+  project_id: '11'
+  active: t
+  title: Test task 196
+  code: TID00196
+  description: Description for test task 196
+  duration: '418.5'
+  created_at: '2013-10-09 06:21:24.736745'
+  updated_at: '2013-10-09 06:21:24.736745'
+  lock_version: '0'
+  billable: t
+tasks_250:
+  id: '250'
+  project_id: '78'
+  active: f
+  title: Test task 481
+  code: TID00481
+  description: Description for test task 481
+  duration: '81.5'
+  created_at: '2013-10-09 06:21:24.742722'
+  updated_at: '2013-10-09 06:21:24.742722'
+  lock_version: '0'
+  billable: t
+tasks_251:
+  id: '251'
+  project_id: '78'
+  active: f
+  title: Test task 223
+  code: TID00223
+  description: Description for test task 223
+  duration: '1756.75'
+  created_at: '2013-10-09 06:21:24.748939'
+  updated_at: '2013-10-09 06:21:24.748939'
+  lock_version: '0'
+  billable: t
+tasks_252:
+  id: '252'
+  project_id: '22'
+  active: f
+  title: Test task 187
+  code: TID00187
+  description: Description for test task 187
+  duration: '29.25'
+  created_at: '2013-10-09 06:21:24.756981'
+  updated_at: '2013-10-09 06:21:24.756981'
+  lock_version: '0'
+  billable: t
+tasks_253:
+  id: '253'
+  project_id: '112'
+  active: f
+  title: Test task 114
+  code: TID00114
+  description: Description for test task 114
+  duration: '121.75'
+  created_at: '2013-10-09 06:21:24.763147'
+  updated_at: '2013-10-09 06:21:24.763147'
+  lock_version: '0'
+  billable: t
+tasks_254:
+  id: '254'
+  project_id: '1'
+  active: f
+  title: Test task 243
+  code: TID00243
+  description: Description for test task 243
+  duration: '32.75'
+  created_at: '2013-10-09 06:21:24.769388'
+  updated_at: '2013-10-09 06:21:24.769388'
+  lock_version: '0'
+  billable: t
+tasks_255:
+  id: '255'
+  project_id: '1'
+  active: f
+  title: Test task 11
+  code: TID00011
+  description: Description for test task 11
+  duration: '2202.0'
+  created_at: '2013-10-09 06:21:24.775201'
+  updated_at: '2013-10-09 06:21:24.775201'
+  lock_version: '0'
+  billable: t
+tasks_256:
+  id: '256'
+  project_id: '71'
+  active: f
+  title: Test task 25
+  code: TID00025
+  description: Description for test task 25
+  duration: '42.0'
+  created_at: '2013-10-09 06:21:24.782046'
+  updated_at: '2013-10-09 06:21:24.782046'
+  lock_version: '0'
+  billable: t
+tasks_257:
+  id: '257'
+  project_id: '65'
+  active: f
+  title: Test task 5
+  code: TID00005
+  description: Description for test task 5
+  duration: '5.25'
+  created_at: '2013-10-09 06:21:24.788842'
+  updated_at: '2013-10-09 06:21:24.788842'
+  lock_version: '0'
+  billable: t
+tasks_258:
+  id: '258'
+  project_id: '65'
+  active: f
+  title: Test task 455
+  code: TID00455
+  description: Description for test task 455
+  duration: '2083.25'
+  created_at: '2013-10-09 06:21:24.795187'
+  updated_at: '2013-10-09 06:21:24.795187'
+  lock_version: '0'
+  billable: t
+tasks_259:
+  id: '259'
+  project_id: '65'
+  active: f
+  title: Test task 171
+  code: TID00171
+  description: Description for test task 171
+  duration: '15.25'
+  created_at: '2013-10-09 06:21:24.802308'
+  updated_at: '2013-10-09 06:21:24.802308'
+  lock_version: '0'
+  billable: t
+tasks_260:
+  id: '260'
+  project_id: '14'
+  active: t
+  title: Test task 71
+  code: TID00071
+  description: Description for test task 71
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.808777'
+  updated_at: '2013-10-09 06:21:24.808777'
+  lock_version: '0'
+  billable: t
+tasks_261:
+  id: '261'
+  project_id: '3'
+  active: t
+  title: Test task 483
+  code: TID00483
+  description: Description for test task 483
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.814839'
+  updated_at: '2013-10-09 06:21:24.814839'
+  lock_version: '0'
+  billable: t
+tasks_262:
+  id: '262'
+  project_id: '67'
+  active: t
+  title: Test task 234
+  code: TID00234
+  description: Description for test task 234
+  duration: '32.75'
+  created_at: '2013-10-09 06:21:24.821326'
+  updated_at: '2013-10-09 06:21:24.821326'
+  lock_version: '0'
+  billable: t
+tasks_263:
+  id: '263'
+  project_id: '62'
+  active: t
+  title: Test task 343
+  code: TID00343
+  description: Description for test task 343
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.827577'
+  updated_at: '2013-10-09 06:21:24.827577'
+  lock_version: '0'
+  billable: f
+tasks_264:
+  id: '264'
+  project_id: '116'
+  active: f
+  title: Test task 420
+  code: TID00420
+  description: Description for test task 420
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.833891'
+  updated_at: '2013-10-09 06:21:24.833891'
+  lock_version: '0'
+  billable: t
+tasks_265:
+  id: '265'
+  project_id: '35'
+  active: f
+  title: Test task 363
+  code: TID00363
+  description: Description for test task 363
+  duration: '24.25'
+  created_at: '2013-10-09 06:21:24.840014'
+  updated_at: '2013-10-09 06:21:24.840014'
+  lock_version: '0'
+  billable: t
+tasks_266:
+  id: '266'
+  project_id: '35'
+  active: f
+  title: Test task 135
+  code: TID00135
+  description: Description for test task 135
+  duration: '1391.0'
+  created_at: '2013-10-09 06:21:24.846190'
+  updated_at: '2013-10-09 06:21:24.846190'
+  lock_version: '0'
+  billable: t
+tasks_267:
+  id: '267'
+  project_id: '22'
+  active: f
+  title: Test task 465
+  code: TID00465
+  description: Description for test task 465
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.852949'
+  updated_at: '2013-10-09 06:21:24.852949'
+  lock_version: '0'
+  billable: t
+tasks_268:
+  id: '268'
+  project_id: '16'
+  active: f
+  title: Test task 413
+  code: TID00413
+  description: Description for test task 413
+  duration: '4.0'
+  created_at: '2013-10-09 06:21:24.859144'
+  updated_at: '2013-10-09 06:21:24.859144'
+  lock_version: '0'
+  billable: t
+tasks_269:
+  id: '269'
+  project_id: '16'
+  active: f
+  title: Test task 208
+  code: TID00208
+  description: Description for test task 208
+  duration: '1314.25'
+  created_at: '2013-10-09 06:21:24.865346'
+  updated_at: '2013-10-09 06:21:24.865346'
+  lock_version: '0'
+  billable: t
+tasks_270:
+  id: '270'
+  project_id: '85'
+  active: t
+  title: Test task 134
+  code: TID00134
+  description: Description for test task 134
+  duration: '70.75'
+  created_at: '2013-10-09 06:21:24.871676'
+  updated_at: '2013-10-09 06:21:24.871676'
+  lock_version: '0'
+  billable: t
+tasks_271:
+  id: '271'
+  project_id: '4'
+  active: f
+  title: Test task 357
+  code: TID00357
+  description: Description for test task 357
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.877765'
+  updated_at: '2013-10-09 06:21:24.877765'
+  lock_version: '0'
+  billable: f
+tasks_272:
+  id: '272'
+  project_id: '69'
+  active: f
+  title: Test task 292
+  code: TID00292
+  description: Description for test task 292
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.883858'
+  updated_at: '2013-10-09 06:21:24.883858'
+  lock_version: '0'
+  billable: f
+tasks_273:
+  id: '273'
+  project_id: '69'
+  active: f
+  title: Test task 194
+  code: TID00194
+  description: Description for test task 194
+  duration: '2335.5'
+  created_at: '2013-10-09 06:21:24.890214'
+  updated_at: '2013-10-09 06:21:24.890214'
+  lock_version: '0'
+  billable: f
+tasks_274:
+  id: '274'
+  project_id: '16'
+  active: f
+  title: Test task 226
+  code: TID00226
+  description: Description for test task 226
+  duration: '3.5'
+  created_at: '2013-10-09 06:21:24.896304'
+  updated_at: '2013-10-09 06:21:24.896304'
+  lock_version: '0'
+  billable: t
+tasks_275:
+  id: '275'
+  project_id: '52'
+  active: f
+  title: Test task 475
+  code: TID00475
+  description: Description for test task 475
+  duration: '103.75'
+  created_at: '2013-10-09 06:21:24.902409'
+  updated_at: '2013-10-09 06:21:24.902409'
+  lock_version: '0'
+  billable: t
+tasks_276:
+  id: '276'
+  project_id: '73'
+  active: f
+  title: Test task 412
+  code: TID00412
+  description: Description for test task 412
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:24.908556'
+  updated_at: '2013-10-09 06:21:24.908556'
+  lock_version: '0'
+  billable: t
+tasks_277:
+  id: '277'
+  project_id: '35'
+  active: f
+  title: Test task 284
+  code: TID00284
+  description: Description for test task 284
+  duration: '8.0'
+  created_at: '2013-10-09 06:21:24.914635'
+  updated_at: '2013-10-09 06:21:24.914635'
+  lock_version: '0'
+  billable: t
+tasks_278:
+  id: '278'
+  project_id: '35'
+  active: f
+  title: Test task 392
+  code: TID00392
+  description: Description for test task 392
+  duration: '935.0'
+  created_at: '2013-10-09 06:21:24.921824'
+  updated_at: '2013-10-09 06:21:24.921824'
+  lock_version: '0'
+  billable: t
+tasks_279:
+  id: '279'
+  project_id: '105'
+  active: t
+  title: Test task 436
+  code: TID00436
+  description: Description for test task 436
+  duration: '36.0'
+  created_at: '2013-10-09 06:21:24.927963'
+  updated_at: '2013-10-09 06:21:24.927963'
+  lock_version: '0'
+  billable: t
+tasks_280:
+  id: '280'
+  project_id: '110'
+  active: f
+  title: Test task 389
+  code: TID00389
+  description: Description for test task 389
+  duration: '22.25'
+  created_at: '2013-10-09 06:21:24.934740'
+  updated_at: '2013-10-09 06:21:24.934740'
+  lock_version: '0'
+  billable: t
+tasks_281:
+  id: '281'
+  project_id: '1'
+  active: f
+  title: Test task 79
+  code: TID00079
+  description: Description for test task 79
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.942354'
+  updated_at: '2013-10-09 06:21:24.942354'
+  lock_version: '0'
+  billable: f
+tasks_282:
+  id: '282'
+  project_id: '69'
+  active: f
+  title: Test task 310
+  code: TID00310
+  description: Description for test task 310
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.948757'
+  updated_at: '2013-10-09 06:21:24.948757'
+  lock_version: '0'
+  billable: t
+tasks_283:
+  id: '283'
+  project_id: '71'
+  active: f
+  title: Test task 460
+  code: TID00460
+  description: Description for test task 460
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.955347'
+  updated_at: '2013-10-09 06:21:24.955347'
+  lock_version: '0'
+  billable: t
+tasks_284:
+  id: '284'
+  project_id: '24'
+  active: t
+  title: Test task 278
+  code: TID00278
+  description: Description for test task 278
+  duration: '92.0'
+  created_at: '2013-10-09 06:21:24.961435'
+  updated_at: '2013-10-09 06:21:24.961435'
+  lock_version: '0'
+  billable: t
+tasks_285:
+  id: '285'
+  project_id: '24'
+  active: t
+  title: Test task 10
+  code: TID00010
+  description: Description for test task 10
+  duration: '1523.25'
+  created_at: '2013-10-09 06:21:24.967563'
+  updated_at: '2013-10-09 06:21:24.967563'
+  lock_version: '0'
+  billable: t
+tasks_286:
+  id: '286'
+  project_id: '100'
+  active: f
+  title: Test task 3
+  code: TID00003
+  description: Description for test task 3
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:24.974164'
+  updated_at: '2013-10-09 06:21:24.974164'
+  lock_version: '0'
+  billable: t
+tasks_287:
+  id: '287'
+  project_id: '100'
+  active: f
+  title: Test task 184
+  code: TID00184
+  description: Description for test task 184
+  duration: '2305.5'
+  created_at: '2013-10-09 06:21:24.980042'
+  updated_at: '2013-10-09 06:21:24.980042'
+  lock_version: '0'
+  billable: t
+tasks_288:
+  id: '288'
+  project_id: '16'
+  active: f
+  title: Test task 36
+  code: TID00036
+  description: Description for test task 36
+  duration: '3.5'
+  created_at: '2013-10-09 06:21:24.989031'
+  updated_at: '2013-10-09 06:21:24.989031'
+  lock_version: '0'
+  billable: t
+tasks_289:
+  id: '289'
+  project_id: '65'
+  active: f
+  title: Test task 244
+  code: TID00244
+  description: Description for test task 244
+  duration: '22.0'
+  created_at: '2013-10-09 06:21:24.995540'
+  updated_at: '2013-10-09 06:21:24.995540'
+  lock_version: '0'
+  billable: t
+tasks_290:
+  id: '290'
+  project_id: '78'
+  active: f
+  title: Test task 30
+  code: TID00030
+  description: Description for test task 30
+  duration: '8.0'
+  created_at: '2013-10-09 06:21:25.004027'
+  updated_at: '2013-10-09 06:21:25.004027'
+  lock_version: '0'
+  billable: t
+tasks_291:
+  id: '291'
+  project_id: '22'
+  active: f
+  title: Test task 53
+  code: TID00053
+  description: Description for test task 53
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.010759'
+  updated_at: '2013-10-09 06:21:25.010759'
+  lock_version: '0'
+  billable: t
+tasks_292:
+  id: '292'
+  project_id: '16'
+  active: f
+  title: Test task 229
+  code: TID00229
+  description: Description for test task 229
+  duration: '12.5'
+  created_at: '2013-10-09 06:21:25.017191'
+  updated_at: '2013-10-09 06:21:25.017191'
+  lock_version: '0'
+  billable: t
+tasks_293:
+  id: '293'
+  project_id: '16'
+  active: f
+  title: Test task 54
+  code: TID00054
+  description: Description for test task 54
+  duration: '464.25'
+  created_at: '2013-10-09 06:21:25.023705'
+  updated_at: '2013-10-09 06:21:25.023705'
+  lock_version: '0'
+  billable: t
+tasks_294:
+  id: '294'
+  project_id: '26'
+  active: t
+  title: Test task 394
+  code: TID00394
+  description: Description for test task 394
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.029967'
+  updated_at: '2013-10-09 06:21:25.029967'
+  lock_version: '0'
+  billable: f
+tasks_295:
+  id: '295'
+  project_id: '101'
+  active: t
+  title: Test task 417
+  code: TID00417
+  description: Description for test task 417
+  duration: '463.25'
+  created_at: '2013-10-09 06:21:25.103465'
+  updated_at: '2013-10-09 06:21:25.103465'
+  lock_version: '0'
+  billable: t
+tasks_296:
+  id: '296'
+  project_id: '101'
+  active: t
+  title: Test task 388
+  code: TID00388
+  description: Description for test task 388
+  duration: '2271.0'
+  created_at: '2013-10-09 06:21:25.110745'
+  updated_at: '2013-10-09 06:21:25.110745'
+  lock_version: '0'
+  billable: t
+tasks_297:
+  id: '297'
+  project_id: '16'
+  active: f
+  title: Test task 172
+  code: TID00172
+  description: Description for test task 172
+  duration: '12.0'
+  created_at: '2013-10-09 06:21:25.117130'
+  updated_at: '2013-10-09 06:21:25.117130'
+  lock_version: '0'
+  billable: t
+tasks_298:
+  id: '298'
+  project_id: '16'
+  active: f
+  title: Test task 40
+  code: TID00040
+  description: Description for test task 40
+  duration: '898.25'
+  created_at: '2013-10-09 06:21:25.125448'
+  updated_at: '2013-10-09 06:21:25.125448'
+  lock_version: '0'
+  billable: t
+tasks_299:
+  id: '299'
+  project_id: '35'
+  active: f
+  title: Test task 299
+  code: TID00299
+  description: Description for test task 299
+  duration: '31.75'
+  created_at: '2013-10-09 06:21:25.131686'
+  updated_at: '2013-10-09 06:21:25.131686'
+  lock_version: '0'
+  billable: t
+tasks_300:
+  id: '300'
+  project_id: '69'
+  active: f
+  title: Test task 248
+  code: TID00248
+  description: Description for test task 248
+  duration: '16.75'
+  created_at: '2013-10-09 06:21:25.137884'
+  updated_at: '2013-10-09 06:21:25.137884'
+  lock_version: '0'
+  billable: t
+tasks_301:
+  id: '301'
+  project_id: '69'
+  active: f
+  title: Test task 288
+  code: TID00288
+  description: Description for test task 288
+  duration: '1451.0'
+  created_at: '2013-10-09 06:21:25.144698'
+  updated_at: '2013-10-09 06:21:25.144698'
+  lock_version: '0'
+  billable: t
+tasks_302:
+  id: '302'
+  project_id: '11'
+  active: t
+  title: Test task 393
+  code: TID00393
+  description: Description for test task 393
+  duration: '178.75'
+  created_at: '2013-10-09 06:21:25.153064'
+  updated_at: '2013-10-09 06:21:25.153064'
+  lock_version: '0'
+  billable: t
+tasks_303:
+  id: '303'
+  project_id: '11'
+  active: t
+  title: Test task 216
+  code: TID00216
+  description: Description for test task 216
+  duration: '1251.5'
+  created_at: '2013-10-09 06:21:25.159535'
+  updated_at: '2013-10-09 06:21:25.159535'
+  lock_version: '0'
+  billable: t
+tasks_304:
+  id: '304'
+  project_id: '33'
+  active: f
+  title: Test task 82
+  code: TID00082
+  description: Description for test task 82
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.165842'
+  updated_at: '2013-10-09 06:21:25.165842'
+  lock_version: '0'
+  billable: t
+tasks_305:
+  id: '305'
+  project_id: '60'
+  active: f
+  title: Test task 42
+  code: TID00042
+  description: Description for test task 42
+  duration: '73.75'
+  created_at: '2013-10-09 06:21:25.171946'
+  updated_at: '2013-10-09 06:21:25.171946'
+  lock_version: '0'
+  billable: t
+tasks_306:
+  id: '306'
+  project_id: '60'
+  active: f
+  title: Test task 258
+  code: TID00258
+  description: Description for test task 258
+  duration: '1781.0'
+  created_at: '2013-10-09 06:21:25.178052'
+  updated_at: '2013-10-09 06:21:25.178052'
+  lock_version: '0'
+  billable: t
+tasks_307:
+  id: '307'
+  project_id: '98'
+  active: f
+  title: Test task 320
+  code: TID00320
+  description: Description for test task 320
+  duration: '112.5'
+  created_at: '2013-10-09 06:21:25.184268'
+  updated_at: '2013-10-09 06:21:25.184268'
+  lock_version: '0'
+  billable: t
+tasks_308:
+  id: '308'
+  project_id: '82'
+  active: t
+  title: Test task 152
+  code: TID00152
+  description: Description for test task 152
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.190734'
+  updated_at: '2013-10-09 06:21:25.190734'
+  lock_version: '0'
+  billable: f
+tasks_309:
+  id: '309'
+  project_id: '28'
+  active: t
+  title: Test task 391
+  code: TID00391
+  description: Description for test task 391
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.197607'
+  updated_at: '2013-10-09 06:21:25.197607'
+  lock_version: '0'
+  billable: t
+tasks_310:
+  id: '310'
+  project_id: '35'
+  active: f
+  title: Test task 367
+  code: TID00367
+  description: Description for test task 367
+  duration: '14.0'
+  created_at: '2013-10-09 06:21:25.203746'
+  updated_at: '2013-10-09 06:21:25.203746'
+  lock_version: '0'
+  billable: t
+tasks_311:
+  id: '311'
+  project_id: '24'
+  active: t
+  title: Test task 489
+  code: TID00489
+  description: Description for test task 489
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.209775'
+  updated_at: '2013-10-09 06:21:25.209775'
+  lock_version: '0'
+  billable: f
+tasks_312:
+  id: '312'
+  project_id: '48'
+  active: f
+  title: Test task 494
+  code: TID00494
+  description: Description for test task 494
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.215776'
+  updated_at: '2013-10-09 06:21:25.215776'
+  lock_version: '0'
+  billable: t
+tasks_313:
+  id: '313'
+  project_id: '65'
+  active: f
+  title: Test task 83
+  code: TID00083
+  description: Description for test task 83
+  duration: '14.75'
+  created_at: '2013-10-09 06:21:25.222365'
+  updated_at: '2013-10-09 06:21:25.222365'
+  lock_version: '0'
+  billable: t
+tasks_314:
+  id: '314'
+  project_id: '65'
+  active: f
+  title: Test task 132
+  code: TID00132
+  description: Description for test task 132
+  duration: '1981.75'
+  created_at: '2013-10-09 06:21:25.228589'
+  updated_at: '2013-10-09 06:21:25.228589'
+  lock_version: '0'
+  billable: t
+tasks_315:
+  id: '315'
+  project_id: '73'
+  active: f
+  title: Test task 533
+  code: TID00533
+  description: Description for test task 533
+  duration: '32.5'
+  created_at: '2013-10-09 06:21:25.234770'
+  updated_at: '2013-10-09 06:21:25.234770'
+  lock_version: '0'
+  billable: t
+tasks_316:
+  id: '316'
+  project_id: '73'
+  active: f
+  title: Test task 43
+  code: TID00043
+  description: Description for test task 43
+  duration: '1802.75'
+  created_at: '2013-10-09 06:21:25.240914'
+  updated_at: '2013-10-09 06:21:25.240914'
+  lock_version: '0'
+  billable: t
+tasks_317:
+  id: '317'
+  project_id: '96'
+  active: t
+  title: Test task 381
+  code: TID00381
+  description: Description for test task 381
+  duration: '22.5'
+  created_at: '2013-10-09 06:21:25.247291'
+  updated_at: '2013-10-09 06:21:25.247291'
+  lock_version: '0'
+  billable: t
+tasks_318:
+  id: '318'
+  project_id: '101'
+  active: t
+  title: Test task 188
+  code: TID00188
+  description: Description for test task 188
+  duration: '57.25'
+  created_at: '2013-10-09 06:21:25.253778'
+  updated_at: '2013-10-09 06:21:25.253778'
+  lock_version: '0'
+  billable: t
+tasks_319:
+  id: '319'
+  project_id: '75'
+  active: f
+  title: Test task 156
+  code: TID00156
+  description: Description for test task 156
+  duration: '6.75'
+  created_at: '2013-10-09 06:21:25.260176'
+  updated_at: '2013-10-09 06:21:25.260176'
+  lock_version: '0'
+  billable: t
+tasks_320:
+  id: '320'
+  project_id: '86'
+  active: f
+  title: Test task 50
+  code: TID00050
+  description: Description for test task 50
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.266230'
+  updated_at: '2013-10-09 06:21:25.266230'
+  lock_version: '0'
+  billable: t
+tasks_321:
+  id: '321'
+  project_id: '86'
+  active: f
+  title: Test task 217
+  code: TID00217
+  description: Description for test task 217
+  duration: '808.0'
+  created_at: '2013-10-09 06:21:25.272292'
+  updated_at: '2013-10-09 06:21:25.272292'
+  lock_version: '0'
+  billable: t
+tasks_322:
+  id: '322'
+  project_id: '123'
+  active: f
+  title: Test task 528
+  code: TID00528
+  description: Description for test task 528
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.279140'
+  updated_at: '2013-10-09 06:21:25.279140'
+  lock_version: '0'
+  billable: f
+tasks_323:
+  id: '323'
+  project_id: '69'
+  active: f
+  title: Test task 368
+  code: TID00368
+  description: Description for test task 368
+  duration: '26.5'
+  created_at: '2013-10-09 06:21:25.285576'
+  updated_at: '2013-10-09 06:21:25.285576'
+  lock_version: '0'
+  billable: t
+tasks_324:
+  id: '324'
+  project_id: '69'
+  active: f
+  title: Test task 329
+  code: TID00329
+  description: Description for test task 329
+  duration: '15.25'
+  created_at: '2013-10-09 06:21:25.292841'
+  updated_at: '2013-10-09 06:21:25.292841'
+  lock_version: '0'
+  billable: t
+tasks_325:
+  id: '325'
+  project_id: '69'
+  active: f
+  title: Test task 115
+  code: TID00115
+  description: Description for test task 115
+  duration: '2239.25'
+  created_at: '2013-10-09 06:21:25.299289'
+  updated_at: '2013-10-09 06:21:25.299289'
+  lock_version: '0'
+  billable: t
+tasks_326:
+  id: '326'
+  project_id: '47'
+  active: t
+  title: Test task 429
+  code: TID00429
+  description: Description for test task 429
+  duration: '4.0'
+  created_at: '2013-10-09 06:21:25.305871'
+  updated_at: '2013-10-09 06:21:25.305871'
+  lock_version: '0'
+  billable: t
+tasks_327:
+  id: '327'
+  project_id: '69'
+  active: f
+  title: Test task 364
+  code: TID00364
+  description: Description for test task 364
+  duration: '22.5'
+  created_at: '2013-10-09 06:21:25.312085'
+  updated_at: '2013-10-09 06:21:25.312085'
+  lock_version: '0'
+  billable: t
+tasks_328:
+  id: '328'
+  project_id: '108'
+  active: t
+  title: Test task 4
+  code: TID00004
+  description: Description for test task 4
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.318699'
+  updated_at: '2013-10-09 06:21:25.318699'
+  lock_version: '0'
+  billable: t
+tasks_329:
+  id: '329'
+  project_id: '13'
+  active: t
+  title: Test task 474
+  code: TID00474
+  description: Description for test task 474
+  duration: '7.25'
+  created_at: '2013-10-09 06:21:25.324964'
+  updated_at: '2013-10-09 06:21:25.324964'
+  lock_version: '0'
+  billable: t
+tasks_330:
+  id: '330'
+  project_id: '73'
+  active: f
+  title: Test task 404
+  code: TID00404
+  description: Description for test task 404
+  duration: '7.75'
+  created_at: '2013-10-09 06:21:25.331162'
+  updated_at: '2013-10-09 06:21:25.331162'
+  lock_version: '0'
+  billable: t
+tasks_331:
+  id: '331'
+  project_id: '73'
+  active: f
+  title: Test task 253
+  code: TID00253
+  description: Description for test task 253
+  duration: '1580.5'
+  created_at: '2013-10-09 06:21:25.337509'
+  updated_at: '2013-10-09 06:21:25.337509'
+  lock_version: '0'
+  billable: t
+tasks_332:
+  id: '332'
+  project_id: '11'
+  active: t
+  title: Test task 361
+  code: TID00361
+  description: Description for test task 361
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.343733'
+  updated_at: '2013-10-09 06:21:25.343733'
+  lock_version: '0'
+  billable: t
+tasks_333:
+  id: '333'
+  project_id: '52'
+  active: f
+  title: Test task 105
+  code: TID00105
+  description: Description for test task 105
+  duration: '81.0'
+  created_at: '2013-10-09 06:21:25.350075'
+  updated_at: '2013-10-09 06:21:25.350075'
+  lock_version: '0'
+  billable: t
+tasks_334:
+  id: '334'
+  project_id: '52'
+  active: f
+  title: Test task 427
+  code: TID00427
+  description: Description for test task 427
+  duration: '2128.75'
+  created_at: '2013-10-09 06:21:25.358166'
+  updated_at: '2013-10-09 06:21:25.358166'
+  lock_version: '0'
+  billable: t
+tasks_335:
+  id: '335'
+  project_id: '69'
+  active: f
+  title: Test task 451
+  code: TID00451
+  description: Description for test task 451
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.368432'
+  updated_at: '2013-10-09 06:21:25.368432'
+  lock_version: '0'
+  billable: t
+tasks_336:
+  id: '336'
+  project_id: '69'
+  active: f
+  title: Test task 352
+  code: TID00352
+  description: Description for test task 352
+  duration: '1530.75'
+  created_at: '2013-10-09 06:21:25.374574'
+  updated_at: '2013-10-09 06:21:25.374574'
+  lock_version: '0'
+  billable: t
+tasks_337:
+  id: '337'
+  project_id: '74'
+  active: f
+  title: Test task 516
+  code: TID00516
+  description: Description for test task 516
+  duration: '171.75'
+  created_at: '2013-10-09 06:21:25.380966'
+  updated_at: '2013-10-09 06:21:25.380966'
+  lock_version: '0'
+  billable: t
+tasks_338:
+  id: '338'
+  project_id: '73'
+  active: f
+  title: Test task 328
+  code: TID00328
+  description: Description for test task 328
+  duration: '22.5'
+  created_at: '2013-10-09 06:21:25.387667'
+  updated_at: '2013-10-09 06:21:25.387667'
+  lock_version: '0'
+  billable: t
+tasks_339:
+  id: '339'
+  project_id: '69'
+  active: f
+  title: Test task 347
+  code: TID00347
+  description: Description for test task 347
+  duration: '52.5'
+  created_at: '2013-10-09 06:21:25.393915'
+  updated_at: '2013-10-09 06:21:25.393915'
+  lock_version: '0'
+  billable: t
+tasks_340:
+  id: '340'
+  project_id: '6'
+  active: f
+  title: Test task 44
+  code: TID00044
+  description: Description for test task 44
+  duration: '45.75'
+  created_at: '2013-10-09 06:21:25.400244'
+  updated_at: '2013-10-09 06:21:25.400244'
+  lock_version: '0'
+  billable: t
+tasks_341:
+  id: '341'
+  project_id: '6'
+  active: f
+  title: Test task 9
+  code: TID00009
+  description: Description for test task 9
+  duration: '740.75'
+  created_at: '2013-10-09 06:21:25.406380'
+  updated_at: '2013-10-09 06:21:25.406380'
+  lock_version: '0'
+  billable: t
+tasks_342:
+  id: '342'
+  project_id: '65'
+  active: f
+  title: Test task 304
+  code: TID00304
+  description: Description for test task 304
+  duration: '17.0'
+  created_at: '2013-10-09 06:21:25.412335'
+  updated_at: '2013-10-09 06:21:25.412335'
+  lock_version: '0'
+  billable: t
+tasks_343:
+  id: '343'
+  project_id: '65'
+  active: f
+  title: Test task 219
+  code: TID00219
+  description: Description for test task 219
+  duration: '272.0'
+  created_at: '2013-10-09 06:21:25.418665'
+  updated_at: '2013-10-09 06:21:25.418665'
+  lock_version: '0'
+  billable: t
+tasks_344:
+  id: '344'
+  project_id: '36'
+  active: f
+  title: Test task 246
+  code: TID00246
+  description: Description for test task 246
+  duration: '127.75'
+  created_at: '2013-10-09 06:21:25.427728'
+  updated_at: '2013-10-09 06:21:25.427728'
+  lock_version: '0'
+  billable: t
+tasks_345:
+  id: '345'
+  project_id: '69'
+  active: f
+  title: Test task 305
+  code: TID00305
+  description: Description for test task 305
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.435580'
+  updated_at: '2013-10-09 06:21:25.435580'
+  lock_version: '0'
+  billable: t
+tasks_346:
+  id: '346'
+  project_id: '69'
+  active: f
+  title: Test task 421
+  code: TID00421
+  description: Description for test task 421
+  duration: '1279.5'
+  created_at: '2013-10-09 06:21:25.444413'
+  updated_at: '2013-10-09 06:21:25.444413'
+  lock_version: '0'
+  billable: t
+tasks_347:
+  id: '347'
+  project_id: '111'
+  active: f
+  title: Test task 250
+  code: TID00250
+  description: Description for test task 250
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.451076'
+  updated_at: '2013-10-09 06:21:25.451076'
+  lock_version: '0'
+  billable: f
+tasks_348:
+  id: '348'
+  project_id: '52'
+  active: f
+  title: Test task 13
+  code: TID00013
+  description: Description for test task 13
+  duration: '82.25'
+  created_at: '2013-10-09 06:21:25.457690'
+  updated_at: '2013-10-09 06:21:25.457690'
+  lock_version: '0'
+  billable: t
+tasks_349:
+  id: '349'
+  project_id: '79'
+  active: t
+  title: Test task 354
+  code: TID00354
+  description: Description for test task 354
+  duration: '149.0'
+  created_at: '2013-10-09 06:21:25.463929'
+  updated_at: '2013-10-09 06:21:25.463929'
+  lock_version: '0'
+  billable: t
+tasks_350:
+  id: '350'
+  project_id: '79'
+  active: t
+  title: Test task 370
+  code: TID00370
+  description: Description for test task 370
+  duration: '1487.75'
+  created_at: '2013-10-09 06:21:25.470312'
+  updated_at: '2013-10-09 06:21:25.470312'
+  lock_version: '0'
+  billable: t
+tasks_351:
+  id: '351'
+  project_id: '10'
+  active: f
+  title: Test task 260
+  code: TID00260
+  description: Description for test task 260
+  duration: '20.25'
+  created_at: '2013-10-09 06:21:25.476373'
+  updated_at: '2013-10-09 06:21:25.476373'
+  lock_version: '0'
+  billable: t
+tasks_352:
+  id: '352'
+  project_id: '10'
+  active: f
+  title: Test task 322
+  code: TID00322
+  description: Description for test task 322
+  duration: '275.25'
+  created_at: '2013-10-09 06:21:25.482244'
+  updated_at: '2013-10-09 06:21:25.482244'
+  lock_version: '0'
+  billable: t
+tasks_353:
+  id: '353'
+  project_id: '3'
+  active: t
+  title: Test task 334
+  code: TID00334
+  description: Description for test task 334
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.488921'
+  updated_at: '2013-10-09 06:21:25.488921'
+  lock_version: '0'
+  billable: t
+tasks_354:
+  id: '354'
+  project_id: '3'
+  active: t
+  title: Test task 57
+  code: TID00057
+  description: Description for test task 57
+  duration: '1563.75'
+  created_at: '2013-10-09 06:21:25.497399'
+  updated_at: '2013-10-09 06:21:25.497399'
+  lock_version: '0'
+  billable: t
+tasks_355:
+  id: '355'
+  project_id: '65'
+  active: f
+  title: Test task 189
+  code: TID00189
+  description: Description for test task 189
+  duration: '25.25'
+  created_at: '2013-10-09 06:21:25.503426'
+  updated_at: '2013-10-09 06:21:25.503426'
+  lock_version: '0'
+  billable: t
+tasks_356:
+  id: '356'
+  project_id: '65'
+  active: f
+  title: Test task 530
+  code: TID00530
+  description: Description for test task 530
+  duration: '877.25'
+  created_at: '2013-10-09 06:21:25.509313'
+  updated_at: '2013-10-09 06:21:25.509313'
+  lock_version: '0'
+  billable: t
+tasks_357:
+  id: '357'
+  project_id: '62'
+  active: t
+  title: Test task 479
+  code: TID00479
+  description: Description for test task 479
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.515471'
+  updated_at: '2013-10-09 06:21:25.515471'
+  lock_version: '0'
+  billable: f
+tasks_358:
+  id: '358'
+  project_id: '62'
+  active: t
+  title: Test task 532
+  code: TID00532
+  description: Description for test task 532
+  duration: '721.25'
+  created_at: '2013-10-09 06:21:25.522090'
+  updated_at: '2013-10-09 06:21:25.522090'
+  lock_version: '0'
+  billable: f
+tasks_359:
+  id: '359'
+  project_id: '67'
+  active: t
+  title: Test task 366
+  code: TID00366
+  description: Description for test task 366
+  duration: '29.5'
+  created_at: '2013-10-09 06:21:25.528340'
+  updated_at: '2013-10-09 06:21:25.528340'
+  lock_version: '0'
+  billable: t
+tasks_360:
+  id: '360'
+  project_id: '39'
+  active: t
+  title: Test task 33
+  code: TID00033
+  description: Description for test task 33
+  duration: '35.5'
+  created_at: '2013-10-09 06:21:25.535179'
+  updated_at: '2013-10-09 06:21:25.535179'
+  lock_version: '0'
+  billable: t
+tasks_361:
+  id: '361'
+  project_id: '39'
+  active: t
+  title: Test task 321
+  code: TID00321
+  description: Description for test task 321
+  duration: '723.75'
+  created_at: '2013-10-09 06:21:25.541198'
+  updated_at: '2013-10-09 06:21:25.541198'
+  lock_version: '0'
+  billable: t
+tasks_362:
+  id: '362'
+  project_id: '50'
+  active: f
+  title: Test task 118
+  code: TID00118
+  description: Description for test task 118
+  duration: '170.5'
+  created_at: '2013-10-09 06:21:25.547609'
+  updated_at: '2013-10-09 06:21:25.547609'
+  lock_version: '0'
+  billable: t
+tasks_363:
+  id: '363'
+  project_id: '10'
+  active: f
+  title: Test task 315
+  code: TID00315
+  description: Description for test task 315
+  duration: '15.0'
+  created_at: '2013-10-09 06:21:25.555442'
+  updated_at: '2013-10-09 06:21:25.555442'
+  lock_version: '0'
+  billable: t
+tasks_364:
+  id: '364'
+  project_id: '30'
+  active: t
+  title: Test task 452
+  code: TID00452
+  description: Description for test task 452
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.561815'
+  updated_at: '2013-10-09 06:21:25.561815'
+  lock_version: '0'
+  billable: f
+tasks_365:
+  id: '365'
+  project_id: '30'
+  active: t
+  title: Test task 440
+  code: TID00440
+  description: Description for test task 440
+  duration: '1135.0'
+  created_at: '2013-10-09 06:21:25.567853'
+  updated_at: '2013-10-09 06:21:25.567853'
+  lock_version: '0'
+  billable: f
+tasks_366:
+  id: '366'
+  project_id: '3'
+  active: t
+  title: Test task 91
+  code: TID00091
+  description: Description for test task 91
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.573805'
+  updated_at: '2013-10-09 06:21:25.573805'
+  lock_version: '0'
+  billable: t
+tasks_367:
+  id: '367'
+  project_id: '3'
+  active: t
+  title: Test task 200
+  code: TID00200
+  description: Description for test task 200
+  duration: '2365.75'
+  created_at: '2013-10-09 06:21:25.579713'
+  updated_at: '2013-10-09 06:21:25.579713'
+  lock_version: '0'
+  billable: t
+tasks_368:
+  id: '368'
+  project_id: '16'
+  active: f
+  title: Test task 491
+  code: TID00491
+  description: Description for test task 491
+  duration: '12.0'
+  created_at: '2013-10-09 06:21:25.586025'
+  updated_at: '2013-10-09 06:21:25.586025'
+  lock_version: '0'
+  billable: t
+tasks_369:
+  id: '369'
+  project_id: '16'
+  active: f
+  title: Test task 291
+  code: TID00291
+  description: Description for test task 291
+  duration: '411.75'
+  created_at: '2013-10-09 06:21:25.593138'
+  updated_at: '2013-10-09 06:21:25.593138'
+  lock_version: '0'
+  billable: t
+tasks_370:
+  id: '370'
+  project_id: '88'
+  active: t
+  title: Test task 100
+  code: TID00100
+  description: Description for test task 100
+  duration: '0.0'
+  created_at: '2013-10-09 06:21:25.602375'
+  updated_at: '2013-10-09 06:21:25.602375'
+  lock_version: '0'
+  billable: t
+tasks_371:
+  id: '371'
+  project_id: '88'
+  active: t
+  title: Test task 183
+  code: TID00183
+  description: Description for test task 183
+  duration: '905.75'
+  created_at: '2013-10-09 06:21:25.608756'
+  updated_at: '2013-10-09 06:21:25.608756'
+  lock_version: '0'
+  billable: t

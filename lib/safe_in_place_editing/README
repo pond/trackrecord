@@ -1,5 +1,5 @@
 
-SafeInPlaceEditing                                         0.02 23-Oct-2009
+SafeInPlaceEditing                                         0.03 26-Sep-2013
 ==================                                         ================
 
 The stock InPlaceEditing plug-in code is inadequate for a few reasons
@@ -169,7 +169,30 @@ trouble the on-complete code will take over. These functions are also
 used to support optimistic locking as described above.
 
 
-4) It is falling out of date
+3) It breaks when used with Prototype 1.7
+-----------------------------------------
+
+If running on newer Prototype JavaScript libraries (or jQuery for that
+matter), spaces in form fields are converted into "+" rather than URL
+escaped in "%XX" hex notation. The processing path within the whole Rails
+stack that receives the form submission from JavaScript is not able to
+understand this so "+" remains as such; indeed, when Form.serialize() in
+JavaScript code correctly encodes "+" to "%2B" and converts " " to "+",
+Rails makes a huge mess by correctly decoding "%2B" back to "+", but
+incorrectly leaving "+" as "+". A user-input plus is indistinguishable
+from a user-input space by the time application code runs.
+
+See RFC 1866 and for example:
+
+  http://stackoverflow.com/questions/5366007/why-does-the-encodings-of-a-url-and-the-query-string-part-differ
+
+The way to fix this is by replacing "+" with "%20" in JavaScript. It will
+mean a techncially non-RFC 1866 compliant URL, but will still be obeying
+wider URL encoding rules so should pass through servers unmolested and
+will be correctly decoded by Rails.
+
+
+5) It is falling out of date
 ----------------------------
 
 In-place editing was moved to a plug-in in more recent versions of Rails,
@@ -184,12 +207,14 @@ patching for Rails 2. It knows about optimistic locking and takes more
 care over security.
 
 
-Example
-=======
+Examples
+========
 
 See above. See also documentation for the standard InPlaceEditor plug-in.
-Sorry, I know, that's lame. Hopefully I'll put something useful in here
-sooner rather than later.
+Use "safe_in_place_edit_for" where you'd have used "in_place_edit_for" in
+controllers; use "safe_in_place_editor_field" where you'd have used
+"in_place_editor_field" in views. The API is otherwise the same but works
+transparently for fields containing boolean values too, not just strings.
 
 
 Contacts
@@ -200,4 +225,4 @@ or suggestions. Or even praise, if you reckon this is worth it :-)
 
   http://pond.org.uk/
 
-Copyright (c) 2008, 2009 Hipposoft, released under the MIT license.
+Copyright (c) 2008-2013 Hipposoft, released under the MIT license.

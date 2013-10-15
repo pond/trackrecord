@@ -384,7 +384,7 @@ saving the updated object.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_inactive_tasks</span>
   <span class="ruby-comment"># See the User model's remove_inactive_tasks method for details.</span>
 
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">active</span> &amp; <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- remove_inactive_tasks-source -->
           

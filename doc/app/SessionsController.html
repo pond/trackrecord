@@ -344,8 +344,11 @@ completed a sign-in attempt, successfully or otherwise.</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">not</span> <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">empty?</span> )
     <span class="ruby-identifier">failed_login</span>( <span class="ruby-string">'You must provide an ID.'</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
-    <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:javascript</span> ] <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> )
+      <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
+      <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:javascript</span> ]
+    <span class="ruby-keyword">end</span>
+
     <span class="ruby-identifier">open_id_authentication</span>()
   <span class="ruby-keyword">end</span>
 
@@ -379,7 +382,7 @@ during the sign-up process.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">user</span>   = <span class="ruby-ivar">@current_user</span>
   <span class="ruby-identifier">normal</span> = ( <span class="ruby-ivar">@current_user</span> <span class="ruby-keyword">and</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> ) <span class="ruby-keyword">and</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> ) )
@@ -501,7 +504,7 @@ everything clean and means that any real attempted attacks would fail.</p>
 
           
           <div class="method-source-code" id="open_id_authentication-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">open_id_authentication</span>()
 
   <span class="ruby-identifier">authenticate_with_open_id</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">identity_url</span> <span class="ruby-operator">|</span>

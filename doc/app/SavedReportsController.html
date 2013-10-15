@@ -333,7 +333,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 120</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-value">:saved_report</span>, <span class="ruby-value">:active_task_ids</span>   )
   <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-value">:saved_report</span>, <span class="ruby-value">:inactive_task_ids</span> )
@@ -368,14 +368,14 @@
 
         <div class="method-description">
           
-          <p>Confirm deletion of and actually delete a saved report.</p>
+          <p>Confirm deletion of a saved report.</p>
           
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 166</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 195</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
-  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">'SavedReport'</span> )
+  <span class="ruby-comment"># All work done via before_filters.</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- delete-source -->
           
@@ -398,12 +398,12 @@
 
         <div class="method-description">
           
-          
+          <p>Actually delete a saved report.</p>
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 170</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">appctrl_destroy</span>( <span class="ruby-constant">SavedReport</span>, <span class="ruby-identifier">user_saved_reports_path</span>( <span class="ruby-ivar">@user</span> ) )
 <span class="ruby-keyword">end</span></pre>
@@ -433,10 +433,9 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 136</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-  <span class="ruby-ivar">@saved_report</span> = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
-  <span class="ruby-ivar">@user_array</span>   = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> <span class="ruby-operator">?</span> [ <span class="ruby-ivar">@current_user</span> ] <span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">active</span>
+  <span class="ruby-ivar">@user_array</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> <span class="ruby-operator">?</span> [ <span class="ruby-ivar">@current_user</span> ] <span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">active</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- edit-source -->
           
@@ -464,7 +463,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
 
   <span class="ruby-comment"># Set up the column data; see the index helper functions in</span>
@@ -484,6 +483,11 @@
 
    <span class="ruby-identifier">user_sql</span> = <span class="ruby-string">&quot;WHERE ( users.id  = :user_id )\n&quot;</span>
   <span class="ruby-identifier">other_sql</span> = <span class="ruby-string">&quot;WHERE ( users.id != :user_id )\n&quot;</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
+    <span class="ruby-identifier">other_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;AND ( shared = :shared_flag )\n&quot;</span>
+    <span class="ruby-identifier">vars</span>[ <span class="ruby-value">:shared_flag</span> ] = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">range_sql</span>, <span class="ruby-identifier">range_start</span>, <span class="ruby-identifier">range_end</span> = <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-constant">SavedReport</span> )
 
@@ -552,7 +556,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 86</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
 
   <span class="ruby-comment"># Implement copying; this could've been done in a new controller</span>
@@ -562,24 +566,24 @@
   <span class="ruby-comment"># the concept of &quot;current controller&quot; etc. in the view (we end up</span>
   <span class="ruby-comment"># wanting to render the SavedReportsController edit view anyway).</span>
 
-  <span class="ruby-ivar">@saved_report</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@record</span> = <span class="ruby-keyword">nil</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-value">:saved_report_id</span> ) )
     <span class="ruby-identifier">found_report</span> = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">find_by_id</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:saved_report_id</span> ] ) <span class="ruby-comment"># No exception raised if record is not found</span>
 
     <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">nil?</span> )
-      <span class="ruby-ivar">@saved_report</span>                  = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">dup</span>
-      <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">active_tasks</span>     = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">active_tasks</span>
-      <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">inactive_tasks</span>   = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">inactive_tasks</span>
-      <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">reportable_users</span> = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">reportable_users</span>
+      <span class="ruby-ivar">@record</span>                  = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">active_tasks</span>     = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">active_tasks</span>
+      <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">inactive_tasks</span>   = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">inactive_tasks</span>
+      <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">reportable_users</span> = <span class="ruby-identifier">found_report</span>.<span class="ruby-identifier">reportable_users</span>
 
-      <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; (copy)&quot;</span>
+      <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; (copy)&quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">nil?</span> )
-    <span class="ruby-ivar">@saved_report</span>      = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">user</span> = <span class="ruby-ivar">@user</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">nil?</span> )
+    <span class="ruby-ivar">@record</span>      = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">user</span> = <span class="ruby-ivar">@user</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-ivar">@user_array</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> <span class="ruby-operator">?</span> [ <span class="ruby-ivar">@current_user</span> ] <span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">active</span>
@@ -610,10 +614,15 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 159</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-identifier">saved_report</span> = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
-  <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">report_path</span>( <span class="ruby-identifier">saved_report</span> ) )
+  <span class="ruby-identifier">saved_report</span> = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">find_by_id</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">saved_report</span>.<span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-ivar">@current_user</span> ) )
+    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">report_path</span>( <span class="ruby-identifier">saved_report</span> ) )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">appctrl_not_permitted</span>()
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- show-source -->
           
@@ -636,21 +645,22 @@
 
         <div class="method-description">
           
-          <p>Commit changes to an existing report.</p>
+          <p>Commit changes to an existing report. Note that some security actions, e.g.
+making sure the list of allowed reportable users is valid or the list of
+tasks is only that the current user can see, are enforced down in the
+report generator. If someone hacks a view, it won’t help them.</p>
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 169</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-identifier">saved_report</span> = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
-
   <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-value">:saved_report</span>, <span class="ruby-value">:active_task_ids</span>   )
   <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-value">:saved_report</span>, <span class="ruby-value">:inactive_task_ids</span> )
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">saved_report</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:saved_report</span> ] ) )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:saved_report</span> ] ) )
     <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">&quot;Report details updated.&quot;</span>
-    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">report_path</span>( <span class="ruby-identifier">saved_report</span> ) )
+    <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">report_path</span>( <span class="ruby-ivar">@record</span> ) )
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:edit</span> )
   <span class="ruby-keyword">end</span>

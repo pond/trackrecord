@@ -69,8 +69,10 @@ class Customer < TaskGroup
   # USE A TRANSACTION around a call to this method. There is no
   # need to call here unless the 'active' flag state is changing.
   # Pass in 'true' to update associated projects, else 'false' and
-  # 'true' to update associated tasks via those projects, else
-  # 'false'. Booleans default to 'true' if omitted.
+  # 'true' to update associated tasks via those projects (only if
+  # updating projects too), else 'false'.
+  #
+  # Booleans default to 'true' if omitted.
   #
   def update_with_side_effects!( attrs, update_projects = true, update_tasks = true )
     active = self.active
@@ -88,8 +90,8 @@ class Customer < TaskGroup
   # As update_with_side_effects!, but destroys things rather than
   # updating them. Pass 'true' to destroy associated projects, else
   # 'false'. If omitted, defaults to 'true'; pass also 'true' to
-  # destroy tasks associated with those projects, else 'false',
-  # with, again, the default being 'true'.
+  # destroy tasks associated with those projects (only if destroying
+  # projects too), else 'false'. Again, the default is 'true'.
   #
   def destroy_with_side_effects( destroy_projects = true, destroy_tasks = true )
     if ( destroy_projects )

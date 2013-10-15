@@ -133,7 +133,6 @@ module TrackRecordSections
   # interface for overall totals.
   #
   module SectionsMixin
-    attr_reader :sectionable_tasks
 
     # Initialize by passing in the array of non-nil Task instances that 
     # will be used for group and section processing. This must already
@@ -152,11 +151,6 @@ module TrackRecordSections
     # module method "initialize_section()".
     #
     def initialize_sections( tasks, optionalClass = Section )
-
-      # Take care not to cause this to get reordered; it may be a
-      # sorted ActiveRecord::Relation.
-
-      @sectionable_tasks = tasks || []
 
       # Create new Section objects and a map between task IDs and
       # those objects, so we can get to them quickly.
@@ -313,8 +307,6 @@ module TrackRecordSections
     # after calling here, return the new tasks list, not the original.
     #
     def reassess_start_flags_using( tasks )
-      @sectionable_tasks = tasks || []
-
       previous_section = nil
       previous_group   = nil
 

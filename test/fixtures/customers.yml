@@ -1,11 +1,253 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  title: MyString
-  code: MyString
-  description: MyString
-
-two:
-  title: MyString
-  code: MyString
-  description: MyString
+---
+customers_001:
+  id: '1'
+  active: t
+  title: Test customer 1
+  code: CID00000
+  description: Description for test customer 1
+  created_at: '2013-10-09 06:21:21.588167'
+  updated_at: '2013-10-09 06:21:21.588167'
+  lock_version: '0'
+customers_002:
+  id: '2'
+  active: f
+  title: Test customer 2
+  code: CID00001
+  description: Description for test customer 2
+  created_at: '2013-10-09 06:21:21.629753'
+  updated_at: '2013-10-09 06:21:21.629753'
+  lock_version: '0'
+customers_003:
+  id: '3'
+  active: f
+  title: Test customer 3
+  code: CID00002
+  description: Description for test customer 3
+  created_at: '2013-10-09 06:21:21.637071'
+  updated_at: '2013-10-09 06:21:21.637071'
+  lock_version: '0'
+customers_004:
+  id: '4'
+  active: f
+  title: Test customer 4
+  code: CID00003
+  description: Description for test customer 4
+  created_at: '2013-10-09 06:21:21.643757'
+  updated_at: '2013-10-09 06:21:21.643757'
+  lock_version: '0'
+customers_005:
+  id: '5'
+  active: t
+  title: Test customer 5
+  code: CID00004
+  description: Description for test customer 5
+  created_at: '2013-10-09 06:21:21.650546'
+  updated_at: '2013-10-09 06:21:21.650546'
+  lock_version: '0'
+customers_006:
+  id: '6'
+  active: t
+  title: Test customer 6
+  code: CID00005
+  description: Description for test customer 6
+  created_at: '2013-10-09 06:21:21.657494'
+  updated_at: '2013-10-09 06:21:21.657494'
+  lock_version: '0'
+customers_007:
+  id: '7'
+  active: t
+  title: Test customer 7
+  code: CID00006
+  description: Description for test customer 7
+  created_at: '2013-10-09 06:21:21.664448'
+  updated_at: '2013-10-09 06:21:21.664448'
+  lock_version: '0'
+customers_008:
+  id: '8'
+  active: f
+  title: Test customer 8
+  code: CID00007
+  description: Description for test customer 8
+  created_at: '2013-10-09 06:21:21.671385'
+  updated_at: '2013-10-09 06:21:21.671385'
+  lock_version: '0'
+customers_009:
+  id: '9'
+  active: t
+  title: Test customer 9
+  code: CID00008
+  description: Description for test customer 9
+  created_at: '2013-10-09 06:21:21.677924'
+  updated_at: '2013-10-09 06:21:21.677924'
+  lock_version: '0'
+customers_010:
+  id: '10'
+  active: t
+  title: Test customer 10
+  code: CID00009
+  description: Description for test customer 10
+  created_at: '2013-10-09 06:21:21.684274'
+  updated_at: '2013-10-09 06:21:21.684274'
+  lock_version: '0'
+customers_011:
+  id: '11'
+  active: t
+  title: Test customer 11
+  code: CID00010
+  description: Description for test customer 11
+  created_at: '2013-10-09 06:21:21.691087'
+  updated_at: '2013-10-09 06:21:21.691087'
+  lock_version: '0'
+customers_012:
+  id: '12'
+  active: t
+  title: Test customer 12
+  code: CID00011
+  description: Description for test customer 12
+  created_at: '2013-10-09 06:21:21.697543'
+  updated_at: '2013-10-09 06:21:21.697543'
+  lock_version: '0'
+customers_013:
+  id: '13'
+  active: f
+  title: Test customer 13
+  code: CID00012
+  description: Description for test customer 13
+  created_at: '2013-10-09 06:21:21.703758'
+  updated_at: '2013-10-09 06:21:21.703758'
+  lock_version: '0'
+customers_014:
+  id: '14'
+  active: f
+  title: Test customer 14
+  code: CID00013
+  description: Description for test customer 14
+  created_at: '2013-10-09 06:21:21.710619'
+  updated_at: '2013-10-09 06:21:21.710619'
+  lock_version: '0'
+customers_015:
+  id: '15'
+  active: t
+  title: Test customer 15
+  code: CID00014
+  description: Description for test customer 15
+  created_at: '2013-10-09 06:21:21.717811'
+  updated_at: '2013-10-09 06:21:21.717811'
+  lock_version: '0'
+customers_016:
+  id: '16'
+  active: f
+  title: Test customer 16
+  code: CID00015
+  description: Description for test customer 16
+  created_at: '2013-10-09 06:21:21.724621'
+  updated_at: '2013-10-09 06:21:21.724621'
+  lock_version: '0'
+customers_017:
+  id: '17'
+  active: f
+  title: Test customer 17
+  code: CID00016
+  description: Description for test customer 17
+  created_at: '2013-10-09 06:21:21.731860'
+  updated_at: '2013-10-09 06:21:21.731860'
+  lock_version: '0'
+customers_018:
+  id: '18'
+  active: t
+  title: Test customer 18
+  code: CID00017
+  description: Description for test customer 18
+  created_at: '2013-10-09 06:21:21.738158'
+  updated_at: '2013-10-09 06:21:21.738158'
+  lock_version: '0'
+customers_019:
+  id: '19'
+  active: t
+  title: Test customer 19
+  code: CID00018
+  description: Description for test customer 19
+  created_at: '2013-10-09 06:21:21.745820'
+  updated_at: '2013-10-09 06:21:21.745820'
+  lock_version: '0'
+customers_020:
+  id: '20'
+  active: f
+  title: Test customer 20
+  code: CID00019
+  description: Description for test customer 20
+  created_at: '2013-10-09 06:21:21.754909'
+  updated_at: '2013-10-09 06:21:21.754909'
+  lock_version: '0'
+customers_021:
+  id: '21'
+  active: t
+  title: Test customer 21
+  code: CID00020
+  description: Description for test customer 21
+  created_at: '2013-10-09 06:21:21.762040'
+  updated_at: '2013-10-09 06:21:21.762040'
+  lock_version: '0'
+customers_022:
+  id: '22'
+  active: f
+  title: Test customer 22
+  code: CID00021
+  description: Description for test customer 22
+  created_at: '2013-10-09 06:21:21.768272'
+  updated_at: '2013-10-09 06:21:21.768272'
+  lock_version: '0'
+customers_023:
+  id: '23'
+  active: f
+  title: Test customer 23
+  code: CID00022
+  description: Description for test customer 23
+  created_at: '2013-10-09 06:21:21.774689'
+  updated_at: '2013-10-09 06:21:21.774689'
+  lock_version: '0'
+customers_024:
+  id: '24'
+  active: t
+  title: Test customer 24
+  code: CID00023
+  description: Description for test customer 24
+  created_at: '2013-10-09 06:21:21.781173'
+  updated_at: '2013-10-09 06:21:21.781173'
+  lock_version: '0'
+customers_025:
+  id: '25'
+  active: f
+  title: Test customer 25
+  code: CID00024
+  description: Description for test customer 25
+  created_at: '2013-10-09 06:21:21.787826'
+  updated_at: '2013-10-09 06:21:21.787826'
+  lock_version: '0'
+customers_026:
+  id: '26'
+  active: t
+  title: Test customer 26
+  code: CID00025
+  description: Description for test customer 26
+  created_at: '2013-10-09 06:21:21.794723'
+  updated_at: '2013-10-09 06:21:21.794723'
+  lock_version: '0'
+customers_027:
+  id: '27'
+  active: t
+  title: Test customer 27
+  code: CID00026
+  description: Description for test customer 27
+  created_at: '2013-10-09 06:21:21.801740'
+  updated_at: '2013-10-09 06:21:21.801740'
+  lock_version: '0'
+customers_028:
+  id: '28'
+  active: t
+  title: Test customer 28
+  code: CID00027
+  description: Description for test customer 28
+  created_at: '2013-10-09 06:21:21.808227'
+  updated_at: '2013-10-09 06:21:21.808227'
+  lock_version: '0'

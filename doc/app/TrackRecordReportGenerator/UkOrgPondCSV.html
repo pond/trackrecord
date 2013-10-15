@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb
+    <li>lib/track_record_report_generator_uk_org_pond_csv.rb
   </ul>
 </nav>
 
@@ -327,7 +327,7 @@ module for more details.</p>
 
           
           <div class="method-source-code" id="extended-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 134</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report_generator_uk_org_pond_csv.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">extended</span>( <span class="ruby-identifier">base</span> )
   <span class="ruby-keyword">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">base</span>
   <span class="ruby-identifier">private</span>
@@ -587,7 +587,7 @@ for details.</p>
 
           
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 59</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report_generator_uk_org_pond_csv.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate</span>( <span class="ruby-identifier">report_type</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">options</span> = {} )
 
   <span class="ruby-identifier">include_title</span> = ( <span class="ruby-identifier">options</span>[ <span class="ruby-identifier">uk_org_pond_id_for_type</span>( <span class="ruby-identifier">report_type</span> ) ] <span class="ruby-operator">==</span> <span class="ruby-string">'1'</span> )
@@ -686,7 +686,7 @@ for details.</p>
 
           
           <div class="method-source-code" id="invocation_button_title_for-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 29</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report_generator_uk_org_pond_csv.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">invocation_button_title_for</span>( <span class="ruby-identifier">type</span> )
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:user</span>
@@ -727,7 +727,7 @@ for details.</p>
 
           
           <div class="method-source-code" id="invocation_options_for-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report_generator_uk_org_pond_csv.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">invocation_options_for</span>( <span class="ruby-identifier">type</span> )
   [
     {
@@ -770,7 +770,7 @@ for details.</p>
 
           
           <div class="method-source-code" id="understands-3F-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb, line 17</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report_generator_uk_org_pond_csv.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">understands?</span>( <span class="ruby-identifier">type</span> )
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:user</span>, <span class="ruby-value">:task</span>, <span class="ruby-value">:comprehensive</span>

@@ -28,9 +28,11 @@ class Task < Rangeable
 
   default_scope( { :order => DEFAULT_SORT_ORDER } )
 
-  scope( :active,     :conditions => { :active     => true  } )
-  scope( :inactive,   :conditions => { :active     => false } )
-  scope( :unassigned, :conditions => { :project_id => nil   } )
+  scope :active,       -> { where( :active     => true  ) }
+  scope :inactive,     -> { where( :active     => false ) }
+  scope :unassigned,   -> { where( :project_id => nil   ) }
+  scope :billable,     -> { where( :billable   => true  ) }
+  scope :not_billable, -> { where( :billable   => false ) }
 
   # Tasks are the fundamental building blocks of a Project. They define
   # specific pieces of work of expected duration, against which work
@@ -212,31 +214,25 @@ class Task < Rangeable
   # Number of hours worked on this task, committed or otherwise
   #
   def total_worked
-    return self.work_packets.sum( :worked_hours ) || 0.0
+    return self.work_packets.sum( :worked_hours )
   end
 
   # Number of committed hours worked on this task.
   #
   def committed_worked
-    sum = 0.0
+    joins      = { :timesheet_row => :timesheet }
+    conditions = { :timesheets => { :committed => true } }
 
-    self.work_packets.all.each do | work_packet |
-      sum += work_packet.worked_hours if ( work_packet.timesheet_row.timesheet.committed )
-    end
-
-    return sum
+    return self.work_packets.joins( joins ).where( conditions ).sum( :worked_hours )
   end
 
   # Number of not committed hours worked on this task.
   #
   def not_committed_worked
-    sum = 0.0
+    joins      = { :timesheet_row => :timesheet }
+    conditions = { :timesheets => { :committed => false } }
 
-    self.work_packets.all.each do | work_packet |
-      sum += work_packet.worked_hours unless ( work_packet.timesheet_row.timesheet.committed )
-    end
-
-    return sum
+    return self.work_packets.joins( joins ).where( conditions ).sum( :worked_hours )
   end
 
   # Number of hours worked on the task between the given start
@@ -248,23 +244,17 @@ class Task < Rangeable
   # giving sums for those types of hours.
   #
   def sum_hours_over_range( date_range, user = nil )
-    committed_sum     = 0.0
-    not_committed_sum = 0.0
-    work_packets      = self.work_packets.all( :conditions => { :date => date_range } )
+    joins         = { :timesheet_row => { :timesheet => :user } }
+    committed     = { :timesheets => { :committed => true  } }
+    not_committed = { :timesheets => { :committed => false } }
+    conditions    = { :date => date_range }
 
-    work_packets.each do | work_packet |
-      timesheet = work_packet.timesheet_row.timesheet
+    conditions[ :users ] = { :id => user.id } unless user.nil?
 
-      if ( user.nil? or timesheet.user == user )
-        if ( timesheet.committed )
-          committed_sum     += work_packet.worked_hours
-        else
-          not_committed_sum += work_packet.worked_hours
-        end
-      end
-    end
-
-    return { :committed => committed_sum, :not_committed => not_committed_sum }
+    return {
+          :committed => self.work_packets.joins( joins ).where(     committed ).where( conditions ).sum( :worked_hours ),
+      :not_committed => self.work_packets.joins( joins ).where( not_committed ).where( conditions ).sum( :worked_hours )
+    }
   end
 
 private

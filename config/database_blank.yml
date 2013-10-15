@@ -1,4 +1,4 @@
-# PostgreSQL database configuration. Syntax taken from
+# TrackRecord PostgreSQL template database configuration. Syntax taken from
 # "http://blog.bleything.net/" (Ben Bleything, June 2006).
 
 dbinfo: &dbinfo
@@ -7,18 +7,18 @@ dbinfo: &dbinfo
   username: username-goes-here
   password: password-goes-here
 
-# Warning: The database defined as 'test' will be erased and
-# re-generated from your development database when you run 'rake'.
-# Do not set this db to the same as development or production.
-
 development:
   <<: *dbinfo
   database: trackrecord-devel
 
-test:
-  <<: *dbinfo
-  database: trackrecord-test
-
 production:
   <<: *dbinfo
   database: trackrecord
+
+# Warning: The database defined as 'test' will be erased and re-generated
+# from your development database when you run 'rake'. Do not set this to
+# the same as development or production.
+
+test:
+  <<: *dbinfo
+  database: trackrecord-test

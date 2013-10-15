@@ -70,7 +70,11 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-i-can_be_modified_by-3F">#can_be_modified_by?</a>
+    
     <li><a href="#method-i-generate_report">#generate_report</a>
+    
+    <li><a href="#method-i-is_permitted_for-3F">#is_permitted_for?</a>
     
     <li><a href="#method-i-range_end_cache">#range_end_cache</a>
     
@@ -445,11 +449,42 @@ migration file and various pieces of application code</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
+      <div id="method-i-can_be_modified_by-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_be_modified_by?</span><span
+            class="method-args">( comparison_user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Is the given user permitted to update this report? Only report owners or
+administrators can do so.</p>
+          
+
+          
+          <div class="method-source-code" id="can_be_modified_by-3F-source">
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_modified_by?</span>( <span class="ruby-identifier">comparison_user</span> )
+  <span class="ruby-identifier">comparison_user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">comparison_user</span>.<span class="ruby-identifier">admin?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- can_be_modified_by-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- can_be_modified_by-3F-method -->
+
+    
       <div id="method-i-generate_report" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">generate_report</span><span
-            class="method-args">( flush_cache = false )</span>
+            class="method-args">( flush_cache = false, viewing_user = user )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -464,18 +499,26 @@ request. If you alter attribute values, pass ‘true’ on entry to force a
 refresh of the cache and update the <a
 href="TrackRecordReport/Report.html">TrackRecordReport::Report</a>
 instance.</p>
+
+<p>Optionally, pass in a user. Without this, the saved report’s own user
+details will be used for task filtering and so-on. If you allow another
+user to view someone else’s report, then you will want to pass in that
+other user’s details, since that user may be subject to different
+restrictions (in particular, differing permitted task lists).</p>
           
 
           
           <div class="method-source-code" id="generate_report-source">
-            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_report</span>( <span class="ruby-identifier">flush_cache</span> = <span class="ruby-keyword">false</span> )
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_report</span>( <span class="ruby-identifier">flush_cache</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">viewing_user</span> = <span class="ruby-identifier">user</span> )
+
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">flush_cache</span> )
+
     <span class="ruby-comment"># The TrackRecord internal Report object can be created from this</span>
     <span class="ruby-comment"># instance's attributes directly, except for many-to-many relationships,</span>
     <span class="ruby-comment"># which are not exposed in that hash and must be assigned manually.</span>
 
-    <span class="ruby-ivar">@report</span>                     = <span class="ruby-constant">TrackRecordReport</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">attributes</span>() )
+    <span class="ruby-ivar">@report</span>                     = <span class="ruby-constant">TrackRecordReport</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">viewing_user</span>, <span class="ruby-identifier">attributes</span>() )
 
     <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">title</span>               = <span class="ruby-identifier">title</span>
     <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">active_task_ids</span>     = <span class="ruby-identifier">active_task_ids</span>
@@ -499,6 +542,38 @@ instance.</p>
       </div><!-- generate_report-method -->
 
     
+      <div id="method-i-is_permitted_for-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_permitted_for?</span><span
+            class="method-args">( comparison_user )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Is the given user permitted to do anything with this report? A shared
+report can be viewed by anyone, privileged users can view any report and of
+course the report’s owner can view it.</p>
+          
+
+          
+          <div class="method-source-code" id="is_permitted_for-3F-source">
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-identifier">comparison_user</span> )
+  <span class="ruby-identifier">shared?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">comparison_user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">comparison_user</span>.<span class="ruby-identifier">privileged?</span> 
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_permitted_for-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_permitted_for-3F-method -->
+
+    
       <div id="method-i-range_end_cache" class="method-detail ">
         
         <div class="method-heading">
@@ -515,7 +590,7 @@ instance.</p>
 
           
           <div class="method-source-code" id="range_end_cache-source">
-            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 124</span>
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_end_cache</span>
   <span class="ruby-identifier">raw_attr_val</span> = <span class="ruby-keyword">self</span>[ <span class="ruby-value">:range_end_cache</span> ]
   <span class="ruby-constant">CACHED_REVERSE_RANGE_MAP</span>[ <span class="ruby-identifier">raw_attr_val</span> ] <span class="ruby-operator">||</span> <span class="ruby-identifier">raw_attr_val</span>
@@ -554,7 +629,7 @@ last month/week, this month/week or two months/weeks ago, respectively
 
           
           <div class="method-source-code" id="range_start_cache-source">
-            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 119</span>
+            <pre><span class="ruby-comment"># File app/models/saved_report.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">range_start_cache</span>
   <span class="ruby-identifier">raw_attr_val</span> = <span class="ruby-keyword">self</span>[ <span class="ruby-value">:range_start_cache</span> ]
   <span class="ruby-constant">CACHED_REVERSE_RANGE_MAP</span>[ <span class="ruby-identifier">raw_attr_val</span> ] <span class="ruby-operator">||</span> <span class="ruby-identifier">raw_attr_val</span>

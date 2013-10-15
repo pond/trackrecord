@@ -33,12 +33,16 @@ module Audited
         def self.used_range( accurate = false )
 
           first = self.unscoped.order( "#{ USED_RANGE_COLUMN } ASC"  ).first
-          last  = self.unscoped.order( "#{ USED_RANGE_COLUMN } DESC" ).first
+           last = self.unscoped.order( "#{ USED_RANGE_COLUMN } DESC" ).first
+
+          today = Date.today
+          first = first.nil? ? today : first.created_at
+           last =  last.nil? ? today :  last.created_at
 
           if accurate
-            ( first.created_at.to_date )..( last.created_at.to_date )
+            ( first.to_date )..( last.to_date )
           else
-            ( first.created_at.year )..( last.created_at.year )
+            ( first.year )..( last.year )
           end
         end
 

@@ -394,7 +394,7 @@ module TrackRecordReport
         :title           => 'Date:',
         :column          => :heading_daily,
         :grouping        => [ '"work_packets"."date"' ],
-        :date_to_key     => ->( date ) { [ date.strftime( '%Y-%m-%d 00:00:00' ) ] },
+        :date_to_key     => ->( date ) { [ date.strftime( '%Y-%m-%d' ) ] },
         :start_of_period => :beginning_of_day,
         :end_of_period   => :end_of_day,
         :throttle        => :days
@@ -628,7 +628,7 @@ module TrackRecordReport
     #
     def frequency=( freq )
       @frequency      = freq.to_i
-      @frequency_data = FREQUENCY[ @frequency ]
+      @frequency_data = FREQUENCY[ @frequency ].dup
     end
 
     # Rationalise overall date ranges whenever a related field is updated
@@ -864,7 +864,7 @@ module TrackRecordReport
       @filtered_users.each { | user | yield( user ) }
     end
 
-    # Compile the report.
+    # Compile the report. Returns 'self' for convenience.
     #
     def compile
       apply_filters()
@@ -876,6 +876,8 @@ module TrackRecordReport
       initialize_sections( @filtered_tasks, Section ) # TrackRecordSections::SectionsMixin
 
       calculate()
+
+      self
     end
 
     # Helper method which returns a user-displayable label describing this
@@ -1387,7 +1389,7 @@ module TrackRecordReport
       end
     end
 
-    # Return the default date range for a report - from the 1st January
+    # Return the default Date range for a report - from the 1st January
     # on the first year that Timesheet.allowed_range() reports as valid, to
     # "today", if no work packets exist; else the date of the earliest and
     # latest work packets over all selected tasks (@task_ids array must be
@@ -1405,8 +1407,8 @@ module TrackRecordReport
       # covered all dates"). The hide-zero-columns option can be employed
       # to clear up the report.
 
-      end_of_range   = latest.nil?   ? Date.current                                    : latest.date.to_date
-      start_of_range = earliest.nil? ? Date.new( Timesheet.allowed_range().min, 1, 1 ) : earliest.date.to_date
+      end_of_range   = latest.nil?   ? Date.current                                    : latest.date
+      start_of_range = earliest.nil? ? Date.new( Timesheet.allowed_range().min, 1, 1 ) : earliest.date
 
       return ( start_of_range..end_of_range )
     end

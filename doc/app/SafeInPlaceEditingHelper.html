@@ -329,6 +329,13 @@ nasty lower case “ok” button that’s produced by the JS code otherwise.</p>
 </li><li>
 <p>The “:cancel_text” option is set to “Cancel” by default to match the above
 change.</p>
+</li><li>
+<p>New option “:is_boolean” indicating a true/false popup should be offered
+instead of a text field; if omitted, a text field is assumed. If present
+and ‘true’, additional optional value “:first_value” says whether or not
+the pop-up menu should start with True/Yes (if “:first_value”‘s value is
+itself true), or False/No (if “:first_value”’s value is itself false, or if
+the option is omitted).</p>
 </li></ul>
 
 <p>Custom on-failure and on-complete functions are used. To try and reduce the
@@ -342,13 +349,14 @@ reason, give the names as strings in options properties :on_complete and
 
           
           <div class="method-source-code" id="safe_in_place_editor-source">
-            <pre><span class="ruby-comment"># File lib/safe_in_place_editing/safe_in_place_editing_helper.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/safe_in_place_editing/safe_in_place_editing_helper.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">safe_in_place_editor</span>( <span class="ruby-identifier">field_id</span>, <span class="ruby-identifier">options</span> = {} )
 
   <span class="ruby-comment"># Set up some default values</span>
 
+  <span class="ruby-identifier">options</span>[ <span class="ruby-value">:with</span> ] <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;Form.serialize(form).replace(/\\+/g,'%20')&quot;</span>
+
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">protect_against_forgery?</span>
-    <span class="ruby-identifier">options</span>[ <span class="ruby-value">:with</span> ] <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;Form.serialize(form)&quot;</span>
     <span class="ruby-identifier">options</span>[ <span class="ruby-value">:with</span> ] <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; + '&amp;authenticity_token=' + encodeURIComponent('#{ form_authenticity_token }')&quot;</span>
   <span class="ruby-keyword">end</span>
 
@@ -393,8 +401,15 @@ reason, give the names as strings in options properties :on_complete and
   <span class="ruby-identifier">js_options</span>[ <span class="ruby-string">'externalControl'</span>     ] = <span class="ruby-node">&quot;'#{          options[ :external_control ]   }'&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-value">:external_control</span> ]
   <span class="ruby-identifier">js_options</span>[ <span class="ruby-string">'loadTextURL'</span>         ] = <span class="ruby-node">&quot;'#{ url_for( options[ :load_text_url    ] ) }'&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-value">:load_text_url</span>    ]
 
-  <span class="ruby-identifier">js_options</span>[ <span class="ruby-string">'callback'</span>            ] = <span class="ruby-node">&quot;function(form) { return #{ options[ :with ] }; }&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-value">:with</span>       ]
-  <span class="ruby-identifier">js_options</span>[ <span class="ruby-string">'collection'</span>          ] = <span class="ruby-string">%Q([['false','No'],['true','Yes']])</span>                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-value">:is_boolean</span> ]
+  <span class="ruby-identifier">js_options</span>[ <span class="ruby-string">'callback'</span>            ] = <span class="ruby-node">&quot;function(form) { return #{ options[ :with ] }; }&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-value">:with</span> ]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-value">:is_boolean</span> ]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[ <span class="ruby-value">:start_value</span> ]
+      <span class="ruby-identifier">js_options</span>[ <span class="ruby-string">'collection'</span> ] = <span class="ruby-string">&quot;[['true','Yes'],['false','No']]&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">js_options</span>[ <span class="ruby-string">'collection'</span> ] = <span class="ruby-string">&quot;[['false','No'],['true','Yes']]&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Set up the custom on-failure and on-complete handlers</span>
 
@@ -466,6 +481,11 @@ communicated to the server’s attribute update action. This is done
 internally; there is no need to set the option yourself.</p>
 </li></ul>
 
+<p>The editor options also support “is_boolean”, which overrides the default
+setting of whether or not the column value is considered to be a string or
+a boolean quantity. This is provided just-in-case, with no current known
+cases where the automatic detection isn’t sufficient.</p>
+
 <p>The Prototype library getText function must be patched as described in the
 README rationale; “application.js” is a good place to do this.</p>
 
@@ -476,7 +496,7 @@ very, very careful with this.</p>
 
           
           <div class="method-source-code" id="safe_in_place_editor_field-source">
-            <pre><span class="ruby-comment"># File lib/safe_in_place_editing/safe_in_place_editing_helper.rb, line 148</span>
+            <pre><span class="ruby-comment"># File lib/safe_in_place_editing/safe_in_place_editing_helper.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">safe_in_place_editor_field</span>( <span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">tag_options</span> = {}, <span class="ruby-identifier">editor_options</span> = {}, <span class="ruby-identifier">no_escape</span> = <span class="ruby-keyword">false</span> )
 
   <span class="ruby-comment"># Allow a symbol or object instance to be passed. Since the symbol use</span>
@@ -506,7 +526,7 @@ very, very careful with this.</p>
 
     <span class="ruby-identifier">editor_options</span>[ <span class="ruby-value">:lock_version</span> ]   = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">lock_version</span>.<span class="ruby-identifier">to_s</span>
     <span class="ruby-identifier">editor_options</span>[ <span class="ruby-value">:lock_var</span>     ] <span class="ruby-operator">||=</span> <span class="ruby-identifier">var</span>
-    <span class="ruby-identifier">editor_options</span>[ <span class="ruby-value">:with</span>         ] <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;Form.serialize(form)&quot;</span>
+    <span class="ruby-identifier">editor_options</span>[ <span class="ruby-value">:with</span>         ] <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;Form.serialize(form).replace(/\\+/g,'%20')&quot;</span>
     <span class="ruby-identifier">editor_options</span>[ <span class="ruby-value">:with</span>         ]  <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; + '&amp;lock_version=' + #{ var }&quot;</span>
   <span class="ruby-keyword">end</span>
 
@@ -518,6 +538,7 @@ very, very careful with this.</p>
   <span class="ruby-identifier">is_boolean</span> = ( <span class="ruby-identifier">editor_options</span>[ <span class="ruby-value">:is_boolean</span> ] <span class="ruby-operator">||</span> ( <span class="ruby-identifier">column_value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">TrueClass</span> ) <span class="ruby-operator">||</span> ( <span class="ruby-identifier">column_value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">FalseClass</span> ) )
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">is_boolean</span> )
+    <span class="ruby-identifier">editor_options</span>[ <span class="ruby-value">:start_value</span> ] = <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">column_value</span>
     <span class="ruby-identifier">column_value</span> = <span class="ruby-identifier">column_value</span> <span class="ruby-operator">?</span> <span class="ruby-string">'Yes'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'No'</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">column_value</span> = <span class="ruby-constant">ERB</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-identifier">html_escape</span>( <span class="ruby-identifier">column_value</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">no_escape</span> )

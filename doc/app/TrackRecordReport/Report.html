@@ -1000,7 +1000,7 @@ below.</p>
 
           
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 899</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 901</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">label</span>( <span class="ruby-identifier">frequency</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">FREQUENCY</span>[ <span class="ruby-identifier">frequency</span> ][ <span class="ruby-value">:label</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -1031,7 +1031,7 @@ frequencies. The index into the array indicates the frequency index.</p>
 
           
           <div class="method-source-code" id="labels-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 906</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 908</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">labels</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">FREQUENCY</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">f</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[ <span class="ruby-value">:label</span> ] }
 <span class="ruby-keyword">end</span></pre>
@@ -1262,7 +1262,7 @@ in the heading, for a plain text alternative.</p>
 
           
           <div class="method-source-code" id="column_heading-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 923</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 925</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">column_heading</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">plain_text</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-identifier">heading</span> = <span class="ruby-identifier">send</span>( <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:column</span> ], <span class="ruby-identifier">range</span> )
   <span class="ruby-identifier">plain_text</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">heading</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-string">&quot;&lt;br /&gt;&quot;</span>, <span class="ruby-string">&quot; &quot;</span> ) <span class="ruby-operator">:</span> <span class="ruby-identifier">heading</span>
@@ -1296,7 +1296,7 @@ appropriate for the report type.</p>
 
           
           <div class="method-source-code" id="column_title-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 914</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 916</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">column_title</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:title</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -1394,7 +1394,7 @@ too.</p>
 
         <div class="method-description">
           
-          <p>Compile the report.</p>
+          <p>Compile the report. Returns ‘self’ for convenience.</p>
           
 
           
@@ -1410,6 +1410,8 @@ too.</p>
   <span class="ruby-identifier">initialize_sections</span>( <span class="ruby-ivar">@filtered_tasks</span>, <span class="ruby-constant">Section</span> ) <span class="ruby-comment"># TrackRecordSections::SectionsMixin</span>
 
   <span class="ruby-identifier">calculate</span>()
+
+  <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- compile-source -->
           
@@ -1438,7 +1440,7 @@ date range for this report.</p>
 
           
           <div class="method-source-code" id="display_range-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 891</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 893</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">display_range</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">heading_total</span>( <span class="ruby-ivar">@range</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -1793,7 +1795,7 @@ when ‘frequency’ is updated externally.</p>
             <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 629</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">frequency=</span>( <span class="ruby-identifier">freq</span> )
   <span class="ruby-ivar">@frequency</span>      = <span class="ruby-identifier">freq</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@frequency_data</span> = <span class="ruby-constant">FREQUENCY</span>[ <span class="ruby-ivar">@frequency</span> ]
+  <span class="ruby-ivar">@frequency_data</span> = <span class="ruby-constant">FREQUENCY</span>[ <span class="ruby-ivar">@frequency</span> ].<span class="ruby-identifier">dup</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- frequency-3D-source -->
           
@@ -1920,7 +1922,7 @@ type. There’s a class method equivalent below.</p>
 
           
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 884</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 886</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@frequency_data</span>[ <span class="ruby-value">:label</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -1952,7 +1954,7 @@ ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
 
           
           <div class="method-source-code" id="partial_column-3F-source">
-            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 932</span>
+            <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 934</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">partial_column?</span>( <span class="ruby-identifier">range</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">range</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@column_ranges</span>.<span class="ruby-identifier">first</span> )
     <span class="ruby-ivar">@column_first_partial</span>

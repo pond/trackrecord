@@ -4,6 +4,10 @@
     <h2 class="report_subtitle">
       Task data for <%= @report.display_range %>
       <%= ( @report.filtered_users.empty? ) ? '(all users)' : '(selected users only)' %>
+
+      <div class="floated_link">
+        <%= link_to( 'Alter report', edit_user_saved_report_path( :id => @saved_report.id, :user_id => @saved_report.user_id ) ) %>
+      </div>
     </h2>
 
 <% if ( @report.filtered_tasks.empty? ) -%>

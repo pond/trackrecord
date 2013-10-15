@@ -318,7 +318,7 @@ controllers/audits_controller.rb for more.</p>
 
           
           <div class="method-source-code" id="audithelp_changes-source">
-            <pre><span class="ruby-comment"># File app/helpers/audits_helper.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/helpers/audits_helper.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">audithelp_changes</span>( <span class="ruby-identifier">record</span> )
   <span class="ruby-identifier">type</span>    = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">auditable_type</span>
   <span class="ruby-identifier">changes</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">audited_changes</span>
@@ -417,7 +417,12 @@ found.</p>
           <div class="method-source-code" id="audithelp_type_of_change-source">
             <pre><span class="ruby-comment"># File app/helpers/audits_helper.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">audithelp_type_of_change</span>( <span class="ruby-identifier">record</span> )
-  <span class="ruby-identifier">type</span>   = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">auditable_type</span>.<span class="ruby-identifier">downcase</span>
+  <span class="ruby-identifier">type</span> = <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">auditable_type</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">auditable_type</span>.<span class="ruby-identifier">downcase</span>
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">type</span>   = <span class="ruby-string">'permitted OpenID'</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'permittedopenid'</span>
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;#{ record.action.capitalize() } #{ h( type ) }&quot;</span>
 
@@ -470,7 +475,7 @@ found.</p>
 
           
           <div class="method-source-code" id="audithelp_user_name-source">
-            <pre><span class="ruby-comment"># File app/helpers/audits_helper.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/helpers/audits_helper.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">audithelp_user_name</span>( <span class="ruby-identifier">record</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_descriptive_s</span>( <span class="ruby-identifier">record</span>.<span class="ruby-identifier">user</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span> )
 <span class="ruby-keyword">end</span></pre>

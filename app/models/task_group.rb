@@ -20,8 +20,19 @@ class TaskGroup < Rangeable
 
   default_scope( { :order => DEFAULT_SORT_ORDER } )
 
-  scope( :active,   :conditions => { :active => true  } )
-  scope( :inactive, :conditions => { :active => false } )
+  # Want to do this, for future compatibility with Rails 4:
+  #
+  #   scope :active,   -> { where( :active => true  ) }
+  #   scope :inactive, -> { where( :active => false ) }
+  #
+  # ...however it breaks:
+  #
+  #   https://github.com/rails/rails/issues/10658
+  #
+  # Thus, bypass the syntactic sugar and just write the methods.
+
+  def self.active;   where( :active => true  ); end
+  def self.inactive; where( :active => false ); end
 
   # Derived classes must state their associations. None are set up
   # in the base class. They should also restrict mass assignment to
@@ -46,7 +57,7 @@ class TaskGroup < Rangeable
     return self.title
   end
 
-  # Find all projects which the given user is allowed to see.
+  # Find all objects which the given user is allowed to see.
   # A conditions hash may be passed to further restrict the search
   # (that is, the "{...}" in "find( :all, :conditions => {...})").
   #
@@ -79,23 +90,17 @@ class TaskGroup < Rangeable
     return self.active
   end
 
-  # Is permission granted for the given user to see this project?
+  # Is permission granted for the given user to see this object?
   # See also find_permitted. Returns 'true' if permitted, else 'false'.
   #
   def is_permitted_for?( user )
     return true if user.privileged?
 
-    # User is restricted. User can only see this project if it
+    # User is restricted. User can only see this object if it
     # has at least one task associated with it and at least one
     # of those associated tasks appears in the user's permitted
     # task list, so check the intersection of the two arrays.
 
-    return false if ( self.tasks.empty? )
-    return true  if ( self.tasks & user.tasks ).length > 0
-
-    # None of the project's tasks are in the user's permitted
-    # list, so the user is not permitted to see this project.
-
-    return false
+    return ( self.tasks & user.tasks ).length > 0
   end
 end

@@ -1,19 +1,169 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  identifier: 
-  name: 
-  password: 
-  email: 
-  type: 
-  active: 
-  last_submitted: 2008-01-03 16:15:54
-
-two:
-  identifier: 
-  name: 
-  password: 
-  email: 
-  type: 
-  active: 
-  last_submitted: 2008-01-03 16:15:54
+---
+users_001:
+  id: '8'
+  identity_url: http://openid-test-8.test.invalid
+  name: Test user 8
+  email: test_8@test.invalid
+  code: UID0007
+  user_type: Normal
+  active: t
+  last_committed: 
+  created_at: '2013-10-09 06:21:25.844275'
+  updated_at: '2013-10-09 06:21:25.844275'
+  lock_version: '0'
+users_002:
+  id: '9'
+  identity_url: http://openid-test-9.test.invalid
+  name: Test user 9
+  email: test_9@test.invalid
+  code: UID0008
+  user_type: Normal
+  active: f
+  last_committed: 
+  created_at: '2013-10-09 06:21:25.865962'
+  updated_at: '2013-10-09 06:21:25.865962'
+  lock_version: '0'
+users_003:
+  id: '1'
+  identity_url: http://openid.pond.org.uk
+  name: Andrew Hodgkinson
+  email: ahodgkin@rowing.org.uk
+  code: UID0000
+  user_type: Admin
+  active: t
+  last_committed: '2013-10-09 06:26:26.975237'
+  created_at: '2013-10-09 06:21:25.627153'
+  updated_at: '2013-10-09 06:26:26.980618'
+  lock_version: '325'
+users_004:
+  id: '2'
+  identity_url: http://openid-test-2.test.invalid
+  name: Test user 2
+  email: test_2@test.invalid
+  code: UID0001
+  user_type: Admin
+  active: t
+  last_committed: '2013-10-09 06:30:52.339410'
+  created_at: '2013-10-09 06:21:25.663341'
+  updated_at: '2013-10-09 06:30:52.344588'
+  lock_version: '269'
+users_005:
+  id: '3'
+  identity_url: http://openid-test-3.test.invalid
+  name: Test user 3
+  email: test_3@test.invalid
+  code: UID0002
+  user_type: Manager
+  active: t
+  last_committed: '2013-10-09 06:31:39.895151'
+  created_at: '2013-10-09 06:21:25.753931'
+  updated_at: '2013-10-09 06:31:39.901207'
+  lock_version: '50'
+users_006:
+  id: '4'
+  identity_url: http://openid-test-4.test.invalid
+  name: Test user 4
+  email: test_4@test.invalid
+  code: UID0003
+  user_type: Manager
+  active: t
+  last_committed: '2013-10-09 06:31:49.381806'
+  created_at: '2013-10-09 06:21:25.771503'
+  updated_at: '2013-10-09 06:31:49.387071'
+  lock_version: '42'
+users_007:
+  id: '5'
+  identity_url: http://openid-test-5.test.invalid
+  name: Test user 5
+  email: test_5@test.invalid
+  code: UID0004
+  user_type: Manager
+  active: t
+  last_committed: '2013-10-09 06:34:46.603172'
+  created_at: '2013-10-09 06:21:25.791216'
+  updated_at: '2013-10-09 06:34:46.608456'
+  lock_version: '159'
+users_008:
+  id: '6'
+  identity_url: http://openid-test-6.test.invalid
+  name: Test user 6
+  email: test_6@test.invalid
+  code: UID0005
+  user_type: Manager
+  active: f
+  last_committed: '2013-10-09 06:35:18.298389'
+  created_at: '2013-10-09 06:21:25.808250'
+  updated_at: '2013-10-09 06:35:18.303583'
+  lock_version: '21'
+users_009:
+  id: '7'
+  identity_url: http://openid-test-7.test.invalid
+  name: Test user 7
+  email: test_7@test.invalid
+  code: UID0006
+  user_type: Normal
+  active: t
+  last_committed: '2013-10-09 06:35:25.600144'
+  created_at: '2013-10-09 06:21:25.824668'
+  updated_at: '2013-10-09 06:35:25.610833'
+  lock_version: '27'
+users_010:
+  id: '10'
+  identity_url: http://openid-test-10.test.invalid
+  name: Test user 10
+  email: test_10@test.invalid
+  code: UID0009
+  user_type: Normal
+  active: f
+  last_committed: '2013-10-09 06:37:01.478901'
+  created_at: '2013-10-09 06:21:25.888863'
+  updated_at: '2013-10-09 06:37:01.483788'
+  lock_version: '36'
+users_011:
+  id: '11'
+  identity_url: http://openid-test-11.test.invalid
+  name: Test user 11
+  email: test_11@test.invalid
+  code: UID0010
+  user_type: Normal
+  active: f
+  last_committed: '2013-10-09 06:37:10.666808'
+  created_at: '2013-10-09 06:21:25.905501'
+  updated_at: '2013-10-09 06:37:10.672060'
+  lock_version: '19'
+users_012:
+  id: '12'
+  identity_url: http://openid-test-12.test.invalid
+  name: Test user 12
+  email: test_12@test.invalid
+  code: UID0011
+  user_type: Normal
+  active: f
+  last_committed: '2013-10-09 06:37:14.062856'
+  created_at: '2013-10-09 06:21:25.923582'
+  updated_at: '2013-10-09 06:37:14.070844'
+  lock_version: '9'
+users_013:
+  id: '13'
+  identity_url: http://openid-test-13.test.invalid
+  name: Test user 13
+  email: test_13@test.invalid
+  code: UID0012
+  user_type: Normal
+  active: f
+  last_committed: '2013-10-09 06:37:53.404681'
+  created_at: '2013-10-09 06:21:25.940824'
+  updated_at: '2013-10-09 06:37:53.410004'
+  lock_version: '22'
+users_014:
+  id: '14'
+  identity_url: http://openid-test-14.test.invalid
+  name: Test user 14
+  email: test_14@test.invalid
+  code: UID0013
+  user_type: Normal
+  active: f
+  last_committed: '2013-10-09 06:37:59.528235'
+  created_at: '2013-10-09 06:21:25.957364'
+  updated_at: '2013-10-09 06:37:59.537181'
+  lock_version: '6'

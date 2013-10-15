@@ -145,7 +145,7 @@ en:
               action_title_show:                       "Report details"
 
               view_not_found_error:                    "The requested report was not found; the owner may have deleted it."
-              view_unnamed_warning:                    "This report is unnamed. It will be deleted automatically. To save it permanently, use the 'Change report parameters' link underneath the report and give it a name."
+              view_unnamed_warning:                    "This report is unnamed. It will be deleted automatically. To save it permanently, use the 'Alter report' link underneath the report and give it a name."
               view_throttle_warning:                   "The requested start date was changed from %{original} to %{actual} to prevent generation of an excessively large report."
 
             saved_reports:

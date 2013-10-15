@@ -40,7 +40,7 @@ class ControlPanel < ActiveRecord::Base
   def remove_inactive_tasks
     # See the User model's remove_inactive_tasks method for details.
 
-    self.tasks = Task.active & self.tasks
+    self.tasks = self.tasks.where( :active => true )
   end
   
   # Get a value from the instance's preferences hash. The hash is nested in a

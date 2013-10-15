@@ -124,7 +124,8 @@ private
 
     earliest = Date.today.beginning_of_month
     compare  = Date.today.beginning_of_week
-    @earliest = earliest - 1.month if ( compare < earliest )
+
+    @earliest = ( compare < earliest ) ? earliest - 1.month : earliest
 
     # Remember, we want the timesheet's *last day* to fall *before*
     # the start-of-month date now stored in "earliest". Or to put it

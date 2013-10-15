@@ -60,12 +60,24 @@ tr.top {
   width: 1px;
 }
 
-/* Heading font (and navigation bar feature area) */
+/* Heading font (and navigation bar feature area), with floated links */
 
 h1, h2, h3, h4, h5, h6,
 div#header * {
   font-family: "Trebuchet MS", sans-serif;
   font-weight: bold;
+}
+
+h1 div.floated_link,
+h2 div.floated_link,
+h3 div.floated_link,
+h4 div.floated_link,
+h5 div.floated_link,
+h6 div.floated_link {
+  float: right;
+  font-size: 11pt;
+  font-weight: normal;
+  line-height: 170%;
 }
 
 /* Header with navigation bar */

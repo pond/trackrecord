@@ -390,7 +390,7 @@ for the new object in future, though presently this parameter is ignored.</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 111</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">super</span>( <span class="ruby-identifier">params</span> )
 
@@ -433,7 +433,7 @@ assumes ‘HTTP’.</p>
 
           
           <div class="method-source-code" id="rationalise_id-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 197</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 202</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">uri</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">nil?</span> )
 
@@ -443,12 +443,14 @@ assumes ‘HTTP’.</p>
   <span class="ruby-comment"># Did the user omit the 'http' prefix? If so, the URI parser will</span>
   <span class="ruby-comment"># be a bit confused. Try adding in 'http' instead.</span>
 
-  <span class="ruby-identifier">orignal</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-node">&quot;http://#{uri}&quot;</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">original</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-identifier">original</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-node">&quot;http://#{uri}&quot;</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">original</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">nil?</span> )
 
   <span class="ruby-comment"># We must by now have at least a scheme and host. If not, something</span>
   <span class="ruby-comment"># very odd is going on - bail out.</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">uri</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">original</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">original</span>.<span class="ruby-identifier">host</span>.<span class="ruby-identifier">nil?</span> )
+
+  <span class="ruby-identifier">original</span>.<span class="ruby-identifier">path</span>.<span class="ruby-identifier">chomp!</span>( <span class="ruby-string">'/'</span> )
 
   <span class="ruby-comment"># Looks good - assemble a clean equivalent.</span>
 
@@ -514,7 +516,7 @@ list for privileged users, if any, will be IGNORED by this call.</p>
 
           
           <div class="method-source-code" id="active_permitted_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 136</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_permitted_tasks</span>
   ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">active</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">active</span>
 <span class="ruby-keyword">end</span></pre>
@@ -551,7 +553,7 @@ both managers and privileged.</p>
 
           
           <div class="method-source-code" id="admin-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 181</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">admin?</span>
   <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -582,7 +584,7 @@ inactive tasks.</p>
 
           
           <div class="method-source-code" id="all_permitted_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">all_permitted_tasks</span>
   ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">scoped</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">scoped</span>
 <span class="ruby-keyword">end</span></pre>
@@ -616,7 +618,7 @@ manager accounts are considered privileged.</p>
 
           
           <div class="method-source-code" id="manager-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 168</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">manager?</span>
   <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> <span class="ruby-keyword">or</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -680,7 +682,7 @@ for saving the updated object.</p>
 
           
           <div class="method-source-code" id="remove_inactive_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 150</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_inactive_tasks</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">active</span>
 <span class="ruby-keyword">end</span></pre>
@@ -712,7 +714,7 @@ administrator can assign. See also “privileged?”.</p>
 
           
           <div class="method-source-code" id="restricted-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 158</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">restricted?</span>
   <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -742,7 +744,7 @@ administrator can assign. See also “privileged?”.</p>
 
           
           <div class="method-source-code" id="tasks_are_active-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 86</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tasks_are_active</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-node">&quot;Cannot assign task '#{ task.title }' to this user - it is no longer active&quot;</span> ) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span>

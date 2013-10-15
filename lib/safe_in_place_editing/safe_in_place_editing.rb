@@ -57,21 +57,23 @@ private
       return
     else
       begin
-        success = @item.update_attribute( attribute, params[ :value ] )
-        raise "Unable to save changes to database" unless ( success )
 
-        # [TODO]: Note a subtle bug here.
+        # Call "touch" to make sure the item is modified even if the user has
+        # actually just submitted the form with an unchanged variable. This
+        # makes sure that Rails sees the object as 'dirty' and saves it. For
+        # objects with lock versions, that means the lock version always
+        # increments. The JavaScript code has to assume such an increment and
+        # has no clear way to know if it doesn't happen; we could dream up
+        # something complex but simpler just to ensure Rails is in step.
         #
-        # JavaScript code has to assume an increment of lock_version for
-        # those models which use locking, but Rails may not actually save the
-        # record if it thinks the attribute value is unchanged. Thus if you
-        # edit an item in-place but don't change its value, subsequent edits
-        # for that model on the page will fail because lock values don't match.
-        #
-        # No solution at present (we cannot ever be sure from JavaScript if
-        # Rails is or is not going to actually update the lock value; something
-        # which happens to work on a Rails version today might break on a new
-        # Rails version tomorrow).
+        # In the worst possible case, JavaScript and Rails end up out of step
+        # with the lock version and the user gets told there's a mismatch. A
+        # page reload later and everything is sorted out.
+
+        success = @item.update_attribute( attribute, params[ :value ] )
+        success = @item.touch if ( success && ! lock_version.nil? && @item.lock_version.to_s == lock_version )
+
+        raise "Unable to save changes to database" unless ( success )
 
       rescue => error
         render( { :status => 500, :text => error.message } )

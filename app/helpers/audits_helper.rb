@@ -19,7 +19,12 @@ module AuditsHelper
   # caught to cope with deleted items etc. not being found.
 
   def audithelp_type_of_change( record )
-    type   = record.auditable_type.downcase
+    type = begin
+      record.auditable_type.constantize.model_name.human
+    rescue
+      record.auditable_type.downcase
+    end
+
     type   = 'permitted OpenID' if type == 'permittedopenid'
     output = "#{ record.action.capitalize() } #{ h( type ) }"
 

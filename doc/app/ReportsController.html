@@ -389,21 +389,34 @@ apply to the current user.</p>
 
     <span class="ruby-keyword">return</span>
 
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">shared</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> ) )
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-ivar">@current_user</span> ) )
 
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_view_hint</span>( <span class="ruby-value">:not_found_error</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_view_hint</span>(
+      <span class="ruby-value">:not_found_error</span>,
+      <span class="ruby-constant">ReportsController</span>
+    )
+
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">home_path</span>() ) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
 
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Generate a compilable report from the saved parameters and compile</span>
   <span class="ruby-comment"># the report data into an easily understood form for report generators.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># By this point security checks have verified that the current user is</span>
+  <span class="ruby-comment"># allowed to see the report, but they may be restricted and this might</span>
+  <span class="ruby-comment"># not be their report in the first place. Thus we pass in the current</span>
+  <span class="ruby-comment"># user to let the report mechanism below that filter tasks etc. as</span>
+  <span class="ruby-comment"># required by the user's restrictions, if any.</span>
 
-  <span class="ruby-ivar">@report</span> = <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">generate_report</span>()
+  <span class="ruby-ivar">@report</span> = <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">generate_report</span>( <span class="ruby-keyword">true</span>, <span class="ruby-ivar">@current_user</span> )
   <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">compile</span>()
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:warning</span> ] = <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_view_hint</span>( <span class="ruby-value">:unnamed_warning</span> )
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:warning</span> ] = <span class="ruby-identifier">@@application_helper</span>.<span class="ruby-identifier">apphelp_view_hint</span>(
+      <span class="ruby-value">:unnamed_warning</span>,
+      <span class="ruby-constant">ReportsController</span>
+    )
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">throttled</span> )

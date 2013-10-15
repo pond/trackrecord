@@ -70,19 +70,11 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-find_by_task_user_and_range">::find_by_task_user_and_range</a>
-    
-    <li><a href="#method-c-find_by_task_user_range_and_committed">::find_by_task_user_range_and_committed</a>
-    
-    <li><a href="#method-c-find_committed_by_task_user_and_range">::find_committed_by_task_user_and_range</a>
-    
     <li><a href="#method-c-find_earliest_by_tasks">::find_earliest_by_tasks</a>
     
     <li><a href="#method-c-find_first_by_tasks_and_order">::find_first_by_tasks_and_order</a>
     
     <li><a href="#method-c-find_latest_by_tasks">::find_latest_by_tasks</a>
-    
-    <li><a href="#method-c-find_not_committed_by_task_user_and_range">::find_not_committed_by_task_user_and_range</a>
     
   </ul>
 </nav>
@@ -316,179 +308,6 @@ See below for more details.</p>
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="method-c-find_by_task_user_and_range" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_by_task_user_and_range</span><span
-            class="method-args">( range, task_id = nil, user_id = nil )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Find work packets in rows related to the given task ID, held in timesheets
-owned by the given user ID, between the Dates in the given range. The range
-MUST be inclusive, for reasons discussed below. The results are sorted by
-work packet date, descending.</p>
-
-<p>The task and user IDs are optional. All tasks and/or users will be included
-in the count if the given task and/or user ID is nil. The date range is
-mandatory.</p>
-
-<p>Returns an ActiveRecord::Relation instance.</p>
-
-<p>IMPORTANT - at the time of writing, Rails 2.1 (and earlier versions) will
-build a BETWEEN statement in SQL with the given range. Although SQL says
-that the values on either side of BETWEEN should be treated as inclusive,
-i.e. a Ruby “a..b” kind of range, some databases may treat the right side
-as exclusive; PostgreSQL is fine, but if in doubt you need to go to the
-Rails console and run a test. For example, issue something like this:</p>
-
-<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">id</span> }.<span class="ruby-identifier">sort</span>
-</pre>
-
-<p>Note any two consecutive IDs listed - e.g. “[1, 2, …]” - 1 and 2 will do.
-Use these as part of range conditions for a find:</p>
-
-<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(:<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">conditions</span> =<span class="ruby-operator">&gt;</span> { :<span class="ruby-identifier">id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">2</span> } )
-</pre>
-
-<p>Assuming you actually <strong>have</strong> users with IDs 1 and 2, then
-both should be returned. If you only get one, BETWEEN isn’t working and you
-need to use another database or change the function below to do something
-else (e.g. hard-code a condition using “&gt;=” and “&lt;=” if your database
-supports those operators).</p>
-
-<p>A final twist is that Rails’ “to_s( :db )” operator assumes all ranges are
-inclusive and generates SQL accordingly. There’s a ticket for this in the
-case of dates:</p>
-
-<pre>http://dev.rubyonrails.org/ticket/8549</pre>
-
-<p>…but actually Rails seems to do this for any kind of range - e.g. change
-the “1..2” to “1…2” in the <a href="User.html">User</a> find above and note
-that the generated SQL is the same. We’d expect it to only look for a user
-with id ‘1’ (or between 1 and 1) in this case.</p>
-
-<p>As a result, ensure you only ever pass inclusive ranges to this function.</p>
-          
-
-          
-          <div class="method-source-code" id="find_by_task_user_and_range-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 93</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_by_task_user_and_range</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>(
-    <span class="ruby-identifier">range</span>,
-    <span class="ruby-keyword">nil</span>,
-    <span class="ruby-identifier">task_id</span>,
-    <span class="ruby-identifier">user_id</span>
-  )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- find_by_task_user_and_range-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- find_by_task_user_and_range-method -->
-
-    
-      <div id="method-c-find_by_task_user_range_and_committed" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_by_task_user_range_and_committed</span><span
-            class="method-args">( range, committed, task_id = nil, user_id = nil )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Support <a
-href="WorkPacket.html#method-c-find_by_task_user_and_range">::find_by_task_user_and_range</a>,
-<a
-href="WorkPacket.html#method-c-find_committed_by_task_user_and_range">::find_committed_by_task_user_and_range</a>
-and find_not_committed_by_task_user_and_range. An extra mandatory second
-parameter must be set to ‘true’ to only include work packets from committed
-timesheets, ‘false’ for not committed timesheets and ‘nil’ for either.</p>
-
-<p>Returns an ActiveRecord::Relation instance.</p>
-          
-
-          
-          <div class="method-source-code" id="find_by_task_user_range_and_committed-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 137</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">committed</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
-
-  <span class="ruby-comment"># With Rails when joins are specified by a hash, each key's value is the</span>
-  <span class="ruby-comment"># next level of association. We first include the timesheet rows, a second</span>
-  <span class="ruby-comment"># order association, because the rows lead to tasks and timesheets. This</span>
-  <span class="ruby-comment"># key points to an array giving two third order things; :task and, itself</span>
-  <span class="ruby-comment"># a hash key, :timesheet; since it is a hash key, :timesheet's value is</span>
-  <span class="ruby-comment"># the second-order association of timesheets, or the fourth-order</span>
-  <span class="ruby-comment"># association of the work packets - :user.</span>
-
-  <span class="ruby-identifier">joins</span> = { <span class="ruby-value">:timesheet_row</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-value">:task</span>, { <span class="ruby-value">:timesheet</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:user</span> } ] }
-  <span class="ruby-identifier">order</span> = <span class="ruby-string">'date DESC'</span>
-
-  <span class="ruby-identifier">conditions</span>                = { <span class="ruby-value">:date</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range</span>     }
-  <span class="ruby-identifier">conditions</span>[ <span class="ruby-value">:tasks</span>      ] = { <span class="ruby-value">:id</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task_id</span>   } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">task_id</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">conditions</span>[ <span class="ruby-value">:users</span>      ] = { <span class="ruby-value">:id</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user_id</span>   } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">conditions</span>[ <span class="ruby-value">:timesheets</span> ] = { <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">committed</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">committed</span>.<span class="ruby-identifier">nil?</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">order</span>( <span class="ruby-identifier">order</span> )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- find_by_task_user_range_and_committed-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- find_by_task_user_range_and_committed-method -->
-
-    
-      <div id="method-c-find_committed_by_task_user_and_range" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_committed_by_task_user_and_range</span><span
-            class="method-args">( range, task_id = nil, user_id = nil )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>As <a
-href="WorkPacket.html#method-c-find_by_task_user_and_range">::find_by_task_user_and_range</a>,
-but only counts work packets belonging to committed timesheets.</p>
-
-<p>Returns an ActiveRecord::Relation instance.</p>
-          
-
-          
-          <div class="method-source-code" id="find_committed_by_task_user_and_range-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 107</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_committed_by_task_user_and_range</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>(
-    <span class="ruby-identifier">range</span>,
-    <span class="ruby-keyword">true</span>,
-    <span class="ruby-identifier">task_id</span>,
-    <span class="ruby-identifier">user_id</span>
-  )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- find_committed_by_task_user_and_range-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- find_committed_by_task_user_and_range-method -->
-
-    
       <div id="method-c-find_earliest_by_tasks" class="method-detail ">
         
         <div class="method-heading">
@@ -507,7 +326,7 @@ The work packet may be in either a not committed or committed timesheet.</p>
 
           
           <div class="method-source-code" id="find_earliest_by_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 162</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_earliest_by_tasks</span>( <span class="ruby-identifier">task_ids</span> = [] )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">'date ASC'</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -540,7 +359,7 @@ fragment, e.g. “date ASC”).</p>
 
           
           <div class="method-source-code" id="find_first_by_tasks_and_order-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 177</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-identifier">order</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task_ids</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
     <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">order</span>( <span class="ruby-identifier">order</span> ).<span class="ruby-identifier">first</span>
@@ -551,7 +370,6 @@ fragment, e.g. “date ASC”).</p>
     <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">significant</span>.<span class="ruby-identifier">joins</span>( <span class="ruby-identifier">joins</span> ).<span class="ruby-identifier">where</span>( <span class="ruby-identifier">conditions</span> ).<span class="ruby-identifier">order</span>( <span class="ruby-identifier">order</span> ).<span class="ruby-identifier">first</span>
 
   <span class="ruby-keyword">end</span>
-
 <span class="ruby-keyword">end</span></pre>
           </div><!-- find_first_by_tasks_and_order-source -->
           
@@ -581,7 +399,7 @@ packet may be in either a not committed or committed timesheet.</p>
 
           
           <div class="method-source-code" id="find_latest_by_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 170</span>
+            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_latest_by_tasks</span>( <span class="ruby-identifier">task_ids</span> = [] )
   <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">'date DESC'</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -593,46 +411,6 @@ packet may be in either a not committed or committed timesheet.</p>
 
         
       </div><!-- find_latest_by_tasks-method -->
-
-    
-      <div id="method-c-find_not_committed_by_task_user_and_range" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_not_committed_by_task_user_and_range</span><span
-            class="method-args">( range, task_id = nil, user_id = nil )</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>As <a
-href="WorkPacket.html#method-c-find_by_task_user_and_range">::find_by_task_user_and_range</a>,
-but only counts work packets belonging to timesheets which are not
-committed.</p>
-
-<p>Returns an ActiveRecord::Relation instance.</p>
-          
-
-          
-          <div class="method-source-code" id="find_not_committed_by_task_user_and_range-source">
-            <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 121</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_not_committed_by_task_user_and_range</span>( <span class="ruby-identifier">range</span>, <span class="ruby-identifier">task_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_task_user_range_and_committed</span>(
-    <span class="ruby-identifier">range</span>,
-    <span class="ruby-keyword">false</span>,
-    <span class="ruby-identifier">task_id</span>,
-    <span class="ruby-identifier">user_id</span>
-  )
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- find_not_committed_by_task_user_and_range-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- find_not_committed_by_task_user_and_range-method -->
 
     
     </section><!-- public-class-method-details -->

@@ -29,6 +29,13 @@ module SafeInPlaceEditingHelper
   # - The ":cancel_text" option is set to "Cancel" by default to match the
   #   above change.
   #
+  # - New option ":is_boolean" indicating a true/false popup should be offered
+  #   instead of a text field; if omitted, a text field is assumed. If present
+  #   and 'true', additional optional value ":first_value" says whether or not
+  #   the pop-up menu should start with True/Yes (if ":first_value"'s value is
+  #   itself true), or False/No (if ":first_value"'s value is itself false, or
+  #   if the option is omitted).
+  #
   # Custom on-failure and on-complete functions are used. To try and reduce
   # the code bulk for each instance of the editor, hard-coded JS function names
   # are used with the support code placed in 'safe_in_place_editing.js'. See
@@ -36,13 +43,14 @@ module SafeInPlaceEditingHelper
   # equivalents. To override the default names of these functions for any
   # reason, give the names as strings in options properties :on_complete and
   # :on_failure, then make sure appropriate JS functions are actually defined.
-
+  #
   def safe_in_place_editor( field_id, options = {} )
 
     # Set up some default values
 
+    options[ :with ] ||= "Form.serialize(form).replace(/\\+/g,'%20')"
+
     if protect_against_forgery?
-      options[ :with ] ||= "Form.serialize(form)"
       options[ :with ] += " + '&authenticity_token=' + encodeURIComponent('#{ form_authenticity_token }')"
     end
 
@@ -87,8 +95,15 @@ module SafeInPlaceEditingHelper
     js_options[ 'externalControl'     ] = "'#{          options[ :external_control ]   }'" if options[ :external_control ]
     js_options[ 'loadTextURL'         ] = "'#{ url_for( options[ :load_text_url    ] ) }'" if options[ :load_text_url    ]
 
-    js_options[ 'callback'            ] = "function(form) { return #{ options[ :with ] }; }" if options[ :with       ]
-    js_options[ 'collection'          ] = %([['false','No'],['true','Yes']])                 if options[ :is_boolean ]
+    js_options[ 'callback'            ] = "function(form) { return #{ options[ :with ] }; }" if options[ :with ]
+
+    if options[ :is_boolean ]
+      if options[ :start_value ]
+        js_options[ 'collection' ] = "[['true','Yes'],['false','No']]"
+      else
+        js_options[ 'collection' ] = "[['false','No'],['true','Yes']]"
+      end
+    end
 
     # Set up the custom on-failure and on-complete handlers
 
@@ -138,13 +153,18 @@ module SafeInPlaceEditingHelper
   #   version may be communicated to the server's attribute update action.
   #   This is done internally; there is no need to set the option yourself.
   #
+  # The editor options also support "is_boolean", which overrides the default
+  # setting of whether or not the column value is considered to be a string
+  # or a boolean quantity. This is provided just-in-case, with no current
+  # known cases where the automatic detection isn't sufficient.
+  #
   # The Prototype library getText function must be patched as described in
   # the README rationale; "application.js" is a good place to do this.
   #
   # Note an optional fifth parameter which if 'true' will prevent HTML
   # escaping of the value for values which are really meant to contain HTML
   # code. Be very, very careful with this.
-
+  #
   def safe_in_place_editor_field( object, method, tag_options = {}, editor_options = {}, no_escape = false )
 
     # Allow a symbol or object instance to be passed. Since the symbol use
@@ -174,7 +194,7 @@ module SafeInPlaceEditingHelper
 
       editor_options[ :lock_version ]   = object.lock_version.to_s
       editor_options[ :lock_var     ] ||= var
-      editor_options[ :with         ] ||= "Form.serialize(form)"
+      editor_options[ :with         ] ||= "Form.serialize(form).replace(/\\+/g,'%20')"
       editor_options[ :with         ]  += " + '&lock_version=' + #{ var }"
     end
 
@@ -186,6 +206,7 @@ module SafeInPlaceEditingHelper
     is_boolean = ( editor_options[ :is_boolean ] || ( column_value.is_a? TrueClass ) || ( column_value.is_a? FalseClass ) )
 
     if ( is_boolean )
+      editor_options[ :start_value ] = !! column_value
       column_value = column_value ? 'Yes' : 'No'
     else
       column_value = ERB::Util::html_escape( column_value ) unless ( no_escape )

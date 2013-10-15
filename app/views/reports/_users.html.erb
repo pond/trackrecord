@@ -18,8 +18,14 @@
 <% else %>
     <!-- Per-user summaries -->
 
-    <h2 class="report_subtitle">User summaries for <%= @report.display_range %></h2>
+    <h2 class="report_subtitle">
+      User summaries for <%= @report.display_range %>
+      <div class="floated_link">
+        <%= link_to( 'Alter report', edit_user_saved_report_path( :id => @saved_report.id, :user_id => @saved_report.user_id ) ) %>
+      </div>
+    </h2>
 
+    <p></p>
     <table class="report display_table ts_show_table">
 
       <!-- Heading - show user names -->

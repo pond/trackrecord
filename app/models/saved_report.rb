@@ -10,6 +10,13 @@
 
 class SavedReport < Rangeable
 
+  audited( :except => [
+    :lock_version,
+    :updated_at,
+    :created_at,
+    :id
+  ] )
+
   DEFAULT_SORT_COLUMN    = 'updated_at'
   DEFAULT_SORT_DIRECTION = 'DESC'
   DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
@@ -71,6 +78,8 @@ class SavedReport < Rangeable
 
   # Validations
 
+  validates_presence_of  :user_id
+
   validates_inclusion_of :frequency,           :in => 0...TrackRecordReport::Report::FREQUENCY.length
 
   validates_inclusion_of :task_filter,         :in => TASK_FILTER_VALUES
@@ -85,13 +94,21 @@ class SavedReport < Rangeable
   # pass 'true' on entry to force a refresh of the cache and update the
   # TrackRecordReport::Report instance.
   #
-  def generate_report( flush_cache = false )
+  # Optionally, pass in a user. Without this, the saved report's own user
+  # details will be used for task filtering and so-on. If you allow another
+  # user to view someone else's report, then you will want to pass in that
+  # other user's details, since that user may be subject to different
+  # restrictions (in particular, differing permitted task lists).
+  #
+  def generate_report( flush_cache = false, viewing_user = user )
+
     if ( @report.nil? || flush_cache )
+
       # The TrackRecord internal Report object can be created from this
       # instance's attributes directly, except for many-to-many relationships,
       # which are not exposed in that hash and must be assigned manually.
 
-      @report                     = TrackRecordReport::Report.new( user, attributes() )
+      @report                     = TrackRecordReport::Report.new( viewing_user, attributes() )
 
       @report.title               = title
       @report.active_task_ids     = active_task_ids
@@ -124,6 +141,21 @@ class SavedReport < Rangeable
   def range_end_cache
     raw_attr_val = self[ :range_end_cache ]
     CACHED_REVERSE_RANGE_MAP[ raw_attr_val ] || raw_attr_val
+  end
+
+  # Is the given user permitted to do anything with this report?
+  # A shared report can be viewed by anyone, privileged users can
+  # view any report and of course the report's owner can view it.
+  #
+  def is_permitted_for?( comparison_user )
+    shared? or comparison_user == user or comparison_user.privileged? 
+  end
+
+  # Is the given user permitted to update this report? Only report
+  # owners or administrators can do so.
+
+  def can_be_modified_by?( comparison_user )
+    comparison_user == user or comparison_user.admin?
   end
 
 private # =====================================================================

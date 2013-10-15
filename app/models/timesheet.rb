@@ -73,7 +73,7 @@ class Timesheet < ActiveRecord::Base
     last  = WorkPacket.find_latest_by_tasks()
 
     if accurate
-      ( first.date.to_date )..( last.date.to_date )
+      ( first.date )..( last.date )
     else
       ( first.date.year )..( last.date.year )
     end
@@ -114,56 +114,48 @@ class Timesheet < ActiveRecord::Base
   # to 'true'. If so, update the associated user's last committed
   # date.
 
-  before_update :check_committed_state
+  before_save :check_committed_state
 
   # Update the start date cache when records are saved or updated.
 
-  before_update :update_start_day_cache
+  before_save :update_start_day_cache
 
   # Is the given user permitted to do anything with this timesheet?
+  # Admins and managers can view anything. Normal users can only view
+  # their own timesheets.
   #
   def is_permitted_for?( user )
-    return ( user.privileged? or user.id == self.user.id )
+    ( user.id == self.user.id ) or ( user.privileged? )
   end
 
-  # Is the given user permitted to update this timesheet?
+  # Is the given user permitted to update this timesheet? Admins can
+  # modify anything. Managers can modify their own timesheets whether
+  # committed or not, or any other timesheet provided it is not
+  # committed. Normal users can only modify their own timesheets when
+  # not committed.
+  #
+  # Note there is no special status awarded to admin-owned timesheets;
+  # a manager can modify any not committed timesheet. This keeps the
+  # model simple. Managers are trusted to only modify timesheets they
+  # don't own when really necessary, but they can't revise history by
+  # changing committed data.
   #
   def can_be_modified_by?( user )
-    return true  if     ( user.admin? )
-    return false unless ( self.is_permitted_for?( user ) )
-    return ( not self.committed )
+    if ( user.admin? )
+      true
+    elsif ( user.manager? )
+      ( user.id == self.user.id ) or ( not self.committed )
+    else
+      ( user.id == self.user.id ) and ( not self.committed )
+    end
   end
 
-  # Instance method that returns an array of all timesheets owned
-  # by this user. Pass an optional conditions hash (will be sent
-  # in as ":conditions => <given value>").
-  #
-  def find_mine( conditions = {} )
-    Timesheet.where( :user_id => self.user_id ).where( conditions )
-  end
-
-  # Instance method which returns an array of all committed
-  # timesheets owned by this user.
-  #
-  def find_mine_committed( conditions = {} )
-    conditions.merge!( :committed => true )
-    return find_mine( conditions )
-  end
-
-  # Instance method which returns an array of all uncommitted
-  # timesheets owned by this user.
-  #
-  def find_mine_uncommitted( conditions = {} )
-    conditions.merge!( :committed => false )
-    return find_mine( conditions )
-  end
-
-  # Return an array of week numbers which can be assigned to the
-  # timesheet. Includes the current timesheet's already allocated
+  # Return a sorted array of week numbers which can be assigned to
+  # the timesheet. Includes the current timesheet's already allocated
   # week.
   #
   def unused_weeks()
-    timesheets = find_mine( :year => self.year )
+    timesheets = Timesheet.where( :user_id => self.user_id, :year => self.year )
     used_weeks = timesheets.select( :week_number ).map( &:week_number )
 
     range        = 1..Timesheet.get_last_week_number( self.year )
@@ -196,44 +188,6 @@ class Timesheet < ActiveRecord::Base
     discover_week( nextweek ) do | timesheet |
       ( not timesheet.nil? )
     end
-  end
-
-  # Back-end to editable_week and showable_week. See those functions for
-  # details. Call with the next/previous week boolean and pass a block;
-  # this is given a timesheet or nil; evaluate 'true' to return details
-  # on the item or 'false' to move on to the next week.
-  #
-  def discover_week( nextweek )
-    year  = self.year
-    owner = self.user_id
-
-    if ( nextweek )
-      inc   = 1
-      week  = self.week_number + 1
-      limit = Timesheet.get_last_week_number( year ) + 1
-
-      return if ( week >= limit )
-    else
-      inc   = -1
-      week  = self.week_number - 1
-      limit = 0
-
-      return if ( week <= limit )
-    end
-
-    while ( week != limit )
-      timesheet = Timesheet.find_by_user_id_and_year_and_week_number(
-        owner, year, week
-      )
-
-      if ( yield( timesheet ) )
-        return { :week_number => week, :timesheet => timesheet }
-      end
-
-      week += inc
-    end
-
-    return nil
   end
 
   # Add a row to the timesheet using the given task object. Does
@@ -421,7 +375,7 @@ class Timesheet < ActiveRecord::Base
     if ( as_date )
       return date
     else
-      return date.strftime( '%d-%b-%Y') # Or ISO: '%Y-%m-%d'
+      return date.strftime( '%d-%b-%Y' ) # Or ISO: '%Y-%m-%d'
     end
   end
 
@@ -453,7 +407,7 @@ private
     self.tasks.all.each do | task |
       errors.add( :base, "Task '#{ task.augmented_title }' is no longer active and cannot be included" ) unless task.active
 
-      if ( self.user.restricted? )
+      if ( self.user.try( :restricted? ) )
         errors.add( :base, "Inclusion of task '#{ task.augmented_title }' is no longer permitted" ) unless self.user.task_ids.include?( task.id )
       end
     end
@@ -467,16 +421,16 @@ private
     end
   end
 
-  # Run via "before_update".
+  # Run via "before_safe".
   #
   def check_committed_state
-    if ( self.committed )
+    if ( self.committed && self.user )
       self.committed_at = self.user.last_committed = Time.new
       self.user.save!
     end
   end
 
-  # Run via "before_update".
+  # Run via "before_safe".
   #
   def update_start_day_cache
     self.start_day_cache = self.date_for(
@@ -484,5 +438,43 @@ private
       true # Return as a Date rather than a String
 
     ).to_datetime.in_time_zone( 'UTC' ) # Rails 3 gotcha/bug; auto-conversion to TimeWithZone uses *server's local time zone* rather than UTC+0, contrary to Rails defaults elsewhere; typical result is the cache column ends up in the 'wrong day' unless server is also at UTC +0.
+  end
+
+  # Back-end to editable_week and showable_week. See those functions for
+  # details. Call with the next/previous week boolean and pass a block;
+  # this is given a timesheet or nil; evaluate 'true' to return details
+  # on the item or 'false' to move on to the next week.
+  #
+  def discover_week( nextweek )
+    year  = self.year
+    owner = self.user_id
+
+    if ( nextweek )
+      inc   = 1
+      week  = self.week_number + 1
+      limit = Timesheet.get_last_week_number( year ) + 1
+
+      return if ( week >= limit )
+    else
+      inc   = -1
+      week  = self.week_number - 1
+      limit = 0
+
+      return if ( week <= limit )
+    end
+
+    while ( week != limit )
+      timesheet = Timesheet.find_by_user_id_and_year_and_week_number(
+        owner, year, week
+      )
+
+      if ( yield( timesheet ) )
+        return { :week_number => week, :timesheet => timesheet }
+      end
+
+      week += inc
+    end
+
+    return nil
   end
 end

@@ -443,7 +443,7 @@ follow this pattern so that it’s easy to add private code later.</p>
 
           
           <div class="method-source-code" id="extended-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator.rb, line 260</span>
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator.rb, line 263</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">extended</span>( <span class="ruby-identifier">base</span> )
   <span class="ruby-keyword">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">base</span> 
     <span class="ruby-identifier">private</span>
@@ -510,7 +510,7 @@ result if you’d already rendered something.</p>
 
           
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator.rb, line 245</span>
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator.rb, line 248</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate</span>( <span class="ruby-identifier">type</span>, <span class="ruby-identifier">report</span>, <span class="ruby-identifier">options</span> = {} )
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -607,7 +607,10 @@ the hash that yield the submitted form values.</p>
 
                 A selected radio button within a group will appear in
                 the options hash in &quot;generate&quot; as a key of the given
-                name and a value of the ID given for the selected item.</pre>
+                name and a value of the ID given for the selected item.
+
+:gap            A gap that visually separates collections of options.
+                Use a value of &quot;true&quot;.</pre>
 
 <p>Options are displayed to the user in a vertical column in the same order as
 in the array (first array entry shown topmost).</p>
@@ -617,7 +620,7 @@ in the array (first array entry shown topmost).</p>
 
           
           <div class="method-source-code" id="invocation_options_for-source">
-            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator.rb, line 220</span>
+            <pre><span class="ruby-comment"># File lib/report_generators/track_record_report_generator.rb, line 223</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">invocation_options_for</span>( <span class="ruby-identifier">type</span> )
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>

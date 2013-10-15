@@ -70,7 +70,11 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-c-active">::active</a>
+    
     <li><a href="#method-c-find_permitted">::find_permitted</a>
+    
+    <li><a href="#method-c-inactive">::inactive</a>
     
     <li><a href="#method-i-augmented_title">#augmented_title</a>
     
@@ -333,6 +337,44 @@ below for more details.</p>
       <h3 class="section-header">Public Class Methods</h3>
 
     
+      <div id="method-c-active" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">active</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Want to do this, for future compatibility with Rails 4:</p>
+
+<pre class="ruby"><span class="ruby-identifier">scope</span> :<span class="ruby-identifier">active</span>,   <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">where</span>( :<span class="ruby-identifier">active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>  ) }
+<span class="ruby-identifier">scope</span> :<span class="ruby-identifier">inactive</span>, <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">where</span>( :<span class="ruby-identifier">active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> ) }
+</pre>
+
+<p>…however it breaks:</p>
+
+<pre>https://github.com/rails/rails/issues/10658</pre>
+
+<p>Thus, bypass the syntactic sugar and just write the methods.</p>
+          
+
+          
+          <div class="method-source-code" id="active-source">
+            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span>;   <span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>  ); <span class="ruby-keyword">end</span></pre>
+          </div><!-- active-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- active-method -->
+
+    
       <div id="method-c-find_permitted" class="method-detail ">
         
         <div class="method-heading">
@@ -344,14 +386,14 @@ below for more details.</p>
 
         <div class="method-description">
           
-          <p>Find all projects which the given user is allowed to see. A conditions hash
+          <p>Find all objects which the given user is allowed to see. A conditions hash
 may be passed to further restrict the search (that is, the “{…}” in “find(
 :all, :conditions =&gt; {…})”).</p>
           
 
           
           <div class="method-source-code" id="find_permitted-source">
-            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_permitted</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">conditions</span> = <span class="ruby-keyword">nil</span> )
 
   <span class="ruby-comment"># Can't see any items if no user is given. Can see all items if</span>
@@ -380,6 +422,34 @@ may be passed to further restrict the search (that is, the “{…}” in “fin
       </div><!-- find_permitted-method -->
 
     
+      <div id="method-c-inactive" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inactive</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="inactive-source">
+            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">inactive</span>; <span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> ); <span class="ruby-keyword">end</span></pre>
+          </div><!-- inactive-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- inactive-method -->
+
+    
     </section><!-- public-class-method-details -->
   
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
@@ -403,7 +473,7 @@ href="Task.html">Task</a> object during report generation.</p>
 
           
           <div class="method-source-code" id="augmented_title-source">
-            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">augmented_title</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">title</span>
 <span class="ruby-keyword">end</span></pre>
@@ -435,7 +505,7 @@ is still active.</p>
 
           
           <div class="method-source-code" id="can_be_modified_by-3F-source">
-            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 76</span>
+            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_modified_by?</span>( <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">restricted?</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span>      )
@@ -462,28 +532,22 @@ is still active.</p>
 
         <div class="method-description">
           
-          <p>Is permission granted for the given user to see this project? See also
+          <p>Is permission granted for the given user to see this object? See also
 find_permitted. Returns ‘true’ if permitted, else ‘false’.</p>
           
 
           
           <div class="method-source-code" id="is_permitted_for-3F-source">
-            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/models/task_group.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">privileged?</span>
 
-  <span class="ruby-comment"># User is restricted. User can only see this project if it</span>
+  <span class="ruby-comment"># User is restricted. User can only see this object if it</span>
   <span class="ruby-comment"># has at least one task associated with it and at least one</span>
   <span class="ruby-comment"># of those associated tasks appears in the user's permitted</span>
   <span class="ruby-comment"># task list, so check the intersection of the two arrays.</span>
 
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">empty?</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>  <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> &amp; <span class="ruby-identifier">user</span>.<span class="ruby-identifier">tasks</span> ).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-
-  <span class="ruby-comment"># None of the project's tasks are in the user's permitted</span>
-  <span class="ruby-comment"># list, so the user is not permitted to see this project.</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> &amp; <span class="ruby-identifier">user</span>.<span class="ruby-identifier">tasks</span> ).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- is_permitted_for-3F-source -->
           

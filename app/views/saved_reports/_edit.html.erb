@@ -30,7 +30,7 @@
     </p>
 <%   end  -%>
 <% else -%>
-  <%= form_for( [ @saved_report.user, @saved_report ] ) do | f | -%><%= f.error_messages %>
+  <%= form_for( [ @record.user, @record ] ) do | f | -%><%= f.error_messages %>
 
   <p>
     <%= f.label :title %>:
@@ -246,7 +246,7 @@
     :report_generator,
     {
       :form        => f,
-      :report      => @saved_report,
+      :report      => @record,
       :line_prefix => '            '
     }
   )
@@ -261,7 +261,7 @@
     :report_generator,
     {
       :form        => f,
-      :report      => @saved_report,
+      :report      => @record,
       :inactive    => true,
       :line_prefix => '            '
     }

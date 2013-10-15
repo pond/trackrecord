@@ -1,5 +1,5 @@
 ########################################################################
-# File::    track_record_report_generator_base.rb
+# File::    track_record_report_generator.rb
 # (C)::     Hipposoft 2013
 #
 # Purpose:: Base class for a report generator. Generators take a

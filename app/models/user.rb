@@ -30,9 +30,11 @@ class User < Rangeable
   USER_TYPE_MANAGER      = 'Manager'
   USER_TYPE_NORMAL       = 'Normal'
 
-  scope( :active,     :conditions => { :active    => true                   } )
-  scope( :inactive,   :conditions => { :active    => false                  } )
-  scope( :restricted, :conditions => { :user_type => User::USER_TYPE_NORMAL } )
+  scope :active,     -> { where( :active    => true                    ) }
+  scope :inactive,   -> { where( :active    => false                   ) }
+  scope :restricted, -> { where( :user_type => User::USER_TYPE_NORMAL  ) }
+  scope :managers,   -> { where( :user_type => User::USER_TYPE_MANAGER ) }
+  scope :admins,     -> { where( :user_type => User::USER_TYPE_ADMIN   ) }
 
   # A User object stores information describing a timesheet system
   # user (obviously), including things like name and e-mail address
@@ -40,8 +42,11 @@ class User < Rangeable
   # to see.
 
   has_one( :control_panel, :dependent => :destroy )
+
+  has_many( :timesheets,    :dependent => :destroy )
+  has_many( :saved_reports, :dependent => :destroy )
+
   has_and_belongs_to_many( :tasks )
-  has_many( :timesheets, :dependent => :destroy )
 
   attr_protected(
     :user_type,
@@ -203,12 +208,14 @@ class User < Rangeable
     # Did the user omit the 'http' prefix? If so, the URI parser will
     # be a bit confused. Try adding in 'http' instead.
 
-    orignal = URI.parse( "http://#{uri}" ) if ( original.scheme.nil? )
+    original = URI.parse( "http://#{uri}" ) if ( original.scheme.nil? )
 
     # We must by now have at least a scheme and host. If not, something
     # very odd is going on - bail out.
 
     return uri if ( original.scheme.nil? or original.host.nil? )
+
+    original.path.chomp!( '/' )
 
     # Looks good - assemble a clean equivalent.
 

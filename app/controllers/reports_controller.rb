@@ -72,7 +72,7 @@ class ReportsController < ApplicationController
 
       return
 
-    elsif ( @saved_report.nil? || ( @saved_report.user_id != @current_user.id && ! @saved_report.shared && ! @current_user.admin? ) )
+    elsif ( @saved_report.nil? || ! @saved_report.is_permitted_for?( @current_user ) )
 
       flash[ :error ] = @@application_helper.apphelp_view_hint(
         :not_found_error,
@@ -85,8 +85,14 @@ class ReportsController < ApplicationController
 
     # Generate a compilable report from the saved parameters and compile
     # the report data into an easily understood form for report generators.
+    #
+    # By this point security checks have verified that the current user is
+    # allowed to see the report, but they may be restricted and this might
+    # not be their report in the first place. Thus we pass in the current
+    # user to let the report mechanism below that filter tasks etc. as
+    # required by the user's restrictions, if any.
 
-    @report = @saved_report.generate_report()
+    @report = @saved_report.generate_report( true, @current_user )
     @report.compile()
 
     if ( @saved_report.title.empty? )

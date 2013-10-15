@@ -1,0 +1,1621 @@
+---
+saved_reports_001:
+  id: '1'
+  user_id: '1'
+  title: 40 Awkward span / Users / All flags / Weekly / Grouped
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2011_11'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_2'
+  range_start_cache: '2011-11-01'
+  range_end_cache: '2013-02-28'
+  frequency: '5'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: both
+  created_at: '2013-10-09 06:21:25.983742'
+  updated_at: '2013-10-09 06:21:25.983742'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_002:
+  id: '2'
+  user_id: '1'
+  title: 46 Real World 3
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '6'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: title
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.002239'
+  updated_at: '2013-10-09 06:21:26.002239'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_003:
+  id: '3'
+  user_id: '1'
+  title: 28 User quarterly / Hide zero rows
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.013511'
+  updated_at: '2013-10-09 06:21:26.013511'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_004:
+  id: '4'
+  user_id: '1'
+  title: 08 All time / Overall / Committed only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '0'
+  task_filter: all
+  include_totals: f
+  include_committed: t
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.025520'
+  updated_at: '2013-10-09 06:21:26.025520'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_005:
+  id: '5'
+  user_id: '1'
+  title: 18 as 17, projects sorted
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.034472'
+  updated_at: '2013-10-09 06:21:26.034472'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_006:
+  id: '6'
+  user_id: '1'
+  title: 24 as 21, both grouped, Customer 11 inactive only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.041227'
+  updated_at: '2013-10-09 06:21:26.041227'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_007:
+  id: '7'
+  user_id: '1'
+  title: 22 as 21, both grouped
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.061739'
+  updated_at: '2013-10-09 06:21:26.061739'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_008:
+  id: '8'
+  user_id: '1'
+  title: 02 All time / Financial year / Totals only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '1'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.068277'
+  updated_at: '2013-10-09 06:21:26.068277'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_009:
+  id: '11'
+  user_id: '1'
+  title: 38 Two month span / Users / All flags / Weekly / Grouped
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2012_12'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_1'
+  range_start_cache: '2012-12-01'
+  range_end_cache: '2013-01-31'
+  frequency: '5'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.097670'
+  updated_at: '2013-10-09 06:21:26.097670'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_010:
+  id: '12'
+  user_id: '3'
+  title: TU3 Real World 1
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.108833'
+  updated_at: '2013-10-09 06:21:26.108833'
+  range_one_month: 
+  range_one_week: 
+  user_details: f
+  lock_version: '0'
+saved_reports_011:
+  id: '14'
+  user_id: '1'
+  title: 03 All time / Calendar year / Totals only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '2'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.124790'
+  updated_at: '2013-10-09 06:21:26.124790'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_012:
+  id: '15'
+  user_id: '1'
+  title: 05 All time / Monthly / Totals only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.131053'
+  updated_at: '2013-10-09 06:21:26.131053'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_013:
+  id: '16'
+  user_id: '1'
+  title: 30 User quarterly / Hide zero all
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.137266'
+  updated_at: '2013-10-09 06:21:26.137266'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_014:
+  id: '17'
+  user_id: '1'
+  title: 26 as 24, both grouped, Customer 11 inactive, not billable
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: non_billable
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.148155'
+  updated_at: '2013-10-09 06:21:26.148155'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_015:
+  id: '19'
+  user_id: '1'
+  title: 21 as 20, active grouped
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: active
+  created_at: '2013-10-09 06:21:26.177087'
+  updated_at: '2013-10-09 06:21:26.177087'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_016:
+  id: '20'
+  user_id: '1'
+  title: 41 as 40, monthly
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2011_11'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_2'
+  range_start_cache: '2011-11-01'
+  range_end_cache: '2013-02-28'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.183502'
+  updated_at: '2013-10-09 06:21:26.183502'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_017:
+  id: '21'
+  user_id: '1'
+  title: 42 as 40, calendar year
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2011_11'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_2'
+  range_start_cache: '2011-11-01'
+  range_end_cache: '2013-02-28'
+  frequency: '2'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.194861'
+  updated_at: '2013-10-09 06:21:26.194861'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_018:
+  id: '22'
+  user_id: '1'
+  title: 33 as 30, customers 1 and 11
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.206458'
+  updated_at: '2013-10-09 06:21:26.206458'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_019:
+  id: '23'
+  user_id: '1'
+  title: 20 as 19, billable grouped
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: billable
+  created_at: '2013-10-09 06:21:26.235687'
+  updated_at: '2013-10-09 06:21:26.235687'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_020:
+  id: '24'
+  user_id: '1'
+  title: 29 User quarterly / Hide zero cols
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: f
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.242367'
+  updated_at: '2013-10-09 06:21:26.242367'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_021:
+  id: '25'
+  user_id: '1'
+  title: 43 as 40, tax year
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2011_11'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_2'
+  range_start_cache: '2011-11-01'
+  range_end_cache: '2013-02-28'
+  frequency: '1'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.254179'
+  updated_at: '2013-10-09 06:21:26.254179'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_022:
+  id: '26'
+  user_id: '1'
+  title: 45 Real World 2
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2013_6'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_7'
+  range_start_cache: '2013-06-01'
+  range_end_cache: '2013-07-31'
+  frequency: '0'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.265444'
+  updated_at: '2013-10-09 06:21:26.265444'
+  range_one_month: 
+  range_one_week: 
+  user_details: f
+  lock_version: '0'
+saved_reports_023:
+  id: '27'
+  user_id: '1'
+  title: 06 All time / Weekly / Totals only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '5'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.284962'
+  updated_at: '2013-10-09 06:21:26.284962'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_024:
+  id: '28'
+  user_id: '1'
+  title: 39 Two week span / Users / All flags / Daily / Grouped
+  shared: f
+  range_start: 
+  range_week_start: '2009_53'
+  range_month_start: ''
+  range_end: 
+  range_week_end: '2010_1'
+  range_month_end: ''
+  range_start_cache: '2009-12-28'
+  range_end_cache: '2010-01-10'
+  frequency: '6'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.291552'
+  updated_at: '2013-10-09 06:21:26.291552'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_025:
+  id: '29'
+  user_id: '1'
+  title: 15 All time / Monthly / All types, zeros hidden / Billable
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: billable
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.303298'
+  updated_at: '2013-10-09 06:21:26.303298'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_026:
+  id: '31'
+  user_id: '1'
+  title: 04 All time / Quarterly / Totals only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.325741'
+  updated_at: '2013-10-09 06:21:26.325741'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_027:
+  id: '32'
+  user_id: '1'
+  title: 31 as 30, customer 1 active only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.332180'
+  updated_at: '2013-10-09 06:21:26.332180'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_028:
+  id: '33'
+  user_id: '1'
+  title: 37 Single day / Users / All flags / Daily
+  shared: f
+  range_start: '2012-09-03'
+  range_week_start: ''
+  range_month_start: ''
+  range_end: '2012-09-03'
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '2012-09-03'
+  range_end_cache: '2012-09-03'
+  frequency: '6'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.351124'
+  updated_at: '2013-10-09 06:21:26.351124'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_029:
+  id: '34'
+  user_id: '1'
+  title: 12 All time / Monthly / All hour types / Hide zero rows
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.362289'
+  updated_at: '2013-10-09 06:21:26.362289'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_030:
+  id: '35'
+  user_id: '1'
+  title: 36 Single day / Users / All flags / Monthly
+  shared: f
+  range_start: '2012-09-03'
+  range_week_start: ''
+  range_month_start: ''
+  range_end: '2012-09-03'
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '2012-09-03'
+  range_end_cache: '2012-09-03'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.418079'
+  updated_at: '2013-10-09 06:21:26.418079'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_031:
+  id: '36'
+  user_id: '1'
+  title: 19 as 18, tasks sorted
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.439237'
+  updated_at: '2013-10-09 06:21:26.439237'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_032:
+  id: '37'
+  user_id: '1'
+  title: 11 All time / Monthly / All hour types
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.522842'
+  updated_at: '2013-10-09 06:21:26.522842'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_033:
+  id: '38'
+  user_id: '1'
+  title: 44 Real World 1
+  shared: t
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.532655'
+  updated_at: '2013-10-09 06:21:26.532655'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_034:
+  id: '39'
+  user_id: '1'
+  title: 27 User quarterly
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.542304'
+  updated_at: '2013-10-09 06:21:26.542304'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_035:
+  id: '40'
+  user_id: '1'
+  title: 10 All time / Overall / All hour types
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '0'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.555155'
+  updated_at: '2013-10-09 06:21:26.555155'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_036:
+  id: '41'
+  user_id: '1'
+  title: 25 as 24, both grouped, Customer 11 inactive, billable
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: billable
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.561935'
+  updated_at: '2013-10-09 06:21:26.561935'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_037:
+  id: '42'
+  user_id: '3'
+  title: TU3 Real World 2
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2013_3'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_3'
+  range_start_cache: '2013-03-01'
+  range_end_cache: '2013-03-31'
+  frequency: '5'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.579311'
+  updated_at: '2013-10-09 06:21:26.579311'
+  range_one_month: 
+  range_one_week: 
+  user_details: f
+  lock_version: '0'
+saved_reports_038:
+  id: '43'
+  user_id: '1'
+  title: 07 All time / Daily / Totals only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '6'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.588911'
+  updated_at: '2013-10-09 06:21:26.588911'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_039:
+  id: '44'
+  user_id: '1'
+  title: 14 All time / Monthly / All hour types / Hide zero all
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.595285'
+  updated_at: '2013-10-09 06:21:26.595285'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_040:
+  id: '45'
+  user_id: '1'
+  title: 17 as 14, customers sorted
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.603267'
+  updated_at: '2013-10-09 06:21:26.603267'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_041:
+  id: '46'
+  user_id: '1'
+  title: 32 as 30, customer 11 inactive only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.612199'
+  updated_at: '2013-10-09 06:21:26.612199'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_042:
+  id: '47'
+  user_id: '4'
+  title: TU4 Shared
+  shared: t
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2013_3'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_4'
+  range_start_cache: '2013-03-01'
+  range_end_cache: '2013-04-30'
+  frequency: '6'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: t
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.637229'
+  updated_at: '2013-10-09 06:21:26.637229'
+  range_one_month: 
+  range_one_week: 
+  user_details: f
+  lock_version: '0'
+saved_reports_043:
+  id: '48'
+  user_id: '1'
+  title: 13 All time / Monthly / All hour types / Hide zero cols
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: f
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.644731'
+  updated_at: '2013-10-09 06:21:26.644731'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_044:
+  id: '49'
+  user_id: '1'
+  title: 16 All time / Monthly / All types, zeros hidden / Not billable
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: non_billable
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.651471'
+  updated_at: '2013-10-09 06:21:26.651471'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_045:
+  id: '50'
+  user_id: '1'
+  title: 23 as 21, both grouped, Customer 1 active only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: created_at
+  project_sort_field: created_at
+  task_sort_field: title
+  task_grouping: both
+  created_at: '2013-10-09 06:21:26.658226'
+  updated_at: '2013-10-09 06:21:26.658226'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_046:
+  id: '30'
+  user_id: '5'
+  title: TU5 Real World 1
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2013_1'
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '2013-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: created_at
+  task_sort_field: created_at
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.309999'
+  updated_at: '2013-10-09 06:40:24.535688'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_047:
+  id: '13'
+  user_id: '5'
+  title: TU5 Real World 2
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '5'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.116573'
+  updated_at: '2013-10-09 06:40:27.823662'
+  range_one_month: 
+  range_one_week: 
+  user_details: f
+  lock_version: '0'
+saved_reports_048:
+  id: '10'
+  user_id: '6'
+  title: TU6 Real World 1
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '5'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.090583'
+  updated_at: '2013-10-09 06:40:38.543186'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_049:
+  id: '18'
+  user_id: '6'
+  title: TU6 Real World 2
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '4'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.166346'
+  updated_at: '2013-10-09 06:40:41.223222'
+  range_one_month: 
+  range_one_week: 
+  user_details: f
+  lock_version: '0'
+saved_reports_050:
+  id: '51'
+  user_id: '1'
+  title: 35 Single day / Users / All flags / Totals
+  shared: f
+  range_start: '2012-09-03'
+  range_week_start: ''
+  range_month_start: ''
+  range_end: '2012-09-03'
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '2012-09-03'
+  range_end_cache: '2012-09-03'
+  frequency: '0'
+  task_filter: all
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.671446'
+  updated_at: '2013-10-09 06:21:26.671446'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_051:
+  id: '52'
+  user_id: '1'
+  title: 01 All time / Overall / Totals only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '0'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.682826'
+  updated_at: '2013-10-09 06:21:26.682826'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_052:
+  id: '53'
+  user_id: '1'
+  title: 34 as 33, non billable
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '3'
+  task_filter: non_billable
+  include_totals: t
+  include_committed: t
+  include_not_committed: t
+  exclude_zero_rows: t
+  exclude_zero_cols: t
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.689833'
+  updated_at: '2013-10-09 06:21:26.689833'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: t
+  lock_version: '0'
+saved_reports_053:
+  id: '54'
+  user_id: '1'
+  title: 09 All time / Overall / Not committed only
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: ''
+  range_end: 
+  range_week_end: ''
+  range_month_end: ''
+  range_start_cache: '4000-01-01'
+  range_end_cache: '4000-01-01'
+  frequency: '0'
+  task_filter: all
+  include_totals: f
+  include_committed: f
+  include_not_committed: t
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.721305'
+  updated_at: '2013-10-09 06:21:26.721305'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'
+saved_reports_054:
+  id: '9'
+  user_id: '4'
+  title: TU4 Not Shared
+  shared: f
+  range_start: 
+  range_week_start: ''
+  range_month_start: '2013_4'
+  range_end: 
+  range_week_end: ''
+  range_month_end: '2013_6'
+  range_start_cache: '2013-04-01'
+  range_end_cache: '2013-06-30'
+  frequency: '6'
+  task_filter: all
+  include_totals: t
+  include_committed: f
+  include_not_committed: f
+  exclude_zero_rows: f
+  exclude_zero_cols: f
+  customer_sort_field: title
+  project_sort_field: title
+  task_sort_field: code
+  task_grouping: default
+  created_at: '2013-10-09 06:21:26.074456'
+  updated_at: '2013-10-09 06:40:14.166425'
+  range_one_month: ''
+  range_one_week: ''
+  user_details: f
+  lock_version: '0'

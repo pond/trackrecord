@@ -300,26 +300,6 @@ along with their own Calculator interface for overall totals.</p>
     
 
     
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
-
-      
-      <div id="attribute-i-sectionable_tasks" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">sectionable_tasks</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-    </section><!-- attribute-method-details -->
-    
 
     <!-- Methods -->
     
@@ -345,7 +325,7 @@ for Groups.</p>
 
           
           <div class="method-source-code" id="each_group-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 296</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 290</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each_group</span>
   <span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">group</span> <span class="ruby-operator">|</span>
     <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">group</span> )
@@ -381,7 +361,7 @@ for deterministic ordering.</p>
 
           
           <div class="method-source-code" id="each_section-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 288</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 282</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each_section</span>
   <span class="ruby-ivar">@sections</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">section</span> <span class="ruby-operator">|</span>
     <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">section</span> )
@@ -418,7 +398,7 @@ new <a href="Group.html">Group</a> if true.</p>
 
           
           <div class="method-source-code" id="each_task-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 276</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each_task</span>
   <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">section</span>, <span class="ruby-identifier">is_new_section</span>, <span class="ruby-identifier">group</span>, <span class="ruby-identifier">is_new_group</span> = <span class="ruby-identifier">retrieve</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> )
@@ -452,7 +432,7 @@ specified as a task ID in string form.</p>
 
           
           <div class="method-source-code" id="group-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 242</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 236</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">group</span>( <span class="ruby-identifier">task_id_str</span> )
   <span class="ruby-ivar">@task_to_group_map</span>[ <span class="ruby-identifier">task_id_str</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -496,13 +476,8 @@ as, and must call module method “initialize_section()”.</p>
 
           
           <div class="method-source-code" id="initialize_sections-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 154</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_sections</span>( <span class="ruby-identifier">tasks</span>, <span class="ruby-identifier">optionalClass</span> = <span class="ruby-constant">Section</span> )
-
-  <span class="ruby-comment"># Take care not to cause this to get reordered; it may be a</span>
-  <span class="ruby-comment"># sorted ActiveRecord::Relation.</span>
-
-  <span class="ruby-ivar">@sectionable_tasks</span> = <span class="ruby-identifier">tasks</span> <span class="ruby-operator">||</span> []
 
   <span class="ruby-comment"># Create new Section objects and a map between task IDs and</span>
   <span class="ruby-comment"># those objects, so we can get to them quickly.</span>
@@ -605,10 +580,8 @@ will, after calling here, return the new tasks list, not the original.</p>
 
           
           <div class="method-source-code" id="reassess_start_flags_using-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 315</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 309</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reassess_start_flags_using</span>( <span class="ruby-identifier">tasks</span> )
-  <span class="ruby-ivar">@sectionable_tasks</span> = <span class="ruby-identifier">tasks</span> <span class="ruby-operator">||</span> []
-
   <span class="ruby-identifier">previous_section</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">previous_group</span>   = <span class="ruby-keyword">nil</span>
 
@@ -657,7 +630,7 @@ new <a href="Group.html">Group</a> if true.</p>
 
           
           <div class="method-source-code" id="retrieve-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 261</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 255</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">retrieve</span>( <span class="ruby-identifier">task_id_str</span> )
   [
     <span class="ruby-ivar">@task_to_section_map</span>[ <span class="ruby-identifier">task_id_str</span> ],
@@ -693,7 +666,7 @@ task, specified as a task ID in string form.</p>
 
           
           <div class="method-source-code" id="section-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 228</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">section</span>( <span class="ruby-identifier">task_id_str</span> )
   <span class="ruby-ivar">@task_to_section_map</span>[ <span class="ruby-identifier">task_id_str</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -724,7 +697,7 @@ starts a new <a href="Group.html">Group</a>.</p>
 
           
           <div class="method-source-code" id="starts_new_group-3F-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 249</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">starts_new_group?</span>( <span class="ruby-identifier">task_id_str</span> )
   <span class="ruby-ivar">@task_starts_group</span>[ <span class="ruby-identifier">task_id_str</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -755,7 +728,7 @@ starts a new <a href="Section.html">Section</a>.</p>
 
           
           <div class="method-source-code" id="starts_new_section-3F-source">
-            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 235</span>
+            <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 229</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">starts_new_section?</span>( <span class="ruby-identifier">task_id_str</span> )
   <span class="ruby-ivar">@task_starts_section</span>[ <span class="ruby-identifier">task_id_str</span> ]
 <span class="ruby-keyword">end</span></pre>

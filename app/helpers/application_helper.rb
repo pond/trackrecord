@@ -589,6 +589,15 @@ module ApplicationHelper
   def apphelp_list_row( structure, item, actions_method, with_reports = false )
     output = "        <tr class=\"#{ cycle( 'even', 'odd' ) }\">\n"
 
+    # It's assumed that admins can always modify things, but otherwise,
+    # we will only allow in-place editors if the model instance can tell
+    # us that editing is allowed by the current user.
+
+    can_edit = @current_user.admin? || (
+                 item.respond_to?( :can_be_modified_by? ) &&
+                 item.can_be_modified_by?( @current_user )
+               )
+
     # Handle the item columns first
 
     structure.each_index do | index |
@@ -610,18 +619,17 @@ module ApplicationHelper
         output << send( helper, item )
       else
 
-        # Restricted users can only edit their own account. Since they are not
-        # allowed to list other users on the system, the list view is disabled
-        # for them, so there can never be in-place editors in that case. For
-        # any other object type, restricted users have no edit permission. The
-        # result? Disable all in-place editors for restricted users.
-
-        in_place = entry[ :value_in_place ] && @current_user.privileged?
+        in_place = entry[ :value_in_place ] && can_edit
 
         if ( in_place )
           output << safe_in_place_editor_field( item, method )
         else
-          output << h( item.send( method ) )
+          value   = item.send( method )
+          safestr = ( value === true or value === false ) ?
+                                 apphelp_boolean( value ) :
+                                               h( value )
+
+          output << safestr
         end
       end
 

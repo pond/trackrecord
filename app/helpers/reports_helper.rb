@@ -405,28 +405,36 @@ module ReportsHelper
   # Return appropriate list view actions for the given report
 
   def reporthelp_actions( report )
-    if ( @current_user.admin? || report.user_id == @current_user.id )
-      return [
-        {
-          :title => :delete,
-          :url   => delete_user_saved_report_path( :user_id => report.user_id, :id => "%s" )
-        },
-        {
-          :title => :edit,
-          :url   => edit_user_saved_report_path( :user_id => report.user_id, :id => "%s" )
-        },
-        {
-          :title => :copy,
-          :url   => user_saved_report_copy_path( :user_id => report.user_id, :saved_report_id => "%s" )
-        },
-        {
-          :title => :show,
-          :url   => user_saved_report_path( :user_id => report.user_id, :id => "%s" )
-        },
-      ]
-    else
-      return []
-    end
+    actions = []
+
+    # All links are generated with the *current* user's ID, because the
+    # security mechanism is based around "can <this> user do the action
+    # to <this other> report", where "<this>" comes from the user ID in
+    # the URL. See SavedReportsBaseController.
+
+    actions += [
+      {
+        :title => :delete,
+        :url   => delete_user_saved_report_path( :user_id => @current_user.id, :id => "%s" )
+      },
+      {
+        :title => :edit,
+        :url   => edit_user_saved_report_path( :user_id => @current_user.id, :id => "%s" )
+      }
+    ] if report.can_be_modified_by?( @current_user )
+
+    actions += [
+      {
+        :title => :copy,
+        :url   => user_saved_report_copy_path( :user_id => @current_user.id, :saved_report_id => "%s" )
+      },
+      {
+        :title => :show,
+        :url   => user_saved_report_path( :user_id => @current_user.id, :id => "%s" )
+      }
+    ] if report.is_permitted_for?( @current_user )
+
+    return actions
   end
 
   # Return an input element and label as part of a form used to export

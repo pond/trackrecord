@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718235640) do
+ActiveRecord::Schema.define(:version => 20131011010129) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "customer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "preferences"
   end
 
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.string   "title",                          :null => false
     t.string   "code"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lock_version", :default => 0
   end
 
@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.string   "title",                          :null => false
     t.string   "code"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lock_version", :default => 0
   end
 
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.string   "range_one_month",       :limit => 7
     t.string   "range_one_week",        :limit => 7
     t.boolean  "user_details"
+    t.integer  "lock_version",                         :default => 0
   end
 
   add_index "saved_reports", ["user_id"], :name => "index_saved_reports_on_user_id"
@@ -150,8 +151,8 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.string   "code"
     t.text     "description"
     t.decimal  "duration",                       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lock_version", :default => 0
     t.boolean  "billable",     :default => true
   end
@@ -167,8 +168,8 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
   create_table "timesheet_rows", :force => true do |t|
     t.integer  "timesheet_id", :null => false
     t.integer  "task_id",      :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "position"
   end
 
@@ -179,8 +180,8 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.text     "description"
     t.boolean  "committed",                     :default => false, :null => false
     t.datetime "committed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.integer  "lock_version",                  :default => 0
     t.datetime "start_day_cache"
     t.string   "auto_sort",       :limit => 16
@@ -194,8 +195,8 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.string   "user_type",                        :null => false
     t.boolean  "active",         :default => true, :null => false
     t.datetime "last_committed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "lock_version",   :default => 0
   end
 
@@ -203,10 +204,9 @@ ActiveRecord::Schema.define(:version => 20130718235640) do
     t.integer  "timesheet_row_id", :null => false
     t.integer  "day_number",       :null => false
     t.decimal  "worked_hours",     :null => false
-    t.text     "description"
-    t.datetime "date",             :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.date     "date",             :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
 end

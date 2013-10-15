@@ -10,6 +10,25 @@
 
 class SavedReportsController < SavedReportsBaseController
 
+  # In place editing and security - note also filters present in the
+  # SavedReportsBaseController superclass.
+
+  safe_in_place_edit_for( :saved_report, :title  )
+  safe_in_place_edit_for( :saved_report, :shared )
+
+  before_filter(
+    :can_be_modified?,
+    :only =>
+    [
+      :edit,
+      :update,
+      :delete,
+      :destroy,
+      :set_saved_report_title,
+      :set_saved_report_shared
+    ]
+  )
+
   uses_prototype( :only => :index )
   uses_leightbox()
   uses_yui_tree(
@@ -38,6 +57,11 @@ class SavedReportsController < SavedReportsBaseController
 
      user_sql = "WHERE ( users.id  = :user_id )\n"
     other_sql = "WHERE ( users.id != :user_id )\n"
+
+    if ( @current_user.restricted? )
+      other_sql << "AND ( shared = :shared_flag )\n"
+      vars[ :shared_flag ] = true
+    end
 
     range_sql, range_start, range_end = appctrl_search_range_sql( SavedReport )
 
@@ -92,24 +116,24 @@ class SavedReportsController < SavedReportsBaseController
     # the concept of "current controller" etc. in the view (we end up
     # wanting to render the SavedReportsController edit view anyway).
 
-    @saved_report = nil
+    @record = nil
 
     if ( params.has_key?( :saved_report_id ) )
       found_report = SavedReport.find_by_id( params[ :saved_report_id ] ) # No exception raised if record is not found
 
       unless ( found_report.nil? )
-        @saved_report                  = found_report.dup
-        @saved_report.active_tasks     = found_report.active_tasks
-        @saved_report.inactive_tasks   = found_report.inactive_tasks
-        @saved_report.reportable_users = found_report.reportable_users
+        @record                  = found_report.dup
+        @record.active_tasks     = found_report.active_tasks
+        @record.inactive_tasks   = found_report.inactive_tasks
+        @record.reportable_users = found_report.reportable_users
 
-        @saved_report.title << " (copy)"
+        @record.title << " (copy)"
       end
     end
 
-    if ( @saved_report.nil? )
-      @saved_report      = SavedReport.new
-      @saved_report.user = @user
+    if ( @record.nil? )
+      @record      = SavedReport.new
+      @record.user = @user
     end
 
     @user_array = @current_user.restricted? ? [ @current_user ] : User.active
@@ -134,21 +158,21 @@ class SavedReportsController < SavedReportsBaseController
   # Edit an existing report.
   #
   def edit
-    @saved_report = SavedReport.find( params[ :id ] )
-    @user_array   = @current_user.restricted? ? [ @current_user ] : User.active
+    @user_array = @current_user.restricted? ? [ @current_user ] : User.active
   end
 
-  # Commit changes to an existing report.
+  # Commit changes to an existing report. Note that some security actions,
+  # e.g. making sure the list of allowed reportable users is valid or the
+  # list of tasks is only that the current user can see, are enforced down
+  # in the report generator. If someone hacks a view, it won't help them.
   #
   def update
-    saved_report = SavedReport.find( params[ :id ] )
-
     appctrl_patch_params_from_js( :saved_report, :active_task_ids   )
     appctrl_patch_params_from_js( :saved_report, :inactive_task_ids )
 
-    if ( saved_report.update_attributes( params[ :saved_report ] ) )
+    if ( @record.update_attributes( params[ :saved_report ] ) )
       flash[ :notice ] = "Report details updated."
-      redirect_to( report_path( saved_report ) )
+      redirect_to( report_path( @record ) )
     else
       render( :action => :edit )
     end
@@ -157,18 +181,34 @@ class SavedReportsController < SavedReportsBaseController
   # For showing reports, just redirect to the dedicated controller for that.
   #
   def show
-    saved_report = SavedReport.find( params[ :id ] )
-    redirect_to( report_path( saved_report ) )
+    saved_report = SavedReport.find_by_id( params[ :id ] )
+
+    if ( saved_report.is_permitted_for?( @current_user ) )
+      redirect_to( report_path( saved_report ) )
+    else
+      appctrl_not_permitted()
+    end
   end
 
-  # Confirm deletion of and actually delete a saved report.
+  # Confirm deletion of a saved report.
   #
   def delete
-    appctrl_delete( 'SavedReport' )
+    # All work done via before_filters.
   end
 
+  # Actually delete a saved report.
+  #
   def destroy
     appctrl_destroy( SavedReport, user_saved_reports_path( @user ) )
   end
 
+private
+
+  # before_filter action - can the item in the params hash be modified by
+  # the current user?
+  #
+  def can_be_modified?
+    @record = SavedReport.find_by_id( params[ :id ] )
+    return appctrl_not_permitted() unless @record.can_be_modified_by?( @current_user )
+  end
 end

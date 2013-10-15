@@ -46,115 +46,6 @@ class WorkPacket < ActiveRecord::Base
 
   before_save( :set_date )
 
-  # Find work packets in rows related to the given task ID, held in timesheets
-  # owned by the given user ID, between the Dates in the given range. The range
-  # MUST be inclusive, for reasons discussed below. The results are sorted by
-  # work packet date, descending.
-  #
-  # The task and user IDs are optional. All tasks and/or users will be
-  # included in the count if the given task and/or user ID is nil. The date
-  # range is mandatory.
-  #
-  # Returns an ActiveRecord::Relation instance.
-  #
-  # IMPORTANT - at the time of writing, Rails 2.1 (and earlier versions) will
-  # build a BETWEEN statement in SQL with the given range. Although SQL says
-  # that the values on either side of BETWEEN should be treated as inclusive,
-  # i.e. a Ruby "a..b" kind of range, some databases may treat the right side
-  # as exclusive; PostgreSQL is fine, but if in doubt you need to go to the
-  # Rails console and run a test. For example, issue something like this:
-  #
-  #   User.all.collect { |x| x.id }.sort
-  #
-  # Note any two consecutive IDs listed - e.g. "[1, 2, ...]" - 1 and 2 will do.
-  # Use these as part of range conditions for a find:
-  #
-  #   User.find(:all, :conditions => { :id => 1..2 } )
-  #
-  # Assuming you actually *have* users with IDs 1 and 2, then both should be
-  # returned. If you only get one, BETWEEN isn't working and you need to use
-  # another database or change the function below to do something else (e.g.
-  # hard-code a condition using ">=" and "<=" if your database supports those
-  # operators).
-  #
-  # A final twist is that Rails' "to_s( :db )" operator assumes all ranges are
-  # inclusive and generates SQL accordingly. There's a ticket for this in the
-  # case of dates:
-  #
-  #   http://dev.rubyonrails.org/ticket/8549
-  #
-  # ...but actually Rails seems to do this for any kind of range - e.g. change
-  # the "1..2" to "1...2" in the User find above and note that the generated
-  # SQL is the same. We'd expect it to only look for a user with id '1' (or
-  # between 1 and 1) in this case.
-  #
-  # As a result, ensure you only ever pass inclusive ranges to this function.
-  #
-  def self.find_by_task_user_and_range( range, task_id = nil, user_id = nil )
-    return WorkPacket.find_by_task_user_range_and_committed(
-      range,
-      nil,
-      task_id,
-      user_id
-    )
-  end
-
-  # As find_by_task_user_and_range, but only counts work packets belonging to
-  # committed timesheets.
-  #
-  # Returns an ActiveRecord::Relation instance.
-  #
-  def self.find_committed_by_task_user_and_range( range, task_id = nil, user_id = nil )
-    return WorkPacket.find_by_task_user_range_and_committed(
-      range,
-      true,
-      task_id,
-      user_id
-    )
-  end
-
-  # As find_by_task_user_and_range, but only counts work packets belonging to
-  # timesheets which are not committed.
-  #
-  # Returns an ActiveRecord::Relation instance.
-  #
-  def self.find_not_committed_by_task_user_and_range( range, task_id = nil, user_id = nil )
-    return WorkPacket.find_by_task_user_range_and_committed(
-      range,
-      false,
-      task_id,
-      user_id
-    )
-  end
-
-  # Support find_by_task_user_and_range, find_committed_by_task_user_and_range
-  # and find_not_committed_by_task_user_and_range. An extra mandatory second
-  # parameter must be set to 'true' to only include work packets from committed
-  # timesheets, 'false' for not committed timesheets and 'nil' for either.
-  #
-  # Returns an ActiveRecord::Relation instance.
-  #
-  def self.find_by_task_user_range_and_committed( range, committed, task_id = nil, user_id = nil )
-
-    # With Rails when joins are specified by a hash, each key's value is the
-    # next level of association. We first include the timesheet rows, a second
-    # order association, because the rows lead to tasks and timesheets. This
-    # key points to an array giving two third order things; :task and, itself
-    # a hash key, :timesheet; since it is a hash key, :timesheet's value is
-    # the second-order association of timesheets, or the fourth-order
-    # association of the work packets - :user.
-
-    joins = { :timesheet_row => [ :task, { :timesheet => :user } ] }
-    order = 'date DESC'
-
-    conditions                = { :date      => range     }
-    conditions[ :tasks      ] = { :id        => task_id   } unless task_id.nil?
-    conditions[ :users      ] = { :id        => user_id   } unless user_id.nil?
-    conditions[ :timesheets ] = { :committed => committed } unless committed.nil?
-
-    return WorkPacket.joins( joins ).where( conditions ).order( order )
-  end
-
   # Return the earliest (first by date) work packet, either across all tasks
   # (pass nothing) or for the given tasks specified as an array of task IDs.
   # The work packet may be in either a not committed or committed timesheet.
@@ -184,7 +75,6 @@ class WorkPacket < ActiveRecord::Base
       return WorkPacket.significant.joins( joins ).where( conditions ).order( order ).first
 
     end
-
   end
 
 private
@@ -196,9 +86,9 @@ private
       self.date = self.timesheet_row.timesheet.date_for(
         self.day_number,
         true # Return as a Date rather than a String
-      ).to_datetime.in_time_zone( 'UTC' ) # Rails 3 gotcha/bug; auto-conversion to TimeWithZone uses *server's local time zone* rather than UTC+0, contrary to Rails defaults elsewhere; typical result is the cache column ends up in the 'wrong day' 
+      )
     else
-      self.date = Time.current
+      self.date = Date.today
     end
   end
 

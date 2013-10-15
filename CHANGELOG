@@ -1,3 +1,36 @@
+Version 2.24, 2013-10-16
+========================
+
+Please see "README.rdoc" for vital information on installation, upgrading
+from an earlier version, database requirements and how to run the built in
+test suite that helps verify your database's suitability for TrackRecord.
+
+Version 2.24 introduces the following new features:
+
+- Easier to access report modification as requested by Issue #24,
+  requested by sarev.
+
+Version 2.24 fixes the following bugs that were found in v2.23:
+
+- The bulk timesheet commit form would raise an error under
+  certain date conditions.
+
+- An in-place title editing issue arising from an incompatibility
+  between Rails and Prototype.js 1.7's more strict adherence to
+  HTTP rules on data encoding has been worked around within the
+  Safe In Place Editor plugin. This fixes Issue #21, reported by
+  sarev (with thanks).
+
+- Saved report shared flags and copying didn't work as expected
+  for various user types; essentially the feature was only half
+  implemented. Now done properly!
+
+- In-place editors for saved report titles and share flags are
+  now supported in the index view.
+
+There are also various efficiency improvements and areas of code tidying.
+
+
 Version 2.23, 2013-09-09
 ========================
 

@@ -59,9 +59,9 @@ private
   # Run via "validate".
   #
   def task_is_active_and_permitted
-    errors.add( :base, 'Only active tasks may be included' ) unless self.task.active
+    errors.add( :base, 'Only active tasks may be included' ) unless self.task.try( :active )
 
-    if ( self.timesheet.user.restricted? )
+    if ( self.timesheet.try( :user ).try( :restricted? ) )
       errors.add( :base, 'Inclusion of this task is not permitted' ) unless self.timesheet.user.task_ids.include?( self.task.id )
     end
   end
