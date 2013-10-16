@@ -50,7 +50,7 @@ Then:
   Edit file +config/initializers/secret_token.rb+ as per the instructions in
   the file; comment out the +raise+ statement, uncomment the +secret_token+
   assignment underneath and type in or otherwise randomly generate a long
-  token string. Running command +rake+ +secret+ is a good way to do this.
+  token string. Running command <tt>rake secret</tt> is a good way to do this.
 
   <em><b>Never make your modified file public anywhere!</b></em> Keep it a
   secret always.
@@ -76,20 +76,20 @@ Then:
     No changes are necessary
 
   [SQLite 3]
-    Comment out the line "<tt>gem 'pg', '>=0.16'</tt>" and add underneath it
-    the line "<tt>gem 'sqlite3'</tt>"
+    Comment out the line <tt>gem 'pg', '>=0.16'</tt> and add underneath it
+    the line <tt>gem 'sqlite3'</tt>
 
   [Other databases]
-    Comment out the line "<tt>gem 'pg', '>=0.16'</tt>" and add underneath it
-    "+gem+" line(s) specifying whatever is needed for your chosen database;
+    Comment out the line <tt>gem 'pg', '>=0.16'</tt> and add underneath it
+    +gem+ line(s) specifying whatever is needed for your chosen database;
     you may need to do a web search to determine the required gem(s)
 
 [Make sure you have all installed gems available]
 
-  Issue the command +bundle+ +install+. This can be a bit fraught as Ruby
-  and Rails gems can be finniky things, especially database adapter gems;
-  these often need native components compiling which in turn require a
-  working native compiler and supporting files on your system. If you get
+  Issue the command <tt>bundle install</tt>. This can be a bit fraught as
+  Ruby and Rails gems can be finniky things, especially database adapter
+  gems; these often need native components compiling which in turn require
+  a working native compiler and supporting files on your system. If you get
   an error, try doing a web search for it as often the answer can be found
   there. If all else fails see http://trackrecord.pond.org.uk for contact
   details.
@@ -135,7 +135,7 @@ Then:
 [Running formal tests]
 
   To make sure your database is suitable for TrackRecord, run the tests with
-  the command "<tt>rake test</tt>". This will take a long time to complete.
+  the command <tt>rake test</tt>. This will take a long time to complete.
   No test failures are expected.
 
 [Optional configuration]
@@ -178,8 +178,8 @@ following things:
 
 [Make sure gems are up to date]
 
-  (Re-)issue command +bundle+ +install+ (then optionally, +bundle+
-  +update+).
+  (Re-)issue command <tt>bundle install</tt> (then optionally, <tt>bundle
+  update</tt>).
 
 [Make sure your databases are up to date]
 
@@ -206,7 +206,7 @@ following things:
 
   To make sure your database is still suitable for TrackRecord, it is
   advisable (though not strictly necessary) to re-run the formal tests with
-  the command "<tt>rake test</tt>". This will take a long time to complete.
+  the command <tt>rake test</tt>. This will take a long time to complete.
   No test failures are expected.
 
 
