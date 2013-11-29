@@ -1,3 +1,15 @@
+Version 2.25, 2013-11-29
+========================
+
+Please see "README.rdoc" for vital information on installation, upgrading
+from an earlier version, database requirements and how to run the built in
+test suite that helps verify your database's suitability for TrackRecord.
+
+Version 2.25 uses the new "Gemified" Safe In Place Editor code, now
+available on RubyGems. It's important to run "bundle install" if you have
+upgraded. Rails 3.2.15 is also required.
+
+
 Version 2.24, 2013-10-16
 ========================
 
