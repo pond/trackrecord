@@ -21,7 +21,7 @@
 <%   end -%>
 <% end -%>
 <% if ( action_name == 'index' ) -%>
-    <%= javascript_include_tag( 'safe_in_place_editing/safe_in_place_editing' ) %>
+    <%= javascript_include_tag( 'safe_in_place_editing' ) %>
 <% end -%>
 <% if ( controller.controller_name == 'saved_reports' || controller.controller_name == 'timesheet_force_commits' || action_name == 'index' ) -%>
 <%= raw( calendar_date_select_includes().gsub( /^/, '    ' ) ) %>

@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 # http://gembundler.com/v1.2/whats_new.html
 ruby '1.9.3'
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.15'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -39,6 +39,7 @@ gem 'prototype-rails'
 # https://github.com/mislav/will_paginate/
 # https://github.com/collectiveidea/audited
 # https://github.com/swanandp/acts_as_list
+# https://github.com/pond/safe_in_place_editing
 
 gem 'calendar_date_select',   '~> 1.6', :git => 'http://github.com/paneq/calendar_date_select'
 gem 'ruby-openid',            '~> 2.3'     
@@ -46,6 +47,7 @@ gem 'open_id_authentication', '~> 1.2'
 gem 'will_paginate',          '~> 3.0'
 gem 'audited-activerecord',   '~> 3.0'
 gem 'acts_as_list'
+gem 'safe_in_place_editing',  '~> 2.0'
 
 # If you want the charting stuff for some reason... Note that
 # this brings in awkward dependencies such as ImageMagick via
