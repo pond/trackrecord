@@ -19,6 +19,14 @@ module Trackrecord
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
+    # 2014-03-19 (ADH): In Rails 3.2.15 and earlier, an invalid locate given to
+    # I18n would result in automatic fallback to 'en'. In 3.2.16 or later this
+    # assumed behaviour would raise a warning. The line below would set a value
+    # of 'false' to explicitly request old-style behaviour with no warnings.
+    # Instead, we say 'true' to request errors if invalid locates are given.
+    #
+    config.i18n.enforce_available_locales = true
+
     # 2011-10-06 (ADH): This is a particularly stupid aspect of Rails 3. It no
     # longer auto-loads code in "lib", leaving you to either manually require
     # it with the implication that just a single file needs the module (but in

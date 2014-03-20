@@ -1,5 +1,69 @@
-Version 2.25, 2013-11-29
-========================
+= Change log
+
+== Version 2.26, 2014-03-20
+===========================
+
+Please see "README.rdoc" for vital information on installation, upgrading
+from an earlier version, database requirements and how to run the built in
+test suite that helps verify your database's suitability for TrackRecord.
+
+This release is a small update that adds a convenience feature to create
+a new first task for a project, at the same time a project is made. A
+similar extension has been added when creating customers too; a new first
+project can be made at the same time. This is intentionally a simple
+feature that only requires a task or project title and uses default
+values for the rest of the item, which you can edit later if necessary.
+
+Other maintenance related changes:
+
+- This release uses the new "Gemified" Safe In Place Editor code, now
+  available on RubyGems. You must run "bundle install" if you've upgraded
+  from an earlier release. Due to important security patches, Rails 3.2.17
+  is also required. The PG gem for PostgreSQL users needs to be at 0.17.1
+  or later. Gemfile requrements for "calendar_date_select" were inaccurate
+  and have been fixed and a general "gem update" will mean that several
+  other updated gems will be included.
+
+- Integration tests are being added using Capybara, a gem which has some
+  quite heavyweight dependencies, including Nokogiri. This may be time
+  consuming or troublesome to install when you do "bundle install" or
+  "bundle update". If you want to avoid this and either not run tests or
+  skip the integration tests, comment out the "gem 'capybara'" line in
+  the "Gemfile" file before you run "bundle install" or "bundle update".
+
+  A test mode bypass of OpenID authentication has been added for
+  integration test purposes. It's only active in test mode.
+
+  See the README.rdoc file for more information on installing Nokogiri,
+  especially if you get warnings at run-time about LibXML versions.
+
+- The ORGANISATION_NAME configuration constant has been removed; locale
+  files are now exclusively used for this, rather than half-and-half.
+
+- The layout of the confirmation view used when deleting projects has
+  been improved a little.
+
+- There was a small bug fix in the Timesheet class that might cause a
+  long running server (two years or more with no restarts) to begin to
+  reject new timesheets as out-of-year-range. A related test failed once
+  the current year rolled over to 2014; the Timesheet class computed the
+  allowed range statically at startup, taking "this year +/- 2", rather
+  than calculating it dynamically at each new timesheet save or update,
+  thus taking account of new accumulating data in the work packets.
+
+- Duplicated locale data for the Will Paginate gem has been resolved in
+  the locale files.
+
+- Documentation has been updated with better generation incorporating
+  both README.rdoc and renamed-for-GitHub doc/README_FOR_APP.rdoc in a
+  way that prevents broken links within "doc/app/index.html". This
+  also-renamed CHANGELOG.rdoc file is also included. Finally, titles are
+  now correct - no more "YOUR_TITLE" text!
+
+
+
+== Version 2.25, 2013-11-29
+===========================
 
 Please see "README.rdoc" for vital information on installation, upgrading
 from an earlier version, database requirements and how to run the built in
@@ -10,8 +74,9 @@ available on RubyGems. It's important to run "bundle install" if you have
 upgraded. Rails 3.2.15 is also required.
 
 
-Version 2.24, 2013-10-16
-========================
+
+== Version 2.24, 2013-10-16
+===========================
 
 Please see "README.rdoc" for vital information on installation, upgrading
 from an earlier version, database requirements and how to run the built in
@@ -43,8 +108,9 @@ Version 2.24 fixes the following bugs that were found in v2.23:
 There are also various efficiency improvements and areas of code tidying.
 
 
-Version 2.23, 2013-09-09
-========================
+
+== Version 2.23, 2013-09-09
+===========================
 
 Please see version 2.20's change information below for important
 notes about database requirements.
@@ -57,8 +123,9 @@ Version 2.23 fixes the following bugs that were found in v2.22:
   (the reported flag value was the opposite of that intended).
 
 
-Version 2.22, 2013-09-05
-========================
+
+== Version 2.22, 2013-09-05
+===========================
 
 Please see version 2.20's change information below for details. In
 particular, please check the database/PostgreSQL notes therein.
@@ -69,8 +136,9 @@ Version 2.22 fixes the following bugs that were found in v2.21:
   typing error ("@f" instead of just "f").
 
 
-Version 2.21, 2013-08-19
-========================
+
+== Version 2.21, 2013-08-19
+===========================
 
 Please see version 2.20's change information below for details. In
 particular, please check the database/PostgreSQL notes therein.
@@ -86,8 +154,9 @@ Version 2.21 fixes the following bugs that were found in v2.20:
   so much as an in-passing note!).
 
 
-Version 2.20, 2013-08-16
-========================
+
+== Version 2.20, 2013-08-16
+===========================
 
 Please see the version 2.11 change details later in this file for very
 important details about upgrading from an earlier version or installing
@@ -128,8 +197,9 @@ The only user-facing enhancements are the performance improvements
 described above.
 
 
-Version 2.11, 2013-08-05
-========================
+
+== Version 2.11, 2013-08-05
+===========================
 
 The procedure to upgrade from any v2.x release or to install anew is the
 same, though upgraders may already have completed some steps:
@@ -177,8 +247,9 @@ migration introduced in version 2.10 and clears up documentation to make
 installing and upgrading easier. There are no other changes or fixes.
 
 
-Version 2.10, 2013-08-02
-========================
+
+== Version 2.10, 2013-08-02
+===========================
 
 Please see the version 2.00 notes later for information about updating
 from version 1. You will need to migrate your data to upgrade from any
@@ -251,8 +322,7 @@ There are the following enhancements:
   less inside Ruby code.
 
 
-Deploying in a subdirectory
----------------------------
+=== Deploying in a subdirectory
 
 Rails asset precompilation is somewhat broken in that it doesn't understand
 applications deployed into subdirectories. If you are not using Heroku, you
@@ -275,8 +345,8 @@ the time of writing) Rails 4 is out so a Rails 3 fix is even more unlikely.
 
 
 
-Version 2.04, 2013-07-11
-========================
+== Version 2.04, 2013-07-11
+===========================
 
 Please see the version 2.00 notes later for information about updating from
 version 1. If upgrading from an earlier version 2, you will need to migrate
@@ -303,8 +373,8 @@ There are the following enhancements:
 
 
 
-Version 2.02 and 2.03, 2013-04-25
-=================================
+== Version 2.02 and 2.03, 2013-04-25
+====================================
 
 Please see the version 2.00 notes later for information about updating from
 earlier versions.
@@ -334,8 +404,8 @@ deployment, rather than with test data only:
 
 
 
-Version 2.01, 2013-04-09
-========================
+== Version 2.01, 2013-04-09
+===========================
 
 Please see the version 2.00 notes later for information about updating from
 earlier version.
@@ -357,11 +427,11 @@ This release fixes the following bugs that were found in v2.00:
 
 
 
-Version 2.00, 2013-03-27
-========================
+== Version 2.00, 2013-03-27
+===========================
 
-Important
----------
+
+=== Important
 
 TrackRecord now requires Rails 3.2. It does not run on Rails 2. As a result,
 the Ruby version requirements are increased too; you need version 1.9.3 at
@@ -377,8 +447,7 @@ used. Internet Explorer is untested and not officially supported at any
 version, though it may work in practice.
 
 
-Upgrading
----------
+=== Upgrading
 
 To upgrade, first do a full database backup in case anything goes wrong!
 Next, unpack TrackRecord somewhere new - don't copy it on top of an existing
@@ -420,8 +489,9 @@ using bundles is very rarely a pain-free process and the issues will usually
 be to do with your computing environment rather than TrackRecord's own code.
 
 
-Changes from version 1.54 (see the v1.x branch for more v1.x changes)
--------------------------
+=== Changes from version 1.54
+
+See the v1.x branch for more v1.x changes.
 
 - New major version number reflects bump to Rails 3.2 / Ruby 1.9.
   + Functionality is an evolution and refinement over TrackRecord v1.x,

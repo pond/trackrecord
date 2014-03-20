@@ -106,8 +106,8 @@ control_panels_013:
 control_panels_014:
   id: '1'
   user_id: '1'
-  project_id: '80'
-  customer_id: '23'
+  project_id: '4'
+  customer_id: '10'
   created_at: '2013-10-09 06:21:25.642667'
   updated_at: '2013-10-09 06:43:12.903759'
   preferences: ! "---\nsorting:\n  savedreport:\n    sort: 0\n    direction: asc\n

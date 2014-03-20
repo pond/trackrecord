@@ -1,4 +1,4 @@
-= Welcome to TrackRecord v2.25
+= Welcome to TrackRecord v2.26
 
 TrackRecord is a timesheet system written for the Ruby On Rails web
 development framework. More information, including a link to the most recent
@@ -11,8 +11,8 @@ for details along with:
 
 * http://www.opensource.org/licenses/bsd-license.php
 
-Technical documentation can be found by opening 'doc/app/index.html'
-in your preferred web browser.
+Detailed lists of changes in each version are in 'CHANGELOG.rdoc'. Technical
+documentation can be found via 'doc/README_FOR_APP.rdoc'.
 
 
 == Requirements, new installations and upgrades 
@@ -93,6 +93,9 @@ Then:
   an error, try doing a web search for it as often the answer can be found
   there. If all else fails see http://trackrecord.pond.org.uk for contact
   details.
+  
+  If you get warnings about something called Nokogiri and LibXML versions
+  at run-time, please see the later section about the Nokogiri gem.
 
 [Finally, set up your database]
 
@@ -137,6 +140,9 @@ Then:
   To make sure your database is suitable for TrackRecord, run the tests with
   the command <tt>rake test</tt>. This will take a long time to complete.
   No test failures are expected.
+  
+  If you get warnings about something called Nokogiri and LibXML versions
+  at run-time, please see the later section about the Nokogiri gem.
 
 [Optional configuration]
 
@@ -180,6 +186,9 @@ following things:
 
   (Re-)issue command <tt>bundle install</tt> (then optionally, <tt>bundle
   update</tt>).
+  
+  If you get warnings about something called Nokogiri and LibXML versions
+  at run-time, please see the later section about the Nokogiri gem.
 
 [Make sure your databases are up to date]
 
@@ -237,7 +246,49 @@ this that's been in Rails for at least two years, especially now that (at
 the time of writing) Rails 4 is out so a Rails 3 fix is even more unlikely.
 
 
-== Running and usage
+== Warnings from Nokogiri
+
+From version 2.25, TrackRecord's test suite uses something called Capybara
+for integration tests. This has an unavoidable but somewhat unfortunate
+reliance on Nokogiri, an XML parser. It's a capable, but very big gem that
+has a huge native extension which can take a long time to build and install.
+
+* https://github.com/jnicklas/capybara
+* http://nokogiri.org
+
+Installing Nokogiri in earlier days used to be quite a fragile process with
+a high chance of error (in my experience) but it's got a lot better since.
+If you do encounter errors, though, you'll need to search the web for help.
+
+A common run-time _warning_ however is a complaint that the LibXML version
+used for building the gem differs from that being used at run-time. I got
+this on OS X Mavericks with a _clean_ installation of the gem via +bundle+.
+Advice online included things like uninstalling and reinstalling the gem
+with simple commands that just didn't make any difference. In the end, I
+installed it with explicit pointers to the libraries it would end up using
+at run-time.
+
+    gem uninstall nokogiri     (...and answer "y" to everything)
+    gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-lib=/usr/lib/ --with-sxlt-include=/usr/include/libxslt --with-xslt-lib=/usr/lib/
+
+Yes, there really is meant to be that "<tt> -- </tt>" after +nokogiri+.
+
+You might have to adapt that for different systems; for example, on a 64-bit
+Linux, you'd probably need +/usr/lib64/+ instead of +/usr/lib+. If you don't
+need the documentation for Nokogiri installed locally - it takes ages! - then
+add <tt>--no-rdoc --no-ri</tt> just after <tt>gem install nokogiri</tt>,
+before the "<tt> -- </tt>". This does mean you'd need to go online to read
+documentation rather than being able to browse it via likes of <tt>gem
+server</tt> or the +ri+ command.
+
+You might need to repeat the above process if you upgrade your system and
+your libraries change.
+
+If this doesn't solve your warning problems, I'm afraid you'll have to start
+searching the web for clues.
+
+
+== TrackRecord Quick Start User Guide
 
 === First time setup
 

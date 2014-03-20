@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class Project - YOUR_TITLE</title>
+<title>class Project - TrackRecord</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -87,7 +87,11 @@
 
   <ul>
   
-    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+    <li class="file"><a href="./CHANGELOG_rdoc.html">CHANGELOG</a>
+  
+    <li class="file"><a href="./README_rdoc.html">README</a>
+  
+    <li class="file"><a href="./doc/README_FOR_APP_rdoc.html">README_FOR_APP</a>
   
   </ul>
 </nav>
@@ -145,17 +149,15 @@
   
     <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
   
-    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
-  
-    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
-  
-    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSVAsDays.html">TrackRecordReportGenerator::UkOrgPondCSVAsDays</a>
-  
     <li><a href="./YuiTree.html">YuiTree</a>
   
     <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
   
     <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
   
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
@@ -342,7 +344,7 @@ control panel data, if available.</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/project.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/models/project.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">super</span>( <span class="ruby-identifier">params</span> )
 
@@ -390,7 +392,7 @@ defaults to ‘true’.</p>
 
           
           <div class="method-source-code" id="destroy_with_side_effects-source">
-            <pre><span class="ruby-comment"># File app/models/project.rb, line 90</span>
+            <pre><span class="ruby-comment"># File app/models/project.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy_with_side_effects</span>( <span class="ruby-identifier">destroy_tasks</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">destroy_tasks</span> )
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
@@ -433,7 +435,7 @@ else ‘false’. If omitted, defaults to ‘true’.</p>
 
           
           <div class="method-source-code" id="update_with_side_effects-21-source">
-            <pre><span class="ruby-comment"># File app/models/project.rb, line 73</span>
+            <pre><span class="ruby-comment"># File app/models/project.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_with_side_effects!</span>( <span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">update_tasks</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-identifier">active</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes!</span>( <span class="ruby-identifier">attrs</span> )

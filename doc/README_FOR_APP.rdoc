@@ -1,4 +1,4 @@
-= Welcome to the TrackRecord API documentation
+= TrackRecord API documentation
 
 This file is part of a set of automatically built documentation in HTML
 format. If you are reading it in a text editor, you should instead look at

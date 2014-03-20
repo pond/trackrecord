@@ -58,7 +58,7 @@ class SessionsController < ApplicationController
         session[ :javascript ] = params[ :javascript ]
       end
 
-      open_id_authentication()
+      open_id_authentication( identity_url )
     end
 
   rescue => error
@@ -85,60 +85,73 @@ class SessionsController < ApplicationController
 
 protected
 
-  def open_id_authentication()
+  def open_id_authentication( identity_url_for_test_mode )
 
-    authenticate_with_open_id do | result, identity_url |
-      identity_url = User.rationalise_id( identity_url )
+    if ( Rails.env == "test" )
 
-      if result.successful?
+      # In test mode, bypass OpenID authentication redirections
+      # since we're not interested in testing third party sites.
+      # Assume sign-in was successful. Manual testing is needed
+      # for "real" working/failed OpenID login.
 
-        # The OpenID sign in went OK. If we can find an active user
-        # with that ID, sign in is complete. If there's an inactive
-        # user, complain. Otherwise, create a new user account - if
-        # this is the first user, any OpenID will do; else it must
-        # be in the permitted list.
+      process_successful_sign_in_for(
+        User.rationalise_id( identity_url_for_test_mode )
+      )
 
-        if ( @current_user = User.active.find_by_identity_url( identity_url ) )
-          successful_login()
+    else
 
-        elsif ( User.inactive.find_by_identity_url( identity_url ) )
-          failed_login( "The account for OpenID '#{ identity_url }' has been deactivated. Please contact your system administrator for assistance." )
+      authenticate_with_open_id do | result, identity_url |
+        identity_url = User.rationalise_id( identity_url )
 
+        if result.successful?
+          process_successful_sign_in_for( identity_url )
         else
-          # Handle very first login auto-creation of the admin account
-
-          if ( User.count.zero? )
-
-            # Do this here because redirecting to the User controller
-            # would require an exposed URL that could be used to try
-            # and create users without OpenID authentication.
-
-            @current_user              = User.new
-            @current_user.identity_url = identity_url
-            @current_user.user_type    = User::USER_TYPE_ADMIN
-            @current_user.save!
-
-            new_login()
-
-          else
-
-            # The identity URL does not match any existing user and the
-            # administrator account already exists.
-
-            failed_login( "Sorry, OpenID '#{ identity_url }' is not permitted to use this service. Please contact your system administrator for assistance.")
-
-          end
+          failed_login( result.message )
         end
-
-      else
-        # The OpenID login attempt failed.
-        failed_login( result.message )
-
       end
+
     end
   end
 
 private
+
+  def process_successful_sign_in_for( identity_url )
+
+    # The OpenID sign in went OK. If we can find an active user
+    # with that ID, sign in is complete. If there's an inactive
+    # user, complain. Otherwise, create a new user account - if
+    # this is the first user, any OpenID will do; else it must
+    # be in the permitted list.
+
+    if ( @current_user = User.active.find_by_identity_url( identity_url ) )
+      successful_login()
+
+    elsif ( User.inactive.find_by_identity_url( identity_url ) )
+      failed_login( "The account for OpenID '#{ identity_url }' has been deactivated. Please contact your system administrator for assistance." )
+
+    elsif ( User.count.zero? )
+
+      # Handle very first login auto-creation of the admin account.
+      # Do this here because redirecting to the User controller
+      # would require an exposed URL that could be used to try and
+      # create users without OpenID authentication.
+
+      @current_user              = User.new
+      @current_user.identity_url = identity_url
+      @current_user.user_type    = User::USER_TYPE_ADMIN
+      @current_user.save!
+
+      new_login()
+
+    else
+
+      # The identity URL does not match any existing user and the
+      # administrator account already exists.
+
+      failed_login( "Sorry, OpenID '#{ identity_url }' is not permitted to use this service. Please contact your system administrator for assistance.")
+
+    end
+  end
 
   def successful_login
     flash[ :notice ] = 'Signed in successfully.'

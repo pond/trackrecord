@@ -17,9 +17,8 @@
       <td><%= f.text_area( :description, { :cols => 40, :rows => 4 } ) %></td>
     </tr>
 
-
-<% if ( action_name == 'edit' or action_name == 'update' ) -%>
     <tr class="editing_row">
+<% if ( action_name == 'edit' or action_name == 'update' ) -%>
       <th>Active?</th>
       <td>
 <%= f.select( :active, [ [ 'Active', true ], [ 'Inactive', false ] ] ) %>
@@ -55,8 +54,34 @@
           again. Only an administrator can make something active again.
         </p>
       </td>
+<% 
+   else # action is "new"/"create" rather than "edit"/"update"
+-%>
+      <th>Auto-create first project?</th>
+      <td>
+<%      if @record.projects.empty?
+
+          # Where here and not in the controller? It keeps this code, the
+          # associated form hidden fields and the text explaining the nature
+          # of the new project all within one place, easing maintenance.
+
+          project = Project.new
+          @record.projects << project
+        end -%>
+<%=     f.fields_for( :projects ) do | project_fields | -%>
+        <%= project_fields.text_field( :title ) %>
+        <%= project_fields.hidden_field( :code ) %>
+        <%= project_fields.hidden_field( :active ) %>
+<%      end -%>
+        <p>
+          If you provide a name above, a simple initial project will be created alongside
+          the customer.<br />
+        </p>
+      </td>
+<%
+   end # Different output for "new"/"create" vs "edit"/"update"
+-%>
     </tr>
-<% end -%>
   </table>
 
   <p>

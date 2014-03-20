@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class SessionsController - YOUR_TITLE</title>
+<title>class SessionsController - TrackRecord</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -91,7 +91,11 @@
 
   <ul>
   
-    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+    <li class="file"><a href="./CHANGELOG_rdoc.html">CHANGELOG</a>
+  
+    <li class="file"><a href="./README_rdoc.html">README</a>
+  
+    <li class="file"><a href="./doc/README_FOR_APP_rdoc.html">README_FOR_APP</a>
   
   </ul>
 </nav>
@@ -149,17 +153,15 @@
   
     <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
   
-    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
-  
-    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
-  
-    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSVAsDays.html">TrackRecordReportGenerator::UkOrgPondCSVAsDays</a>
-  
     <li><a href="./YuiTree.html">YuiTree</a>
   
     <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
   
     <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
   
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
@@ -345,7 +347,7 @@ completed a sign-in attempt, successfully or otherwise.</p>
       <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:javascript</span> ]
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">open_id_authentication</span>()
+    <span class="ruby-identifier">open_id_authentication</span>( <span class="ruby-identifier">identity_url</span> )
   <span class="ruby-keyword">end</span>
 
 <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
@@ -488,7 +490,7 @@ everything clean and means that any real attempted attacks would fail.</p>
         
         <div class="method-heading">
           <span class="method-name">open_id_authentication</span><span
-            class="method-args">()</span>
+            class="method-args">( identity_url_for_test_mode )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -501,56 +503,31 @@ everything clean and means that any real attempted attacks would fail.</p>
           
           <div class="method-source-code" id="open_id_authentication-source">
             <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_id_authentication</span>()
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open_id_authentication</span>( <span class="ruby-identifier">identity_url_for_test_mode</span> )
 
-  <span class="ruby-identifier">authenticate_with_open_id</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">identity_url</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;test&quot;</span> )
 
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">successful?</span>
+    <span class="ruby-comment"># In test mode, bypass OpenID authentication redirections</span>
+    <span class="ruby-comment"># since we're not interested in testing third party sites.</span>
+    <span class="ruby-comment"># Assume sign-in was successful. Manual testing is needed</span>
+    <span class="ruby-comment"># for &quot;real&quot; working/failed OpenID login.</span>
 
-      <span class="ruby-comment"># The OpenID sign in went OK. If we can find an active user</span>
-      <span class="ruby-comment"># with that ID, sign in is complete. If there's an inactive</span>
-      <span class="ruby-comment"># user, complain. Otherwise, create a new user account - if</span>
-      <span class="ruby-comment"># this is the first user, any OpenID will do; else it must</span>
-      <span class="ruby-comment"># be in the permitted list.</span>
+    <span class="ruby-identifier">process_successful_sign_in_for</span>(
+      <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url_for_test_mode</span> )
+    )
 
-      <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">find_by_identity_url</span>( <span class="ruby-identifier">identity_url</span> ) )
-        <span class="ruby-identifier">successful_login</span>()
+  <span class="ruby-keyword">else</span>
 
-      <span class="ruby-keyword">elsif</span> ( <span class="ruby-constant">User</span>.<span class="ruby-identifier">inactive</span>.<span class="ruby-identifier">find_by_identity_url</span>( <span class="ruby-identifier">identity_url</span> ) )
-        <span class="ruby-identifier">failed_login</span>( <span class="ruby-node">&quot;The account for OpenID '#{ identity_url }' has been deactivated. Please contact your system administrator for assistance.&quot;</span> )
+    <span class="ruby-identifier">authenticate_with_open_id</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">identity_url</span> <span class="ruby-operator">|</span>
+      <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
 
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">successful?</span>
+        <span class="ruby-identifier">process_successful_sign_in_for</span>( <span class="ruby-identifier">identity_url</span> )
       <span class="ruby-keyword">else</span>
-        <span class="ruby-comment"># Handle very first login auto-creation of the admin account</span>
-
-        <span class="ruby-keyword">if</span> ( <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
-
-          <span class="ruby-comment"># Do this here because redirecting to the User controller</span>
-          <span class="ruby-comment"># would require an exposed URL that could be used to try</span>
-          <span class="ruby-comment"># and create users without OpenID authentication.</span>
-
-          <span class="ruby-ivar">@current_user</span>              = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
-          <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">identity_url</span> = <span class="ruby-identifier">identity_url</span>
-          <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">user_type</span>    = <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span>
-          <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">save!</span>
-
-          <span class="ruby-identifier">new_login</span>()
-
-        <span class="ruby-keyword">else</span>
-
-          <span class="ruby-comment"># The identity URL does not match any existing user and the</span>
-          <span class="ruby-comment"># administrator account already exists.</span>
-
-          <span class="ruby-identifier">failed_login</span>( <span class="ruby-node">&quot;Sorry, OpenID '#{ identity_url }' is not permitted to use this service. Please contact your system administrator for assistance.&quot;</span>)
-
-        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">failed_login</span>( <span class="ruby-identifier">result</span>.<span class="ruby-identifier">message</span> )
       <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-comment"># The OpenID login attempt failed.</span>
-      <span class="ruby-identifier">failed_login</span>( <span class="ruby-identifier">result</span>.<span class="ruby-identifier">message</span> )
-
     <span class="ruby-keyword">end</span>
+
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- open_id_authentication-source -->

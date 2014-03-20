@@ -91,8 +91,8 @@ class Timesheet < ActiveRecord::Base
 
   validates_inclusion_of(
     :year,
-    :in => allowed_range(),
-    :message => "must lie between #{ allowed_range().first } and #{ allowed_range().last }"
+    :in => ->( record ) { record.class.allowed_range() },
+    :message => "must lie between allowed range determined by work packets for active tasks, or the current year if there are none, +/- 2 years"
   )
 
   validates_inclusion_of(

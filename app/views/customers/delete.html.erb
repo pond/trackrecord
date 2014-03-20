@@ -12,15 +12,25 @@
 
   <br style="clear: both" /><br />
 
-  <%= f.submit( 'Delete customer', { :disable_with => 'Deleting...' } ) %>
-  <%= label_tag :destroy_projects do %>
-    <%= check_box_tag( 'destroy_projects' ) %>
-    Delete associated projects too?
-  <% end %>
-  <%= label_tag :destroy_tasks do %>
-    <%= check_box_tag( 'destroy_tasks' ) %>
-    If deleting projects, delete the tasks associated with those projects too?
-  <% end %>
+  <table class="for_layout">
+    <tr>
+      <td>
+        <%= f.submit( 'Delete customer', { :disable_with => 'Deleting...' } ) %>
+        &nbsp;
+      </td>
+      <td>  
+        <%= label_tag :destroy_projects do %>
+          <%= check_box_tag( 'destroy_projects' ) %>
+          Delete associated projects too?
+        <% end %>
+        <br />
+        <%= label_tag :destroy_tasks do %>
+          <%= check_box_tag( 'destroy_tasks' ) %>
+          If deleting projects, also delete all associated tasks?
+        <% end %>
+      </td>
+    </tr>
+  </table>
 <% end %>
 
 <p>

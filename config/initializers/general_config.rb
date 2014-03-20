@@ -6,13 +6,9 @@
 # ----------------------------------------------------------------------
 #           14-Oct-2008 (ADH): Created.
 #           15-Oct-2009 (ADH): Removed PATH_PREFIX mechanism.
+#           12-Dec-2013 (ADH): Removed ORGANISATION_NAME constant; the
+#                              locale files are used for such things.
 ########################################################################
-
-# The name of the organisation for which TrackRecord has been installed.
-# If this is not applicable in your case, leave this set to "TrackRecord"
-# so that sentences incorporating the name make sense.
-
-ORGANISATION_NAME = 'TrackRecord'
 
 # The maximum number of columns you want to allow in a report, to avoid
 # excessive report size generation. This is a base figure for a normal

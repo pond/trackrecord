@@ -22,9 +22,11 @@ class Customer < TaskGroup
   # Customers are people for whom work is done. Customers are involved
   # with various projects, which in turn include various tasks.
 
+  has_many( :control_panels )
   has_many( :projects, { :order => Project::DEFAULT_SORT_ORDER } )
   has_many( :tasks,    { :through => :projects, :uniq => true  } )
-  has_many( :control_panels )
+
+  accepts_nested_attributes_for( :projects, reject_if: proc() { | attrs | attrs[ 'title' ] .blank? } )
 
   attr_protected(
     :project_ids,

@@ -292,24 +292,6 @@ div.messages div.flash_notice {
   background: #efe;
 }
 
-/* OpenID login table */
-
-table.openid form {
-  margin: 0;
-  padding: 0;
-}
-
-table.openid input#openid_url {
-  font-size: 100%;
-  background: url( <%= asset_path( "trackrecord/openid_small_logo.png" ) %> ) 2px 50% no-repeat; 
-  padding-left: 22px;
-  display: inline;
-}
-
-table.openid input#commit {
-  font-size: 100%;
-}
-
 /* Home page sections */
 
 div#home_general,
@@ -334,6 +316,42 @@ div.report_button {
 
 div.report_button input {
   margin: 0;
+}
+
+/* Layout hackery tables */
+
+table.for_layout {
+  border: none;
+  border-spacing: 0;
+  border-collapse: collapse;   
+}
+
+table.for_layout tr {
+  vertical-align: top;
+  text-align: left;
+}
+
+table.for_layout tr td {
+  margin: 0;
+  padding: 0;
+}
+
+/* OpenID login table */
+
+table.openid form {
+  margin: 0;
+  padding: 0;
+}
+
+table.openid input#openid_url {
+  font-size: 100%;
+  background: url( <%= asset_path( "trackrecord/openid_small_logo.png" ) %> ) 2px 50% no-repeat; 
+  padding-left: 22px;
+  display: inline;
+}
+
+table.openid input#commit {
+  font-size: 100%;
 }
 
 /* List views */

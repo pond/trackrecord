@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>class Customer - YOUR_TITLE</title>
+<title>class Customer - TrackRecord</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -89,7 +89,11 @@
 
   <ul>
   
-    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+    <li class="file"><a href="./CHANGELOG_rdoc.html">CHANGELOG</a>
+  
+    <li class="file"><a href="./README_rdoc.html">README</a>
+  
+    <li class="file"><a href="./doc/README_FOR_APP_rdoc.html">README_FOR_APP</a>
   
   </ul>
 </nav>
@@ -147,17 +151,15 @@
   
     <li><a href="./QuietPrototype/QuietPrototypeHelper.html">QuietPrototype::QuietPrototypeHelper</a>
   
-    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
-  
-    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
-  
-    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSVAsDays.html">TrackRecordReportGenerator::UkOrgPondCSVAsDays</a>
-  
     <li><a href="./YuiTree.html">YuiTree</a>
   
     <li><a href="./YuiTree/ClassMethods.html">YuiTree::ClassMethods</a>
   
     <li><a href="./YuiTree/YuiTreeHelper.html">YuiTree::YuiTreeHelper</a>
+  
+    <li><a href="./TrackRecordReportGenerator.html">TrackRecordReportGenerator</a>
+  
+    <li><a href="./TrackRecordReportGenerator/UkOrgPondCSV.html">TrackRecordReportGenerator::UkOrgPondCSV</a>
   
     <li><a href="./ApplicationController.html">ApplicationController</a>
   
@@ -340,7 +342,7 @@ arrays of objects.</p>
 
           
           <div class="method-source-code" id="apply_default_sort_order-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">apply_default_sort_order</span>( <span class="ruby-identifier">array</span> )
   <span class="ruby-identifier">array</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">downcase</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -379,7 +381,7 @@ for the new object in future, though presently this parameter is ignored.</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">super</span>( <span class="ruby-identifier">params</span> )
 
@@ -424,7 +426,7 @@ default is ‘true’.</p>
 
           
           <div class="method-source-code" id="destroy_with_side_effects-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 96</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy_with_side_effects</span>( <span class="ruby-identifier">destroy_projects</span> = <span class="ruby-keyword">true</span>, <span class="ruby-identifier">destroy_tasks</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">destroy_projects</span> )
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span>
@@ -470,7 +472,7 @@ projects (only if updating projects too), else ‘false’.</p>
 
           
           <div class="method-source-code" id="update_with_side_effects-21-source">
-            <pre><span class="ruby-comment"># File app/models/customer.rb, line 77</span>
+            <pre><span class="ruby-comment"># File app/models/customer.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_with_side_effects!</span>( <span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">update_projects</span> = <span class="ruby-keyword">true</span>, <span class="ruby-identifier">update_tasks</span> = <span class="ruby-keyword">true</span> )
   <span class="ruby-identifier">active</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes!</span>( <span class="ruby-identifier">attrs</span> )

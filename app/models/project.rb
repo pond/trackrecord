@@ -26,8 +26,10 @@ class Project < TaskGroup
 
   belongs_to( :customer )
 
-  has_many( :tasks )
   has_many( :control_panels )
+  has_many( :tasks )
+
+  accepts_nested_attributes_for( :tasks, reject_if: proc() { | attrs | attrs[ 'title' ] .blank? } )
 
   scope :unassigned, -> { where( :customer_id => nil ) }
 
