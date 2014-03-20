@@ -1,7 +1,10 @@
 = Change log
 
+
+
 == Version 2.26, 2014-03-20
-===========================
+
+
 
 Please see "README.rdoc" for vital information on installation, upgrading
 from an earlier version, database requirements and how to run the built in
@@ -63,7 +66,8 @@ Other maintenance related changes:
 
 
 == Version 2.25, 2013-11-29
-===========================
+
+
 
 Please see "README.rdoc" for vital information on installation, upgrading
 from an earlier version, database requirements and how to run the built in
@@ -76,7 +80,8 @@ upgraded. Rails 3.2.15 is also required.
 
 
 == Version 2.24, 2013-10-16
-===========================
+
+
 
 Please see "README.rdoc" for vital information on installation, upgrading
 from an earlier version, database requirements and how to run the built in
@@ -110,7 +115,8 @@ There are also various efficiency improvements and areas of code tidying.
 
 
 == Version 2.23, 2013-09-09
-===========================
+
+
 
 Please see version 2.20's change information below for important
 notes about database requirements.
@@ -125,7 +131,8 @@ Version 2.23 fixes the following bugs that were found in v2.22:
 
 
 == Version 2.22, 2013-09-05
-===========================
+
+
 
 Please see version 2.20's change information below for details. In
 particular, please check the database/PostgreSQL notes therein.
@@ -138,7 +145,8 @@ Version 2.22 fixes the following bugs that were found in v2.21:
 
 
 == Version 2.21, 2013-08-19
-===========================
+
+
 
 Please see version 2.20's change information below for details. In
 particular, please check the database/PostgreSQL notes therein.
@@ -156,7 +164,8 @@ Version 2.21 fixes the following bugs that were found in v2.20:
 
 
 == Version 2.20, 2013-08-16
-===========================
+
+
 
 Please see the version 2.11 change details later in this file for very
 important details about upgrading from an earlier version or installing
@@ -199,7 +208,8 @@ described above.
 
 
 == Version 2.11, 2013-08-05
-===========================
+
+
 
 The procedure to upgrade from any v2.x release or to install anew is the
 same, though upgraders may already have completed some steps:
@@ -249,7 +259,8 @@ installing and upgrading easier. There are no other changes or fixes.
 
 
 == Version 2.10, 2013-08-02
-===========================
+
+
 
 Please see the version 2.00 notes later for information about updating
 from version 1. You will need to migrate your data to upgrade from any
@@ -346,7 +357,8 @@ the time of writing) Rails 4 is out so a Rails 3 fix is even more unlikely.
 
 
 == Version 2.04, 2013-07-11
-===========================
+
+
 
 Please see the version 2.00 notes later for information about updating from
 version 1. If upgrading from an earlier version 2, you will need to migrate
@@ -374,7 +386,8 @@ There are the following enhancements:
 
 
 == Version 2.02 and 2.03, 2013-04-25
-====================================
+
+
 
 Please see the version 2.00 notes later for information about updating from
 earlier versions.
@@ -405,7 +418,8 @@ deployment, rather than with test data only:
 
 
 == Version 2.01, 2013-04-09
-===========================
+
+
 
 Please see the version 2.00 notes later for information about updating from
 earlier version.
@@ -428,7 +442,7 @@ This release fixes the following bugs that were found in v2.00:
 
 
 == Version 2.00, 2013-03-27
-===========================
+
 
 
 === Important

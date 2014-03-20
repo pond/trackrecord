@@ -1,4 +1,4 @@
-Thu, 20 Mar 2014 20:46:00 +1300
+Thu, 20 Mar 2014 22:08:01 +1300
 app/controllers/application_controller.rb	Thu, 20 Mar 2014 20:38:58 +1300
 app/controllers/audits_controller.rb	Thu, 20 Mar 2014 20:38:58 +1300
 app/controllers/charts_controller.rb	Thu, 20 Mar 2014 20:38:58 +1300
@@ -59,5 +59,5 @@ lib/track_record_report.rb	Thu, 20 Mar 2014 20:38:58 +1300
 lib/track_record_sections.rb	Thu, 20 Mar 2014 20:38:58 +1300
 lib/yui_tree/yui_tree.rb	Thu, 20 Mar 2014 20:38:58 +1300
 README.rdoc	Thu, 20 Mar 2014 20:38:58 +1300
-CHANGELOG.rdoc	Thu, 20 Mar 2014 20:45:56 +1300
+CHANGELOG.rdoc	Thu, 20 Mar 2014 22:07:54 +1300
 doc/README_FOR_APP.rdoc	Thu, 20 Mar 2014 20:38:58 +1300
