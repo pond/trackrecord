@@ -169,7 +169,7 @@ module UsersHelper
 
   def userhelp_actions( user )
     actions = [ 'edit' ]
-    actions.push( 'delete' ) unless user.admin?
+    actions.push( 'delete' ) unless user.admin? or not @current_user.admin?
     actions.push( 'show' )
     return actions
   end

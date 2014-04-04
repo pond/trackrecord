@@ -1,23 +1,24 @@
-<h1>Delete timesheet for week <%= @record.week_number %>, <%= @record.year %>?</h1>
+<div class="icon_page warning">
 
-<%= image_tag( 'trackrecord/warning.png', { :size => '96x84', :alt=>'!', :class=>'warning' } ) %>
-<h2>Warning!</h2>
+  <h1>Delete timesheet for week <%= @record.week_number %>, <%= @record.year %>?</h1>
+  <h2>Warning!</h2>
 
-<%= form_for( :task, :url => { :action => 'destroy', :id => @record.id }, :html => { :method => 'delete' } ) do | f | %>
-
-  Only use the 'delete' button if you are <strong>absolutely sure</strong>
-  that you wish to delete this timesheet. All rows and work packets therein
-  will be deleted; there will be no record remaining of any time booked in
-  the timesheet. <strong>The action cannot be undone.</strong>
-
-  <br style="clear: both" /><br />
+  <p>
+    Only use the 'delete' button if you are <strong>absolutely sure</strong>
+    that you wish to delete this timesheet. All rows and work packets therein
+    will be deleted; there will be no record remaining of any time booked in
+    the timesheet. <strong>The action cannot be undone.</strong>
+  </p>
 
   <div align="center">
-    <%= f.submit( 'Delete timesheet', { :disable_with => 'Deleting...' } ) %>
-    or <%= link_to( 'cancel and show details',    @record           ) %>
-    or <%= link_to( 'cancel and list timesheets', timesheets_path() ) %>.
+    <%= form_for( :task, :url => { :action => 'destroy', :id => @record.id }, :html => { :method => 'delete' } ) do | f | %>
+      <%= f.submit( 'Delete timesheet', { :disable_with => 'Deleting...' } ) %>
+    <% end %>
   </div>
-<% end %>
 
-<p>
-</p>
+  <p>
+    <%= link_to( 'Cancel and show details',    @record           ) %> |
+    <%= link_to( 'Cancel and list timesheets', timesheets_path() ) %>
+  </p>
+
+</div>

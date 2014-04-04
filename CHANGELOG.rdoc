@@ -2,6 +2,88 @@
 
 
 
+== Version 2.30, 2014-04-04
+
+
+
+Please see "README.rdoc" for information on installation and upgrades.
+If updating, run bundle install" after updating your sources then migrate
+your data with "rake db:migrate".
+
+A while ago, a major OpenID provider shut down its ID service. Although
+other providers still exist - e.g. Google account holders have an OpenID,
+even if they don't realise it - OpenID has struggled to gain widespread
+adoption and finding an easy-to-use provider with a clear indication of
+your actual ID can be a struggle.
+
+Accordingly, TrackRecord now offers a more traditional sign-in option
+based on e-mail address and password. For administrators, the process is:
+
+- At first-time startup of a new installation, you get to choose either
+  an OpenID for your new admin account, or provide an e-mail address and
+  password which is used for subsequent sign-in, or you can even provide
+  both and use either to sign in later.
+
+- When someone new needs to use the system, the administrator creates
+  their user account as normal. Either that user tells the admin what
+  OpenID they want, or the admin assigns a temporary password to the
+  new account, or both; the admin then tells the new user about the
+  password (if that's been chosen). When the user signs in, they'll be
+  asked to reset the temporary password to a permanent one that only
+  they know. Adminstrators can actually change this - though it isn't
+  recommended - by deselecting the "must change password on sign-in"
+  option when creating the new user account. Administrators can also
+  re-set this option for existing users should they need to re-issue a
+  password (maybe the user forgot theirs), or should they want the user
+  to choose another password.
+
+- From the normal user perspective, the user can sign in with their OpenID
+  if they gave one to the administrator, and/or their e-mail address and
+  password. As per the above, they may be asked to change that the first
+  time they sign in, or if the administrator had subsequently turned back
+  on the "must change password" flag on their account.
+
+In TrackRecord, the process is always one wherein the administrator creates
+accounts for new users. Accordingly, the usual process of password reset
+messages, "forgotten my password" systems and so-on are not provided; a
+user who had forgotten their access details would contact the administrator
+who could issue a new temporary password by editing the user's account. The
+control over access management is primarily in the hands of the admin, not
+all other users of the system.
+
+Security is provided via rails-bcrypt and uses salted, encrypted storage.
+This is fairly secure; if you are unfortunate enough to have your database
+compromised and its contents downloaded by a miscreant, they are unlikely
+to be able to determine the unencrypted value of any password. It would
+still be necessary to inform all users of such a breach so they could make
+informed decisions about what to do with other web sites should they have
+used the same password anywhere else.
+
+- https://github.com/codahale/bcrypt-ruby/tree/master
+
+If you are unsure about detection of, mitigation of, or handling of
+security breaches when running a server, please spend some time Googling
+around the issue so that you can have confidence your provided service.
+
+
+=== Other notable changes
+
+- The sign-in/sign-up process has been cleaned up with some dead code
+  removal, bug fixes in e-mail sending, lots of improvements in User
+  model validation and so-on. Basically, a general overhaul.
+
+- Removal of some unncessary configuration items, related to continued
+  extension of internationalisation through "config/locales...", though
+  a great deal of work is still to be done here with many hard-coded
+  strings throughout the application.
+
+- Improved indication of errant fields in forms.
+
+- Fewer places where links might accidentally be shown to users that
+  lead to a "not authorised" response.
+
+
+
 == Version 2.26, 2014-03-20
 
 

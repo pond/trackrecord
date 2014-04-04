@@ -28,7 +28,7 @@
 <% else -%>
 <%   if ( @current_user.admin? ) and ( @user.id != @current_user.id ) -%>
         <%= check_box_tag( 'notify_user', '1', true ) %>
-        <em><%= label_tag( 'notify_user', 'Notify the user about this update by e-mail' ) %></em>
+        <em><%= label_tag( 'notify_user', apphelp_view_hint( :notify_edit_by_email ).html_safe() ) %></em>
         <br /><br />
 <%   end -%>
         <%= f.submit( 'Update', { :disable_with => 'Updating...' } ) %>

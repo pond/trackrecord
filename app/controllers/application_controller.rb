@@ -22,14 +22,14 @@ class ApplicationController < ActionController::Base
 
   # Make sure that @current_user is set to the User object of whoever
   # is presently logged in, or 'nil' if nobody is logged in, whenever
-  # any action runs. If there is no user, redirect to the Home page.
-  # If the current user has no user name then force them back to the
-  # 'edit user' page to set one.
+  # any action runs. If there is no user, redirect to the Home page. If
+  # the user hasn't filled in full valid account details, yet, force them
+  # back to the 'edit user' page to set one.
 
   before_filter(
     :appctrl_set_user,
     :appctrl_confirm_user,
-    :appctrl_ensure_user_name
+    :appctrl_ensure_user_is_valid
   )
 
 protected
@@ -82,7 +82,13 @@ protected
     @record = model.constantize.new( params[ model.downcase ], @current_user )
 
     if ( @record.save )
-      flash[ :notice ] = "New #{ model.downcase } added"
+      view_context.apphelp_flash(
+        :notice,
+        :added,
+        ApplicationController,
+        :name => @record.class.model_name.human
+      )
+
       redirect_to( send( "#{ model.downcase.pluralize }_path" ) )
     else
       render( :action => 'new' )
@@ -108,7 +114,13 @@ protected
     @record = model.constantize.find( params[ :id ] )
 
     if ( @record.update_attributes( params[ model.downcase ] ) )
-      flash[ :notice ] = "#{ model } details updated"
+      view_context.apphelp_flash(
+        :notice,
+        :updated,
+        ApplicationController,
+        :name => @record.class.model_name.human
+      )
+
       redirect_to( send( "#{ model.downcase.pluralize }_path" ) )
     else
       render( :action => 'edit' )
@@ -140,12 +152,22 @@ protected
   def appctrl_destroy( model, path = nil )
     begin
       model.destroy( params[ :id ] )
-
-      flash[ :notice ] = "#{ model.model_name.human.capitalize } deleted"
+      view_context.apphelp_flash(
+        :notice,
+        :delete,
+        ApplicationController,
+        :name => model.model_name.human
+      )
       redirect_to( path || send( "#{ model.model_name.route_key }_path" ) )
 
     rescue => error
-      flash[ :error ] = "Could not destroy #{ model.model_name.human }: #{ error }"
+      view_context.apphelp_flash(
+        :notice,
+        :deletion_failed,
+        ApplicationController,
+        :name => model.model_name.human,
+        :error => error.message
+      )
       redirect_to( home_path() )
 
     end
@@ -361,14 +383,17 @@ private
     redirect_to( signin_path() ) unless @current_user
   end
 
-  # If logged in but the current user has no name, assume a partial
-  # sign in (perhaps the user closed their browser window or typed
-  # in an explicit URL before submitting their User edit form) -
-  # redirect back to that form.
+  # If logged in, make sure the current user is valid; else edit it.
 
-  def appctrl_ensure_user_name
-    if ( ( not @current_user.nil? ) and @current_user.name.blank? )
-      redirect_to( edit_user_path( @current_user) )
+  def appctrl_ensure_user_is_valid
+    edit_user = if @current_user.try( :invalid? )
+      view_context.apphelp_flash( :error, :provide_account_details, ApplicationController )
+      true
+    elsif @current_user.try( :must_reset_password? )
+      view_context.apphelp_flash( :warning, :must_reset_password, ApplicationController )
+      true
     end
+
+    redirect_to( edit_user_path( @current_user ) ) if ( edit_user )
   end
 end

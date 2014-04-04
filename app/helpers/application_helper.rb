@@ -86,8 +86,45 @@ module ApplicationHelper
   # optional third parameter as a hash.
   #
   def apphelp_view_hint( hint_name, ctrl = controller, substitutions = {} )
+    apphelp_prefixed( :view, hint_name, ctrl, substitutions )
+  end
+
+  # As apphelp_view_hint, but looks for "flash_<foo>". Intended for flash
+  # messages; the "flash_" prefix should keep string meanings more obvious
+  # inside locale files. Pass the flash key to set (e.g. ":error" or
+  # ":notice"), the name to look up ("<foo>"), then the optional controller
+  # / nil and substitution hash. On exit, the flash is set and the string
+  # that was used is returned.
+  #
+  # IMPORTANT: This sets the flash directly, expecting a redirection to happen
+  # next. If instead you're just going to render something in *this* request,
+  # you must use "apphelp_flash_now". Otherwise, your flash message will appear
+  # on both the current, rendered page, and the next fetched page.
+  #
+  def apphelp_flash( key, flash_name, ctrl = controller, substitutions = {} )
+    flash[ key ] = apphelp_prefixed( :flash, flash_name, ctrl, substitutions )
+  end
+
+  # As apphelp_flash, but for use when you're about to render content within
+  # this request, rather than redirect.
+  #
+  def apphelp_flash_now( key, flash_name, ctrl = controller, substitutions = {} )
+    flash.now[ key ] = apphelp_prefixed( :flash, flash_name, ctrl, substitutions )
+  end
+
+  # Back-end for apphelp_view_hint and apphelp_flash (along with possibly
+  # others). Looks up "uk.org.pond.trackrecord.controllers.[n].[p]_[s]", with
+  # the returned string marked HTML-safe, in the locale files; where [n] is a
+  # controller name, [p] a prefix string and [s] a suffix string. Pass the
+  # prefix string/symbol, suffix string/symbol, then optionally the
+  # controller (defaults to current request handling controller, or pass 'nil'
+  # for the same result) and optionally any token substitutions as a hash.
+  #
+  def apphelp_prefixed( prefix, suffix, ctrl = controller, substitutions = {} )
+    ctrl ||= controller
+
     I18n::t(
-      "uk.org.pond.trackrecord.controllers.#{ ctrl.controller_name }.view_#{ hint_name }",
+      "uk.org.pond.trackrecord.controllers.#{ ctrl.controller_name }.#{ prefix }_#{ suffix }",
       substitutions
     ).html_safe()
   end
@@ -102,7 +139,7 @@ module ApplicationHelper
 
     if ( ctname == 'users' and action == 'home' )
       slug = 'Home'
-    elsif ( ctname == 'sessions' and action == 'new' )
+    elsif ( ctname == 'sessions' and ( action == 'new' || action == 'create' ) )
       slug << 'Sign in'
     elsif ( action == 'index' or action == 'list' or ctname == 'timesheet_force_commits' )
       slug << apphelp_heading()
@@ -162,7 +199,7 @@ module ApplicationHelper
       if ( @current_user.name.nil? or @current_user.name.empty? )
         signinfo = 'Creating new account'
       else
-        signinfo = "You are signed in as #{ h( @current_user.name ) } &ndash; #{ link_to( 'sign out', signout_path() ) } "
+        signinfo = "#{ h( @current_user.name ) } &ndash; #{ link_to( 'sign out', signout_path() ) } "
       end
     else
       # The Application Controller forces redirection to the sign-in page
@@ -619,9 +656,7 @@ module ApplicationHelper
         output << send( helper, item )
       else
 
-        in_place = entry[ :value_in_place ] && can_edit
-
-        if ( in_place )
+        if ( can_edit && entry[ :value_in_place ] )
           output << safe_in_place_editor_field( item, method )
         else
           value   = item.send( method )

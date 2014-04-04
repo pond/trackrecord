@@ -241,6 +241,8 @@
   
     <li><a href="./SessionsController.html">SessionsController</a>
   
+    <li><a href="./SignIn.html">SignIn</a>
+  
     <li><a href="./Task.html">Task</a>
   
     <li><a href="./TaskGroup.html">TaskGroup</a>
@@ -337,7 +339,7 @@ administrators can do this. Pass the model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_admin_destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 131</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_admin_destroy</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-identifier">appctrl_destroy</span>( <span class="ruby-identifier">model</span> )
@@ -375,7 +377,13 @@ Restricted users can’t do this. Pass the model name as a string.</p>
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">model</span>.<span class="ruby-identifier">downcase</span> ], <span class="ruby-ivar">@current_user</span> )
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">save</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;New #{ model.downcase } added&quot;</span>
+    <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash</span>(
+      <span class="ruby-value">:notice</span>,
+      <span class="ruby-value">:added</span>,
+      <span class="ruby-constant">ApplicationController</span>,
+      <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>
+    )
+
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'new'</span> )
@@ -410,7 +418,7 @@ it returns a Date object instance.</p>
 
           
           <div class="method-source-code" id="appctrl_date_from_params-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 247</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 269</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-identifier">key</span> )
   <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">key</span> ].<span class="ruby-identifier">blank?</span> )
     <span class="ruby-keyword">begin</span>
@@ -451,7 +459,7 @@ is invalid.</p>
 
           
           <div class="method-source-code" id="appctrl_dates_from_search-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 264</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 286</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_dates_from_search</span>( <span class="ruby-identifier">default_start</span>, <span class="ruby-identifier">default_end</span> )
   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_start</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_start</span>
   <span class="ruby-identifier">b</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_end</span>   ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_end</span>
@@ -489,7 +497,7 @@ model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_delete-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 123</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
@@ -524,16 +532,26 @@ instead). Optionally pass the path to redirect to upon success.</p>
 
           
           <div class="method-source-code" id="appctrl_destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 140</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_destroy</span>( <span class="ruby-identifier">model</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">model</span>.<span class="ruby-identifier">destroy</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
-
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ model.model_name.human.capitalize } deleted&quot;</span>
+    <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash</span>(
+      <span class="ruby-value">:notice</span>,
+      <span class="ruby-value">:delete</span>,
+      <span class="ruby-constant">ApplicationController</span>,
+      <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>
+    )
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">path</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.model_name.route_key }_path&quot;</span> ) )
 
   <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-node">&quot;Could not destroy #{ model.model_name.human }: #{ error }&quot;</span>
+    <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash</span>(
+      <span class="ruby-value">:notice</span>,
+      <span class="ruby-value">:deletion_failed</span>,
+      <span class="ruby-constant">ApplicationController</span>,
+      <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>,
+      <span class="ruby-value">:error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>.<span class="ruby-identifier">message</span>
+    )
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">home_path</span>() )
 
   <span class="ruby-keyword">end</span>
@@ -567,7 +585,7 @@ name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 97</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_edit</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
@@ -604,7 +622,7 @@ method has been given, for sorting purposes.</p>
 
           
           <div class="method-source-code" id="appctrl_index_assist-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 162</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_index_assist</span>( <span class="ruby-identifier">model</span> )
 
   <span class="ruby-comment"># Set up some default sort and pagination data.</span>
@@ -780,7 +798,7 @@ reference.</p>
 
           
           <div class="method-source-code" id="appctrl_patch_params_from_js-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 336</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 358</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-identifier">sym</span>, <span class="ruby-identifier">name</span> = <span class="ruby-value">:task_ids</span> )
   <span class="ruby-identifier">task_ids</span> = (<span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ] <span class="ruby-operator">||</span> {} )[ <span class="ruby-identifier">name</span> ] <span class="ruby-operator">||</span> []
 
@@ -834,7 +852,7 @@ an explicit ‘search_cancel’ params key has a value.</p>
 
           
           <div class="method-source-code" id="appctrl_search_range_sql-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 294</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 316</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-identifier">model</span>, <span class="ruby-identifier">field</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">range_start</span> = <span class="ruby-identifier">range_end</span> = <span class="ruby-keyword">nil</span>
 
@@ -925,14 +943,20 @@ users can’t do this. Pass the model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_update-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 105</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_update</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
 
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">model</span>.<span class="ruby-identifier">downcase</span> ] ) )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ model } details updated&quot;</span>
+    <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash</span>(
+      <span class="ruby-value">:notice</span>,
+      <span class="ruby-value">:updated</span>,
+      <span class="ruby-constant">ApplicationController</span>,
+      <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>
+    )
+
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'edit'</span> )

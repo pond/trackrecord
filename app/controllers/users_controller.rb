@@ -9,15 +9,22 @@
 
 class UsersController < ApplicationController
 
-  # In-place editing and security
+  skip_before_filter( :appctrl_ensure_user_is_valid,
+                      :only => [ :new, :create, :edit, :update, :cancel ] )
+
+  before_filter :set_simple_password_suggestion, :only => [ :new, :create, :edit, :update ]
+
+  # SecureRandom is used for simple password suggestions for the temporary
+  # initial password on new accounts.
+
+  require 'securerandom'
+
+  # In-place editing
+
+  uses_prototype( :only => :index )
 
   safe_in_place_edit_for( :user, :name )
   safe_in_place_edit_for( :user, :code )
-
-  skip_before_filter( :appctrl_confirm_user,     :only => [ :home ] )
-  skip_before_filter( :appctrl_ensure_user_name, :only => [ :edit, :update, :cancel ] )
-
-  uses_prototype( :only => :index )
 
   # YUI tree component for task selection
 
@@ -28,12 +35,6 @@ class UsersController < ApplicationController
     { :xhr_url_method => :trees_path },
     dynamic_actions
   )
-
-  # Home page - only show if logged in.
-  #
-  def home
-    redirect_to signin_path() and return if ( @current_user.nil? )
-  end
 
   # List users - not allowed for restricted users
   #
@@ -107,7 +108,9 @@ class UsersController < ApplicationController
   #
   def new
     return appctrl_not_permitted() unless @current_user.admin?
-    @record = @user = User.new
+
+    @user                     = User.new
+    @user.must_reset_password = true
   end
 
   # Create a new User account.
@@ -115,10 +118,14 @@ class UsersController < ApplicationController
   def create
     return appctrl_not_permitted() unless @current_user.admin?
 
-    @record = @user = User.new
+    @user                                = User.new
     @control_panel = @user.control_panel = ControlPanel.new
 
-    update_and_save_user( 'New account created', 'new' )
+    update_and_save_user(
+      :added,
+      'new',
+      params[ :notify_user ].present?
+    )
   end
 
   # Prepare for the 'edit' view, allowing a user to update their
@@ -147,55 +154,45 @@ class UsersController < ApplicationController
 
     @user = User.find( id )
 
-    if ( @current_user.admin? and params[ :notify_user ] )
-      EmailNotifier.admin_update_notification( @user ).deliver()
-    end
+    # Normally, user accounts are only ever created through this controller,
+    # so they're subject to normal user validation rules. This means the name
+    # field of a record obtained from the database cannot be empty. However,
+    # for the very first user to sign up, the Sessions Controller makes a
+    # sort of skeleton User object and saves it bypassing validation, then
+    # redirects to the User Controller's edit action.
 
-    # New user just set up a previously uninitialised account (no
-    # e-mail yet stored - update_and_save_user will take that from
-    # the params hash) or a normal account edit?
-
-    if ( @user.nil? or @user.name.empty? )
-      if ( User.count == 1 )
-        message = 'New administrator account created. You can now set up whatever ' <<
-                  'initial customers, projects and tasks you need.'
-      else
-        message = 'New account created. Before you can use the service fully, the '   <<
-                  'administrator will have to configure some account settings. You '  <<
-                  'will be notified by e-mail when this process is complete. Please ' <<
-                  "direct queries to the administrator at '#{ EMAIL_ADMIN }'."
-      end
-
-      update_and_save_user(
-        message,
-        'edit',
-        true
-      )
+    message = if ( @user.name.empty? && User.count == 1)
+      :initial_signup
     else
-      update_and_save_user( 'User details updated.', 'edit' )
+      :updated
     end
+
+    update_and_save_user(
+      message,
+      'edit',
+      @current_user.privileged? && params[ :notify_user ].present?
+    )
   end
 
   # Cancel a sign in account edit request.
   #
   def cancel
-    id    = params[ :id ]
-    @user = User.find( id )
 
-    # We must have found a user in the database matching the ID.
-    # The ID must be provided. There must be a currently logged in
-    # user and their ID must match that of the cancellation request.
-    # The user must not have a name yet - if they do, it implies a
-    # created, active account.
+    @user = User.find( params[ :id ] )
 
-    if ( @user.nil? or id.nil? or @current_user.nil? or ( id.to_i() != @current_user.id ) or @user.name )
+    # We must have an ID and must find a user under that ID (else an exception
+    # is thrown); this must match the current user; and the record must not yet
+    # be valid, implying in-progress first time account setup.
+
+    if ( @current_user.nil? or @current_user.id != @user.id or @current_user.valid? )
       flash[ :error ] = "Cancellation request not understood."
+      redirect_to( home_path() )
     else
       @user.destroy()
-      flash[ :error ] = 'Sign in cancelled.'
+      reset_session()
+      flash[ :error ] = 'Sign up cancelled.'
+      redirect_to( signin_path() )
     end
-
-    redirect_to( signout_path() )
   end
 
   # Users should not normally be destroyed. Only administrators
@@ -203,6 +200,7 @@ class UsersController < ApplicationController
   #
   def delete
     appctrl_delete( 'User' )
+    @user = @record # (historical)
   end
 
   # Show an "Are you sure?" prompt.
@@ -216,10 +214,10 @@ class UsersController < ApplicationController
     # account type and delete the user record. This is a good way
     # of ensuring that there is always at least one admin.
 
-    @record = User.find( params[ :id ] )
-    return appctrl_not_permitted() if ( @record.admin? )
+    @user = User.find( params[ :id ] )
+    return appctrl_not_permitted() if ( @user.admin? )
 
-    @record.destroy()
+    @user.destroy()
 
     flash[ :notice ] = 'User and all associated data deleted'
     redirect_to( users_path() )
@@ -227,22 +225,67 @@ class UsersController < ApplicationController
 
 private
 
-  # Update @user based on the params hash. Saves the result. Pass a
-  # message to show on success or an action to render on failure. Make
-  # sure appropriate instance variables exist for the associated on-
-  # failure view to be displayed. The optional third parameter should
-  # be set to 'true' if an update notification is to be sent to the user
-  # if the update succeeds. By default, no message is sent.
+  # Update '@user' based on the params hash. Saves the result. Pass a lookup
+  # token (for 'apphelp_flash') that yields the message to show on success;
+  # pass also an action to render upon failure. Ensure appropriate instance
+  # variables exist for the associated on-failure view to be displayed.
   #
-  # This gets complex because both a User and the user's ControlPanel
-  # object get updated.
+  # The optional third parameter, defaulting to 'false', is set to 'true' if
+  # an update notification is to be sent to the user if the update succeeds.
+  # By default, no message is sent. The nature of the e-mail depends on
+  # whether or not @user is a new record (sends an 'account created' message)
+  # or updated (sends an 'account changed' message).
   #
-  def update_and_save_user( success_message, failure_action, send_email = false)
+  # Internally, this gets complex because both the user object and the user's
+  # ControlPanel object get updated.
+  #
+  def update_and_save_user( success_token, failure_action, send_email = false)
 
     User.transaction do
 
       appctrl_patch_params_from_js( :user          )
       appctrl_patch_params_from_js( :control_panel )
+
+      # Was this a new record? We'll use this information later for sending
+      # out e-mail messages *after* successfully saving the model.
+
+      user_is_new = @user.new_record?
+
+      # Work out the "must reset password" flag, which is hardly ever taken
+      # from "params"! *Set* the required value in "params" so that it gets
+      # transferred to "@user" further down, when we update attributes from
+      # the parameters hash. Consider:
+      #
+      # - A new account with a password must have the flag set unless this is
+      #   for first-time signup (more than zero accounts exist already) to
+      #   force all new users to reset (since first-time passwords get sent
+      #   out in the clear over e-mail).
+      #
+      # - An admin editing someone else's account who has set a flag value in
+      #   the form should have that value respected and used.
+      #
+      # - Anyone else, of any privilege, editing any account has the flag
+      #   preserved *unless* they're the account owner and they are setting a
+      #   new password.
+
+      if ( user_is_new )
+        # New account, set the flag if using a password for non-first users.
+        params[ :user ][ :must_reset_password ] = params[ :user ][ :password ].present? && User.count.nonzero?
+
+      elsif ( @current_user.admin? and @current_user != @user and params[ :user ].has_key?( :must_reset_password ) )
+        # Leave the form-set value alone
+
+      else
+        # Editing own or non-admin (i.e. manager) editing other account;
+        # preserve flag value, only clear if owner is setting a new password.
+
+        params[ :user ][ :must_reset_password ] = @user.must_reset_password
+
+        if ( @current_user == @user and params[ :user ][ :new_password ].present? )
+          params[ :user ][ :must_reset_password ] = false
+        end
+
+      end
 
       # Rails does not quite understand the way we update the associated
       # control panel yet want to save everything in a way which rolls back
@@ -297,33 +340,59 @@ private
       # being updated, but catch things here just in case).
 
       @user.remove_inactive_tasks() if ( @current_user.restricted? )
-      @user.save!
 
-      # Now update the control panel within the user transaction.
+      unless @user.save
+        @user.must_reset_password = true if user_is_new # Make sure the form reflects the 'expected' initial value
+        render( :action => failure_action )
 
-      ControlPanel.transaction do
-        @user.control_panel.attributes = params[ :control_panel ]
+      else
+        # Now update the control panel within the user transaction.
 
-        # Annoying glitch - if the user empties the task list for the
-        # control panel, the above code does NOT empty the corresponding
-        # model property. Instead the missing hash contents are taken to
-        # mean 'no change'.
+        ControlPanel.transaction do
+          @user.control_panel.attributes = params[ :control_panel ]
 
-        @user.control_panel.tasks = [] if ( params[ :control_panel ].nil? or params[ :control_panel ][ :task_ids ].nil? )
+          # Annoying glitch - if the user empties the task list for the
+          # control panel, the above code does NOT empty the corresponding
+          # model property. Instead the missing hash contents are taken to
+          # mean 'no change'.
 
-        # As with the user, remove inactive tasks, then save.
+          @user.control_panel.tasks = [] if ( params[ :control_panel ].nil? or params[ :control_panel ][ :task_ids ].nil? )
 
-        @user.control_panel.remove_inactive_tasks() if ( @current_user.restricted? )
-        @user.control_panel.save!
+          # As with the user, remove inactive tasks, then save.
 
-        begin
-          EmailNotifier.signup_notification( @user ).deliver() if ( send_email )
-          flash[ :notice ] = success_message
-        rescue => error
-          flash[ :notice ] = success_message + " Please note, though, that the notification e-mail message could not be sent: #{ error.message }"
+          @user.control_panel.remove_inactive_tasks() if ( @current_user.restricted? )
+          @user.control_panel.save!
+
+          begin
+            if ( send_email )
+              if ( user_is_new )
+                EmailNotifier.signup_notification( @user, request() ).deliver()
+              else
+                EmailNotifier.admin_update_notification( @user, request() ).deliver()
+              end
+            end
+
+            view_context.apphelp_flash(
+              :notice,
+              success_token
+            )
+
+          rescue => error
+
+            view_context.apphelp_flash(
+              :notice,
+              :success_without_email,
+              self,
+              {
+                :success_message => t( "uk.org.pond.trackrecord.controllers.users.flash_#{ success_token }" ),
+                :error_message   => error.message
+              }
+            )
+
+          end
+
+          redirect_to( home_path() )
         end
-
-        redirect_to( home_path() )
       end
     end
 
@@ -337,5 +406,13 @@ private
     @user.control_panel.valid? # Check for control panel errors even if the user save failed
     render( :action => failure_action )
 
+  end
+
+  # Set a simple randomised password in "@suggestion" - intended to be shown
+  # in views as a suggested *temporary* password only for use in conjunction
+  # with the must-reset flag.
+  #
+  def set_simple_password_suggestion()
+    @suggestion = @current_user.admin? ? SecureRandom.hex( 5 ) : nil
   end
 end

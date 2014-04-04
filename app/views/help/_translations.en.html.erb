@@ -1,0 +1,165 @@
+<% #========================================================================= %>
+<% content_for :reports do %>
+<% #========================================================================= %>
+<h1>Naming, saving and sharing reports</h1>
+
+<p>
+  When a report is given a name and created, it is saved in your personal list
+  of reports so you can recall it easily later. Names are optional;
+  <em>unnamed reports are not saved</em>. You can
+  <%= link_to "view, edit or delete saved reports here",
+      user_saved_reports_path( @current_user || 0 ) %>.
+</p>
+
+<p>
+  Saved reports can viewed by other users. Select the 'Shared' option to
+  allow the report to be shared immediately. Leave this unset to keep the
+  report private. To enable sharing later on, edit the saved report.
+</p>
+
+<p>
+  If you ask for an unnamed report to be shared, it will be given a name
+  automatically.
+</p>
+
+<h2>How to share reports</h2>
+
+<p>
+  To tell other people about a 'Shared' report, you must view it, copy the
+  address of the page out of the browser's address bar and send this address
+  to other people (e.g. paste it into an e-mail message).
+</p>
+
+<h2>Security and permissions</h2>
+
+<p>
+  A viewer's security restrictions always apply. There may be task or user
+  details they are not permitted to see. As a result, the report you see may
+  look different when viewed by other people.
+</p>
+
+<p>
+  If you need to share a report <em>precisely</em>, export it to a CSV file or,
+  if your operating system or browser supports it, save the report web page as
+  a PDF file. Bear in mind that this <em>bypasses security restrictions</em>
+  since you can send that full report to anybody. Take care to only send it to
+  users who are allowed to view all of its contents.
+</p>
+<% #========================================================================= %>
+<% end %>
+<% #========================================================================= %>
+<% #========================================================================= %>
+<% content_for :sign_in do %>
+<% #========================================================================= %>
+<h2>Overview</h2>
+
+<p>
+  You can sign up or sign in using either an
+  <a href="http://openid.net/">OpenID</a> or an e-mail address and password.
+</p>
+
+<ul>
+  <li>
+    <p>
+      An OpenID is a globally unique way for you to identify yourself to any
+      OpenID-aware web site. You don't create a new password for every
+      new site; you have just one, for your account with your OpenID
+      <em>provider.</em> See
+      <%= auto_link( 'http://openid.net/get-an-openid/' ) %> for details.
+    </p>
+  </li>
+  
+  <li>
+    <p>
+      You might find OpenID confusing or find it hard to choose a provider.
+      If having trouble, use a password instead. It means you have yet another
+      password to remember and keep secure, but it is a familiar way to work.
+    </p>
+  </li>
+</ul>
+  
+<h2>Signing up</h2>
+
+<p>
+  Tell your system administrator your e-mail address and either tell them
+  your OpenID, or that you want to use a password. They will add you to the
+  system and let you know when it's ready, giving you a temporary one-off
+  password if you are using that kind of account. You can then sign in.
+</p>
+
+<h2>Signing in</h2>
+
+<ul>
+  <li>
+    <p>
+      If using OpenID, just enter the ID and nothing else into the
+      <%= link_to "sign-in form", signin_path() %>. You will probably
+      get taken to your provider's web site to verify the sign-in the
+      first time around.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Otherwise, enter your e-mail address and the temporary one-off
+      password into the <%= link_to "sign-in form", signin_path() %>. You
+      will be asked to change the password to something only you know. Use
+      this for sign-in thereafter. If you forget the password, you will have
+      to ask the administrator to reset it.
+    </p>
+  </li>
+</ul>
+
+<h2>A note on OpenID longevity</h2>
+
+<p>
+  OpenIDs are kept for life. Your provider will let you delete your OpenID
+  account to invalidate it, but the ID is remembered so that nobody can ever
+  use it again. Nobody can impersonate you, either accidentally or maliciously,
+  by choosing your old ID.
+</p>
+
+<p>
+  Please visit the OpenID web site at <%= auto_link( 'http://openid.net/' ) %>
+  for more information.
+</p>
+<% #========================================================================= %>
+<% end %>
+<% #========================================================================= %>
+<% #========================================================================= %>
+<% content_for :xml_import do %>
+<% #========================================================================= %>
+<h1>XML import</h1>
+
+<p>
+  XML file projects and tasks are mapped to TrackRecord projects and tasks as
+  follows:
+</p>
+
+<ul>
+  <li>
+    Any tasks with non-zero work time assigned are included.
+  </li>
+  <li>
+    TrackRecord task names are generated from the name of each XML file task,
+    with the name of its most immediate grouping parent summary added as a
+    prefix.
+  </li>
+  <li>
+    Assigned work time in the XML data is converted to TrackRecord project
+    durations in hours, mathematically rounded to two decimal places if need
+    be.
+  </li>
+  <li>
+    Task codes are created from the current date and the task ID, this being
+    typically directly related to position in which the task is listed in most
+    graphical project plan editors.
+  </li>
+  <li>
+    Tasks are imported "flat" since TrackRecord does not support hierarchical
+    task structures.
+  </li>
+</ul>
+<% #========================================================================= %>
+<% end %>
+<% #========================================================================= %>

@@ -13,11 +13,6 @@
 # account notification e-mail messages.
 EMAIL_ADMIN = 'please@configure.this.address'
 
-# Prefix to use in subject lines of account notification e-mail
-# messages, including trailing spaces if you want a space between
-# your prefix and the subject text.
-EMAIL_PREFIX = '[TrackRecord] '
-
 # Hostname to use in notification messages. The controller/action
 # data will be appended to it.
 EMAIL_HOST = 'please.configure.this.domain'

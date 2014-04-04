@@ -49,6 +49,53 @@ en:
         shared:                                        "Shared?"
         title:                                         "Name"
 
+      user:
+        code:                                          "User code"
+        email:                                         "Contact e-mail address"
+        identity_url:                                  "OpenID"
+        name:                                          "Full name"
+        password:                                      "Password"
+        old_password:                                  "Old password"
+        new_password:                                  "New password"
+        password_confirmation:                         "Password confirmation"
+        new_password_confirmation:                     "New password confirmation"
+        must_reset_password:                           "Must change password immediately"
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken:                                   "has already been used by another account"
+              invalid:                                 "must be provided and must be valid"
+
+            password:
+              confirmation:                            "does not match the password confirmation value"
+              too_short:                               "must, when provided, be at least %{count} characters long"
+
+            old_password:
+              wrong:                                   "is incorrect"
+
+            identity_url:
+              taken:                                   "has already been used by another account"
+
+            # This is a slight abuse of the hierarchy as these messages are
+            # added with custom validators and "errors.add(:base)", but it
+            # makes sense to keep attribute related messages together here.
+
+            tasks:
+              inactive:                                "Cannot assign task '%{task_title}' to this user - it is no longer active"
+
+            identity_url_or_password:
+              either:                                  "You must provide an OpenID, a password or both"
+
+  helpers:
+    label:
+      sign_in:
+        email:                                         "E-mail address"
+        password:                                      "Password"
+        password_confirmation:                         "Confirmation"
+
   # TrackRecord-specific messages.
 
   uk:
@@ -64,12 +111,17 @@ en:
             time:                                      "%H:%M:%S"
             date_and_time:                             "%{date} %{time}"
             range:                                     "%{start} to %{finish}"
+            required:                                  "(required)"
+            optional:                                  "(optional)"
+            if_changing:                               "(if changing it)"
+            can_be_blank:                              "(can be blank)"
+            unsure:                                    "(leave as-is if unsure)"
 
           brief_action_names:
-            show:                                   "Show"
-            edit:                                   "Edit"
-            delete:                                 "Delete"
-            copy:                                   "Copy"
+            show:                                      "Show"
+            edit:                                      "Edit"
+            delete:                                    "Delete"
+            copy:                                      "Copy"
 
           action_names:
             index:                                     "List"
@@ -82,6 +134,15 @@ en:
             destroy:                                   "Delete"
 
           controllers:
+            application:
+              flash_provide_account_details:           "You must fill in valid account details before you can continue."
+              flash_must_change_password:              "You must change your password to something only you know."
+              flash_added:                             "New %{name} added."
+              flash_updated:                           "The %{name} was updated."
+              flash_deleted:                           "The %{name} was deleted."
+              flash_deletion_failed:                   "Could not delete the %{name}: %{error}"
+              flash_must_reset_password:               "You must change your password before you can continue."
+
             audits:
               action_title_index:                      "Auditing"
 
@@ -95,22 +156,9 @@ en:
               action_title_delete:                     "Delete customer"
 
             help:
-              action_title_show:                       "Help"
+              action_title_show:                       "Help viewer"
 
-              view_report_name_help_1:                 "When a report is given a name and created, it is saved in your personal list of reports so you can recall it easily later. Names are optional; unnamed reports are not saved. To view, edit or delete saved reports, go to the Home page and follow the 'Manage reports' link in the 'General options' section."
-              view_report_name_help_2:                 "Saved reports can be shared with other users. Select the 'Shared' option to allow the report to be shared immediately. Leave this unset to keep the report private. To enable sharing later on, edit the saved report."
-              view_report_name_help_3:                 "If you ask for an unnamed report to be shared, it will be given a name automatically."
-
-              view_report_share_help_1:                "Once a report is saved and marked as shared, other users can view it. To share, view the report, copy the address of the page out of the browser's address bar and send this address to other people (e.g. paste it into an e-mail message)."
-              view_report_share_help_2:                "A viewer's security restrictions always apply. There may be task or user details they are not permitted to see. As a result, the report you share may look different when viewed by other people."
-              view_report_share_help_3:                "If you need to share a report <em>precisely</em>, export it to a CSV file or, if your operating system or browser supports it, save the report web page as a PDF file. Bear in mind that this <em>bypasses security restrictions</em> since you can send that full report to anybody. Take care to only send it to users who are allowed to view all of its contents."
-
-              view_xml_import_help_1:                  "XML file projects and tasks are mapped to TrackRecord projects and tasks as follows:"
-              view_xml_import_help_2:                  "Any tasks with non-zero work time assigned are included."
-              view_xml_import_help_3:                  "TrackRecord task names are generated from the name of each XML file task, with the name of its most immediate grouping parent summary added as a prefix."
-              view_xml_import_help_4:                  "Assigned work time in the XML data is converted to TrackRecord project durations in hours, mathematically rounded to two decimal places if need be."
-              view_xml_import_help_5:                  "Task codes are created from the current date and the task ID, this being typically directly related to position in which the task is listed in most graphical project plan editors."
-              view_xml_import_help_6:                  "Tasks are imported \"flat\" since TrackRecord does not support hierarchical task structures."
+              view_no_help:                            "Sorry, no help is available on that topic."
 
             projects:
               action_title_index:                      "Manage projects"
@@ -163,6 +211,25 @@ en:
               action_title_new:         &new_title     "Sign in"
               action_title_create:      *new_title
 
+              flash_msie:                              "If using Microsoft Internet Explorer, please update to version 10 or later for TrackRecord, or switch to a browser such as Chrome, Safari, Opera or Firefox, if possible."
+              flash_signed_up:                         "New administrator account created successfully. Please fill in your account details to complete the sign-up process."
+              flash_signed_in:                         "Signed in successfully."
+              flash_signed_out:                        "You have signed out."
+              flash_external_message:                  "%{message}"
+              flash_need_full_info:                    "You must provide an Identity URL or e-mail address and password."
+              flash_incorrect_info:                    "Unrecognised e-mail address or incorrect password."
+              flash_account_deactivated:               "The account for OpenID '%{id}' has been deactivated. Please contact your system administrator for assistance."
+              flash_id_not_recognised:                 "OpenID '%{id}' is not recognised. Please contact your system administrator for assistance."
+
+              view_initial_account:                    "Please start by providing an OpenID, or e-mail address and password.<br />This will be used to create the system administrator account."
+              view_welcome:                            "Welcome to %{site_name}"
+              view_intro:                              "To sign in, please enter your <strong>OpenID or e-mail address and password</strong> %{help_indicator} below"
+              view_or:                                 "&hellip;or&hellip;"
+              view_submit_initial:                     "Get started"
+              view_submit_initial_disabled:            "Creating account, please wait&hellip;"
+              view_submit_normal:                      "Sign in"
+              view_submit_normal_disabled:             "Signing in, please wait&hellip;"
+
             task_imports:
               action_title_new:         &new_title     "Bulk task import"
               action_title_create:      *new_title
@@ -212,3 +279,14 @@ en:
               action_title_update:      *edit_title
               action_title_show:                       "Account details"
               action_title_delete:                     "Delete account"
+
+              flash_added:                             "New account created."
+              flash_updated:                           "User details updated."
+              flash_initial_signup:                    "Sign up completed. You can now set up whatever initial customers, projects and tasks you need."
+              flash_success_without_email:             "%{success_message} Please note, though, that the notification e-mail message could not be sent: %{error_message}"
+
+              view_passwords_are_optional:             "You can use an OpenID, or your e-mail address and a password to sign in.<br />If you're happy with OpenID, do not set a password."
+              view_password_is_set:                    "(Password is set)"
+              view_suggestion:                         "(Suggestion: \"%{suggestion}\")"
+              view_notify_new_by_email:                "Tell the user about their new account (<strong>including temporary password</strong>, if there is one) by e-mail"
+              view_notify_edit_by_email:               "Tell the user about the alteration (<strong>including temporary password</strong>, if there is one) by e-mail"

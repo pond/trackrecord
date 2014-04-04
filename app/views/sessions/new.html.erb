@@ -1,80 +1,76 @@
-<h1>Welcome to TrackRecord</h1>
+<div class="signin">
 
-<p>
-  To use the service you must sign in.
-  Please enter your OpenID into the text field below.
-</p>
-
-<table class="openid">
-  <tr>
-    <td><%= image_tag( 'trackrecord/openid_med_logo_text.png', { :size => '84x28', :alt => 'OpenID logo' } ) %></td>
-    <td>
-      <%= form_for( :session, { :url => { :action => 'create' } } ) do %>
-        <label for="openid_url">&nbsp;</label>
-        <%= text_field_tag "openid_url" %>
-        &nbsp;
-        <%= submit_tag 'Sign in', :disable_with => "Signing in, please wait&hellip;" %>
-      <% end %>
-    </td>
-  </tr>
-</table>
-
-<h2 id="item_breakdown_heading">Help</h2>
-
-<div id="item_breakdown_contents">
-  <p>
-    This site uses <a href="http://openid.net/">OpenID</a> for signing in.
-    An OpenID is a globally unique way for you to identify yourself to any
-    OpenID-aware web site. You don't need to create a new user name and
-    password for such sites &ndash; just use your OpenID.
-  </p>
-
-  <ul>
-    <li>
-      <p>
-        If you already have an OpenID, sign up by entering it into the form above.
-        You must have told your system administrator about your OpenID first as
-        <strong>only people previously authorised by the administrator are allowed
-        access</strong>.
-      </p>
-    </li>
-    <li>
-      <p>
-        If you need to obtain an OpenID, you can use various providers - see
-        <%= auto_link( 'http://openid.net/get-an-openid/' ) %> for details.
-      </p>
-    </li>
-  </ul>
-
-  <h3>For life, not just for Christmas!</h3>
+  <h1>
+    <%= apphelp_view_hint( :welcome, nil,
+                           :site_name => apphelp_site_name ) %>
+  </h1>
 
   <p>
-    OpenIDs are kept for life. Your provider will let you delete your OpenID
-    to invalidate it, but the user name is remembered so that nobody can ever
-    use it again. This prevents someone from impersonating you, either
-    accidentally or maliciously, by choosing the same user name from the same
-    provider.
+<% if User.count.zero? -%>
+    <%= apphelp_view_hint( :initial_account ) %>
+<% else -%>
+    <%= apphelp_view_hint( :intro, nil,
+                           :help_indicator => help_link( :sign_in ), )%>
+<% end -%>
   </p>
 
-  <h3>Signing in</h3>
+  <%= error_messages_for @signin %>
+  <%= form_for( @signin, { :url => { :action => 'create' }, :html => { :novalidate => "true", :autocomplete => 'on' } } ) do | f | %>
 
-  <p>
-    Fill in your OpenID above and submit it with the "Sign in" button. You may
-    be sent back to your OpenID provider to sign in there and your provider may
-    double-check that you are happy to let TrackRecord remember your OpenID.
-  </p>
-  
-  <p>
-    Most providers let you decide if you want to stay logged in with them. If
-    you do this then entering your OpenID into the TrackRecord sign-in form
-    will grant you immediate access. This is convenient, but only stay logged
-    in with your provider if you are <em>absolutely sure</em> that your
-    computer and web browser are private, secure and only used by you.
-  </p>
+    <table class="signin">
+      <tr>
+        <th><%= image_tag( 'trackrecord/openid_med_logo_text.png', { :size => '84x28', :alt => 'OpenID logo' } ) %></th>
+        <td>
+          <%= f.text_field( :identity_url, { :type => :url, :autofocus => true } ) %>
+        </td>
+      </tr>
 
-  <h3>Further information</h3>
+      <tr>
+        <td colspan="2" id="or">
+          <%= apphelp_view_hint( :or ) %>
+        </td>
+      </tr>
 
-  <p>
-    Please visit the OpenID web site at <%= auto_link( 'http://openid.net/' ) %>.
-  </p>
+      <tr>
+        <th>
+          <%= f.label( :email ) %>
+        </th>
+        <td>
+          <%= f.text_field( :email, { :type => :email } ) %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= f.label( :password ) %>
+        </th>
+        <td>
+          <%= f.password_field( :password ) %>
+        </td>
+      </tr>
+<% if User.count.zero? -%>
+      <tr>
+        <th>
+          <%= f.label( :password_confirmation ) %>
+        </th>
+        <td>
+          <%= f.password_field( :password_confirmation ) %>
+        </td>
+      </tr>
+<% end -%>
+
+      <tr>
+        <td colspan="2" id="submit">
+<% if User.count.zero? -%>
+          <%= f.submit apphelp_view_hint( :submit_initial ),
+                       :disable_with => apphelp_view_hint( :submit_initial_disabled ) %>
+<% else -%>
+          <%= f.submit apphelp_view_hint( :submit_normal ),
+                       :disable_with => apphelp_view_hint( :submit_normal_disabled ) %>
+<% end -%>
+        </td>
+      </tr>
+    </table>
+
+  <% end %>
+
 </div>

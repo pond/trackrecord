@@ -8,8 +8,21 @@
  * History: 29-Nov-2009 (ADH): Created.                                 *
 \************************************************************************/
 
-div#header, div#footer {
+body {
+  height: auto;
+  zoom: 70%;
+}
+
+div#header, div#footer, table.report_actions {
   display: none;
+}
+
+div#main_page_content {
+  margin: auto;
+}
+
+#container {
+  min-height: 0;
 }
 
 a, a:link, a:visited {
@@ -17,8 +30,9 @@ a, a:link, a:visited {
   text-decoration: none;
 }
 
-div#main_page_content {
-  margin: auto;
+tr.odd  td.overall_total,
+tr.even td.overall_total {
+  color: #0a0;
 }
 
 input {

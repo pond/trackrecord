@@ -207,6 +207,8 @@
   
     <li><a href="./SessionsController.html">SessionsController</a>
   
+    <li><a href="./SignIn.html">SignIn</a>
+  
     <li><a href="./Task.html">Task</a>
   
     <li><a href="./TaskGroup.html">TaskGroup</a>
@@ -315,7 +317,8 @@ objects. See controllers/customers_controller.rb for more.</p>
             <pre><span class="ruby-comment"># File app/helpers/customers_helper.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">customerhelp_actions</span>( <span class="ruby-identifier">customer</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">or</span> ( <span class="ruby-identifier">customer</span>.<span class="ruby-identifier">active</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">manager?</span> ) )
-    <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">'edit'</span>, <span class="ruby-string">'delete'</span> ]
+    <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">'edit'</span> ]
+    <span class="ruby-identifier">actions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'delete'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">actions</span> = []
   <span class="ruby-keyword">end</span>

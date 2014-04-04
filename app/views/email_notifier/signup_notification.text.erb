@@ -1,11 +1,44 @@
-A new user has signed up for TrackRecord.
+Thank you for signing up with <%= @site_name %>.
 
-  User name:      <%= @user.name  %>
-  E-mail address: <%= @user.email %>
+The administrator has set up your account and you can now sign in:
 
-Please configure the account at your earliest convenience:
+  <%= home_url %>
 
-  <%= @account_url %>
+<% if @user.plaintext_password.present? -%>
+Your account has been given a TEMPORARY PASSWORD that can only be used
+once. Sign in with your e-mail address and this password. You will then
+be asked to change it to something only you know.
+
+  The temporary password is: <%= @user.plaintext_password %>
+
+Since the temporary password has been sent in this e-mail and e-mail is
+not secure, you should change sign in AS SOON AS POSSIBLE to set a new
+password.
+
+<%   if @user.identity_url.present? -%>
+You can also sign in with this OpenID:
+
+  <%= @user.identity_url %>
+
+<%   end -%>
+<% elsif @user.identity_url.present? -%>
+To sign in, use the following OpenID:
+
+  <%= @user.identity_url %>
+
+<% end -%>
+If you wish, you can edit your account settings at any time to change
+between using a password and/or OpenID for signing in.
+
+Please note that different individuals are often granted different
+levels of access to the system. If you have any questions, please
+direct them to the administrator at:
+
+  <%= EMAIL_ADMIN %>
+
+If you did not request this account then someone else may have given an
+incorrect e-mail address to the administrator. To resolve the problem,
+please contact the administrator at the address above.
 
 -- 
-TrackRecord automatic message
+<%= @site_name %> automatic message

@@ -10,6 +10,8 @@
 
 class User < Rangeable
 
+  require 'bcrypt'
+
   audited( :except => [
     :lock_version,
     :updated_at,
@@ -56,27 +58,64 @@ class User < Rangeable
     :task_ids
   )
 
-  # Make sure the data is sane. Normal users always get created
-  # through OpenID setup and the Session Controller, which saves a
-  # partially filled in model then gets the user to update the rest.
-  # This means that we don't want to validate some things on :save,
-  # the default, or the attempt to save the intermediate object will
-  # fail. Only validate for :update for such cases.
+  # Attach a ControlPanel object to this User whenever one is created.
 
-  validates_presence_of( :name, :email, :on => :update )
-  validates_presence_of( :user_type, :identity_url )
-  validates_uniqueness_of( :email, :on => :update )
-  validates_uniqueness_of( :identity_url )
+  before_create( :add_control_panel )
 
-  validates_format_of(
+  # A user account has an optional secure password. This runs through BCrypt
+  # behind the scenes. We don't use Rails 3's "has_secure_password" because
+  # our model has unusual requirements and there are naming issues with the
+  # BCrypt gem, which decided to rename itself at version 3.2.13, but Rails
+  # at the time of writing still requires the old named version, which would
+  # force us to use an outdated gem.
+  #
+  # Instead, code in 'activemodel-3.2.17/lib/active_model/secure_password.rb'
+  # is adapted here, where required
+  # http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password
+  # https://github.com/codahale/bcrypt-ruby/tree/master
+  #
+  # These accessors are for local use when forms are trying to change data.
+  # Validations later add additional related accessors. Do not use the
+  # "password" attribute to see if there's a password on an existing model;
+  # use "has_validated_password?" insead.
+
+  attr_accessor :password, :new_password, :old_password
+
+  # A user account always needs a type, unique e-mail address and human name.
+  # Identity URLs, where provided, must be unique; either a URL or a password
+  # must be present.
+
+  validates_presence_of( :name )
+
+  validates(
     :email,
-    :on => :update,
-    :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+    :uniqueness => true,
+    :format     => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   )
+
+  validates(
+    :identity_url,
+    :allow_blank => true,
+    :uniqueness  => true
+  )
+
+  validate( :identity_url_or_password )
+
+  # When a user is saved, all associated tasks must be active, else the list
+  # needs to be updated.
+  #
+  validate( :tasks_are_active )
+
+  # No I18n messages for these, since it's difficult to get the custom list
+  # of types and this should never happen in production anyway. It's really
+  # just for debugging.
+  #
+  # For the true/false check, "..._presence_of" triggers for 'false', but all
+  # we want is "not nil". That's why "..._inclusion_of" is used.
 
   validates_inclusion_of(
     :user_type,
-    :in => [ USER_TYPE_ADMIN, USER_TYPE_MANAGER, USER_TYPE_NORMAL ],
+    :in      => [ USER_TYPE_ADMIN, USER_TYPE_MANAGER, USER_TYPE_NORMAL ],
     :message => "must be one of '#{ USER_TYPE_ADMIN }', '#{ USER_TYPE_MANAGER }' or '#{ USER_TYPE_NORMAL }'"
   )
 
@@ -86,19 +125,75 @@ class User < Rangeable
     :message => "must be set to 'true' or 'false'"
   )
 
-  validate( :tasks_are_active )
+  # Password rules are a bit complex, because of the whole "user can set a
+  # password where there is none, so there's no old password to provide"
+  # thing, the "user can change a password, providing the old one" thing and
+  # the "user can clear their password, providing the old one and no new one"
+  # conditions.
+  #
+  # The model assumes that forms use "password" / "password_confirmation" only
+  # if no password is present; else "old_password", "new_password" and
+  # "new_password_confirmation" must be used.
+  #
+  # First:
+  #
+  # We only look at password and password confirmation if the digest is nil,
+  # indicating no current password.
+  # 
+  # In that case, if both are blank, do nothing; else validate password and
+  # that it matches confirmation.
+  # 
+  # Before saving, same conditions apply; set digest only if digest is nil,
+  # but password is not.
 
-  def tasks_are_active
-    self.tasks.all.each do | task |
-      errors.add( :base, "Cannot assign task '#{ task.title }' to this user - it is no longer active" ) unless task.active
-    end
-  end
+  validates(
+    :password,
+    :allow_blank  => false,
+    :confirmation => true, # (Adds accessors for "password_confirmation...")
+    :length       => { :minimum => 4 },
+    :if           => ->( user ) {
+      ( not user.has_validated_password? ) and (
+        user.password.present? or user.password_confirmation.present?
+      )
+    }
+  )
 
-  # Attach a ControlPanel object to this User whenever one is created.
+  # Next:
+  #
+  # We only look at old password, new & new confirmation if digest is non-nil,
+  # indicating a current password that might need changing.
+  # 
+  # In this case, if new password or new confirmation are not blank, then they
+  # must match, new password must be valid, old password must be correct.
+  # 
+  # If old password is not blank but new & confirmation are, then this is an
+  # attempt to clear the existing password; old must match. A catch here - what
+  # if the user is changing to a blank password (removing it) but also has set
+  # no identity URL? The custom validator we use checks that too.
+  # 
+  # If all are blank, no change.
 
-  before_create( :add_control_panel )
+  validates(
+    :new_password,
+    :allow_blank  => true,
+    :confirmation => true, # (Adds accessors for "new_password_confirmation...")
+    :length       => { :minimum => 4 },
+    :if           => ->( user ) { user.has_validated_password? }
+  )
 
-  # Before saving, make sure the Open ID is sane.
+  validate(
+    :old_password_is_correct_if_changing,
+    :if => ->( user ) { user.has_validated_password? }
+  )
+
+  # Finally:
+  #
+  # Before saving, similar conditions to the validation cases above exist for
+  # whether or not we set or clear the password digest field.
+
+  before_save( :set_password_data )
+
+  # Before saving, make sure the Open ID, if present, is sane.
 
   before_save( :rationalise_identity_url )
 
@@ -124,6 +219,61 @@ class User < Rangeable
       self.identity_url = ''
       self.user_type    = User::USER_TYPE_NORMAL
     end
+  end
+
+  # Returns self if the password is correct, otherwise false. Taken from
+  # 'activemodel-3.2.17/lib/active_model/secure_password.rb'.
+  #
+  def authenticate( unencrypted_password )
+    if ( has_validated_password? and BCrypt::Password.new( password_digest ) == unencrypted_password )
+      self
+    else
+      false
+    end
+  end
+
+  # Did this instance have a valid password set at the time it was loaded
+  # from the database? (Note that the "password" attribute MUST NOT be used
+  # for that check as most of the time it'll be 'nil'; note also that it is
+  # never possible to retrieve the decrypted value of a password from the
+  # database's encrypted copy; all we can do is take a user-supplied
+  # password, encrypt it and see if the result matches the stored digest).
+  #
+  # Note that locally setting a password which is not yet persisted in the
+  # database (and thus may not yet have been validated) will NOT result in
+  # a 'true' response from this method.
+  #
+  def has_validated_password?
+
+    # There are other ways to do this (e.g. "password_digest?" instead of
+    # "!! password_digest") but I felt this was the most legible.
+
+    if ( password_digest_changed? )
+      !! password_digest_was
+    else
+      !! password_digest
+    end
+  end
+
+  # Ask for the plaintext password - only possible on a user instance where
+  # the "password" or "new_password" attribute has been actively *set*. The
+  # "password" attribute is returned in favour of "new_password" if they
+  # are both present.
+  #
+  # A new User record from the database will never be able to return this
+  # data. It's only for use when you have a new-password / changed-password
+  # scenario in an existing instance and need to retrieve the value.
+  #
+  # Never use this to determine if a validated, in-database password exists
+  # for the user. Always use "has_validated_password?" for that instead.
+  #
+  def plaintext_password
+    
+    # Do this rather than "password || new_password" so that an empty
+    # string in "password" is *not* returned in favour of something more
+    # significant in "new_password".
+    
+    password.blank? ? new_password : password
   end
 
   # Find all tasks which this user is permitted to see; only active
@@ -243,11 +393,99 @@ class User < Rangeable
 
 private
 
+  # Custom validation method.
+  #
+  def identity_url_or_password
+    errors.add(
+      :base,
+      I18n.t(
+        :'activerecord.errors.models.user.attributes.identity_url_or_password.either'
+      )
+    ) unless ( identity_url.present? or has_validated_password? or password.present? )
+  end
+
+  # Custom validation method.
+  #
+  def tasks_are_active
+    self.tasks.all.each do | task |
+      errors.add(
+        :base,
+        I18n.t(
+          :'activerecord.errors.models.user.attributes.tasks.inactive',
+          :task_title => task.title
+        )
+      ) unless ( task.active? )
+    end
+  end
+
+  # Custom validation method.
+  #
+  def old_password_is_correct_if_changing
+    if ( old_password.present? || new_password.present? || new_password_confirmation.present? )
+      if ( authenticate( old_password ) )
+
+        # Old password was correct - what if the new password is blank? Do we
+        # have an identity URL? The "identity_url_or_password" validator does
+        # not catch this edge case.
+
+        errors.add(
+          :base,
+          I18n.t(
+            :'activerecord.errors.models.user.attributes.identity_url_or_password.either'
+          )
+        ) unless ( identity_url.present? or new_password.present? )
+      else
+        errors.add(
+          :old_password,
+          I18n.t(
+            :'activerecord.errors.models.user.attributes.old_password.wrong'
+          )
+        )
+      end
+    end
+  end
+
   # Run via "before_create".
   #
   def add_control_panel
     unless ( self.control_panel )
       self.control_panel = ControlPanel.new
+    end
+  end
+
+  # Run via "before_save". Assumes validations have taken care of things
+  # like checking an old password is correct, or that a new password matches
+  # a confirmation value.
+  #
+  def set_password_data
+    alter = false
+
+    if ( has_validated_password? )
+
+      # A password is currently set. Presence of an old password indicates
+      # intention to change digest to a new value (which may be blank).
+
+      if ( old_password.present? )
+        value = new_password
+        alter = true
+      end
+    else
+
+      # No password currently set. Presence of password attribute value
+      # indicates intention to set digest to that value.
+
+      if ( password.present? )
+        value = password
+        alter = true
+      end
+    end
+
+    if ( alter )
+      if value.blank?
+        self.password_digest = nil
+      else
+        self.password_digest = BCrypt::Password.create( value )
+      end
     end
   end
 

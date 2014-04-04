@@ -1,21 +1,54 @@
     <h2>Basic information</h2>
 
+<%
+  # Managers can edit anything within their own account, but only edit the
+  # user code for any other accounts. The Controller allows full access and
+  # the Controller/Model combo prevent attempts to write to fields that a
+  # manager shouldn't alter; we need to reflect those restrictions in the view.
+
+  if @user.id == @current_user.id
+-%>
+<%= render :partial => "credentials", :locals => { :f => f } %>
+<% else -%>
     <table class="editing_table">
       <tr class="editing_row">
-        <th>Full name (required)</th>
-        <td><%= @user.id == @current_user.id ? f.text_field( :name ) : h( @user.name )%></td>
+        <th><%= f.label :name %> <%= apphelp_generic( :required ) %></th>
+        <td><%= h( @user.name )%></td>
       </tr>
 
       <tr class="editing_row">
-        <th>Contact e-mail address (required)</th>
-        <td><%= @user.id == @current_user.id ? f.text_field( :email ) : h( @user.email )%></td>
+        <th><%= f.label :email %> <%= apphelp_generic( :required )%></th>
+        <td><%= h( @user.email )%></td>
       </tr>
 
       <tr class="editing_row">
-        <th>User code (leave as-is if unsure)</th>
+        <th><%= f.label( :code ) %> <%= apphelp_generic( :unsure ) %></th>
         <td><%= f.text_field( :code ) %></td>
       </tr>
+
+      <tr class="editing_row">
+        <th>&nbsp;</th><td>&nbsp;</td>
+      </tr>
+
+      <tr class="editing_row">
+        <th><%= f.label( :identity_url ) %></th>
+        <td><%= h( @user.identity_url ) %></td>
+      </tr>
+<% if @user.has_validated_password? -%>
+      <tr class="editing_row">
+        <th><%= f.label( :password ) %></th>
+        <td><%= apphelp_view_hint( :password_is_set ) %></td>
+      </tr>
+      <tr class="editing_row">
+        <th>&nbsp;</th>
+        <td>
+          <%= f.check_box( :must_reset_password, :disabled => true ) %>
+          <%= f.label( :must_reset_password, :disabled => true ) %>
+        </td>
+      </tr>
+<%   end -%>
     </table>
+<% end -%>
 
     <h2>Security</h2>
 

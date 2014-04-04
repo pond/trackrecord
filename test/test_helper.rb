@@ -33,9 +33,9 @@ class ActionDispatch::IntegrationTest
   # Sign in as a given user (or by default, the admin that's present in
   # the fixtures).
   #
-  def thelper_sign_in( id = 'openid.pond.org.uk' )
+  def thelper_sign_in( u = User.find_by_identity_url( 'http://openid.pond.org.uk' ) )
     visit signin_path
-    fill_in :openid_url, with: id
+    fill_in :sign_in_identity_url, :with => u.identity_url
     thelper_submit_with_named_button()
     assert_equal home_path, current_path
   end

@@ -215,6 +215,8 @@
   
     <li><a href="./SessionsController.html">SessionsController</a>
   
+    <li><a href="./SignIn.html">SignIn</a>
+  
     <li><a href="./Task.html">Task</a>
   
     <li><a href="./TaskGroup.html">TaskGroup</a>
@@ -307,7 +309,7 @@
         
         <div class="method-heading">
           <span class="method-name">admin_update_notification</span><span
-            class="method-args">( user )</span>
+            class="method-args">( user, request )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -315,19 +317,25 @@
         <div class="method-description">
           
           <p>Send a message to a user when their account settings are changed. Pass the
-<a href="User.html">User</a> object representing the updated account.</p>
+Pass the updated <a href="User.html">User</a> instance and the
+ActionDispatch::Request instance for the current controller action, so that
+URLs can be generated with a known host and port.</p>
           
 
           
           <div class="method-source-code" id="admin_update_notification-source">
-            <pre><span class="ruby-comment"># File app/models/email_notifier.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">admin_update_notification</span>( <span class="ruby-identifier">user</span> )
-  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+            <pre><span class="ruby-comment"># File app/models/email_notifier.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">admin_update_notification</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">request</span> )
+
+  <span class="ruby-constant">EmailNotifier</span>.<span class="ruby-identifier">default_url_options</span>[ <span class="ruby-value">:host</span> ] = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host_with_port</span>
+
+  <span class="ruby-ivar">@user</span>      = <span class="ruby-identifier">user</span>
+  <span class="ruby-ivar">@site_name</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>( <span class="ruby-value">:'uk.org.pond.trackrecord.site_name'</span> )
 
   <span class="ruby-identifier">mail</span>(
     <span class="ruby-value">:to</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ user.name } &lt;#{ user.email }&gt;&quot;</span>,
     <span class="ruby-value">:from</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">EMAIL_ADMIN</span>,
-    <span class="ruby-value">:subject</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ EMAIL_PREFIX }Your account has been configured&quot;</span>
+    <span class="ruby-value">:subject</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;[#{ @site_name }] Your account settings have been changed&quot;</span>
   )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- admin_update_notification-source -->
@@ -344,22 +352,28 @@
         
         <div class="method-heading">
           <span class="method-name">signup_notification</span><span
-            class="method-args">( user )</span>
+            class="method-args">( user, request )</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Send a message to the administrator when a new user signs up. Pass the new
-<a href="User.html">User</a> object.</p>
+          <p>Send a message to a user when their account is created by an administrator.
+Pass the new <a href="User.html">User</a> instance and the
+ActionDispatch::Request instance for the current controller action, so that
+URLs can be generated with a known host and port.</p>
           
 
           
           <div class="method-source-code" id="signup_notification-source">
-            <pre><span class="ruby-comment"># File app/models/email_notifier.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">signup_notification</span>( <span class="ruby-identifier">user</span> )
+            <pre><span class="ruby-comment"># File app/models/email_notifier.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">signup_notification</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">request</span> )
+
+  <span class="ruby-constant">EmailNotifier</span>.<span class="ruby-identifier">default_url_options</span>[ <span class="ruby-value">:host</span> ] = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host_with_port</span>
+
   <span class="ruby-ivar">@user</span>        = <span class="ruby-identifier">user</span>
+  <span class="ruby-ivar">@site_name</span>   = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>( <span class="ruby-value">:'uk.org.pond.trackrecord.site_name'</span> )
   <span class="ruby-ivar">@account_url</span> = <span class="ruby-identifier">url_for</span>(
     {
       <span class="ruby-value">:protocol</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'https'</span>,
@@ -371,9 +385,9 @@
   )
 
   <span class="ruby-identifier">mail</span>(
-    <span class="ruby-value">:to</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">EMAIL_ADMIN</span>,
+    <span class="ruby-value">:to</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ user.name } &lt;#{ user.email }&gt;&quot;</span>,
     <span class="ruby-value">:from</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">EMAIL_ADMIN</span>,
-    <span class="ruby-value">:subject</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ EMAIL_PREFIX }A new user has signed up&quot;</span>
+    <span class="ruby-value">:subject</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;[#{ @site_name }] Your account has been created&quot;</span>
   )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- signup_notification-source -->

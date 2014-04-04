@@ -1,37 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Thank you for signing up with TrackRecord</title>
+    <title>Your <%= @site_name %> account is ready</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
     <p>
-      A new user has signed up for TrackRecord.
+      Thank you for signing up with <%= @site_name %>. The administrator has
+      set up your account and you can now sign in:
     </p>
 
-    <table>
-      <tr>
-        <th style="text-align: left">User name</th>
-        <td style="text-align: left"><%= @user.name %></td>
-      </tr>
-      <tr>
-        <th style="text-align: left">E-mail address</th>
-        <td style="text-align: left"><%= @user.email %></td>
-      </tr>
-    </table>
+    <!-- Not clickable - discourage phishing -->
+    <ul>
+      <li><%= home_url %></li>
+    </ul>
+
+<% if @user.plaintext_password.present? -%>
+    <p>
+      Your account has been given a <strong>temporary password</strong>
+      that can <strong>only be used once</strong>. Sign in with your e-mail
+      address and this password. You will then be asked to change it to
+      something only you know.
+    <p>
+
+    <ul>
+      <li>The temporary password is: <tt><strong><%= @user.plaintext_password %></strong></tt></li>
+    </ul>
+      
+    <p>
+      Since the temporary password has been sent in this e-mail and e-mail
+      is not secure, you should sign in <strong><em>as soon as
+      possible</em></strong> to set a new password.
+    </p>
+<%   if @user.identity_url.present? -%>
 
     <p>
-      Please configure the account at your earliest convenience by copying
-      this page address into your preferred web browser:
+      You can also sign in with this OpenID: <tt><strong><%= @user.identity_url %></strong></tt>
     </p>
-    
+<%   end -%>
+<% elsif @user.identity_url.present? -%>
     <p>
-      <!-- Not clickable - discourage phishing -->
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= @account_url %>
+      To sign in, use the following OpenID:
+      <tt><strong><%= @user.identity_url %></strong></tt>
+    </p>
+<% end -%>
+
+    <p>
+      If you wish, you can edit your account settings at any time to change
+      between using a password and/or OpenID for signing in.
     </p>
 
     <p>
-      <em><small>TrackRecord automatic message</small></em>
+      Please note that different individuals are often granted different
+      levels of access to the system. If you have any questions, please
+      direct them to the administrator at:
+    </p>
+
+    <!-- Not clickable - discourage phishing -->
+    <ul>
+      <li><%= EMAIL_ADMIN %></li>
+    </ul>
+
+    <p>
+      If you did not request this account then someone else may have given an
+      incorrect e-mail address to the administrator. To resolve the problem,
+      please contact the administrator at the address above.
+    </p>
+
+    <p>
+      <em><small><%= @site_name %> automatic message</small></em>
     </p>
   </body>
 </html>

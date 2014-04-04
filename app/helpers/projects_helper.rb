@@ -22,7 +22,8 @@ module ProjectsHelper
 
   def projecthelp_actions( project )
     if ( @current_user.admin? or ( project.active and @current_user.manager? ) )
-      actions = [ 'edit', 'delete' ]
+      actions = [ 'edit' ]
+      actions << 'delete' if ( @current_user.admin? )
     else
       actions = []
     end

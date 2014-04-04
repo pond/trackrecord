@@ -215,6 +215,8 @@
   
     <li><a href="./SessionsController.html">SessionsController</a>
   
+    <li><a href="./SignIn.html">SignIn</a>
+  
     <li><a href="./Task.html">Task</a>
   
     <li><a href="./TaskGroup.html">TaskGroup</a>
@@ -321,8 +323,15 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/help_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/controllers/help_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+
+  <span class="ruby-comment"># I can't imagine how being able to view arbitrary help pages without being</span>
+  <span class="ruby-comment"># signed in could be harmful, but to be absolutely sure, only allow the one</span>
+  <span class="ruby-comment"># help page that's required in this case - the sign-in page information</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-identifier">appctrl_confirm_user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;sign_in&quot;</span>
+
   <span class="ruby-comment"># The &quot;:id&quot; value ends up being used as the name of a Partial to be</span>
   <span class="ruby-comment"># rendered by the 'help' view. To stop hackers putting dots, slashes</span>
   <span class="ruby-comment"># etc. into a URL in an attempt to get the renderer to load a different</span>
@@ -358,9 +367,9 @@ DIV for CSS styling of the whole text block, if required.</p>
 
           
           <div class="method-source-code" id="skip_main_heading-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/help_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/help_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">skip_main_heading?</span>
-  <span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-string">'show'</span>
+  <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- skip_main_heading-3F-source -->
           

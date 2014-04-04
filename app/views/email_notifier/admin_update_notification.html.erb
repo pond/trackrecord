@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Thank you for signing up with TrackRecord</title>
+    <title>Your <%= @site_name %> account has been changed</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
     <p>
-      Thank you for signing up with TrackRecord. The administrator has
-      finished configuring your account and you can now use the service.
+      Your <%= @site_name %> account settings have been changed.
+      This was probably done by the site administrator. If you did not
+      expect any such changes, please <em>immediately</em> enquire about
+      this message by contacting the administrator at:
+    </p>
+
+    <!-- Not clickable - discourage phishing -->
+    <ul>
+      <li><%= EMAIL_ADMIN %></ul>
+    </ul>
+
+<% if @user.plaintext_password.present? && @user.must_reset_password? -%>
+    <p>
+      Your account has been given a new <strong>temporary password</strong>
+      that can <strong>only be used once</strong>. Sign in with your e-mail
+      address and this password. You will then be asked to change it to
+      something only you know.
+    <p>
+
+    <ul>
+      <li>The temporary password is: <tt><strong><%= @user.plaintext_password %></strong></tt></li>
+    </ul>
+      
+    <p>
+      Since the temporary password has been sent in this e-mail and e-mail
+      is not secure, you should sign in <strong><em>as soon as
+      possible</em></strong> to set a new password.
+    </p>
+<%   if @user.identity_url.present? -%>
+
+    <p>
+      You can also sign in with this OpenID: <tt><strong><%= @user.identity_url %></strong></tt>
+    </p>
+<%   end -%>
+<% elsif @user.identity_url.present? -%>
+    <p>
+      Use the following OpenID to sign in:
+      <tt><strong><%= @user.identity_url %></strong></tt>
+    </p>
+<% end -%>
+
+    <p>
+      If you wish, you can edit your account settings at any time to change
+      between using a password and/or OpenID for signing in.
     </p>
 
     <p>
-      Please note that different individuals are often granted different
-      levels of access to the system. If you have any questions, please
-      direct them to the administrator at:
-    </p>
-
-    <p>
-      <!-- Not clickable - discourage phishing -->
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= EMAIL_ADMIN %>
-    </p>
-
-    <p>
-      If you did not sign up with TrackRecord then someone else did so,
-      using your e-mail address. To resolve the problem, please contact
-      the administrator.
-    </p>
-
-    <p>
-      <em><small>TrackRecord automatic message</small></em>
+      <em><small><%= @site_name %> automatic message</small></em>
     </p>
   </body>
 </html>

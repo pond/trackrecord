@@ -1,19 +1,17 @@
-<h1>Delete report <%= @record.title %>?</h1>
+<div class="icon_page warning">
 
-<%= image_tag( 'trackrecord/warning.png', { :size => '96x84', :alt=>'!', :class=>'warning' } ) %>
-<h2>Warning!</h2>
+  <h1>Delete report <%= @record.title %>?</h1>
+  <h2>Warning!</h2>
 
-<%= form_for( :saved_report, :url => { :action => 'destroy', :id => @record.id }, :html => { :method => 'delete' } ) do | f | %>
+  <p>
+    The action cannot be undone.
+  </p>
 
-  The action cannot be undone.
-
-  <br style="clear: both" /><br />
-
-  <div align="center">
-    <%= f.submit( 'Delete report', { :disable_with => 'Deleting...' } ) %>
-    or <%= link_to( 'cancel and list reports', user_saved_reports_path( @record.user ) ) %>.
+  <div class="centred">
+    <%= form_for( :saved_report, :url => { :action => 'destroy', :id => @record.id }, :html => { :method => 'delete' } ) do | f | %>
+      <%= f.submit( 'Delete report', { :disable_with => 'Deleting...' } ) %>
+      or <%= link_to( 'cancel and list reports', user_saved_reports_path( @record.user ) ) %>.
+    <% end %>
   </div>
-<% end %>
 
-<p>
-</p>
+</div>

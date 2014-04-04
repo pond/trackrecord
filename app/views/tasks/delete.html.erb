@@ -1,22 +1,26 @@
-<h1>Delete task<%= @record.title.blank? ? '' : " '#{ @record.title }'" %>?</h1>
+<div class="icon_page warning">
 
-<%= image_tag( 'trackrecord/warning.png', { :size => '96x84', :alt=>'!', :class=>'warning' } ) %>
-<h2>Warning!</h2>
+  <h1>Delete task<%= @record.title.blank? ? '' : " '#{ @record.title }'" %>?</h1>
+  <h2>Warning!</h2>
 
-<%= form_for( :task, :url => { :action => 'destroy', :id => @record.id }, :html => { :method => 'delete' } ) do | f | %>
+  <p>
+    Only use the 'delete' button if you are <strong>absolutely sure</strong>
+    that you wish to delete this task. Any timesheets with rows referring to
+    the task will have those rows automatically deleted. Work packets booked
+    for those rows will be deleted in passing; there will be no record
+    remaining of any time booked to the task. <strong>The action cannot be
+    undone.</strong>
+  </p>
 
-  Only use the 'delete' button if you are <strong>absolutely sure</strong>
-  that you wish to delete this task. Any timesheets with rows referring to
-  the task will have those rows automatically deleted. Work packets booked
-  for those rows will be deleted in passing; there will be no record
-  remaining of any time booked to the task. <strong>The action cannot be
-  undone.</strong>
-
-  <br style="clear: both" /><br />
-
-  <div align="center">
-    <%= f.submit( 'Delete task', { :disable_with => 'Deleting...' } ) %>
-    or <%= link_to( 'cancel and show details', @record      ) %>
-    or <%= link_to( 'cancel and list tasks',   tasks_path() ) %>.
+  <div class="centred">
+    <%= form_for( :task, :url => { :action => 'destroy', :id => @record.id }, :html => { :method => 'delete' } ) do | f | %>
+      <%= f.submit( 'Delete task', { :disable_with => 'Deleting...' } ) %>
+    <% end %>
   </div>
-<% end %>
+
+  <p>
+    <%= link_to( 'Cancel and show details', @record      ) %> |
+    <%= link_to( 'Cancel and list tasks',   tasks_path() ) %>
+  </p>
+
+</div>

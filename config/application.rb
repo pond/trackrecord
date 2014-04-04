@@ -48,6 +48,17 @@ module Trackrecord
     #
     config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/"]
 
+    # 2014-03-25 (ADH): It seems that at some point Rails changed from using
+    # a class name of "fieldWithErrors" on errant form fields, to
+    # "field_with_errors". The "errorExplanation" DIV hasn't changed name.
+    # Sigh, sigh, thrice sigh... To avoid CSS changes, which would include
+    # changes in Calendar Date Select CSS - a third party gem - override
+    # Rails and put back the old name. How silly that this is required.
+    #
+    config.action_view.field_error_proc = Proc.new { | html_tag, instance |
+      "<div class=\"fieldWithErrors\">#{ html_tag }</div>".html_safe()
+    }
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

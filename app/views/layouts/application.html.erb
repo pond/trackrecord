@@ -3,6 +3,7 @@
 
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <%= raw( ( csrf_meta_tags || '' ).gsub( /^/, '    ' ) ) %>
 
     <title><%= apphelp_title() %></title>
@@ -39,7 +40,7 @@
 
     <div id="header">
       <div id="title">
-        <h1>TrackRecord <span class="version">v2.26</span></h1>
+        <h1>TrackRecord <span class="version">v2.30</span></h1>
         <span class="slug"><%= raw( apphelp_slug() ) %></span>
       </div>
       <div id="navbar">
@@ -75,7 +76,7 @@
     <!-- Footer -->
 
     <div id="footer" class="float_clear">
-      <div><a href="http://trackrecord.pond.org.uk/">TrackRecord</a> by <a href="http://hipposoft.pond.org.uk/">Hipposoft</a> 2007-2013</div>
+      <div><a href="http://trackrecord.pond.org.uk/">TrackRecord</a> by <a href="http://hipposoft.pond.org.uk/">Hipposoft</a> 2007-2014</div>
       <div><%= apphelp_sign_or_signed_in() %></div>
     </div>
   </div></body>

@@ -221,6 +221,8 @@
   
     <li><a href="./SessionsController.html">SessionsController</a>
   
+    <li><a href="./SignIn.html">SignIn</a>
+  
     <li><a href="./Task.html">Task</a>
   
     <li><a href="./TaskGroup.html">TaskGroup</a>
@@ -328,30 +330,52 @@ completed a sign-in attempt, successfully or otherwise.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-identifier">identity_url</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:openid_url</span> ]
+
+  <span class="ruby-ivar">@signin</span> = <span class="ruby-constant">SignIn</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sign_in</span> ] )
+
+  <span class="ruby-comment"># The OpenID subsystem ends up back at this method with a parameter</span>
+  <span class="ruby-comment"># of &quot;openid_url&quot; set up, so we have to look at that too. It also</span>
+  <span class="ruby-comment"># annoyingly *requires* this to be *set* when we're calling out.</span>
+  <span class="ruby-comment"># There being no coherent documentation, a bodge is forced.</span>
+
+  <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:openid_url</span> ]
+  <span class="ruby-identifier">params</span>[ <span class="ruby-value">:openid_url</span> ] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>
 
   <span class="ruby-comment"># Identity URL is *not* nil, but *is* empty? Form was submitted</span>
-  <span class="ruby-comment"># with an empty string. URL is *not* nil and is *not* empty? Form</span>
-  <span class="ruby-comment"># was submitted with a URL; call authentication routine. URL *is*</span>
-  <span class="ruby-comment"># nil? We're being called from the Open ID plug-in with the result</span>
-  <span class="ruby-comment"># of a sign-in attempt. Again, call the authentication routine but</span>
-  <span class="ruby-comment"># don't try and read the JavaScript detection field.</span>
+  <span class="ruby-comment"># with an empty string. Fall through to the password-based code.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># URL is *not* nil and is *not* empty? Form was submitted with a</span>
+  <span class="ruby-comment"># identity URL; call OpenID authentication routine.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># URL *is* nil? We're being called from the Open ID plug-in with</span>
+  <span class="ruby-comment"># the result of a sign-in attempt. Again, call the authentication</span>
+  <span class="ruby-comment"># routine but don't try and read the JavaScript detection field.</span>
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">not</span> <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-identifier">failed_login</span>( <span class="ruby-string">'You must provide an ID.'</span>)
+  <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">empty?</span> )
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">valid?</span>
+      <span class="ruby-identifier">process_password_sign_in_with</span>( <span class="ruby-ivar">@signin</span> )
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
+    <span class="ruby-keyword">end</span>
+
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> )
-      <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
+    <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> )
+      <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> )
       <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:javascript</span> ]
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">open_id_authentication</span>( <span class="ruby-identifier">identity_url</span> )
+    <span class="ruby-identifier">open_id_authentication</span>( <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> )
   <span class="ruby-keyword">end</span>
 
 <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
-  <span class="ruby-identifier">failed_login</span>( <span class="ruby-node">&quot;An unexpected error was encountered: #{ error.message }&quot;</span> )
+  <span class="ruby-identifier">failed_login</span>(
+    <span class="ruby-ivar">@signin</span>,
+    <span class="ruby-value">:external_message</span>,
+    <span class="ruby-value">:message</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>.<span class="ruby-identifier">message</span>
+  )
+
 <span class="ruby-keyword">end</span></pre>
           </div><!-- create-source -->
           
@@ -380,18 +404,10 @@ during the sign-up process.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-identifier">user</span>   = <span class="ruby-ivar">@current_user</span>
-  <span class="ruby-identifier">normal</span> = ( <span class="ruby-ivar">@current_user</span> <span class="ruby-keyword">and</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> ) <span class="ruby-keyword">and</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> ) )
   <span class="ruby-identifier">reset_session</span>()
-
-  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">normal</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'You have signed out.'</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">destroy</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">user</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'Sign in process aborted.'</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash</span>( <span class="ruby-value">:notice</span>, <span class="ruby-value">:signed_out</span> )
 
   <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">signin_path</span>() )
 <span class="ruby-keyword">end</span></pre>
@@ -431,7 +447,7 @@ everything clean and means that any real attempted attacks would fail.</p>
 
           
           <div class="method-source-code" id="handle_unverified_request-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 27</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_unverified_request</span>
   <span class="ruby-identifier">js</span> = <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ]
   <span class="ruby-identifier">reset_session</span>()
@@ -463,11 +479,14 @@ everything clean and means that any real attempted attacks would fail.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">if</span> ( <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'Please sign by providing the OpenID which is to be '</span> <span class="ruby-operator">&lt;&lt;</span>
-                       <span class="ruby-string">'assigned to a new administrator account.'</span>
+  <span class="ruby-ivar">@signin</span> = <span class="ruby-constant">SignIn</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-comment"># &quot;browser...&quot; comes from the 'browser' gem (see Gemfile).</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie6?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie7?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie8?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie9?</span> )
+    <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash_now</span>( <span class="ruby-value">:warning</span>, <span class="ruby-value">:msie</span> )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
@@ -502,7 +521,7 @@ everything clean and means that any real attempted attacks would fail.</p>
 
           
           <div class="method-source-code" id="open_id_authentication-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 88</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">open_id_authentication</span>( <span class="ruby-identifier">identity_url_for_test_mode</span> )
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;test&quot;</span> )
@@ -512,7 +531,7 @@ everything clean and means that any real attempted attacks would fail.</p>
     <span class="ruby-comment"># Assume sign-in was successful. Manual testing is needed</span>
     <span class="ruby-comment"># for &quot;real&quot; working/failed OpenID login.</span>
 
-    <span class="ruby-identifier">process_successful_sign_in_for</span>(
+    <span class="ruby-identifier">process_openid_sign_in_for</span>(
       <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url_for_test_mode</span> )
     )
 
@@ -522,9 +541,13 @@ everything clean and means that any real attempted attacks would fail.</p>
       <span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">identity_url</span> )
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">successful?</span>
-        <span class="ruby-identifier">process_successful_sign_in_for</span>( <span class="ruby-identifier">identity_url</span> )
+        <span class="ruby-identifier">process_openid_sign_in_for</span>( <span class="ruby-identifier">identity_url</span> )
       <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">failed_login</span>( <span class="ruby-identifier">result</span>.<span class="ruby-identifier">message</span> )
+        <span class="ruby-identifier">failed_login</span>(
+          <span class="ruby-constant">SignIn</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sign_in</span> ] ),
+          <span class="ruby-value">:external_message</span>,
+          <span class="ruby-value">:message</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">message</span>
+        )
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 

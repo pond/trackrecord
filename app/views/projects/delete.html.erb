@@ -1,25 +1,26 @@
-<h1>Delete project<%= @record.title.blank? ? '' : " '#{ @record.title }'" %>?</h1>
+<div class="icon_page warning">
 
-<%= image_tag( 'trackrecord/warning.png', { :size => '96x84', :alt=>'!', :class=>'warning' } ) %>
-<h2>Warning!</h2>
+  <h1>Delete project<%= @record.title.blank? ? '' : " '#{ @record.title }'" %>?</h1>
+  <h2>Warning!</h2>
 
-<%= form_for( :project, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+  <p>
+    Only use the 'delete' button if you are <strong>absolutely sure</strong>
+    that you wish to delete the project and, if the box next to the button is
+    ticked, <em>all</em> of its associated tasks. <strong>The action cannot be
+    undone.</strong>
+  </p>
 
-  Only use the 'delete' button if you are <strong>absolutely sure</strong>
-  that you wish to delete the project and, if the box next to the button is
-  ticked, <em>all</em> of its associated tasks. <strong>The action cannot be
-  undone.</strong>
-
-  <br style="clear: both" /><br />
-
-  <%= f.submit( 'Delete project', { :disable_with => 'Deleting...' } ) %>
-  <%= label_tag :destroy_tasks do %>
-    <%= check_box_tag( 'destroy_tasks' ) %>
-    Delete associated tasks too?
+  <%= form_for( :project, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+    <%= f.submit( 'Delete project', { :disable_with => 'Deleting...' } ) %>
+    <%= label_tag :destroy_tasks do %>
+      <%= check_box_tag( 'destroy_tasks' ) %>
+      Delete associated tasks too?
+    <% end %>
   <% end %>
-<% end %>
 
-<p>
-  <%= link_to( 'Cancel and show details',  @record         ) %> |
-  <%= link_to( 'Cancel and list projects', projects_path() ) %>
-</p>
+  <p>
+    <%= link_to( 'Cancel and show details',  @record         ) %> |
+    <%= link_to( 'Cancel and list projects', projects_path() ) %>
+  </p>
+
+</div>

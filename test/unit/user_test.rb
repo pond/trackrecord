@@ -40,7 +40,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal User::USER_TYPE_NORMAL, u.user_type, "New user has unexpected user type"
     refute u.save, "A blank user was saved"
 
-    u.user_type = User::USER_TYPE_ADMIN
+    u.name         = "Foo User"
+    u.email        = "foo@test.com"
+    u.user_type    = User::USER_TYPE_ADMIN
+
     refute u.save, "A new user without an identity URL was saved"
 
     u.identity_url = User.first.identity_url
@@ -55,6 +58,7 @@ class UserTest < ActiveSupport::TestCase
     assert u.tasks.try( :empty? ), "A new user has unexpected nil, or associated tasks"
 
     u.name = "Test user new"
+    u.email = nil
     refute u.save, "An updated user with only a name was saved"
 
     u.name = nil
@@ -223,10 +227,51 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "https://foo.pond.org.uk", User.rationalise_id( "https://foo.pond.org.uk"  ), "Identity URL rationalisation failure"
     assert_equal "https://foo.pond.org.uk", User.rationalise_id( "https://foo.pond.org.uk/" ), "Identity URL rationalisation failure"
 
-    u = User.new
+    u              = User.new
+    u.name         = "Foo User"
+    u.email        = "foo@test.com"
     u.identity_url = "foo.pond.org.uk"
     u.save!
 
     assert_equal "http://foo.pond.org.uk", u.identity_url, "User identity URL not rationalised upon saving"
+  end
+
+  # =========================================================================
+  # =========================================================================
+
+  test "07 password rules" do
+    u       = User.new
+    u.name  = "Foo User"
+    u.email = "foo@test.com"
+
+    refute u.save, "A user with no OpenID or password was saved"
+    assert_equal I18n.t( :'activerecord.errors.models.user.attributes.identity_url_or_password.either' ), u.errors.messages[ :base ].first
+
+    # Incorrect confirmation; note nil confirmation *is* permitted in model,
+    # i.e. a nil value for confirmation results in a validation *pass*, but an
+    # empty string does not; forms in views typically ensure an empty string.
+    #
+    # http://api.rubyonrails.org/classes/ActiveModel/Validations/HelperMethods.html#method-i-validates_confirmation_of
+
+    u.password = "foobly"
+    u.password_confirmation = "barbly"
+
+    refute u.save, "A user with incorrect password confirmation was saved"
+    assert u.errors.messages.has_key?( :password ), "Expected error message on 'password' attribtue is missing"
+
+    # Too short.
+
+    u.password = "foo"
+    u.password_confirmation = u.password # (cough)
+
+    refute u.save, "A user with too short a password was saved"
+    assert u.errors.messages.has_key?( :password ), "Expected error message on 'password' attribtue is missing"
+
+    # http://xkcd.com/936/
+
+    u.password = "correct horse battery staple"
+    u.password_confirmation = u.password
+
+    assert u.save, "A valid user could not be saved"
   end
 end

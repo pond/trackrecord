@@ -1,22 +1,11 @@
     <h2>Basic information</h2>
 
-    <table class="editing_table">
-      <tr class="editing_row">
-        <th>Full name (required)</th>
-        <td><%= f.text_field( :name ) %></td>
-      </tr>
+<%=
+  # Normal users can edit anything within their own account; the Controller
+  # prevents access to any other accounts.
 
-      <tr class="editing_row">
-        <th>Contact e-mail address (required)</th>
-        <td><%= f.text_field( :email ) %></td>
-      </tr>
-
-      <tr class="editing_row">
-        <th>User code (leave as-is if unsure)</th>
-        <td><%= f.text_field( :code ) %></td>
-      </tr>
-    </table>
-
+  render :partial => "credentials", :locals => { :f => f }
+%>
 <% unless ( @current_user.nil? or @current_user.name.blank? ) -%>
     <h2>Configuration</h2>
 <%= fields_for :control_panel do | cp | -%>

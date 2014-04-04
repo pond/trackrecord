@@ -9,11 +9,17 @@
 
 class EmailNotifier < ActionMailer::Base
 
-  # Send a message to the administrator when a new user signs up. Pass the new
-  # User object.
+  # Send a message to a user when their account is created by an administrator.
+  # Pass the new User instance and the ActionDispatch::Request instance for the
+  # current controller action, so that URLs can be generated with a known host
+  # and port.
   #
-  def signup_notification( user )
+  def signup_notification( user, request )
+
+    EmailNotifier.default_url_options[ :host ] = request.host_with_port
+
     @user        = user
+    @site_name   = I18n.t( :'uk.org.pond.trackrecord.site_name' )
     @account_url = url_for(
       {
         :protocol   => 'https',
@@ -25,22 +31,28 @@ class EmailNotifier < ActionMailer::Base
     )
 
     mail(
-      :to      => EMAIL_ADMIN,
+      :to      => "#{ user.name } <#{ user.email }>",
       :from    => EMAIL_ADMIN,
-      :subject => "#{ EMAIL_PREFIX }A new user has signed up"
+      :subject => "[#{ @site_name }] Your account has been created"
     )
   end
 
   # Send a message to a user when their account settings are changed. Pass the
-  # User object representing the updated account.
+  # Pass the updated User instance and the ActionDispatch::Request instance for
+  # the current controller action, so that URLs can be generated with a known
+  # host and port.
   #
-  def admin_update_notification( user )
-    @user = user
+  def admin_update_notification( user, request )
+
+    EmailNotifier.default_url_options[ :host ] = request.host_with_port
+
+    @user      = user
+    @site_name = I18n.t( :'uk.org.pond.trackrecord.site_name' )
 
     mail(
       :to      => "#{ user.name } <#{ user.email }>",
       :from    => EMAIL_ADMIN,
-      :subject => "#{ EMAIL_PREFIX }Your account has been configured"
+      :subject => "[#{ @site_name }] Your account settings have been changed"
     )
   end
 

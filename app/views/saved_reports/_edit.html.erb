@@ -35,12 +35,12 @@
   <p>
     <%= f.label :title %>:
     <%= f.text_field :title, :size => 50, :maxlength => SavedReport::TITLE_LIMIT %>
-    <%= help_link( :report_title ) %>
+    <%= help_link( :reports ) %>
 
     &nbsp;
 
     <%= f.check_box( :shared ) %><%= f.label( :shared ) %>
-    <%= help_link( :report_share ) %>
+    <%= help_link( :reports ) %>
   </p>
 
   <script type="text/javascript">

@@ -32,6 +32,13 @@ gem 'prototype-rails'
 # To use debugger
 # gem 'ruby-debug'
 
+# For a Rails' has_secure_password (or equivalent - see the User model
+# implementation for details):
+# 
+# https://github.com/codahale/bcrypt-ruby/tree/master
+
+gem 'bcrypt', '~> 3.1.7'
+
 # https://github.com/timcharper/calendar_date_select (original, but not Rails 3 compatible)
 #       http://github.com/paneq/calendar_date_select (Rails 3 fork)
 # https://github.com/openid/ruby-openid
@@ -40,20 +47,28 @@ gem 'prototype-rails'
 # https://github.com/collectiveidea/audited
 # https://github.com/swanandp/acts_as_list
 # https://github.com/pond/safe_in_place_editing
+# https://github.com/fnando/browser
 
 gem 'calendar_date_select',   '~> 1.16', :git => 'git://github.com/paneq/calendar_date_select.git'
-gem 'ruby-openid',            '~> 2.3'     
+gem 'ruby-openid',            '~> 2.5'     
 gem 'open_id_authentication', '~> 1.2'
 gem 'will_paginate',          '~> 3.0'
 gem 'audited-activerecord',   '~> 3.0'
 gem 'acts_as_list'
 gem 'safe_in_place_editing',  '~> 2.0.1'
+gem 'browser', '~> 0.4'
 
 # For testing:
 #
 # https://github.com/jnicklas/capybara
+# https://github.com/macournoyer/thin/
+#
+# The 'thin' server is specified as the stock Rails 3 server caused lots
+# of problems in Safari with blank pages; looks like Safari's fault, but
+# that doesn't help solve the problem! Thin is faster anyway.
 
 gem 'capybara', '~> 2.2'
+gem 'thin'
 
 # If you want the charting stuff for some reason... Note that
 # this brings in awkward dependencies such as ImageMagick via

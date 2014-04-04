@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011010129) do
+ActiveRecord::Schema.define(:version => 20140324005805) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20131011010129) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "customer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "preferences"
   end
 
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(:version => 20131011010129) do
     t.string   "title",                          :null => false
     t.string   "code"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lock_version", :default => 0
   end
 
@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(:version => 20131011010129) do
     t.string   "title",                          :null => false
     t.string   "code"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lock_version", :default => 0
   end
 
@@ -151,8 +151,8 @@ ActiveRecord::Schema.define(:version => 20131011010129) do
     t.string   "code"
     t.text     "description"
     t.decimal  "duration",                       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lock_version", :default => 0
     t.boolean  "billable",     :default => true
   end
@@ -168,8 +168,8 @@ ActiveRecord::Schema.define(:version => 20131011010129) do
   create_table "timesheet_rows", :force => true do |t|
     t.integer  "timesheet_id", :null => false
     t.integer  "task_id",      :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "position"
   end
 
@@ -180,24 +180,26 @@ ActiveRecord::Schema.define(:version => 20131011010129) do
     t.text     "description"
     t.boolean  "committed",                     :default => false, :null => false
     t.datetime "committed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.integer  "lock_version",                  :default => 0
     t.datetime "start_day_cache"
     t.string   "auto_sort",       :limit => 16
   end
 
   create_table "users", :force => true do |t|
-    t.text     "identity_url",                     :null => false
-    t.text     "name",                             :null => false
-    t.text     "email",                            :null => false
+    t.text     "identity_url",                          :null => false
+    t.text     "name",                                  :null => false
+    t.text     "email",                                 :null => false
     t.string   "code"
-    t.string   "user_type",                        :null => false
-    t.boolean  "active",         :default => true, :null => false
+    t.string   "user_type",                             :null => false
+    t.boolean  "active",              :default => true, :null => false
     t.datetime "last_committed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "lock_version",   :default => 0
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "lock_version",        :default => 0
+    t.text     "password_digest"
+    t.boolean  "must_reset_password"
   end
 
   create_table "work_packets", :force => true do |t|
@@ -205,8 +207,8 @@ ActiveRecord::Schema.define(:version => 20131011010129) do
     t.integer  "day_number",       :null => false
     t.decimal  "worked_hours",     :null => false
     t.date     "date",             :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
 end

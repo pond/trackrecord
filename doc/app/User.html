@@ -80,15 +80,19 @@
     
     <li><a href="#method-i-all_permitted_tasks">#all_permitted_tasks</a>
     
+    <li><a href="#method-i-authenticate">#authenticate</a>
+    
+    <li><a href="#method-i-has_validated_password-3F">#has_validated_password?</a>
+    
     <li><a href="#method-i-manager-3F">#manager?</a>
+    
+    <li><a href="#method-i-plaintext_password">#plaintext_password</a>
     
     <li><a href="#method-i-privileged-3F">#privileged?</a>
     
     <li><a href="#method-i-remove_inactive_tasks">#remove_inactive_tasks</a>
     
     <li><a href="#method-i-restricted-3F">#restricted?</a>
-    
-    <li><a href="#method-i-tasks_are_active">#tasks_are_active</a>
     
   </ul>
 </nav>
@@ -231,6 +235,8 @@
   
     <li><a href="./SessionsController.html">SessionsController</a>
   
+    <li><a href="./SignIn.html">SignIn</a>
+  
     <li><a href="./Task.html">Task</a>
   
     <li><a href="./TaskGroup.html">TaskGroup</a>
@@ -356,6 +362,100 @@ for more details.</p>
     
 
     
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-new_password" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">new_password</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>A user account has an optional secure password. This runs through BCrypt
+behind the scenes. We don’t use Rails 3’s “has_secure_password” because our
+model has unusual requirements and there are naming issues with the BCrypt
+gem, which decided to rename itself at version 3.2.13, but Rails at the
+time of writing still requires the old named version, which would force us
+to use an outdated gem.</p>
+
+<p>Instead, code in ‘activemodel-3.2.17/lib/active_model/secure_password.rb’
+is adapted here, where required <a
+href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password">api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password</a>
+<a
+href="https://github.com/codahale/bcrypt-ruby/tree/master">github.com/codahale/bcrypt-ruby/tree/master</a></p>
+
+<p>These accessors are for local use when forms are trying to change data.
+Validations later add additional related accessors. Do not use the
+“password” attribute to see if there’s a password on an existing model; use
+“has_validated_password?” insead.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-old_password" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">old_password</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>A user account has an optional secure password. This runs through BCrypt
+behind the scenes. We don’t use Rails 3’s “has_secure_password” because our
+model has unusual requirements and there are naming issues with the BCrypt
+gem, which decided to rename itself at version 3.2.13, but Rails at the
+time of writing still requires the old named version, which would force us
+to use an outdated gem.</p>
+
+<p>Instead, code in ‘activemodel-3.2.17/lib/active_model/secure_password.rb’
+is adapted here, where required <a
+href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password">api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password</a>
+<a
+href="https://github.com/codahale/bcrypt-ruby/tree/master">github.com/codahale/bcrypt-ruby/tree/master</a></p>
+
+<p>These accessors are for local use when forms are trying to change data.
+Validations later add additional related accessors. Do not use the
+“password” attribute to see if there’s a password on an existing model; use
+“has_validated_password?” insead.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-password" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">password</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>A user account has an optional secure password. This runs through BCrypt
+behind the scenes. We don’t use Rails 3’s “has_secure_password” because our
+model has unusual requirements and there are naming issues with the BCrypt
+gem, which decided to rename itself at version 3.2.13, but Rails at the
+time of writing still requires the old named version, which would force us
+to use an outdated gem.</p>
+
+<p>Instead, code in ‘activemodel-3.2.17/lib/active_model/secure_password.rb’
+is adapted here, where required <a
+href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password">api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password</a>
+<a
+href="https://github.com/codahale/bcrypt-ruby/tree/master">github.com/codahale/bcrypt-ruby/tree/master</a></p>
+
+<p>These accessors are for local use when forms are trying to change data.
+Validations later add additional related accessors. Do not use the
+“password” attribute to see if there’s a password on an existing model; use
+“has_validated_password?” insead.</p>
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
     <!-- Methods -->
     
@@ -388,7 +488,7 @@ for the new object in future, though presently this parameter is ignored.</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 116</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">super</span>( <span class="ruby-identifier">params</span> )
 
@@ -431,7 +531,7 @@ assumes ‘HTTP’.</p>
 
           
           <div class="method-source-code" id="rationalise_id-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 202</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 352</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-identifier">uri</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">nil?</span> )
 
@@ -514,7 +614,7 @@ list for privileged users, if any, will be IGNORED by this call.</p>
 
           
           <div class="method-source-code" id="active_permitted_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 141</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 291</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_permitted_tasks</span>
   ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">active</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">active</span>
 <span class="ruby-keyword">end</span></pre>
@@ -551,7 +651,7 @@ both managers and privileged.</p>
 
           
           <div class="method-source-code" id="admin-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 186</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 336</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">admin?</span>
   <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -582,7 +682,7 @@ inactive tasks.</p>
 
           
           <div class="method-source-code" id="all_permitted_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 148</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 298</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">all_permitted_tasks</span>
   ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">scoped</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">scoped</span>
 <span class="ruby-keyword">end</span></pre>
@@ -594,6 +694,88 @@ inactive tasks.</p>
 
         
       </div><!-- all_permitted_tasks-method -->
+
+    
+      <div id="method-i-authenticate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">authenticate</span><span
+            class="method-args">( unencrypted_password )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns self if the password is correct, otherwise false. Taken from
+‘activemodel-3.2.17/lib/active_model/secure_password.rb’.</p>
+          
+
+          
+          <div class="method-source-code" id="authenticate-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticate</span>( <span class="ruby-identifier">unencrypted_password</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">has_validated_password?</span> <span class="ruby-keyword">and</span> <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Password</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">password_digest</span> ) <span class="ruby-operator">==</span> <span class="ruby-identifier">unencrypted_password</span> )
+    <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- authenticate-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- authenticate-method -->
+
+    
+      <div id="method-i-has_validated_password-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_validated_password?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Did this instance have a valid password set at the time it was loaded from
+the database? (Note that the “password” attribute MUST NOT be used for that
+check as most of the time it’ll be ‘nil’; note also that it is never
+possible to retrieve the decrypted value of a password from the database’s
+encrypted copy; all we can do is take a user-supplied password, encrypt it
+and see if the result matches the stored digest).</p>
+
+<p>Note that locally setting a password which is not yet persisted in the
+database (and thus may not yet have been validated) will NOT result in a
+‘true’ response from this method.</p>
+          
+
+          
+          <div class="method-source-code" id="has_validated_password-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_validated_password?</span>
+
+  <span class="ruby-comment"># There are other ways to do this (e.g. &quot;password_digest?&quot; instead of</span>
+  <span class="ruby-comment"># &quot;!! password_digest&quot;) but I felt this was the most legible.</span>
+
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">password_digest_changed?</span> )
+    <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">password_digest_was</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-operator">!</span><span class="ruby-operator">!</span> <span class="ruby-identifier">password_digest</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- has_validated_password-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- has_validated_password-3F-method -->
 
     
       <div id="method-i-manager-3F" class="method-detail ">
@@ -616,7 +798,7 @@ manager accounts are considered privileged.</p>
 
           
           <div class="method-source-code" id="manager-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 173</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 323</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">manager?</span>
   <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> <span class="ruby-keyword">or</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -632,6 +814,54 @@ manager accounts are considered privileged.</p>
 
         
       </div><!-- manager-3F-method -->
+
+    
+      <div id="method-i-plaintext_password" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">plaintext_password</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Ask for the plaintext password - only possible on a user instance where the
+“password” or “<a
+href="User.html#attribute-i-new_password">#new_password</a>” attribute has
+been actively <strong>set</strong>. The “password” attribute is returned in
+favour of “<a href="User.html#attribute-i-new_password">#new_password</a>”
+if they are both present.</p>
+
+<p>A new <a href="User.html">User</a> record from the database will never be
+able to return this data. It’s only for use when you have a new-password /
+changed-password scenario in an existing instance and need to retrieve the
+value.</p>
+
+<p>Never use this to determine if a validated, in-database password exists for
+the user. Always use “has_validated_password?” for that instead.</p>
+          
+
+          
+          <div class="method-source-code" id="plaintext_password-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 270</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">plaintext_password</span>
+  
+  <span class="ruby-comment"># Do this rather than &quot;password || new_password&quot; so that an empty</span>
+  <span class="ruby-comment"># string in &quot;password&quot; is *not* returned in favour of something more</span>
+  <span class="ruby-comment"># significant in &quot;new_password&quot;.</span>
+  
+  <span class="ruby-identifier">password</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">new_password</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">password</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- plaintext_password-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- plaintext_password-method -->
 
     
       <div id="method-i-privileged-3F" class="method-detail method-alias">
@@ -680,7 +910,7 @@ for saving the updated object.</p>
 
           
           <div class="method-source-code" id="remove_inactive_tasks-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 305</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_inactive_tasks</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">active</span>
 <span class="ruby-keyword">end</span></pre>
@@ -712,7 +942,7 @@ administrator can assign. See also “privileged?”.</p>
 
           
           <div class="method-source-code" id="restricted-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 163</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 313</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">restricted?</span>
   <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -724,38 +954,6 @@ administrator can assign. See also “privileged?”.</p>
 
         
       </div><!-- restricted-3F-method -->
-
-    
-      <div id="method-i-tasks_are_active" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">tasks_are_active</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="tasks_are_active-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tasks_are_active</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:base</span>, <span class="ruby-node">&quot;Cannot assign task '#{ task.title }' to this user - it is no longer active&quot;</span> ) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- tasks_are_active-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- tasks_are_active-method -->
 
     
     </section><!-- public-instance-method-details -->

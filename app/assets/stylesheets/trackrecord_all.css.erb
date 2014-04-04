@@ -19,7 +19,6 @@ body {
 }
 
 body {
-  min-width: 800px;
   font-family: "Lucida Grande", "Helvetica Neue", sans-serif;
   font-size: 11pt;
 }
@@ -85,7 +84,7 @@ h6 div.floated_link {
 div#header {
   padding: 10px 2%;
   height: 72px;
-  margin-bottom: 35px;
+  margin-bottom: 40px;
 
   background: rgb(96,108,136); /* Old browsers */
   background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
@@ -271,7 +270,11 @@ div.messages {
 
 div.messages div {
   margin-top: 12px;
-  padding: 5px;
+  padding: 10px;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 div.messages div.flash_error {
@@ -290,6 +293,11 @@ div.messages div.flash_notice {
   color: #080;
   border: 1px solid #080;
   background: #efe;
+}
+
+div.messages + h1,
+div.messages + div.signin {
+  margin-top: 36px;
 }
 
 /* Home page sections */
@@ -336,22 +344,67 @@ table.for_layout tr td {
   padding: 0;
 }
 
-/* OpenID login table */
+/* Sign-in table, with some related modifications for user account editing */
 
-table.openid form {
+div.signin {
+  text-align: center;
+}
+
+div.signin div.errorExplanation {
+  text-align: left;
+}
+
+div.signin p {
+  padding: 10px 0;
+}
+
+div.signin table {
+  margin: 30px auto;
+  border: 1px solid black;
+  padding: 15px;
+  background: #f8f8f8;
+
+  text-align: left;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+div.signin table form {
   margin: 0;
   padding: 0;
 }
 
-table.openid input#openid_url {
-  font-size: 100%;
-  background: url( <%= asset_path( "trackrecord/openid_small_logo.png" ) %> ) 2px 50% no-repeat; 
-  padding-left: 22px;
-  display: inline;
+div.signin th img {
+  padding-right: 10px;
 }
 
-table.openid input#commit {
+div.signin table input {
   font-size: 100%;
+  display: inline;
+  padding-right: 22px;
+}
+
+div.signin table input#sign_in_identity_url {
+  background: white url( <%= asset_path( "trackrecord/openid_small_logo.png" ) %> ) 2px 50% no-repeat; 
+  padding-left: 22px;
+  padding-right: 0;
+}
+
+div.signin table input[ type ~= 'submit' ] {
+  font-size: 14pt;
+  padding-right: 0;
+}
+
+div.signin table td#or {
+  text-align: center;
+  padding: 10px 0;
+}
+
+div.signin table td#submit {
+  text-align: center;
+  padding: 15px 0 0 0;
 }
 
 /* List views */
@@ -992,6 +1045,23 @@ dt {
   padding: 1em 0;
 }
 
+/* General "floating icon" based pages and variants */
+
+div.icon_page {
+  background: top left no-repeat;
+  padding-left: 106px;
+  min-height: 116px;
+}
+
+div.icon_page.help {
+  background-image: url( <%= asset_path( "trackrecord/info.png" ) %> );
+}
+
+div.icon_page.warning {
+  background-image: url( <%= asset_path( "trackrecord/warning.png" ) %> );
+  padding-left: 116px;
+}
+
 /* "Help" icons */
 
 img.help {
@@ -1043,3 +1113,84 @@ a.ygtvspacer:hover {
 a.lbOn {
   font-size: 90%;
 }
+
+/* Narrow viewport adjustments */
+
+@media all and (max-width: 800px) {
+
+  /* Header - stack vertically */
+
+  div#header {
+    text-align: center;
+  }
+
+  div#title {
+    float: none;
+    padding-top: 0;
+  }
+
+  div#title h1 {
+    font-size: 120%;
+    line-height: 100%;
+  }
+  
+  span.slug {
+    font-size: 12px;
+  }
+
+  div#navbar {
+    float: none;
+    border-top: 1px solid rgb(106,118,146);
+    margin: 5px 0 0 0;
+    padding: 5px 0 0 0;
+    width: 100%;
+  }
+
+  div#navbar li {
+    margin: 0 auto;
+    padding: 0;
+    width: 23%;
+    margin: 0 1%;
+  }
+
+  div#navbar a {
+    float: none;
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    line-height: 160%;
+  }
+
+  div#navbar li.current a {
+    padding-top: 5px;
+    height: 28px;
+  }
+
+  /* Footer - stack vertically */
+
+  div#footer {
+    text-align: center;
+    padding: 10px 0 30px;
+  }
+
+  div#footer div:first-child {
+    float: none;
+    padding: 0;
+  }
+
+  div#footer div:last-child {
+    float: none;
+    padding: 0;
+  }
+
+  /* Control panel - stack vertically */
+
+  div#home_general,
+  div#home_management,
+  div#home_admin {
+    float: none;
+    width: auto;
+    padding: 0;
+  }
+}
+

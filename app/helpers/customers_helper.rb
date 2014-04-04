@@ -14,7 +14,8 @@ module CustomersHelper
 
   def customerhelp_actions( customer )
     if ( @current_user.admin? or ( customer.active and @current_user.manager? ) )
-      actions = [ 'edit', 'delete' ]
+      actions = [ 'edit' ]
+      actions << 'delete' if ( @current_user.admin? )
     else
       actions = []
     end

@@ -1,7 +1,6 @@
 <% unless ( @current_user.admin? ) -%>
     <p>Action not permitted</p>
-<% else
-   @user = @record -%>
+<% else -%>
     <h1>Create new account</h1>
 
     <%= error_messages_for :user %>
@@ -11,6 +10,9 @@
 <%= render( :partial => 'admin_edit', :locals => { :f => f } ) -%>
 
       <p>
+        <%= check_box_tag( 'notify_user', '1', true ) %>
+        <em><%= label_tag( 'notify_user', apphelp_view_hint( :notify_new_by_email ).html_safe() ) %></em>
+        <br /><br />
         <%= f.submit( 'Create', { :disable_with => 'Creating...' } ) %>
       </p>
     <% end %>

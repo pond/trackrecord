@@ -14,7 +14,7 @@
   objects = model.pluralize
 -%>
       <div class="list_titles">
-<% if ( @current_user.privileged? ) -%>
+<% if ( @current_user.privileged? && ( model != 'user' || @current_user.admin? ) ) -%>
         <div class="list_create">
           <h2><%= link_to( "Add #{ model }", send( "new_#{ model }_path" ) ) %></h2>
         </div>
