@@ -330,7 +330,7 @@ URLs can be generated with a known host and port.</p>
   <span class="ruby-constant">EmailNotifier</span>.<span class="ruby-identifier">default_url_options</span>[ <span class="ruby-value">:host</span> ] = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host_with_port</span>
 
   <span class="ruby-ivar">@user</span>      = <span class="ruby-identifier">user</span>
-  <span class="ruby-ivar">@site_name</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>( <span class="ruby-value">:'uk.org.pond.trackrecord.site_name'</span> )
+  <span class="ruby-ivar">@site_name</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>( <span class="ruby-value">:&#39;uk.org.pond.trackrecord.site_name&#39;</span> )
 
   <span class="ruby-identifier">mail</span>(
     <span class="ruby-value">:to</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ user.name } &lt;#{ user.email }&gt;&quot;</span>,
@@ -373,13 +373,13 @@ URLs can be generated with a known host and port.</p>
   <span class="ruby-constant">EmailNotifier</span>.<span class="ruby-identifier">default_url_options</span>[ <span class="ruby-value">:host</span> ] = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host_with_port</span>
 
   <span class="ruby-ivar">@user</span>        = <span class="ruby-identifier">user</span>
-  <span class="ruby-ivar">@site_name</span>   = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>( <span class="ruby-value">:'uk.org.pond.trackrecord.site_name'</span> )
+  <span class="ruby-ivar">@site_name</span>   = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>( <span class="ruby-value">:&#39;uk.org.pond.trackrecord.site_name&#39;</span> )
   <span class="ruby-ivar">@account_url</span> = <span class="ruby-identifier">url_for</span>(
     {
-      <span class="ruby-value">:protocol</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'https'</span>,
+      <span class="ruby-value">:protocol</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;https&#39;</span>,
       <span class="ruby-value">:host</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">EMAIL_HOST</span>,
-      <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'users'</span>,
-      <span class="ruby-value">:action</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'edit'</span>,
+      <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;users&#39;</span>,
+      <span class="ruby-value">:action</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;edit&#39;</span>,
       <span class="ruby-value">:id</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
     }
   )

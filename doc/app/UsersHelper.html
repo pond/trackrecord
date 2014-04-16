@@ -328,9 +328,9 @@ objects. See controllers/users_controller.rb for more.</p>
           <div class="method-source-code" id="userhelp_actions-source">
             <pre><span class="ruby-comment"># File app/helpers/users_helper.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_actions</span>( <span class="ruby-identifier">user</span> )
-  <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">'edit'</span> ]
-  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'delete'</span> ) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">or</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span>
-  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'show'</span> )
+  <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">&#39;edit&#39;</span> ]
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">&#39;delete&#39;</span> ) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">or</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span>
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">&#39;show&#39;</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">actions</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- userhelp_actions-source -->
@@ -355,8 +355,8 @@ objects. See controllers/users_controller.rb for more.</p>
         <div class="method-description">
           
           <p>Output HTML for the given form and user which produces a selection list
-allowing the user’s ‘active’ flag to be changed. It is assumed that the
-caller has permission to edit the user in this way.</p>
+allowing the user&#39;s &#39;active&#39; flag to be changed. It is assumed
+that the caller has permission to edit the user in this way.</p>
           
 
           
@@ -367,8 +367,8 @@ caller has permission to edit the user in this way.</p>
     <span class="ruby-identifier">form</span>,
     <span class="ruby-value">:active</span>,
     [
-      [ <span class="ruby-string">'Active'</span>,      <span class="ruby-keyword">true</span>  ],
-      [ <span class="ruby-string">'Deactivated'</span>, <span class="ruby-keyword">false</span> ]
+      [ <span class="ruby-string">&#39;Active&#39;</span>,      <span class="ruby-keyword">true</span>  ],
+      [ <span class="ruby-string">&#39;Deactivated&#39;</span>, <span class="ruby-keyword">false</span> ]
     ],
     <span class="ruby-keyword">false</span>
   )
@@ -420,7 +420,7 @@ lets the user choose the default customer associated with new projects.</p>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">output</span>  = <span class="ruby-string">&quot;          There are no active customers. Please\n&quot;</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;          #{ link_to( 'create at least one', new_customer_path() ) }.&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;          #{ link_to( &#39;create at least one&#39;, new_customer_path() ) }.&quot;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
@@ -446,7 +446,7 @@ lets the user choose the default customer associated with new projects.</p>
 
         <div class="method-description">
           
-          <p>Output HTML for the given user’s control panel editing section within a
+          <p>Output HTML for the given user&#39;s control panel editing section within a
 wider user editing form, which lets the user choose the default project
 associated with new tasks.</p>
 
@@ -460,8 +460,8 @@ associated with new tasks.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_default_project_selector</span>( <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">unless</span>( <span class="ruby-constant">Project</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
     <span class="ruby-identifier">output</span> = <span class="ruby-identifier">apphelp_project_selector</span>(
-      <span class="ruby-string">'control_panel_project_id'</span>,
-      <span class="ruby-string">'control_panel[project_id]'</span>,
+      <span class="ruby-string">&#39;control_panel_project_id&#39;</span>,
+      <span class="ruby-string">&#39;control_panel[project_id]&#39;</span>,
       <span class="ruby-identifier">user</span>.<span class="ruby-identifier">control_panel</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">control_panel</span>.<span class="ruby-identifier">project_id</span>,
       <span class="ruby-keyword">true</span>
     )
@@ -476,7 +476,7 @@ associated with new tasks.</p>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">output</span>  = <span class="ruby-string">&quot;          There are no active projects. Please\n&quot;</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;          #{ link_to( 'create at least one', new_project_path() ) }.&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;          #{ link_to( &#39;create at least one&#39;, new_project_path() ) }.&quot;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
@@ -502,10 +502,10 @@ associated with new tasks.</p>
 
         <div class="method-description">
           
-          <p>List view helper - format the given user’s e-mail address as a link; do so
-using auto_link so we don’t have to worry about malformed addresses. That’s
-the main reason for doing this in a helper rather than manually, within the
-model.</p>
+          <p>List view helper - format the given user&#39;s e-mail address as a link; do
+so using auto_link so we don&#39;t have to worry about malformed addresses.
+That&#39;s the main reason for doing this in a helper rather than manually,
+within the model.</p>
           
 
           
@@ -535,7 +535,7 @@ model.</p>
 
         <div class="method-description">
           
-          <p>As above, but for the user’s identity URL</p>
+          <p>As above, but for the user&#39;s identity URL</p>
           
 
           
@@ -579,7 +579,7 @@ has permission to edit the user in this way.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">userhelp_user_type_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">user</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span> )
 
-    <span class="ruby-comment"># You can't change your own account type if you are an administrator.</span>
+    <span class="ruby-comment"># You can&#39;t change your own account type if you are an administrator.</span>
     <span class="ruby-comment"># This is an easy way to prevent all administrators losing privilege,</span>
     <span class="ruby-comment"># leaving no administrator in the system.</span>
 
@@ -591,29 +591,29 @@ has permission to edit the user in this way.</p>
   <span class="ruby-keyword">elsif</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">admin?</span> )
 
     <span class="ruby-comment"># If the editing account is administrative but the user is not,</span>
-    <span class="ruby-comment"># then the account type can't be changed (managers can only assign</span>
+    <span class="ruby-comment"># then the account type can&#39;t be changed (managers can only assign</span>
     <span class="ruby-comment"># privilege up to manager).</span>
 
     <span class="ruby-identifier">output</span>  = <span class="ruby-string">&quot;          Administrator. Only another administrator can change\n&quot;</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          this user's account type.\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          this user&#39;s account type.\n&quot;</span>
 
   <span class="ruby-keyword">else</span>
 
-    <span class="ruby-comment"># OK, this is your account and you're not an administrator, or</span>
-    <span class="ruby-comment"># it is someone else's account and they're not an administrator.</span>
+    <span class="ruby-comment"># OK, this is your account and you&#39;re not an administrator, or</span>
+    <span class="ruby-comment"># it is someone else&#39;s account and they&#39;re not an administrator.</span>
 
     <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
       <span class="ruby-identifier">warn</span>    = <span class="ruby-keyword">false</span>
       <span class="ruby-identifier">options</span> = [
-                  [ <span class="ruby-string">'Normal'</span>,        <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span>  ],
-                  [ <span class="ruby-string">'Manager'</span>,       <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> ],
-                  [ <span class="ruby-string">'Administrator'</span>, <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span>   ]
+                  [ <span class="ruby-string">&#39;Normal&#39;</span>,        <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span>  ],
+                  [ <span class="ruby-string">&#39;Manager&#39;</span>,       <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> ],
+                  [ <span class="ruby-string">&#39;Administrator&#39;</span>, <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_ADMIN</span>   ]
                 ]
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">warn</span>    = <span class="ruby-keyword">true</span>
       <span class="ruby-identifier">options</span> = [
-                  [ <span class="ruby-string">'Normal'</span>,  <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span>  ],
-                  [ <span class="ruby-string">'Manager'</span>, <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> ]
+                  [ <span class="ruby-string">&#39;Normal&#39;</span>,  <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span>  ],
+                  [ <span class="ruby-string">&#39;Manager&#39;</span>, <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_MANAGER</span> ]
                 ]
     <span class="ruby-keyword">end</span>
 

@@ -268,7 +268,7 @@ href="SavedReport.html">SavedReport</a> instance - or more commonly, the
 href="SavedReport.html">SavedReport</a> instance. Either way, all the
 attributes are copied internally with extra processing and filtering, so
 you can read things like the saved report “range_start_cache” and
-“range_start_cache” attributes, or instead use the compilable report’s
+“range_start_cache” attributes, or instead use the compilable report&#39;s
 computed “range” property - a Range instance giving the two inclusive Dates
 for the report start and end.</p>
 
@@ -304,9 +304,9 @@ the “filtered_users” array.</p>
 
 <p>Note that if the “filtered_tasks” array is empty after compilation, the
 report determined that it could perform no useful calculations. Proceed as
-if the report was never compiled in the first place - don’t attempt to
+if the report was never compiled in the first place - don&#39;t attempt to
 iterate over its rows for example - and just let the user know that the
-report is ‘empty’ / has no useful data.</p>
+report is &#39;empty&#39; / has no useful data.</p>
 
 <p>A <a href="TrackRecordReport/Report.html">Report</a> itself is a
 calculation object (see the <a
@@ -315,7 +315,7 @@ href="TrackRecordReport/CalculatorWithUsers.html">CalculatorWithUsers</a>
 classes) and its own committed and not-committed hour values represent the
 overall report total. The rows and cells and various other calculated
 portions are similarly subclassed. Additonally a final pass over the
-report’s non-zero hour tasks is made and three numbers generated to
+report&#39;s non-zero hour tasks is made and three numbers generated to
 indicate overall task results: “total_duration” is a BigDecimal giving the
 total task duration (for tasks with that set), “total_actual_remaining” is
 the total duration minus all committed hours (only meaningful if all your
@@ -333,7 +333,7 @@ inside
 <code>lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb</code>.
 You can also consult <code>app/views/reports</code> partials for various
 report types, though the mixture of ERb code and HTML therein can make it
-harder to see what’s going on.</p>
+harder to see what&#39;s going on.</p>
 
 <h2 id="label-Database+dependence">Database dependence</h2>
 

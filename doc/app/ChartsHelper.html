@@ -326,8 +326,8 @@
           <p>Return an HTML &lt;img&gt; tag which includes a Gruff-generated pie chart
 summarising a task based on the given duration, committed and not committed
 hours, using the given width and height (pixels). The height of the
-generated image tends to depend on Gruff, so it’s only given the width. If
-you wish to have the image appear undistorted, generate one at the given
+generated image tends to depend on Gruff, so it&#39;s only given the width.
+If you wish to have the image appear undistorted, generate one at the given
 width, check its actual height then use that value from then on.</p>
           
 
@@ -374,14 +374,14 @@ given width (pixels).</p>
             <pre><span class="ruby-comment"># File app/helpers/charts_helper.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">charthelp_image_url</span>( <span class="ruby-identifier">duration</span>, <span class="ruby-identifier">committed</span>, <span class="ruby-identifier">not_committed</span>, <span class="ruby-identifier">width</span> )
 
-  <span class="ruby-comment"># Rails routes don't like &quot;.&quot; appearing in the middle of a URL.</span>
-  <span class="ruby-comment"># &quot;CGI.escape()&quot; doesn't touch them, so change them manually to</span>
+  <span class="ruby-comment"># Rails routes don&#39;t like &quot;.&quot; appearing in the middle of a URL.</span>
+  <span class="ruby-comment"># &quot;CGI.escape()&quot; doesn&#39;t touch them, so change them manually to</span>
   <span class="ruby-comment"># underscores for maximum inoffensiveness! The controller changes</span>
   <span class="ruby-comment"># them back.</span>
 
-  <span class="ruby-identifier">duration</span>      = <span class="ruby-identifier">duration</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>( <span class="ruby-string">'.'</span>, <span class="ruby-string">'_'</span> )
-  <span class="ruby-identifier">committed</span>     = <span class="ruby-identifier">committed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>( <span class="ruby-string">'.'</span>, <span class="ruby-string">'_'</span> )
-  <span class="ruby-identifier">not_committed</span> = <span class="ruby-identifier">not_committed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>( <span class="ruby-string">'.'</span>, <span class="ruby-string">'_'</span> )
+  <span class="ruby-identifier">duration</span>      = <span class="ruby-identifier">duration</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>( <span class="ruby-string">&#39;.&#39;</span>, <span class="ruby-string">&#39;_&#39;</span> )
+  <span class="ruby-identifier">committed</span>     = <span class="ruby-identifier">committed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>( <span class="ruby-string">&#39;.&#39;</span>, <span class="ruby-string">&#39;_&#39;</span> )
+  <span class="ruby-identifier">not_committed</span> = <span class="ruby-identifier">not_committed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>( <span class="ruby-string">&#39;.&#39;</span>, <span class="ruby-string">&#39;_&#39;</span> )
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">chart_url</span>(
     <span class="ruby-constant">CHART_TYPE_PIE</span>,

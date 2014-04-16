@@ -277,8 +277,8 @@
 <p>Hipposoft 2013</p>
 </dd><dt>Purpose
 <dd>
-<p>Base class for objects which have a ‘used range’ defined by an oldest and
-newest item in the database.</p>
+<p>Base class for objects which have a &#39;used range&#39; defined by an
+oldest and newest item in the database.</p>
 </dd></dl>
 <hr style="height: 10px">
 
@@ -315,8 +315,9 @@ newest item in the database.</p>
 
         <div class="method-description">
           
-          <p>Return a range of years used by all instances. Optionally pass ‘true’ if
-you want an actual Date object range rather than just a year range.</p>
+          <p>Return a range of years used by all instances. Optionally pass
+&#39;true&#39; if you want an actual Date object range rather than just a
+year range.</p>
 
 <p>Derived classes must set USED_RANGE_COLUMN to the column for sorting; e.g.
 “created_at”. See also “appctrl_search_range_sql” and elsewhere.</p>
@@ -327,9 +328,9 @@ you want an actual Date object range rather than just a year range.</p>
             <pre><span class="ruby-comment"># File app/models/rangeable.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">used_range</span>( <span class="ruby-identifier">accurate</span> = <span class="ruby-keyword">false</span> )
 
-  <span class="ruby-comment"># May get nothing back from 'first' if there are no instances of the</span>
-  <span class="ruby-comment"># record for this model at all in the database, so use 'try' to get</span>
-  <span class="ruby-comment"># the 'created_at' value or, if there are no objects, 'nil'.</span>
+  <span class="ruby-comment"># May get nothing back from &#39;first&#39; if there are no instances of the</span>
+  <span class="ruby-comment"># record for this model at all in the database, so use &#39;try&#39; to get</span>
+  <span class="ruby-comment"># the &#39;created_at&#39; value or, if there are no objects, &#39;nil&#39;.</span>
 
   <span class="ruby-identifier">first</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">unscoped</span>.<span class="ruby-identifier">order</span>( <span class="ruby-node">&quot;#{ self::USED_RANGE_COLUMN } ASC&quot;</span>  ).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:created_at</span> )
   <span class="ruby-identifier">last</span>  = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">unscoped</span>.<span class="ruby-identifier">order</span>( <span class="ruby-node">&quot;#{ self::USED_RANGE_COLUMN } DESC&quot;</span> ).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:created_at</span> )

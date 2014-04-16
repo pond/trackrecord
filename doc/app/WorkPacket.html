@@ -328,7 +328,7 @@ The work packet may be in either a not committed or committed timesheet.</p>
           <div class="method-source-code" id="find_earliest_by_tasks-source">
             <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_earliest_by_tasks</span>( <span class="ruby-identifier">task_ids</span> = [] )
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">'date ASC'</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">&#39;date ASC&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- find_earliest_by_tasks-source -->
           
@@ -401,7 +401,7 @@ packet may be in either a not committed or committed timesheet.</p>
           <div class="method-source-code" id="find_latest_by_tasks-source">
             <pre><span class="ruby-comment"># File app/models/work_packet.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_latest_by_tasks</span>( <span class="ruby-identifier">task_ids</span> = [] )
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">'date DESC'</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_first_by_tasks_and_order</span>( <span class="ruby-identifier">task_ids</span>, <span class="ruby-string">&#39;date DESC&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- find_latest_by_tasks-source -->
           

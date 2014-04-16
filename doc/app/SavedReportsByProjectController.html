@@ -277,7 +277,7 @@
 <p>Hipposoft 2013</p>
 </dd><dt>Purpose
 <dd>
-<p>Generate ‘canned’ reports for a specific project.</p>
+<p>Generate &#39;canned&#39; reports for a specific project.</p>
 </dd></dl>
 <hr style="height: 10px">
 
@@ -314,7 +314,7 @@
 
         <div class="method-description">
           
-          <p>Generate a report based on a ‘new report’ form submission.</p>
+          <p>Generate a report based on a &#39;new report&#39; form submission.</p>
           
 
           
@@ -338,7 +338,7 @@
   <span class="ruby-identifier">saved_report</span>.<span class="ruby-identifier">task_grouping</span>         = <span class="ruby-string">&quot;both&quot;</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">saved_report</span>.<span class="ruby-identifier">active_task_ids</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">saved_report</span>.<span class="ruby-identifier">inactive_task_ids</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'The project has no associated tasks to show in a report.'</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&#39;The project has no associated tasks to show in a report.&#39;</span>
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">home_path</span>() )
   <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">saved_report</span>.<span class="ruby-identifier">save</span> )
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">report_path</span>( <span class="ruby-identifier">saved_report</span> ) )

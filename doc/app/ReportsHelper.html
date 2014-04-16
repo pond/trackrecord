@@ -364,7 +364,7 @@ controllers/reports_controller.rb for more.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_actions</span>( <span class="ruby-identifier">report</span> )
   <span class="ruby-identifier">actions</span> = []
 
-  <span class="ruby-comment"># All links are generated with the *current* user's ID, because the</span>
+  <span class="ruby-comment"># All links are generated with the *current* user&#39;s ID, because the</span>
   <span class="ruby-comment"># security mechanism is based around &quot;can &lt;this&gt; user do the action</span>
   <span class="ruby-comment"># to &lt;this other&gt; report&quot;, where &quot;&lt;this&gt;&quot; comes from the user ID in</span>
   <span class="ruby-comment"># the URL. See SavedReportsBaseController.</span>
@@ -414,18 +414,19 @@ controllers/reports_controller.rb for more.</p>
 
         <div class="method-description">
           
-          <p>Report a terse number of hours with an ‘overrun’ span if negative or a
-‘no_overrun’ span if &gt;= 0 in two sections separated by a “/” - the idea
-is to pass actual and potential remaining hours for a task in here.</p>
+          <p>Report a terse number of hours with an &#39;overrun&#39; span if negative
+or a &#39;no_overrun&#39; span if &gt;= 0 in two sections separated by a
+“/” - the idea is to pass actual and potential remaining hours for a task
+in here.</p>
           
 
           
           <div class="method-source-code" id="reporthelp_decorated_hours-source">
             <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 360</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_decorated_hours</span>( <span class="ruby-identifier">actual</span>, <span class="ruby-identifier">potential</span> )
-  <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">actual</span>    <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">'overrun'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'no_overrun'</span>
+  <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">actual</span>    <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;overrun&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;no_overrun&#39;</span>
   <span class="ruby-identifier">output</span>      = <span class="ruby-node">&quot;&lt;strong&gt;&lt;span class=\&quot;#{ class_name }\&quot;&gt;#{ apphelp_terse_hours( actual ) }&lt;/span&gt; / &quot;</span>
-  <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">potential</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">'overrun'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'no_overrun'</span>
+  <span class="ruby-identifier">class_name</span>  = <span class="ruby-identifier">potential</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;overrun&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;no_overrun&#39;</span>
   <span class="ruby-identifier">output</span>     <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;span class=\&quot;#{ class_name }\&quot;&gt;#{ apphelp_terse_hours( potential ) }&lt;/span&gt;&lt;/strong&gt;&quot;</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
@@ -575,7 +576,7 @@ the submodule provides in “invocation_options_for”.</p>
         <div class="method-description">
           
           <p>Return HTML suitable for inclusion in the form passed in the first
-parameter (i.e. the ‘f’ in “form for … do |f|” ), which provides a
+parameter (i.e. the &#39;f&#39; in “form for … do |f|” ), which provides a
 selection list allowing the user to choose a report frequency (weekly,
 monthly etc.).</p>
           
@@ -625,10 +626,10 @@ option.</p>
     <span class="ruby-identifier">form</span>,
     <span class="ruby-value">:task_grouping</span>,
     [
-      [ <span class="ruby-string">'No special grouping'</span>,                <span class="ruby-string">'default'</span>  ],
-      [ <span class="ruby-string">'Group billable tasks together'</span>,      <span class="ruby-string">'billable'</span> ],
-      [ <span class="ruby-string">'Group active tasks together'</span>,        <span class="ruby-string">'active'</span>   ],
-      [ <span class="ruby-string">'Group both kinds of tasks together'</span>, <span class="ruby-string">'both'</span>     ]
+      [ <span class="ruby-string">&#39;No special grouping&#39;</span>,                <span class="ruby-string">&#39;default&#39;</span>  ],
+      [ <span class="ruby-string">&#39;Group billable tasks together&#39;</span>,      <span class="ruby-string">&#39;billable&#39;</span> ],
+      [ <span class="ruby-string">&#39;Group active tasks together&#39;</span>,        <span class="ruby-string">&#39;active&#39;</span>   ],
+      [ <span class="ruby-string">&#39;Group both kinds of tasks together&#39;</span>, <span class="ruby-string">&#39;both&#39;</span>     ]
     ],
     <span class="ruby-keyword">false</span>
   )
@@ -654,12 +655,13 @@ option.</p>
 
         <div class="method-description">
           
-          <p>Return HTML suitable for an ‘hours’ field which gives a total amount, then
-a committed and not-committed amount wrapped in SPANs to give the correct
-committed/uncommitted text styles. If the overall total time is zero,
-“&amp;nbsp;” is returned instead. Pass any object subclassing
-TrackRecordReport::ReportElementaryCalculator and, optionally, ‘true’ to
-show “0.0” rather than “&amp;nbsp;” in the zero hours total case.</p>
+          <p>Return HTML suitable for an &#39;hours&#39; field which gives a total
+amount, then a committed and not-committed amount wrapped in SPANs to give
+the correct committed/uncommitted text styles. If the overall total time is
+zero, “&amp;nbsp;” is returned instead. Pass any object subclassing
+TrackRecordReport::ReportElementaryCalculator and, optionally,
+&#39;true&#39; to show “0.0” rather than “&amp;nbsp;” in the zero hours
+total case.</p>
           
 
           
@@ -667,29 +669,29 @@ show “0.0” rather than “&amp;nbsp;” in the zero hours total case.</p>
             <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 328</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_hours</span>( <span class="ruby-identifier">calculator</span>, <span class="ruby-identifier">show_zero</span> = <span class="ruby-keyword">false</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:has_hours?</span> ) )
-    <span class="ruby-identifier">output</span>  = <span class="ruby-string">''</span>
+    <span class="ruby-identifier">output</span>  = <span class="ruby-string">&#39;&#39;</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">total</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' ('</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> ) )
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; (&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> ) )
 
     <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
-      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;span class=&quot;timesheet_committed&quot;&gt;'</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;span class=&quot;timesheet_committed&quot;&gt;&#39;</span>
       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">committed</span> )
-      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/span&gt;'</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;/span&gt;&#39;</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'/'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
 
     <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> )
-      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;span class=&quot;timesheet_not_committed&quot;&gt;'</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;span class=&quot;timesheet_not_committed&quot;&gt;&#39;</span>
       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">calculator</span>.<span class="ruby-identifier">not_committed</span> )
-      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/span&gt;'</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;/span&gt;&#39;</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">')'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> ) )
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;)&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_totals</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">include_not_committed</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> ) )
 
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">show_zero</span> <span class="ruby-operator">?</span> <span class="ruby-string">'0'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'&amp;nbsp;'</span> ).<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">show_zero</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;0&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&amp;nbsp;&#39;</span> ).<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- reporthelp_hours-source -->
@@ -728,12 +730,12 @@ Pass the form being constructed and “:range_month_start” or
   <span class="ruby-identifier">form</span>.<span class="ruby-identifier">grouped_collection_select</span>(
     <span class="ruby-identifier">method</span>,
     <span class="ruby-identifier">get_year_array</span>(), <span class="ruby-comment"># Use years for groups</span>
-    <span class="ruby-value">:months</span>,          <span class="ruby-comment"># A years's &quot;months&quot; method returns its month list</span>
-    <span class="ruby-value">:title</span>,           <span class="ruby-comment"># Use the year 'title' for the group labels</span>
-    <span class="ruby-value">:id</span>,              <span class="ruby-comment"># A month's &quot;id&quot; method returns the value for an option tag</span>
-    <span class="ruby-identifier">start_or_end</span>,     <span class="ruby-comment"># A month's &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
+    <span class="ruby-value">:months</span>,          <span class="ruby-comment"># A years&#39;s &quot;months&quot; method returns its month list</span>
+    <span class="ruby-value">:title</span>,           <span class="ruby-comment"># Use the year &#39;title&#39; for the group labels</span>
+    <span class="ruby-value">:id</span>,              <span class="ruby-comment"># A month&#39;s &quot;id&quot; method returns the value for an option tag</span>
+    <span class="ruby-identifier">start_or_end</span>,     <span class="ruby-comment"># A month&#39;s &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
     {
-      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'-'</span>
+      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;-&#39;</span>
     }
   )
 <span class="ruby-keyword">end</span></pre>
@@ -813,7 +815,7 @@ constructed and “:range_one_month” or “:range_one_week”.</p>
     <span class="ruby-value">:value</span>,
     <span class="ruby-value">:text</span>,
     {
-      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'-'</span>
+      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;-&#39;</span>
     }
   )
 <span class="ruby-keyword">end</span></pre>
@@ -881,9 +883,9 @@ given method to set the chosen option in the report - one of
     <span class="ruby-identifier">form</span>,
     <span class="ruby-identifier">method</span>,
     [
-      [ <span class="ruby-string">'Sort by name'</span>,          <span class="ruby-string">'title'</span>      ],
-      [ <span class="ruby-string">'Sort by code'</span>,          <span class="ruby-string">'code'</span>       ],
-      [ <span class="ruby-string">'Sort by addition date'</span>, <span class="ruby-string">'created_at'</span> ]
+      [ <span class="ruby-string">&#39;Sort by name&#39;</span>,          <span class="ruby-string">&#39;title&#39;</span>      ],
+      [ <span class="ruby-string">&#39;Sort by code&#39;</span>,          <span class="ruby-string">&#39;code&#39;</span>       ],
+      [ <span class="ruby-string">&#39;Sort by addition date&#39;</span>, <span class="ruby-string">&#39;created_at&#39;</span> ]
     ],
     <span class="ruby-keyword">false</span>
   )
@@ -980,7 +982,7 @@ time of a report. Pass the form instance upon which to operate.</p>
 
         <div class="method-description">
           
-          <p>List helper - formatted ‘updated at’ date for the given report</p>
+          <p>List helper - formatted &#39;updated at&#39; date for the given report</p>
           
 
           
@@ -1011,8 +1013,8 @@ time of a report. Pass the form instance upon which to operate.</p>
         <div class="method-description">
           
           <p>Return HTML suitable for inclusion in the form passed in the first
-parameter (i.e. the ‘f’ in “form for … do |f|” ), based on the user array
-given in the second parameter, which provides:</p>
+parameter (i.e. the &#39;f&#39; in “form for … do |f|” ), based on the user
+array given in the second parameter, which provides:</p>
 <ul><li>
 <p>A &lt;select&gt; tag with options listing all users in the array in the
 order in which they are stored in that array.</p>
@@ -1026,11 +1028,11 @@ order in which they are stored in that array.</p>
             <pre><span class="ruby-comment"># File app/helpers/reports_helper.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reporthelp_user_selection</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">users</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">users</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-keyword">return</span> <span class="ruby-string">''</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_collection_select</span>(
       <span class="ruby-identifier">form</span>,
-      <span class="ruby-string">'reportable_user_ids'</span>,
+      <span class="ruby-string">&#39;reportable_user_ids&#39;</span>,
       <span class="ruby-identifier">users</span>,
       <span class="ruby-value">:id</span>,
       <span class="ruby-value">:name</span>
@@ -1072,12 +1074,12 @@ the form being constructed and “:range_week_start” or “:range_week_end”.
   <span class="ruby-identifier">form</span>.<span class="ruby-identifier">grouped_collection_select</span>(
     <span class="ruby-identifier">method</span>,
     <span class="ruby-identifier">get_year_array</span>(), <span class="ruby-comment"># Use years for groups</span>
-    <span class="ruby-value">:weeks</span>,           <span class="ruby-comment"># A years's &quot;weeks&quot; method returns its week list</span>
-    <span class="ruby-value">:title</span>,           <span class="ruby-comment"># Use the year 'title' for the group labels</span>
-    <span class="ruby-value">:id</span>,              <span class="ruby-comment"># A week's &quot;id&quot; method returns the value for an option tag</span>
-    <span class="ruby-identifier">start_or_end</span>,     <span class="ruby-comment"># A week's &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
+    <span class="ruby-value">:weeks</span>,           <span class="ruby-comment"># A years&#39;s &quot;weeks&quot; method returns its week list</span>
+    <span class="ruby-value">:title</span>,           <span class="ruby-comment"># Use the year &#39;title&#39; for the group labels</span>
+    <span class="ruby-value">:id</span>,              <span class="ruby-comment"># A week&#39;s &quot;id&quot; method returns the value for an option tag</span>
+    <span class="ruby-identifier">start_or_end</span>,     <span class="ruby-comment"># A week&#39;s &quot;start&quot; or &quot;end&quot; method is used for the option contents</span>
     {
-      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'-'</span>
+      <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;-&#39;</span>
     }
   )
 <span class="ruby-keyword">end</span></pre>
@@ -1104,8 +1106,8 @@ the form being constructed and “:range_week_start” or “:range_week_end”.
           
           <p>Pass a hash. The “:item” entry is read. If a <a href="User.html">User</a>,
 a string of “by &lt;name&gt;” is returned. Otherwise, a string of “on
-‘&lt;title&gt;’” is returned. Useful for indicating hours are done by a
-user, or were worked on some task.</p>
+&#39;&lt;title&gt;&#39;” is returned. Useful for indicating hours are done
+by a user, or were worked on some task.</p>
           
 
           
@@ -1117,7 +1119,7 @@ user, or were worked on some task.</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">item</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span> )
     <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;by #{ h( item.name ) }&quot;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;on '#{ h( item.augmented_title ) }'&quot;</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;on &#39;#{ h( item.augmented_title ) }&#39;&quot;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- reporthelp_work_breakdown_item_name-source -->

@@ -376,22 +376,23 @@ for more details.</p>
         <div class="method-description">
         
         <p>A user account has an optional secure password. This runs through BCrypt
-behind the scenes. We don’t use Rails 3’s “has_secure_password” because our
-model has unusual requirements and there are naming issues with the BCrypt
-gem, which decided to rename itself at version 3.2.13, but Rails at the
-time of writing still requires the old named version, which would force us
-to use an outdated gem.</p>
+behind the scenes. We don&#39;t use Rails 3&#39;s “has_secure_password”
+because our model has unusual requirements and there are naming issues with
+the BCrypt gem, which decided to rename itself at version 3.2.13, but Rails
+at the time of writing still requires the old named version, which would
+force us to use an outdated gem.</p>
 
-<p>Instead, code in ‘activemodel-3.2.17/lib/active_model/secure_password.rb’
-is adapted here, where required <a
+<p>Instead, code in
+&#39;activemodel-3.2.17/lib/active_model/secure_password.rb&#39; is adapted
+here, where required <a
 href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password">api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password</a>
 <a
 href="https://github.com/codahale/bcrypt-ruby/tree/master">github.com/codahale/bcrypt-ruby/tree/master</a></p>
 
 <p>These accessors are for local use when forms are trying to change data.
 Validations later add additional related accessors. Do not use the
-“password” attribute to see if there’s a password on an existing model; use
-“has_validated_password?” insead.</p>
+“password” attribute to see if there&#39;s a password on an existing model;
+use “has_validated_password?” insead.</p>
         
         </div>
       </div>
@@ -405,22 +406,23 @@ Validations later add additional related accessors. Do not use the
         <div class="method-description">
         
         <p>A user account has an optional secure password. This runs through BCrypt
-behind the scenes. We don’t use Rails 3’s “has_secure_password” because our
-model has unusual requirements and there are naming issues with the BCrypt
-gem, which decided to rename itself at version 3.2.13, but Rails at the
-time of writing still requires the old named version, which would force us
-to use an outdated gem.</p>
+behind the scenes. We don&#39;t use Rails 3&#39;s “has_secure_password”
+because our model has unusual requirements and there are naming issues with
+the BCrypt gem, which decided to rename itself at version 3.2.13, but Rails
+at the time of writing still requires the old named version, which would
+force us to use an outdated gem.</p>
 
-<p>Instead, code in ‘activemodel-3.2.17/lib/active_model/secure_password.rb’
-is adapted here, where required <a
+<p>Instead, code in
+&#39;activemodel-3.2.17/lib/active_model/secure_password.rb&#39; is adapted
+here, where required <a
 href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password">api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password</a>
 <a
 href="https://github.com/codahale/bcrypt-ruby/tree/master">github.com/codahale/bcrypt-ruby/tree/master</a></p>
 
 <p>These accessors are for local use when forms are trying to change data.
 Validations later add additional related accessors. Do not use the
-“password” attribute to see if there’s a password on an existing model; use
-“has_validated_password?” insead.</p>
+“password” attribute to see if there&#39;s a password on an existing model;
+use “has_validated_password?” insead.</p>
         
         </div>
       </div>
@@ -434,22 +436,23 @@ Validations later add additional related accessors. Do not use the
         <div class="method-description">
         
         <p>A user account has an optional secure password. This runs through BCrypt
-behind the scenes. We don’t use Rails 3’s “has_secure_password” because our
-model has unusual requirements and there are naming issues with the BCrypt
-gem, which decided to rename itself at version 3.2.13, but Rails at the
-time of writing still requires the old named version, which would force us
-to use an outdated gem.</p>
+behind the scenes. We don&#39;t use Rails 3&#39;s “has_secure_password”
+because our model has unusual requirements and there are naming issues with
+the BCrypt gem, which decided to rename itself at version 3.2.13, but Rails
+at the time of writing still requires the old named version, which would
+force us to use an outdated gem.</p>
 
-<p>Instead, code in ‘activemodel-3.2.17/lib/active_model/secure_password.rb’
-is adapted here, where required <a
+<p>Instead, code in
+&#39;activemodel-3.2.17/lib/active_model/secure_password.rb&#39; is adapted
+here, where required <a
 href="http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password">api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password</a>
 <a
 href="https://github.com/codahale/bcrypt-ruby/tree/master">github.com/codahale/bcrypt-ruby/tree/master</a></p>
 
 <p>These accessors are for local use when forms are trying to change data.
 Validations later add additional related accessors. Do not use the
-“password” attribute to see if there’s a password on an existing model; use
-“has_validated_password?” insead.</p>
+“password” attribute to see if there&#39;s a password on an existing model;
+use “has_validated_password?” insead.</p>
         
         </div>
       </div>
@@ -495,9 +498,9 @@ for the new object in future, though presently this parameter is ignored.</pre>
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> )
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">code</span>         = <span class="ruby-string">&quot;UID%04d&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span>       = <span class="ruby-keyword">true</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">name</span>         = <span class="ruby-string">''</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span>        = <span class="ruby-string">''</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">identity_url</span> = <span class="ruby-string">''</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">name</span>         = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span>        = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">identity_url</span> = <span class="ruby-string">&#39;&#39;</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_type</span>    = <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_TYPE_NORMAL</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -525,8 +528,8 @@ for the new object in future, though presently this parameter is ignored.</pre>
           <p>Class method - rationalise a URL for use with Open ID by ensuring that the
 scheme and host are in lower case, the port nubmer is explicit and query or
 fragment strings are stripped out. Only call for HTTP or HTTPS URLs. If
-given ‘nil’, returns ‘nil’. If given something with no apparent scheme,
-assumes ‘HTTP’.</p>
+given &#39;nil&#39;, returns &#39;nil&#39;. If given something with no
+apparent scheme, assumes &#39;HTTP&#39;.</p>
           
 
           
@@ -538,8 +541,8 @@ assumes ‘HTTP’.</p>
   <span class="ruby-identifier">uri</span>      = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">strip</span>
   <span class="ruby-identifier">original</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-identifier">uri</span> )
 
-  <span class="ruby-comment"># Did the user omit the 'http' prefix? If so, the URI parser will</span>
-  <span class="ruby-comment"># be a bit confused. Try adding in 'http' instead.</span>
+  <span class="ruby-comment"># Did the user omit the &#39;http&#39; prefix? If so, the URI parser will</span>
+  <span class="ruby-comment"># be a bit confused. Try adding in &#39;http&#39; instead.</span>
 
   <span class="ruby-identifier">original</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-node">&quot;http://#{uri}&quot;</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">original</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">nil?</span> )
 
@@ -548,11 +551,11 @@ assumes ‘HTTP’.</p>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">uri</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">original</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">original</span>.<span class="ruby-identifier">host</span>.<span class="ruby-identifier">nil?</span> )
 
-  <span class="ruby-identifier">original</span>.<span class="ruby-identifier">path</span>.<span class="ruby-identifier">chomp!</span>( <span class="ruby-string">'/'</span> )
+  <span class="ruby-identifier">original</span>.<span class="ruby-identifier">path</span>.<span class="ruby-identifier">chomp!</span>( <span class="ruby-string">&#39;/&#39;</span> )
 
   <span class="ruby-comment"># Looks good - assemble a clean equivalent.</span>
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">original</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">'https'</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">original</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;https&#39;</span> )
     <span class="ruby-identifier">mod</span> = <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPS</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">mod</span> = <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>
@@ -641,9 +644,9 @@ list for privileged users, if any, will be IGNORED by this call.</p>
           
           <p>Is this user an administrator? This generally means full read/write system
 access. This does given the potential to completely break the system (e.g.
-delete a user’s control panel but not the user), although steps are taken
-to try and protect against it. In the end, though, an administrator is
-assumed to be With Clue.</p>
+delete a user&#39;s control panel but not the user), although steps are
+taken to try and protect against it. In the end, though, an administrator
+is assumed to be With Clue.</p>
 
 <p>See also “privileged?” and “manager?”. Administrators are considered to be
 both managers and privileged.</p>
@@ -676,7 +679,7 @@ both managers and privileged.</p>
 
         <div class="method-description">
           
-          <p>As ‘permitted_tasks’ above, but returns details for both active and
+          <p>As &#39;permitted_tasks&#39; above, but returns details for both active and
 inactive tasks.</p>
           
 
@@ -708,7 +711,7 @@ inactive tasks.</p>
         <div class="method-description">
           
           <p>Returns self if the password is correct, otherwise false. Taken from
-‘activemodel-3.2.17/lib/active_model/secure_password.rb’.</p>
+&#39;activemodel-3.2.17/lib/active_model/secure_password.rb&#39;.</p>
           
 
           
@@ -744,14 +747,14 @@ inactive tasks.</p>
           
           <p>Did this instance have a valid password set at the time it was loaded from
 the database? (Note that the “password” attribute MUST NOT be used for that
-check as most of the time it’ll be ‘nil’; note also that it is never
-possible to retrieve the decrypted value of a password from the database’s
-encrypted copy; all we can do is take a user-supplied password, encrypt it
-and see if the result matches the stored digest).</p>
+check as most of the time it&#39;ll be &#39;nil&#39;; note also that it is
+never possible to retrieve the decrypted value of a password from the
+database&#39;s encrypted copy; all we can do is take a user-supplied
+password, encrypt it and see if the result matches the stored digest).</p>
 
 <p>Note that locally setting a password which is not yet persisted in the
 database (and thus may not yet have been validated) will NOT result in a
-‘true’ response from this method.</p>
+&#39;true&#39; response from this method.</p>
           
 
           
@@ -835,9 +838,9 @@ favour of “<a href="User.html#attribute-i-new_password">#new_password</a>”
 if they are both present.</p>
 
 <p>A new <a href="User.html">User</a> record from the database will never be
-able to return this data. It’s only for use when you have a new-password /
-changed-password scenario in an existing instance and need to retrieve the
-value.</p>
+able to return this data. It&#39;s only for use when you have a
+new-password / changed-password scenario in an existing instance and need
+to retrieve the value.</p>
 
 <p>Never use this to determine if a validated, in-database password exists for
 the user. Always use “has_validated_password?” for that instead.</p>
@@ -904,8 +907,8 @@ this alias can lead to more legible code.</p>
 
         <div class="method-description">
           
-          <p>Remove inactive tasks from a user’s tasks list. The caller is responsible
-for saving the updated object.</p>
+          <p>Remove inactive tasks from a user&#39;s tasks list. The caller is
+responsible for saving the updated object.</p>
           
 
           

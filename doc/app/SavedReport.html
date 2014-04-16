@@ -309,26 +309,28 @@
       
         <dt id="CACHED_RANGE_MAP">CACHED_RANGE_MAP
         
-        <dd class="description"><p>Range maps and “update_cached_ranges”: An effective hack to map a Report’s
-indication of date range to a Date value which can be stored in the
-database. Store very early dates, so that people can ask the database to
-sort on the cache values and get relative-style date reports collected
-together. Yes, this does mean that attempts to report time in early January
-of the year 4000 would result in confusion, but only confusion for views
-which use the cached range values for sorting. They’re not used for any
-report mathematics calculations. In practice only the ‘Saved Reports’ index
-view would do the wrong thing; and it’s something of an edge use case :-)</p>
+        <dd class="description"><p>Range maps and “update_cached_ranges”: An effective hack to map a
+Report&#39;s indication of date range to a Date value which can be stored
+in the database. Store very early dates, so that people can ask the
+database to sort on the cache values and get relative-style date reports
+collected together. Yes, this does mean that attempts to report time in
+early January of the year 4000 would result in confusion, but only
+confusion for views which use the cached range values for sorting.
+They&#39;re not used for any report mathematics calculations. In practice
+only the &#39;Saved Reports&#39; index view would do the wrong thing; and
+it&#39;s something of an edge use case :-)</p>
 
 <p>A high future date is used rather than a low past date (e.g. the 1900s) so
 that sorting makes sense. If you wanted to see your most recent reports,
-for example, you’d sort descending by start date. But chances are any of
-the relative dates are likely to be the most recent, or a good enough
+for example, you&#39;d sort descending by start date. But chances are any
+of the relative dates are likely to be the most recent, or a good enough
 approximation, so they should show up first in a descending sort.</p>
 
-<p>It would theoretically be possible to sweep a user’s saved reports at an
-“appropriate moment” (e.g. rendering of the index view) and update all of
-the cached dates to <strong>actual</strong> values and give a true accurate
-sort, but that’s an unbounded performance problem and not really necessary.</p>
+<p>It would theoretically be possible to sweep a user&#39;s saved reports at
+an “appropriate moment” (e.g. rendering of the index view) and update all
+of the cached dates to <strong>actual</strong> values and give a true
+accurate sort, but that&#39;s an unbounded performance problem and not
+really necessary.</p>
         
       
         <dt id="CACHED_REVERSE_RANGE_MAP">CACHED_REVERSE_RANGE_MAP
@@ -495,15 +497,15 @@ administrators can do so.</p>
 href="TrackRecordReport/Report.html">TrackRecordReport::Report</a> instance
 based on the attributes of this <a href="SavedReport.html">SavedReport</a>
 model instance. The result is cached for later access within the current
-request. If you alter attribute values, pass ‘true’ on entry to force a
-refresh of the cache and update the <a
+request. If you alter attribute values, pass &#39;true&#39; on entry to
+force a refresh of the cache and update the <a
 href="TrackRecordReport/Report.html">TrackRecordReport::Report</a>
 instance.</p>
 
-<p>Optionally, pass in a user. Without this, the saved report’s own user
+<p>Optionally, pass in a user. Without this, the saved report&#39;s own user
 details will be used for task filtering and so-on. If you allow another
-user to view someone else’s report, then you will want to pass in that
-other user’s details, since that user may be subject to different
+user to view someone else&#39;s report, then you will want to pass in that
+other user&#39;s details, since that user may be subject to different
 restrictions (in particular, differing permitted task lists).</p>
           
 
@@ -515,7 +517,7 @@ restrictions (in particular, differing permitted task lists).</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">flush_cache</span> )
 
     <span class="ruby-comment"># The TrackRecord internal Report object can be created from this</span>
-    <span class="ruby-comment"># instance's attributes directly, except for many-to-many relationships,</span>
+    <span class="ruby-comment"># instance&#39;s attributes directly, except for many-to-many relationships,</span>
     <span class="ruby-comment"># which are not exposed in that hash and must be assigned manually.</span>
 
     <span class="ruby-ivar">@report</span>                     = <span class="ruby-constant">TrackRecordReport</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">viewing_user</span>, <span class="ruby-identifier">attributes</span>() )
@@ -555,7 +557,7 @@ restrictions (in particular, differing permitted task lists).</p>
           
           <p>Is the given user permitted to do anything with this report? A shared
 report can be viewed by anyone, privileged users can view any report and of
-course the report’s owner can view it.</p>
+course the report&#39;s owner can view it.</p>
           
 
           
@@ -622,9 +624,10 @@ other half of this from an implementation standpoint, if interested).</p>
 
 <p>Each returns either a Date for a fixed report start or end date, or a
 symbol - “:all” indicates start-or-end-of-all-time, while symbols starting
-with ‘last’, ‘this’ or ‘two’ and ending in ‘_month’ or ‘_week’ refer to
-last month/week, this month/week or two months/weeks ago, respectively
-(e.g. “:two_week”, “:last_month”).</p>
+with &#39;last&#39;, &#39;this&#39; or &#39;two&#39; and ending in
+&#39;_month&#39; or &#39;_week&#39; refer to last month/week, this
+month/week or two months/weeks ago, respectively (e.g. “:two_week”,
+“:last_month”).</p>
           
 
           

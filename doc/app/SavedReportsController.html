@@ -328,7 +328,7 @@
 
         <div class="method-description">
           
-          <p>Generate a report based on a ‘new report’ form submission.</p>
+          <p>Generate a report based on a &#39;new report&#39; form submission.</p>
           
 
           
@@ -470,12 +470,12 @@
   <span class="ruby-comment"># application_helper.rb for details.</span>
 
   <span class="ruby-ivar">@columns</span> = [
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Name'</span>,        <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'title'</span>,                 <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'title'</span>             },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Shared'</span>,      <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'shared'</span>,                <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'shared'</span>            },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Last edited'</span>, <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reporthelp_updated_at'</span>,                          <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'updated_at'</span>        },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Start date'</span>,  <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reporthelp_start_date'</span>,                          <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'range_start_cache'</span> },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'End date'</span>,    <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reporthelp_end_date'</span>,                            <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'range_end_cache'</span>   },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Owner'</span>,       <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reporthelp_owner'</span>,                               <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'users.name'</span>        }
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Name&#39;</span>,        <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;title&#39;</span>,                 <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;title&#39;</span>             },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Shared&#39;</span>,      <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;shared&#39;</span>,                <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;shared&#39;</span>            },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Last edited&#39;</span>, <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;reporthelp_updated_at&#39;</span>,                          <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;updated_at&#39;</span>        },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Start date&#39;</span>,  <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;reporthelp_start_date&#39;</span>,                          <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;range_start_cache&#39;</span> },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;End date&#39;</span>,    <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;reporthelp_end_date&#39;</span>,                            <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;range_end_cache&#39;</span>   },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Owner&#39;</span>,       <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;reporthelp_owner&#39;</span>,                               <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;users.name&#39;</span>        }
   ]
 
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">appctrl_index_assist</span>( <span class="ruby-constant">SavedReport</span> )
@@ -503,15 +503,15 @@
     <span class="ruby-identifier">vars</span>.<span class="ruby-identifier">merge!</span>( { <span class="ruby-value">:search_str</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_str</span>, <span class="ruby-value">:search_num</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">search_num</span>, <span class="ruby-value">:range_start</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range_start</span>, <span class="ruby-value">:range_end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range_end</span> } )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Sort order is already partially compiled in 'options' from the earlier</span>
-  <span class="ruby-comment"># call to 'appctrl_index_assist'.</span>
+  <span class="ruby-comment"># Sort order is already partially compiled in &#39;options&#39; from the earlier</span>
+  <span class="ruby-comment"># call to &#39;appctrl_index_assist&#39;.</span>
 
   <span class="ruby-identifier">order_sql</span> = <span class="ruby-node">&quot;ORDER BY #{ options[ :order ] }&quot;</span>
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:order</span> )
 
   <span class="ruby-comment"># Compile the main SQL statement. Select all columns of the project, fetching</span>
-  <span class="ruby-comment"># customers where the project's customer ID matches those customer IDs, with</span>
-  <span class="ruby-comment"># only projects containing tasks in the user's permitted task list (if any)</span>
+  <span class="ruby-comment"># customers where the project&#39;s customer ID matches those customer IDs, with</span>
+  <span class="ruby-comment"># only projects containing tasks in the user&#39;s permitted task list (if any)</span>
   <span class="ruby-comment"># are included, returned in the required order.</span>
   <span class="ruby-comment">#</span>
   <span class="ruby-comment"># Due to restrictions in the way that DISTINCT works, I just cannot figure out</span>
@@ -551,7 +551,7 @@
 
         <div class="method-description">
           
-          <p>Prepare for the ‘new report’ view.</p>
+          <p>Prepare for the &#39;new report&#39; view.</p>
           
 
           
@@ -559,7 +559,7 @@
             <pre><span class="ruby-comment"># File app/controllers/saved_reports_controller.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
 
-  <span class="ruby-comment"># Implement copying; this could've been done in a new controller</span>
+  <span class="ruby-comment"># Implement copying; this could&#39;ve been done in a new controller</span>
   <span class="ruby-comment"># but no matter how you look at it, &quot;new-with-an-ID&quot; does not map</span>
   <span class="ruby-comment"># cleanly to Rails REST and doing such an action in a separate</span>
   <span class="ruby-comment"># controller just leads to code duplication and difficulties with</span>
@@ -648,7 +648,7 @@
           <p>Commit changes to an existing report. Note that some security actions, e.g.
 making sure the list of allowed reportable users is valid or the list of
 tasks is only that the current user can see, are enforced down in the
-report generator. If someone hacks a view, it won’t help them.</p>
+report generator. If someone hacks a view, it won&#39;t help them.</p>
           
 
           

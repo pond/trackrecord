@@ -243,7 +243,7 @@ your sources then migrate your data with ”rake db:migrate“.</p>
 
 <p>A while ago, a major OpenID provider shut down its ID service. Although
 other providers still exist - e.g. Google account holders have an OpenID,
-even if they don’t realise it - OpenID has struggled to gain widespread
+even if they don&#39;t realise it - OpenID has struggled to gain widespread
 adoption and finding an easy-to-use provider with a clear indication of
 your actual ID can be a struggle.</p>
 
@@ -258,14 +258,14 @@ and use either to sign in later.</p>
 <p>When someone new needs to use the system, the administrator creates their
 user account as normal. Either that user tells the admin what OpenID they
 want, or the admin assigns a temporary password to the new account, or
-both; the admin then tells the new user about the password (if that’s been
-chosen). When the user signs in, they’ll be asked to reset the temporary
-password to a permanent one that only they know. Adminstrators can actually
-change this - though it isn’t recommended - by deselecting the “must change
-password on sign-in” option when creating the new user account.
-Administrators can also re-set this option for existing users should they
-need to re-issue a password (maybe the user forgot theirs), or should they
-want the user to choose another password.</p>
+both; the admin then tells the new user about the password (if that&#39;s
+been chosen). When the user signs in, they&#39;ll be asked to reset the
+temporary password to a permanent one that only they know. Adminstrators
+can actually change this - though it isn&#39;t recommended - by deselecting
+the “must change password on sign-in” option when creating the new user
+account. Administrators can also re-set this option for existing users
+should they need to re-issue a password (maybe the user forgot theirs), or
+should they want the user to choose another password.</p>
 </li><li>
 <p>From the normal user perspective, the user can sign in with their OpenID if
 they gave one to the administrator, and/or their e-mail address and
@@ -278,9 +278,9 @@ they sign in, or if the administrator had subsequently turned back on the
 accounts for new users. Accordingly, the usual process of password reset
 messages, “forgotten my password” systems and so-on are not provided; a
 user who had forgotten their access details would contact the administrator
-who could issue a new temporary password by editing the user’s account. The
-control over access management is primarily in the hands of the admin, not
-all other users of the system.</p>
+who could issue a new temporary password by editing the user&#39;s account.
+The control over access management is primarily in the hands of the admin,
+not all other users of the system.</p>
 
 <p>Security is provided via rails-bcrypt and uses salted, encrypted storage.
 This is fairly secure; if you are unfortunate enough to have your database
@@ -321,7 +321,7 @@ a “not authorised” response.</p>
 <p>Please see “<a href="README_rdoc.html">README.rdoc</a>” for vital
 information on installation, upgrading from an earlier version, database
 requirements and how to run the built in test suite that helps verify your
-database’s suitability for TrackRecord.</p>
+database&#39;s suitability for TrackRecord.</p>
 
 <p>This release is a small update that adds a convenience feature to create a
 new first task for a project, at the same time a project is made. A similar
@@ -333,7 +333,7 @@ of the item, which you can edit later if necessary.</p>
 <p>Other maintenance related changes:</p>
 <ul><li>
 <p>This release uses the new “Gemified” Safe In Place Editor code, now
-available on RubyGems. You must run “bundle install” if you’ve upgraded
+available on RubyGems. You must run “bundle install” if you&#39;ve upgraded
 from an earlier release. Due to important security patches, Rails 3.2.17 is
 also required. The PG gem for PostgreSQL users needs to be at 0.17.1 or
 later. Gemfile requrements for “calendar_date_select” were inaccurate and
@@ -344,11 +344,11 @@ updated gems will be included.</p>
 quite heavyweight dependencies, including Nokogiri. This may be time
 consuming or troublesome to install when you do “bundle install” or “bundle
 update”. If you want to avoid this and either not run tests or skip the
-integration tests, comment out the “gem ‘capybara’” line in the “Gemfile”
-file before you run “bundle install” or “bundle update”.</p>
+integration tests, comment out the “gem &#39;capybara&#39;” line in the
+“Gemfile” file before you run “bundle install” or “bundle update”.</p>
 
 <p>A test mode bypass of OpenID authentication has been added for integration
-test purposes. It’s only active in test mode.</p>
+test purposes. It&#39;s only active in test mode.</p>
 
 <p>See the <a href="README_rdoc.html">README.rdoc</a> file for more
 information on installing Nokogiri, especially if you get warnings at
@@ -385,18 +385,18 @@ Finally, titles are now correct - no more “YOUR_TITLE” text!</p>
 <p>Please see “<a href="README_rdoc.html">README.rdoc</a>” for vital
 information on installation, upgrading from an earlier version, database
 requirements and how to run the built in test suite that helps verify your
-database’s suitability for TrackRecord.</p>
+database&#39;s suitability for TrackRecord.</p>
 
 <p>Version 2.25 uses the new “Gemified” Safe In Place Editor code, now
-available on RubyGems. It’s important to run “bundle install” if you have
-upgraded. Rails 3.2.15 is also required.</p>
+available on RubyGems. It&#39;s important to run “bundle install” if you
+have upgraded. Rails 3.2.15 is also required.</p>
 
 <h2 id="label-Version+2.24%2C+2013-10-16">Version 2.24, 2013-10-16</h2>
 
 <p>Please see “<a href="README_rdoc.html">README.rdoc</a>” for vital
 information on installation, upgrading from an earlier version, database
 requirements and how to run the built in test suite that helps verify your
-database’s suitability for TrackRecord.</p>
+database&#39;s suitability for TrackRecord.</p>
 
 <p>Version 2.24 introduces the following new features:</p>
 <ul><li>
@@ -410,13 +410,13 @@ by sarev.</p>
 conditions.</p>
 </li><li>
 <p>An in-place title editing issue arising from an incompatibility between
-Rails and Prototype.js 1.7’s more strict adherence to HTTP rules on data
-encoding has been worked around within the Safe In Place Editor plugin.
-This fixes Issue #21, reported by sarev (with thanks).</p>
+Rails and Prototype.js 1.7&#39;s more strict adherence to HTTP rules on
+data encoding has been worked around within the Safe In Place Editor
+plugin. This fixes Issue #21, reported by sarev (with thanks).</p>
 </li><li>
-<p>Saved report shared flags and copying didn’t work as expected for various
-user types; essentially the feature was only half implemented. Now done
-properly!</p>
+<p>Saved report shared flags and copying didn&#39;t work as expected for
+various user types; essentially the feature was only half implemented. Now
+done properly!</p>
 </li><li>
 <p>In-place editors for saved report titles and share flags are now supported
 in the index view.</p>
@@ -426,7 +426,7 @@ in the index view.</p>
 
 <h2 id="label-Version+2.23%2C+2013-09-09">Version 2.23, 2013-09-09</h2>
 
-<p>Please see version 2.20’s change information below for important notes
+<p>Please see version 2.20&#39;s change information below for important notes
 about database requirements.</p>
 
 <p>Version 2.23 fixes the following bugs that were found in v2.22:</p>
@@ -439,18 +439,18 @@ reported flag value was the opposite of that intended).</p>
 
 <h2 id="label-Version+2.22%2C+2013-09-05">Version 2.22, 2013-09-05</h2>
 
-<p>Please see version 2.20’s change information below for details. In
+<p>Please see version 2.20&#39;s change information below for details. In
 particular, please check the database/PostgreSQL notes therein.</p>
 
 <p>Version 2.22 fixes the following bugs that were found in v2.21:</p>
 <ul><li>
-<p>Manager-type users couldn’t edit their profile details due to a typing
+<p>Manager-type users couldn&#39;t edit their profile details due to a typing
 error (“@f” instead of just “f”).</p>
 </li></ul>
 
 <h2 id="label-Version+2.21%2C+2013-08-19">Version 2.21, 2013-08-19</h2>
 
-<p>Please see version 2.20’s change information below for details. In
+<p>Please see version 2.20&#39;s change information below for details. In
 particular, please check the database/PostgreSQL notes therein.</p>
 
 <p>Version 2.21 fixes the following bugs that were found in v2.20:</p>
@@ -470,8 +470,8 @@ in-passing note!).</p>
 
 <p>Please see the version 2.11 change details later in this file for very
 important details about upgrading from an earlier version or installing
-anew. If you’re already running version 2.11, there are few extra steps to
-take - just update your TrackRecord files with the new release. You then
+anew. If you&#39;re already running version 2.11, there are few extra steps
+to take - just update your TrackRecord files with the new release. You then
 need to run “bundle install” to get updated required gems.</p>
 
 <p>THIS RELEASE WORKS BEST ON POSTGRESQL. If you are using another database,
@@ -485,10 +485,11 @@ but report performance will be poor.</p>
 improve upon. The new report generator is much faster than both in all
 circumstances.</p>
 
-<p>THE TrackRecordReprot API HAS NECESSARILY CHANGED AS A RESULT - just after
-I’d said it would be stable for report generators…! Hopefully the
-v2.10/v2.11 series were sufficiently short lived that nobody wrote code
-against that API. There was no other way to improve performance.</p>
+<p>The <a href="TrackRecordReport.html">TrackRecordReport</a> API HAS
+NECESSARILY CHANGED AS A RESULT - just after I&#39;d said it would be
+stable for report generators…! Hopefully the v2.10/v2.11 series were
+sufficiently short lived that nobody wrote code against that API. There was
+no other way to improve performance.</p>
 
 <p>The TrackRecordSection API has changed too. See “doc/app/index.html” for
 API documentation.</p>
@@ -501,7 +502,7 @@ via e.g. Git.</p>
 <p>The “copy report” feature now actually copies reports (!).</p>
 </li><li>
 <p>The list of saved reports uses the correct user ID for URLs in the view (a
-technical level fix that users shouldn’t notice much).</p>
+technical level fix that users shouldn&#39;t notice much).</p>
 </li></ul>
 
 <p>The only user-facing enhancements are the performance improvements
@@ -512,12 +513,13 @@ described above.</p>
 <p>The procedure to upgrade from any v2.x release or to install anew is the
 same, though upgraders may already have completed some steps:</p>
 <ul><li>
-<p>INSTALLING: If you are not using ‘rvm’ to manage your Ruby environment, I
-strongly recommend getting that set up, though it’s not essential. See:</p>
+<p>INSTALLING: If you are not using &#39;rvm&#39; to manage your Ruby
+environment, I strongly recommend getting that set up, though it&#39;s not
+essential. See:</p>
 
 <pre>https://rvm.io</pre>
 </li><li>
-<p>INSTALLING: If you haven’t already, copy “config/database_blank.yml” as
+<p>INSTALLING: If you haven&#39;t already, copy “config/database_blank.yml” as
 “config/database.yml” and fill in the details for your database.
 TrackRecord is tested on PostgreSQL 8 though others should work too.</p>
 
@@ -570,17 +572,17 @@ RAILS_ENV=production bundle exec rake assets:precompile</pre>
 
 <p>This can be a fraught process and the best I can do is recommend you do web
 searches for any of the huge range of problems this process seems prone to
-throwing up; but with luck, it’ll just work. IMPORTANT: If you run the
+throwing up; but with luck, it&#39;ll just work. IMPORTANT: If you run the
 application from a subdirectory rather than the root of your domain, even
-if it’s done transparently with Passenger, you have to take extra steps.
-See after the change details below for more.</p>
+if it&#39;s done transparently with Passenger, you have to take extra
+steps. See after the change details below for more.</p>
 
 <p>Version 2.10 fixes the following bugs that were found in v2.04:</p>
 <ul><li>
 <p>Errors made in a timesheet editor grid (e.g. non-numerical hours) would
 cause validation to fail correctly, but changes made elsewhere would be
 reset when the form was presented back with errors listed. Changes to the
-timesheet’s week, description and/or commit flag are now maintained.</p>
+timesheet&#39;s week, description and/or commit flag are now maintained.</p>
 </li><li>
 <p>Sign-in page updated with new text, fixing outdated links.</p>
 </li><li>
@@ -616,8 +618,8 @@ allowing other report manipulation and export mechanisms to be added easily
 by third parties.</p>
 </li><li>
 <p>Inline project creation for bulk task import - users reported often going
-through the import process only to realise that they hadn’t added a project
-to contain the new tasks. Now both can be done simultaneously.</p>
+through the import process only to realise that they hadn&#39;t added a
+project to contain the new tasks. Now both can be done simultaneously.</p>
 </li><li>
 <p>Administrators can now bulk-commit timesheets over a given date range.</p>
 </li><li>
@@ -628,25 +630,27 @@ less inside Ruby code.</p>
 
 <h3 id="label-Deploying+in+a+subdirectory">Deploying in a subdirectory</h3>
 
-<p>Rails asset precompilation is somewhat broken in that it doesn’t understand
-applications deployed into subdirectories. If you are not using Heroku, you
-can fix this by adding the following into
+<p>Rails asset precompilation is somewhat broken in that it doesn&#39;t
+understand applications deployed into subdirectories. If you are not using
+Heroku, you can fix this by adding the following into
 config/environments/production.rb:</p>
 
 <pre>config.assets.initialize_on_precompile = true
-config.relative_url_root = '/&lt;your-app-subdir&gt;'</pre>
+config.relative_url_root = &#39;/&lt;your-app-subdir&gt;&#39;</pre>
 
 <p>…then precompile the assets. If already compiled, delete the folder
-‘public/assets’ then precompile again (see earlier for the command).</p>
+&#39;public/assets&#39; then precompile again (see earlier for the
+command).</p>
 
-<p>On Heroku, the ‘initialize’ flag must be ‘false’. The following link may
-provide some insight about what to do:</p>
+<p>On Heroku, the &#39;initialize&#39; flag must be &#39;false&#39;. The
+following link may provide some insight about what to do:</p>
 
 <pre>https://github.com/rails/rails/issues/8941</pre>
 
-<p>I apologise for the inconvenience, but I can’t do much about a bug like
-this that’s been in Rails for at least two years, especially now that (at
-the time of writing) Rails 4 is out so a Rails 3 fix is even more unlikely.</p>
+<p>I apologise for the inconvenience, but I can&#39;t do much about a bug like
+this that&#39;s been in Rails for at least two years, especially now that
+(at the time of writing) Rails 4 is out so a Rails 3 fix is even more
+unlikely.</p>
 
 <h2 id="label-Version+2.04%2C+2013-07-11">Version 2.04, 2013-07-11</h2>
 
@@ -659,8 +663,8 @@ command:</p>
 
 <p>Version 2.04 fixes the following bugs that were found in v2.03:</p>
 <ul><li>
-<p>Sometimes sorting a timesheet’s rows would not fully sort them - you would
-have to sort a second time to get the correct result.</p>
+<p>Sometimes sorting a timesheet&#39;s rows would not fully sort them - you
+would have to sort a second time to get the correct result.</p>
 </li><li>
 <p>Reordered timesheet rows were not maintained when the timesheet was saved
 and used as a template for another week; the row order would be reset.</p>
@@ -691,10 +695,10 @@ deployment, rather than with test data only:</p>
 <ul><li>
 <p>Sometimes duplicating a timesheet would keep apparently duplicating one or
 more of its rows more than once. This was actually due to an iterator
-removing a new timesheet’s default rows, as specified in the user’s control
-panel, failing to actually iterate over all objects. It seems an explicit
-call to “all” is required on associated collections before “each” to
-reliably iterate across all objects (!). A lot of other files have been
+removing a new timesheet&#39;s default rows, as specified in the user&#39;s
+control panel, failing to actually iterate over all objects. It seems an
+explicit call to “all” is required on associated collections before “each”
+to reliably iterate across all objects (!). A lot of other files have been
 updated as a precaution, following the same pattern.</p>
 </li><li>
 <p>In passing while testing this fix, noticed that attribute protection code
@@ -713,12 +717,12 @@ earlier version.</p>
 
 <p>This release fixes the following bugs that were found in v2.00:</p>
 <ul><li>
-<p>Rails 3 converts dates to dates-with-time-and-timezone using the server’s
-local timezone rather than UTC as in Rails 2. This could lead to work
-packets and timesheets having incorrect cached date-time values. Editing
-timesheets would show no issues but reports might be wrong. Noticed on the
-Endurance installation when the server automatically changed from UTC to
-UTC+1 on April 1st. Fixed.</p>
+<p>Rails 3 converts dates to dates-with-time-and-timezone using the
+server&#39;s local timezone rather than UTC as in Rails 2. This could lead
+to work packets and timesheets having incorrect cached date-time values.
+Editing timesheets would show no issues but reports might be wrong. Noticed
+on the Endurance installation when the server automatically changed from
+UTC to UTC+1 on April 1st. Fixed.</p>
 </li><li>
 <p>Administrator users were unable to show saved reports from other users
 unless they were shared, even though they could edit them. Administrators
@@ -736,46 +740,49 @@ result, the Ruby version requirements are increased too; you need version
 1.9.3 at patch 392 or later. The upgrade instructions below assume that
 this is already available.</p>
 
-<p>On the client side, TrackRecord’s views now assume a competent HTML 5, CSS
-2 capable browser is used. It looks best on modern CSS 3 aware browsers
+<p>On the client side, TrackRecord&#39;s views now assume a competent HTML 5,
+CSS 2 capable browser is used. It looks best on modern CSS 3 aware browsers
 such as recent Safari, Chrome, Opera and Firefox builds. JavaScript is very
 strongly recommended but not required, so if you have it turned off in your
-browser for any reason or your browser doesn’t support it, TrackRecord can
-still be used. Internet Explorer is untested and not officially supported
-at any version, though it may work in practice.</p>
+browser for any reason or your browser doesn&#39;t support it, TrackRecord
+can still be used. Internet Explorer is untested and not officially
+supported at any version, though it may work in practice.</p>
 
 <h3 id="label-Upgrading">Upgrading</h3>
 
 <p>To upgrade, first do a full database backup in case anything goes wrong!
-Next, unpack TrackRecord somewhere new - don’t copy it on top of an
+Next, unpack TrackRecord somewhere new - don&#39;t copy it on top of an
 existing installation. Make any configuration changes you made to your old
 copy:</p>
 <ul><li>
-<p>You can safely just copy over the old ‘config/database.yml’</p>
+<p>You can safely just copy over the old &#39;config/database.yml&#39;</p>
 </li><li>
-<p>…and ‘config/initializers/email_config.rb’</p>
+<p>…and &#39;config/initializers/email_config.rb&#39;</p>
 </li><li>
-<p>…and ‘config/initializers/general_config.rb’ files</p>
+<p>…and &#39;config/initializers/general_config.rb&#39; files</p>
 </li><li>
 <p>Possibly port over your e-mail sending configuration for ActionMailer in
-‘config/environments/production.rb’ or ‘…development.rb’ - see: <a
+&#39;config/environments/production.rb&#39; or &#39;…development.rb&#39; -
+see: <a
 href="http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration">guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration</a></p>
 </li></ul>
 
-<p>You must also set a secret key in ‘config/initializers/secret_token.rb’;
-this is the equivalent of the key that in previous versions lived inside
-‘config/environment.rb’. Comments in the file give detailed instructions.</p>
+<p>You must also set a secret key in
+&#39;config/initializers/secret_token.rb&#39;; this is the equivalent of
+the key that in previous versions lived inside
+&#39;config/environment.rb&#39;. Comments in the file give detailed
+instructions.</p>
 
-<p>The gem dependencies for TrackRecord are all listed in ‘Gemfile’. To get
-these installed, from inside the ‘trackrecord’ directory (the same
-directory as this change log file and ‘Gemfile’), run:</p>
+<p>The gem dependencies for TrackRecord are all listed in &#39;Gemfile&#39;.
+To get these installed, from inside the &#39;trackrecord&#39; directory
+(the same directory as this change log file and &#39;Gemfile&#39;), run:</p>
 
 <pre>bundle install</pre>
 
 <p>…to make sure all the relevant gems required by the updated TrackRecord are
 present. Now make sure your web server is offline and bring your database
-up to date (changing ‘production’ to ‘development’ if being rightly
-cautious and testing on a development copy first):</p>
+up to date (changing &#39;production&#39; to &#39;development&#39; if being
+rightly cautious and testing on a development copy first):</p>
 
 <pre>rake db:migrate RAILS_ENV=production</pre>
 
@@ -784,11 +791,11 @@ server changes needed for Rails 3; consult your web server documentation if
 necessary. I recommend using Phusion Passenger, if possible, to serve Rails
 application such as TrackRecord.</p>
 
-<p>If you have trouble running ‘bundle’ or the migration, in the first
+<p>If you have trouble running &#39;bundle&#39; or the migration, in the first
 instance check Google for the error message you see - upgrading Rails and
 using bundles is very rarely a pain-free process and the issues will
-usually be to do with your computing environment rather than TrackRecord’s
-own code.</p>
+usually be to do with your computing environment rather than
+TrackRecord&#39;s own code.</p>
 
 <h3 id="label-Changes+from+version+1.54">Changes from version 1.54</h3>
 
@@ -825,17 +832,19 @@ the original item, with tooltips giving code and description details.</p>
 <p>The beginnings of proper internationalisation are in place, though a lot of
 messages are not yet run through the language files.</p>
 </li><li>
-<p>The ‘gruff’ gem is commented out inside ‘Gemfile’ to prevent annoying
-dependencies. The graph controller mechanism is still present but will not
-work unless you uncomment the gruff line in ‘Gemfile’ and re-run “bundle
-install”. It isn’t used by default anywhere in TrackRecord.</p>
+<p>The &#39;gruff&#39; gem is commented out inside &#39;Gemfile&#39; to
+prevent annoying dependencies. The graph controller mechanism is still
+present but will not work unless you uncomment the gruff line in
+&#39;Gemfile&#39; and re-run “bundle install”. It isn&#39;t used by default
+anywhere in TrackRecord.</p>
 </li><li>
 <p>Bugs related to tasks with no project or projects with on customer fixed.</p>
 </li><li>
 <p>Old-style report URLs are now reliable, rather than leading to 404 errors
 on older TrackRecord versions if active tasks had become inactive or vice
 versa. Now the active-vs-inactive lists are reassessed at generation time
-(and the signed in user’s task permissions taken into account as usual).</p>
+(and the signed in user&#39;s task permissions taken into account as
+usual).</p>
 </li></ul>
 
 </div>

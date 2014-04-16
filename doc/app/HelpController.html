@@ -326,18 +326,18 @@
             <pre><span class="ruby-comment"># File app/controllers/help_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
 
-  <span class="ruby-comment"># I can't imagine how being able to view arbitrary help pages without being</span>
+  <span class="ruby-comment"># I can&#39;t imagine how being able to view arbitrary help pages without being</span>
   <span class="ruby-comment"># signed in could be harmful, but to be absolutely sure, only allow the one</span>
-  <span class="ruby-comment"># help page that's required in this case - the sign-in page information</span>
+  <span class="ruby-comment"># help page that&#39;s required in this case - the sign-in page information</span>
   <span class="ruby-comment">#</span>
   <span class="ruby-identifier">appctrl_confirm_user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;sign_in&quot;</span>
 
   <span class="ruby-comment"># The &quot;:id&quot; value ends up being used as the name of a Partial to be</span>
-  <span class="ruby-comment"># rendered by the 'help' view. To stop hackers putting dots, slashes</span>
+  <span class="ruby-comment"># rendered by the &#39;help&#39; view. To stop hackers putting dots, slashes</span>
   <span class="ruby-comment"># etc. into a URL in an attempt to get the renderer to load a different</span>
   <span class="ruby-comment"># Partial, only let &quot;a-z&quot; and underscores through.</span>
 
-  <span class="ruby-ivar">@partial</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ].<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/[^a-z_]/</span>, <span class="ruby-string">''</span> )
+  <span class="ruby-ivar">@partial</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ].<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/[^a-z_]/</span>, <span class="ruby-string">&#39;&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- show-source -->
           

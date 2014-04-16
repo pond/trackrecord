@@ -434,11 +434,11 @@ href="http://railscasts.com/episodes/219-active-model">railscasts.com/episodes/2
 
         <div class="method-description">
           
-          <p>We use a private coerce-to-date function rather than Rails’ built in “<a
-href="TimesheetForceCommit.html#method-i-to_date">#to_date</a>” because of
-the latter’s bizarre behaviour when faced with invalid strings
+          <p>We use a private coerce-to-date function rather than Rails&#39; built in
+“<a href="TimesheetForceCommit.html#method-i-to_date">#to_date</a>” because
+of the latter&#39;s bizarre behaviour when faced with invalid strings
 (user-meaningless exceptions arising from the internal implementation,
-rather than Ruby’s “invalid date”).</p>
+rather than Ruby&#39;s “invalid date”).</p>
 
 <p>The values used for limits end up always coerced to dates, while the
 user-specified “earliest” and “latest” are left to whatever the user set.
@@ -569,7 +569,8 @@ effectively empty.</p>
           
           <p>Pass a Date, DateTime, Time, string etc. and have it parsed to a Date.
 Returns the result (or throws an exception). If the value given is
-effectively empty (e.g. nil, empty string) then the method returns ‘nil’.</p>
+effectively empty (e.g. nil, empty string) then the method returns
+&#39;nil&#39;.</p>
           
 
           

@@ -361,8 +361,8 @@ instance.</p>
             <pre><span class="ruby-comment"># File lib/track_record_sections.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
   <span class="ruby-identifier">this_group</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">task_title</span> = <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
-  <span class="ruby-identifier">colon</span>      = <span class="ruby-identifier">task_title</span>.<span class="ruby-identifier">index</span>( <span class="ruby-string">':'</span> )
+  <span class="ruby-identifier">task_title</span> = <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-identifier">colon</span>      = <span class="ruby-identifier">task_title</span>.<span class="ruby-identifier">index</span>( <span class="ruby-string">&#39;:&#39;</span> )
   <span class="ruby-identifier">this_group</span> = <span class="ruby-identifier">task_title</span>[ <span class="ruby-value">0</span><span class="ruby-operator">..</span>( <span class="ruby-identifier">colon</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> ) ] <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">colon</span>.<span class="ruby-identifier">nil?</span> )
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">this_group</span>

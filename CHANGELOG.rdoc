@@ -266,7 +266,7 @@ Version 2.20 fixes the following bugs that were found in v2.11:
   to improve upon. The new report generator is much faster than both in
   all circumstances.
   
-  THE TrackRecordReprot API HAS NECESSARILY CHANGED AS A RESULT - just
+  The TrackRecordReport API HAS NECESSARILY CHANGED AS A RESULT - just
   after I'd said it would be stable for report generators...! Hopefully
   the v2.10/v2.11 series were sufficiently short lived that nobody wrote
   code against that API. There was no other way to improve performance.

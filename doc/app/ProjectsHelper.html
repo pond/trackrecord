@@ -319,13 +319,13 @@ objects. See controllers/projects_controller.rb for more.</p>
             <pre><span class="ruby-comment"># File app/helpers/projects_helper.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">projecthelp_actions</span>( <span class="ruby-identifier">project</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">or</span> ( <span class="ruby-identifier">project</span>.<span class="ruby-identifier">active</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">manager?</span> ) )
-    <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">'edit'</span> ]
-    <span class="ruby-identifier">actions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'delete'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+    <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">&#39;edit&#39;</span> ]
+    <span class="ruby-identifier">actions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;delete&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">actions</span> = []
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'show'</span> )
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">&#39;show&#39;</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">actions</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- projecthelp_actions-source -->
@@ -349,7 +349,7 @@ objects. See controllers/projects_controller.rb for more.</p>
 
         <div class="method-description">
           
-          <p>Return a name of a given project’s associated customer, for use in list
+          <p>Return a name of a given project&#39;s associated customer, for use in list
 views.</p>
           
 
@@ -357,7 +357,7 @@ views.</p>
           <div class="method-source-code" id="projecthelp_customer-source">
             <pre><span class="ruby-comment"># File app/helpers/projects_helper.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">projecthelp_customer</span>( <span class="ruby-identifier">project</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-string">'-'</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;-&#39;</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">nil?</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_augmented_link</span>( <span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- projecthelp_customer-source -->

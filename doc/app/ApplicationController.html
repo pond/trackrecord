@@ -365,8 +365,8 @@ administrators can do this. Pass the model name as a string.</p>
 
         <div class="method-description">
           
-          <p>Create a new object following submission of a ‘create’ view form.
-Restricted users can’t do this. Pass the model name as a string.</p>
+          <p>Create a new object following submission of a &#39;create&#39; view form.
+Restricted users can&#39;t do this. Pass the model name as a string.</p>
           
 
           
@@ -386,7 +386,7 @@ Restricted users can’t do this. Pass the model name as a string.</p>
 
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'new'</span> )
+    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;new&#39;</span> )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- appctrl_create-source -->
@@ -412,8 +412,8 @@ Restricted users can’t do this. Pass the model name as a string.</p>
           
           <p>Given a key for the params hash, construct a date from the value associated
 with the key. If the key is not present or has an emtpy value, or if any
-exception occurs trying to parse the date, the function returns ‘nil’; else
-it returns a Date object instance.</p>
+exception occurs trying to parse the date, the function returns
+&#39;nil&#39;; else it returns a Date object instance.</p>
           
 
           
@@ -525,8 +525,8 @@ model name as a string.</p>
           
           <p>Destroy an object. Pass the model class (e.g. <a
 href="User.html">User</a>). Access control is left up to the caller (or use
-‘<a
-href="ApplicationController.html#method-i-appctrl_admin_destroy">#appctrl_admin_destroy</a>’
+&#39;<a
+href="ApplicationController.html#method-i-appctrl_admin_destroy">#appctrl_admin_destroy</a>&#39;
 instead). Optionally pass the path to redirect to upon success.</p>
           
 
@@ -577,7 +577,7 @@ instead). Optionally pass the path to redirect to upon success.</p>
 
         <div class="method-description">
           
-          <p>Prepare to edit an object. Restricted users can’t do this. Pass a model
+          <p>Prepare to edit an object. Restricted users can&#39;t do this. Pass a model
 name as a string.</p>
 
 <p>If successful, sets “@record” and renders the view.</p>
@@ -634,7 +634,7 @@ method has been given, for sorting purposes.</p>
 
   <span class="ruby-comment"># Attempt to read user preferences for sorting and pagination in index</span>
   <span class="ruby-comment"># views for the given model. Note the heavy use of &quot;try()&quot; to tolerate</span>
-  <span class="ruby-comment"># 'nil' values propagated through, e.g. due to no logged in user, or</span>
+  <span class="ruby-comment"># &#39;nil&#39; values propagated through, e.g. due to no logged in user, or</span>
   <span class="ruby-comment"># a user with no control panel (not that this ought to ever happen).</span>
 
   <span class="ruby-identifier">prefs_prefix</span>      = <span class="ruby-node">&quot;sorting.#{ model.name.downcase }.&quot;</span>
@@ -645,7 +645,7 @@ method has been given, for sorting purposes.</p>
 
   <span class="ruby-comment"># For each one, try to read from the parameters; or fall back to the user</span>
   <span class="ruby-comment"># settings; or fall back to the defaults. If the value so determined is</span>
-  <span class="ruby-comment"># different from the user's current setting, then update that setting.</span>
+  <span class="ruby-comment"># different from the user&#39;s current setting, then update that setting.</span>
 
   <span class="ruby-identifier">sort</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ].<span class="ruby-identifier">try</span>( <span class="ruby-value">:to_i</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">cp_sort</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">default_sort</span>
   <span class="ruby-identifier">cp</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:set_preference</span>, <span class="ruby-node">&quot;#{ prefs_prefix }sort&quot;</span>, <span class="ruby-identifier">sort</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">cp_sort</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sort</span> )
@@ -694,10 +694,10 @@ method has been given, for sorting purposes.</p>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-string">'desc'</span> )
-    <span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' DESC'</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;desc&#39;</span> )
+    <span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; DESC&#39;</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' ASC'</span>
+    <span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; ASC&#39;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> { <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">page</span>, <span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">entries</span>, <span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order</span> }
@@ -723,7 +723,7 @@ method has been given, for sorting purposes.</p>
 
         <div class="method-description">
           
-          <p>Prepare to create a new object. Restricted users can’t do this. Pass a
+          <p>Prepare to create a new object. Restricted users can&#39;t do this. Pass a
 model name as a string.</p>
 
 <p>If successful, sets “@record” and renders the view.</p>
@@ -765,7 +765,7 @@ here. Redirects to Home with a permissions message.</p>
           <div class="method-source-code" id="appctrl_not_permitted-source">
             <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_not_permitted</span>
-  <span class="ruby-identifier">render</span>( { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Action not permitted'</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">403</span> } )
+  <span class="ruby-identifier">render</span>( { <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Action not permitted&#39;</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">403</span> } )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- appctrl_not_permitted-source -->
           
@@ -803,7 +803,7 @@ reference.</p>
   <span class="ruby-identifier">task_ids</span> = (<span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ] <span class="ruby-operator">||</span> {} )[ <span class="ruby-identifier">name</span> ] <span class="ruby-operator">||</span> []
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task_ids</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">task_ids</span>[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">String</span> ) )
-    <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ][ <span class="ruby-identifier">name</span> ] = <span class="ruby-identifier">task_ids</span>[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">split</span>( <span class="ruby-string">','</span> )
+    <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ][ <span class="ruby-identifier">name</span> ] = <span class="ruby-identifier">task_ids</span>[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">split</span>( <span class="ruby-string">&#39;,&#39;</span> )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- appctrl_patch_params_from_js-source -->
@@ -831,23 +831,23 @@ reference.</p>
 date-field &lt;= bar :range_end” where the ranges are dates obtained from
 “<a
 href="ApplicationController.html#method-i-appctrl_dates_from_search">#appctrl_dates_from_search</a>”
-and ‘date-field’ is given as an optional second input parameter. The return
-value includes the ranges which you pass in using named parameter
-substitution when the SQL fragment is included in a wider query.</p>
+and &#39;date-field&#39; is given as an optional second input parameter.
+The return value includes the ranges which you pass in using named
+parameter substitution when the SQL fragment is included in a wider query.</p>
 
-<p>Pass the model being searched; it must support a ‘used_range’ class method
-that returns a Range of years for all existant instances in the database at
-the time of calling, for the field that is to be searched. The second
-parameter is that field, or if omitted, the model’s USED_RANGE_COLUMN by
-default.</p>
+<p>Pass the model being searched; it must support a &#39;used_range&#39; class
+method that returns a Range of years for all existant instances in the
+database at the time of calling, for the field that is to be searched. The
+second parameter is that field, or if omitted, the model&#39;s
+USED_RANGE_COLUMN by default.</p>
 
 <p>Returns an array (anticipating parallel assignment by the caller) with the
 SQl data, the start Date and the end Date of the range, or an array of
-‘nil’ if there is no usable search data in the parameters hash (or it is
-being explicitly cleared).</p>
+&#39;nil&#39; if there is no usable search data in the parameters hash (or
+it is being explicitly cleared).</p>
 
 <p>Intended side-effect: Makes sure that search parameters are cleared out if
-an explicit ‘search_cancel’ params key has a value.</p>
+an explicit &#39;search_cancel&#39; params key has a value.</p>
           
 
           
@@ -870,7 +870,7 @@ an explicit ‘search_cancel’ params key has a value.</p>
         <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">range</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>  <span class="ruby-comment"># I.e. start of year after end year, minus one day; that is, the last day of end year</span>
       )
 
-      <span class="ruby-comment"># Since SQL date-only queries work on a 'start of the day' basis,</span>
+      <span class="ruby-comment"># Since SQL date-only queries work on a &#39;start of the day&#39; basis,</span>
       <span class="ruby-comment"># we do a &quot;&gt;=&quot; start and a &quot;&lt;&quot; end comparison, setting the end to</span>
       <span class="ruby-comment"># the beginning of the *next* day.</span>
 
@@ -903,8 +903,9 @@ an explicit ‘search_cancel’ params key has a value.</p>
 
         <div class="method-description">
           
-          <p>Common code for a ‘show’ back-end. Pass a model name as a string. Invokes
-‘is_permitted_for?’ on the instance to check for authority to proceed.</p>
+          <p>Common code for a &#39;show&#39; back-end. Pass a model name as a string.
+Invokes &#39;is_permitted_for?&#39; on the instance to check for authority
+to proceed.</p>
 
 <p>If successful, sets “@record” and renders the view.</p>
           
@@ -937,8 +938,8 @@ an explicit ‘search_cancel’ params key has a value.</p>
 
         <div class="method-description">
           
-          <p>Update an object following submission of an ‘edit’ view form. Restricted
-users can’t do this. Pass the model name as a string.</p>
+          <p>Update an object following submission of an &#39;edit&#39; view form.
+Restricted users can&#39;t do this. Pass the model name as a string.</p>
           
 
           
@@ -959,7 +960,7 @@ users can’t do this. Pass the model name as a string.</p>
 
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">send</span>( <span class="ruby-node">&quot;#{ model.downcase.pluralize }_path&quot;</span> ) )
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'edit'</span> )
+    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;edit&#39;</span> )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- appctrl_update-source -->

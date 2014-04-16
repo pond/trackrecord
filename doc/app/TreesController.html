@@ -332,9 +332,9 @@ comments inside for details of the required parameters.</p>
         <span class="ruby-comment">#                this key, returns only active projects and tasks.</span>
         <span class="ruby-comment">#</span>
         <span class="ruby-comment">#   &quot;restrict&quot;   Next array entry must be a user ID. Restricts tasks</span>
-        <span class="ruby-comment">#                to those in the user's task list and projects to</span>
+        <span class="ruby-comment">#                to those in the user&#39;s task list and projects to</span>
         <span class="ruby-comment">#                those where at least one of the project tasks are</span>
-        <span class="ruby-comment">#                in the user's task list.</span>
+        <span class="ruby-comment">#                in the user&#39;s task list.</span>
         <span class="ruby-comment">#</span>
         <span class="ruby-comment">#   &quot;include&quot;    Next array entry must be one or more underscore-</span>
         <span class="ruby-comment">#                separated IDs. Only tasks in that list will be</span>
@@ -346,7 +346,7 @@ comments inside for details of the required parameters.</p>
         <span class="ruby-comment"># bypass user restrictions by generating custom XHR requests will</span>
         <span class="ruby-comment"># therefore always fail.</span>
 
-        <span class="ruby-identifier">restrictions</span>  = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:data</span> ] <span class="ruby-operator">||</span> <span class="ruby-string">''</span> ).<span class="ruby-identifier">split</span>( <span class="ruby-string">','</span> )
+        <span class="ruby-identifier">restrictions</span>  = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:data</span> ] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> ).<span class="ruby-identifier">split</span>( <span class="ruby-string">&#39;,&#39;</span> )
         <span class="ruby-identifier">index</span>         = <span class="ruby-value">0</span>
 
         <span class="ruby-identifier">restrict_user</span> = <span class="ruby-keyword">nil</span>
@@ -356,15 +356,15 @@ comments inside for details of the required parameters.</p>
         <span class="ruby-keyword">until</span> ( <span class="ruby-identifier">restriction</span> = <span class="ruby-identifier">restrictions</span>[ <span class="ruby-identifier">index</span> ] ).<span class="ruby-identifier">nil?</span>
           <span class="ruby-keyword">case</span> <span class="ruby-identifier">restriction</span>
 
-            <span class="ruby-keyword">when</span> <span class="ruby-string">'inactive'</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;inactive&#39;</span>
               <span class="ruby-identifier">active</span> = <span class="ruby-value">:inactive</span>
 
-            <span class="ruby-keyword">when</span> <span class="ruby-string">'restrict'</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;restrict&#39;</span>
               <span class="ruby-identifier">restrict_user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">restrictions</span>[ <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ] )
               <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
 
-            <span class="ruby-keyword">when</span> <span class="ruby-string">'include'</span>
-              <span class="ruby-identifier">include_only</span> = <span class="ruby-identifier">restrictions</span>[ <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ].<span class="ruby-identifier">split</span>( <span class="ruby-string">'_'</span> ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_i</span> }
+            <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;include&#39;</span>
+              <span class="ruby-identifier">include_only</span> = <span class="ruby-identifier">restrictions</span>[ <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ].<span class="ruby-identifier">split</span>( <span class="ruby-string">&#39;_&#39;</span> ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_i</span> }
               <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
 
           <span class="ruby-keyword">end</span>
@@ -379,7 +379,7 @@ comments inside for details of the required parameters.</p>
         <span class="ruby-identifier">restrict_user</span> = <span class="ruby-ivar">@current_user</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
 
         <span class="ruby-comment"># Find the ID of the parent item selected in the tree. This must have</span>
-        <span class="ruby-comment"># a textual prefix of 'C' or 'P' for Customers or Projects. Tasks</span>
+        <span class="ruby-comment"># a textual prefix of &#39;C&#39; or &#39;P&#39; for Customers or Projects. Tasks</span>
         <span class="ruby-comment"># should never end up causing a call into this code because they are</span>
         <span class="ruby-comment"># always leaf nodes.</span>
 
@@ -387,16 +387,16 @@ comments inside for details of the required parameters.</p>
         <span class="ruby-identifier">children</span> = []
 
         <span class="ruby-keyword">case</span> <span class="ruby-identifier">id</span>[ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span> ]
-          <span class="ruby-keyword">when</span> <span class="ruby-string">'C'</span>
-            <span class="ruby-identifier">prefix</span>   = <span class="ruby-string">'P'</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;C&#39;</span>
+            <span class="ruby-identifier">prefix</span>   = <span class="ruby-string">&#39;P&#39;</span>
             <span class="ruby-identifier">isLeaf</span>   = <span class="ruby-keyword">false</span>
             <span class="ruby-identifier">children</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">active</span> ).<span class="ruby-identifier">find_all_by_customer_id</span>( <span class="ruby-identifier">id</span>[ <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span> ] )
 
             <span class="ruby-comment"># Reject projects if there are no active/inactive tasks; or if we</span>
-            <span class="ruby-comment"># are restricting by a user's permitted task list and the union</span>
-            <span class="ruby-comment"># of the project and user's task list is empty; or if we are</span>
+            <span class="ruby-comment"># are restricting by a user&#39;s permitted task list and the union</span>
+            <span class="ruby-comment"># of the project and user&#39;s task list is empty; or if we are</span>
             <span class="ruby-comment"># restricting by a list of IDs and the union of that list of IDs</span>
-            <span class="ruby-comment"># and the project's task IDs is empty.</span>
+            <span class="ruby-comment"># and the project&#39;s task IDs is empty.</span>
 
             <span class="ruby-identifier">children</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">project</span> <span class="ruby-operator">|</span>
               <span class="ruby-identifier">project</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">active</span> ).<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> <span class="ruby-operator">||</span> (
@@ -406,8 +406,8 @@ comments inside for details of the required parameters.</p>
               )
             <span class="ruby-keyword">end</span>
 
-          <span class="ruby-keyword">when</span> <span class="ruby-string">'P'</span>
-            <span class="ruby-identifier">prefix</span>   = <span class="ruby-string">''</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;P&#39;</span>
+            <span class="ruby-identifier">prefix</span>   = <span class="ruby-string">&#39;&#39;</span>
             <span class="ruby-identifier">isLeaf</span>   = <span class="ruby-keyword">true</span>
             <span class="ruby-identifier">children</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">active</span> ).<span class="ruby-identifier">find_all_by_project_id</span>( <span class="ruby-identifier">id</span>[ <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span> ] )
             <span class="ruby-identifier">children</span> = <span class="ruby-identifier">children</span> &amp; <span class="ruby-identifier">restrict_user</span>.<span class="ruby-identifier">tasks</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">restrict_user</span>.<span class="ruby-identifier">nil?</span> )

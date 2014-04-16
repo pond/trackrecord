@@ -499,13 +499,13 @@ entities for sensitive characters just as in HTML. Views should
 
   <span class="ruby-identifier">tasks</span> = []
 
-  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">each_element</span>( <span class="ruby-string">'Project/Tasks/Task'</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">each_element</span>( <span class="ruby-string">&#39;Project/Tasks/Task&#39;</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">tasks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span>( {
-        <span class="ruby-value">:level</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'OutlineLevel'</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_i</span>,
-        <span class="ruby-value">:tid</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'ID'</span>           )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>,
-        <span class="ruby-value">:uid</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'UID'</span>          )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>,
-        <span class="ruby-value">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'Name'</span>         )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
+        <span class="ruby-value">:level</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">&#39;OutlineLevel&#39;</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_i</span>,
+        <span class="ruby-value">:tid</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">&#39;ID&#39;</span>           )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>,
+        <span class="ruby-value">:uid</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">&#39;UID&#39;</span>          )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>,
+        <span class="ruby-value">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">&#39;Name&#39;</span>         )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
       } )
     <span class="ruby-keyword">rescue</span>
       <span class="ruby-comment"># Ignore errors; they tend to indicate malformed tasks, or at least,</span>
@@ -521,11 +521,11 @@ entities for sensitive characters just as in HTML. Views should
   <span class="ruby-comment">#</span>
   <span class="ruby-comment"># At each step, we keep a note of the titles and UIDs in the branch</span>
   <span class="ruby-comment"># leading up to a given task and push this &quot;history&quot; into a parent</span>
-  <span class="ruby-comment"># title and UID array so that we can implement the 'collapse to level'</span>
+  <span class="ruby-comment"># title and UID array so that we can implement the &#39;collapse to level&#39;</span>
   <span class="ruby-comment"># function later on, without having to refer back to the original</span>
   <span class="ruby-comment"># file (which is temporary and will have been deleted by then).</span>
 
-  <span class="ruby-identifier">prefix</span>        = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">prefix</span>        = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">branch_uids</span>   = []
   <span class="ruby-identifier">branch_titles</span> = []
   <span class="ruby-identifier">parent_uids</span>   = []
@@ -569,7 +569,7 @@ entities for sensitive characters just as in HTML. Views should
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Remove any 'nil' items we ended up with above.</span>
+  <span class="ruby-comment"># Remove any &#39;nil&#39; items we ended up with above.</span>
 
   <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">compact!</span>
   <span class="ruby-identifier">parent_uids</span>.<span class="ruby-identifier">compact!</span>
@@ -584,14 +584,14 @@ entities for sensitive characters just as in HTML. Views should
   <span class="ruby-comment"># make sure the ordering (which has relevance in terms of input file</span>
   <span class="ruby-comment"># structure and the parent UID and title arrays) is maintained later.</span>
 
-  <span class="ruby-identifier">uid_tasks</span> = {} <span class="ruby-comment"># Using a hash means UIDs don't have to be numeric.</span>
+  <span class="ruby-identifier">uid_tasks</span> = {} <span class="ruby-comment"># Using a hash means UIDs don&#39;t have to be numeric.</span>
 
   <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">task</span> = <span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span> ]
     <span class="ruby-identifier">uid_tasks</span>[ <span class="ruby-identifier">task</span>.<span class="ruby-identifier">uid</span> ] = { <span class="ruby-value">:task</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>, <span class="ruby-value">:index</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">index</span> }
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># OK, now it's time to parse the assignments into some meaningful</span>
+  <span class="ruby-comment"># OK, now it&#39;s time to parse the assignments into some meaningful</span>
   <span class="ruby-comment"># array. These will become our timesheet system tasks. Assignments</span>
   <span class="ruby-comment"># which relate to empty elements in &quot;uid_tasks&quot; or which have zero</span>
   <span class="ruby-comment"># work are associated with tasks which are either summaries or</span>
@@ -601,15 +601,15 @@ entities for sensitive characters just as in HTML. Views should
   <span class="ruby-identifier">real_parent_uids</span>   = []
   <span class="ruby-identifier">real_parent_titles</span> = []
 
-  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">each_element</span>( <span class="ruby-string">'Project/Assignments/Assignment'</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">assignment</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">task_uid</span> = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'TaskUID'</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">each_element</span>( <span class="ruby-string">&#39;Project/Assignments/Assignment&#39;</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">assignment</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">task_uid</span> = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">&#39;TaskUID&#39;</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
     <span class="ruby-identifier">data</span>     = <span class="ruby-identifier">uid_tasks</span>[ <span class="ruby-identifier">task_uid</span> ]
 
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> )
 
     <span class="ruby-identifier">task</span>     = <span class="ruby-identifier">data</span>[ <span class="ruby-value">:task</span>  ]
     <span class="ruby-identifier">index</span>    = <span class="ruby-identifier">data</span>[ <span class="ruby-value">:index</span> ]
-    <span class="ruby-identifier">work</span>     = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">'Work'</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
+    <span class="ruby-identifier">work</span>     = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">get_elements</span>( <span class="ruby-string">&#39;Work&#39;</span> )[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">text</span>
 
     <span class="ruby-comment"># Parse the &quot;Work&quot; string: &quot;PT&lt;num&gt;H&lt;num&gt;M&lt;num&gt;S&quot;, but with some</span>
     <span class="ruby-comment"># leniency to allow any data before or after the H/M/S stuff.</span>
@@ -619,8 +619,8 @@ entities for sensitive characters just as in HTML. Views should
 
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">mins</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">secs</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> )
 
-    <span class="ruby-comment"># Woohoo, real task! Store it in 'real_tasks' at the same array index</span>
-    <span class="ruby-comment"># as the item used to hold in the raw 'tasks' array.</span>
+    <span class="ruby-comment"># Woohoo, real task! Store it in &#39;real_tasks&#39; at the same array index</span>
+    <span class="ruby-comment"># as the item used to hold in the raw &#39;tasks&#39; array.</span>
     <span class="ruby-comment">#</span>
     <span class="ruby-comment"># The divide by 3600.0 is VITAL to perform a floating point calculation</span>
     <span class="ruby-comment"># rather than rounding everything with integer maths.</span>
@@ -634,7 +634,7 @@ entities for sensitive characters just as in HTML. Views should
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Remove &quot;nil&quot; entries which exist beacuse of any tasks in the original</span>
-  <span class="ruby-comment"># 'tasks' array which were discarded for some reason (e.g. no duration).</span>
+  <span class="ruby-comment"># &#39;tasks&#39; array which were discarded for some reason (e.g. no duration).</span>
 
   <span class="ruby-identifier">real_tasks</span>.<span class="ruby-identifier">compact!</span>
   <span class="ruby-identifier">real_parent_uids</span>.<span class="ruby-identifier">compact!</span>
@@ -695,7 +695,7 @@ entities for sensitive characters just as in HTML. Views should
     <span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">dup</span>
     <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">stringify_keys!</span>
     <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-string">'('</span> ) )
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-string">&#39;(&#39;</span> ) )
         <span class="ruby-identifier">raise</span>( <span class="ruby-string">&quot;Multi-parameter attributes are not supported.&quot;</span> )
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">send</span>( <span class="ruby-identifier">key</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-identifier">value</span> )
@@ -850,10 +850,10 @@ entities for sensitive characters just as in HTML. Views should
 
         <div class="method-description">
           
-          <p>Take this object’s (fully set up) task array along with the associated
-parent title and UID arrays; then collapse these using this object’s
-‘collapse’ value and update the internal filtered task, parent title and
-parent UID arrays (“<a
+          <p>Take this object&#39;s (fully set up) task array along with the associated
+parent title and UID arrays; then collapse these using this object&#39;s
+&#39;collapse&#39; value and update the internal filtered task, parent
+title and parent UID arrays (“<a
 href="TaskImport.html#attribute-i-filtered_tasks">#filtered_tasks</a>”, “<a
 href="TaskImport.html#attribute-i-filtered_parent_uids">#filtered_parent_uids</a>”
 and “<a
@@ -875,7 +875,7 @@ href="TaskImport.html#attribute-i-filtered_parent_titles">#filtered_parent_title
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
 
     <span class="ruby-identifier">task</span>          = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>[ <span class="ruby-identifier">index</span> ]
-    <span class="ruby-identifier">collapsed_uid</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_uids</span>[ <span class="ruby-identifier">index</span> ][ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">collapse_level</span> ].<span class="ruby-identifier">join</span>( <span class="ruby-string">','</span> )
+    <span class="ruby-identifier">collapsed_uid</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_uids</span>[ <span class="ruby-identifier">index</span> ][ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">collapse_level</span> ].<span class="ruby-identifier">join</span>( <span class="ruby-string">&#39;,&#39;</span> )
 
     <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">level</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">collapse_level</span> )
 
@@ -886,8 +886,8 @@ href="TaskImport.html#attribute-i-filtered_parent_titles">#filtered_parent_title
       <span class="ruby-identifier">collapsed_tasks</span>[ <span class="ruby-identifier">task</span>.<span class="ruby-identifier">uid</span> ] = <span class="ruby-identifier">collapsed_task</span>
 
       <span class="ruby-comment"># We rely on Ruby storing a reference to the same task structure here,</span>
-      <span class="ruby-comment"># else later changes to the 'duration' field via the &quot;collapsed_tasks&quot;</span>
-      <span class="ruby-comment"># hash won't be reflected in the &quot;filtered_tasks&quot; array.</span>
+      <span class="ruby-comment"># else later changes to the &#39;duration&#39; field via the &quot;collapsed_tasks&quot;</span>
+      <span class="ruby-comment"># hash won&#39;t be reflected in the &quot;filtered_tasks&quot; array.</span>
 
       <span class="ruby-identifier">filtered_tasks</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">collapsed_task</span>
       <span class="ruby-identifier">filtered_parent_uids</span>   <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_uids</span>[   <span class="ruby-identifier">index</span> ].<span class="ruby-identifier">dup</span>
@@ -896,7 +896,7 @@ href="TaskImport.html#attribute-i-filtered_parent_titles">#filtered_parent_title
     <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">collapsed_tasks</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-identifier">collapsed_uid</span> ) )
 
       <span class="ruby-comment"># Have we generated this collapsed task UID before? Yes - just add</span>
-      <span class="ruby-comment"># the current child task's duration to it.</span>
+      <span class="ruby-comment"># the current child task&#39;s duration to it.</span>
 
       <span class="ruby-identifier">collapsed_tasks</span>[ <span class="ruby-identifier">collapsed_uid</span> ].<span class="ruby-identifier">duration</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>
 
@@ -904,7 +904,7 @@ href="TaskImport.html#attribute-i-filtered_parent_titles">#filtered_parent_title
 
       <span class="ruby-comment"># Generate a new collapsed task. Use the last two entries in the</span>
       <span class="ruby-comment"># titles array (noting Ruby array reference syntax meaning we have to</span>
-      <span class="ruby-comment"># be careful of negative indices) for the new collapsed task's title.</span>
+      <span class="ruby-comment"># be careful of negative indices) for the new collapsed task&#39;s title.</span>
 
       <span class="ruby-identifier">previous_level</span> = <span class="ruby-identifier">collapse_level</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
       <span class="ruby-identifier">previous_level</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">previous_level</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> )
@@ -913,7 +913,7 @@ href="TaskImport.html#attribute-i-filtered_parent_titles">#filtered_parent_title
         <span class="ruby-value">:level</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collapse_level</span>,
         <span class="ruby-value">:uid</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collapsed_uid</span>, <span class="ruby-comment"># NB: See above - this is a string of one or more integers joined with a comma</span>
         <span class="ruby-value">:tid</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">tid</span>,
-        <span class="ruby-value">:title</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_titles</span>[ <span class="ruby-identifier">index</span> ][ <span class="ruby-identifier">previous_level</span><span class="ruby-operator">..</span><span class="ruby-identifier">collapse_level</span> ].<span class="ruby-identifier">join</span>( <span class="ruby-string">': '</span> ),
+        <span class="ruby-value">:title</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent_titles</span>[ <span class="ruby-identifier">index</span> ][ <span class="ruby-identifier">previous_level</span><span class="ruby-operator">..</span><span class="ruby-identifier">collapse_level</span> ].<span class="ruby-identifier">join</span>( <span class="ruby-string">&#39;: &#39;</span> ),
         <span class="ruby-value">:code</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Task</span>.<span class="ruby-identifier">generate_xml_code</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">tid</span> ),
         <span class="ruby-value">:duration</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>
       } )
@@ -952,8 +952,8 @@ href="TaskImport.html#attribute-i-filtered_parent_titles">#filtered_parent_title
 
         <div class="method-description">
           
-          <p>Read the maximum level stored in the ‘tasks’ array. Generated on the fly
-and cached until ‘tasks’ gets reset.</p>
+          <p>Read the maximum level stored in the &#39;tasks&#39; array. Generated on
+the fly and cached until &#39;tasks&#39; gets reset.</p>
           
 
           

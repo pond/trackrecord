@@ -337,7 +337,7 @@ completed a sign-in attempt, successfully or otherwise.</p>
 
   <span class="ruby-comment"># The OpenID subsystem ends up back at this method with a parameter</span>
   <span class="ruby-comment"># of &quot;openid_url&quot; set up, so we have to look at that too. It also</span>
-  <span class="ruby-comment"># annoyingly *requires* this to be *set* when we're calling out.</span>
+  <span class="ruby-comment"># annoyingly *requires* this to be *set* when we&#39;re calling out.</span>
   <span class="ruby-comment"># There being no coherent documentation, a bodge is forced.</span>
 
   <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:openid_url</span> ]
@@ -349,9 +349,9 @@ completed a sign-in attempt, successfully or otherwise.</p>
   <span class="ruby-comment"># URL is *not* nil and is *not* empty? Form was submitted with a</span>
   <span class="ruby-comment"># identity URL; call OpenID authentication routine.</span>
   <span class="ruby-comment">#</span>
-  <span class="ruby-comment"># URL *is* nil? We're being called from the Open ID plug-in with</span>
+  <span class="ruby-comment"># URL *is* nil? We&#39;re being called from the Open ID plug-in with</span>
   <span class="ruby-comment"># the result of a sign-in attempt. Again, call the authentication</span>
-  <span class="ruby-comment"># routine but don't try and read the JavaScript detection field.</span>
+  <span class="ruby-comment"># routine but don&#39;t try and read the JavaScript detection field.</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">empty?</span> )
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">valid?</span>
@@ -483,7 +483,7 @@ everything clean and means that any real attempted attacks would fail.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@signin</span> = <span class="ruby-constant">SignIn</span>.<span class="ruby-identifier">new</span>
 
-  <span class="ruby-comment"># &quot;browser...&quot; comes from the 'browser' gem (see Gemfile).</span>
+  <span class="ruby-comment"># &quot;browser...&quot; comes from the &#39;browser&#39; gem (see Gemfile).</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie6?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie7?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie8?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">ie9?</span> )
     <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash_now</span>( <span class="ruby-value">:warning</span>, <span class="ruby-value">:msie</span> )
@@ -527,7 +527,7 @@ everything clean and means that any real attempted attacks would fail.</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;test&quot;</span> )
 
     <span class="ruby-comment"># In test mode, bypass OpenID authentication redirections</span>
-    <span class="ruby-comment"># since we're not interested in testing third party sites.</span>
+    <span class="ruby-comment"># since we&#39;re not interested in testing third party sites.</span>
     <span class="ruby-comment"># Assume sign-in was successful. Manual testing is needed</span>
     <span class="ruby-comment"># for &quot;real&quot; working/failed OpenID login.</span>
 

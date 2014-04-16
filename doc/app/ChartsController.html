@@ -318,10 +318,10 @@ HTML reports.</p>
           <p>Show a graph. See charts_helper.rb for the way to generate a URL that will
 correctly convey the required parameters. Essentially, the ID is used to
 carry the chart type and extra query string parameters carry additional
-required parameters. This is more of a ‘create’ action than ‘show’, but
-since it’s used for things like showing reports and the charts are usually
-generated on-demand as part of IMG tags, it is far more natural from the
-caller’s perspective to use ‘show’.</p>
+required parameters. This is more of a &#39;create&#39; action than
+&#39;show&#39;, but since it&#39;s used for things like showing reports and
+the charts are usually generated on-demand as part of IMG tags, it is far
+more natural from the caller&#39;s perspective to use &#39;show&#39;.</p>
           
 
           
@@ -335,11 +335,11 @@ caller’s perspective to use ‘show’.</p>
 
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Chart type #{type} is unknown&quot;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">ChartsHelper</span><span class="ruby-operator">::</span><span class="ruby-constant">CHART_TYPE_PIE</span>.<span class="ruby-identifier">to_s</span> )
 
-  <span class="ruby-identifier">leaf</span>          = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:leaf</span>          ] <span class="ruby-operator">||</span> <span class="ruby-string">'chart'</span> )
-  <span class="ruby-identifier">width</span>         = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:width</span>         ] <span class="ruby-operator">||</span> <span class="ruby-string">'128'</span>   ).<span class="ruby-identifier">to_i</span>
-  <span class="ruby-identifier">duration</span>      = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:duration</span>      ] <span class="ruby-operator">||</span> <span class="ruby-string">'1_0'</span>   ).<span class="ruby-identifier">sub</span>( <span class="ruby-string">'_'</span>, <span class="ruby-string">'.'</span> ).<span class="ruby-identifier">to_f</span>
-  <span class="ruby-identifier">committed</span>     = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:committed</span>     ] <span class="ruby-operator">||</span> <span class="ruby-string">'0_2'</span>   ).<span class="ruby-identifier">sub</span>( <span class="ruby-string">'_'</span>, <span class="ruby-string">'.'</span> ).<span class="ruby-identifier">to_f</span>
-  <span class="ruby-identifier">not_committed</span> = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:not_committed</span> ] <span class="ruby-operator">||</span> <span class="ruby-string">'0_5'</span>   ).<span class="ruby-identifier">sub</span>( <span class="ruby-string">'_'</span>, <span class="ruby-string">'.'</span> ).<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">leaf</span>          = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:leaf</span>          ] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;chart&#39;</span> )
+  <span class="ruby-identifier">width</span>         = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:width</span>         ] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;128&#39;</span>   ).<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">duration</span>      = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:duration</span>      ] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;1_0&#39;</span>   ).<span class="ruby-identifier">sub</span>( <span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;.&#39;</span> ).<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">committed</span>     = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:committed</span>     ] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;0_2&#39;</span>   ).<span class="ruby-identifier">sub</span>( <span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;.&#39;</span> ).<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">not_committed</span> = ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:not_committed</span> ] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;0_5&#39;</span>   ).<span class="ruby-identifier">sub</span>( <span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;.&#39;</span> ).<span class="ruby-identifier">to_f</span>
   <span class="ruby-identifier">remaining</span>     = <span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">committed</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">not_committed</span>
 
   <span class="ruby-comment"># Stop silly widths from loading the server unnecessarily.</span>
@@ -348,7 +348,7 @@ caller’s perspective to use ‘show’.</p>
   <span class="ruby-identifier">width</span> = <span class="ruby-value">640</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">width</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">640</span> );
 
   <span class="ruby-identifier">g</span>                  = <span class="ruby-constant">Gruff</span><span class="ruby-operator">::</span><span class="ruby-constant">Mini</span><span class="ruby-operator">::</span><span class="ruby-constant">Pie</span>.<span class="ruby-identifier">new</span>( <span class="ruby-node">&quot;#{ width }x#{ width * 0.75 }&quot;</span> )
-  <span class="ruby-identifier">g</span>.<span class="ruby-identifier">title</span>            = <span class="ruby-string">'Chart'</span>
+  <span class="ruby-identifier">g</span>.<span class="ruby-identifier">title</span>            = <span class="ruby-string">&#39;Chart&#39;</span>
   <span class="ruby-identifier">g</span>.<span class="ruby-identifier">font</span>             = <span class="ruby-node">&quot;#{ Rails.root }/#{ GRAPH_FONT }&quot;</span>
   <span class="ruby-identifier">g</span>.<span class="ruby-identifier">hide_legend</span>      = <span class="ruby-keyword">true</span>
   <span class="ruby-identifier">g</span>.<span class="ruby-identifier">hide_title</span>       = <span class="ruby-keyword">true</span>
@@ -361,30 +361,30 @@ caller’s perspective to use ‘show’.</p>
     <span class="ruby-identifier">g</span>.<span class="ruby-identifier">theme</span> = {
       <span class="ruby-value">:colors</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w( #cc7777 #ffaa77 #99ff99 )</span>,
       <span class="ruby-value">:background_colors</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w( white   white           )</span>,
-      <span class="ruby-value">:marker_color</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'black'</span>
+      <span class="ruby-value">:marker_color</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;black&#39;</span>
     }
 
-    <span class="ruby-comment"># Can't have a pie chart where every entry has zero size;</span>
+    <span class="ruby-comment"># Can&#39;t have a pie chart where every entry has zero size;</span>
     <span class="ruby-comment"># set the remaining time to 100 (as in, 100%) in that case.</span>
 
     <span class="ruby-identifier">remaining</span> = <span class="ruby-value">0</span>   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">remaining</span>  <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> ) <span class="ruby-comment"># Zero duration task</span>
     <span class="ruby-identifier">remaining</span> = <span class="ruby-value">100</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">remaining</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">committed</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">not_committed</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> )
 
-    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">'Committed'</span>,     <span class="ruby-identifier">committed</span>     )
-    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">'Not committed'</span>, <span class="ruby-identifier">not_committed</span> )
-    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">'Remaining'</span>,     <span class="ruby-identifier">remaining</span>     )
+    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">&#39;Committed&#39;</span>,     <span class="ruby-identifier">committed</span>     )
+    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">&#39;Not committed&#39;</span>, <span class="ruby-identifier">not_committed</span> )
+    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">&#39;Remaining&#39;</span>,     <span class="ruby-identifier">remaining</span>     )
 
   <span class="ruby-keyword">else</span>
 
     <span class="ruby-identifier">g</span>.<span class="ruby-identifier">theme</span> = {
       <span class="ruby-value">:colors</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w( #ffaa77 #880000 #000000 )</span>,
       <span class="ruby-value">:background_colors</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">%w( white   white           )</span>,
-      <span class="ruby-value">:marker_color</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'black'</span>
+      <span class="ruby-value">:marker_color</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;black&#39;</span>
     }
 
-    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">'Duration'</span>, <span class="ruby-identifier">duration</span>   )
-    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">'Overrun'</span>,  <span class="ruby-operator">-</span><span class="ruby-identifier">remaining</span> )
-    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">'-'</span>, <span class="ruby-value">0</span> )
+    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">&#39;Duration&#39;</span>, <span class="ruby-identifier">duration</span>   )
+    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">&#39;Overrun&#39;</span>,  <span class="ruby-operator">-</span><span class="ruby-identifier">remaining</span> )
+    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">data</span>( <span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-value">0</span> )
 
   <span class="ruby-keyword">end</span>
 
@@ -396,8 +396,8 @@ caller’s perspective to use ‘show’.</p>
 
   <span class="ruby-identifier">send_data</span>(
     <span class="ruby-identifier">g</span>.<span class="ruby-identifier">to_blob</span>,
-    <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'inline'</span>,
-    <span class="ruby-value">:type</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'image/png'</span>,
+    <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;inline&#39;</span>,
+    <span class="ruby-value">:type</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;image/png&#39;</span>,
     <span class="ruby-value">:filename</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ leaf }.png&quot;</span>
   )
 <span class="ruby-keyword">end</span></pre>

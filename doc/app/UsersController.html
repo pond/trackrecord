@@ -350,7 +350,7 @@
   <span class="ruby-keyword">else</span>
     <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">destroy</span>()
     <span class="ruby-identifier">reset_session</span>()
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'Sign up cancelled.'</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&#39;Sign up cancelled.&#39;</span>
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">signin_path</span>() )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -389,7 +389,7 @@
 
   <span class="ruby-identifier">update_and_save_user</span>(
     <span class="ruby-value">:added</span>,
-    <span class="ruby-string">'new'</span>,
+    <span class="ruby-string">&#39;new&#39;</span>,
     <span class="ruby-identifier">params</span>[ <span class="ruby-value">:notify_user</span> ].<span class="ruby-identifier">present?</span>
   )
 <span class="ruby-keyword">end</span></pre>
@@ -421,7 +421,7 @@
           <div class="method-source-code" id="delete-source">
             <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
-  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">'User'</span> )
+  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">&#39;User&#39;</span> )
   <span class="ruby-ivar">@user</span> = <span class="ruby-ivar">@record</span> <span class="ruby-comment"># (historical)</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- delete-source -->
@@ -455,7 +455,7 @@
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
 
   <span class="ruby-comment"># Nobody can delete admin accounts. You must assign the admin</span>
-  <span class="ruby-comment"># privilege to someone else, then, since you can't revoke your</span>
+  <span class="ruby-comment"># privilege to someone else, then, since you can&#39;t revoke your</span>
   <span class="ruby-comment"># own admin privileges either, have the new admin change your</span>
   <span class="ruby-comment"># account type and delete the user record. This is a good way</span>
   <span class="ruby-comment"># of ensuring that there is always at least one admin.</span>
@@ -465,7 +465,7 @@
 
   <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">destroy</span>()
 
-  <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'User and all associated data deleted'</span>
+  <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">&#39;User and all associated data deleted&#39;</span>
   <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">users_path</span>() )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- delete_confirm-source -->
@@ -489,8 +489,8 @@
 
         <div class="method-description">
           
-          <p>Prepare for the ‘edit’ view, allowing a user to update their account
-details. Restricted users can only edit their own account.</p>
+          <p>Prepare for the &#39;edit&#39; view, allowing a user to update their
+account details. Restricted users can only edit their own account.</p>
           
 
           
@@ -540,11 +540,11 @@ details. Restricted users can only edit their own account.</p>
   <span class="ruby-comment"># application_helper.rb for details.</span>
 
   <span class="ruby-ivar">@columns</span> = [
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Name'</span>,           <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'name'</span>,         <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                  },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Code'</span>,           <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'code'</span>,         <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                  },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Account type'</span>,   <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'user_type'</span>                                              },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'E-mail address'</span>, <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'email'</span>,        <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'userhelp_email'</span>        },
-    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Identity URL'</span>,   <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'identity_url'</span>, <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'userhelp_identity_url'</span> },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Name&#39;</span>,           <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;name&#39;</span>,         <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                  },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Code&#39;</span>,           <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;code&#39;</span>,         <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                  },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Account type&#39;</span>,   <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;user_type&#39;</span>                                              },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;E-mail address&#39;</span>, <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;email&#39;</span>,        <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;userhelp_email&#39;</span>        },
+    { <span class="ruby-value">:header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Identity URL&#39;</span>,   <span class="ruby-value">:value_method</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;identity_url&#39;</span>, <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;userhelp_identity_url&#39;</span> },
   ]
 
   <span class="ruby-comment"># Get the basic options hash from ApplicationController, then work out</span>
@@ -569,8 +569,8 @@ details. Restricted users can only edit their own account.</p>
     <span class="ruby-identifier">inactive_vars</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">vars</span> )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Sort order is already partially compiled in 'options' from the earlier</span>
-  <span class="ruby-comment"># call to 'appctrl_index_assist'.</span>
+  <span class="ruby-comment"># Sort order is already partially compiled in &#39;options&#39; from the earlier</span>
+  <span class="ruby-comment"># call to &#39;appctrl_index_assist&#39;.</span>
 
   <span class="ruby-identifier">order_sql</span> = <span class="ruby-node">&quot;ORDER BY #{ options[ :order ] }, name ASC, code ASC&quot;</span>
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:order</span> )
@@ -676,8 +676,8 @@ an ID to the permitted list.</p>
 
         <div class="method-description">
           
-          <p>Update a <a href="User.html">User</a> following submission of an ‘edit’
-view form. Restricted users can only edit their own account.</p>
+          <p>Update a <a href="User.html">User</a> following submission of an
+&#39;edit&#39; view form. Restricted users can only edit their own account.</p>
           
 
           
@@ -693,11 +693,11 @@ view form. Restricted users can only edit their own account.</p>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">id</span> )
 
   <span class="ruby-comment"># Normally, user accounts are only ever created through this controller,</span>
-  <span class="ruby-comment"># so they're subject to normal user validation rules. This means the name</span>
+  <span class="ruby-comment"># so they&#39;re subject to normal user validation rules. This means the name</span>
   <span class="ruby-comment"># field of a record obtained from the database cannot be empty. However,</span>
   <span class="ruby-comment"># for the very first user to sign up, the Sessions Controller makes a</span>
   <span class="ruby-comment"># sort of skeleton User object and saves it bypassing validation, then</span>
-  <span class="ruby-comment"># redirects to the User Controller's edit action.</span>
+  <span class="ruby-comment"># redirects to the User Controller&#39;s edit action.</span>
 
   <span class="ruby-identifier">message</span> = <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
     <span class="ruby-value">:initial_signup</span>
@@ -707,7 +707,7 @@ view form. Restricted users can only edit their own account.</p>
 
   <span class="ruby-identifier">update_and_save_user</span>(
     <span class="ruby-identifier">message</span>,
-    <span class="ruby-string">'edit'</span>,
+    <span class="ruby-string">&#39;edit&#39;</span>,
     <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">privileged?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:notify_user</span> ].<span class="ruby-identifier">present?</span>
   )
 <span class="ruby-keyword">end</span></pre>

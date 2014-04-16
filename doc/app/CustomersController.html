@@ -335,7 +335,7 @@ href="ApplicationController.html#method-i-appctrl_create">ApplicationController#
           <div class="method-source-code" id="create-source">
             <pre><span class="ruby-comment"># File app/controllers/customers_controller.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-identifier">appctrl_create</span>( <span class="ruby-string">'Customer'</span> )
+  <span class="ruby-identifier">appctrl_create</span>( <span class="ruby-string">&#39;Customer&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- create-source -->
           
@@ -367,7 +367,7 @@ href="ApplicationController.html#method-i-appctrl_delete">ApplicationController#
           <div class="method-source-code" id="delete-source">
             <pre><span class="ruby-comment"># File app/controllers/customers_controller.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
-  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">'Customer'</span> )
+  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">&#39;Customer&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- delete-source -->
           
@@ -390,7 +390,7 @@ href="ApplicationController.html#method-i-appctrl_delete">ApplicationController#
 
         <div class="method-description">
           
-          <p>Show an ‘Are you sure?’ prompt.</p>
+          <p>Show an &#39;Are you sure?&#39; prompt.</p>
           
 
           
@@ -409,12 +409,12 @@ href="ApplicationController.html#method-i-appctrl_delete">ApplicationController#
 
       <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">destroy_projects</span> )
         <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">destroy_tasks</span> )
-          <span class="ruby-identifier">message</span> = <span class="ruby-string">'Customer, customer\s projects and associated tasks deleted'</span>
+          <span class="ruby-identifier">message</span> = <span class="ruby-string">&#39;Customer, customer\s projects and associated tasks deleted&#39;</span>
         <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">message</span> = <span class="ruby-string">'Customer and customer\s projects deleted; tasks left alone'</span>
+          <span class="ruby-identifier">message</span> = <span class="ruby-string">&#39;Customer and customer\s projects deleted; tasks left alone&#39;</span>
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">message</span> = <span class="ruby-string">'Customer deleted; projects and tasks left alone'</span>
+        <span class="ruby-identifier">message</span> = <span class="ruby-string">&#39;Customer deleted; projects and tasks left alone&#39;</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-identifier">message</span>
@@ -460,9 +460,9 @@ href="ApplicationController.html#method-i-appctrl_delete">ApplicationController#
   <span class="ruby-comment"># application_helper.rb for details.</span>
 
   <span class="ruby-ivar">@columns</span> = [
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Customer title'</span>, <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:title</span>,      <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                },
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Customer code'</span>,  <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:code</span>,       <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                },
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Created at'</span>,     <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created_at</span>, <span class="ruby-value">:value_helper</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:apphelp_created_at</span> },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Customer title&#39;</span>, <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:title</span>,      <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Customer code&#39;</span>,  <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:code</span>,       <span class="ruby-value">:value_in_place</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>                },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Created at&#39;</span>,     <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created_at</span>, <span class="ruby-value">:value_helper</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:apphelp_created_at</span> },
   ]
 
   <span class="ruby-comment"># Get the basic options hash from ApplicationController, then work out</span>
@@ -477,19 +477,19 @@ href="ApplicationController.html#method-i-appctrl_delete">ApplicationController#
   <span class="ruby-comment"># The user may only be able to see projects associated with tasks matching</span>
   <span class="ruby-comment"># a specific list of IDs.</span>
 
-  <span class="ruby-identifier">restrictions_sql</span> = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">restrictions_sql</span> = <span class="ruby-string">&#39;&#39;</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
     <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">task_ids</span>.<span class="ruby-identifier">empty?</span> )
-      <span class="ruby-identifier">restrictions_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'WHERE ( customers.id = -1 )'</span> <span class="ruby-comment"># Never matches - forces no results</span>
-      <span class="ruby-identifier">conditions_sql</span>    = <span class="ruby-string">'AND '</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>
+      <span class="ruby-identifier">restrictions_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;WHERE ( customers.id = -1 )&#39;</span> <span class="ruby-comment"># Never matches - forces no results</span>
+      <span class="ruby-identifier">conditions_sql</span>    = <span class="ruby-string">&#39;AND &#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">restrictions_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;INNER JOIN projects ON ( projects.customer_id = customers.id )\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-                          <span class="ruby-node">&quot;INNER JOIN tasks    ON ( tasks.project_id = projects.id AND tasks.id IN (#{ @current_user.task_ids.join( ',' ) } ) )\n&quot;</span>
-      <span class="ruby-identifier">conditions_sql</span>    = <span class="ruby-string">'WHERE '</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>
+                          <span class="ruby-node">&quot;INNER JOIN tasks    ON ( tasks.project_id = projects.id AND tasks.id IN (#{ @current_user.task_ids.join( &#39;,&#39; ) } ) )\n&quot;</span>
+      <span class="ruby-identifier">conditions_sql</span>    = <span class="ruby-string">&#39;WHERE &#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">conditions_sql</span> = <span class="ruby-string">'WHERE '</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>
+    <span class="ruby-identifier">conditions_sql</span> = <span class="ruby-string">&#39;WHERE &#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions_sql</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># If asked to search for something, build extra conditions to do so.</span>
@@ -505,15 +505,15 @@ href="ApplicationController.html#method-i-appctrl_delete">ApplicationController#
     <span class="ruby-identifier">inactive_vars</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">vars</span> )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Sort order is already partially compiled in 'options' from the earlier</span>
-  <span class="ruby-comment"># call to 'ApplicationController.appctrl_index_assist'.</span>
+  <span class="ruby-comment"># Sort order is already partially compiled in &#39;options&#39; from the earlier</span>
+  <span class="ruby-comment"># call to &#39;ApplicationController.appctrl_index_assist&#39;.</span>
 
   <span class="ruby-identifier">order_sql</span> = <span class="ruby-node">&quot;ORDER BY #{ options[ :order ] }, title ASC, code ASC&quot;</span>
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:order</span> )
 
   <span class="ruby-comment"># Compile the main SQL statement. Select all columns of the project, fetching</span>
-  <span class="ruby-comment"># customers where the project's customer ID matches those customer IDs, with</span>
-  <span class="ruby-comment"># only projects containing tasks in the user's permitted task list (if any)</span>
+  <span class="ruby-comment"># customers where the project&#39;s customer ID matches those customer IDs, with</span>
+  <span class="ruby-comment"># only projects containing tasks in the user&#39;s permitted task list (if any)</span>
   <span class="ruby-comment"># are included, returned in the required order.</span>
 
   <span class="ruby-identifier">finder_sql</span>  = <span class="ruby-string">&quot;SELECT DISTINCT customers.* FROM customers\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
@@ -549,7 +549,7 @@ href="ApplicationController.html#method-i-appctrl_delete">ApplicationController#
 
         <div class="method-description">
           
-          <p>Show a ‘Create Customer’ view (via <a
+          <p>Show a &#39;Create Customer&#39; view (via <a
 href="ApplicationController.html#method-i-appctrl_new">ApplicationController#appctrl_new</a>).</p>
           
 
@@ -557,7 +557,7 @@ href="ApplicationController.html#method-i-appctrl_new">ApplicationController#app
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File app/controllers/customers_controller.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">appctrl_new</span>( <span class="ruby-string">'Customer'</span> )
+  <span class="ruby-identifier">appctrl_new</span>( <span class="ruby-string">&#39;Customer&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -588,7 +588,7 @@ href="ApplicationController.html#method-i-appctrl_show">ApplicationController#ap
           <div class="method-source-code" id="show-source">
             <pre><span class="ruby-comment"># File app/controllers/customers_controller.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-identifier">appctrl_show</span>( <span class="ruby-string">'Customer'</span> )
+  <span class="ruby-identifier">appctrl_show</span>( <span class="ruby-string">&#39;Customer&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- show-source -->
           
@@ -634,17 +634,17 @@ to roll back if anything goes wrong.</p>
         <span class="ruby-identifier">update_tasks</span>
       )
 
-      <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'Customer details updated'</span>
+      <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">&#39;Customer details updated&#39;</span>
       <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">customers_path</span>() )
     <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">StaleObjectError</span>
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'The customer details were modified by someone else while you were making changes. Please examine the updated information before editing again.'</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&#39;The customer details were modified by someone else while you were making changes. Please examine the updated information before editing again.&#39;</span>
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">customer_path</span>( <span class="ruby-ivar">@record</span> ) )
 
   <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
     <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-node">&quot;Could not update customer details: #{ error }&quot;</span>
-    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'edit'</span> )
+    <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;edit&#39;</span> )
 
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>

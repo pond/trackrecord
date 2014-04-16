@@ -378,8 +378,9 @@ See below for more details.</p>
 
         <div class="method-description">
           
-          <p>Return a range of years allowed for a timesheet. Optionally pass ‘true’ if
-you want an actual Date object range rather than just a year range.</p>
+          <p>Return a range of years allowed for a timesheet. Optionally pass
+&#39;true&#39; if you want an actual Date object range rather than just a
+year range.</p>
           
 
           
@@ -422,8 +423,8 @@ you want an actual Date object range rather than just a year range.</p>
           
           <p>Class method; as <a href="Timesheet.html#method-i-date_for">#date_for</a>,
 but pass explicitly the year, week number and day number of interest. If an
-optional fourth parameter is ‘true’, returns a Date object rather than a
-string.</p>
+optional fourth parameter is &#39;true&#39;, returns a Date object rather
+than a string.</p>
           
 
           
@@ -431,7 +432,7 @@ string.</p>
             <pre><span class="ruby-comment"># File app/models/timesheet.rb, line 360</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">date_for</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">week_number</span>, <span class="ruby-identifier">day_number</span>, <span class="ruby-identifier">as_date</span> = <span class="ruby-keyword">false</span> )
 
-  <span class="ruby-comment"># Get the date of Monday, week 1 in this timesheet's year.</span>
+  <span class="ruby-comment"># Get the date of Monday, week 1 in this timesheet&#39;s year.</span>
   <span class="ruby-comment"># Add as many days as needed to get to Monday of the week</span>
   <span class="ruby-comment"># for this timesheet.</span>
 
@@ -447,7 +448,7 @@ string.</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">as_date</span> )
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">'%d-%b-%Y'</span> ) <span class="ruby-comment"># Or ISO: '%Y-%m-%d'</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-string">&#39;%d-%b-%Y&#39;</span> ) <span class="ruby-comment"># Or ISO: &#39;%Y-%m-%d&#39;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- date_for-source -->
@@ -493,8 +494,8 @@ weeks (Mon-&gt;Sun). Returns a Date.</p>
       <span class="ruby-identifier">date</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">year</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>, <span class="ruby-value">12</span>, <span class="ruby-identifier">day</span> )
 
       <span class="ruby-comment"># If we encounter a date in the previous year which has a week</span>
-      <span class="ruby-comment"># number &gt; 1, then that's the last week of the previous year. If</span>
-      <span class="ruby-comment"># we're on Dec 31st that means that week 1 started on Jan 1st,</span>
+      <span class="ruby-comment"># number &gt; 1, then that&#39;s the last week of the previous year. If</span>
+      <span class="ruby-comment"># we&#39;re on Dec 31st that means that week 1 started on Jan 1st,</span>
       <span class="ruby-comment"># else in December.</span>
 
       <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">date</span>.<span class="ruby-identifier">cweek</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> )
@@ -643,8 +644,9 @@ This is usually 52, but is 53 for some years.</p>
         <div class="method-description">
           
           <p>Return a range of years used by all current timesheets, or the allowed
-range (see above) if there are no work packets. Optionally pass ‘true’ if
-you want an actual Date object range rather than just a year range.</p>
+range (see above) if there are no work packets. Optionally pass
+&#39;true&#39; if you want an actual Date object range rather than just a
+year range.</p>
           
 
           
@@ -693,7 +695,7 @@ you want an actual Date object range rather than just a year range.</p>
 row containing that task is already present. The updated timesheet is not
 saved - the caller must do this. The new, added timesheet row object is
 returned, unless the task is already included in the timesheet, in which
-case the method returns ‘nil’.</p>
+case the method returns &#39;nil&#39;.</p>
           
 
           
@@ -739,8 +741,9 @@ only modify their own timesheets when not committed.</p>
 
 <p>Note there is no special status awarded to admin-owned timesheets; a
 manager can modify any not committed timesheet. This keeps the model
-simple. Managers are trusted to only modify timesheets they don’t own when
-really necessary, but they can’t revise history by changing committed data.</p>
+simple. Managers are trusted to only modify timesheets they don&#39;t own
+when really necessary, but they can&#39;t revise history by changing
+committed data.</p>
           
 
           
@@ -786,7 +789,7 @@ Monday to Saturday.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">column_sum</span>( <span class="ruby-identifier">day_number</span> )
   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
 
-  <span class="ruby-comment"># [TODO] Slow. Surely there's a better way...?</span>
+  <span class="ruby-comment"># [TODO] Slow. Surely there&#39;s a better way...?</span>
 
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">timesheet_rows</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">timesheet_row</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">work_packet</span> = <span class="ruby-constant">WorkPacket</span>.<span class="ruby-identifier">find_by_timesheet_row_id</span>(
@@ -822,10 +825,10 @@ Monday to Saturday.</p>
           
           <p>Return a date string representing this timesheet on the given day number.
 Day numbers are odd - 0 = Sunday at the <strong>end</strong> of this
-timesheet’s week, while 1-6 = Monday at the <strong>start</strong> of the
-week through to Saturday inclusive (aligning with Ruby “cweek”). If an
-optional second parameter is ‘true’, returns a Date object rather than a
-string.</p>
+timesheet&#39;s week, while 1-6 = Monday at the <strong>start</strong> of
+the week through to Saturday inclusive (aligning with Ruby “cweek”). If an
+optional second parameter is &#39;true&#39;, returns a Date object rather
+than a string.</p>
           
 
           
@@ -855,13 +858,13 @@ string.</p>
 
         <div class="method-description">
           
-          <p>Return the next (pass ‘true’) or previous (pass ‘false’) editable week
-after this one, as a hash with properties ‘week_number’ and ‘timesheet’.
-The latter will be populated with a timesheet if there is a not committed
-item in the found week, or nil if the week has no associated timesheet yet.
-Returns nil altogether if no editable week can be found (e.g. ask for
-previous from week 1, or all previous weeks have committed timesheets on
-them).</p>
+          <p>Return the next (pass &#39;true&#39;) or previous (pass &#39;false&#39;)
+editable week after this one, as a hash with properties
+&#39;week_number&#39; and &#39;timesheet&#39;. The latter will be populated
+with a timesheet if there is a not committed item in the found week, or nil
+if the week has no associated timesheet yet. Returns nil altogether if no
+editable week can be found (e.g. ask for previous from week 1, or all
+previous weeks have committed timesheets on them).</p>
 
 <p>This operation may involve many database queries so is relatively slow.</p>
           
@@ -928,8 +931,8 @@ timesheets.</p>
         <div class="method-description">
           
           <p>As <a href="Timesheet.html#method-i-editable_week">#editable_week</a>, but
-returns weeks for ‘showable’ weeks - that is, only weeks where a timesheet
-owned by the current user already exists.</p>
+returns weeks for &#39;showable&#39; weeks - that is, only weeks where a
+timesheet owned by the current user already exists.</p>
           
 
           
@@ -1023,7 +1026,7 @@ with week number for display purposes.</p>
         <div class="method-description">
           
           <p>Return a sorted array of week numbers which can be assigned to the
-timesheet. Includes the current timesheet’s already allocated week.</p>
+timesheet. Includes the current timesheet&#39;s already allocated week.</p>
           
 
           

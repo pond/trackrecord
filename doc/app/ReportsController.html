@@ -299,8 +299,8 @@ finding <a href="SavedReport.html">SavedReport</a> model instances and,
 using the <a
 href="TrackRecordReport/Report.html">TrackRecordReport::Report</a> class
 with its attributes configured from the <a
-href="SavedReport.html">SavedReport</a> instance’s contents, generating and
-showing reports to users.</p>
+href="SavedReport.html">SavedReport</a> instance&#39;s contents, generating
+and showing reports to users.</p>
 </dd></dl>
 <hr style="height: 10px">
 
@@ -357,9 +357,9 @@ apply to the current user.</p>
     <span class="ruby-comment"># This is pretty weird as active tasks at the time the link to the</span>
     <span class="ruby-comment"># legacy report was generated may have become inactive or vice versa.</span>
     <span class="ruby-comment"># Indeed even with a conventionally generated report, another user of</span>
-    <span class="ruby-comment"># the system may have changed an included task's active flag.</span>
+    <span class="ruby-comment"># the system may have changed an included task&#39;s active flag.</span>
     <span class="ruby-comment">#</span>
-    <span class="ruby-comment"># This means that the report's active_tasks and inactive_tasks lists</span>
+    <span class="ruby-comment"># This means that the report&#39;s active_tasks and inactive_tasks lists</span>
     <span class="ruby-comment"># may contain a mixture of active and inactive items. Fortunately,</span>
     <span class="ruby-comment"># this is all resolved by the TrackRecordReport code when the IDs are</span>
     <span class="ruby-comment"># given to the Report instance. It re-finds and re-builds the list of</span>
@@ -374,7 +374,7 @@ apply to the current user.</p>
 
     <span class="ruby-ivar">@saved_report</span>       = <span class="ruby-constant">SavedReport</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:report</span> ] )
     <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">user</span>  = <span class="ruby-ivar">@current_user</span>
-    <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">title</span> = <span class="ruby-string">''</span>
+    <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span>
 
     <span class="ruby-keyword">begin</span>
       <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">save!</span>()
@@ -407,7 +407,7 @@ apply to the current user.</p>
   <span class="ruby-comment"># allowed to see the report, but they may be restricted and this might</span>
   <span class="ruby-comment"># not be their report in the first place. Thus we pass in the current</span>
   <span class="ruby-comment"># user to let the report mechanism below that filter tasks etc. as</span>
-  <span class="ruby-comment"># required by the user's restrictions, if any.</span>
+  <span class="ruby-comment"># required by the user&#39;s restrictions, if any.</span>
 
   <span class="ruby-ivar">@report</span> = <span class="ruby-ivar">@saved_report</span>.<span class="ruby-identifier">generate_report</span>( <span class="ruby-keyword">true</span>, <span class="ruby-ivar">@current_user</span> )
   <span class="ruby-ivar">@report</span>.<span class="ruby-identifier">compile</span>()
@@ -430,7 +430,7 @@ apply to the current user.</p>
     )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Everything's ready to render the report in @report, but should we</span>
+  <span class="ruby-comment"># Everything&#39;s ready to render the report in @report, but should we</span>
   <span class="ruby-comment"># actually be running a generator instead?</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>( <span class="ruby-value">:generator</span> ) )
@@ -458,7 +458,7 @@ apply to the current user.</p>
 
           <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span> )
             <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">to_s</span>
-            <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reports/show'</span> } )
+            <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;reports/show&#39;</span> } )
           <span class="ruby-keyword">end</span>
 
           <span class="ruby-keyword">break</span>
@@ -470,7 +470,7 @@ apply to the current user.</p>
 
     <span class="ruby-comment"># Simple render.</span>
 
-    <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'reports/show'</span> } )
+    <span class="ruby-identifier">render</span>( { <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;reports/show&#39;</span> } )
 
   <span class="ruby-keyword">end</span>
 

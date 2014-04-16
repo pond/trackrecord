@@ -396,9 +396,9 @@ accordingly.</p>
 
         <div class="method-description">
           
-          <p>Returns ‘true’ if configured to use the YUI tree control for the view
-related to the current request. See the “uses_yui_tree” class method for
-more information.</p>
+          <p>Returns &#39;true&#39; if configured to use the YUI tree control for the
+view related to the current request. See the “uses_yui_tree” class method
+for more information.</p>
           
 
           
@@ -439,7 +439,7 @@ options specified as available in a call to “<a
 href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>”
 and <strong>must</strong> at least contain values for the following keys
 unless they have been given values in the YAML configuration file
-(uncommon) or the view’s corresponding controller’s call to “<a
+(uncommon) or the view&#39;s corresponding controller&#39;s call to “<a
 href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>”
 (more common):</p>
 <ul><li>
@@ -456,16 +456,16 @@ below)</p>
 <code>:root_model</code>)</p>
 </li><li>
 <p><code>:root_collection</code> - if your model does <strong>not</strong>
-match the characteristics described for option "<code>:root_model</code>"
-in the "<a
-href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>"
+match the characteristics described for option “<code>:root_model</code>”
+in the “<a
+href="ClassMethods.html#method-i-uses_yui_tree">YuiTree::ClassMethods#uses_yui_tree</a>”
 method documentation, then you must provide an array of objects defining
-the roots of the tree. Construct array entries by calling "<a
-href="../YuiTree.html#method-c-make_node_object">YuiTree.make_node_object</a>".
+the roots of the tree. Construct array entries by calling “<a
+href="../YuiTree.html#method-c-make_node_object">YuiTree.make_node_object</a>”.
 The resulting collection is later turned into a JavaScript-safe array by a
-wider call to "to_json" on a JavaScript options hash which gets created by
-the YUI tree instantiation helper code; you don't need to worry about HTML
-or JavaScript escaping of any values yourself.</p>
+wider call to “to_json” on a JavaScript options hash which gets created by
+the YUI tree instantiation helper code; you don&#39;t need to worry about
+HTML or JavaScript escaping of any values yourself.</p>
 </li></ul>
 
 <p>The following option values can be specified technically in any of the
@@ -480,7 +480,7 @@ another. Any such relationships are described below:</p>
 <dd>
 <p>A string if you want that string to be included at the top of the roots of
 the tree as an item that indicates nothing/none/blank - an ID of zero is
-associated with it. This option works whether you use the plugin’s
+associated with it. This option works whether you use the plugin&#39;s
 generation of the root dataset via “<code>:root_model</code>” or if you
 generate your own dataset and provide it through
 “<code>:root_collection</code>”. Of course, you can always add your own
@@ -497,16 +497,16 @@ highlighted and the “<code>:target_name_field_id</code>” option has been
 set up - the string is written as innerHTML of the name field.</p>
 </dd><dt><code>:exclude</code>
 <dd>
-<p>An ID as an integer, or an object with a method ‘id’ which returns its ID
-as an integer, or an array of either of these types (they can be mixed in
-the same array). Specifies items which will not be included in the tree
-even if the Controller returns them at any point. This works at the node
-addition level in JS, so it is *not a security feature*. If you don’t want
-something to be seen by a user, don’t let the Controller send it out in the
-first place. The exclusion feature is useful if using, say, a tree to
-assign a parent to an existing item within a hierarchy - you don’t want to
-let the user try and assign the item <em>itself</em> as a parent, so
-exclude it.</p>
+<p>An ID as an integer, or an object with a method &#39;id&#39; which returns
+its ID as an integer, or an array of either of these types (they can be
+mixed in the same array). Specifies items which will not be included in the
+tree even if the Controller returns them at any point. This works at the
+node addition level in JS, so it is *not a security feature*. If you
+don&#39;t want something to be seen by a user, don&#39;t let the Controller
+send it out in the first place. The exclusion feature is useful if using,
+say, a tree to assign a parent to an existing item within a hierarchy - you
+don&#39;t want to let the user try and assign the item <em>itself</em> as a
+parent, so exclude it.</p>
 
 <p>If you exclude a non-leaf item, it will be shown in the tree but will not
 be selectable. This way, children can still be selected. At present the
@@ -515,7 +515,7 @@ present due to exclusions, in that it will try to fetch child nodes but
 when they all get excluded the Yahoo tree view itself will stop trying
 further and change the node indicator on the parent to being a branch,
 rather than a toggle control. It does mean one technically unnecessary AJAX
-request and associated UI update delay though, but it’s a much simpler
+request and associated UI update delay though, but it&#39;s a much simpler
 mechanism than trying to work such things out up-front.</p>
 </dd><dt><code>:expand</code>
 <dd>
@@ -537,15 +537,15 @@ to use the “<code>:expand</code>” option in cojunction with
 “<code>:highlight</code>” for non-root nodes.</p>
 </dd><dt><code>:multiple</code>
 <dd>
-<p>A boolean (defaults to ‘<code>false</code>’) which says that multiple items
-may be selected in the tree. See below for more.</p>
+<p>A boolean (defaults to &#39;<code>false</code>&#39;) which says that
+multiple items may be selected in the tree. See below for more.</p>
 </dd><dt><code>:form_leaf_nodes_only</code>
 <dd>
-<p>If ‘<code>true</code>’, only the IDs of <em>leaf</em> nodes will be written
-into the form field identified by the mandatory
+<p>If &#39;<code>true</code>&#39;, only the IDs of <em>leaf</em> nodes will be
+written into the form field identified by the mandatory
 “<code>:target_form_field_id</code>” option. Defaults to
-‘<code>false</code>’ so that any selected (highlighted) node is included,
-leaf or otherwise.</p>
+&#39;<code>false</code>&#39; so that any selected (highlighted) node is
+included, leaf or otherwise.</p>
 </dd><dt><code>:data_for_xhr_call</code>
 <dd>
 <p>An optional string which if included will be added to the parameters used
@@ -556,12 +556,12 @@ method then this is of no use, but if you write a custom handler then the
 data string provides a crude but effective way of passing in external data.
 Usually, the data is used as some kind of filter, restricting the range of
 nodes which the XHR handler method would otherwise have returned. Note that
-the string will be run through the ‘j’ helper to make it JS-safe, so some
-characters may not be treated quite how you expect - avoid literal single
-quotes, double quotes and backslashes in particular. The string will appear
-in the params hash under the key “<code>:data</code>”. An empty string
-given here is treated the same way as if the option had been completely
-omitted.</p>
+the string will be run through the &#39;j&#39; helper to make it JS-safe,
+so some characters may not be treated quite how you expect - avoid literal
+single quotes, double quotes and backslashes in particular. The string will
+appear in the params hash under the key “<code>:data</code>”. An empty
+string given here is treated the same way as if the option had been
+completely omitted.</p>
 </dd></dl>
 
 <p>The options hash *must not* contain any of the following keys since this
@@ -581,11 +581,11 @@ results will be undefined.</p>
 
 <h2 id="method-i-yui_tree-label-Multiple+selection+trees">Multiple selection trees</h2>
 
-<p>If ‘<code>:multiple</code>’ is ‘<code>true</code>’ the tree allows multiple
-check boxes to be selected. Selecting a child does not cause its parents to
-change state by default - the user is free to choose any collection of
-nodes without constraint - but that can be changed with options listed
-below.</p>
+<p>If &#39;<code>:multiple</code>&#39; is &#39;<code>true</code>&#39; the tree
+allows multiple check boxes to be selected. Selecting a child does not
+cause its parents to change state by default - the user is free to choose
+any collection of nodes without constraint - but that can be changed with
+options listed below.</p>
 
 <p>Option key “<code>:highlight</code>” now begins to work as
 “<code>:expand</code>” or “<code>:exclude</code>” in that it can take a
@@ -607,7 +607,7 @@ single space. Must be JS single quoted string safe. May be HTML (e.g.
 “&lt;br /&gt;”).</p>
 </dd><dt><code>:name_include_parents</code>
 <dd>
-<p>If you want to include the names of all parent nodes whenever a node’s
+<p>If you want to include the names of all parent nodes whenever a node&#39;s
 label is used for the name field so that each text entry reflects the whole
 of the branch of the tree used to reach the node in question, then set this
 option to a string which is used as a separator between each of the parent
@@ -617,8 +617,8 @@ are not included - only the label of the individual node is added to the
 name field.</p>
 </dd><dt><code>:name_leaf_nodes_only</code>
 <dd>
-<p>If ‘<code>true</code>’, use only labels of leaf nodes for name field text;
-don’t include others. Useful in conjunction with the
+<p>If &#39;<code>true</code>&#39;, use only labels of leaf nodes for name
+field text; don&#39;t include others. Useful in conjunction with the
 “<code>:name_include_parents</code>” option, since when the latter is in
 use, individual entries in the name field will already indicate the labels
 for the complete branch leading to a node so including names of non-leaf
@@ -627,19 +627,20 @@ included.</p>
 </dd></dl>
 
 <p>Once multiple items are selectable, it becomes desirable to be able to
-control the YUI tree’s highlight propagation features - that is, when a
+control the YUI tree&#39;s highlight propagation features - that is, when a
 node is selected, should its parent and/or child nodes be automatically
 selected as well? The following options control this behaviour. The
 settings apply to every node in the tree.</p>
 <dl class="rdoc-list note-list"><dt><code>:propagate_up</code>
 <dd>
-<p>If ‘<code>true</code>’, selecting any node causes all parent nodes on the
-same branch to be selected, if any. By default this option is disabled.</p>
+<p>If &#39;<code>true</code>&#39;, selecting any node causes all parent nodes
+on the same branch to be selected, if any. By default this option is
+disabled.</p>
 </dd><dt><code>:propagate_down</code>
 <dd>
-<p>If ‘<code>true</code>’, selecting any node causes all child nodes in the
-tree below this node, if any, to be selected. By default this option is
-disabled.</p>
+<p>If &#39;<code>true</code>&#39;, selecting any node causes all child nodes
+in the tree below this node, if any, to be selected. By default this option
+is disabled.</p>
 </dd></dl>
           
 
@@ -686,7 +687,7 @@ disabled.</p>
   <span class="ruby-identifier">multiple</span>             = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:multiple</span>             ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">propagate_up</span>         = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:propagate_up</span>         ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">propagate_down</span>       = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:propagate_down</span>       ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
-  <span class="ruby-identifier">name_field_separator</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:name_field_separator</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">' '</span>
+  <span class="ruby-identifier">name_field_separator</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:name_field_separator</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">&#39; &#39;</span>
   <span class="ruby-identifier">name_include_parents</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:name_include_parents</span> )
   <span class="ruby-identifier">name_leaf_nodes_only</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:name_leaf_nodes_only</span> ) <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
 
@@ -700,7 +701,7 @@ disabled.</p>
   <span class="ruby-comment"># Build a root collection if working with the &quot;root_model&quot; option.</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">root_collection</span>.<span class="ruby-identifier">nil?</span> )
-    <span class="ruby-identifier">raise</span> ( <span class="ruby-constant">YUI_MISSING_OPTS_ERROR</span> <span class="ruby-operator">%</span> <span class="ruby-string">'root_model&quot; or &quot;:root_collection'</span> )
+    <span class="ruby-identifier">raise</span> ( <span class="ruby-constant">YUI_MISSING_OPTS_ERROR</span> <span class="ruby-operator">%</span> <span class="ruby-string">&#39;root_model&quot; or &quot;:root_collection&#39;</span> )
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">root_collection</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">root_model</span>      = <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">constantize</span>
     <span class="ruby-identifier">root_instances</span>  = <span class="ruby-identifier">root_model</span>.<span class="ruby-identifier">roots</span>()
@@ -721,7 +722,7 @@ disabled.</p>
   <span class="ruby-comment"># Add in a blank entry if necessary.</span>
 
   <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">include_blank</span>.<span class="ruby-identifier">nil?</span> )
-    <span class="ruby-identifier">blank_item</span> = <span class="ruby-constant">YuiTree</span><span class="ruby-operator">::</span><span class="ruby-identifier">make_node_object</span>( <span class="ruby-string">'0'</span>, <span class="ruby-identifier">include_blank</span>, <span class="ruby-keyword">true</span> )
+    <span class="ruby-identifier">blank_item</span> = <span class="ruby-constant">YuiTree</span><span class="ruby-operator">::</span><span class="ruby-identifier">make_node_object</span>( <span class="ruby-string">&#39;0&#39;</span>, <span class="ruby-identifier">include_blank</span>, <span class="ruby-keyword">true</span> )
     <span class="ruby-identifier">root_collection</span>.<span class="ruby-identifier">unshift</span>( <span class="ruby-identifier">blank_item</span> )
   <span class="ruby-keyword">end</span>
 
@@ -730,7 +731,7 @@ disabled.</p>
 
   <span class="ruby-identifier">result</span> = <span class="ruby-identifier">content_tag</span>(
     <span class="ruby-value">:div</span>,
-    <span class="ruby-string">''</span>,
+    <span class="ruby-string">&#39;&#39;</span>,
     {
       <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ div_class } ygtv-checkbox&quot;</span>,
       <span class="ruby-value">:id</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">div_id</span>
@@ -767,7 +768,7 @@ disabled.</p>
 
   }.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nil?</span> }
 
-  <span class="ruby-comment"># The use of 'to_json' ensures that strange JS characters get properly</span>
+  <span class="ruby-comment"># The use of &#39;to_json&#39; ensures that strange JS characters get properly</span>
   <span class="ruby-comment"># escaped, among other things.</span>
 
   <span class="ruby-identifier">js</span> = <span class="ruby-node">&quot;  var options = #{ options_hash.to_json };\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span>

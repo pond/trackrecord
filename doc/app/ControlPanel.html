@@ -321,10 +321,11 @@ below for more details.</p>
 
         <div class="method-description">
           
-          <p>Get a value from the instance’s preferences hash. The hash is nested in a
-similar manner to the I18n module’s translation hashes and is addressed in
-a similar way - pass a dot-separated key string, e.g. “foo.bar.baz”.
-Returns ‘nil’ for unset preferences, else the value at that location.</p>
+          <p>Get a value from the instance&#39;s preferences hash. The hash is nested in
+a similar manner to the I18n module&#39;s translation hashes and is
+addressed in a similar way - pass a dot-separated key string, e.g.
+“foo.bar.baz”. Returns &#39;nil&#39; for unset preferences, else the value
+at that location.</p>
 
 <p>Currently defined preferences include (but may not be limited to - this
 list may be out of date) the following:</p>
@@ -343,7 +344,7 @@ list may be out of date) the following:</p>
           <div class="method-source-code" id="get_preference-source">
             <pre><span class="ruby-comment"># File app/models/control_panel.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_preference</span>( <span class="ruby-identifier">key_str</span> )
-  <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">key_str</span>.<span class="ruby-identifier">split</span>( <span class="ruby-string">'.'</span> )
+  <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">key_str</span>.<span class="ruby-identifier">split</span>( <span class="ruby-string">&#39;.&#39;</span> )
   <span class="ruby-identifier">pref</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preferences</span>
 
   <span class="ruby-keyword">for</span> <span class="ruby-identifier">key</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">keys</span>
@@ -382,7 +383,7 @@ saving the updated object.</p>
           <div class="method-source-code" id="remove_inactive_tasks-source">
             <pre><span class="ruby-comment"># File app/models/control_panel.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_inactive_tasks</span>
-  <span class="ruby-comment"># See the User model's remove_inactive_tasks method for details.</span>
+  <span class="ruby-comment"># See the User model&#39;s remove_inactive_tasks method for details.</span>
 
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:active</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -413,8 +414,9 @@ above. If any of the nested hashes identified by the key string are missing
 (e.g. in example “foo.bar.baz”, any of hashes “foo”, “bar” or “baz”) then
 relevant entries in the preferences will be made automatically.</p>
 
-<p>The method saves ‘self’ back to database and returns the return value of
-the call made to “save”. Thus returns ‘false’ on failure, else ‘true’.</p>
+<p>The method saves &#39;self&#39; back to database and returns the return
+value of the call made to “save”. Thus returns &#39;false&#39; on failure,
+else &#39;true&#39;.</p>
 
 <p>See also “<a
 href="ControlPanel.html#method-i-set_preference">#set_preference</a>!”.</p>

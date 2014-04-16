@@ -396,7 +396,7 @@ may be passed to further restrict the search (that is, the “{…}” in “fin
             <pre><span class="ruby-comment"># File app/models/task_group.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_permitted</span>( <span class="ruby-identifier">user</span>, <span class="ruby-identifier">conditions</span> = <span class="ruby-keyword">nil</span> )
 
-  <span class="ruby-comment"># Can't see any items if no user is given. Can see all items if</span>
+  <span class="ruby-comment"># Can&#39;t see any items if no user is given. Can see all items if</span>
   <span class="ruby-comment"># the user is unrestricted.</span>
 
   <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user</span>
@@ -467,8 +467,8 @@ may be passed to further restrict the search (that is, the “{…}” in “fin
 
         <div class="method-description">
           
-          <p>Return the object’s title. This is done for loose compatibility with a <a
-href="Task.html">Task</a> object during report generation.</p>
+          <p>Return the object&#39;s title. This is done for loose compatibility with a
+<a href="Task.html">Task</a> object during report generation.</p>
           
 
           
@@ -533,7 +533,7 @@ is still active.</p>
         <div class="method-description">
           
           <p>Is permission granted for the given user to see this object? See also
-find_permitted. Returns ‘true’ if permitted, else ‘false’.</p>
+find_permitted. Returns &#39;true&#39; if permitted, else &#39;false&#39;.</p>
           
 
           
@@ -544,7 +544,7 @@ find_permitted. Returns ‘true’ if permitted, else ‘false’.</p>
 
   <span class="ruby-comment"># User is restricted. User can only see this object if it</span>
   <span class="ruby-comment"># has at least one task associated with it and at least one</span>
-  <span class="ruby-comment"># of those associated tasks appears in the user's permitted</span>
+  <span class="ruby-comment"># of those associated tasks appears in the user&#39;s permitted</span>
   <span class="ruby-comment"># task list, so check the intersection of the two arrays.</span>
 
   <span class="ruby-keyword">return</span> ( <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tasks</span> &amp; <span class="ruby-identifier">user</span>.<span class="ruby-identifier">tasks</span> ).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>

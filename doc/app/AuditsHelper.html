@@ -324,15 +324,15 @@ controllers/audits_controller.rb for more.</p>
   <span class="ruby-identifier">changes</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">audited_changes</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">changes</span>.<span class="ruby-identifier">blank?</span> )
-    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'Timesheet'</span> )
-      <span class="ruby-keyword">return</span> <span class="ruby-string">'Added or removed rows, or edited hours within rows'</span>
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Timesheet&#39;</span> )
+      <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;Added or removed rows, or edited hours within rows&#39;</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">return</span> <span class="ruby-string">'No other details available'</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;No other details available&#39;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">output</span>  = <span class="ruby-string">'&lt;table class=&quot;list audit_changes&quot;&gt;'</span>
-  <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;tr&gt;&lt;th class=&quot;audit_changes_field&quot;&gt;Field&lt;/th&gt;&lt;th class=&quot;audit_changes_from&quot;&gt;From&lt;/th&gt;&lt;th class=&quot;audit_changes_to&quot;&gt;To&lt;/th&gt;&lt;/tr&gt;'</span>
+  <span class="ruby-identifier">output</span>  = <span class="ruby-string">&#39;&lt;table class=&quot;list audit_changes&quot;&gt;&#39;</span>
+  <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;tr&gt;&lt;th class=&quot;audit_changes_field&quot;&gt;Field&lt;/th&gt;&lt;th class=&quot;audit_changes_from&quot;&gt;From&lt;/th&gt;&lt;th class=&quot;audit_changes_to&quot;&gt;To&lt;/th&gt;&lt;/tr&gt;&#39;</span>
 
   <span class="ruby-identifier">changes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">cdata</span> = <span class="ruby-identifier">changes</span>[ <span class="ruby-identifier">key</span> ]
@@ -341,23 +341,23 @@ controllers/audits_controller.rb for more.</p>
       <span class="ruby-identifier">cfrom</span> = <span class="ruby-identifier">to_descriptive_s</span>( <span class="ruby-identifier">cdata</span>[ <span class="ruby-value">0</span> ] )
       <span class="ruby-identifier">cto</span>   = <span class="ruby-identifier">to_descriptive_s</span>( <span class="ruby-identifier">cdata</span>[ <span class="ruby-value">1</span> ] )
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">cfrom</span> = <span class="ruby-string">'&amp;ndash;'</span>.<span class="ruby-identifier">html_safe</span>()
+      <span class="ruby-identifier">cfrom</span> = <span class="ruby-string">&#39;&amp;ndash;&#39;</span>.<span class="ruby-identifier">html_safe</span>()
       <span class="ruby-identifier">cto</span>   = <span class="ruby-identifier">cdata</span>.<span class="ruby-identifier">to_s</span>()
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-comment"># Try to get clever :-) and see if we have &quot;[foo_]id&quot; in a string. If</span>
     <span class="ruby-comment"># so, extract &quot;foo&quot; and see if the item can be found.</span>
 
-    <span class="ruby-identifier">array</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">split</span>( <span class="ruby-string">'_'</span> )
+    <span class="ruby-identifier">array</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">split</span>( <span class="ruby-string">&#39;_&#39;</span> )
 
     <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">array</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> )
       <span class="ruby-identifier">check</span> = <span class="ruby-identifier">array</span>.<span class="ruby-identifier">pop</span>()
 
-      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">check</span> <span class="ruby-operator">==</span> <span class="ruby-string">'id'</span> )
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">check</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;id&#39;</span> )
         <span class="ruby-identifier">type</span> = <span class="ruby-identifier">array</span>[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">capitalize</span>
 
-        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'User'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'Project'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'Customer'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'Task'</span> )
-          <span class="ruby-identifier">field</span> = ( <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'User'</span> ) <span class="ruby-operator">?</span> <span class="ruby-string">'name'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'title'</span>
+        <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;User&#39;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Project&#39;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Customer&#39;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Task&#39;</span> )
+          <span class="ruby-identifier">field</span> = ( <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;User&#39;</span> ) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;title&#39;</span>
 
           <span class="ruby-keyword">begin</span>
             <span class="ruby-identifier">const</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">constantize</span>
@@ -381,7 +381,7 @@ controllers/audits_controller.rb for more.</p>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;tr&gt;&lt;td&gt;#{ h( key ) }&lt;/td&gt;&lt;td&gt;#{ h( cfrom ) }&lt;/td&gt;&lt;td&gt;#{ h( cto ) }&lt;/td&gt;&lt;/tr&gt;&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/table&gt;'</span> ).<span class="ruby-identifier">html_safe</span>
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;/table&gt;&#39;</span> ).<span class="ruby-identifier">html_safe</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- audithelp_changes-source -->
           
@@ -423,7 +423,7 @@ found.</p>
     <span class="ruby-identifier">record</span>.<span class="ruby-identifier">auditable_type</span>.<span class="ruby-identifier">downcase</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">type</span>   = <span class="ruby-string">'permitted OpenID'</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'permittedopenid'</span>
+  <span class="ruby-identifier">type</span>   = <span class="ruby-string">&#39;permitted OpenID&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;permittedopenid&#39;</span>
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;#{ record.action.capitalize() } #{ h( type ) }&quot;</span>
 
   <span class="ruby-keyword">begin</span>
@@ -431,14 +431,14 @@ found.</p>
     <span class="ruby-identifier">objinst</span> = <span class="ruby-identifier">objtype</span>.<span class="ruby-identifier">find_by_id</span>( <span class="ruby-identifier">record</span>.<span class="ruby-identifier">auditable_id</span> )
 
     <span class="ruby-keyword">case</span> ( <span class="ruby-identifier">record</span>.<span class="ruby-identifier">auditable_type</span> )
-      <span class="ruby-keyword">when</span> <span class="ruby-string">'User'</span>
-        <span class="ruby-keyword">return</span> <span class="ruby-identifier">append_link</span>( <span class="ruby-identifier">output</span>, <span class="ruby-node">&quot;'#{ h( objinst.name ) }'&quot;</span>, <span class="ruby-identifier">record</span> )
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;User&#39;</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">append_link</span>( <span class="ruby-identifier">output</span>, <span class="ruby-node">&quot;&#39;#{ h( objinst.name ) }&#39;&quot;</span>, <span class="ruby-identifier">record</span> )
 
-      <span class="ruby-keyword">when</span> <span class="ruby-string">'Task'</span>, <span class="ruby-string">'Project'</span>, <span class="ruby-string">'Customer'</span>
-        <span class="ruby-keyword">return</span> <span class="ruby-identifier">append_link</span>( <span class="ruby-identifier">output</span>, <span class="ruby-node">&quot;'#{ h( objinst.title ) }'&quot;</span>, <span class="ruby-identifier">record</span> )
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Task&#39;</span>, <span class="ruby-string">&#39;Project&#39;</span>, <span class="ruby-string">&#39;Customer&#39;</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">append_link</span>( <span class="ruby-identifier">output</span>, <span class="ruby-node">&quot;&#39;#{ h( objinst.title ) }&#39;&quot;</span>, <span class="ruby-identifier">record</span> )
 
-      <span class="ruby-keyword">when</span> <span class="ruby-string">'Timesheet'</span>
-        <span class="ruby-keyword">return</span> <span class="ruby-identifier">append_link</span>( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">' for week'</span>, <span class="ruby-node">&quot;#{ h( objinst.week_number ) }, #{ h( objinst.year ) }&quot;</span>, <span class="ruby-identifier">record</span> )
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Timesheet&#39;</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">append_link</span>( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; for week&#39;</span>, <span class="ruby-node">&quot;#{ h( objinst.week_number ) }, #{ h( objinst.year ) }&quot;</span>, <span class="ruby-identifier">record</span> )
 
       <span class="ruby-keyword">else</span>
         <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>

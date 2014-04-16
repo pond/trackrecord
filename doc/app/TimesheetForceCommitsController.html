@@ -352,7 +352,7 @@ users who never manually commit them.</p>
 
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Pick earliest/latest instead of 'nil' and bounds check dates.</span>
+  <span class="ruby-comment"># Pick earliest/latest instead of &#39;nil&#39; and bounds check dates.</span>
 
   <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">earliest</span> = <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">earliest_limit</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">earliest</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">earliest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">earliest_limit</span> )
   <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">latest</span>   = <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">latest_limit</span>   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">latest</span>.<span class="ruby-identifier">nil?</span>   <span class="ruby-operator">||</span> <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">latest</span>   <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">latest_limit</span>   )
@@ -370,13 +370,13 @@ users who never manually commit them.</p>
       <span class="ruby-comment"># Remember that &quot;@object.latest&quot; is an inclusive timesheet</span>
       <span class="ruby-comment"># end date and everything runs in UTC.</span>
       <span class="ruby-comment">#</span>
-      <span class="ruby-comment"># We can't use &quot;update_all&quot;, even though it'd be fast, as</span>
-      <span class="ruby-comment"># it doesn't trigger callbacks or validations and both are</span>
+      <span class="ruby-comment"># We can&#39;t use &quot;update_all&quot;, even though it&#39;d be fast, as</span>
+      <span class="ruby-comment"># it doesn&#39;t trigger callbacks or validations and both are</span>
       <span class="ruby-comment"># important (particularly callbacks).</span>
 
       <span class="ruby-identifier">timesheets</span> = <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">where</span>( <span class="ruby-value">:committed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> )
-      <span class="ruby-identifier">timesheets</span> = <span class="ruby-identifier">timesheets</span>.<span class="ruby-identifier">where</span>( <span class="ruby-string">'start_day_cache &gt;= ?'</span>, <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">earliest</span> )
-      <span class="ruby-identifier">timesheets</span> = <span class="ruby-identifier">timesheets</span>.<span class="ruby-identifier">where</span>( <span class="ruby-string">'start_day_cache &lt;= ?'</span>, <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">latest</span> <span class="ruby-operator">-</span> <span class="ruby-value">6</span>.<span class="ruby-identifier">days</span> )
+      <span class="ruby-identifier">timesheets</span> = <span class="ruby-identifier">timesheets</span>.<span class="ruby-identifier">where</span>( <span class="ruby-string">&#39;start_day_cache &gt;= ?&#39;</span>, <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">earliest</span> )
+      <span class="ruby-identifier">timesheets</span> = <span class="ruby-identifier">timesheets</span>.<span class="ruby-identifier">where</span>( <span class="ruby-string">&#39;start_day_cache &lt;= ?&#39;</span>, <span class="ruby-ivar">@object</span>.<span class="ruby-identifier">latest</span> <span class="ruby-operator">-</span> <span class="ruby-value">6</span>.<span class="ruby-identifier">days</span> )
 
       <span class="ruby-identifier">timesheets</span>.<span class="ruby-identifier">find_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">timesheet</span> <span class="ruby-operator">|</span>
         <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> = <span class="ruby-keyword">true</span>

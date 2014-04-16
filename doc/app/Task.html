@@ -405,7 +405,7 @@ defaults in a migration.</p>
 <pre>Optional hash used for instance initialisation in the traditional way
 for an ActiveRecord subclass.
 
-Optional User object. A default project is taken from that user's
+Optional User object. A default project is taken from that user&#39;s
 control panel data, if available.</pre>
           
 
@@ -448,7 +448,7 @@ control panel data, if available.</pre>
         <div class="method-description">
           
           <p>Class method - sort an array of tasks by the augmented title. Since this
-isn’t done by the database, it’s slow.</p>
+isn&#39;t done by the database, it&#39;s slow.</p>
           
 
           
@@ -484,8 +484,8 @@ isn’t done by the database, it’s slow.</p>
 
         <div class="method-description">
           
-          <p>Return the ‘augmented’ task title; that is, the task name, with the project
-and customer names appended if available.</p>
+          <p>Return the &#39;augmented&#39; task title; that is, the task name, with the
+project and customer names appended if available.</p>
           
 
           
@@ -700,11 +700,11 @@ find restricted types.</p>
           
           <p>Number of hours worked on the task between the given start and end Dates as
 a Range. Optionally pass a <a href="User.html">User</a> object; work
-packets will only be counted if they’re in a timesheet belonging to that
-user.</p>
+packets will only be counted if they&#39;re in a timesheet belonging to
+that user.</p>
 
-<p>Returns an object with fields ‘committed’ and ‘not_committed’, giving sums
-for those types of hours.</p>
+<p>Returns an object with fields &#39;committed&#39; and
+&#39;not_committed&#39;, giving sums for those types of hours.</p>
           
 
           
@@ -775,10 +775,10 @@ for those types of hours.</p>
         <div class="method-description">
           
           <p>Update an object with the given attributes. This is done by a special model
-method because changes of the ‘active’ flag have side effects for other
-associated objects. THE CALLER *<strong>MUST</strong>* USE A TRANSACTION
-around a call to this method. There is no need to call here unless the
-‘active’ flag state is changing.</p>
+method because changes of the &#39;active&#39; flag have side effects for
+other associated objects. THE CALLER *<strong>MUST</strong>* USE A
+TRANSACTION around a call to this method. There is no need to call here
+unless the &#39;active&#39; flag state is changing.</p>
           
 
           
@@ -788,17 +788,17 @@ around a call to this method. There is no need to call here unless the
   <span class="ruby-identifier">active</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">active</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes!</span>( <span class="ruby-identifier">attrs</span> )
 
-  <span class="ruby-comment"># If the active flag has changed and it *was* 'true', then the task</span>
+  <span class="ruby-comment"># If the active flag has changed and it *was* &#39;true&#39;, then the task</span>
   <span class="ruby-comment"># has just been made inactive.</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">attrs</span>[ <span class="ruby-value">:active</span> ] <span class="ruby-operator">!=</span> <span class="ruby-identifier">active</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">active</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> )
 
     <span class="ruby-comment"># When tasks are made inactive, remove them from each of the Task lists</span>
     <span class="ruby-comment"># in User and ControlPanel objects. There are checks for this elsewhere,</span>
-    <span class="ruby-comment"># but they're only to try and catch cases where this code has gone wrong.</span>
+    <span class="ruby-comment"># but they&#39;re only to try and catch cases where this code has gone wrong.</span>
     <span class="ruby-comment">#</span>
     <span class="ruby-comment"># Although only restricted users make use of this list, other user types</span>
-    <span class="ruby-comment"># may have a list set up either accidentally or because the user's type</span>
+    <span class="ruby-comment"># may have a list set up either accidentally or because the user&#39;s type</span>
     <span class="ruby-comment"># is due to be changed to one with lower permissions. As a result, we</span>
     <span class="ruby-comment"># must update every user.</span>
 

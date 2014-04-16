@@ -341,13 +341,13 @@ objects. See controllers/tasks_controller.rb for more.</p>
             <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_actions</span>( <span class="ruby-identifier">task</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> <span class="ruby-keyword">or</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">active</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">manager?</span> ) )
-    <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">'edit'</span> ]
-    <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'delete'</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
+    <span class="ruby-identifier">actions</span> = [ <span class="ruby-string">&#39;edit&#39;</span> ]
+    <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">&#39;delete&#39;</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">actions</span> = []
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">'show'</span> )
+  <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">push</span>( <span class="ruby-string">&#39;show&#39;</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">actions</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- taskhelp_actions-source -->
@@ -415,8 +415,8 @@ but for active/inactive tasks.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_active_help</span>
   <span class="ruby-keyword">return</span> (
     <span class="ruby-string">&quot;Names of active or inactive tasks are shown as follows: &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_active_class( true  ) }\&quot;&gt;active&lt;/span&gt;', &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_active_class( false ) }\&quot;&gt;inactive&lt;/span&gt;'.&quot;</span>
+    <span class="ruby-node">&quot;&#39;&lt;span class=\&quot;#{ taskhelp_active_class( true  ) }\&quot;&gt;active&lt;/span&gt;&#39;, &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+    <span class="ruby-node">&quot;&#39;&lt;span class=\&quot;#{ taskhelp_active_class( false ) }\&quot;&gt;inactive&lt;/span&gt;&#39;.&quot;</span>
   ).<span class="ruby-identifier">html_safe</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- taskhelp_active_help-source -->
@@ -442,7 +442,7 @@ but for active/inactive tasks.</p>
           
           <p>Return an HTML class name appropriate for a billable or not billable task
 according to the given task or, if given a boolean, the value of that
-boolean where ‘true’ means ‘billable’</p>
+boolean where &#39;true&#39; means &#39;billable&#39;</p>
 
 <p>Note that an additional class name may be included for active/inactive
 tasks (but not when a boolean is given, obviously!).</p>
@@ -485,8 +485,8 @@ tasks (but not when a boolean is given, obviously!).</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_billable_help</span>
   <span class="ruby-keyword">return</span> (
     <span class="ruby-string">&quot;Names of billable or non-billable tasks are shown as follows: &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_billable_class( true  ) }\&quot;&gt;billable&lt;/span&gt;', &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-    <span class="ruby-node">&quot;'&lt;span class=\&quot;#{ taskhelp_billable_class( false ) }\&quot;&gt;not billable&lt;/span&gt;'.&quot;</span>
+    <span class="ruby-node">&quot;&#39;&lt;span class=\&quot;#{ taskhelp_billable_class( true  ) }\&quot;&gt;billable&lt;/span&gt;&#39;, &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+    <span class="ruby-node">&quot;&#39;&lt;span class=\&quot;#{ taskhelp_billable_class( false ) }\&quot;&gt;not billable&lt;/span&gt;&#39;.&quot;</span>
   ).<span class="ruby-identifier">html_safe</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- taskhelp_billable_help-source -->
@@ -510,14 +510,15 @@ tasks (but not when a boolean is given, obviously!).</p>
 
         <div class="method-description">
           
-          <p>Return a name of a given task’s associated customer, for use in list views.</p>
+          <p>Return a name of a given task&#39;s associated customer, for use in list
+views.</p>
           
 
           
           <div class="method-source-code" id="taskhelp_customer-source">
             <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_customer</span>( <span class="ruby-identifier">task</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-string">'-'</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;-&#39;</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">nil?</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_augmented_link</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">customer</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- taskhelp_customer-source -->
@@ -549,7 +550,7 @@ client requirements.</p>
 specific cases are handled with special-case code and HTML output may
 include extra text to help the user for certain edge conditions, such as a
 lack of any available tasks (in a timesheet editor, this may be because all
-tasks are already added to the timesheet; for a user’s choice of the
+tasks are already added to the timesheet; for a user&#39;s choice of the
 default list of tasks to show in timesheets, this may be because the user
 has no permission to view any tasks; when configuring the tasks which a
 restricted user is able to see, this may be because no active tasks exist).</p>
@@ -557,10 +558,10 @@ restricted user is able to see, this may be because no active tasks exist).</p>
 <p>As a result, pass the reason for calling in the first parameter and an
 options list in the second.</p>
 
-<p>Supported reasons are symbols and listsed in the ‘case’ statement in the
-code below. Each is preceeded by comprehensive comments describing the
-mandatory and (if any) optional key/value pairs which should go into the
-options hash. Please consult these comments for more information.</p>
+<p>Supported reasons are symbols and listsed in the &#39;case&#39; statement
+in the code below. Each is preceeded by comprehensive comments describing
+the mandatory and (if any) optional key/value pairs which should go into
+the options hash. Please consult these comments for more information.</p>
 
 <p>The following global options are also supported (none are mandatory):</p>
 
@@ -575,7 +576,7 @@ options hash. Please consult these comments for more information.</p>
           <div class="method-source-code" id="taskhelp_degrading_selector-source">
             <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 351</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_degrading_selector</span>( <span class="ruby-identifier">reason</span>, <span class="ruby-identifier">options</span> )
-  <span class="ruby-identifier">output</span> = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">form</span>   = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:form</span> )
   <span class="ruby-identifier">user</span>   = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:user</span> )
 
@@ -609,15 +610,15 @@ options hash. Please consult these comments for more information.</p>
         <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ].<span class="ruby-identifier">nil?</span> )
           <span class="ruby-constant">Task</span>.<span class="ruby-identifier">sort_by_augmented_title</span>( <span class="ruby-identifier">tasks</span> )
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-value">:task_ids</span>, <span class="ruby-identifier">tasks</span>, <span class="ruby-value">:id</span>, <span class="ruby-value">:augmented_title</span> )
-          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;br /&gt;'</span>
-          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">submit</span>( <span class="ruby-string">'Add'</span>, { <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'add_row'</span> } )
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;br /&gt;&#39;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">submit</span>( <span class="ruby-string">&#39;Add&#39;</span>, { <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;add_row&#39;</span> } )
         <span class="ruby-keyword">else</span>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taskhelp_tree_selector</span>(
             <span class="ruby-identifier">form</span>,
             {
               <span class="ruby-value">:included_tasks</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">tasks</span>,
-              <span class="ruby-value">:change_text</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Choose tasks...'</span>,
-              <span class="ruby-value">:suffix_html</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot; then #{ form.submit( 'add them', { :name =&gt; 'add_row' } ) }\n&quot;</span>
+              <span class="ruby-value">:change_text</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Choose tasks...&#39;</span>,
+              <span class="ruby-value">:suffix_html</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot; then #{ form.submit( &#39;add them&#39;, { :name =&gt; &#39;add_row&#39; } ) }\n&quot;</span>
             }
           )
         <span class="ruby-keyword">end</span>
@@ -640,8 +641,8 @@ options hash. Please consult these comments for more information.</p>
     <span class="ruby-comment">#              which tasks are already included in the report (for form</span>
     <span class="ruby-comment">#              resubmissions, e.g. from validation failure).</span>
     <span class="ruby-comment">#</span>
-    <span class="ruby-comment">#   :inactive  If 'true', the selector is generated for inactive tasks</span>
-    <span class="ruby-comment">#              only. If omitted or 'false', only active tasks are shown.</span>
+    <span class="ruby-comment">#   :inactive  If &#39;true&#39;, the selector is generated for inactive tasks</span>
+    <span class="ruby-comment">#              only. If omitted or &#39;false&#39;, only active tasks are shown.</span>
     <span class="ruby-comment">#</span>
     <span class="ruby-comment">#   :name      A name to use instead of &quot;task_ids&quot; in the form submission</span>
     <span class="ruby-comment">#              - optional, required if you want multiple selectors in the</span>
@@ -706,7 +707,7 @@ options hash. Please consult these comments for more information.</p>
     <span class="ruby-comment">#          Typically this is used by a User configuration view, though,</span>
     <span class="ruby-comment">#          where a nested set of fields are being built via something</span>
     <span class="ruby-comment">#          like &quot;fields_for :control_panel do | cp |&quot;. In such a case,</span>
-    <span class="ruby-comment">#          use &quot;cp&quot; for the &quot;:form&quot; option's value.</span>
+    <span class="ruby-comment">#          use &quot;cp&quot; for the &quot;:form&quot; option&#39;s value.</span>
     <span class="ruby-comment">#</span>
     <span class="ruby-comment">#          This leads to &quot;task_ids&quot; being invoked on the model associated</span>
     <span class="ruby-comment">#          with the form to determine which items in the selection list,</span>
@@ -778,12 +779,12 @@ options hash. Please consult these comments for more information.</p>
     <span class="ruby-comment"># with relevant messages included in the HTML output.</span>
     <span class="ruby-comment">#</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:user_permitted_task_list</span>
-      <span class="ruby-keyword">return</span> <span class="ruby-string">''</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-comment"># Privileged users only!</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> ) <span class="ruby-comment"># Privileged users only!</span>
 
       <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Task</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
 
         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;There are no tasks currently defined. Please\n&quot;</span>
-        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ link_to( 'create at least one', new_task_path() ) }.&quot;</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{ link_to( &#39;create at least one&#39;, new_task_path() ) }.&quot;</span>
 
       <span class="ruby-keyword">else</span>
 
@@ -793,7 +794,7 @@ options hash. Please consult these comments for more information.</p>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_collection_select</span>( <span class="ruby-identifier">form</span>, <span class="ruby-value">:task_ids</span>, <span class="ruby-identifier">tasks</span>, <span class="ruby-value">:id</span>, <span class="ruby-value">:augmented_title</span> )
         <span class="ruby-keyword">else</span>
 
-          <span class="ruby-comment"># Don't use &quot;user.[foo_]permitted_tasks&quot; here as we *want* an empty</span>
+          <span class="ruby-comment"># Don&#39;t use &quot;user.[foo_]permitted_tasks&quot; here as we *want* an empty</span>
           <span class="ruby-comment"># list for privileged accounts where no tasks have been set up.</span>
 
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taskhelp_tree_selector</span>(
@@ -806,7 +807,7 @@ options hash. Please consult these comments for more information.</p>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n\n&quot;</span>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;p&gt;\n&quot;</span>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  This list is only enforced for users with a\n&quot;</span>
-          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  'normal' account type. It is included here\n&quot;</span>
+          <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  &#39;normal&#39; account type. It is included here\n&quot;</span>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  in case you are intending to change the account\n&quot;</span>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  type and want to assign tasks at the same time.\n&quot;</span>
           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;/p&gt;&quot;</span>
@@ -851,7 +852,7 @@ options hash. Please consult these comments for more information.</p>
           <div class="method-source-code" id="taskhelp_duration-source">
             <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_duration</span>( <span class="ruby-identifier">task</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">'0'</span>, <span class="ruby-string">'?'</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">duration</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&#39;0&#39;</span>, <span class="ruby-string">&#39;?&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- taskhelp_duration-source -->
           
@@ -886,7 +887,7 @@ duration.</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">duration</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">duration</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> )
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-identifier">hours</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">duration</span> )
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-string">'&lt;span class=&quot;no_overrun&quot;&gt;None&lt;/span&gt;'</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&lt;span class=&quot;no_overrun&quot;&gt;None&lt;/span&gt;&#39;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- taskhelp_overrun-source -->
@@ -910,14 +911,15 @@ duration.</p>
 
         <div class="method-description">
           
-          <p>Return a name of a given task’s associated project, for use in list views.</p>
+          <p>Return a name of a given task&#39;s associated project, for use in list
+views.</p>
           
 
           
           <div class="method-source-code" id="taskhelp_project-source">
             <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_project</span>( <span class="ruby-identifier">task</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-string">'-'</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">nil?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;-&#39;</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">nil?</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_augmented_link</span>( <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- taskhelp_project-source -->
@@ -943,8 +945,8 @@ duration.</p>
           
           <p>Return HTML suitable for an edit form, providing a grouped list of projects
 that can be assigned to the task. The list is grouped by customer in
-default customer sort order, along with a ‘None’ entry for unassigned
-projects. Pass the task object being edited.</p>
+default customer sort order, along with a &#39;None&#39; entry for
+unassigned projects. Pass the task object being edited.</p>
           
 
           
@@ -952,8 +954,8 @@ projects. Pass the task object being edited.</p>
             <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_project_selector</span>( <span class="ruby-identifier">task</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_project_selector</span>(
-    <span class="ruby-string">'task_project_id'</span>,
-    <span class="ruby-string">'task[project_id]'</span>,
+    <span class="ruby-string">&#39;task_project_id&#39;</span>,
+    <span class="ruby-string">&#39;task[project_id]&#39;</span>,
     <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project_id</span>,
     <span class="ruby-keyword">true</span>
   )
@@ -988,7 +990,7 @@ overrun. Pass the number of hours and the expected task duration.</p>
             <pre><span class="ruby-comment"># File app/helpers/tasks_helper.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taskhelp_remaining</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">duration</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">duration</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">duration</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> )
-    <span class="ruby-keyword">return</span> <span class="ruby-string">'&lt;span class=&quot;overrun&quot;&gt;Overrunning&lt;/span&gt;'</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&lt;span class=&quot;overrun&quot;&gt;Overrunning&lt;/span&gt;&#39;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-value">0</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">duration</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> )
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-identifier">duration</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">hours</span> )
@@ -1030,15 +1032,15 @@ value being used instead.</p>
 
 <pre>Key              Meaning
 =========================================================================
-:inactive        If 'true', only inactive tasks, customers and projects
+:inactive        If &#39;true&#39;, only inactive tasks, customers and projects
                  are shown in the selector. By default, only active items
                  will be shown.
 
 :restricted_by   The task/project/customer list for currently logged in
                  users who are restricted is always restricted by that
-                 user's permitted task list no matter what you set here.
+                 user&#39;s permitted task list no matter what you set here.
                  If the current user is privileged, though, then passing
-                 in a User object results in restriction by that user's
+                 in a User object results in restriction by that user&#39;s
                  permitted task list. By default there is no restriction
                  so for privileged currently logged in users, all tasks
                  would be shown.
@@ -1052,8 +1054,8 @@ value being used instead.</p>
 :selected_tasks  An array of tasks to be initially selected in the tree.
                  May be empty. By default no tasks are selected. Ideally
                  the list should include no tasks that the current user
-                 or 'restricted_by' key would hide, but if it does, they
-                 simply won't be shown or selected and only the task IDs
+                 or &#39;restricted_by&#39; key would hide, but if it does, they
+                 simply won&#39;t be shown or selected and only the task IDs
                  will appear in HTML output.
 
 :suffix_html     Beneath the text area gadget listing selected tasks is
@@ -1093,8 +1095,8 @@ definition first.</p>
     <span class="ruby-identifier">restricted_by</span>  = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:restricted_by</span>  )
     <span class="ruby-identifier">included_tasks</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:included_tasks</span> )
     <span class="ruby-identifier">selected_tasks</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:selected_tasks</span> ) <span class="ruby-operator">||</span> []
-    <span class="ruby-identifier">suffix_html</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:suffix_html</span>    ) <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
-    <span class="ruby-identifier">change_text</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:change_text</span>    ) <span class="ruby-operator">||</span> <span class="ruby-string">'Change...'</span>
+    <span class="ruby-identifier">suffix_html</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:suffix_html</span>    ) <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">change_text</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:change_text</span>    ) <span class="ruby-operator">||</span> <span class="ruby-string">&#39;Change...&#39;</span>
     <span class="ruby-identifier">params_name</span>    = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:params_name</span>    ) <span class="ruby-operator">||</span> <span class="ruby-value">:task_ids</span>
 
     <span class="ruby-comment"># Callers may generate trees restricted by the current user, but if that</span>
@@ -1108,7 +1110,7 @@ definition first.</p>
     <span class="ruby-comment"># customer array as easily as possible, trying to avoid pulling all tasks</span>
     <span class="ruby-comment"># out of the database. This is a bit painful either way, but usually a</span>
     <span class="ruby-comment"># restricted user will have a relatively small set of tasks assigned to</span>
-    <span class="ruby-comment"># them so doing the array processing in Ruby isn't too big a deal.</span>
+    <span class="ruby-comment"># them so doing the array processing in Ruby isn&#39;t too big a deal.</span>
 
     <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
       <span class="ruby-identifier">permitted_tasks</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">active_permitted_tasks</span>()
@@ -1167,7 +1169,7 @@ definition first.</p>
     <span class="ruby-identifier">included_ids</span> = ( <span class="ruby-identifier">included_tasks</span> <span class="ruby-operator">||</span> [] ).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span> }
 
     <span class="ruby-comment"># Generate the root node data and extra XHR parameters to pass to the tree</span>
-    <span class="ruby-comment"># controller in 'tree_controller.rb'.</span>
+    <span class="ruby-comment"># controller in &#39;tree_controller.rb&#39;.</span>
 
     <span class="ruby-identifier">roots</span> = <span class="ruby-identifier">root_customers</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">customer</span> <span class="ruby-operator">|</span>
       {
@@ -1178,9 +1180,9 @@ definition first.</p>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">data_for_xhr_call</span>  = []
-    <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'inactive'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">inactive</span> )
+    <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;inactive&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">inactive</span> )
     <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;restrict,#{ restricted_by.id }&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">restricted_by</span>.<span class="ruby-identifier">nil?</span> )
-    <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;include,#{ included_ids.join( '_' ) }&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">included_ids</span>.<span class="ruby-identifier">empty?</span> )
+    <span class="ruby-identifier">data_for_xhr_call</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;include,#{ included_ids.join( &#39;_&#39; ) }&quot;</span> <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">included_ids</span>.<span class="ruby-identifier">empty?</span> )
 
     <span class="ruby-comment"># Create and (implicitly) return the HTML.</span>
 
@@ -1191,7 +1193,7 @@ definition first.</p>
       <span class="ruby-value">:target_form_field_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>,
       <span class="ruby-value">:target_name_field_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{ id }_text&quot;</span>,
       <span class="ruby-value">:name_field_separator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-comment"># Yes, a literal newline character</span>
-      <span class="ruby-value">:name_include_parents</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">' &amp;raquo; '</span>,
+      <span class="ruby-value">:name_include_parents</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39; &amp;raquo; &#39;</span>,
       <span class="ruby-value">:name_leaf_nodes_only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
       <span class="ruby-value">:form_leaf_nodes_only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
       <span class="ruby-value">:expand</span>               =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">selected_ids</span>,
@@ -1199,9 +1201,9 @@ definition first.</p>
       <span class="ruby-value">:propagate_up</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
       <span class="ruby-value">:propagate_down</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>,
       <span class="ruby-value">:root_collection</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">roots</span>,
-      <span class="ruby-value">:data_for_xhr_call</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data_for_xhr_call</span>.<span class="ruby-identifier">join</span>( <span class="ruby-string">','</span> ),
-      <span class="ruby-value">:div_id</span>               =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'yui_tree_container_'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">id</span>
-    ).<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-string">'  '</span> )
+      <span class="ruby-value">:data_for_xhr_call</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data_for_xhr_call</span>.<span class="ruby-identifier">join</span>( <span class="ruby-string">&#39;,&#39;</span> ),
+      <span class="ruby-value">:div_id</span>               =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;yui_tree_container_&#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">id</span>
+    ).<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;  &#39;</span> )
     <span class="ruby-identifier">html</span> = <span class="ruby-value">&lt;&lt;HTML
 &lt;textarea disabled=&quot;disabled&quot; rows=&quot;5&quot; cols=&quot;60&quot; class=&quot;tree_selector_text&quot; id=&quot;#{ id }_text&quot;&gt;Task data loading...&lt;/textarea&gt;
 &lt;br /&gt;
@@ -1210,7 +1212,7 @@ definition first.</p>
   &lt;a href=&quot;#&quot; class=&quot;lbAction&quot; data-leightbox=&quot;deactivate&quot;&gt;Close&lt;/a&gt;
   #{ taskhelp_billable_help }
   &lt;p&gt;&lt;/p&gt;
-  #{ hidden_field_tag( id, selected_task_ids.join( ',' ), { :name =&gt; name } ) }
+  #{ hidden_field_tag( id, selected_task_ids.join( &#39;,&#39; ), { :name =&gt; name } ) }
 #{ tree }
   &lt;a href=&quot;#&quot; class=&quot;lbAction&quot; data-leightbox=&quot;deactivate&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;

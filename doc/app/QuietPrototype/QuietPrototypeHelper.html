@@ -315,21 +315,21 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
           
           <div class="method-source-code" id="include_prototype_if_used-source">
             <pre><span class="ruby-comment"># File lib/quiet_prototype/quiet_prototype.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">include_prototype_if_used</span>( <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">''</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">include_prototype_if_used</span>( <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">&#39;&#39;</span> )
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">using_quiet_prototype?</span>
 
     <span class="ruby-comment"># 2013-07-18 (ADH): Even with appropriate configuration data in</span>
     <span class="ruby-comment"># &quot;config/application.rb&quot; for the &quot;:defaults&quot; expansion, using it</span>
     <span class="ruby-comment"># here results in &quot;assets/defaults.js&quot; being generated. Doh. Since</span>
     <span class="ruby-comment"># code here is evaluated before the application starts, presumably</span>
-    <span class="ruby-comment"># the expansion isn't defined in time. Instead we have to do it</span>
+    <span class="ruby-comment"># the expansion isn&#39;t defined in time. Instead we have to do it</span>
     <span class="ruby-comment"># the hard way.</span>
 
-    <span class="ruby-identifier">data</span>          = <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype/prototype'</span> )
-    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype_ujs/rails'</span> )
-    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/effects'</span> )
-    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/dragdrop'</span> )
-    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/controls'</span> )
+    <span class="ruby-identifier">data</span>          = <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;prototype/prototype&#39;</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;prototype_ujs/rails&#39;</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;scriptaculous/effects&#39;</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;scriptaculous/dragdrop&#39;</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;scriptaculous/controls&#39;</span> )
 
     <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-identifier">line_prefix</span> ) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> ).<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">end</span>
@@ -355,9 +355,9 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
 
         <div class="method-description">
           
-          <p>Returns ‘true’ if configured to use the Prototype library for the view
-related to the current request. See the “uses_prototype” class method for
-more information.</p>
+          <p>Returns &#39;true&#39; if configured to use the Prototype library for the
+view related to the current request. See the “uses_prototype” class method
+for more information.</p>
           
 
           

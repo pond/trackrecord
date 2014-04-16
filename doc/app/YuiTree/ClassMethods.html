@@ -359,7 +359,7 @@ tree is built)</p>
 calls for individual views:</p>
 <ul><li>
 <p><code>:body_class</code> (a class name added to any existing class name(s)
-on the BODY element of the HTML document) - if "<code>yui-skin-sam</code>"
+on the BODY element of the HTML document) - if “<code>yui-skin-sam</code>”
 is used then CSS files for this skin will be included automatically, else
 you must manually ensure that all relevant CSS resources are included.</p>
 </li></ul>
@@ -369,9 +369,9 @@ href="ClassMethods.html#method-i-uses_yui_tree">#uses_yui_tree</a>”, or to
 a helper function like “<a
 href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>”
 as they have no default values. You could put them into the YAML file but
-due to the nature of the options it is very likely that you’ll specify them
-in method calls instead. In fact it’s more likely that you will want to
-specify them in calls made in views rather than here in “<a
+due to the nature of the options it is very likely that you&#39;ll specify
+them in method calls instead. In fact it&#39;s more likely that you will
+want to specify them in calls made in views rather than here in “<a
 href="ClassMethods.html#method-i-uses_yui_tree">#uses_yui_tree</a>”, but
 you can establish Controller-global defaults by specifying the options here
 if you find this useful.</p>
@@ -385,9 +385,9 @@ plugin - then specify the root model class here (e.g specify
 Category</code>”) as a Controller-global default. Nested set behaviour
 assumes a class method called “roots” which takes no parameters and returns
 an array of model instances which are tree roots; and an instance method
-“leaf?” which also takes no parameters and returns ‘<code>true</code>’ if
-the instance has no children (is a leaf node), else returns
-‘<code>false</code>’.</p>
+“leaf?” which also takes no parameters and returns
+&#39;<code>true</code>&#39; if the instance has no children (is a leaf
+node), else returns &#39;<code>false</code>&#39;.</p>
 
 <p>The root model is used by YUI tree creation code (e.g. see helper method
 “<a
@@ -395,10 +395,10 @@ href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>�
 to generate the root data set for the initial tree view. Alternatively,
 specify this when you make the call to e.g. “<a
 href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>”
-if you don’t want to set a default here. By default the helper code calls
-an instance method called “name” to obtain label text for the tree nodes.
-Use the “<code>:root_title_method</code>” option (see below) to specify a
-different method name if necessary.</p>
+if you don&#39;t want to set a default here. By default the helper code
+calls an instance method called “name” to obtain label text for the tree
+nodes. Use the “<code>:root_title_method</code>” option (see below) to
+specify a different method name if necessary.</p>
 
 <p>The root and child items can be sorted in various ways. See method
 “yui_tree_handled_xhr_request?” method for further information.</p>
@@ -417,37 +417,39 @@ method.</p>
 <dd>
 <p>If using “<code>:root_model</code>” (see above) but with a model which uses
 something other than a “name” method to return text for showing in tree
-nodes, then specify the alternative method’s name here as a symbol. It must
-be an instance method for the model in question and should return a
+nodes, then specify the alternative method&#39;s name here as a symbol. It
+must be an instance method for the model in question and should return a
 non-empty string.</p>
 </dd><dt><code>:xhr_url_method</code>
 <dd>
 <p>Name of a method which will be invoked to get the <strong>prefix</strong>
 of a URL used to fetch more tree data (when parent nodes are expanded for
-the first time). This is usually a path to a controller’s ‘index’ action,
-e.g. “<code>:locations_path</code>” or “<code>:categories_path</code>”. The
-corresponding Controller action must return an array of child data. It can
-use the “yui_tree_handled_xhr_request?” method to do this or use entirely
-custom code. It must return an array of child data as described above (see
+the first time). This is usually a path to a controller&#39;s
+&#39;index&#39; action, e.g. “<code>:locations_path</code>” or
+“<code>:categories_path</code>”. The corresponding Controller action must
+return an array of child data. It can use the
+“yui_tree_handled_xhr_request?” method to do this or use entirely custom
+code. It must return an array of child data as described above (see
 “<code>:root_model</code>”), generating array entries with the “<a
 href="../YuiTree.html#method-c-make_node_object">YuiTree.make_node_object</a>”
-method. The parent’s database ID is delivered to the controller action via
-the “params” hash under key “<code>:tree_parent_id</code>” and may have a
-string, symbol or integer value type.</p>
+method. The parent&#39;s database ID is delivered to the controller action
+via the “params” hash under key “<code>:tree_parent_id</code>” and may have
+a string, symbol or integer value type.</p>
 </dd></dl>
 
 <p>Some options are likely to be set per-tree but do have default values:</p>
 <dl class="rdoc-list note-list"><dt><code>:select_leaf_only</code>
 <dd>
-<p>Set to ‘<code>true</code>’ if leaves (nodes without children) can be
-selected but parents cannot, else ‘<code>false</code>’. Has an internal
-default value of ‘<code>false</code>’ (i.e. can select anything).</p>
+<p>Set to &#39;<code>true</code>&#39; if leaves (nodes without children) can
+be selected but parents cannot, else &#39;<code>false</code>&#39;. Has an
+internal default value of &#39;<code>false</code>&#39; (i.e. can select
+anything).</p>
 </dd></dl>
 
 <p>A few YUI tree options can be set as global defaults when making calls to
 “<a href="ClassMethods.html#method-i-uses_yui_tree">#uses_yui_tree</a>”,
 but such defaults only make sense if you use a single tree in any of the
-containing controller’s views. For example, the option giving the ID of
+containing controller&#39;s views. For example, the option giving the ID of
 enclosing DIV inside which the tree is built falls into this category,
 since no two elements in a valid HTML document are allowed to have the same
 ID. It is up to you where you choose to specify these options - here, or
@@ -459,14 +461,14 @@ href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>�
 as a controller-global default if you are only going to use one tree
 control in any given view, else more than one DIV container for more than
 one tree view would have the same ID; or make very sure that any views
-using more than one tree view specify overriding DIV IDs in those views’
-calls to “<a
+using more than one tree view specify overriding DIV IDs in those
+views&#39; calls to “<a
 href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>”.</p>
 </dd><dt><code>:div_class</code>
 <dd>
 <p>As “<code>:div_id</code>”, but even less frequently used! Usually you will
 want application-wide styles to apply to trees via CSS and thus specify a
-single application-global class name in the YUI tree plugin’s YAML
+single application-global class name in the YUI tree plugin&#39;s YAML
 configuration file, rather than specifying a controller-global value here,
 or even a per-tree value in indivdual calls to “<a
 href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>”.
@@ -483,8 +485,8 @@ The field is usually a hidden INPUT element.</p>
 “<a
 href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>”
 for details), by default it assumes that you always want to ultimately let
-the user select a single item in the tree and have that item’s database ID
-passed back to a controller in a related form submission.</p>
+the user select a single item in the tree and have that item&#39;s database
+ID passed back to a controller in a related form submission.</p>
 
 <p>A value of 0 may indicate that a blank entry is use and has been selected.
 See option “<code>:include_blank</code>” in helper method “<a
@@ -492,19 +494,20 @@ href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>�
 
 <p>An empty string indicates that no nodes were highlighted at all. If you
 allow such things you should probably interpret this the same as the user
-explicitly selecting a blank entry. It’s good to allow both as it isn’t too
-friendly to assume the user will mean that deselecting all nodes means
-“none/blank”; it’s good to have an explicit entry for that. You can still
-fault a no-selection form submission from the controller if the target form
-field value is empty rather than zero, should you wish to do so.</p>
+explicitly selecting a blank entry. It&#39;s good to allow both as it
+isn&#39;t too friendly to assume the user will mean that deselecting all
+nodes means “none/blank”; it&#39;s good to have an explicit entry for that.
+You can still fault a no-selection form submission from the controller if
+the target form field value is empty rather than zero, should you wish to
+do so.</p>
 </dd><dt><code>:target_name_field_id</code>
 <dd>
 <p>Optional; if included, then when a node is selected, its display text is
 written as innerHTML inside the identified element. This lets you show the
-user which node was selected by its text, as well as by the TreeView’s own
-highlight mechanism. This is handy if you’re worried that a selected node
-in a collapsed branch remains selected, albeit invisibly - a TreeView
-implementation quirk, it seems.</p>
+user which node was selected by its text, as well as by the TreeView&#39;s
+own highlight mechanism. This is handy if you&#39;re worried that a
+selected node in a collapsed branch remains selected, albeit invisibly - a
+TreeView implementation quirk, it seems.</p>
 
 <p>If you specify a value for the “<code>:include_blank</code>” option in a
 call to helper method “<a
@@ -534,10 +537,10 @@ if it so wishes.</p>
 tree will obtain new data by a JSON XHR request to the URL returned by a
 call to “locations_path” with “.js” added as a suffix. Only the “:edit” and
 “:update” actions can use the tree. Listing both of these actions in the
-“:only” clause is vital since the Controller’s “update” code might
+“:only” clause is vital since the Controller&#39;s “update” code might
 re-render the “edit” view (and thus the tree) because of form validation
 errors. Alternatively use “:exclude” rather than “:only”, or omit such a
-clause altogether to prepare all the controller’s views for YUI trees.</p>
+clause altogether to prepare all the controller&#39;s views for YUI trees.</p>
 
 <p>An XHR URL method of “locations_path” will (assuming sane routes!) lead to
 an “index” action of a controller for the Location model. The index method
@@ -553,11 +556,11 @@ must be aware of the YUI tree JSON requests - see
 
 <p>A helper method such as “<a
 href="YuiTreeHelper.html#method-i-yui_tree">YuiTree::YuiTreeHelper#yui_tree</a>”
-must be invoked somewhere in the “:edit” action’s view (e.g. in
+must be invoked somewhere in the “:edit” action&#39;s view (e.g. in
 “edit.html.erb”) so that the tree actually gets built:</p>
 
-<pre>&lt;%= hidden_field_tag( 'foo', '[currently selected item ID here]' ) %&gt;
-&lt;%= yui_tree( :target_form_field_id =&gt; 'foo' ) %&gt;</pre>
+<pre>&lt;%= hidden_field_tag( &#39;foo&#39;, &#39;[currently selected item ID here]&#39; ) %&gt;
+&lt;%= yui_tree( :target_form_field_id =&gt; &#39;foo&#39; ) %&gt;</pre>
           
 
           
@@ -620,7 +623,7 @@ must be invoked somewhere in the “:edit” action’s view (e.g. in
         end   # respond_to do | format |
       end     # if ( request.xhr? ... )
 
-      result # Can't do &quot;return result&quot;; leads to ThreadError exception.
+      result # Can&#39;t do &quot;return result&quot;; leads to ThreadError exception.
 
     end # define_method...
   )</span>
@@ -652,22 +655,23 @@ from (e.g. Category, Location - a class, not a string or symbol), then
 optionally the name of the model instance method used to obtain the text to
 show for each node (default is “name”) and the name of a method used to
 find out if the item is a leaf (default is “leaf?”) - it should return
-‘true’ if so, else ‘false’. Models which “act_as_nested_set” using the <a
+&#39;true&#39; if so, else &#39;false&#39;. Models which
+“act_as_nested_set” using the <a
 href="http://github.com/collectiveidea/awesome_nested_set/tree/master">Awesome Nested Set</a>
 plug-in are compatible with the defaults.</p>
 
 <p>If you want the tree order items automatically sorted then add a class
 method called “apply_default_sort_order” to your model. This is passed an
 array of model object instances and should sort the array in-place (e.g.
-with the Array “sort!” method). The method’s return value is ignored. If
-the model has no “apply_default_sort_order” method then the collection
+with the Array “sort!” method). The method&#39;s return value is ignored.
+If the model has no “apply_default_sort_order” method then the collection
 retrieved from the database is left in default sort order. If you have
-simple requirements then using a call to Rails’ “<a
+simple requirements then using a call to Rails&#39; “<a
 href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M002313">default_scope</a>”
 method from your model is the most efficient way to achieve sorted results.
 For example, in your model issue:</p>
 
-<pre class="ruby"><span class="ruby-identifier">default_scope</span>( { :<span class="ruby-identifier">order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'name DESC'</span> } )
+<pre class="ruby"><span class="ruby-identifier">default_scope</span>( { :<span class="ruby-identifier">order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;name DESC&#39;</span> } )
 </pre>
 
 <p>…to have all collections of that model returned by finder methods sorted in

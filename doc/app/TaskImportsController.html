@@ -316,11 +316,11 @@
 
         <div class="method-description">
           
-          <p>Take the file data from the ‘new’ view form and ‘create’ an “import
-session”; that is, parse the file and generate an intermediate
-representation of the tasks therein. Render an ‘edit’ view where the user
-can ‘edit’ the “import session”, by changing titles etc. of the task list
-obtained from the file.</p>
+          <p>Take the file data from the &#39;new&#39; view form and &#39;create&#39; an
+“import session”; that is, parse the file and generate an intermediate
+representation of the tasks therein. Render an &#39;edit&#39; view where
+the user can &#39;edit&#39; the “import session”, by changing titles etc.
+of the task list obtained from the file.</p>
           
 
           
@@ -330,13 +330,13 @@ obtained from the file.</p>
 
   <span class="ruby-comment"># Set up a new TaskImport session object and read the XML file details</span>
 
-  <span class="ruby-identifier">xmlfile</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:import</span> ][ <span class="ruby-value">:xmlfile</span> ] <span class="ruby-operator">||</span> <span class="ruby-string">''</span>
+  <span class="ruby-identifier">xmlfile</span> = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:import</span> ][ <span class="ruby-value">:xmlfile</span> ] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-ivar">@import</span> = <span class="ruby-constant">TaskImport</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">project_id</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">control_panel</span>.<span class="ruby-identifier">project_id</span>
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">xmlfile</span> <span class="ruby-operator">==</span> <span class="ruby-string">''</span> ) <span class="ruby-comment"># Empty string = nothing chosen, else a file object</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">xmlfile</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> ) <span class="ruby-comment"># Empty string = nothing chosen, else a file object</span>
 
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&quot;Please choose a file before using the 'Analyse' button.&quot;</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&quot;Please choose a file before using the &#39;Analyse&#39; button.&quot;</span>
 
   <span class="ruby-keyword">else</span>
 
@@ -345,14 +345,14 @@ obtained from the file.</p>
     <span class="ruby-keyword">begin</span>
 
       <span class="ruby-comment"># We assume XML files always begin with &quot;&lt;&quot; in the first byte and</span>
-      <span class="ruby-comment"># if that's missing then it's GZip compressed. That's true in the</span>
+      <span class="ruby-comment"># if that&#39;s missing then it&#39;s GZip compressed. That&#39;s true in the</span>
       <span class="ruby-comment"># limited case of project files.</span>
 
       <span class="ruby-identifier">xmlfile</span> = <span class="ruby-identifier">xmlfile</span>.<span class="ruby-identifier">tempfile</span>
       <span class="ruby-identifier">byte</span> = <span class="ruby-identifier">xmlfile</span>.<span class="ruby-identifier">getc</span>()
       <span class="ruby-identifier">xmlfile</span>.<span class="ruby-identifier">rewind</span>()
 
-      <span class="ruby-identifier">xmlfile</span>       = <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipReader</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">xmlfile</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">byte</span> <span class="ruby-operator">!=</span> <span class="ruby-string">'&lt;'</span>[ <span class="ruby-value">0</span> ] )
+      <span class="ruby-identifier">xmlfile</span>       = <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipReader</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">xmlfile</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">byte</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&lt;&#39;</span>[ <span class="ruby-value">0</span> ] )
       <span class="ruby-identifier">xmldoc</span>        = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">xmlfile</span>.<span class="ruby-identifier">read</span>() )
       <span class="ruby-identifier">task_data</span>     = <span class="ruby-constant">TaskImport</span>.<span class="ruby-identifier">get_tasks_from_xml</span>( <span class="ruby-identifier">xmldoc</span> )
 
@@ -361,7 +361,7 @@ obtained from the file.</p>
       <span class="ruby-identifier">parent_titles</span> = <span class="ruby-identifier">task_data</span>[ <span class="ruby-value">:parent_titles</span> ]
 
       <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">blank?</span> )
-        <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span>  ] = <span class="ruby-string">'No usable tasks were found in that file'</span>
+        <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span>  ] = <span class="ruby-string">&#39;No usable tasks were found in that file&#39;</span>
 
       <span class="ruby-keyword">else</span>
         <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">tasks</span>         = <span class="ruby-identifier">tasks</span>
@@ -371,7 +371,7 @@ obtained from the file.</p>
 
         <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">generate_filtered_task_list</span>()
 
-        <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'Tasks read successfully. Please choose items to import.'</span>
+        <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">&#39;Tasks read successfully. Please choose items to import.&#39;</span>
         <span class="ruby-identifier">render</span>( { <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:edit</span> } )
         <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:notice</span> ) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-comment"># If not deleted, flash message persists for one fetch too many</span>
 
@@ -380,7 +380,7 @@ obtained from the file.</p>
     <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
 
       <span class="ruby-comment"># REXML errors can be huge, including a full backtrace. It can cause</span>
-      <span class="ruby-comment"># session cookie overflow and we don't want the user to see it. Cut</span>
+      <span class="ruby-comment"># session cookie overflow and we don&#39;t want the user to see it. Cut</span>
       <span class="ruby-comment"># the message off at the first newline.</span>
 
       <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">error</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
@@ -415,9 +415,9 @@ obtained from the file.</p>
         <div class="method-description">
           
           <p>Once the user has updated anything they need to update in the import
-session ‘edit’-like view (see also ‘create’ above), process the form
-submission and import any real Tasks into the database if so requested or
-re-process the input file if necessary.</p>
+session &#39;edit&#39;-like view (see also &#39;create&#39; above), process
+the form submission and import any real Tasks into the database if so
+requested or re-process the input file if necessary.</p>
           
 
           
@@ -437,11 +437,11 @@ re-process the input file if necessary.</p>
   <span class="ruby-comment"># Import tasks from the filtered list submitted with the form, which holds</span>
   <span class="ruby-comment"># a combination of user-editable and hidden preset values.</span>
 
-  <span class="ruby-identifier">to_import</span> = <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">filtered_tasks</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">import</span> <span class="ruby-operator">!=</span> <span class="ruby-string">'1'</span> }
+  <span class="ruby-identifier">to_import</span> = <span class="ruby-ivar">@import</span>.<span class="ruby-identifier">filtered_tasks</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">import</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;1&#39;</span> }
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">to_import</span>.<span class="ruby-identifier">empty?</span> )
 
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'No tasks were selected for import. Please select at least one task and try again.'</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&#39;No tasks were selected for import. Please select at least one task and try again.&#39;</span>
 
   <span class="ruby-keyword">else</span>
 
@@ -476,7 +476,7 @@ re-process the input file if necessary.</p>
           <span class="ruby-keyword">end</span>.<span class="ruby-identifier">save!</span>
         <span class="ruby-keyword">end</span>
 
-        <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ to_import.length } #{ to_import.length == 1 ? 'task' : 'tasks' } imported successfully.&quot;</span>
+        <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-node">&quot;#{ to_import.length } #{ to_import.length == 1 ? &#39;task&#39; : &#39;tasks&#39; } imported successfully.&quot;</span>
         <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">tasks_path</span>() ) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
       <span class="ruby-keyword">end</span>
 

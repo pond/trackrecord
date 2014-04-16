@@ -86,13 +86,28 @@ Then:
 
 [Make sure you have all installed gems available]
 
-  Issue the command <tt>bundle install</tt>. This can be a bit fraught as
-  Ruby and Rails gems can be finniky things, especially database adapter
-  gems; these often need native components compiling which in turn require
-  a working native compiler and supporting files on your system. If you get
-  an error, try doing a web search for it as often the answer can be found
-  there. If all else fails see http://trackrecord.pond.org.uk for contact
-  details.
+  If you only want to use TrackRecord for a production (normal) environment,
+  then it is recommended that you issue this command the very first time you
+  install the software:
+
+    bundle install --without development test
+
+  Thereafter, just using <tt>bundle install</tt> will remember this setting
+  and always omit development and test-related gems. To undo this persistent
+  setting, issue this command:
+
+    bundle config --delete without
+
+  Alternatively, ignore the above and just install all gems, regardless of
+  whether they are used for production, development or test environments.
+  Issue the command <tt>bundle install</tt> to install everything.
+
+  Bundle installation can be a bit fraught. Ruby and Rails gems can be finniky
+  things, especially the "nokogiri" gem used during tests or database adapter
+  gems. These usually need native components compiling which in turn requires
+  a working native compiler and supporting files on your system. If you get an
+  error, try doing a web search for it as often the answer can be found there.
+  If all else fails see http://trackrecord.pond.org.uk for contact details.
   
   If you get warnings about something called Nokogiri and LibXML versions
   at run-time, please see the later section about the Nokogiri gem.

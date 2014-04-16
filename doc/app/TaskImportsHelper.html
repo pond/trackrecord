@@ -319,7 +319,7 @@ string to add as a prefix to each line of output.</p>
           
           <div class="method-source-code" id="timphelp_collapse_selector-source">
             <pre><span class="ruby-comment"># File app/helpers/task_imports_helper.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">timphelp_collapse_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">max_level</span>, <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">''</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">timphelp_collapse_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">max_level</span>, <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">&#39;&#39;</span> )
   <span class="ruby-identifier">levels</span> = []
 
   <span class="ruby-value">0</span>.<span class="ruby-identifier">upto</span>( <span class="ruby-identifier">max_level</span> ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">level</span> <span class="ruby-operator">|</span>
@@ -366,15 +366,15 @@ output string will be empty.</p>
           
           <div class="method-source-code" id="timphelp_project_selector-source">
             <pre><span class="ruby-comment"># File app/helpers/task_imports_helper.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">timphelp_project_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">''</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">timphelp_project_selector</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">&#39;&#39;</span> )
   <span class="ruby-keyword">unless</span> ( <span class="ruby-constant">Project</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
     <span class="ruby-identifier">output</span> = <span class="ruby-identifier">apphelp_project_selector</span>(
-               <span class="ruby-string">'import_project_id'</span>,
-               <span class="ruby-string">'import[project_id]'</span>,
+               <span class="ruby-string">&#39;import_project_id&#39;</span>,
+               <span class="ruby-string">&#39;import[project_id]&#39;</span>,
                <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">control_panel</span>.<span class="ruby-identifier">project_id</span>
              ).<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-identifier">line_prefix</span> )
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">output</span> = <span class="ruby-string">''</span>
+    <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()

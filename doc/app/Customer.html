@@ -336,10 +336,10 @@ below for more details.</p>
           
           <p>Apply a default sort to the given array of customer objects. The array is
 modified in place. Although this method is compatible with the default sort
-mechanism in the YUI tree view component, it’s not called by that because
-the wider data set does not behave even remotely like acts_as_nested_set
-style collections, so bespoke controller and view code is used to generate
-arrays of objects.</p>
+mechanism in the YUI tree view component, it&#39;s not called by that
+because the wider data set does not behave even remotely like
+acts_as_nested_set style collections, so bespoke controller and view code
+is used to generate arrays of objects.</p>
           
 
           
@@ -420,10 +420,11 @@ for the new object in future, though presently this parameter is ignored.</pre>
         <div class="method-description">
           
           <p>As update_with_side_effects!, but destroys things rather than updating
-them. Pass ‘true’ to destroy associated projects, else ‘false’. If omitted,
-defaults to ‘true’; pass also ‘true’ to destroy tasks associated with those
-projects (only if destroying projects too), else ‘false’. Again, the
-default is ‘true’.</p>
+them. Pass &#39;true&#39; to destroy associated projects, else
+&#39;false&#39;. If omitted, defaults to &#39;true&#39;; pass also
+&#39;true&#39; to destroy tasks associated with those projects (only if
+destroying projects too), else &#39;false&#39;. Again, the default is
+&#39;true&#39;.</p>
           
 
           
@@ -462,14 +463,15 @@ default is ‘true’.</p>
         <div class="method-description">
           
           <p>Update an object with the given attributes. This is done by a special model
-method because changes of the ‘active’ flag have side effects for other
-associated objects. THE CALLER *<strong>MUST</strong>* USE A TRANSACTION
-around a call to this method. There is no need to call here unless the
-‘active’ flag state is changing. Pass in ‘true’ to update associated
-projects, else ‘false’ and ‘true’ to update associated tasks via those
-projects (only if updating projects too), else ‘false’.</p>
+method because changes of the &#39;active&#39; flag have side effects for
+other associated objects. THE CALLER *<strong>MUST</strong>* USE A
+TRANSACTION around a call to this method. There is no need to call here
+unless the &#39;active&#39; flag state is changing. Pass in &#39;true&#39;
+to update associated projects, else &#39;false&#39; and &#39;true&#39; to
+update associated tasks via those projects (only if updating projects too),
+else &#39;false&#39;.</p>
 
-<p>Booleans default to ‘true’ if omitted.</p>
+<p>Booleans default to &#39;true&#39; if omitted.</p>
           
 
           

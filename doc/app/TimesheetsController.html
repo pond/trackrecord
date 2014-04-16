@@ -358,12 +358,12 @@ determine the appropriate values.</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">clash</span> )
     <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-node">&quot;A timesheet for week #{ @timesheet.week_number } has already been created.&quot;</span>
   <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@timesheet</span>.<span class="ruby-identifier">save</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">'New timesheet created and ready for editing.'</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:notice</span> ] = <span class="ruby-string">&#39;New timesheet created and ready for editing.&#39;</span>
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">edit_timesheet_path</span>( <span class="ruby-ivar">@timesheet</span> ) )
     <span class="ruby-keyword">return</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'new'</span> )
+  <span class="ruby-identifier">render</span>( <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;new&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- create-source -->
           
@@ -394,7 +394,7 @@ this.</p>
           <div class="method-source-code" id="delete-source">
             <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 233</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
-  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">'Timesheet'</span> )
+  <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">&#39;Timesheet&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- delete-source -->
           
@@ -496,12 +496,12 @@ automatically. Rows and work packets are included in the editing form.</p>
   <span class="ruby-comment"># application_helper.rb for details.</span>
 
   <span class="ruby-ivar">@columns</span> = [
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Start day'</span>,   <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'start_day'</span>,                 <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'start_day_cache'</span>             },
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Owner'</span>,       <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_owner</span>,        <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'users.name, start_day_cache'</span> },
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Last edited'</span>, <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_updated_at</span>,   <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'updated_at'</span>                  },
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Committed'</span>,   <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_committed_at</span>, <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'committed_at'</span>                },
-    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Hours'</span>,       <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_hours</span>,
-      <span class="ruby-value">:header_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'center'</span>,      <span class="ruby-value">:value_align</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'center'</span>                                                               },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Start day&#39;</span>,   <span class="ruby-value">:value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;start_day&#39;</span>,                 <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;start_day_cache&#39;</span>             },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Owner&#39;</span>,       <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_owner</span>,        <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;users.name, start_day_cache&#39;</span> },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Last edited&#39;</span>, <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_updated_at</span>,   <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;updated_at&#39;</span>                  },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Committed&#39;</span>,   <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_committed_at</span>, <span class="ruby-value">:sort_by</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;committed_at&#39;</span>                },
+    { <span class="ruby-value">:header_text</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Hours&#39;</span>,       <span class="ruby-value">:value_helper</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:timesheethelp_hours</span>,
+      <span class="ruby-value">:header_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;center&#39;</span>,      <span class="ruby-value">:value_align</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;center&#39;</span>                                                               },
   ]
 
   <span class="ruby-comment"># Get the basic options hash from ApplicationController, then work out</span>
@@ -532,8 +532,8 @@ automatically. Rows and work packets are included in the editing form.</p>
     <span class="ruby-identifier">not_committed_vars</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">vars</span> )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># Sort order is already partially compiled in 'options' from the earlier</span>
-  <span class="ruby-comment"># call to 'appctrl_index_assist'.</span>
+  <span class="ruby-comment"># Sort order is already partially compiled in &#39;options&#39; from the earlier</span>
+  <span class="ruby-comment"># call to &#39;appctrl_index_assist&#39;.</span>
 
   <span class="ruby-identifier">order_sql</span> = <span class="ruby-node">&quot;ORDER BY #{ options[ :order ] }&quot;</span>
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-value">:order</span> )
@@ -572,7 +572,7 @@ automatically. Rows and work packets are included in the editing form.</p>
 
         <div class="method-description">
           
-          <p>Prepare for the ‘new timesheet’ view.</p>
+          <p>Prepare for the &#39;new timesheet&#39; view.</p>
           
 
           
@@ -659,7 +659,7 @@ automatically. Rows and work packets are included in the editing form.</p>
   <span class="ruby-ivar">@errors</span> = <span class="ruby-identifier">update_backend</span>( <span class="ruby-ivar">@timesheet</span> )
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@errors</span>.<span class="ruby-identifier">nil?</span> )
-    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">'This timesheet was modified by someone else while you were making changes. Please examine the updated information before editing again.'</span>
+    <span class="ruby-identifier">flash</span>[ <span class="ruby-value">:error</span> ] = <span class="ruby-string">&#39;This timesheet was modified by someone else while you were making changes. Please examine the updated information before editing again.&#39;</span>
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">timesheet_path</span>( <span class="ruby-ivar">@timesheet</span> ) )
     <span class="ruby-keyword">return</span>
   <span class="ruby-keyword">end</span>
@@ -711,7 +711,7 @@ automatically. Rows and work packets are included in the editing form.</p>
       <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">edit_timesheet_path</span>( <span class="ruby-identifier">new_timesheet</span> ) )
     <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@timesheet</span>.<span class="ruby-identifier">committed</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:commit</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">'Save changes and exit'</span> )
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@timesheet</span>.<span class="ruby-identifier">committed</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:commit</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Save changes and exit&#39;</span> )
     <span class="ruby-identifier">redirect_to</span>( <span class="ruby-identifier">new_timesheet_path</span>() )
 
   <span class="ruby-keyword">else</span>

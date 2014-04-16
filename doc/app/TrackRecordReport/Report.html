@@ -383,11 +383,11 @@ be queried via a accessors and enumerators provided herein.</p>
         <dd class="description"><p>Configure the handlers and human-readable labels for the ways in which
 reports get broken up, in terms of frequency. View code which presents a
 choice of report frequency should obtain the labels for the list with the
-‘label’ method. Use the ‘<a
-href="Report.html#method-i-column_title">#column_title</a>’ method for a
-column “title”, shown alongside or above column headings. Use the ‘<a
-href="Report.html#method-i-column_heading">#column_heading</a>’ method for
-per-column headings.</p>
+&#39;label&#39; method. Use the &#39;<a
+href="Report.html#method-i-column_title">#column_title</a>&#39; method for
+a column “title”, shown alongside or above column headings. Use the &#39;<a
+href="Report.html#method-i-column_heading">#column_heading</a>&#39; method
+for per-column headings.</p>
 
 <p><em>These must stay in the same order!</em></p>
 
@@ -411,7 +411,7 @@ in effect calculate the entire body of the report in one query. So for
 example, a monthly report would group by year and month number; any given
 date produces a unique year and month.</p>
 
-<p>To do this, the SQL ‘EXTRACT’ function is used by default.</p>
+<p>To do this, the SQL &#39;EXTRACT&#39; function is used by default.</p>
 <ul><li>
 <p><a
 href="http://www.postgresql.org/docs/8.3/static/functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT">www.postgresql.org/docs/8.3/static/functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT</a></p>
@@ -439,15 +439,15 @@ month splits)</p>
 <p>Ruby mirrors ISOYEAR with Date#cwyear. PostgreSQL v8.3 and later also</p>
 </li></ul>
 
-<p>provide ISODOW (day-of-week), equivalent to Ruby’s Date#cwday, but that is
-not needed by TrackRecord.</p>
+<p>provide ISODOW (day-of-week), equivalent to Ruby&#39;s Date#cwday, but that
+is not needed by TrackRecord.</p>
 </li></ul>
 
 <p>Weekly reports are thorny, because that requires grouping by some idea of a
 unique numbered week. The commercial week number is the obvious choice.
 MySQL and PostgreSQL provide a WEEK parameter for this in EXTRACT, but
-<em>Oracle does not offer this and can’t be used</em> without changing the
-TrackRecord report generator’s <a
+<em>Oracle does not offer this and can&#39;t be used</em> without changing
+the TrackRecord report generator&#39;s <a
 href="Report.html#FREQUENCY">FREQUENCY</a> constant for weekly reports, or
 disabling weekly reports entirely.</p>
 
@@ -456,17 +456,17 @@ start of commercial week number 1 for the commercial year 2013; but the
 date itself is in calendar year 2012. January 1st 2006 is actually the last
 day of commercial week 52 in the commercial year 2005, despite the date
 being in calendar year 2006. If we were to just use a standard calendar
-year, we’d get into trouble - 2012 would appear to contain week 1 twice,
-leading to numbers from entirely different time periods being combined in
-the report calculations.</p>
+year, we&#39;d get into trouble - 2012 would appear to contain week 1
+twice, leading to numbers from entirely different time periods being
+combined in the report calculations.</p>
 
 <p>Thus <em>&lt;strong&gt;weekly reports will only function if you use
 PostgreSQL version 8.3 or later&lt;/strong&gt;</em> unless you modify the
 report code. Without modifications, Oracle and MySQL should work (but are
 not tested). Note that SQLite will <em>&lt;strong&gt;not work at
 all&lt;/strong&gt;</em> as it has no support for EXTRACT at all - you need
-to use ‘strftime’ instead, and this provides easily enough flexibility to
-support weekly reports too:</p>
+to use &#39;strftime&#39; instead, and this provides easily enough
+flexibility to support weekly reports too:</p>
 <ul><li>
 <p><a
 href="http://www.sqlite.org/lang_datefunc.html">www.sqlite.org/lang_datefunc.html</a></p>
@@ -480,14 +480,14 @@ database:</p>
 <ol><li>
 <p>Change “config/initializers/can_database_do_fast_reports.rb” so that the
 SLOW_DATABASE_ALTERNATIVE constant value is “false” for your database.
-Without this, you won’t be able to test your modifications to <a
+Without this, you won&#39;t be able to test your modifications to <a
 href="Report.html#FREQUENCY">FREQUENCY</a> as a “safe mode” fallback is
 active.</p>
 </li><li>
 <p>Change the “:grouping” key to the equivalent of the EXTRACT already
-present, noting that it shoudld always be an array, even if there’s only
-one group. Ensure that whatever you group by will lead to one group for
-every single unique column for the intended report, e.g. uniquely
+present, noting that it shoudld always be an array, even if there&#39;s
+only one group. Ensure that whatever you group by will lead to one group
+for every single unique column for the intended report, e.g. uniquely
 identifies months across many years, or weeks across awkward end-of-year
 boundaries.</p>
 </li><li>
@@ -495,7 +495,7 @@ boundaries.</p>
 the grouping keys returned by the database when it runs the query that
 calculates the report data. To find out that bit of the puzzle, search in
 “lib/track_record_report.rb” (i.e. this file) for the string
-“*date_based_key”. You’ll see a line of code that assigns this from a
+“*date_based_key”. You&#39;ll see a line of code that assigns this from a
 variable. Underneath that line, add in: “raise date_based_key.inspect” and
 generate a report of the column duration you are modifying, while in
 development mode. The raised exception will show in your browser the form
@@ -506,7 +506,7 @@ of the value that the date-to-key proc must return.</p>
 href="Report.html#FREQUENCY">FREQUENCY</a> to see how the slow “safe mode”
 is done. You could always create those values inside <a
 href="Report.html#FREQUENCY">FREQUENCY</a> by hand for report types you
-can’t generate in the database.</p>
+can&#39;t generate in the database.</p>
         
       
       </dl>
@@ -540,10 +540,10 @@ can’t generate in the database.</p>
 
         <div class="method-description">
         
-        <p>“Cacheable” range values. If a report’s start or end date is fixed, returns
-the date. If the start or end date are start/end-of-all-time, one or both
-returns :all. If the report is being generated for a relative month or
-week, returns “last_”, “this_” or “two_” with a suffix of “month” or
+        <p>“Cacheable” range values. If a report&#39;s start or end date is fixed,
+returns the date. If the start or end date are start/end-of-all-time, one
+or both returns :all. If the report is being generated for a relative month
+or week, returns “last_”, “this_” or “two_” with a suffix of “month” or
 “week”, as a symbol, for both start and end.</p>
         
         </div>
@@ -557,10 +557,10 @@ week, returns “last_”, “this_” or “two_” with a suffix of “month�
 
         <div class="method-description">
         
-        <p>“Cacheable” range values. If a report’s start or end date is fixed, returns
-the date. If the start or end date are start/end-of-all-time, one or both
-returns :all. If the report is being generated for a relative month or
-week, returns “last_”, “this_” or “two_” with a suffix of “month” or
+        <p>“Cacheable” range values. If a report&#39;s start or end date is fixed,
+returns the date. If the start or end date are start/end-of-all-time, one
+or both returns :all. If the report is being generated for a relative month
+or week, returns “last_”, “this_” or “two_” with a suffix of “month” or
 “week”, as a symbol, for both start and end.</p>
         
         </div>
@@ -681,8 +681,8 @@ per-user breakdowns; array of task IDs the report will represent.</p>
 
         <div class="method-description">
         
-        <p>Range data for the ‘new’ view form. Custom attribute writer methods are
-used to call “rationalise_dates” whenever a range value is altered.</p>
+        <p>Range data for the &#39;new&#39; view form. Custom attribute writer methods
+are used to call “rationalise_dates” whenever a range value is altered.</p>
         
         </div>
       </div>
@@ -747,8 +747,8 @@ used to call “rationalise_dates” whenever a range value is altered.</p>
 
         <div class="method-description">
         
-        <p>Range data for the ‘new’ view form. Custom attribute writer methods are
-used to call “rationalise_dates” whenever a range value is altered.</p>
+        <p>Range data for the &#39;new&#39; view form. Custom attribute writer methods
+are used to call “rationalise_dates” whenever a range value is altered.</p>
         
         </div>
       </div>
@@ -867,11 +867,11 @@ users or tasks may be included, depending on security settings.</p>
 
         <div class="method-description">
         
-        <p>A report’s total date span may be restricted to avoid generating giant
+        <p>A report&#39;s total date span may be restricted to avoid generating giant
 reports which would swamp a server (for example, a daily report over
 hundreds or thousands of days would be a bad idea). If not done, this holds
-‘nil’, else the Date giving the <strong>original</strong> start date (the
-limited, actual start date used is in the “range” property).</p>
+&#39;nil&#39;, else the Date giving the <strong>original</strong> start
+date (the limited, actual start date used is in the “range” property).</p>
 
 <p>Views/generators can use it to include warnings that the start date was
 limited, should they so wish.</p>
@@ -902,10 +902,10 @@ limited, should they so wish.</p>
         
         <p>Total duration of all tasks in all rows; number of hours remaining (may be
 negative for overrun) after all hours worked in tasks with non-zero
-duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
-‘actual’ value only accounts for committed hours, while the ‘potential’
-value includes both committed and not-committed hours (thus, subject to
-change).</p>
+duration. If &#39;nil&#39;, <strong>all</strong> tasks had zero duration.
+The &#39;actual&#39; value only accounts for committed hours, while the
+&#39;potential&#39; value includes both committed and not-committed hours
+(thus, subject to change).</p>
 
 <p>A report that hides zero total rows will not include task durations on
 those rows. A report that shows them <strong>will</strong> include task
@@ -924,10 +924,10 @@ durations on those rows.</p>
         
         <p>Total duration of all tasks in all rows; number of hours remaining (may be
 negative for overrun) after all hours worked in tasks with non-zero
-duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
-‘actual’ value only accounts for committed hours, while the ‘potential’
-value includes both committed and not-committed hours (thus, subject to
-change).</p>
+duration. If &#39;nil&#39;, <strong>all</strong> tasks had zero duration.
+The &#39;actual&#39; value only accounts for committed hours, while the
+&#39;potential&#39; value includes both committed and not-committed hours
+(thus, subject to change).</p>
 
 <p>A report that hides zero total rows will not include task durations on
 those rows. A report that shows them <strong>will</strong> include task
@@ -946,10 +946,10 @@ durations on those rows.</p>
         
         <p>Total duration of all tasks in all rows; number of hours remaining (may be
 negative for overrun) after all hours worked in tasks with non-zero
-duration. If ‘nil’, <strong>all</strong> tasks had zero duration. The
-‘actual’ value only accounts for committed hours, while the ‘potential’
-value includes both committed and not-committed hours (thus, subject to
-change).</p>
+duration. If &#39;nil&#39;, <strong>all</strong> tasks had zero duration.
+The &#39;actual&#39; value only accounts for committed hours, while the
+&#39;potential&#39; value includes both committed and not-committed hours
+(thus, subject to change).</p>
 
 <p>A report that hides zero total rows will not include task durations on
 those rows. A report that shows them <strong>will</strong> include task
@@ -1058,9 +1058,9 @@ frequencies. The index into the array indicates the frequency index.</p>
           
           <p>Create a new <a href="Report.html">Report</a>. In the first parameter, pass
 the current TrackRecord user. In the next parameter pass nothing to use
-default values for a ‘new report’ view form, or pass “params[ :report ]”
-(or similar) to create using a params hash from a ‘new report’ form
-submission.</p>
+default values for a &#39;new report&#39; view form, or pass “params[
+:report ]” (or similar) to create using a params hash from a &#39;new
+report&#39; form submission.</p>
           
 
           
@@ -1080,11 +1080,11 @@ submission.</p>
   <span class="ruby-ivar">@range_month_end</span>       = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@frequency</span>             = <span class="ruby-value">0</span>
 
-  <span class="ruby-ivar">@customer_sort_field</span>   = <span class="ruby-string">'title'</span>
-  <span class="ruby-ivar">@project_sort_field</span>    = <span class="ruby-string">'title'</span>
+  <span class="ruby-ivar">@customer_sort_field</span>   = <span class="ruby-string">&#39;title&#39;</span>
+  <span class="ruby-ivar">@project_sort_field</span>    = <span class="ruby-string">&#39;title&#39;</span>
   <span class="ruby-ivar">@task_sort_field</span>       = <span class="ruby-constant">Task</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SORT_COLUMN</span>
   <span class="ruby-ivar">@task_grouping</span>         = <span class="ruby-value">:default</span>
-  <span class="ruby-ivar">@task_filter</span>           = <span class="ruby-string">'all'</span>
+  <span class="ruby-ivar">@task_filter</span>           = <span class="ruby-string">&#39;all&#39;</span>
 
   <span class="ruby-ivar">@include_totals</span>        = <span class="ruby-keyword">true</span>
   <span class="ruby-ivar">@include_committed</span>     = <span class="ruby-keyword">false</span>
@@ -1115,7 +1115,7 @@ submission.</p>
     <span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">dup</span>
     <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">stringify_keys!</span>
     <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-string">'('</span> ) )
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-string">&#39;(&#39;</span> ) )
         <span class="ruby-identifier">raise</span>( <span class="ruby-string">&quot;Multi-parameter attributes are not supported.&quot;</span> )
       <span class="ruby-keyword">else</span>
         <span class="ruby-keyword">begin</span>
@@ -1154,8 +1154,8 @@ submission.</p>
 
         <div class="method-description">
           
-          <p>Build the ‘tasks’ array if ‘<a
-href="Report.html#attribute-i-active_task_ids">#active_task_ids</a>’ is
+          <p>Build the &#39;tasks&#39; array if &#39;<a
+href="Report.html#attribute-i-active_task_ids">#active_task_ids</a>&#39; is
 updated externally. The result will be the sum of existing inactive and
 updated active task IDs.</p>
           
@@ -1324,8 +1324,8 @@ appropriate for the report type.</p>
           <p>Return the total value as a <a href="Calculator.html">Calculator</a>
 subclass instance for the column identified by the given date-based key.</p>
 
-<p>Will return ‘nil’ if no such non-zero total column exists (yet). Only
-really useful if the report has been compiled by calling “compile”.</p>
+<p>Will return &#39;nil&#39; if no such non-zero total column exists (yet).
+Only really useful if the report has been compiled by calling “compile”.</p>
           
 
           
@@ -1394,7 +1394,7 @@ too.</p>
 
         <div class="method-description">
           
-          <p>Compile the report. Returns ‘self’ for convenience.</p>
+          <p>Compile the report. Returns &#39;self&#39; for convenience.</p>
           
 
           
@@ -1469,13 +1469,13 @@ date range for this report.</p>
 
 <p>Iterate over the cells in a given <a href="Row.html">Row</a> or <a
 href="Row.html">Row</a> subclass. Calls a caller-supplied block, passing
-the cell instance. Will pass ‘nil’ for cells with a zero hour total (it is
-much faster to check for ‘nil’ many times than instantiate a useless cell
-object with zero values for its hours).</p>
+the cell instance. Will pass &#39;nil&#39; for cells with a zero hour total
+(it is much faster to check for &#39;nil&#39; many times than instantiate a
+useless cell object with zero values for its hours).</p>
 
-<p>A ‘nil’ input parameter value is allowed. The caller block will be invoked
-with ‘nil’ for each cell that <strong>would</strong> have been on the row
-if it existed.</p>
+<p>A &#39;nil&#39; input parameter value is allowed. The caller block will be
+invoked with &#39;nil&#39; for each cell that <strong>would</strong> have
+been on the row if it existed.</p>
           
 
           
@@ -1526,14 +1526,15 @@ columns” is enabled.</p>
 
 <p>This is similar to just doing “<a
 href="Report.html#method-i-each_cell_for">#each_cell_for</a>( row )” and
-calling the cell’s “user_total” method manually for whatever your current
-<a href="../User.html">User</a> of interest happens to be, but calling here
-takes care of that for you and deals with ‘nil’ cleanly in passing.</p>
+calling the cell&#39;s “user_total” method manually for whatever your
+current <a href="../User.html">User</a> of interest happens to be, but
+calling here takes care of that for you and deals with &#39;nil&#39;
+cleanly in passing.</p>
 
 <p>The given <a href="../User.html">User</a> instance must be valid. The given
-<a href="Row.html">Row</a> instance may be ‘nil’. If so, either the block
-is called with ‘nil’ for each column if “hide zero rows” is disabled, else
-it isn’t called at all.</p>
+<a href="Row.html">Row</a> instance may be &#39;nil&#39;. If so, either the
+block is called with &#39;nil&#39; for each column if “hide zero rows” is
+disabled, else it isn&#39;t called at all.</p>
           
 
           
@@ -1575,7 +1576,7 @@ it isn’t called at all.</p>
 
 <p>Iterate over all columns, calling a caller-supplied block with a Range
 object describing the Date range for each one, inclusive of column
-start/end. Always calls with a valid Range, never ‘nil’.</p>
+start/end. Always calls with a valid Range, never &#39;nil&#39;.</p>
           
 
           
@@ -1616,8 +1617,8 @@ start/end. Always calls with a valid Range, never ‘nil’.</p>
 
 <p>Iterate over all column totals, calling the caller-supplied block with a <a
 href="Calculator.html">Calculator</a> subclass describing the total for
-that column. If the total is zero and ‘hide zero columns’ is disabled, your
-block will be called with ‘nil’ for that column.</p>
+that column. If the total is zero and &#39;hide zero columns&#39; is
+disabled, your block will be called with &#39;nil&#39; for that column.</p>
           
 
           
@@ -1654,9 +1655,9 @@ block will be called with ‘nil’ for that column.</p>
 <p>Iterate over all defined rows, yielding a caller supplied block passing it
 the row and task in task list order. If “hide zero rows” is set, only
 defined rows and tasks with non-zero totals will be sent. Otherwise, you
-will be called with a row value of ‘nil’ and the task for which the row
-total was zero (it is much faster to check for ‘nil’ many times than
-instantiate a useless row object with zero values for its hours).</p>
+will be called with a row value of &#39;nil&#39; and the task for which the
+row total was zero (it is much faster to check for &#39;nil&#39; many times
+than instantiate a useless row object with zero values for its hours).</p>
           
 
           
@@ -1729,16 +1730,17 @@ only users with a non-zero overall total will be included.</p>
 <p>Results of calling here are undefined unless the report parameters tell it
 to include per-user details during compilation.</p>
 
-<p>For each user associated with a row, call the caller’s block with the <a
-href="../User.html">User</a> instance and the <a
-href="Calculator.html">Calculator</a> subclass giving the user’s total on
-that row. Will call with “nil” for each user in the row is “nil”, unless
+<p>For each user associated with a row, call the caller&#39;s block with the
+<a href="../User.html">User</a> instance and the <a
+href="Calculator.html">Calculator</a> subclass giving the user&#39;s total
+on that row. Will call with “nil” for each user in the row is “nil”, unless
 “hide zero rows” is enabled, in which case if given nil it will not call
 the block at all.</p>
 
 <p>The block is only called for a non-nil row if a user has a non-zero total,
 or if “hide zero rows” is disabled, in which case the user total instance
-may be ‘nil’ (but the <a href="../User.html">User</a> is always valid).</p>
+may be &#39;nil&#39; (but the <a href="../User.html">User</a> is always
+valid).</p>
 
 <p>See also “<a
 href="Report.html#method-i-each_cell_for_user_on_row">#each_cell_for_user_on_row</a>”.</p>
@@ -1749,11 +1751,11 @@ href="Report.html#method-i-each_cell_for_user_on_row">#each_cell_for_user_on_row
             <pre><span class="ruby-comment"># File lib/track_record_report.rb, line 760</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each_user_on_row</span>( <span class="ruby-identifier">row</span> ) <span class="ruby-comment"># :yields: user, user_total_for_row</span>
 
-  <span class="ruby-comment"># Not 'filtered_users' - those are aimed at the columns in reports</span>
+  <span class="ruby-comment"># Not &#39;filtered_users&#39; - those are aimed at the columns in reports</span>
   <span class="ruby-comment"># where each *column* represents a user, so hide-zero-columns will</span>
-  <span class="ruby-comment"># result in hidden users. Here, we're looking at the per-user</span>
+  <span class="ruby-comment"># result in hidden users. Here, we&#39;re looking at the per-user</span>
   <span class="ruby-comment"># breakdown for a single task on a row. If hide-zero-cols is set</span>
-  <span class="ruby-comment"># but hide-zero-rows is not, we don't want to hide users here.</span>
+  <span class="ruby-comment"># but hide-zero-rows is not, we don&#39;t want to hide users here.</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">row</span>.<span class="ruby-identifier">nil?</span> )
     <span class="ruby-ivar">@users</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>( <span class="ruby-identifier">user</span>, <span class="ruby-keyword">nil</span> ) } <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@exclude_zero_rows</span> )
@@ -1785,9 +1787,9 @@ href="Report.html#method-i-each_cell_for_user_on_row">#each_cell_for_user_on_row
 
         <div class="method-description">
           
-          <p>Set the ‘<a
-href="Report.html#attribute-i-frequency_data">#frequency_data</a>’ field
-when ‘frequency’ is updated externally.</p>
+          <p>Set the &#39;<a
+href="Report.html#attribute-i-frequency_data">#frequency_data</a>&#39;
+field when &#39;frequency&#39; is updated externally.</p>
           
 
           
@@ -1820,9 +1822,9 @@ when ‘frequency’ is updated externally.</p>
           
           <p>Only useful for compiled reports - see “compile”.</p>
 
-<p>Returns ‘true’ if the report has any non-zero hours counted for any of its
-rows, else ‘false’ (all tasks counted to zero hours within the other report
-constraints/parameters).</p>
+<p>Returns &#39;true&#39; if the report has any non-zero hours counted for any
+of its rows, else &#39;false&#39; (all tasks counted to zero hours within
+the other report constraints/parameters).</p>
           
 
           
@@ -1852,9 +1854,9 @@ constraints/parameters).</p>
 
         <div class="method-description">
           
-          <p>Build the ‘tasks’ array if ‘<a
-href="Report.html#attribute-i-inactive_task_ids">#inactive_task_ids</a>’ is
-updated externally. The result will be the sum of existing active and
+          <p>Build the &#39;tasks&#39; array if &#39;<a
+href="Report.html#attribute-i-inactive_task_ids">#inactive_task_ids</a>&#39;
+is updated externally. The result will be the sum of existing active and
 updated inactive task IDs.</p>
           
 
@@ -1917,7 +1919,7 @@ updated inactive task IDs.</p>
         <div class="method-description">
           
           <p>Helper method which returns a user-displayable label describing this report
-type. There’s a class method equivalent below.</p>
+type. There&#39;s a class method equivalent below.</p>
           
 
           
@@ -1949,7 +1951,8 @@ type. There’s a class method equivalent below.</p>
           
           <p>Does the column at the given index only contain partial results, because it
 is the first or last column in the overall range and that range starts or
-ends somewhere in the middle? Returns ‘true’ if so, else ‘false’.</p>
+ends somewhere in the middle? Returns &#39;true&#39; if so, else
+&#39;false&#39;.</p>
           
 
           
@@ -2210,8 +2213,8 @@ externally.</p>
 
         <div class="method-description">
           
-          <p>Build the ‘user’ array if ‘<a
-href="Report.html#attribute-i-reportable_user_ids">#reportable_user_ids</a>’
+          <p>Build the &#39;user&#39; array if &#39;<a
+href="Report.html#attribute-i-reportable_user_ids">#reportable_user_ids</a>&#39;
 is updated externally.</p>
           
 
@@ -2257,8 +2260,8 @@ is updated externally.</p>
           
           <p>Return the row defined for the given task ID, specified as a string.</p>
 
-<p>Will return ‘nil’ if no such row exists. Only really useful if the report
-has been compiled by calling “compile”.</p>
+<p>Will return &#39;nil&#39; if no such row exists. Only really useful if the
+report has been compiled by calling “compile”.</p>
           
 
           
@@ -2322,8 +2325,8 @@ necessary. Usually only useful during the process of report compilation
 
         <div class="method-description">
           
-          <p>Build the ‘tasks’ array if ‘<a
-href="Report.html#attribute-i-task_ids">#task_ids</a>’ is updated
+          <p>Build the &#39;tasks&#39; array if &#39;<a
+href="Report.html#attribute-i-task_ids">#task_ids</a>&#39; is updated
 externally.</p>
           
 

@@ -249,10 +249,10 @@ details along with:</p>
 href="http://www.opensource.org/licenses/bsd-license.php">www.opensource.org/licenses/bsd-license.php</a></p>
 </li></ul>
 
-<p>Detailed lists of changes in each version are in ‘<a
-href="CHANGELOG_rdoc.html">CHANGELOG.rdoc</a>’. Technical documentation can
-be found via ‘<a
-href="doc/README_FOR_APP_rdoc.html">doc/README_FOR_APP.rdoc</a>’.</p>
+<p>Detailed lists of changes in each version are in &#39;<a
+href="CHANGELOG_rdoc.html">CHANGELOG.rdoc</a>&#39;. Technical documentation
+can be found via &#39;<a
+href="doc/README_FOR_APP_rdoc.html">doc/README_FOR_APP.rdoc</a>&#39;.</p>
 
 <h2 id="label-Requirements%2C+new+installations+and+upgrades+">Requirements, new installations and upgrades </h2>
 
@@ -281,7 +281,7 @@ not work on Ruby 1.8.</p>
 
 <h3 id="label-Installation+for+new+users">Installation for new users</h3>
 
-<p>Download either a source archive from the Pond’s Place web site (see
+<p>Download either a source archive from the Pond&#39;s Place web site (see
 above), from GitHub directly, or glone the repository as per GitHub
 instructions. Then:</p>
 <dl class="rdoc-list label-list"><dt>Make a secret key
@@ -317,22 +317,39 @@ distribution:</p>
 <p>No changes are necessary</p>
 </dd><dt>SQLite 3
 <dd>
-<p>Comment out the line <code>gem 'pg', '&gt;=0.16'</code> and add underneath
-it the line <code>gem 'sqlite3'</code></p>
+<p>Comment out the line <code>gem &#39;pg&#39;, &#39;&gt;=0.16&#39;</code> and
+add underneath it the line <code>gem &#39;sqlite3&#39;</code></p>
 </dd><dt>Other databases
 <dd>
-<p>Comment out the line <code>gem 'pg', '&gt;=0.16'</code> and add underneath
-it <code>gem</code> line(s) specifying whatever is needed for your chosen
-database; you may need to do a web search to determine the required gem(s)</p>
+<p>Comment out the line <code>gem &#39;pg&#39;, &#39;&gt;=0.16&#39;</code> and
+add underneath it <code>gem</code> line(s) specifying whatever is needed
+for your chosen database; you may need to do a web search to determine the
+required gem(s)</p>
 </dd></dl>
 </dd><dt>Make sure you have all installed gems available
 <dd>
-<p>Issue the command <code>bundle install</code>. This can be a bit fraught as
-Ruby and Rails gems can be finniky things, especially database adapter
-gems; these often need native components compiling which in turn require a
-working native compiler and supporting files on your system. If you get an
-error, try doing a web search for it as often the answer can be found
-there. If all else fails see <a
+<p>If you only want to use TrackRecord for a production (normal) environment,
+then it is recommended that you issue this command the very first time you
+install the software:</p>
+
+<pre>bundle install --without development test</pre>
+
+<p>Thereafter, just using <code>bundle install</code> will remember this
+setting and always omit development and test-related gems. To undo this
+persistent setting, issue this command:</p>
+
+<pre>bundle config --delete without</pre>
+
+<p>Alternatively, ignore the above and just install all gems, regardless of
+whether they are used for production, development or test environments.
+Issue the command <code>bundle install</code> to install everything.</p>
+
+<p>Bundle installation can be a bit fraught. Ruby and Rails gems can be
+finniky things, especially the “nokogiri” gem used during tests or database
+adapter gems. These usually need native components compiling which in turn
+requires a working native compiler and supporting files on your system. If
+you get an error, try doing a web search for it as often the answer can be
+found there. If all else fails see <a
 href="http://trackrecord.pond.org.uk">trackrecord.pond.org.uk</a> for
 contact details.</p>
 
@@ -347,13 +364,13 @@ assume a Unix-like environment. Windows users will need to adapt them.</p>
 RAILS_ENV=production rake db:migrate
 RAILS_ENV=development rake db:migrate</pre>
 
-<p>If you get an error, it’s likely that your database configuration isn’t
-correct - check the steps above are OK.</p>
+<p>If you get an error, it&#39;s likely that your database configuration
+isn&#39;t correct - check the steps above are OK.</p>
 </dd><dt>Check it works in development mode
 <dd>
-<p>Depending on where you’re deploying, you may have wider web server issues
-to consider. For a local machine, you can test with the Rails built in web
-server:</p>
+<p>Depending on where you&#39;re deploying, you may have wider web server
+issues to consider. For a local machine, you can test with the Rails built
+in web server:</p>
 <ul><li>
 <p><code>rails s</code></p>
 </li><li>
@@ -364,7 +381,7 @@ browser</p>
 <p>This will test the server in development mode, so changes made here will
 not affect your production environment database unless you configured them
 to be the same in <code>config/database.yml</code>.</p>
-</dd><dt>Possibly ‘precompile assets’ for production mode
+</dd><dt>Possibly &#39;precompile assets&#39; for production mode
 <dd>
 <p>Asset precompilation is rather convoluted Rails-ism aimed at performance
 improvements in production mode. If you run a production server you may
@@ -389,7 +406,7 @@ run-time, please see the later section about the Nokogiri gem.</p>
 <dd>
 <p>You may want to look at files
 <code>config/initializers/email_config.rb</code> and
-<code>config/initializers/general_config.rb</code> once you’ve verified
+<code>config/initializers/general_config.rb</code> once you&#39;ve verified
 that the software is running, to see what other things can be changed. In
 general, the other files in <code>config/initializers</code> should not be
 modified.</p>
@@ -400,14 +417,15 @@ modified.</p>
 <h4 id="label-Upgrading+from+version+1.x">Upgrading from version 1.x</h4>
 
 <p>If you are updating from a version earlier than v2.0, please see the
-<code>CHANGELOG</code> file’s information about v2.0 for details as this is
-a major update from Rails 2 to Rails 3.</p>
+<code>CHANGELOG</code> file&#39;s information about v2.0 for details as
+this is a major update from Rails 2 to Rails 3.</p>
 
 <h4 id="label-Upgrading+from+version+2.00+to+2.11+inclusive">Upgrading from version 2.00 to 2.11 inclusive</h4>
 
 <p>You will need to update <code>config/production.rb</code> with a path
-prefix if you deploy in a subdirectory rather than you server’s document
-root. This step is required because of a very long standing Rails bug.</p>
+prefix if you deploy in a subdirectory rather than you server&#39;s
+document root. This step is required because of a very long standing Rails
+bug.</p>
 
 <p>See the comments above the “config.relative_url_root” line for details. 
 This is vital for anyone running TrackRecord in a non-root location,
@@ -441,8 +459,9 @@ RAILS_ENV=development rake db:migrate</pre>
 <dd>
 <p>TrackRecord as a Rails 3 application requires asset precompilation for
 production mode, unless you changed
-<code>config/environments/production.rb</code> so that this wasn’t needed.
-A new release of TrackRecord means updated assets so you need to issue:</p>
+<code>config/environments/production.rb</code> so that this wasn&#39;t
+needed. A new release of TrackRecord means updated assets so you need to
+issue:</p>
 
 <pre>RAILS_ENV=production rake assets:clean
 RAILS_ENV=production bundle exec rake assets:precompile</pre>
@@ -462,35 +481,37 @@ No test failures are expected.</p>
 
 <h4 id="label-Deploying+in+a+subdirectory">Deploying in a subdirectory</h4>
 
-<p>Rails asset precompilation is somewhat broken in that it doesn’t understand
-applications deployed into subdirectories. If you are not using Heroku, you
-can fix this by adding the following into
+<p>Rails asset precompilation is somewhat broken in that it doesn&#39;t
+understand applications deployed into subdirectories. If you are not using
+Heroku, you can fix this by adding the following into
 config/environments/production.rb:</p>
 
 <pre>config.assets.initialize_on_precompile = true
-config.relative_url_root = '/&lt;your-app-subdir&gt;'</pre>
+config.relative_url_root = &#39;/&lt;your-app-subdir&gt;&#39;</pre>
 
 <p>…then precompile the assets. If already compiled, delete the folder
-‘public/assets’ then precompile again (see earlier for the command).</p>
+&#39;public/assets&#39; then precompile again (see earlier for the
+command).</p>
 
 <h4 id="label-Deploying+on+Heroku">Deploying on Heroku</h4>
 
-<p>On Heroku, the ‘initialize’ flag must be ‘false’. The following link may
-provide some insight about what to do:</p>
+<p>On Heroku, the &#39;initialize&#39; flag must be &#39;false&#39;. The
+following link may provide some insight about what to do:</p>
 
 <pre>https://github.com/rails/rails/issues/8941</pre>
 
-<p>I apologise for the inconvenience, but I can’t do much about a bug like
-this that’s been in Rails for at least two years, especially now that (at
-the time of writing) Rails 4 is out so a Rails 3 fix is even more unlikely.</p>
+<p>I apologise for the inconvenience, but I can&#39;t do much about a bug like
+this that&#39;s been in Rails for at least two years, especially now that
+(at the time of writing) Rails 4 is out so a Rails 3 fix is even more
+unlikely.</p>
 
 <h2 id="label-Warnings+from+Nokogiri">Warnings from Nokogiri</h2>
 
-<p>From version 2.25, TrackRecord’s test suite uses something called Capybara
-for integration tests. This has an unavoidable but somewhat unfortunate
-reliance on Nokogiri, an XML parser. It’s a capable, but very big gem that
-has a huge native extension which can take a long time to build and
-install.</p>
+<p>From version 2.25, TrackRecord&#39;s test suite uses something called
+Capybara for integration tests. This has an unavoidable but somewhat
+unfortunate reliance on Nokogiri, an XML parser. It&#39;s a capable, but
+very big gem that has a huge native extension which can take a long time to
+build and install.</p>
 <ul><li>
 <p><a
 href="https://github.com/jnicklas/capybara">github.com/jnicklas/capybara</a></p>
@@ -499,14 +520,15 @@ href="https://github.com/jnicklas/capybara">github.com/jnicklas/capybara</a></p>
 </li></ul>
 
 <p>Installing Nokogiri in earlier days used to be quite a fragile process with
-a high chance of error (in my experience) but it’s got a lot better since.
-If you do encounter errors, though, you’ll need to search the web for help.</p>
+a high chance of error (in my experience) but it&#39;s got a lot better
+since. If you do encounter errors, though, you&#39;ll need to search the
+web for help.</p>
 
 <p>A common run-time <em>warning</em> however is a complaint that the LibXML
 version used for building the gem differs from that being used at run-time.
 I got this on OS X Mavericks with a <em>clean</em> installation of the gem
 via <code>bundle</code>. Advice online included things like uninstalling
-and reinstalling the gem with simple commands that just didn’t make any
+and reinstalling the gem with simple commands that just didn&#39;t make any
 difference. In the end, I installed it with explicit pointers to the
 libraries it would end up using at run-time.</p>
 
@@ -517,27 +539,27 @@ gem install nokogiri -- --with-xml2-include=/usr/include/libxml2/libxml --with-x
 <code>nokogiri</code>.</p>
 
 <p>You might have to adapt that for different systems; for example, on a
-64-bit Linux, you’d probably need <code>/usr/lib64/</code> instead of
-<code>/usr/lib</code>. If you don’t need the documentation for Nokogiri
+64-bit Linux, you&#39;d probably need <code>/usr/lib64/</code> instead of
+<code>/usr/lib</code>. If you don&#39;t need the documentation for Nokogiri
 installed locally - it takes ages! - then add <code>--no-rdoc
 --no-ri</code> just after <code>gem install nokogiri</code>, before the
-“<code> -- </code>”. This does mean you’d need to go online to read
+“<code> -- </code>”. This does mean you&#39;d need to go online to read
 documentation rather than being able to browse it via likes of <code>gem
 server</code> or the <code>ri</code> command.</p>
 
 <p>You might need to repeat the above process if you upgrade your system and
 your libraries change.</p>
 
-<p>If this doesn’t solve your warning problems, I’m afraid you’ll have to
-start searching the web for clues.</p>
+<p>If this doesn&#39;t solve your warning problems, I&#39;m afraid you&#39;ll
+have to start searching the web for clues.</p>
 
 <h2 id="label-TrackRecord+Quick+Start+User+Guide">TrackRecord Quick Start <a href="User.html">User</a> Guide</h2>
 
 <h3 id="label-First+time+setup">First time setup</h3>
 
-<p>The first time you use TrackRecord you’ll be asked to provide an Open ID
-for the person that’ll become the first system administrator. More details
-about OpenID are provided on the welcome page.</p>
+<p>The first time you use TrackRecord you&#39;ll be asked to provide an Open
+ID for the person that&#39;ll become the first system administrator. More
+details about OpenID are provided on the welcome page.</p>
 
 <h3 id="label-Adding+other+users">Adding other users</h3>
 
@@ -549,7 +571,7 @@ about OpenID are provided on the welcome page.</p>
 add a new <a href="User.html">User</a> entry with the required permissions
 and Open ID set</p>
 </li><li>
-<p>The admin tells the new user that they’re set up</p>
+<p>The admin tells the new user that they&#39;re set up</p>
 </li><li>
 <p>The new user can now log in</p>
 </li></ul>
@@ -566,9 +588,9 @@ able to create any of these entities.</p>
 
 <p>When adding new customers etc. to the system, start with the customer, then
 add the projects, then add the tasks. Always take care to assign the
-correct task-&gt;project-&gt;customer ownership; you don’t <em>have</em> to
-assign a task to a project, for example, but users can’t add that task to a
-row in their timesheet unti you do.</p>
+correct task-&gt;project-&gt;customer ownership; you don&#39;t
+<em>have</em> to assign a task to a project, for example, but users
+can&#39;t add that task to a row in their timesheet unti you do.</p>
 
 <h4 id="label-Bulk+task+import">Bulk task import</h4>
 
@@ -588,10 +610,10 @@ almost all data on the system, but can only edit their own data or the
 timesheets of other users (so they can make corrections or adjustments if
 necessary). Restricted users can only read data that they have created, or
 that they are given explicit permission to see. An administrator must edit
-the user’s account and add a task list to it, so that the user is able to
-do things with that task list - in particular, they can’t add task rows to
-their timesheets unless the admin has given them permission to “see” those
-tasks.</p>
+the user&#39;s account and add a task list to it, so that the user is able
+to do things with that task list - in particular, they can&#39;t add task
+rows to their timesheets unless the admin has given them permission to
+“see” those tasks.</p>
 
 <p>Users can make temporary, or permanently saved reports. These can be marked
 as “shared”, in which case other users can see them. For managers and
@@ -606,19 +628,20 @@ leads to the notion of comitted versus non-committed hours in reports and
 so forth. The idea is that at the end of a week, a user finishes editing
 their timesheet and commits it using the relevant pop-up menu in the
 timesheet editor. Thereafter, “history cannot be rewritten” - important if
-you’ve used timesheet data in reports sent to clients.</p>
+you&#39;ve used timesheet data in reports sent to clients.</p>
 
 <p>For some workflows, you might want to commit less often, or you might find
-that some users don’t remember to commit timesheets when you expect them
-to. Consequently, it’s possible for admins to bulk commit timesheets that
-lie between two given dates. Use the “Bulk timesheet commit” link on the
-Home page control panel and follow the instructions provided.</p>
+that some users don&#39;t remember to commit timesheets when you expect
+them to. Consequently, it&#39;s possible for admins to bulk commit
+timesheets that lie between two given dates. Use the “Bulk timesheet
+commit” link on the Home page control panel and follow the instructions
+provided.</p>
 
 <h3 id="label-Audit+trail">Audit trail</h3>
 
 <p>Changes to “important” objects like customers or timesheets are recorded in
 detail in the audit trail. Admins can examine this if they need to see who
-modified something and when. It’s unlikely that you will need it, but
+modified something and when. It&#39;s unlikely that you will need it, but
 should anything unexpectedly change in a way that might be a problem for a
 report or client, you do at least have this fallback to help work out what
 happened. Follow the “Raw audit data” link on the Home Page control panel.</p>

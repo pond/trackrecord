@@ -315,7 +315,7 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
           
           <div class="method-source-code" id="include_leightbox_if_used-source">
             <pre><span class="ruby-comment"># File lib/quiet_leightbox/quiet_leightbox.rb, line 49</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">include_leightbox_if_used</span>( <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">''</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">include_leightbox_if_used</span>( <span class="ruby-identifier">line_prefix</span> = <span class="ruby-string">&#39;&#39;</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">using_quiet_leightbox?</span>
 
   <span class="ruby-identifier">data</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -324,20 +324,20 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
   <span class="ruby-comment"># &quot;config/application.rb&quot; for the &quot;:defaults&quot; expansion, using it</span>
   <span class="ruby-comment"># here results in &quot;assets/defaults.js&quot; being generated. Doh. Since</span>
   <span class="ruby-comment"># code here is evaluated before the application starts, presumably</span>
-  <span class="ruby-comment"># the expansion isn't defined in time. Instead we have to do it</span>
+  <span class="ruby-comment"># the expansion isn&#39;t defined in time. Instead we have to do it</span>
   <span class="ruby-comment"># the hard way.</span>
   <span class="ruby-comment">#</span>
   <span class="ruby-comment"># In addition, cooperate with the &quot;Quiet Prototype&quot; plugin.</span>
 
   <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">respond_to?</span>( <span class="ruby-value">:using_quiet_prototype?</span> ) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">using_quiet_prototype?</span>() )
-    <span class="ruby-identifier">data</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype/prototype'</span> )
-    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'prototype_ujs/rails'</span> )
-    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'scriptaculous/scriptaculous'</span> )
+    <span class="ruby-identifier">data</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;prototype/prototype&#39;</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;prototype_ujs/rails&#39;</span> )
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;scriptaculous/scriptaculous&#39;</span> )
     <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">data</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">'leightbox/leightbox'</span> )
-  <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">stylesheet_link_tag</span>( <span class="ruby-string">'leightbox/leightbox'</span> )
+  <span class="ruby-identifier">data</span>         <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_include_tag</span>( <span class="ruby-string">&#39;leightbox/leightbox&#39;</span> )
+  <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">stylesheet_link_tag</span>( <span class="ruby-string">&#39;leightbox/leightbox&#39;</span> )
 
   <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span>.<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-identifier">line_prefix</span> ) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> ).<span class="ruby-identifier">html_safe</span>()
 <span class="ruby-keyword">end</span></pre>
@@ -362,9 +362,9 @@ event that the plugin is <strong>not</strong> used by the current view.</p>
 
         <div class="method-description">
           
-          <p>Returns ‘true’ if configured to use the Leightbox library for the view
-related to the current request. See the “uses_leightbox” class method for
-more information.</p>
+          <p>Returns &#39;true&#39; if configured to use the Leightbox library for the
+view related to the current request. See the “uses_leightbox” class method
+for more information.</p>
           
 
           

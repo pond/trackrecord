@@ -384,11 +384,12 @@
 
         <div class="method-description">
           
-          <p>Return an internationalised version of the given action name. If ‘true’ is
-passed in the second parameter, a default fallback of the humanized version
-of the non-internationalised action name will be chosen. If this parameter
-is omitted or ‘false’ is given, the I18n engine’s “missing token” message
-is returned instead (no default string is used).</p>
+          <p>Return an internationalised version of the given action name. If
+&#39;true&#39; is passed in the second parameter, a default fallback of the
+humanized version of the non-internationalised action name will be chosen.
+If this parameter is omitted or &#39;false&#39; is given, the I18n
+engine&#39;s “missing token” message is returned instead (no default string
+is used).</p>
           
 
           
@@ -419,10 +420,11 @@ is returned instead (no default string is used).</p>
 
         <div class="method-description">
           
-          <p>For an object with a ‘title’, ‘code’ and ‘description’ attribute, make a
-link to that object showing its title as the link text, with a link title
-attribute consisting of the code and description (where either, both or
-neither may be an empty string or even nil). Returns the link.</p>
+          <p>For an object with a &#39;title&#39;, &#39;code&#39; and
+&#39;description&#39; attribute, make a link to that object showing its
+title as the link text, with a link title attribute consisting of the code
+and description (where either, both or neither may be an empty string or
+even nil). Returns the link.</p>
           
 
           
@@ -461,10 +463,11 @@ neither may be an empty string or even nil). Returns the link.</p>
 
         <div class="method-description">
           
-          <p>Return ‘yes’ or ‘no’, internationalised, according to the given value,
-which is evaluated as (or should already be) a boolean. Remember that in
-Ruby the boolean evaluation of certain types can be unexpected - e.g.
-integer zero is not “nil”, so it evaluates to ‘true’ in a boolean context.</p>
+          <p>Return &#39;yes&#39; or &#39;no&#39;, internationalised, according to the
+given value, which is evaluated as (or should already be) a boolean.
+Remember that in Ruby the boolean evaluation of certain types can be
+unexpected - e.g. integer zero is not “nil”, so it evaluates to
+&#39;true&#39; in a boolean context.</p>
           
 
           
@@ -526,17 +529,18 @@ limited subset is supported (see the “brief_action_names” list in
 
         <div class="method-description">
           
-          <p>Run ‘collection_select’ for the given form with the given arguments for the
-field name of the target object to be updated, the collection, the field
-from within that collection to use for the values to actually set in the
-target object and the field from within that collection to use for the
+          <p>Run &#39;collection_select&#39; for the given form with the given arguments
+for the field name of the target object to be updated, the collection, the
+field from within that collection to use for the values to actually set in
+the target object and the field from within that collection to use for the
 values displayed to the user.</p>
 
-<p>A sixth optional boolean parameter, defaulting to ‘true’, says whether or
-not the selection list should allow multiple selections (for this, pass
-‘true’). The function takes care of working out how tall to make the
-selection list (the ‘size’ parameter) internally, which is really the only
-reason to call here rather than calling ‘collection_select’ directly.</p>
+<p>A sixth optional boolean parameter, defaulting to &#39;true&#39;, says
+whether or not the selection list should allow multiple selections (for
+this, pass &#39;true&#39;). The function takes care of working out how tall
+to make the selection list (the &#39;size&#39; parameter) internally, which
+is really the only reason to call here rather than calling
+&#39;collection_select&#39; directly.</p>
 
 <p>Single selection items will include blank entries.</p>
           
@@ -550,7 +554,7 @@ reason to call here rather than calling ‘collection_select’ directly.</p>
     <span class="ruby-identifier">collection</span>,
     <span class="ruby-identifier">colsetfield</span>,
     <span class="ruby-identifier">colseefield</span>,
-    <span class="ruby-identifier">multiple</span> <span class="ruby-operator">?</span> {} <span class="ruby-operator">:</span> { <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'None'</span> },
+    <span class="ruby-identifier">multiple</span> <span class="ruby-operator">?</span> {} <span class="ruby-operator">:</span> { <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;None&#39;</span> },
     <span class="ruby-identifier">apphelp_extra_selection_args</span>( <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">multiple</span> )
   )
 <span class="ruby-keyword">end</span></pre>
@@ -577,8 +581,8 @@ reason to call here rather than calling ‘collection_select’ directly.</p>
           
           <p>Output HTML suitable as a label to show whether or not the given object is
 active or otherwise. The second parameter lets you override the given
-object and force the generation of an active (pass ‘true’) or inactive
-(pass ‘false’) label.</p>
+object and force the generation of an active (pass &#39;true&#39;) or
+inactive (pass &#39;false&#39;) label.</p>
           
 
           
@@ -589,7 +593,7 @@ object and force the generation of an active (pass ‘true’) or inactive
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">content_tag</span>(
     <span class="ruby-value">:span</span>,
-    <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-string">'Active'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'Inactive'</span>,
+    <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;Active&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;Inactive&#39;</span>,
     { <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> ( <span class="ruby-identifier">active</span> <span class="ruby-operator">?</span> <span class="ruby-value">:active</span> <span class="ruby-operator">:</span> <span class="ruby-value">:inactive</span> ) }
   )
 <span class="ruby-keyword">end</span></pre>
@@ -654,13 +658,13 @@ marked HTML safe.</p>
           <div class="method-source-code" id="apphelp_date-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">date</span> )
-  <span class="ruby-identifier">date_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">'uk.org.pond.trackrecord.generic_messages.date'</span> )
+  <span class="ruby-identifier">date_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">&#39;uk.org.pond.trackrecord.generic_messages.date&#39;</span> )
   <span class="ruby-identifier">date_format</span> = <span class="ruby-node">&quot;&lt;span class=\&quot;nowrap\&quot;&gt;#{ date_strfmt }&lt;/span&gt;&quot;</span>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">date</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Date</span> ) )
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">date_format</span> ).<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">time_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">'uk.org.pond.trackrecord.generic_messages.time'</span> )
+    <span class="ruby-identifier">time_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">&#39;uk.org.pond.trackrecord.generic_messages.time&#39;</span> )
     <span class="ruby-identifier">time_format</span> = <span class="ruby-node">&quot;&lt;span class=\&quot;nowrap\&quot;&gt;#{ time_strfmt }&lt;/span&gt;&quot;</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(
       <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>(
@@ -701,12 +705,12 @@ and conditionals for speed).</p>
           <div class="method-source-code" id="apphelp_date_plain-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 279</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_date_plain</span>( <span class="ruby-identifier">date</span> )
-  <span class="ruby-identifier">date_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">'uk.org.pond.trackrecord.generic_messages.date'</span> )
+  <span class="ruby-identifier">date_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">&#39;uk.org.pond.trackrecord.generic_messages.date&#39;</span> )
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">date</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Date</span> ) )
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>( <span class="ruby-identifier">date_strfmt</span> )
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">time_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">'uk.org.pond.trackrecord.generic_messages.time'</span> )
+    <span class="ruby-identifier">time_strfmt</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>( <span class="ruby-string">&#39;uk.org.pond.trackrecord.generic_messages.time&#39;</span> )
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(
       <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-identifier">t</span>(
         <span class="ruby-string">&quot;uk.org.pond.trackrecord.generic_messages.date_and_time&quot;</span>,
@@ -777,7 +781,7 @@ substitution hash. On exit, the flash is set and the string that was used
 is returned.</p>
 
 <p>IMPORTANT: This sets the flash directly, expecting a redirection to happen
-next. If instead you’re just going to render something in
+next. If instead you&#39;re just going to render something in
 <strong>this</strong> request, you must use “<a
 href="ApplicationHelper.html#method-i-apphelp_flash_now">#apphelp_flash_now</a>”.
 Otherwise, your flash message will appear on both the current, rendered
@@ -813,25 +817,25 @@ page, and the next fetched page.</p>
           
           <p>Return any flash messages using class names prefixed by “flash_”, with the
 suffix being the key name from the flash hash. The messages are wrapped by
-a DIV with class ‘messages’. If there are no messages to show, an empty
-string is returned. Optionally pass an indent string to add at the front of
-any non-empty line of output. If a non-empty result is returned, note that
-it will be terminated by “nn”. Result contains HTML but is safe and marked
-as such.</p>
+a DIV with class &#39;messages&#39;. If there are no messages to show, an
+empty string is returned. Optionally pass an indent string to add at the
+front of any non-empty line of output. If a non-empty result is returned,
+note that it will be terminated by “nn”. Result contains HTML but is safe
+and marked as such.</p>
           
 
           
           <div class="method-source-code" id="apphelp_flash_messages-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 180</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_flash_messages</span>( <span class="ruby-identifier">indent</span> = <span class="ruby-string">''</span> )
-  <span class="ruby-identifier">output</span> = <span class="ruby-string">''</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_flash_messages</span>( <span class="ruby-identifier">indent</span> = <span class="ruby-string">&#39;&#39;</span> )
+  <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
 
   <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;div class='flash_#{ h( key ) }'&gt;#{ h( flash[ key ] ) }&lt;/div&gt;&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;div class=&#39;flash_#{ h( key ) }&#39;&gt;#{ h( flash[ key ] ) }&lt;/div&gt;&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">output</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;#{ indent }#{ content_tag( :div, output.html_safe(), { :class =&gt; 'messages' } ) }\n\n&quot;</span>
+    <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;#{ indent }#{ content_tag( :div, output.html_safe(), { :class =&gt; &#39;messages&#39; } ) }\n\n&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">html_safe</span>()
@@ -859,8 +863,8 @@ as such.</p>
           
           <p>As <a
 href="ApplicationHelper.html#method-i-apphelp_flash">#apphelp_flash</a>,
-but for use when you’re about to render content within this request, rather
-than redirect.</p>
+but for use when you&#39;re about to render content within this request,
+rather than redirect.</p>
           
 
           
@@ -923,14 +927,15 @@ which require no parameter substitution or default lookup values.</p>
 
         <div class="method-description">
           
-          <p>Equivalent of ‘h()’, but returns ‘-’ for nil or empty strings.</p>
+          <p>Equivalent of &#39;h()&#39;, but returns &#39;-&#39; for nil or empty
+strings.</p>
           
 
           
           <div class="method-source-code" id="apphelp_h-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_h</span>( <span class="ruby-identifier">value</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-string">'-'</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">value</span>.<span class="ruby-identifier">blank?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;-&#39;</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">value</span>.<span class="ruby-identifier">blank?</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">h</span>( <span class="ruby-identifier">value</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_h-source -->
@@ -993,15 +998,15 @@ as descriptive action link text.</p>
 
         <div class="method-description">
           
-          <p>Simple wrapper over ‘pluralize’ to return a string indicating a number of
-hours mathematically rounded to two decimal places.</p>
+          <p>Simple wrapper over &#39;pluralize&#39; to return a string indicating a
+number of hours mathematically rounded to two decimal places.</p>
           
 
           
           <div class="method-source-code" id="apphelp_hours-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_hours</span>( <span class="ruby-identifier">hours</span> )
-  <span class="ruby-identifier">pluralize</span>( <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ), <span class="ruby-string">'hour'</span> )
+  <span class="ruby-identifier">pluralize</span>( <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ), <span class="ruby-string">&#39;hour&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_hours-source -->
           
@@ -1029,14 +1034,14 @@ outer definition must be included externally. To define the row contents,
 pass an array of hashes. Each array entry corresponds to a cell in the row,
 built in order of appearance in the array. The hashes can contain optional
 property “header_align” to override the row alignment for that cell; the
-property’s value is used directly as a TH “align” value.</p>
+property&#39;s value is used directly as a TH “align” value.</p>
 
 <p>Each hash must include property “header_text” giving the heading text for
 that cell. The text is placed in the cell wrapped up in an HTML link which
 will re-fetch the list view with modified search parameters. To achieve
 this requires a second mandatory input parameter, which is the name of the
-method to use for the ‘index’ view - e.g. “users_path” or (for an example
-nested resource) “user_saved_reports_path”.</p>
+method to use for the &#39;index&#39; view - e.g. “users_path” or (for an
+example nested resource) “user_saved_reports_path”.</p>
 
 <p>A blank header cell is placed at the end of the row to appear above an
 actions column if the third optiona parameter is non-nil. If nil, no room
@@ -1048,11 +1053,11 @@ is made for an actions column.</p>
 
 <pre class="ruby"><span class="ruby-identifier">apphelp_list_header</span>(
   [
-    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'User name'</span> },
-    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Age'</span>, :<span class="ruby-identifier">header_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'center'</span> },
-    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'E-mail address'</span> }
+    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;User name&#39;</span> },
+    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Age&#39;</span>, :<span class="ruby-identifier">header_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;center&#39;</span> },
+    { :<span class="ruby-identifier">header_text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;E-mail address&#39;</span> }
   ],
-  <span class="ruby-string">'users_path'</span>
+  <span class="ruby-string">&#39;users_path&#39;</span>
 )
 </pre>
           
@@ -1069,7 +1074,7 @@ is made for an actions column.</p>
     <span class="ruby-identifier">sort_class</span> = <span class="ruby-keyword">nil</span>
 
     <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ] <span class="ruby-operator">==</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">to_s</span> )
-      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">'desc'</span> )
+      <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;desc&#39;</span> )
         <span class="ruby-identifier">sort_class</span> = <span class="ruby-string">&quot;sorted_column_desc&quot;</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">sort_class</span> = <span class="ruby-string">&quot;sorted_column_asc&quot;</span>
@@ -1130,7 +1135,7 @@ and given column index.</p>
 
 <p>E.g.:</p>
 
-<pre>apphelp_list_header_link( 'users_path', 'User name', 0 )</pre>
+<pre>apphelp_list_header_link( &#39;users_path&#39;, &#39;User name&#39;, 0 )</pre>
           
 
           
@@ -1141,20 +1146,20 @@ and given column index.</p>
   <span class="ruby-comment"># When generating the link, there is no point maintaining the</span>
   <span class="ruby-comment"># current page number - reset to 1. Do maintain the entries count.</span>
 
-  <span class="ruby-identifier">entries</span>   = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">entries</span>   = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">entries</span>   = <span class="ruby-node">&quot;&amp;entries=#{ params[ :entries ] }&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:entries</span> ]
 
-  <span class="ruby-comment"># For the direction, if the current sort index in 'params' matches</span>
+  <span class="ruby-comment"># For the direction, if the current sort index in &#39;params&#39; matches</span>
   <span class="ruby-comment"># the index for this column, the link should be used to toggle the</span>
-  <span class="ruby-comment"># sort order; if currently on 'asc', write 'desc' and vice versa.</span>
-  <span class="ruby-comment"># If building a link for a different column, default to 'asc'.</span>
+  <span class="ruby-comment"># sort order; if currently on &#39;asc&#39;, write &#39;desc&#39; and vice versa.</span>
+  <span class="ruby-comment"># If building a link for a different column, default to &#39;asc&#39;.</span>
 
-  <span class="ruby-identifier">direction</span> = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">direction</span> = <span class="ruby-string">&#39;&#39;</span>
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ] <span class="ruby-operator">==</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">'asc'</span> )
-    <span class="ruby-identifier">direction</span> = <span class="ruby-string">'&amp;direction=desc'</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sort</span> ] <span class="ruby-operator">==</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:direction</span> ] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;asc&#39;</span> )
+    <span class="ruby-identifier">direction</span> = <span class="ruby-string">&#39;&amp;direction=desc&#39;</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">direction</span> = <span class="ruby-string">'&amp;direction=asc'</span>
+    <span class="ruby-identifier">direction</span> = <span class="ruby-string">&#39;&amp;direction=asc&#39;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Get the base URL using the caller-supplied method and assemble the</span>
@@ -1170,7 +1175,7 @@ and given column index.</p>
       <span class="ruby-value">:search_range_end</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[ <span class="ruby-value">:search_range_end</span>   ],
     }
 
-    <span class="ruby-identifier">url</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&amp;'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">to_query</span>()
+    <span class="ruby-identifier">url</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&amp;&#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">to_query</span>()
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">text</span>, <span class="ruby-identifier">url</span> )
@@ -1201,7 +1206,7 @@ outer definition must be included externally. To define the row contents,
 pass an array of hashes. Each array entry corresponds to a cell in the row,
 built in order of appearance in the array. The hashes can contain optional
 property “value_align” to override the row alignment for that cell; the
-property’s value is used directly as a TD “align” value.</p>
+property&#39;s value is used directly as a TD “align” value.</p>
 
 <p>Each hash must include property “value_method”. This method will be invoked
 on the object given in the second function input parameter and must return
@@ -1211,22 +1216,23 @@ a call to “h()” automatically.</p>
 <p>The third input parameter is the name of a helper method which will be
 invoked with the current item as a parameter. It must return the names of
 actions permitted for that item, in an array. Actions will be placed in the
-final cell on the row as normal links. If the parameter is ‘nil’, no
-actions cell will be added onto the rows.</p>
+final cell on the row as normal links. If the parameter is &#39;nil&#39;,
+no actions cell will be added onto the rows.</p>
 
-<p>The fourth input parameter is optional. If present and ‘true’, buttons
-linking to auto-generated reports relevant for the resource at hand are
-added in the actions area. For example, a task would link to a report for
-hours on just that task; a user to a user report over all tasks; a project
-to all tasks in that project and so-on.</p>
+<p>The fourth input parameter is optional. If present and &#39;true&#39;,
+buttons linking to auto-generated reports relevant for the resource at hand
+are added in the actions area. For example, a task would link to a report
+for hours on just that task; a user to a user report over all tasks; a
+project to all tasks in that project and so-on.</p>
 
-<p>Since models can’t always generate what you want (e.g. they don’t have
-access to helpers, so creating values with associations’ “show” views
-linked to is difficult), you can specify property “value_helper”. This
-helper method will be called and passed the item. Its return value is used
-instead of the value method, which won’t be called and can be omitted if a
-helper is being used instead. HELPER TEXT IS <strong>NOT</strong> WRAPPED
-BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
+<p>Since models can&#39;t always generate what you want (e.g. they don&#39;t
+have access to helpers, so creating values with associations&#39; “show”
+views linked to is difficult), you can specify property “value_helper”.
+This helper method will be called and passed the item. Its return value is
+used instead of the value method, which won&#39;t be called and can be
+omitted if a helper is being used instead. HELPER TEXT IS
+<strong>NOT</strong> WRAPPED BY A CALL TO “h()” - value helpers MUST do
+this themselves.</p>
 
 <p>See also apphelp_list_header.</p>
 
@@ -1234,9 +1240,9 @@ BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
 
 <pre class="ruby"><span class="ruby-identifier">apphelp_list_row</span>(
   [
-    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'name'</span> },
-    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'age'</span>, :<span class="ruby-identifier">value_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'center'</span> },
-    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'email_as_link'</span> } <span class="ruby-comment"># Custom method in User model</span>
+    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;name&#39;</span> },
+    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;age&#39;</span>, :<span class="ruby-identifier">value_align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;center&#39;</span> },
+    { :<span class="ruby-identifier">value_method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;email_as_link&#39;</span> } <span class="ruby-comment"># Custom method in User model</span>
   ],
   <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>( :<span class="ruby-identifier">first</span> )
 )
@@ -1247,9 +1253,9 @@ BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
           <div class="method-source-code" id="apphelp_list_row-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 626</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_list_row</span>( <span class="ruby-identifier">structure</span>, <span class="ruby-identifier">item</span>, <span class="ruby-identifier">actions_method</span>, <span class="ruby-identifier">with_reports</span> = <span class="ruby-keyword">false</span> )
-  <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;        &lt;tr class=\&quot;#{ cycle( 'even', 'odd' ) }\&quot;&gt;\n&quot;</span>
+  <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;        &lt;tr class=\&quot;#{ cycle( &#39;even&#39;, &#39;odd&#39; ) }\&quot;&gt;\n&quot;</span>
 
-  <span class="ruby-comment"># It's assumed that admins can always modify things, but otherwise,</span>
+  <span class="ruby-comment"># It&#39;s assumed that admins can always modify things, but otherwise,</span>
   <span class="ruby-comment"># we will only allow in-place editors if the model instance can tell</span>
   <span class="ruby-comment"># us that editing is allowed by the current user.</span>
 
@@ -1314,14 +1320,14 @@ BY A CALL TO “h()” - value helpers MUST do this themselves.</p>
     <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">with_reports</span> )
       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">render</span>(
                         {
-                          <span class="ruby-value">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'shared/report_button'</span>,
+                          <span class="ruby-value">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;shared/report_button&#39;</span>,
                           <span class="ruby-value">:locals</span>  =<span class="ruby-operator">&gt;</span>
                           {
                             <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_user</span>,
                             <span class="ruby-value">:item</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">item</span>
                           }
                         }
-                      ).<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-string">'            '</span> )
+                      ).<span class="ruby-identifier">gsub</span>( <span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;            &#39;</span> )
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;/td&gt;\n&quot;</span>
@@ -1359,13 +1365,13 @@ field name as a symbol in the optional second parameter.</p>
           <div class="method-source-code" id="apphelp_object_list-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 444</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_object_list</span>( <span class="ruby-identifier">objects</span>, <span class="ruby-identifier">field</span> = <span class="ruby-value">:title</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-string">'None'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">blank?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;None&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">blank?</span> )
 
   <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">object</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">h</span>( <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">field</span> ) ), <span class="ruby-identifier">object</span> )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">join</span>( <span class="ruby-string">', '</span> ).<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">join</span>( <span class="ruby-string">&#39;, &#39;</span> ).<span class="ruby-identifier">html_safe</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_object_list-source -->
           
@@ -1398,8 +1404,8 @@ href="http://s">p]_</a>”, with the returned string marked HTML-safe, in the
 locale files; where [n] is a controller name, [p] a prefix string and [s] a
 suffix string. Pass the prefix string/symbol, suffix string/symbol, then
 optionally the controller (defaults to current request handling controller,
-or pass ‘nil’ for the same result) and optionally any token substitutions
-as a hash.</p>
+or pass &#39;nil&#39; for the same result) and optionally any token
+substitutions as a hash.</p>
           
 
           
@@ -1436,12 +1442,12 @@ as a hash.</p>
           
           <p>Return HTML suitable for an edit form, providing a grouped list of projects
 that can be assigned to something. The list is grouped by customer in
-default customer sort order, along with a ‘None’ entry for unassigned
-projects. Pass an ID for the select list, a name for the select list, and
-an ID to match within the list to have one of the entries selected (or omit
-for no pre-selected item). Pass an optional fourth parameter of “true” to
-include a “none” entry, else exclude it (exclusion is the default
-behaviour).</p>
+default customer sort order, along with a &#39;None&#39; entry for
+unassigned projects. Pass an ID for the select list, a name for the select
+list, and an ID to match within the list to have one of the entries
+selected (or omit for no pre-selected item). Pass an optional fourth
+parameter of “true” to include a “none” entry, else exclude it (exclusion
+is the default behaviour).</p>
           
 
           
@@ -1455,12 +1461,12 @@ behaviour).</p>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">include_none</span> )
     <span class="ruby-identifier">dummy_project</span>           = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">dummy_project</span>.<span class="ruby-identifier">id</span>        = <span class="ruby-string">''</span>
-    <span class="ruby-identifier">dummy_project</span>.<span class="ruby-identifier">title</span>     = <span class="ruby-string">'None'</span>
+    <span class="ruby-identifier">dummy_project</span>.<span class="ruby-identifier">id</span>        = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">dummy_project</span>.<span class="ruby-identifier">title</span>     = <span class="ruby-string">&#39;None&#39;</span>
 
     <span class="ruby-identifier">dummy_customer</span>          = <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">id</span>       = <span class="ruby-string">''</span>
-    <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">title</span>    = <span class="ruby-string">'None'</span>
+    <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">id</span>       = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">title</span>    = <span class="ruby-string">&#39;None&#39;</span>
     <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">projects</span> = [ <span class="ruby-identifier">dummy_project</span> ]
 
     <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">dummy_customer</span> )
@@ -1469,30 +1475,30 @@ behaviour).</p>
   <span class="ruby-comment"># Create a dummy customer for the unassigned projects.</span>
 
   <span class="ruby-identifier">dummy_customer</span>          = <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">title</span>    = <span class="ruby-string">'No assigned customer'</span>
+  <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">title</span>    = <span class="ruby-string">&#39;No assigned customer&#39;</span>
   <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">projects</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">unassigned</span>
 
   <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">dummy_customer</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">dummy_customer</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">empty?</span> )
 
   <span class="ruby-comment"># Find all customers and loop through, adding those that have at least</span>
-  <span class="ruby-comment"># one assigned project to the 'customers' array.</span>
+  <span class="ruby-comment"># one assigned project to the &#39;customers&#39; array.</span>
 
   <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">customer</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">customer</span> ) <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">customer</span>.<span class="ruby-identifier">projects</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">zero?</span> )
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">return</span> <span class="ruby-string">'There are no active projects.'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">empty?</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;There are no active projects.&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">customers</span>.<span class="ruby-identifier">empty?</span> )
 
   <span class="ruby-identifier">data</span> = <span class="ruby-node">&quot;&lt;select id=\&quot;#{ select_id }\&quot; name=\&quot;#{ select_name }\&quot;&gt;&quot;</span>
   <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">option_groups_from_collection_for_select</span>(
     <span class="ruby-identifier">customers</span>, <span class="ruby-comment"># Use customers for groups</span>
-    <span class="ruby-value">:projects</span>, <span class="ruby-comment"># A customer's &quot;projects&quot; method returns its project list</span>
+    <span class="ruby-value">:projects</span>, <span class="ruby-comment"># A customer&#39;s &quot;projects&quot; method returns its project list</span>
     <span class="ruby-value">:title</span>,    <span class="ruby-comment"># Use the customer title for the group labels</span>
-    <span class="ruby-value">:id</span>,       <span class="ruby-comment"># A project's &quot;id&quot; method returns the value for an option tag</span>
-    <span class="ruby-value">:title</span>,    <span class="ruby-comment"># A project's &quot;title&quot; method is used for the option contents</span>
+    <span class="ruby-value">:id</span>,       <span class="ruby-comment"># A project&#39;s &quot;id&quot; method returns the value for an option tag</span>
+    <span class="ruby-value">:title</span>,    <span class="ruby-comment"># A project&#39;s &quot;title&quot; method is used for the option contents</span>
     <span class="ruby-identifier">match</span>      <span class="ruby-comment"># Match this ID for the selected option item</span>
   )
-  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/select&gt;'</span> ).<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;/select&gt;&#39;</span> ).<span class="ruby-identifier">html_safe</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_project_selector-source -->
           
@@ -1587,8 +1593,8 @@ but returns a representation of a range of two dates, inclusive.</p>
           
           <p>As <a
 href="ApplicationHelper.html#method-i-apphelp_collection_select">#apphelp_collection_select</a>,
-but runs ‘select’ rather than ‘collection_select’. The parameters are
-adjusted accordingly.</p>
+but runs &#39;select&#39; rather than &#39;collection_select&#39;. The
+parameters are adjusted accordingly.</p>
           
 
           
@@ -1623,7 +1629,8 @@ adjusted accordingly.</p>
 
         <div class="method-description">
           
-          <p>Return ‘sign in’ or ‘you are signed in’ text indicating current status.</p>
+          <p>Return &#39;sign in&#39; or &#39;you are signed in&#39; text indicating
+current status.</p>
           
 
           
@@ -1632,14 +1639,14 @@ adjusted accordingly.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_sign_or_signed_in</span>
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span> )
     <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">empty?</span> )
-      <span class="ruby-identifier">signinfo</span> = <span class="ruby-string">'Creating new account'</span>
+      <span class="ruby-identifier">signinfo</span> = <span class="ruby-string">&#39;Creating new account&#39;</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">signinfo</span> = <span class="ruby-node">&quot;#{ h( @current_user.name ) } &amp;ndash; #{ link_to( 'sign out', signout_path() ) } &quot;</span>
+      <span class="ruby-identifier">signinfo</span> = <span class="ruby-node">&quot;#{ h( @current_user.name ) } &amp;ndash; #{ link_to( &#39;sign out&#39;, signout_path() ) } &quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-comment"># The Application Controller forces redirection to the sign-in page</span>
-    <span class="ruby-comment"># if the user isn't signed in.</span>
-    <span class="ruby-identifier">signinfo</span> = <span class="ruby-node">&quot;Please #{ link_to( 'sign in', signin_path() ) }&quot;</span>
+    <span class="ruby-comment"># if the user isn&#39;t signed in.</span>
+    <span class="ruby-identifier">signinfo</span> = <span class="ruby-node">&quot;Please #{ link_to( &#39;sign in&#39;, signin_path() ) }&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">signinfo</span>.<span class="ruby-identifier">html_safe</span>()
@@ -1665,14 +1672,14 @@ adjusted accordingly.</p>
 
         <div class="method-description">
           
-          <p>Return an internationalised version of the web site’s name.</p>
+          <p>Return an internationalised version of the web site&#39;s name.</p>
           
 
           
           <div class="method-source-code" id="apphelp_site_name-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_site_name</span>
-  <span class="ruby-identifier">t</span>( <span class="ruby-value">:'uk.org.pond.trackrecord.site_name'</span> )
+  <span class="ruby-identifier">t</span>( <span class="ruby-value">:&#39;uk.org.pond.trackrecord.site_name&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_site_name-source -->
           
@@ -1704,21 +1711,21 @@ adjusted accordingly.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_slug</span>
   <span class="ruby-identifier">action</span> = <span class="ruby-identifier">h</span>( <span class="ruby-identifier">action_name</span> )
   <span class="ruby-identifier">ctname</span> = <span class="ruby-identifier">h</span>( <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">controller_name</span> )
-  <span class="ruby-identifier">sep</span>    = <span class="ruby-string">'&amp;nbsp;&amp;raquo;&amp;nbsp;'</span>.<span class="ruby-identifier">html_safe</span>()
-  <span class="ruby-identifier">slug</span>   = <span class="ruby-identifier">link_to</span>( <span class="ruby-string">'Home'</span>, <span class="ruby-identifier">home_path</span>() ) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sep</span>
+  <span class="ruby-identifier">sep</span>    = <span class="ruby-string">&#39;&amp;nbsp;&amp;raquo;&amp;nbsp;&#39;</span>.<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-identifier">slug</span>   = <span class="ruby-identifier">link_to</span>( <span class="ruby-string">&#39;Home&#39;</span>, <span class="ruby-identifier">home_path</span>() ) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sep</span>
 
-  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'users'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'home'</span> )
-    <span class="ruby-identifier">slug</span> = <span class="ruby-string">'Home'</span>
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'sessions'</span> <span class="ruby-keyword">and</span> ( <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'new'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'create'</span> ) )
-    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'Sign in'</span>
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'index'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">'list'</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'timesheet_force_commits'</span> )
+  <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;users&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;home&#39;</span> )
+    <span class="ruby-identifier">slug</span> = <span class="ruby-string">&#39;Home&#39;</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;sessions&#39;</span> <span class="ruby-keyword">and</span> ( <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;new&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;create&#39;</span> ) )
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Sign in&#39;</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;index&#39;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;list&#39;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;timesheet_force_commits&#39;</span> )
     <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">apphelp_heading</span>()
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'reports'</span> )
-    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-string">'Reports'</span>, <span class="ruby-identifier">new_user_saved_report_path</span>( <span class="ruby-ivar">@current_user</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;reports&#39;</span> )
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-string">&#39;Reports&#39;</span>, <span class="ruby-identifier">new_user_saved_report_path</span>( <span class="ruby-ivar">@current_user</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
             <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span>
-            <span class="ruby-string">'Show report'</span>
-  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">'saved_reports'</span> )
-    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-string">'Reports'</span>, <span class="ruby-identifier">new_user_saved_report_path</span>( <span class="ruby-ivar">@current_user</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
+            <span class="ruby-string">&#39;Show report&#39;</span>
+  <span class="ruby-keyword">elsif</span> ( <span class="ruby-identifier">ctname</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;saved_reports&#39;</span> )
+    <span class="ruby-identifier">slug</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link_to</span>( <span class="ruby-string">&#39;Reports&#39;</span>, <span class="ruby-identifier">new_user_saved_report_path</span>( <span class="ruby-ivar">@current_user</span> ) ) <span class="ruby-operator">&lt;&lt;</span>
             <span class="ruby-identifier">sep</span> <span class="ruby-operator">&lt;&lt;</span>
             <span class="ruby-identifier">apphelp_heading</span>()
   <span class="ruby-keyword">else</span>
@@ -1751,7 +1758,7 @@ adjusted accordingly.</p>
         <div class="method-description">
           
           <p>Pass a string representation of worked hours or a duration and a string to
-show instead of “0.0”, if that’s the duration/worked hours value.
+show instead of “0.0”, if that&#39;s the duration/worked hours value.
 Optionally, pass in a string to use instead of an empty string, should the
 duration/worked hours value be empty itself.</p>
           
@@ -1761,7 +1768,7 @@ duration/worked hours value be empty itself.</p>
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 249</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">alt_str</span>, <span class="ruby-identifier">empty_str</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">empty_str</span> ) <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">empty_str</span>.<span class="ruby-identifier">blank?</span> )
-  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">'0.0'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">alt_str</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">hours</span> )
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;0.0&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">alt_str</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">hours</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_string_hours-source -->
           
@@ -1784,16 +1791,16 @@ duration/worked hours value be empty itself.</p>
 
         <div class="method-description">
           
-          <p>Terse hours - precision 2, don’t show “.0”, no string suffix. If you want a
-blank string instead of “0”, pass “true” in the second parameter.</p>
+          <p>Terse hours - precision 2, don&#39;t show “.0”, no string suffix. If you
+want a blank string instead of “0”, pass “true” in the second parameter.</p>
           
 
           
           <div class="method-source-code" id="apphelp_terse_hours-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 238</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apphelp_terse_hours</span>( <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">zero_is_blank</span> = <span class="ruby-keyword">false</span> )
-  <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'0'</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">'.'</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-string">''</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">'0'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">zero_is_blank</span> )
+  <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">hours</span>.<span class="ruby-identifier">precision</span>( <span class="ruby-value">2</span> ).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&#39;0&#39;</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&#39;0&#39;</span> ).<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&#39;.&#39;</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">hours</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;0&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">zero_is_blank</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">hours</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- apphelp_terse_hours-source -->

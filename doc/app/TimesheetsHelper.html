@@ -338,10 +338,10 @@ controllers/timesheets_controller.rb for more.</p>
             <pre><span class="ruby-comment"># File app/helpers/timesheets_helper.rb, line 241</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">timesheethelp_actions</span>( <span class="ruby-identifier">timesheet</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
-    <span class="ruby-keyword">return</span> [ <span class="ruby-string">'edit'</span>, <span class="ruby-string">'delete'</span>, <span class="ruby-string">'show'</span> ]
+    <span class="ruby-keyword">return</span> [ <span class="ruby-string">&#39;edit&#39;</span>, <span class="ruby-string">&#39;delete&#39;</span>, <span class="ruby-string">&#39;show&#39;</span> ]
   <span class="ruby-keyword">elsif</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">manager?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> )
-    <span class="ruby-keyword">return</span> [ <span class="ruby-string">'show'</span>         ] <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
-    <span class="ruby-keyword">return</span> [ <span class="ruby-string">'edit'</span>, <span class="ruby-string">'show'</span> ]
+    <span class="ruby-keyword">return</span> [ <span class="ruby-string">&#39;show&#39;</span>         ] <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
+    <span class="ruby-keyword">return</span> [ <span class="ruby-string">&#39;edit&#39;</span>, <span class="ruby-string">&#39;show&#39;</span> ]
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">return</span> []
   <span class="ruby-keyword">end</span>
@@ -367,7 +367,7 @@ controllers/timesheets_controller.rb for more.</p>
 
         <div class="method-description">
           
-          <p>Return the timesheet description, or ‘None’ if it is empty.</p>
+          <p>Return the timesheet description, or &#39;None&#39; if it is empty.</p>
           
 
           
@@ -375,7 +375,7 @@ controllers/timesheets_controller.rb for more.</p>
             <pre><span class="ruby-comment"># File app/helpers/timesheets_helper.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">timesheethelp_always_visible_description</span>( <span class="ruby-identifier">timesheet</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">description</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">description</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-identifier">des</span> = <span class="ruby-string">'None'</span>
+    <span class="ruby-identifier">des</span> = <span class="ruby-string">&#39;None&#39;</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">des</span> = <span class="ruby-identifier">h</span>( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">description</span> )
   <span class="ruby-keyword">end</span>
@@ -405,8 +405,8 @@ controllers/timesheets_controller.rb for more.</p>
           
           <p>Output HTML suitable as a label to show whether or not the given timesheet
 is committed or otherwise. The second parameter lets you override the given
-timesheet and force the generation of a committed (pass ‘true’) or not
-committed (pass ‘false’) label.</p>
+timesheet and force the generation of a committed (pass &#39;true&#39;) or
+not committed (pass &#39;false&#39;) label.</p>
           
 
           
@@ -415,8 +415,8 @@ committed (pass ‘false’) label.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">timesheethelp_commit_label</span>( <span class="ruby-identifier">timesheet</span>, <span class="ruby-identifier">committed</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-identifier">committed</span> = <span class="ruby-ivar">@timesheet</span>.<span class="ruby-identifier">committed</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">committed</span>.<span class="ruby-identifier">nil?</span> )
   <span class="ruby-keyword">return</span> (
-    <span class="ruby-identifier">committed</span> <span class="ruby-operator">?</span> <span class="ruby-string">'&lt;span class=&quot;timesheet_committed&quot;&gt;Committed&lt;/span&gt;'</span> <span class="ruby-operator">:</span>
-                <span class="ruby-string">'&lt;span class=&quot;timesheet_not_committed&quot;&gt;Not Committed&lt;/span&gt;'</span>
+    <span class="ruby-identifier">committed</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&lt;span class=&quot;timesheet_committed&quot;&gt;Committed&lt;/span&gt;&#39;</span> <span class="ruby-operator">:</span>
+                <span class="ruby-string">&#39;&lt;span class=&quot;timesheet_not_committed&quot;&gt;Not Committed&lt;/span&gt;&#39;</span>
   ).<span class="ruby-identifier">html_safe</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- timesheethelp_commit_label-source -->
@@ -440,7 +440,7 @@ committed (pass ‘false’) label.</p>
 
         <div class="method-description">
           
-          <p>List helper - formatted ‘committed at’ date for the given timesheet</p>
+          <p>List helper - formatted &#39;committed at&#39; date for the given timesheet</p>
           
 
           
@@ -450,7 +450,7 @@ committed (pass ‘false’) label.</p>
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_date</span>( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed_at</span> )
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-string">'Not committed'</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;Not committed&#39;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- timesheethelp_committed_at-source -->
@@ -481,7 +481,7 @@ committed (pass ‘false’) label.</p>
           <div class="method-source-code" id="timesheethelp_hours-source">
             <pre><span class="ruby-comment"># File app/helpers/timesheets_helper.rb, line 235</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">timesheethelp_hours</span>( <span class="ruby-identifier">timesheet</span> )
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">total_sum</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">'-'</span>, <span class="ruby-string">'-'</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_string_hours</span>( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">total_sum</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39;-&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
           </div><!-- timesheethelp_hours-source -->
           
@@ -535,8 +535,8 @@ committed (pass ‘false’) label.</p>
         <div class="method-description">
           
           <p>Return HTML suitable for inclusion in the form passed in the first
-parameter (i.e. the ‘f’ in “form for … do |f|” ), based on the task array
-given in the second parameter, which provides:</p>
+parameter (i.e. the &#39;f&#39; in “form for … do |f|” ), based on the task
+array given in the second parameter, which provides:</p>
 <ul><li>
 <p>A &lt;select&gt; tag with options listing all tasks not already used by
 this timesheet.</p>
@@ -551,13 +551,13 @@ stored in the system.</p>
             <pre><span class="ruby-comment"># File app/helpers/timesheets_helper.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">timesheethelp_task_selection</span>( <span class="ruby-identifier">form</span>, <span class="ruby-identifier">tasks</span> )
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-keyword">return</span> <span class="ruby-string">''</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">else</span>
     <span class="ruby-constant">Task</span>.<span class="ruby-identifier">sort_by_augmented_title</span>( <span class="ruby-identifier">tasks</span> )
 
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">apphelp_collection_select</span>(
       <span class="ruby-identifier">form</span>,
-      <span class="ruby-string">'task_ids'</span>,
+      <span class="ruby-string">&#39;task_ids&#39;</span>,
       <span class="ruby-identifier">tasks</span>,
       <span class="ruby-value">:id</span>,
       <span class="ruby-value">:augmented_title</span>
@@ -624,7 +624,7 @@ are excluded from the list.</p>
 
         <div class="method-description">
           
-          <p>List helper - formatted ‘updated at’ date for the given timesheet</p>
+          <p>List helper - formatted &#39;updated at&#39; date for the given timesheet</p>
           
 
           
@@ -655,8 +655,8 @@ are excluded from the list.</p>
         <div class="method-description">
           
           <p>Return HTML suitable for inclusion in the form passed in the first
-parameter (i.e. the ‘f’ in “form for … do |f|” ), based on the timesheet
-given in the second parameter, which provides:</p>
+parameter (i.e. the &#39;f&#39; in “form for … do |f|” ), based on the
+timesheet given in the second parameter, which provides:</p>
 <ul><li>
 <p>A &lt;select&gt; tag listing available week numbers, with dates, which may
 be assigned to the timesheet.</p>
@@ -673,7 +673,7 @@ have been shown, but never mind…!</p>
   <span class="ruby-identifier">weeks</span> = <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">unused_weeks</span>();
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">weeks</span>.<span class="ruby-identifier">empty?</span> )
-    <span class="ruby-keyword">return</span> <span class="ruby-string">''</span>.<span class="ruby-identifier">html_safe</span>()
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span>()
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">select</span>(
       <span class="ruby-value">:week_number</span>,
@@ -744,11 +744,11 @@ timesheets or create new timesheets as necessary.</p>
   <span class="ruby-comment"># Now run through the collated data to build the chart, working on the</span>
   <span class="ruby-comment"># basis of the sorted keys in the hash for each row and a maximum of 5</span>
   <span class="ruby-comment"># weeks in any of those rows. Blank entries are put at the start of a</span>
-  <span class="ruby-comment"># row to make up 5 columns in case there aren't that many weeks in that</span>
+  <span class="ruby-comment"># row to make up 5 columns in case there aren&#39;t that many weeks in that</span>
   <span class="ruby-comment"># particular month.</span>
 
   <span class="ruby-identifier">keys</span>      = <span class="ruby-identifier">months</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>
-  <span class="ruby-identifier">row_class</span> = <span class="ruby-string">'even'</span>
+  <span class="ruby-identifier">row_class</span> = <span class="ruby-string">&#39;even&#39;</span>
   <span class="ruby-identifier">output</span>    = <span class="ruby-string">&quot;&lt;table class=\&quot;timesheet_chart\&quot;&gt;\n&quot;</span>
   <span class="ruby-identifier">output</span>   <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  &lt;tr&gt;&lt;th&gt;Month&lt;/th&gt;&lt;th colspan=\&quot;5\&quot;&gt;Week start date and number&lt;/th&gt;&lt;/tr&gt;\n&quot;</span>
 
@@ -759,8 +759,8 @@ timesheets or create new timesheets as necessary.</p>
     <span class="ruby-identifier">heading</span> = <span class="ruby-node">&quot;#{ Date::MONTHNAMES[ row_start.month ] } &quot;</span><span class="ruby-operator">&lt;&lt;</span>
               <span class="ruby-node">&quot;#{ row_start.year }&quot;</span>
 
-    <span class="ruby-identifier">row_class</span> = ( <span class="ruby-identifier">row_class</span> <span class="ruby-operator">==</span> <span class="ruby-string">'even'</span> ) <span class="ruby-operator">?</span> <span class="ruby-string">'odd'</span> <span class="ruby-operator">:</span> <span class="ruby-string">'even'</span>
-    <span class="ruby-identifier">row_class</span> = <span class="ruby-identifier">row_class</span> <span class="ruby-operator">+</span> <span class="ruby-string">' last'</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">last</span> )
+    <span class="ruby-identifier">row_class</span> = ( <span class="ruby-identifier">row_class</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;even&#39;</span> ) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;odd&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;even&#39;</span>
+    <span class="ruby-identifier">row_class</span> = <span class="ruby-identifier">row_class</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39; last&#39;</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">last</span> )
 
     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  &lt;tr class=\&quot;#{ row_class }\&quot;&gt;\n&quot;</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;    &lt;td class=\&quot;timesheet_chart_month\&quot;&gt;#{ heading }&lt;/td&gt;\n&quot;</span>
@@ -773,17 +773,17 @@ timesheets or create new timesheets as necessary.</p>
         <span class="ruby-identifier">week</span>[ <span class="ruby-value">:week</span> ]
       )
 
-      <span class="ruby-identifier">classnm</span> = <span class="ruby-string">'centred'</span>
+      <span class="ruby-identifier">classnm</span> = <span class="ruby-string">&#39;centred&#39;</span>
       <span class="ruby-identifier">content</span> = <span class="ruby-node">&quot;#{ week[ :start_date ].day }&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
                 <span class="ruby-node">&quot; #{ Date::ABBR_MONTHNAMES[ week[ :start_date ].month ] }&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
                 <span class="ruby-node">&quot; (#{ week[ :week ] })&quot;</span>
 
       <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">timesheet</span> )
         <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">timesheet</span>.<span class="ruby-identifier">committed</span> )
-          <span class="ruby-identifier">classnm</span> = <span class="ruby-string">'centred committed'</span>
+          <span class="ruby-identifier">classnm</span> = <span class="ruby-string">&#39;centred committed&#39;</span>
           <span class="ruby-identifier">content</span> = <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">content</span>.<span class="ruby-identifier">html_safe</span>(), <span class="ruby-identifier">timesheet_path</span>( <span class="ruby-identifier">timesheet</span> ) )
         <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">classnm</span> = <span class="ruby-string">'centred not_committed'</span>
+          <span class="ruby-identifier">classnm</span> = <span class="ruby-string">&#39;centred not_committed&#39;</span>
           <span class="ruby-identifier">content</span> = <span class="ruby-identifier">link_to</span>( <span class="ruby-identifier">content</span>.<span class="ruby-identifier">html_safe</span>(), <span class="ruby-identifier">edit_timesheet_path</span>( <span class="ruby-identifier">timesheet</span> ) )
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">else</span>
@@ -804,7 +804,7 @@ timesheets or create new timesheets as necessary.</p>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  &lt;/tr&gt;\n&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'&lt;/table&gt;'</span> ).<span class="ruby-identifier">html_safe</span>()
+  <span class="ruby-keyword">return</span> ( <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&lt;/table&gt;&#39;</span> ).<span class="ruby-identifier">html_safe</span>()
 <span class="ruby-keyword">end</span></pre>
           </div><!-- timesheethelp_year_chart-source -->
           

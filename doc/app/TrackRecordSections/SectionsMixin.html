@@ -389,11 +389,11 @@ for deterministic ordering.</p>
         <div class="method-description">
           
           <p>Iterate over the tasks provided in the constructor, in the same order as
-provided in the construtor. The caller’s block is invoked with parameters
-of the task, a <a href="Section.html">Section</a>, a flag indicating that
-the task started a new <a href="Section.html">Section</a> if true, a <a
-href="Group.html">Group</a> and a flag indicating that the task started a
-new <a href="Group.html">Group</a> if true.</p>
+provided in the construtor. The caller&#39;s block is invoked with
+parameters of the task, a <a href="Section.html">Section</a>, a flag
+indicating that the task started a new <a href="Section.html">Section</a>
+if true, a <a href="Group.html">Group</a> and a flag indicating that the
+task started a new <a href="Group.html">Group</a> if true.</p>
           
 
           
@@ -462,8 +462,8 @@ href="../Task.html">Task</a> instances that  will be used for group and
 section processing. This must already be in an order that makes sense for
 such processing, e.g. sorted by project, customer, task title.</p>
 
-<p>Ideally, pass an ActiveRecord::Relation instance that’ll return a set of
-appropriately sorted objects for most efficient operation.</p>
+<p>Ideally, pass an ActiveRecord::Relation instance that&#39;ll return a set
+of appropriately sorted objects for most efficient operation.</p>
 
 <p>In the optional section parameter, pass a Class which will be instantiated
 instead of <a href="Section.html">TrackRecordSections::Section</a> whenever
@@ -485,9 +485,9 @@ as, and must call module method “initialize_section()”.</p>
   <span class="ruby-comment"># We run through the tasks in the array order. Whether or</span>
   <span class="ruby-comment"># not a task needs a new Section object instance, because</span>
   <span class="ruby-comment"># it represents a hithertoo unencountered project/customer</span>
-  <span class="ruby-comment"># combination, tells us that this task's row will sit at</span>
+  <span class="ruby-comment"># combination, tells us that this task&#39;s row will sit at</span>
   <span class="ruby-comment"># the top of a new section in e.g. a generated report. Keep</span>
-  <span class="ruby-comment"># track of that flag in another task-keyed hash as it'll be</span>
+  <span class="ruby-comment"># track of that flag in another task-keyed hash as it&#39;ll be</span>
   <span class="ruby-comment"># very useful for section-aware generators or similar views.</span>
   <span class="ruby-comment">#</span>
   <span class="ruby-comment"># Groups are also handled in this loop, creating a set of</span>
@@ -514,8 +514,8 @@ as, and must call module method “initialize_section()”.</p>
   <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">task</span> <span class="ruby-operator">|</span>
     <span class="ruby-identifier">task_id_str</span> = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
 
-    <span class="ruby-identifier">project_id</span>  = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:id</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">'-'</span>
-    <span class="ruby-identifier">customer_id</span> = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:customer</span> ).<span class="ruby-identifier">try</span>( <span class="ruby-value">:id</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">'-'</span>
+    <span class="ruby-identifier">project_id</span>  = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:id</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">&#39;-&#39;</span>
+    <span class="ruby-identifier">customer_id</span> = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">try</span>( <span class="ruby-value">:customer</span> ).<span class="ruby-identifier">try</span>( <span class="ruby-value">:id</span> ) <span class="ruby-operator">||</span> <span class="ruby-string">&#39;-&#39;</span>
     <span class="ruby-identifier">section_id</span>  = <span class="ruby-node">&quot;#{ customer_id }_#{ project_id }&quot;</span>
     <span class="ruby-identifier">found</span>       = <span class="ruby-ivar">@sections</span>[ <span class="ruby-identifier">section_id</span> ]
 
@@ -691,8 +691,8 @@ task, specified as a task ID in string form.</p>
 
         <div class="method-description">
           
-          <p>Returns ‘true’ if the given task, specified as a task ID in string form,
-starts a new <a href="Group.html">Group</a>.</p>
+          <p>Returns &#39;true&#39; if the given task, specified as a task ID in string
+form, starts a new <a href="Group.html">Group</a>.</p>
           
 
           
@@ -722,8 +722,8 @@ starts a new <a href="Group.html">Group</a>.</p>
 
         <div class="method-description">
           
-          <p>Returns ‘true’ if the given task, specified as a task ID in string form,
-starts a new <a href="Section.html">Section</a>.</p>
+          <p>Returns &#39;true&#39; if the given task, specified as a task ID in string
+form, starts a new <a href="Section.html">Section</a>.</p>
           
 
           
