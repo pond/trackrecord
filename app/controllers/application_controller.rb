@@ -49,6 +49,18 @@ protected
     render( { :text => 'Action not permitted', :status => 403 } )
   end
 
+  # Bypass the cache. Some browsers are very aggressive in their
+  # cache behaviour, but this can break things like the sign in page
+  # and JavaScript detection if JS has been toggled. For actions
+  # which are known to be sensitive in this manner, a controller
+  # can invoke this method in a before_filter.
+
+  def appctrl_do_not_cache
+    response.headers[ 'Pragma'        ] = 'no-cache'
+    response.headers[ 'Cache-Control' ] = 'no-cache, no-store, max-age=0, must-revalidate'
+    response.headers[ 'Expires'       ] = 'Fri, 01 Jan 1990 00:00:00 GMT'
+  end
+
   #############################################################################
   # ACTION ASSISTANCE
   #############################################################################
@@ -287,7 +299,7 @@ protected
     a = appctrl_date_from_params( :search_range_start ) || default_start
     b = appctrl_date_from_params( :search_range_end   ) || default_end
 
-    a, b = b, a if ( a > b ) 
+    a, b = b, a if ( a > b )
 
     return [ a, b ]
   end
