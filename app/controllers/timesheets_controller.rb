@@ -9,6 +9,8 @@
 
 class TimesheetsController < ApplicationController
 
+  before_filter :appctrl_do_not_cache, :only => [ :new, :create, :edit, :update ]
+
   # YUI tree component for task selection
 
   dynamic_actions = { :only => [ :edit, :update ] }
@@ -418,6 +420,10 @@ private
         appctrl_patch_params_from_js( :timesheet )
         ids = params[ :timesheet ][ :task_ids ]
 
+        # http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select-using-an-embedde
+        #
+        ids.reject! { |id| id.blank? }
+
         if ( ids.blank? )
           errors.push( "No tasks selected - first choose one or more tasks from the list, then use the 'Add' button" )
         else
@@ -426,6 +432,7 @@ private
               task = Task.find_by_id( id )
               timesheet.add_row( task )
             rescue => error
+              log_error( error )
               errors.push( "Adding task '#{ task.title }': #{ error.message }" )
             end
           end
@@ -494,6 +501,7 @@ private
     return errors
 
   rescue => error # Don't use 'ensure', because early exits elsewhere may fail then.
+    log_error( error )
     errors.push( "Timesheet: #{ error }" )
     return errors
 
@@ -541,7 +549,8 @@ private
 
     return timesheet
 
-  rescue
+  rescue => error
+    log_error( error )
     return nil
 
   end
@@ -557,5 +566,26 @@ private
     @timesheet.week_number = timesheet_hash[ :week_number ]
     @timesheet.description = timesheet_hash[ :description ]
     @timesheet.committed   = timesheet_hash[ :committed   ]
+  end
+
+  # Log an error. Pass the exception.
+  #
+  def log_error( e )
+    logger.error( '' )
+    logger.error( '*** Caught exception:' )
+    logger.error( '' )
+    logger.error( "    #{ e.inspect } " )
+    logger.error( '' )
+    logger.error( '*** Backtrace:' )
+    logger.error( '' )
+
+    if ( e.respond_to?( :backtrace ) && e.backtrace.present? )
+      logger.error( e.backtrace.join( "\n" ) )
+    elsif ( Kernel.respond_to?( :caller ) )
+      logger.error( Kernel.caller.join( "\n" ) )
+    else
+      logger.error( '<Backtrace not available>' )
+    end
+    logger.error( '' )
   end
 end
