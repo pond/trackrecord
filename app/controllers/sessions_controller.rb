@@ -12,6 +12,8 @@ class SessionsController < ApplicationController
 
   skip_before_filter( :appctrl_confirm_user, :only => [ :new, :create ] )
 
+  before_filter :appctrl_do_not_cache, :only => [ :new, :create ]
+
   # With the Rails CSRF fix/bodge (sigh), unverified requests - such as that
   # issued by the OpenID provider - cause the session to be reset. Since data
   # about JavaScript support in the sign-in form is stored there, this would
@@ -66,6 +68,7 @@ class SessionsController < ApplicationController
 
     if ( not @signin.identity_url.nil? and @signin.identity_url.empty? )
       if @signin.valid?
+        session[ :javascript ] = params[ :javascript ]
         process_password_sign_in_with( @signin )
       else
         render :new
@@ -73,8 +76,8 @@ class SessionsController < ApplicationController
 
     else
       unless ( @signin.identity_url.nil? )
-        @signin.identity_url = User.rationalise_id( @signin.identity_url )
         session[ :javascript ] = params[ :javascript ]
+        @signin.identity_url = User.rationalise_id( @signin.identity_url )
       end
 
       open_id_authentication( @signin.identity_url )
