@@ -82,6 +82,8 @@
     
     <li><a href="#method-i-appctrl_destroy">#appctrl_destroy</a>
     
+    <li><a href="#method-i-appctrl_do_not_cache">#appctrl_do_not_cache</a>
+    
     <li><a href="#method-i-appctrl_edit">#appctrl_edit</a>
     
     <li><a href="#method-i-appctrl_index_assist">#appctrl_index_assist</a>
@@ -339,7 +341,7 @@ administrators can do this. Pass the model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_admin_destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_admin_destroy</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-identifier">appctrl_destroy</span>( <span class="ruby-identifier">model</span> )
@@ -371,7 +373,7 @@ Restricted users can&#39;t do this. Pass the model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_create-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 80</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_create</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">model</span>.<span class="ruby-identifier">downcase</span> ], <span class="ruby-ivar">@current_user</span> )
@@ -418,7 +420,7 @@ exception occurs trying to parse the date, the function returns
 
           
           <div class="method-source-code" id="appctrl_date_from_params-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 269</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-identifier">key</span> )
   <span class="ruby-keyword">unless</span> ( <span class="ruby-identifier">params</span>[ <span class="ruby-identifier">key</span> ].<span class="ruby-identifier">blank?</span> )
     <span class="ruby-keyword">begin</span>
@@ -459,12 +461,12 @@ is invalid.</p>
 
           
           <div class="method-source-code" id="appctrl_dates_from_search-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 286</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 298</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_dates_from_search</span>( <span class="ruby-identifier">default_start</span>, <span class="ruby-identifier">default_end</span> )
   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_start</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_start</span>
   <span class="ruby-identifier">b</span> = <span class="ruby-identifier">appctrl_date_from_params</span>( <span class="ruby-value">:search_range_end</span>   ) <span class="ruby-operator">||</span> <span class="ruby-identifier">default_end</span>
 
-  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-identifier">b</span>, <span class="ruby-identifier">a</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">a</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b</span> ) 
+  <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> = <span class="ruby-identifier">b</span>, <span class="ruby-identifier">a</span> <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">a</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b</span> )
 
   <span class="ruby-keyword">return</span> [ <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> ]
 <span class="ruby-keyword">end</span></pre>
@@ -497,7 +499,7 @@ model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_delete-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 135</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">admin?</span> )
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
@@ -532,7 +534,7 @@ instead). Optionally pass the path to redirect to upon success.</p>
 
           
           <div class="method-source-code" id="appctrl_destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 152</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_destroy</span>( <span class="ruby-identifier">model</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">model</span>.<span class="ruby-identifier">destroy</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
@@ -566,6 +568,42 @@ instead). Optionally pass the path to redirect to upon success.</p>
       </div><!-- appctrl_destroy-method -->
 
     
+      <div id="method-i-appctrl_do_not_cache" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appctrl_do_not_cache</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Bypass the cache. Some browsers are very aggressive in their cache
+behaviour, but this can break things like the sign in page and JavaScript
+detection if JS has been toggled. For actions which are known to be
+sensitive in this manner, a controller can invoke this method in a
+before_filter.</p>
+          
+
+          
+          <div class="method-source-code" id="appctrl_do_not_cache-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_do_not_cache</span>
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[ <span class="ruby-string">&#39;Pragma&#39;</span>        ] = <span class="ruby-string">&#39;no-cache&#39;</span>
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[ <span class="ruby-string">&#39;Cache-Control&#39;</span> ] = <span class="ruby-string">&#39;no-cache, no-store, max-age=0, must-revalidate&#39;</span>
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[ <span class="ruby-string">&#39;Expires&#39;</span>       ] = <span class="ruby-string">&#39;Fri, 01 Jan 1990 00:00:00 GMT&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- appctrl_do_not_cache-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- appctrl_do_not_cache-method -->
+
+    
       <div id="method-i-appctrl_edit" class="method-detail ">
         
         <div class="method-heading">
@@ -585,7 +623,7 @@ name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 103</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_edit</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
@@ -622,7 +660,7 @@ method has been given, for sorting purposes.</p>
 
           
           <div class="method-source-code" id="appctrl_index_assist-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 184</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_index_assist</span>( <span class="ruby-identifier">model</span> )
 
   <span class="ruby-comment"># Set up some default sort and pagination data.</span>
@@ -731,7 +769,7 @@ model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_new-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 72</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_new</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword">nil</span>, <span class="ruby-ivar">@current_user</span> )
@@ -798,7 +836,7 @@ reference.</p>
 
           
           <div class="method-source-code" id="appctrl_patch_params_from_js-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 358</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 370</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_patch_params_from_js</span>( <span class="ruby-identifier">sym</span>, <span class="ruby-identifier">name</span> = <span class="ruby-value">:task_ids</span> )
   <span class="ruby-identifier">task_ids</span> = (<span class="ruby-identifier">params</span>[ <span class="ruby-identifier">sym</span> ] <span class="ruby-operator">||</span> {} )[ <span class="ruby-identifier">name</span> ] <span class="ruby-operator">||</span> []
 
@@ -852,7 +890,7 @@ an explicit &#39;search_cancel&#39; params key has a value.</p>
 
           
           <div class="method-source-code" id="appctrl_search_range_sql-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 316</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 328</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_search_range_sql</span>( <span class="ruby-identifier">model</span>, <span class="ruby-identifier">field</span> = <span class="ruby-keyword">nil</span> )
   <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">range_start</span> = <span class="ruby-identifier">range_end</span> = <span class="ruby-keyword">nil</span>
 
@@ -912,7 +950,7 @@ to proceed.</p>
 
           
           <div class="method-source-code" id="appctrl_show-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_show</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">is_permitted_for?</span>( <span class="ruby-ivar">@current_user</span> ) )
@@ -944,7 +982,7 @@ Restricted users can&#39;t do this. Pass the model name as a string.</p>
 
           
           <div class="method-source-code" id="appctrl_update-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 111</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appctrl_update</span>( <span class="ruby-identifier">model</span> )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">if</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">restricted?</span> )
 

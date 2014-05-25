@@ -1,4 +1,4 @@
-= Welcome to TrackRecord v2.30
+= Welcome to TrackRecord v2.31
 
 TrackRecord is a timesheet system written for the Ruby On Rails web
 development framework. More information, including a link to the most recent
@@ -34,9 +34,10 @@ up already for Ruby On Rails. If not, then I strong recommend you begin with
 
 * http://rvm.io
 
-...and use this to establish a Ruby 1.9 installation. TrackRecord assumes
-Ruby 1.9 patch level 392 or later. It is not tested on Ruby 2.0 and will not
-work on Ruby 1.8.
+...and use this to establish a Ruby 2.1.x installation. TrackRecord assumes
+Ruby 1.9 patch level 392 or later, but will work on Ruby 2.0 or 2.1 also;
+edit file "Gemfile" to specify an older version or a different 2.1.x patch
+release if need be. TrackRecord will not work on Ruby 1.8.
 
 
 === Installation for new users

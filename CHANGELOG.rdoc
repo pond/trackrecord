@@ -2,6 +2,35 @@
 
 
 
+== Version 2.31, 2014-05-25
+
+
+
+This version has been updated to include Ruby 2.1.2 in the Gemfile, which
+is a pretty big change for a minor version number :-) but it'll run fine
+on 1.9.3 or later, as with previous releases. Edit the line near the top
+of "Gemfile" to specify your preferred Ruby version if need be.
+
+Please see "README.rdoc" for information on installation and upgrades.
+If updating, run bundle install" after updating your sources then migrate
+your data with "rake db:migrate"; Rails 3.2.18 is required by this update
+as it include important security fixes.
+
+Otherwise, this is a minor bug fix release, fixing the following:
+
+- JavaScript presence detection failed when using username/password
+  sign-in.
+
+- The no-JavaScript version of the timesheet editor's "Add tasks to
+  timesheet" feature didn't work.
+
+Additional test coverage is included to catch the faults including new
+use of Poltergeist/PhantomJS to run automated integrated tests over parts
+of the user interface that use JavaScript. As ever, there is far more
+work to do here, but it's a good start.
+
+
+
 == Version 2.30, 2014-04-04
 
 

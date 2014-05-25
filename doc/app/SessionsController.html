@@ -330,7 +330,7 @@ completed a sign-in attempt, successfully or otherwise.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
 
   <span class="ruby-ivar">@signin</span> = <span class="ruby-constant">SignIn</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:sign_in</span> ] )
@@ -355,6 +355,7 @@ completed a sign-in attempt, successfully or otherwise.</p>
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-keyword">not</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">empty?</span> )
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">valid?</span>
+      <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:javascript</span> ]
       <span class="ruby-identifier">process_password_sign_in_with</span>( <span class="ruby-ivar">@signin</span> )
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
@@ -362,8 +363,8 @@ completed a sign-in attempt, successfully or otherwise.</p>
 
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span>.<span class="ruby-identifier">nil?</span> )
-      <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> )
       <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ] = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:javascript</span> ]
+      <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">rationalise_id</span>( <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> )
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">open_id_authentication</span>( <span class="ruby-ivar">@signin</span>.<span class="ruby-identifier">identity_url</span> )
@@ -404,7 +405,7 @@ during the sign-up process.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">reset_session</span>()
   <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">apphelp_flash</span>( <span class="ruby-value">:notice</span>, <span class="ruby-value">:signed_out</span> )
@@ -447,7 +448,7 @@ everything clean and means that any real attempted attacks would fail.</p>
 
           
           <div class="method-source-code" id="handle_unverified_request-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_unverified_request</span>
   <span class="ruby-identifier">js</span> = <span class="ruby-identifier">session</span>[ <span class="ruby-value">:javascript</span> ]
   <span class="ruby-identifier">reset_session</span>()
@@ -479,7 +480,7 @@ everything clean and means that any real attempted attacks would fail.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@signin</span> = <span class="ruby-constant">SignIn</span>.<span class="ruby-identifier">new</span>
 
@@ -521,7 +522,7 @@ everything clean and means that any real attempted attacks would fail.</p>
 
           
           <div class="method-source-code" id="open_id_authentication-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 104</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">open_id_authentication</span>( <span class="ruby-identifier">identity_url_for_test_mode</span> )
 
   <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;test&quot;</span> )

@@ -44,9 +44,9 @@ source 'http://rubygems.org'
 
 # The following line requires Bundler v1.2 or later; see:
 # http://gembundler.com/v1.2/whats_new.html
-ruby '2.1.0'
+ruby '2.1.2'
 
-gem 'rails', '3.2.17'
+gem 'rails', '3.2.18'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -83,6 +83,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # https://github.com/timcharper/calendar_date_select (original, but not Rails 3 compatible)
 #       http://github.com/paneq/calendar_date_select (Rails 3 fork)
+#       https://github.com/pond/calendar_date_select (my fork to ensure survival)
 # https://github.com/openid/ruby-openid
 # https://github.com/grosser/open_id_authentication
 # https://github.com/mislav/will_paginate/
@@ -91,7 +92,7 @@ gem 'bcrypt', '~> 3.1.7'
 # https://github.com/pond/safe_in_place_editing
 # https://github.com/fnando/browser
 
-gem 'calendar_date_select',   '~> 1.16', :git => 'https://github.com/paneq/calendar_date_select.git'
+gem 'calendar_date_select',   '~> 1.16', :git => 'https://github.com/pond/calendar_date_select.git'
 gem 'ruby-openid',            '~> 2.5'     
 gem 'open_id_authentication', '~> 1.2'
 gem 'will_paginate',          '~> 3.0'
@@ -103,14 +104,23 @@ gem 'browser', '~> 0.4'
 # For testing:
 #
 # https://github.com/jnicklas/capybara
+# https://github.com/teampoltergeist/poltergeist
+# https://github.com/bmabey/database_cleaner
 # https://github.com/macournoyer/thin/
 #
 # The 'thin' server is specified as the stock Rails 3 server caused lots
 # of problems in Safari with blank pages; looks like Safari's fault, but
 # that doesn't help solve the problem! Thin is faster anyway.
+#
+# IMPORTANT: For Poltergeist, you'll need PhantomJS installed. See the
+# Poltergeist documentation at GitHub for details:
+#
+#   https://github.com/teampoltergeist/poltergeist
 
 group :test do
   gem 'capybara', '~> 2.2'
+  gem 'poltergeist', '~> 1.5'
+  gem 'database_cleaner', '~> 1.2'
 end
 
 group :test, :development do

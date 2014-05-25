@@ -250,11 +250,3 @@ private
     refute User.find( u.id ).has_validated_password?
   end
 end
-
-# So need to add various tests for changing my own account password
-# Then add various tests for changing other account passwords
-# I also need to manually test manager views and normal user views
-# on all of this as I have never actually run them!
-
-
-

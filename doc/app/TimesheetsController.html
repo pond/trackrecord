@@ -338,7 +338,7 @@ determine the appropriate values.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 108</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@timesheet</span>             = <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">new</span>()
   <span class="ruby-ivar">@timesheet</span>.<span class="ruby-identifier">year</span>        = <span class="ruby-identifier">params</span>[ <span class="ruby-value">:year</span> ]
@@ -392,7 +392,7 @@ this.</p>
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 233</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 235</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
   <span class="ruby-identifier">appctrl_delete</span>( <span class="ruby-string">&#39;Timesheet&#39;</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -422,7 +422,7 @@ this.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 237</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 239</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">appctrl_admin_destroy</span>( <span class="ruby-constant">Timesheet</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -453,7 +453,7 @@ automatically. Rows and work packets are included in the editing form.</p>
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 139</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-ivar">@timesheet</span> = <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@timesheet</span>.<span class="ruby-identifier">can_be_modified_by?</span>( <span class="ruby-ivar">@current_user</span> )
@@ -489,7 +489,7 @@ automatically. Rows and work packets are included in the editing form.</p>
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
 
   <span class="ruby-comment"># Set up the column data; see the index helper functions in</span>
@@ -577,7 +577,7 @@ automatically. Rows and work packets are included in the editing form.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 89</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@years</span> = <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">allowed_range</span>()
 
@@ -616,7 +616,7 @@ automatically. Rows and work packets are included in the editing form.</p>
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 222</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 224</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@timesheet</span> = <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">appctrl_not_permitted</span>() <span class="ruby-keyword">unless</span> ( <span class="ruby-ivar">@timesheet</span> <span class="ruby-keyword">and</span> ( <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">privileged?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@timesheet</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">id</span> ) )
@@ -650,7 +650,7 @@ automatically. Rows and work packets are included in the editing form.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 151</span>
+            <pre><span class="ruby-comment"># File app/controllers/timesheets_controller.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
 
   <span class="ruby-ivar">@timesheet</span> = <span class="ruby-constant">Timesheet</span>.<span class="ruby-identifier">find</span>( <span class="ruby-identifier">params</span>[ <span class="ruby-value">:id</span> ] )

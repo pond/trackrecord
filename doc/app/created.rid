@@ -1,5 +1,5 @@
-Wed, 16 Apr 2014 21:34:36 +1200
-app/controllers/application_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
+Sun, 25 May 2014 20:51:06 +1200
+app/controllers/application_controller.rb	Wed, 14 May 2014 22:59:06 +1200
 app/controllers/audits_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/charts_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/control_panels_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
@@ -14,12 +14,12 @@ app/controllers/saved_reports_by_project_controller.rb	Fri, 04 Apr 2014 17:50:02
 app/controllers/saved_reports_by_task_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/saved_reports_by_user_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/saved_reports_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
-app/controllers/sessions_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
+app/controllers/sessions_controller.rb	Wed, 14 May 2014 22:59:04 +1200
 app/controllers/task_imports_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/tasks_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/timesheet_force_commits_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/timesheet_rows_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
-app/controllers/timesheets_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
+app/controllers/timesheets_controller.rb	Wed, 14 May 2014 22:59:00 +1200
 app/controllers/trees_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/users_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
 app/controllers/work_packets_controller.rb	Fri, 04 Apr 2014 17:50:02 +1300
@@ -59,6 +59,6 @@ lib/report_generators/track_record_report_generator_uk_org_pond_csv.rb	Fri, 04 A
 lib/track_record_report.rb	Fri, 04 Apr 2014 17:50:03 +1300
 lib/track_record_sections.rb	Fri, 04 Apr 2014 17:50:03 +1300
 lib/yui_tree/yui_tree.rb	Fri, 04 Apr 2014 17:50:03 +1300
-README.rdoc	Wed, 16 Apr 2014 21:34:30 +1200
-CHANGELOG.rdoc	Wed, 16 Apr 2014 21:23:37 +1200
+README.rdoc	Sun, 25 May 2014 20:45:52 +1200
+CHANGELOG.rdoc	Sun, 25 May 2014 20:45:52 +1200
 doc/README_FOR_APP.rdoc	Fri, 04 Apr 2014 17:50:03 +1300

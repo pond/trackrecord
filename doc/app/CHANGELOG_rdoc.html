@@ -235,6 +235,31 @@
   
 <h1 id="label-Change+log">Change log</h1>
 
+<h2 id="label-Version+2.31%2C+2014-05-25">Version 2.31, 2014-05-25</h2>
+
+<p>This version has been updated to include Ruby 2.1.2 in the Gemfile, which
+is a pretty big change for a minor version number :-) but it&#39;ll run
+fine on 1.9.3 or later, as with previous releases. Edit the line near the
+top of “Gemfile” to specify your preferred Ruby version if need be.</p>
+
+<p>Please see “<a href="README_rdoc.html">README.rdoc</a>” for information on
+installation and upgrades. If updating, run bundle install“ after updating
+your sources then migrate your data with ”rake db:migrate“; Rails 3.2.18 is
+required by this update as it include important security fixes.</p>
+
+<p>Otherwise, this is a minor bug fix release, fixing the following:</p>
+<ul><li>
+<p>JavaScript presence detection failed when using username/password sign-in.</p>
+</li><li>
+<p>The no-JavaScript version of the timesheet editor&#39;s “Add tasks to
+timesheet” feature didn&#39;t work.</p>
+</li></ul>
+
+<p>Additional test coverage is included to catch the faults including new use
+of Poltergeist/PhantomJS to run automated integrated tests over parts of
+the user interface that use JavaScript. As ever, there is far more work to
+do here, but it&#39;s a good start.</p>
+
 <h2 id="label-Version+2.30%2C+2014-04-04">Version 2.30, 2014-04-04</h2>
 
 <p>Please see “<a href="README_rdoc.html">README.rdoc</a>” for information on

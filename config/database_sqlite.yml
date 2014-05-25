@@ -6,13 +6,13 @@ dbinfo: &dbinfo
   pool: 5
   timeout: 5000
 
-development:
-  <<: *dbinfo
-  database: db/trackrecord-devel.sqlite3
-
 production:
   <<: *dbinfo
   database: db/trackrecord.sqlite3
+
+development:
+  <<: *dbinfo
+  database: db/trackrecord-devel.sqlite3
 
 # Warning: The database defined as 'test' will be erased and re-generated
 # from your development database when you run 'rake'. Do not set this to

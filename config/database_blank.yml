@@ -7,13 +7,13 @@ dbinfo: &dbinfo
   username: username-goes-here
   password: password-goes-here
 
-development:
-  <<: *dbinfo
-  database: trackrecord-devel
-
 production:
   <<: *dbinfo
   database: trackrecord
+
+development:
+  <<: *dbinfo
+  database: trackrecord-devel
 
 # Warning: The database defined as 'test' will be erased and re-generated
 # from your development database when you run 'rake'. Do not set this to
