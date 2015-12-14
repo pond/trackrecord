@@ -3,6 +3,7 @@
 
 dbinfo: &dbinfo
   adapter: postgresql
+  encoding: utf8
   host: /path/to/database/
   username: username-goes-here
   password: password-goes-here
