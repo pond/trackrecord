@@ -311,7 +311,7 @@ module ApplicationHelper
       { :start => apphelp_date_plain( range.min ), :finish => apphelp_date_plain( range.max ) }
     )
   end
-    
+
   # For an object with a 'title', 'code' and 'description' attribute, make
   # a link to that object showing its title as the link text, with a link
   # title attribute consisting of the code and description (where either,
