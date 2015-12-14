@@ -8,4 +8,6 @@ Trackrecord::Application.config.secret_token = 'see above'
 
 # When you've set the key above, you can delete or comment out this
 # "raise" line below.
-raise "Before you can start TrackRecord, you must set a key in config/initializers/secret_token.rb and keep it secret!"
+unless Rails.env.test?
+  raise "Before you can start TrackRecord, you must set a key in config/initializers/secret_token.rb and keep it secret!"
+end
