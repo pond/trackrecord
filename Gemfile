@@ -44,7 +44,7 @@ source 'http://rubygems.org'
 
 # The following line requires Bundler v1.2 or later; see:
 # http://gembundler.com/v1.2/whats_new.html
-ruby '2.1.2'
+ruby '2.1.6'
 
 gem 'rails', '3.2.18'
 
