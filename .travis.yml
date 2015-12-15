@@ -14,4 +14,4 @@ addons:
   postgresql: '9.4'
 
 script:
-  - TZ=Europe/London DATABASE_USER=postgres bundle exec rake db:drop db:create db:migrate test --backtrace
+  - TZ=Europe/London DATABASE_USER=postgres RAILS_ENV=test bundle exec rake db:drop db:create db:migrate test --backtrace
