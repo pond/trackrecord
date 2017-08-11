@@ -1,8 +1,27 @@
-= Change log
+# Change log
 
 
 
-== Version 2.31, 2014-05-25
+## Version 3.0.0, 2017-08-11
+
+
+
+After an extremely long update hiatus, TrackRecord is finally brought up
+to date at least in terms of its infrastructure - Rails 5, Ruby support
+up to 2.4.x and all updated gems throughout.
+
+- Rails 5, Ruby 2.4.1 validation, full bundle update and legacy removal.
+
+- PostgreSQL 9.6 used for testing, but there's little in the way of
+  special or heavy SQL that should prevent other engines or older
+  PostgreSQL versions from working fine.
+
+- Changed all `.rdoc` files to Markdown, `.md`. If reading any entries in
+  the log below, bear that in mind where filename references are given.
+
+
+
+## Version 2.31, 2014-05-25
 
 
 
@@ -31,7 +50,7 @@ work to do here, but it's a good start.
 
 
 
-== Version 2.30, 2014-04-04
+## Version 2.30, 2014-04-04
 
 
 
@@ -95,7 +114,7 @@ security breaches when running a server, please spend some time Googling
 around the issue so that you can have confidence your provided service.
 
 
-=== Other notable changes
+### Other notable changes
 
 - The sign-in/sign-up process has been cleaned up with some dead code
   removal, bug fixes in e-mail sending, lots of improvements in User
@@ -113,7 +132,7 @@ around the issue so that you can have confidence your provided service.
 
 
 
-== Version 2.26, 2014-03-20
+## Version 2.26, 2014-03-20
 
 
 
@@ -176,7 +195,7 @@ Other maintenance related changes:
 
 
 
-== Version 2.25, 2013-11-29
+## Version 2.25, 2013-11-29
 
 
 
@@ -190,7 +209,7 @@ upgraded. Rails 3.2.15 is also required.
 
 
 
-== Version 2.24, 2013-10-16
+## Version 2.24, 2013-10-16
 
 
 
@@ -225,7 +244,7 @@ There are also various efficiency improvements and areas of code tidying.
 
 
 
-== Version 2.23, 2013-09-09
+## Version 2.23, 2013-09-09
 
 
 
@@ -241,7 +260,7 @@ Version 2.23 fixes the following bugs that were found in v2.22:
 
 
 
-== Version 2.22, 2013-09-05
+## Version 2.22, 2013-09-05
 
 
 
@@ -255,7 +274,7 @@ Version 2.22 fixes the following bugs that were found in v2.21:
 
 
 
-== Version 2.21, 2013-08-19
+## Version 2.21, 2013-08-19
 
 
 
@@ -274,7 +293,7 @@ Version 2.21 fixes the following bugs that were found in v2.20:
 
 
 
-== Version 2.20, 2013-08-16
+## Version 2.20, 2013-08-16
 
 
 
@@ -294,7 +313,7 @@ Version 2.20 fixes the following bugs that were found in v2.11:
 - The report generator was often slower than v2.04, which it was supposed
   to improve upon. The new report generator is much faster than both in
   all circumstances.
-  
+
   The TrackRecordReport API HAS NECESSARILY CHANGED AS A RESULT - just
   after I'd said it would be stable for report generators...! Hopefully
   the v2.10/v2.11 series were sufficiently short lived that nobody wrote
@@ -318,7 +337,7 @@ described above.
 
 
 
-== Version 2.11, 2013-08-05
+## Version 2.11, 2013-08-05
 
 
 
@@ -369,7 +388,7 @@ installing and upgrading easier. There are no other changes or fixes.
 
 
 
-== Version 2.10, 2013-08-02
+## Version 2.10, 2013-08-02
 
 
 
@@ -412,7 +431,7 @@ Version 2.10 fixes the following bugs that were found in v2.04:
 - Moved to using the Rails 3 asset pipeline and fixed up issue related to
   this in various plugins. This is a relatively significant change to the
   internal organisation of the software and is the main reason for the
-  TrackRecord version number jump.  
+  TrackRecord version number jump.
 
 There are the following enhancements:
 
@@ -444,7 +463,7 @@ There are the following enhancements:
   less inside Ruby code.
 
 
-=== Deploying in a subdirectory
+### Deploying in a subdirectory
 
 Rails asset precompilation is somewhat broken in that it doesn't understand
 applications deployed into subdirectories. If you are not using Heroku, you
@@ -467,7 +486,7 @@ the time of writing) Rails 4 is out so a Rails 3 fix is even more unlikely.
 
 
 
-== Version 2.04, 2013-07-11
+## Version 2.04, 2013-07-11
 
 
 
@@ -496,7 +515,7 @@ There are the following enhancements:
 
 
 
-== Version 2.02 and 2.03, 2013-04-25
+## Version 2.02 and 2.03, 2013-04-25
 
 
 
@@ -528,7 +547,7 @@ deployment, rather than with test data only:
 
 
 
-== Version 2.01, 2013-04-09
+## Version 2.01, 2013-04-09
 
 
 
@@ -552,11 +571,11 @@ This release fixes the following bugs that were found in v2.00:
 
 
 
-== Version 2.00, 2013-03-27
+## Version 2.00, 2013-03-27
 
 
 
-=== Important
+### Important
 
 TrackRecord now requires Rails 3.2. It does not run on Rails 2. As a result,
 the Ruby version requirements are increased too; you need version 1.9.3 at
@@ -572,7 +591,7 @@ used. Internet Explorer is untested and not officially supported at any
 version, though it may work in practice.
 
 
-=== Upgrading
+### Upgrading
 
 To upgrade, first do a full database backup in case anything goes wrong!
 Next, unpack TrackRecord somewhere new - don't copy it on top of an existing
@@ -614,7 +633,7 @@ using bundles is very rarely a pain-free process and the issues will usually
 be to do with your computing environment rather than TrackRecord's own code.
 
 
-=== Changes from version 1.54
+### Changes from version 1.54
 
 See the v1.x branch for more v1.x changes.
 
