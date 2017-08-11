@@ -1,50 +1,7 @@
-# GEM / BUNDLE INSTALLATION
-# =========================
-#
-# You'll need the "bundler" gem installed in your current gem set for the
-# version of Ruby you're using with TrackRecord. You also need Bundler version
-# 1.6 or later. Do this to see what version you have:
-#
-#   bundle --version
-#
-# If the "bundle" command is not found then the "bundler" gem is probably not
-# installed, so try "gem install bundler". If the version is too old, try
-# "gem update bundler". Depending on your OS and Ruby setup, you might need
-# superuser privilege for these commands; e.g. do "sudo gem install bundler"
-# on Unix-like operating systems such as Linux or OS X.
-#
-# To install all of the gem for TrackRecord, including those only for testing
-# or development, use:
-#
-#   bundle install
-#
-# Since test gems require Nokogiri and other relatively heavy gems which
-# can be cumbersome to install, it (and "thin", a web server used for
-# development) are kept in groups. You can easily avoid bundling them for
-# production with:
-#
-#   bundle install --without development test
-#
-# ...noting that *THIS PERSISTS* on subsequent "bundle install" commands.
-# List such persisted settings with:
-#
-#   bundle config
-#
-# ...and undo the "--without" using something like:
-#
-#   bundle config --delete without
-#
-# For more information about Bundler "remembered settings" and how to manage
-# them, see:
-#
-# * http://bundler.io/v1.6/man/bundle-install.1.html#REMEMBERED-OPTIONS
-# *  http://stackoverflow.com/questions/9765007/how-do-you-undo-bundle-install-without
+# See "README.md" for installation details and information on ways in which
+# you may need to modify this file.
 
 source 'http://rubygems.org'
-
-# The following line requires Bundler v1.2 or later; see:
-# http://gembundler.com/v1.2/whats_new.html
-ruby '2.1.6'
 
 gem 'rails', '3.2.18'
 
@@ -53,6 +10,8 @@ gem 'rails', '3.2.18'
 
 gem 'pg', '>=0.17.1' # 0.16 or later is essential if using PostgreSQL with TrackRecord as it means PostgreSQL 0.8.4 or later are present; for more on this or using other databases, see doc/README_FOR_APP.
 gem 'json'
+
+gem 'rails4_upgrade', github: 'alindeman/rails4_upgrade'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -76,7 +35,7 @@ gem 'prototype-rails'
 
 # For a Rails' has_secure_password (or equivalent - see the User model
 # implementation for details):
-# 
+#
 # https://github.com/codahale/bcrypt-ruby/tree/master
 
 gem 'bcrypt', '~> 3.1.7'
@@ -93,7 +52,7 @@ gem 'bcrypt', '~> 3.1.7'
 # https://github.com/fnando/browser
 
 gem 'calendar_date_select',   '~> 1.16', :git => 'https://github.com/pond/calendar_date_select.git'
-gem 'ruby-openid',            '~> 2.5'     
+gem 'ruby-openid',            '~> 2.5'
 gem 'open_id_authentication', '~> 1.2'
 gem 'will_paginate',          '~> 3.0'
 gem 'audited-activerecord',   '~> 3.0'
@@ -133,7 +92,7 @@ end
 #
 # https://github.com/topfunky/gruff
 #
-# gem 'gruff'            
+# gem 'gruff'
 # gem 'rmagick', :require => false
 
 # https://github.com/tenderlove/rails_autolink
