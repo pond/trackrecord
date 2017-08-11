@@ -10,6 +10,9 @@ Trackrecord::Application.configure do
   # a value of '/trackrecord'.
   config.relative_url_root = ''
 
+  # Loading files from 'lib'
+  config.eager_load = true
+
   # Code is not reloaded between requests
   config.cache_classes = true
 

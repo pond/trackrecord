@@ -16,13 +16,6 @@ class WorkPacket < ActiveRecord::Base
   belongs_to( :timesheet_row )
   scope :significant, -> { where( 'worked_hours > 0.0' ) }
 
-  # Security controls.
-
-  attr_accessible(
-    :worked_hours,
-    :description
-  )
-
   # Make sure the data is sane.
 
   validates_presence_of( :timesheet_row_id )

@@ -11,8 +11,8 @@ class CustomersController < ApplicationController
 
   # In place editing and security
 
-  safe_in_place_edit_for( :customer, :title )
-  safe_in_place_edit_for( :customer, :code  )
+  in_place_edit_for( :customer, :title )
+  in_place_edit_for( :customer, :code  )
 
   before_filter( :can_be_modified?, :only => [ :edit, :update, :set_customer_title, :set_customer_code ] )
 
@@ -114,7 +114,7 @@ class CustomersController < ApplicationController
   # Create a Customer (via ApplicationController.appctrl_create).
   #
   def create
-    appctrl_create( 'Customer' )
+    appctrl_create( 'Customer', customer_params() )
   end
 
   # Update the customer details. We may need to update associated projects
@@ -131,7 +131,7 @@ class CustomersController < ApplicationController
         update_projects = ! params[ :update_projects ].nil?
 
         @record.update_with_side_effects!(
-          params[ :customer ],
+          customer_params(),
           update_projects,
           update_tasks
         )
@@ -193,6 +193,24 @@ class CustomersController < ApplicationController
   end
 
 private
+
+  # Rails 4+ Strong Parameters, replacing in-model "attr_accessible".
+  #
+  def customer_params
+    params.require( :customer ).permit(
+      :active,
+      :title,
+      :code,
+      :description,
+      :projects_attributes => [
+        :customer_id,
+        :active,
+        :title,
+        :code,
+        :description
+      ]
+    )
+  end
 
   # before_filter action - can the item in the params hash be modified by
   # the current user?

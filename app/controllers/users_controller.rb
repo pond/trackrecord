@@ -23,8 +23,8 @@ class UsersController < ApplicationController
 
   uses_prototype( :only => :index )
 
-  safe_in_place_edit_for( :user, :name )
-  safe_in_place_edit_for( :user, :code )
+  in_place_edit_for( :user, :name )
+  in_place_edit_for( :user, :code )
 
   # YUI tree component for task selection
 
@@ -297,7 +297,7 @@ private
       # control panel. Should that go wrong, the transaction for the control
       # panel will roll back, followed by the transaction for the user.
 
-      @user.attributes = params[ :user ]
+      @user.attributes = sanitised_params()
 
       # Only assign task IDs if the user is privileged (managers, admins).
 
@@ -349,14 +349,9 @@ private
         # Now update the control panel within the user transaction.
 
         ControlPanel.transaction do
-          @user.control_panel.attributes = params[ :control_panel ]
-
-          # Annoying glitch - if the user empties the task list for the
-          # control panel, the above code does NOT empty the corresponding
-          # model property. Instead the missing hash contents are taken to
-          # mean 'no change'.
-
-          @user.control_panel.tasks = [] if ( params[ :control_panel ].nil? or params[ :control_panel ][ :task_ids ].nil? )
+          @user.control_panel.task_ids    = params[ :control_panel ][ :task_ids    ] || []
+          @user.control_panel.project_id  = params[ :control_panel ][ :project_id  ]
+          @user.control_panel.customer_id = params[ :control_panel ][ :customer_id ]
 
           # As with the user, remove inactive tasks, then save.
 
@@ -414,5 +409,24 @@ private
   #
   def set_simple_password_suggestion()
     @suggestion = @current_user.admin? ? SecureRandom.hex( 5 ) : nil
+  end
+
+private
+
+  # Rails 4+ Strong Parameters, replacing in-model "attr_accessible". The
+  # User create/update code is complex so uses this in an unusual way and
+  # only one particular touchpoint; in other places, "params[ :user ]" is
+  # addressed (when safe) directly (for specific other key/value pairs).
+  #
+  def sanitised_params
+    params.require( :user ).permit(
+      :identity_url,
+      :name,
+      :email,
+      :code,
+      :active,
+      :password_digest,
+      :must_reset_password
+    )
   end
 end

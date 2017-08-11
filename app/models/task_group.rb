@@ -35,9 +35,8 @@ class TaskGroup < Rangeable
   def self.inactive; where( :active => false ); end
 
   # Derived classes must state their associations. None are set up
-  # in the base class. They should also restrict mass assignment to
-  # attributes (attr_protected or attr_accessible) and set up any
-  # required acts_as_audited settings.
+  # in the base class. They must also set up any required
+  # acts_as_audited settings.
 
   # Make sure the data is sane.
 

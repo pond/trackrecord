@@ -3,8 +3,8 @@ Trackrecord::Application.routes.draw do
   # Map root to the User account home page. The "root" mapping is so that
   # "root_url" exists, since the open_id_authentication plugin requires it.
 
-  match '/' => 'users#home'
-  match '/' => 'users#home', :as => :home
+  get '/' => 'users#home'
+  get '/' => 'users#home', :as => :home
 
   # Mapping for the OpenID login system. The signin and signout
   # entries are for more readable paths in views; they're just
@@ -14,12 +14,12 @@ Trackrecord::Application.routes.draw do
 
   resource :session
 
-  match '/signin'  => 'sessions#new',     :as => :signin
-  match '/signout' => 'sessions#destroy', :as => :signout
+  get '/signin'  => 'sessions#new',     :as => :signin
+  get '/signout' => 'sessions#destroy', :as => :signout
 
   # Allow in-progress account signup to be cancelled
 
-  match '/users/cancel/:id' => 'users#cancel', :as => :user_cancel
+  get '/users/cancel/:id' => 'users#cancel', :as => :user_cancel
 
   # Get common named routes for our resources. Don't be confused by the rather
   # esoteric use of Ruby block syntax here - this is just defining some nested
@@ -75,6 +75,6 @@ Trackrecord::Application.routes.draw do
 
   # Finally, the normal default rules at lowest priority
 
-  match '/:controller/:action/:id' => '#index'
-  match '/:controller/:action/:id.:format' => '#index'
+  get '/:controller/:action/:id' => '#index'
+  get '/:controller/:action/:id.:format' => '#index'
 end

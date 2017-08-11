@@ -12,13 +12,15 @@ class User < Rangeable
 
   require 'bcrypt'
 
-  audited( :except => [
-    :lock_version,
-    :updated_at,
-    :created_at,
-    :id,
-    :last_committed
-  ] )
+  audited( {
+    :except => [
+      :lock_version,
+      :updated_at,
+      :created_at,
+      :id,
+      :last_committed
+    ]
+  } )
 
   DEFAULT_SORT_COLUMN    = 'name'
   DEFAULT_SORT_DIRECTION = 'ASC'
@@ -26,7 +28,7 @@ class User < Rangeable
 
   USED_RANGE_COLUMN      = 'created_at' # For Rangeable base class
 
-  default_scope( { :order => DEFAULT_SORT_ORDER } )
+  default_scope( -> { order( DEFAULT_SORT_ORDER ) } )
 
   USER_TYPE_ADMIN        = 'Admin'
   USER_TYPE_MANAGER      = 'Manager'
@@ -49,14 +51,6 @@ class User < Rangeable
   has_many( :saved_reports, :dependent => :destroy )
 
   has_and_belongs_to_many( :tasks )
-
-  attr_protected(
-    :user_type,
-    :last_committed,
-    :control_panel_id,
-    :timesheet_ids,
-    :task_ids
-  )
 
   # Attach a ControlPanel object to this User whenever one is created.
 
@@ -139,10 +133,10 @@ class User < Rangeable
   #
   # We only look at password and password confirmation if the digest is nil,
   # indicating no current password.
-  # 
+  #
   # In that case, if both are blank, do nothing; else validate password and
   # that it matches confirmation.
-  # 
+  #
   # Before saving, same conditions apply; set digest only if digest is nil,
   # but password is not.
 
@@ -162,15 +156,15 @@ class User < Rangeable
   #
   # We only look at old password, new & new confirmation if digest is non-nil,
   # indicating a current password that might need changing.
-  # 
+  #
   # In this case, if new password or new confirmation are not blank, then they
   # must match, new password must be valid, old password must be correct.
-  # 
+  #
   # If old password is not blank but new & confirmation are, then this is an
   # attempt to clear the existing password; old must match. A catch here - what
   # if the user is changing to a blank password (removing it) but also has set
   # no identity URL? The custom validator we use checks that too.
-  # 
+  #
   # If all are blank, no change.
 
   validates(
@@ -268,11 +262,11 @@ class User < Rangeable
   # for the user. Always use "has_validated_password?" for that instead.
   #
   def plaintext_password
-    
+
     # Do this rather than "password || new_password" so that an empty
     # string in "password" is *not* returned in favour of something more
     # significant in "new_password".
-    
+
     password.blank? ? new_password : password
   end
 

@@ -22,10 +22,6 @@ class TimesheetRow < ActiveRecord::Base
 
   acts_as_list( { :scope => :timesheet } )
 
-  # Security controls - *no* mass assignments, please.
-
-  attr_accessible()
-
   # Make sure the data is sane.
 
   validates_presence_of( :timesheet_id, :task_id )

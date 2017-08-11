@@ -10,12 +10,14 @@
 
 class Project < TaskGroup
 
-  audited( :except => [
-    :lock_version,
-    :updated_at,
-    :created_at,
-    :id
-  ] )
+  audited( {
+    :except => [
+      :lock_version,
+      :updated_at,
+      :created_at,
+      :id
+    ]
+  } )
 
   # A Project is an organisational unit for the benefit of the
   # timesheet system operator. Projects consist of a series of
@@ -32,8 +34,6 @@ class Project < TaskGroup
   accepts_nested_attributes_for( :tasks, reject_if: proc() { | attrs | attrs[ 'title' ] .blank? } )
 
   scope :unassigned, -> { where( :customer_id => nil ) }
-
-  attr_protected() # Necessary for unknown reasons, Rails issues?
 
   USED_RANGE_COLUMN = 'created_at' # For the Rangeable base class of TaskGroup
 

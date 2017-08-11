@@ -26,7 +26,7 @@
         :path    => audits_path(),
         :prompt  => 'Search user names ("Who?"), action names ("What?") and revision numbers',
         :dprompt => 'between record creation date',
-        :years   => Audited::Adapters::ActiveRecord::Audit.used_range()
+        :years   => Audited::Audit.used_range()
       }
     )
 %>

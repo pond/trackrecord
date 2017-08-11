@@ -26,14 +26,6 @@ class ControlPanel < ActiveRecord::Base
   belongs_to( :project  )
   belongs_to( :customer )
 
-  # Security controls.
-
-  attr_accessible(
-    :task_ids,
-    :project_id,
-    :customer_id
-  )
-
   # Remove inactive tasks from the control panel. The caller
   # is responsible for saving the updated object.
   #
@@ -42,7 +34,7 @@ class ControlPanel < ActiveRecord::Base
 
     self.tasks = self.tasks.where( :active => true )
   end
-  
+
   # Get a value from the instance's preferences hash. The hash is nested in a
   # similar manner to the I18n module's translation hashes and is addressed
   # in a similar way - pass a dot-separated key string, e.g. "foo.bar.baz".

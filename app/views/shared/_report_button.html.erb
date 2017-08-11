@@ -11,7 +11,7 @@
 -%>
 <div class="report_button">
   <%= form_for( SavedReport.new,
-                :url => send( "user_saved_reports_by_#{ item.class.model_name.downcase }_path", user ),
+                :url => send( "user_saved_reports_by_#{ item.class.model_name.to_s.downcase }_path", user ),
                 :html => { :id => "new_saved_report_for_#{ item.id }" } ) do | f | -%>
     <input type="hidden" name="item" value="<%= item.id %>">
     <%= f.submit( 'Report', { :disable_with => 'Creating...' } ) %>

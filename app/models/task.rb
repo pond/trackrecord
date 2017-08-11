@@ -10,29 +10,20 @@
 
 class Task < Rangeable
 
-  audited( :except => [
-    :lock_version,
-    :updated_at,
-    :created_at,
-    :id
-  ] )
+  audited( {
+    :except => [
+      :lock_version,
+      :updated_at,
+      :created_at,
+      :id
+    ]
+  } )
 
   DEFAULT_SORT_COLUMN    = 'title'
   DEFAULT_SORT_DIRECTION = 'ASC'
   DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
 
   USED_RANGE_COLUMN      = 'created_at' # For Rangeable base class
-
-  # Set a default order; note also the default eager-loading scope
-  # added later.
-
-  default_scope( { :order => DEFAULT_SORT_ORDER } )
-
-  scope :active,       -> { where( :active     => true  ) }
-  scope :inactive,     -> { where( :active     => false ) }
-  scope :unassigned,   -> { where( :project_id => nil   ) }
-  scope :billable,     -> { where( :billable   => true  ) }
-  scope :not_billable, -> { where( :billable   => false ) }
 
   # Tasks are the fundamental building blocks of a Project. They define
   # specific pieces of work of expected duration, against which work
@@ -43,12 +34,17 @@ class Task < Rangeable
   # Every Task has an expected duration stored as a number of hours. It
   # is exceptionally common for a task's project and customer (if any)
   # to be looked up, so eager loading those at all times ends up saving
-  # on database overhead on average. The default scope set here will
-  # combine with the order-related scope set earlier.
+  # on database overhead on average.
+
+  default_scope( -> { order( DEFAULT_SORT_ORDER ).includes( { :project => :customer } ) } )
+
+  scope :active,       -> { where( :active     => true  ) }
+  scope :inactive,     -> { where( :active     => false ) }
+  scope :unassigned,   -> { where( :project_id => nil   ) }
+  scope :billable,     -> { where( :billable   => true  ) }
+  scope :not_billable, -> { where( :billable   => false ) }
 
   belongs_to( :project )
-
-  default_scope( includes( { :project => :customer } ) )
 
   has_many( :timesheet_rows, { :dependent => :destroy        } )
   has_many( :work_packets,   { :through   => :timesheet_rows } )
@@ -60,13 +56,6 @@ class Task < Rangeable
 
   has_and_belongs_to_many( :control_panels )
   has_and_belongs_to_many( :users          )
-
-  attr_protected(
-    :timesheet_row_ids,
-    :work_packet_ids,
-    :control_panel_ids,
-    :user_ids
-  )
 
   # Make sure the data is sane.
 

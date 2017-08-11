@@ -10,12 +10,14 @@
 
 class SavedReport < Rangeable
 
-  audited( :except => [
-    :lock_version,
-    :updated_at,
-    :created_at,
-    :id
-  ] )
+  audited( {
+    :except => [
+      :lock_version,
+      :updated_at,
+      :created_at,
+      :id
+    ]
+  } )
 
   DEFAULT_SORT_COLUMN    = 'updated_at'
   DEFAULT_SORT_DIRECTION = 'DESC'
@@ -23,22 +25,30 @@ class SavedReport < Rangeable
 
   USED_RANGE_COLUMN      = 'updated_at' # For Rangeable base class
 
-  # Relationships and security
+  # Relationships
 
   belongs_to              :user
-  attr_protected          :user_id
 
-  has_and_belongs_to_many :active_tasks,     :join_table => :saved_reports_active_tasks,
-                                             :class_name => 'Task',
-                                             :readonly   => true
+  has_and_belongs_to_many :active_tasks,
+                          {
+                            :join_table => :saved_reports_active_tasks,
+                            :class_name => 'Task'
+                          },
+                          -> { readonly() }
 
-  has_and_belongs_to_many :inactive_tasks,   :join_table => :saved_reports_inactive_tasks,
-                                             :class_name => 'Task',
-                                             :readonly   => true
+  has_and_belongs_to_many :inactive_tasks,
+                          {
+                            :join_table => :saved_reports_inactive_tasks,
+                            :class_name => 'Task'
+                          },
+                          -> { readonly() }
 
-  has_and_belongs_to_many :reportable_users, :join_table => :saved_reports_reportable_users,
-                                             :class_name => 'User',
-                                             :readonly   => true
+  has_and_belongs_to_many :reportable_users,
+                          {
+                            :join_table => :saved_reports_reportable_users,
+                            :class_name => 'User'
+                          },
+                          -> { readonly() }
 
   # Various constants used by the "20111013142252_add_saved_reports_support.rb"
   # migration file and various pieces of application code
@@ -148,7 +158,7 @@ class SavedReport < Rangeable
   # view any report and of course the report's owner can view it.
   #
   def is_permitted_for?( comparison_user )
-    shared? or comparison_user == user or comparison_user.privileged? 
+    shared? or comparison_user == user or comparison_user.privileged?
   end
 
   # Is the given user permitted to update this report? Only report

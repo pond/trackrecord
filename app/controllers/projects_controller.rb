@@ -11,8 +11,8 @@ class ProjectsController < ApplicationController
 
   # In place editing and security
 
-  safe_in_place_edit_for( :project, :title )
-  safe_in_place_edit_for( :project, :code  )
+  in_place_edit_for( :project, :title )
+  in_place_edit_for( :project, :code  )
 
   before_filter( :can_be_modified?, :only => [ :edit, :update, :set_project_title, :set_project_code ] )
 
@@ -59,7 +59,7 @@ class ProjectsController < ApplicationController
     # If asked to search for something, build extra conditions to do so.
 
     range_sql, range_start, range_end = appctrl_search_range_sql( Project )
-    
+
     unless ( range_sql.nil? )
       search = "%#{ params[ :search ] }%" # SQL wildcards either side of the search string
       conditions_sql << "AND #{ range_sql } ( projects.title ILIKE :search OR projects.code ILIKE :search OR customers.title ILIKE :search )\n"
@@ -125,7 +125,7 @@ class ProjectsController < ApplicationController
   # Create a Project (via ApplicationController.appctrl_create).
   #
   def create
-    appctrl_create( 'Project' )
+    appctrl_create( 'Project', project_params() )
   end
 
   # Update the project details. We may need to update associated tasks
@@ -140,7 +140,7 @@ class ProjectsController < ApplicationController
         update_tasks = ! params[ :update_tasks ].nil?
 
         @record.update_with_side_effects!(
-          params[ :project ],
+          project_params(),
           update_tasks
         )
 
@@ -196,6 +196,26 @@ class ProjectsController < ApplicationController
   end
 
 private
+
+  # Rails 4+ Strong Parameters, replacing in-model "attr_accessible".
+  #
+  def project_params
+    params.require( :project ).permit(
+      :customer_id,
+      :active,
+      :title,
+      :code,
+      :description,
+      :tasks_attributes => [
+        :active,
+        :title,
+        :code,
+        :description,
+        :duration,
+        :billable
+      ]
+    )
+  end
 
   # before_filter action - can the item in the params hash be modified by
   # the current user?

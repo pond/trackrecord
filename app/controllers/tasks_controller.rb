@@ -11,10 +11,10 @@ class TasksController < ApplicationController
 
   # In place editing and security
 
-  safe_in_place_edit_for( :task, :title    )
-  safe_in_place_edit_for( :task, :code     )
-  safe_in_place_edit_for( :task, :duration )
-  safe_in_place_edit_for( :task, :billable )
+  in_place_edit_for( :task, :title    )
+  in_place_edit_for( :task, :code     )
+  in_place_edit_for( :task, :duration )
+  in_place_edit_for( :task, :billable )
 
   before_filter(
     :can_be_modified?,
@@ -138,7 +138,7 @@ class TasksController < ApplicationController
   # users can't do this. Works via ApplicationController.appctrl_create.
   #
   def create
-    appctrl_create( 'Task' )
+    appctrl_create( 'Task', tasks_params() )
   end
 
   # Update a task following submission of an 'edit' view form.
@@ -153,7 +153,7 @@ class TasksController < ApplicationController
 
     begin
       Task.transaction do
-        @record.update_with_side_effects!( params[ :task ] )
+        @record.update_with_side_effects!( tasks_params() )
 
         flash[ :notice ] = 'Task details updated.'
         redirect_to( tasks_path() )
@@ -182,6 +182,19 @@ class TasksController < ApplicationController
   end
 
 private
+
+  # Rails 4+ Strong Parameters, replacing in-model "attr_accessible".
+  #
+  def tasks_params
+    params.require( :task ).permit(
+      :active,
+      :title,
+      :code,
+      :description,
+      :duration,
+      :billable
+    )
+  end
 
   # before_filter action - can the item in the params hash be modified by
   # the current user?

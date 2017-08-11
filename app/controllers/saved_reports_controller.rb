@@ -13,8 +13,8 @@ class SavedReportsController < SavedReportsBaseController
   # In place editing and security - note also filters present in the
   # SavedReportsBaseController superclass.
 
-  safe_in_place_edit_for( :saved_report, :title  )
-  safe_in_place_edit_for( :saved_report, :shared )
+  in_place_edit_for( :saved_report, :title  )
+  in_place_edit_for( :saved_report, :shared )
 
   before_filter(
     :can_be_modified?,
@@ -145,7 +145,7 @@ class SavedReportsController < SavedReportsBaseController
     appctrl_patch_params_from_js( :saved_report, :active_task_ids   )
     appctrl_patch_params_from_js( :saved_report, :inactive_task_ids )
 
-    saved_report      = SavedReport.new( params[ :saved_report ] )
+    saved_report      = SavedReport.new( saved_report_params() )
     saved_report.user = @user
 
     if ( saved_report.save )
@@ -170,7 +170,7 @@ class SavedReportsController < SavedReportsBaseController
     appctrl_patch_params_from_js( :saved_report, :active_task_ids   )
     appctrl_patch_params_from_js( :saved_report, :inactive_task_ids )
 
-    if ( @record.update_attributes( params[ :saved_report ] ) )
+    if ( @record.update_attributes( saved_report_params() ) )
       flash[ :notice ] = "Report details updated."
       redirect_to( report_path( @record ) )
     else
@@ -203,6 +203,12 @@ class SavedReportsController < SavedReportsBaseController
   end
 
 private
+
+  # Rails 4+ Strong Parameters, replacing in-model "attr_accessible".
+  #
+  def saved_report_params
+    appctrl_saved_report_params( :saved_report )
+  end
 
   # before_filter action - can the item in the params hash be modified by
   # the current user?

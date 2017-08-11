@@ -10,12 +10,14 @@
 
 class Customer < TaskGroup
 
-  audited( :except => [
-    :lock_version,
-    :updated_at,
-    :created_at,
-    :id
-  ] )
+  audited( {
+    :except => [
+      :lock_version,
+      :updated_at,
+      :created_at,
+      :id
+    ]
+  } )
 
   USED_RANGE_COLUMN = 'created_at' # For the Rangeable base class of TaskGroup
 
@@ -23,15 +25,10 @@ class Customer < TaskGroup
   # with various projects, which in turn include various tasks.
 
   has_many( :control_panels )
-  has_many( :projects, { :order => Project::DEFAULT_SORT_ORDER } )
-  has_many( :tasks,    { :through => :projects, :uniq => true  } )
+  has_many( :projects, -> { order( Project::DEFAULT_SORT_ORDER ) } )
+  has_many( :tasks,    -> { uniq()                               }, { :through => :projects } )
 
   accepts_nested_attributes_for( :projects, reject_if: proc() { | attrs | attrs[ 'title' ] .blank? } )
-
-  attr_protected(
-    :project_ids,
-    :control_panel_ids
-  )
 
   # Some default properties are dynamic, so assign these here rather than
   # as defaults in a migration.

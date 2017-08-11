@@ -2,10 +2,9 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  # Bundler.require *Rails.groups(:assets => %w(development test))
-  # If you want your assets lazily compiled in production, use this line
-  Bundler.require(:default, :assets, Rails.env)
+  # Require the gems listed in Gemfile, including any gems
+  # you've limited to :test, :development, or :production.
+  Bundler.require(*Rails.groups)
 end
 
 module Trackrecord
@@ -15,9 +14,6 @@ module Trackrecord
     # -- all .rb files in that directory are automatically loaded.
 
     config.log_level = :info
-
-    # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
 
     # 2014-03-19 (ADH): In Rails 3.2.15 and earlier, an invalid locate given to
     # I18n would result in automatic fallback to 'en'. In 3.2.16 or later this

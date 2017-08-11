@@ -55,7 +55,7 @@ class ReportsController < ApplicationController
 
       params[ :report ][ :reportable_user_ids ] = params[ :report ].delete( :user_ids )
 
-      @saved_report       = SavedReport.new( params[ :report ] )
+      @saved_report       = SavedReport.new( report_params() )
       @saved_report.user  = @current_user
       @saved_report.title = ''
 
@@ -160,4 +160,13 @@ class ReportsController < ApplicationController
     flash.delete( :warning ) # Else these show on the *next* fetched page too
     flash.delete( :error   )
   end
+
+private
+
+  # Rails 4+ Strong Parameters, replacing in-model "attr_accessible".
+  #
+  def report_params
+    appctrl_saved_report_params( :report )
+  end
+
 end

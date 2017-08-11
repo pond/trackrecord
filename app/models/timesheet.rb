@@ -10,14 +10,16 @@
 
 class Timesheet < ActiveRecord::Base
 
-  audited( :except => [
-    :lock_version,
-    :updated_at,
-    :created_at,
-    :id,
-    :committed_at,
-    :start_day_cache
-  ] )
+  audited( {
+    :except => [
+      :lock_version,
+      :updated_at,
+      :created_at,
+      :id,
+      :committed_at,
+      :start_day_cache
+    ]
+  } )
 
   USED_RANGE_COLUMN      = 'start_day_cache'
   DEFAULT_SORT_COLUMN    = 'start_day_cache'
@@ -33,16 +35,9 @@ class Timesheet < ActiveRecord::Base
 
   belongs_to( :user )
 
-  has_many( :timesheet_rows, { :dependent => :destroy, :order => :position } )
-  has_many( :tasks,          { :through   => :timesheet_rows               } )
-  has_many( :work_packets,   { :through   => :timesheet_rows               } )
-
-  attr_accessible(
-    :week_number,
-    :year,
-    :description,
-    :auto_sort
-  )
+  has_many( :timesheet_rows, { :dependent => :destroy        }, -> { order( :position ) } )
+  has_many( :tasks,          { :through   => :timesheet_rows } )
+  has_many( :work_packets,   { :through   => :timesheet_rows } )
 
   # Return a range of years allowed for a timesheet. Optionally pass 'true'
   # if you want an actual Date object range rather than just a year range.

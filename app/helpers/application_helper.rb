@@ -657,7 +657,7 @@ module ApplicationHelper
       else
 
         if ( can_edit && entry[ :value_in_place ] )
-          output << safe_in_place_editor_field( item, method )
+          output << in_place_editor_field( item, method )
         else
           value   = item.send( method )
           safestr = ( value === true or value === false ) ?

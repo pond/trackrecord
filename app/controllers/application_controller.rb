@@ -87,11 +87,14 @@ protected
   end
 
   # Create a new object following submission of a 'create' view form.
-  # Restricted users can't do this. Pass the model name as a string.
-
-  def appctrl_create( model )
+  # Restricted users can't do this. Pass the model name as a string and
+  # a parameters Hash filtered via strong params:
+  #
+  #     params.require(<model-name>).permit(...)
+  #
+  def appctrl_create( model, strong_params )
     return appctrl_not_permitted() if ( @current_user.restricted? )
-    @record = model.constantize.new( params[ model.downcase ], @current_user )
+    @record = model.constantize.new( strong_params, @current_user )
 
     if ( @record.save )
       view_context.apphelp_flash(
@@ -373,6 +376,44 @@ protected
     if ( task_ids.length == 1 && task_ids[ 0 ].is_a?( String ) )
       params[ sym ][ name ] = task_ids[ 0 ].split( ',' )
     end
+  end
+
+  #############################################################################
+  # SHARED STRONG PARAMETERS METHODS
+  #############################################################################
+
+  # Since this security layer has for some reason moved out of the model
+  # in Rails >= 4, we are forced to kludge the shared use across many
+  # controllers of the same model via shared parameter filter methods.
+
+  # Parameters for a SavedReport. Pass optionally the required params Hash
+  # key; defaults to 'saved_report'.
+  #
+  def appctrl_saved_report_params( key = :saved_report )
+    params.require( key ).permit(
+      :title,
+      :shared,
+      :range_start,
+      :range_week_start,
+      :range_month_start,
+      :range_end,
+      :range_week_end,
+      :range_month_end,
+      :frequency,
+      :task_filter,
+      :include_totals,
+      :include_committed,
+      :include_not_committed,
+      :exclude_zero_rows,
+      :exclude_zero_cols,
+      :customer_sort_field,
+      :project_sort_field,
+      :task_sort_field,
+      :task_grouping,
+      :range_one_month,
+      :range_one_week,
+      :user_details
+    )
   end
 
 private

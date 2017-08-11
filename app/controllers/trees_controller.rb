@@ -85,7 +85,7 @@ class TreesController < ApplicationController
             when 'C'
               prefix   = 'P'
               isLeaf   = false
-              children = Project.send( active ).find_all_by_customer_id( id[ 1..-1 ] )
+              children = Project.send( active ).where( :customer_id => id[ 1..-1 ] ).all
 
               # Reject projects if there are no active/inactive tasks; or if we
               # are restricting by a user's permitted task list and the union
