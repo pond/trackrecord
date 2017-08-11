@@ -145,9 +145,15 @@ Then:
 7. Running formal tests
 
   To make sure your database is suitable for TrackRecord, run the tests
-  with command `bundle exec rake test`. The tests take a long time to run.
-  No back-end failures are expected, but GUI tests cannot run unless you
-  also manually install [PhantomJS](http://phantomjs.org).
+  with this command, in full:
+
+  ```sh
+  RAILS_ENV=test bundle exec rake test
+  ```
+
+  The tests take a long time to run. No back-end failures are expected,
+  but GUI tests cannot run unless you also manually install
+  [PhantomJS](http://phantomjs.org).
 
   If you get warnings about something called Nokogiri and LibXML versions
   at run-time, please see the later section about the Nokogiri gem.
@@ -227,7 +233,7 @@ following things:
 
   To make sure your database is still suitable for TrackRecord, it is
   advisable (though not strictly necessary) to re-run the formal tests with
-  the command `rake test`.
+  the command `RAILS_ENV=test bundle exec rake test`.
 
 
 ### Notes on asset precompilation

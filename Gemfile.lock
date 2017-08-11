@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/alindeman/rails4_upgrade.git
-  revision: 6d71d4418891ef11243451481f28cbb3072c6019
-  specs:
-    rails4_upgrade (0.5.0)
-      bundler (>= 1.2.2)
-      terminal-table (>= 1.4.5)
-
-GIT
   remote: https://github.com/pond/calendar_date_select.git
   revision: 977048211b94599fe0f08eb37a481f3d69df48f6
   specs:
@@ -140,8 +132,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    terminal-table (1.8.0)
-      unicode-display_width (~> 1.1, >= 1.1.1)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -158,7 +148,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicode-display_width (1.3.0)
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -185,7 +174,6 @@ DEPENDENCIES
   poltergeist (~> 1.5)
   prototype-rails
   rails (= 3.2.18)
-  rails4_upgrade!
   rails_autolink
   ruby-openid (~> 2.5)
   safe_in_place_editing (~> 2.0.1)

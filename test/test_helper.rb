@@ -1,5 +1,23 @@
-ENV["RAILS_ENV"] = "test"
+# Cannot figure out what the issue is, but during local tests, the
+# suite sometimes comes up and runs at least one test *without* going
+# here first, so it comes up in development mode and complains about
+# the secret token being unset. Explicitly setting RAILS_ENV works
+# around this. Have the test helper herein ensure that's done, else
+# the suite would start to run OK but then fail badly later.
+#
+# TL;DR wish I'd learned RSpec back before I wrote everything with
+# the default framework.
+#
+if ENV[ "RAILS_ENV" ] != "test"
+  raise "Please run using 'RAILS_ENV=test bundle exec rake test'"
+end
+
+# This is necessary for cookies involved in some integration tests.
+#
+ENV[ "TRACKRECORD_SECRET_TOKEN" ] = "7b007aea0e810bc66550e52c0bd24d914e67231cc169a7c9b99405eacbee5c7549caaf672e72e10458fae908d9c81935d89473f583b60a2c80a4e5c4f33106b5"
+
 require File.expand_path('../../config/environment', __FILE__)
+
 require 'rails/test_help'
 require 'capybara/rails'
 require 'capybara/poltergeist'
@@ -106,7 +124,7 @@ class ActionDispatch::IntegrationTest
   def thelper_find_input_by_name( n = 'commit' )
     find( :xpath, "//input[contains(@name, '#{ n }')]" )
   end
-  
+
   # Submit a form by clicking on an 'input' element with the given name
   # (defaults to 'commit').
   #

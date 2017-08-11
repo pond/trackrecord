@@ -11,8 +11,6 @@ gem 'rails', '3.2.18'
 gem 'pg', '>=0.17.1' # 0.16 or later is essential if using PostgreSQL with TrackRecord as it means PostgreSQL 0.8.4 or later are present; for more on this or using other databases, see doc/README_FOR_APP.
 gem 'json'
 
-gem 'rails4_upgrade', github: 'alindeman/rails4_upgrade'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
