@@ -295,10 +295,9 @@ Yes, there really is meant to be that "` -- `" after `nokogiri`.
 You might have to adapt that for different systems; for example, on a 64-bit
 Linux, you'd probably need `/usr/lib64/` instead of `/usr/lib`. If you don't
 need the documentation for Nokogiri installed locally - it takes ages! - then
-add `--no-doc --no-rdoc --no-ri` just after `gem install nokogiri`, before
-the "` -- `". This does mean you'd need to go online to read documentation
-rather than being able to browse it via likes of `gem server` or the `ri`
-command.
+add `--no-doc` just after `gem install nokogiri`, before the "` -- `". This
+does mean you'd need to go online to read documentation rather than being
+able to browse it via likes of `gem server` or the `ri` command.
 
 You might need to repeat the above process if you upgrade your system and
 your libraries change.
