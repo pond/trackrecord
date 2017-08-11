@@ -55,9 +55,8 @@ Then:
 1. Make a secret key
 
   Edit file `config/initializers/secret_token.rb` as per the instructions in
-  the file; comment out the `raise` statement, uncomment the `secret_token`
-  assignment underneath and type in or otherwise randomly generate a long
-  token string. Running command `rake secret` is a good way to do this.
+  the file; you'll need a secret token. Running command `rake secret` is a
+  good way to generate one.
 
   _**Never make your modified file public anywhere!**_ Keep it a secret
   always.
