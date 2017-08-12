@@ -10,7 +10,7 @@
   </p>
 
   <div class="centred">
-    <%= form_for( :user, :url => { :action => 'delete_confirm', :id => @user.id } ) do | f | %>
+    <%= form_for( :user, :url => { :action => 'destroy', :id => @user.id } ) do | f | %>
       <%= f.submit( 'Delete user', { :disable_with => 'Deleting...' } ) %>
     <% end %>
   </div>

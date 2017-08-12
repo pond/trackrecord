@@ -160,7 +160,7 @@ class CustomersController < ApplicationController
 
   # Show an 'Are you sure?' prompt.
   #
-  def delete_confirm
+  def destroy
     return appctrl_not_permitted() unless ( @current_user.admin? )
 
     begin

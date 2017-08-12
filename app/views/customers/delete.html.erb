@@ -10,14 +10,14 @@
     with those projects. <strong>The action cannot be undone.</strong>
   </p>
 
-  <%= form_for( :customer, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+  <%= form_for( :customer, :url => { :action => 'destroy', :id => @record.id } ) do | f | %>
     <table class="for_layout">
       <tr>
         <td>
           <%= f.submit( 'Delete customer', { :disable_with => 'Deleting...' } ) %>
           &nbsp;
         </td>
-        <td>  
+        <td>
           <%= label_tag :destroy_projects do %>
             <%= check_box_tag( 'destroy_projects' ) %>
             Delete associated projects too?

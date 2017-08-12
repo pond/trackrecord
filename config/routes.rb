@@ -74,16 +74,16 @@ Trackrecord::Application.routes.draw do
   # "edit" with PATCH for associated "update". For "delete", though, it
   # just as the DELETE route. TrackRecord implements confirmation pages
   # without fragile JavaScript that might be bypassed by client-side web
-  # crawlers via GET to 'delete' & subsequent POST to 'delete_confirm'.
+  # crawlers via GET to 'delete' & subsequent POST to 'destroy'.
   #
   get  '/customers/delete/:id',         :action => 'delete',         :controller => 'customers'
   get   '/projects/delete/:id',         :action => 'delete',         :controller => 'projects'
   get      '/users/delete/:id',         :action => 'delete',         :controller => 'users'
   get      '/tasks/delete/:id',         :action => 'delete',         :controller => 'tasks'
 
-  post '/customers/delete_confirm/:id', :action => 'delete_confirm', :controller => 'customers'
-  post  '/projects/delete_confirm/:id', :action => 'delete_confirm', :controller => 'projects'
-  post     '/users/delete_confirm/:id', :action => 'delete_confirm', :controller => 'users'
+  post '/customers/destroy/:id', :action => 'destroy', :controller => 'customers'
+  post  '/projects/destroy/:id', :action => 'destroy', :controller => 'projects'
+  post     '/users/destroy/:id', :action => 'destroy', :controller => 'users'
   post     '/tasks/destroy/:id',        :action => 'destroy',        :controller => 'tasks'
 
 end

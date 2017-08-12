@@ -10,7 +10,7 @@
     undone.</strong>
   </p>
 
-  <%= form_for( :project, :url => { :action => 'delete_confirm', :id => @record.id } ) do | f | %>
+  <%= form_for( :project, :url => { :action => 'destroy', :id => @record.id } ) do | f | %>
     <%= f.submit( 'Delete project', { :disable_with => 'Deleting...' } ) %>
     <%= label_tag :destroy_tasks do %>
       <%= check_box_tag( 'destroy_tasks' ) %>
