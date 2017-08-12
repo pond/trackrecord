@@ -94,7 +94,7 @@ class SessionsController < ApplicationController
 
   # Sign out - may be called by a normal user or if a user decides to
   # cancel during the sign-up process.
-
+  #
   def destroy
     reset_session()
     view_context.apphelp_flash( :notice, :signed_out )

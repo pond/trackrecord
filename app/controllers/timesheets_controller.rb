@@ -229,13 +229,15 @@ class TimesheetsController < ApplicationController
     set_sections( @timesheet )
   end
 
-  # Timesheets should not normally be destroyed. Only administrators
-  # can do this.
-
+  # Show an 'Are you sure?' prompt.
+  #
   def delete
     appctrl_delete( 'Timesheet' )
   end
 
+  # Timesheets should not normally be destroyed. Only administrators
+  # can do this.
+  #
   def destroy
     appctrl_admin_destroy( Timesheet )
   end

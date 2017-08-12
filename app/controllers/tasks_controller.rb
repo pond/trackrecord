@@ -170,13 +170,15 @@ class TasksController < ApplicationController
     end
   end
 
-  # Tasks should not normally be destroyed. Only administrators
-  # can do this. Works via ApplicationController.appctrl_delete.
+  # Show an 'Are you sure?' prompt.
   #
   def delete
     appctrl_delete( 'Task' )
   end
 
+  # Tasks should not normally be destroyed. Only administrators
+  # can do this. Works via ApplicationController.appctrl_delete.
+  #
   def destroy
     appctrl_admin_destroy( Task )
   end

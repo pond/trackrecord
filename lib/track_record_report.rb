@@ -1511,7 +1511,7 @@ module TrackRecordReport
       @filtered_users = @filtered_users.try( :all ) if ( @filtered_users.is_a? ActiveRecord::Relation )
     end
 
-    # Back-end to "calculate". Runs the calculation engine using all th
+    # Back-end to "calculate". Runs the calculation engine using all the
     # normal database constraints, over a given range.
     #
     def run_sums_for_range( range, override_key = nil )

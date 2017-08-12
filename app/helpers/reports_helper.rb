@@ -415,22 +415,22 @@ module ReportsHelper
     actions += [
       {
         :title => :delete,
-        :url   => delete_user_saved_report_path( :user_id => @current_user.id, :id => "%s" )
+        :url   => delete_user_saved_report_path( :user_id => @current_user.id, :id => report.id )
       },
       {
         :title => :edit,
-        :url   => edit_user_saved_report_path( :user_id => @current_user.id, :id => "%s" )
+        :url   => edit_user_saved_report_path( :user_id => @current_user.id, :id => report.id )
       }
     ] if report.can_be_modified_by?( @current_user )
 
     actions += [
       {
         :title => :copy,
-        :url   => user_saved_report_copy_path( :user_id => @current_user.id, :saved_report_id => "%s" )
+        :url   => user_saved_report_copy_path( :user_id => @current_user.id, :saved_report_id => report.id )
       },
       {
         :title => :show,
-        :url   => user_saved_report_path( :user_id => @current_user.id, :id => "%s" )
+        :url   => user_saved_report_path( :user_id => @current_user.id, :id => report.id )
       }
     ] if report.is_permitted_for?( @current_user )
 

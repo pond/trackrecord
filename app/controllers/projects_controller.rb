@@ -159,14 +159,14 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # Projects should not normally be destroyed. Only administrators
-  # can do this. Works via ApplicationController.appctrl_delete.
+  # Show an 'Are you sure?' prompt.
   #
   def delete
     appctrl_delete( 'Project' )
   end
 
-  # Show an 'Are you sure?' prompt.
+  # Projects should not normally be destroyed. Only administrators
+  # can do this. Works via ApplicationController.appctrl_delete.
   #
   def destroy
     return appctrl_not_permitted() unless ( @current_user.admin? )

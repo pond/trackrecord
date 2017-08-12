@@ -1,6 +1,6 @@
 <div class="icon_page warning">
 
-  <h1>Delete user<%= @user.name.blank? ? '' : " '#{ @user.name }'" %>?</h1>
+  <h1>Delete user<%= @record.name.blank? ? '' : " '#{ @record.name }'" %>?</h1>
   <h2>Warning!</h2>
 
   <p>
@@ -10,13 +10,13 @@
   </p>
 
   <div class="centred">
-    <%= form_for( :user, :url => { :action => 'destroy', :id => @user.id } ) do | f | %>
+    <%= form_for( :user, :url => { :action => 'destroy', :id => @record.id } ) do | f | %>
       <%= f.submit( 'Delete user', { :disable_with => 'Deleting...' } ) %>
     <% end %>
   </div>
 
   <p>
-    <%= link_to( 'Cancel and show details', @user        ) %> |
+    <%= link_to( 'Cancel and show details', @record      ) %> |
     <%= link_to( 'Cancel and list users',   users_path() ) %>
   </p>
 

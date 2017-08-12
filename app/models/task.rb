@@ -36,7 +36,11 @@ class Task < Rangeable
   # to be looked up, so eager loading those at all times ends up saving
   # on database overhead on average.
 
-  default_scope( -> { includes( { :project => :customer } ).order( DEFAULT_SORT_ORDER ) } )
+  default_scope( -> {
+    includes( { :project => :customer } ).
+       joins( { :project => :customer } ).
+       order( DEFAULT_SORT_ORDER        )
+  } )
 
   scope :active,       -> { where( :active     => true  ) }
   scope :inactive,     -> { where( :active     => false ) }

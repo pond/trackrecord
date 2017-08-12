@@ -76,14 +76,11 @@ Trackrecord::Application.routes.draw do
   # without fragile JavaScript that might be bypassed by client-side web
   # crawlers via GET to 'delete' & subsequent POST to 'destroy'.
   #
-  get  '/customers/delete/:id',         :action => 'delete',         :controller => 'customers'
-  get   '/projects/delete/:id',         :action => 'delete',         :controller => 'projects'
-  get      '/users/delete/:id',         :action => 'delete',         :controller => 'users'
-  get      '/tasks/delete/:id',         :action => 'delete',         :controller => 'tasks'
+  # I couldn't get these to work with concerns or similar, so use brute
+  # force instead.
 
-  post '/customers/destroy/:id', :action => 'destroy', :controller => 'customers'
-  post  '/projects/destroy/:id', :action => 'destroy', :controller => 'projects'
-  post     '/users/destroy/:id', :action => 'destroy', :controller => 'users'
-  post     '/tasks/destroy/:id',        :action => 'destroy',        :controller => 'tasks'
-
+  [ 'customers', 'projects', 'tasks', 'users', 'timesheets', 'saved_reports' ].each do | rsrc |
+    get  "/#{ rsrc }/delete/:id",  :action => 'delete',  :controller => rsrc
+    post "/#{ rsrc }/destroy/:id", :action => 'destroy', :controller => rsrc
+  end
 end

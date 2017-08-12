@@ -151,14 +151,14 @@ class CustomersController < ApplicationController
     end
   end
 
-  # Customers should not normally be destroyed. Only administrators
-  # can do this. Works via ApplicationController.appctrl_delete.
+  # Show an 'Are you sure?' prompt.
   #
   def delete
     appctrl_delete( 'Customer' )
   end
 
-  # Show an 'Are you sure?' prompt.
+  # Customers should not normally be destroyed. Only administrators
+  # can do this. Works via ApplicationController.appctrl_delete.
   #
   def destroy
     return appctrl_not_permitted() unless ( @current_user.admin? )

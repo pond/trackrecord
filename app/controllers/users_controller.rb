@@ -195,15 +195,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # Users should not normally be destroyed. Only administrators
-  # can do this.
+  # Show an "Are you sure?" prompt.
   #
   def delete
     appctrl_delete( 'User' )
-    @user = @record # (historical)
   end
 
-  # Show an "Are you sure?" prompt.
+  # Users should not normally be destroyed. Only administrators
+  # can do this.
   #
   def destroy
     return appctrl_not_permitted() unless ( @current_user.admin? )
@@ -214,10 +213,10 @@ class UsersController < ApplicationController
     # account type and delete the user record. This is a good way
     # of ensuring that there is always at least one admin.
 
-    @user = User.find( params[ :id ] )
-    return appctrl_not_permitted() if ( @user.admin? )
+    @record = User.find( params[ :id ] )
+    return appctrl_not_permitted() if ( @record.admin? )
 
-    @user.destroy()
+    @record.destroy()
 
     flash[ 'notice' ] = 'User and all associated data deleted'
     redirect_to( users_path() )
