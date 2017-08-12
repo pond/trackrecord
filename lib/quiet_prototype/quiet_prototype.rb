@@ -21,7 +21,7 @@ module QuietPrototype
         c.instance_variable_set( :@uses_prototype, true )
       end
 
-      before_filter( proc, filter_options )
+      before_action( proc, filter_options )
     end
   end
 

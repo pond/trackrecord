@@ -12,10 +12,6 @@ if ENV[ "RAILS_ENV" ] != "test"
   raise "Please run using 'RAILS_ENV=test bundle exec rake test'"
 end
 
-# This is necessary for cookies involved in some integration tests.
-#
-ENV[ "TRACKRECORD_SECRET_TOKEN" ] = "7b007aea0e810bc66550e52c0bd24d914e67231cc169a7c9b99405eacbee5c7549caaf672e72e10458fae908d9c81935d89473f583b60a2c80a4e5c4f33106b5"
-
 require File.expand_path('../../config/environment', __FILE__)
 
 require 'rails/test_help'
@@ -50,8 +46,8 @@ class ActionDispatch::IntegrationTest
            :tasks_users, :control_panels_tasks
 
   # Set up Poltergeist, which via PhantomJS (which you must have installed -
-  # e.g. "brew install phantomjs" if using HomeBrew on OS X) supports headless
-  # browser-based testing of page content that includes JavaScript.
+  # see http://phantomjs.org) supports headless browser-based testing of page
+  # content that includes JavaScript.
 
   @@ukorgpondtrackrecord_nonjs_driver = Capybara.current_driver
 

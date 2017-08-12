@@ -20,8 +20,8 @@ class Task < Rangeable
   } )
 
   DEFAULT_SORT_COLUMN    = 'title'
-  DEFAULT_SORT_DIRECTION = 'ASC'
-  DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
+  DEFAULT_SORT_DIRECTION = :asc
+  DEFAULT_SORT_ORDER     = { DEFAULT_SORT_COLUMN => DEFAULT_SORT_DIRECTION }
 
   USED_RANGE_COLUMN      = 'created_at' # For Rangeable base class
 
@@ -36,7 +36,7 @@ class Task < Rangeable
   # to be looked up, so eager loading those at all times ends up saving
   # on database overhead on average.
 
-  default_scope( -> { order( DEFAULT_SORT_ORDER ).includes( { :project => :customer } ) } )
+  default_scope( -> { includes( { :project => :customer } ).order( DEFAULT_SORT_ORDER ) } )
 
   scope :active,       -> { where( :active     => true  ) }
   scope :inactive,     -> { where( :active     => false ) }
@@ -140,7 +140,7 @@ class Task < Rangeable
   # Since this isn't done by the database, it's slow.
   #
   def self.sort_by_augmented_title( list )
-    list.sort! { | x, y | x.augmented_title <=> y.augmented_title }
+    list.to_a.sort! { | x, y | x.augmented_title <=> y.augmented_title }
   end
 
   # Return an array with two elements - the first is the restricted

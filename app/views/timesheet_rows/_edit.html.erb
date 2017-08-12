@@ -36,10 +36,10 @@
 <% col_number = -1
    TimesheetRow::DAY_ORDER.each do | day_number |
      col_number += 1
-     work_packet = WorkPacket.find_by_timesheet_row_id(
-       timesheet_row.id,
-       :conditions => { :day_number => day_number }
-     )
+     work_packet = WorkPacket.where(
+       :timesheet_row_id => timesheet_row.id,
+       :day_number       => day_number
+     ).first
 -%>
       <td class="ts_edit_work">
 <%=

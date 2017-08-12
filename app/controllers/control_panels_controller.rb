@@ -12,6 +12,6 @@ class ControlPanelsController < ApplicationController
   # Security. No direct CRUD actions are allowed at all. Everything
   # is done through user account editing.
 
-  before_filter( :appctrl_not_permitted )
+  before_action( :appctrl_not_permitted )
 
 end

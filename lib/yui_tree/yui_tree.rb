@@ -250,7 +250,7 @@ module YuiTree
         c.instance_variable_set( :@uses_yui_tree,    true         )
       end
 
-      before_filter( proc, filter_options )
+      before_action( proc, filter_options )
 
       # See the dummy, static version of "yui_tree_handled_xhr_request?" below
       # for documentation.
@@ -328,7 +328,7 @@ module YuiTree
     # method from your model is the most efficient way to achieve sorted
     # results. For example, in your model issue:
     #
-    #   default_scope( { :order => 'name DESC' } )
+    #   default_scope( -> { order( 'name' => :desc ) } )
     #
     # ...to have all collections of that model returned by finder methods
     # sorted in descending order by a "name" field by default. This applies

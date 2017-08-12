@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   in_place_edit_for( :project, :title )
   in_place_edit_for( :project, :code  )
 
-  before_filter( :can_be_modified?, :only => [ :edit, :update, :set_project_title, :set_project_code ] )
+  before_action( :can_be_modified?, :only => [ :edit, :update, :set_project_title, :set_project_code ] )
 
   uses_prototype( :only => :index )
 
@@ -132,7 +132,7 @@ class ProjectsController < ApplicationController
   # too, so the update is wrapped in a transaction to allow the database
   # to roll back if anything goes wrong.
   #
-  # @record is set by the "can_be_modified?" before_filter method.
+  # @record is set by the "can_be_modified?" before_action method.
   #
   def update
     begin
@@ -144,16 +144,16 @@ class ProjectsController < ApplicationController
           update_tasks
         )
 
-        flash[ :notice ] = 'Project details updated'
+        flash[ 'notice' ] = 'Project details updated'
         redirect_to( projects_path() )
       end
 
     rescue ActiveRecord::StaleObjectError
-      flash[ :error ] = 'The project details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
+      flash[ 'error' ] = 'The project details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
       redirect_to( project_path( @record ) )
 
     rescue => error
-      flash[ :error ] = "Could not update project details: #{ error }"
+      flash[ 'error' ] = "Could not update project details: #{ error }"
       render( :action => 'edit' )
 
     end
@@ -184,12 +184,12 @@ class ProjectsController < ApplicationController
           message = 'Project deleted; its tasks were left alone'
         end
 
-        flash[ :notice ] = message
+        flash[ 'notice' ] = message
         redirect_to( projects_path() )
       end
 
     rescue => error
-      flash[ :error ] = "Could not destroy project: #{ error }"
+      flash[ 'error' ] = "Could not destroy project: #{ error }"
       redirect_to( home_path() )
 
     end
@@ -217,7 +217,7 @@ private
     )
   end
 
-  # before_filter action - can the item in the params hash be modified by
+  # before_action method - can the item in the params hash be modified by
   # the current user?
   #
   def can_be_modified?

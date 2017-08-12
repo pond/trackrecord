@@ -102,14 +102,14 @@ module ApplicationHelper
   # on both the current, rendered page, and the next fetched page.
   #
   def apphelp_flash( key, flash_name, ctrl = controller, substitutions = {} )
-    flash[ key ] = apphelp_prefixed( :flash, flash_name, ctrl, substitutions )
+    flash[ key.to_s ] = apphelp_prefixed( :flash, flash_name, ctrl, substitutions )
   end
 
   # As apphelp_flash, but for use when you're about to render content within
   # this request, rather than redirect.
   #
   def apphelp_flash_now( key, flash_name, ctrl = controller, substitutions = {} )
-    flash.now[ key ] = apphelp_prefixed( :flash, flash_name, ctrl, substitutions )
+    flash.now[ key.to_s ] = apphelp_prefixed( :flash, flash_name, ctrl, substitutions )
   end
 
   # Back-end for apphelp_view_hint and apphelp_flash (along with possibly
@@ -656,7 +656,9 @@ module ApplicationHelper
         output << send( helper, item )
       else
 
-        if ( can_edit && entry[ :value_in_place ] )
+        # TODO: FIX ME: All modern plugins require jQuery.
+        #
+        if ( false && can_edit && entry[ :value_in_place ] )
           output << in_place_editor_field( item, method )
         else
           value   = item.send( method )

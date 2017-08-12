@@ -47,7 +47,7 @@ Set plug-in (see http://github.com/collectiveidea/awesome_nested_set):
 ==== controllers/category_controller.rb
 
 In the Controller, note that YUI tree is used. You can use Rails
-ActionController::Filters semantics here (e.g. as in "before_filter"):
+ActionController::Filters semantics here (e.g. as in "before_action"):
 
   class CategoryController < ApplicationController
     uses_yui_tree( { :xhr_url_method => :categories_path }, {} )
@@ -148,7 +148,7 @@ along the following lines, in the controller:
     end
 
     if ( successful )
-      flash[ :notice ] = 'New category created successfully'
+      flash[ 'notice' ] = 'New category created successfully'
       redirect_to @category
     else
       render :action => 'new'

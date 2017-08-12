@@ -10,9 +10,9 @@
 
 class SessionsController < ApplicationController
 
-  skip_before_filter( :appctrl_confirm_user, :only => [ :new, :create ] )
+  skip_before_action( :appctrl_confirm_user, :only => [ :new, :create ] )
 
-  before_filter :appctrl_do_not_cache, :only => [ :new, :create ]
+  before_action :appctrl_do_not_cache, :only => [ :new, :create ]
 
   # With the Rails CSRF fix/bodge (sigh), unverified requests - such as that
   # issued by the OpenID provider - cause the session to be reset. Since data

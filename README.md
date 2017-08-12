@@ -49,17 +49,23 @@ install the Bundler gem (`gem install bundler`).
 ### Installation for new users
 
 Download either a source archive from the Pond's Place web site (see above),
-from GitHub directly, or glone the repository as per GitHub instructions.
+from GitHub directly, or clone the repository as per GitHub instructions.
 Then:
 
 1. Make a secret key
 
-  Edit file `config/initializers/secret_token.rb` as per the instructions in
-  the file; you'll need a secret token. Running command `rake secret` is a
-  good way to generate one.
+  For development and test use, `config/secrets.yml` already contains some
+  canned data for securing session cookies. In Production mode, convey this
+  through environment variable `SECRET_KEY_BASE`. Changing this value will
+  invalidate any users' session cookies so keep it consistent once you are
+  in Production. Command `rake secret` generates good random values.
 
-  _**Never make your modified file public anywhere!**_ Keep it a secret
-  always.
+  If you run in Development mode routinely, then please *do* change the
+  value assigned in `config/secrets.yml` to something only you know. Really
+  you should stop doing that and use Production mode in preference.
+
+  _**Never make the key public anywhere!**_ Keep it a secret always. Don't
+  check its value into source control!
 
 2. Configure TrackRecord for your database
 

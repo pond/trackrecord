@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   # the user hasn't filled in full valid account details, yet, force them
   # back to the 'edit user' page to set one.
 
-  before_filter(
+  before_action(
     :appctrl_set_user,
     :appctrl_confirm_user,
     :appctrl_ensure_user_is_valid
@@ -46,7 +46,7 @@ protected
   # should call here. Redirects to Home with a permissions message.
 
   def appctrl_not_permitted
-    render( { :text => 'Action not permitted', :status => 403 } )
+    render( { :plain => 'Action not permitted', :status => 403 } )
   end
 
   # Bypass the cache. Some browsers are very aggressive in their
@@ -169,7 +169,7 @@ protected
       model.destroy( params[ :id ] )
       view_context.apphelp_flash(
         :notice,
-        :delete,
+        :deleted,
         ApplicationController,
         :name => model.model_name.human
       )

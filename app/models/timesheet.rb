@@ -35,7 +35,7 @@ class Timesheet < ActiveRecord::Base
 
   belongs_to( :user )
 
-  has_many( :timesheet_rows, { :dependent => :destroy        }, -> { order( :position ) } )
+  has_many( :timesheet_rows, { :dependent => :destroy        }, -> { order( :position => :asc ) } )
   has_many( :tasks,          { :through   => :timesheet_rows } )
   has_many( :work_packets,   { :through   => :timesheet_rows } )
 
@@ -214,10 +214,10 @@ class Timesheet < ActiveRecord::Base
     # [TODO] Slow. Surely there's a better way...?
 
     self.timesheet_rows.all.each do | timesheet_row |
-      work_packet = WorkPacket.find_by_timesheet_row_id(
-        timesheet_row.id,
-        :conditions => { :day_number => day_number }
-      )
+      work_packet = WorkPacket.where(
+        :timesheet_row_id => timesheet_row.id,
+        :day_number       => day_number
+      ).first
 
       sum += work_packet.worked_hours if work_packet
     end

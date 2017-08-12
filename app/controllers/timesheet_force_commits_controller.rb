@@ -14,8 +14,8 @@ class TimesheetForceCommitsController < ApplicationController
 
   # Security and prerequisites
 
-  before_filter( :permitted? )
-  before_filter( :assign     )
+  before_action( :permitted? )
+  before_action( :assign     )
 
   def new
     unless ( @timesheets.count.zero? )
@@ -33,7 +33,7 @@ class TimesheetForceCommitsController < ApplicationController
     # filling in the submitted form.
 
     if ( @timesheets.count.zero? )
-      flash[ :error ] = "No action taken - while you were using the form, all timesheets were committed by their users anyway."
+      flash[ 'error' ] = "No action taken - while you were using the form, all timesheets were committed by their users anyway."
       redirect_to( home_path() ) and return
     end
 
@@ -90,7 +90,7 @@ class TimesheetForceCommitsController < ApplicationController
 
     end
 
-    flash[ :notice ] = "Timesheets committed successfully."
+    flash[ 'notice' ] = "Timesheets committed successfully."
     redirect_to( home_path() )
   end
 
@@ -101,14 +101,14 @@ private
   def permitted?
     appctrl_not_permitted() unless ( @current_user.privileged? )
   end
-  
+
   # Assign useful instance variables.
   #
-  def assign 
+  def assign
 
     # Start by getting all uncommitted timesheets.
 
-    @timesheets = Timesheet.where( :committed => false ).order( 'start_day_cache ASC' )
+    @timesheets = Timesheet.where( :committed => false ).order( 'start_day_cache' => :asc )
 
     # Further restrict this to timesheets ending before the start of
     # the current month. If the current week falls into the previous
@@ -153,7 +153,7 @@ private
     @object.earliest = form_data[ :earliest ]
     @object.latest   = form_data[ :latest   ]
 
-    flash[ :error ] = "Could not commit timesheets: #{ error }"
+    flash[ 'error' ] = "Could not commit timesheets: #{ error }"
     render( { :action => :new } )
   end
 end

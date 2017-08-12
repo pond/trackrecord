@@ -64,7 +64,7 @@ class ReportsController < ApplicationController
         redirect_to( report_path( @saved_report ) )
 
       rescue
-        flash[ :error ] = "The legacy report could not be generated. An unknown error occurred."
+        flash[ 'error' ] = "The legacy report could not be generated. An unknown error occurred."
         redirect_to( home_path() )
       end
 
@@ -74,7 +74,7 @@ class ReportsController < ApplicationController
 
     elsif ( @saved_report.nil? || ! @saved_report.is_permitted_for?( @current_user ) )
 
-      flash[ :error ] = @@application_helper.apphelp_view_hint(
+      flash[ 'error' ] = @@application_helper.apphelp_view_hint(
         :not_found_error,
         ReportsController
       )
@@ -96,14 +96,14 @@ class ReportsController < ApplicationController
     @report.compile()
 
     if ( @saved_report.title.empty? )
-      flash[ :warning ] = @@application_helper.apphelp_view_hint(
+      flash[ 'warning' ] = @@application_helper.apphelp_view_hint(
         :unnamed_warning,
         ReportsController
       )
     end
 
     if ( @report.throttled )
-      flash[ :error ] = @@application_helper.apphelp_view_hint(
+      flash[ 'error' ] = @@application_helper.apphelp_view_hint(
         :throttle_warning,
         ReportsController,
         {
@@ -140,7 +140,7 @@ class ReportsController < ApplicationController
             result = generate( report_type, @report, generator_params )
 
             unless ( result.nil? )
-              flash[ :error ] = result.to_s
+              flash[ 'error' ] = result.to_s
               render( { :template => 'reports/show' } )
             end
 
@@ -157,8 +157,8 @@ class ReportsController < ApplicationController
 
     end
 
-    flash.delete( :warning ) # Else these show on the *next* fetched page too
-    flash.delete( :error   )
+    flash.delete( 'warning' ) # Else these show on the *next* fetched page too
+    flash.delete( 'error'   )
   end
 
 private

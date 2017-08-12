@@ -55,6 +55,10 @@ module Trackrecord
       "<div class=\"fieldWithErrors\">#{ html_tag }</div>".html_safe()
     }
 
+    # Opt into exception raising in `after_rollback`/`after_commit` hooks
+    # introduced in Rails 4.2, to avoid deprecation warnings.
+    config.active_record.raise_in_transactional_callbacks = true
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -78,8 +82,16 @@ module Trackrecord
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.precompile += %w( prototype/prototype.js prototype_ujs/rails.js scriptaculous/scriptaculous.js scriptaculous/effects.js scriptaculous/dragdrop.js scriptaculous/controls.js )
+    config.assets.precompile += %w( leightbox/leightbox.js leightbox/leightbox.css )
+    config.assets.precompile += %w( yui_tree/yui_tree_support.js )
+    config.assets.precompile += %w( calendar_date_select/calendar_date_select.js calendar_date_select/default.css )
+
+    config.assets.precompile += %w( application.js saved_reports.js sessions.js task_imports.js )
+    config.assets.precompile += %w( trackrecord/check_box_toggler.js trackrecord/check_for_javascript.js trackrecord/global.js trackrecord/saved_report_editor.js trackrecord/section_revealer.js trackrecord/timesheet_editor.js trackrecord/timesheet_viewer.js )
+    config.assets.precompile += %w( application.css scaffold.css trackrecord_all.css trackrecord_print.css )
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.1'
+    config.assets.version = '1.2'
   end
 end

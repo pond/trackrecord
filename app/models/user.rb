@@ -23,8 +23,8 @@ class User < Rangeable
   } )
 
   DEFAULT_SORT_COLUMN    = 'name'
-  DEFAULT_SORT_DIRECTION = 'ASC'
-  DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
+  DEFAULT_SORT_DIRECTION = :asc
+  DEFAULT_SORT_ORDER     = { DEFAULT_SORT_COLUMN => DEFAULT_SORT_DIRECTION }
 
   USED_RANGE_COLUMN      = 'created_at' # For Rangeable base class
 
@@ -290,7 +290,7 @@ class User < Rangeable
   # inactive tasks.
   #
   def all_permitted_tasks
-    ( self.restricted? ) ? self.tasks.scoped : Task.scoped
+    ( self.restricted? ) ? self.tasks.all : Task.all
   end
 
   # Remove inactive tasks from a user's tasks list. The caller is

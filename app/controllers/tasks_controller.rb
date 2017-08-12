@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   in_place_edit_for( :task, :duration )
   in_place_edit_for( :task, :billable )
 
-  before_filter(
+  before_action(
     :can_be_modified?,
     :only =>
     [
@@ -127,7 +127,7 @@ class TasksController < ApplicationController
   #
   def new
     if ( Project.active.count.zero? )
-      flash[ :error ] = 'You must create at least one active project first.'
+      flash[ 'error' ] = 'You must create at least one active project first.'
       redirect_to( new_project_path() )
     else
       appctrl_new( 'Task' )
@@ -144,7 +144,7 @@ class TasksController < ApplicationController
   # Update a task following submission of an 'edit' view form.
   # Restricted users can't do this.
   #
-  # @record is set by the "can_be_modified?" before_filter method.
+  # @record is set by the "can_be_modified?" before_action method.
   #
   def update
 
@@ -155,16 +155,16 @@ class TasksController < ApplicationController
       Task.transaction do
         @record.update_with_side_effects!( tasks_params() )
 
-        flash[ :notice ] = 'Task details updated.'
+        flash[ 'notice' ] = 'Task details updated.'
         redirect_to( tasks_path() )
       end
 
     rescue ActiveRecord::StaleObjectError
-      flash[ :error ] = 'The task details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
+      flash[ 'error' ] = 'The task details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
       redirect_to( task_path( params[ :task ] ) )
 
     rescue => error
-      flash[ :error ] = "Could not update task details: #{ error }"
+      flash[ 'error' ] = "Could not update task details: #{ error }"
       render( :action => 'edit' )
 
     end
@@ -192,11 +192,12 @@ private
       :code,
       :description,
       :duration,
-      :billable
+      :billable,
+      :project_id
     )
   end
 
-  # before_filter action - can the item in the params hash be modified by
+  # before_action method - can the item in the params hash be modified by
   # the current user?
   #
   def can_be_modified?

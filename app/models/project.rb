@@ -10,6 +10,8 @@
 
 class Project < TaskGroup
 
+  default_scope( -> { order( DEFAULT_SORT_ORDER ) } )
+
   audited( {
     :except => [
       :lock_version,

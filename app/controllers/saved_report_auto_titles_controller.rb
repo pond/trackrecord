@@ -9,6 +9,6 @@
 
 class SavedReportAutoTitlesController < ApplicationController
   def show
-    render :text => "#{ Time.now }"
+    render :plain => "#{ Time.now }"
   end
 end

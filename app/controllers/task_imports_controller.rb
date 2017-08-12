@@ -17,7 +17,7 @@ class TaskImportsController < ApplicationController
 
   # Security.
 
-  before_filter( :permitted? )
+  before_action( :permitted? )
 
   # Take the file data from the 'new' view form and 'create' an "import
   # session"; that is, parse the file and generate an intermediate
@@ -35,7 +35,7 @@ class TaskImportsController < ApplicationController
 
     if ( xmlfile == '' ) # Empty string = nothing chosen, else a file object
 
-      flash[ :error ] = "Please choose a file before using the 'Analyse' button."
+      flash[ 'error' ] = "Please choose a file before using the 'Analyse' button."
 
     else
 
@@ -60,7 +60,7 @@ class TaskImportsController < ApplicationController
         parent_titles = task_data[ :parent_titles ]
 
         if ( tasks.blank? )
-          flash[ :error  ] = 'No usable tasks were found in that file'
+          flash[ 'error' ] = 'No usable tasks were found in that file'
 
         else
           @import.tasks         = tasks
@@ -70,9 +70,9 @@ class TaskImportsController < ApplicationController
 
           @import.generate_filtered_task_list()
 
-          flash[ :notice ] = 'Tasks read successfully. Please choose items to import.'
+          flash[ 'notice' ] = 'Tasks read successfully. Please choose items to import.'
           render( { :action => :edit } )
-          flash.delete( :notice ) and return # If not deleted, flash message persists for one fetch too many
+          flash.delete( 'notice' ) and return # If not deleted, flash message persists for one fetch too many
 
         end
 
@@ -83,14 +83,14 @@ class TaskImportsController < ApplicationController
         # the message off at the first newline.
 
         lines = error.message.split("\n")
-        flash[ :error ] = "Failed to read file: #{ lines[ 0 ] }"
-        flash.delete( :notice ) # In case it got set above, but the render call then failed
+        flash[ 'error' ] = "Failed to read file: #{ lines[ 0 ] }"
+        flash.delete( 'notice' ) # In case it got set above, but the render call then failed
 
       end
     end
 
     render( { :action => :new } )
-    flash.delete( :error ) # If not deleted, flash message persists for one fetch too many
+    flash.delete( 'error' ) # If not deleted, flash message persists for one fetch too many
   end
 
   # Once the user has updated anything they need to update in the import
@@ -116,7 +116,7 @@ class TaskImportsController < ApplicationController
 
     if ( to_import.empty? )
 
-      flash[ :error ] = 'No tasks were selected for import. Please select at least one task and try again.'
+      flash[ 'error' ] = 'No tasks were selected for import. Please select at least one task and try again.'
 
     else
 
@@ -151,19 +151,19 @@ class TaskImportsController < ApplicationController
             end.save!
           end
 
-          flash[ :notice ] = "#{ to_import.length } #{ to_import.length == 1 ? 'task' : 'tasks' } imported successfully."
+          flash[ 'notice' ] = "#{ to_import.length } #{ to_import.length == 1 ? 'task' : 'tasks' } imported successfully."
           redirect_to( tasks_path() ) and return
         end
 
       rescue => error
-        flash[ :error ] = "Unable to import tasks: #{ error }"
+        flash[ 'error' ] = "Unable to import tasks: #{ error }"
 
       end
 
     end
 
     render( { :action => :edit } )
-    flash.delete( :error )
+    flash.delete( 'error' )
   end
 
 private

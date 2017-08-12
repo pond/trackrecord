@@ -12,13 +12,13 @@ class TaskGroup < Rangeable
 
   self.abstract_class = true
 
-  # Define default sort order for caller convenience.
+  # Define default sort order constants for caller convenience. From
+  # Rails 4.2 onwards, subclasses must define a default scope, if they
+  # require one; it cannot be done here.
 
   DEFAULT_SORT_COLUMN    = 'title'
-  DEFAULT_SORT_DIRECTION = 'ASC'
-  DEFAULT_SORT_ORDER     = "#{ DEFAULT_SORT_COLUMN } #{ DEFAULT_SORT_DIRECTION }"
-
-  default_scope( { :order => DEFAULT_SORT_ORDER } )
+  DEFAULT_SORT_DIRECTION = :asc
+  DEFAULT_SORT_ORDER     = { DEFAULT_SORT_COLUMN => DEFAULT_SORT_DIRECTION }
 
   # Want to do this, for future compatibility with Rails 4:
   #
@@ -58,7 +58,7 @@ class TaskGroup < Rangeable
 
   # Find all objects which the given user is allowed to see.
   # A conditions hash may be passed to further restrict the search
-  # (that is, the "{...}" in "find( :all, :conditions => {...})").
+  # via passing into a "where" clause.
   #
   def self.find_permitted( user, conditions = nil )
 
@@ -67,7 +67,7 @@ class TaskGroup < Rangeable
 
     return [] unless user
 
-    items = find( :all, { :conditions => conditions } )
+    items = where( conditions || {} )
     return items if user.privileged?
 
     allowed = []

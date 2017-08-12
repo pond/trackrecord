@@ -19,6 +19,14 @@ up to 2.4.x and all updated gems throughout.
 - Changed all `.rdoc` files to Markdown, `.md`. If reading any entries in
   the log below, bear that in mind where filename references are given.
 
+- No need to edit any `secret_token.rb` file now, but if you run in
+  Development mode routinely, then please *do* change the value assigned
+  in `config/secrets.yml` to something only you know. Do not check it in
+  to source control systems. Command `rake secret` will generate a new
+  random value for you to substitute. It's a better idea, though, to run
+  in Production mode and use environment variable `SECRET_KEY_BASE` to
+  convey that data.
+
 
 
 ## Version 2.31, 2014-05-25

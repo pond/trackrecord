@@ -137,11 +137,11 @@ class UserTest < ActiveSupport::TestCase
 
     admin = admins.first # Admin, me, expect all tasks
     assert_equal Task.active.all, admin.active_permitted_tasks.all, "Unexpected admin active task list"
-    assert_equal Task.scoped.all, admin.all_permitted_tasks.all, "Unexpected admin task list"
+    assert_equal Task.all, admin.all_permitted_tasks.all, "Unexpected admin task list"
 
     manager = managers.first
     assert_equal Task.active.all, manager.active_permitted_tasks.all, "Unexpected manager active task list"
-    assert_equal Task.scoped.all, manager.all_permitted_tasks.all, "Unexpected manager task list"
+    assert_equal Task.all, manager.all_permitted_tasks.all, "Unexpected manager task list"
 
     # No user by default has any inactive tasks in their task list,
     # so both active and permitted lists should be the same. We use

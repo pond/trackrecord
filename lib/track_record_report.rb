@@ -263,7 +263,7 @@ module TrackRecordReport
     # * <em>WEEK - see below - so also ISOYEAR (PostgreSQL v8.3+ specific)</em>
     #   - Ruby mirrors ISOYEAR with Date#cwyear. PostgreSQL v8.3 and later also
     #   provide ISODOW (day-of-week), equivalent to Ruby's Date#cwday, but that
-    #   is not needed by TrackRecord. 
+    #   is not needed by TrackRecord.
     #
     # Weekly reports are thorny, because that requires grouping by some idea of
     # a unique numbered week. The commercial week number is the obvious choice.
@@ -524,8 +524,8 @@ module TrackRecordReport
       @column_ranges         = []
       @column_keys           = []
 
-      @tasks                 = Task.scoped
-      @filtered_tasks        = Task.scoped
+      @tasks                 = Task.all
+      @filtered_tasks        = Task.all
       @task_ids              = []
       @active_task_ids       = []
       @inactive_task_ids     = []
@@ -576,7 +576,7 @@ module TrackRecordReport
       unless array.nil? || array.count.zero?
         @tasks = Task.where( :id => array )
       else
-        @tasks = Task.scoped
+        @tasks = Task.all
       end
 
       update_internal_task_lists()

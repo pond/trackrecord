@@ -44,7 +44,7 @@ class WorkPacket < ActiveRecord::Base
   # The work packet may be in either a not committed or committed timesheet.
   #
   def self.find_earliest_by_tasks( task_ids = [] )
-    return WorkPacket.find_first_by_tasks_and_order( task_ids, 'date ASC' )
+    return WorkPacket.find_first_by_tasks_and_order( task_ids, { 'date' => :asc } )
   end
 
   # Return the latest (last by date) work packet, either across all tasks
@@ -52,20 +52,20 @@ class WorkPacket < ActiveRecord::Base
   # The work packet may be in either a not committed or committed timesheet.
   #
   def self.find_latest_by_tasks( task_ids = [] )
-    return WorkPacket.find_first_by_tasks_and_order( task_ids, 'date DESC' )
+    return WorkPacket.find_first_by_tasks_and_order( task_ids, { 'date' => :desc } )
   end
 
   # Support find_earliest_by_tasks and find_latest_by_tasks. Pass an array
-  # of task IDs and a sort order (SQL fragment, e.g. "date ASC").
+  # of task IDs and a sort order (Hash, e.g. "{ 'date' => :asc }").
   #
-  def self.find_first_by_tasks_and_order( task_ids, order )
+  def self.find_first_by_tasks_and_order( task_ids, order_hash )
     if ( task_ids.count.zero? )
-      return WorkPacket.significant.order( order ).first
+      return WorkPacket.significant.order( order_hash ).first
 
     else
       joins      = :timesheet_row
       conditions = { :timesheet_rows => { :task_id => task_ids } }
-      return WorkPacket.significant.joins( joins ).where( conditions ).order( order ).first
+      return WorkPacket.significant.joins( joins ).where( conditions ).order( order_hash ).first
 
     end
   end

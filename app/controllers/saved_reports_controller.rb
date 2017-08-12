@@ -16,7 +16,7 @@ class SavedReportsController < SavedReportsBaseController
   in_place_edit_for( :saved_report, :title  )
   in_place_edit_for( :saved_report, :shared )
 
-  before_filter(
+  before_action(
     :can_be_modified?,
     :only =>
     [
@@ -171,7 +171,7 @@ class SavedReportsController < SavedReportsBaseController
     appctrl_patch_params_from_js( :saved_report, :inactive_task_ids )
 
     if ( @record.update_attributes( saved_report_params() ) )
-      flash[ :notice ] = "Report details updated."
+      flash[ 'notice' ] = "Report details updated."
       redirect_to( report_path( @record ) )
     else
       render( :action => :edit )
@@ -193,7 +193,7 @@ class SavedReportsController < SavedReportsBaseController
   # Confirm deletion of a saved report.
   #
   def delete
-    # All work done via before_filters.
+    # All work done via before_action methods.
   end
 
   # Actually delete a saved report.
@@ -210,7 +210,7 @@ private
     appctrl_saved_report_params( :saved_report )
   end
 
-  # before_filter action - can the item in the params hash be modified by
+  # before_action method - can the item in the params hash be modified by
   # the current user?
   #
   def can_be_modified?

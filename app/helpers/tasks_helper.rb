@@ -225,7 +225,7 @@ module TasksHelper
     end
 
     if ( permitted_tasks.nil? )
-      root_customers = Customer.all
+      root_customers = Customer.all.to_a
     else
       root_projects  = permitted_tasks.map { | task    | task.project             }.uniq
       root_customers = root_projects.map   { | project | project.try( :customer ) }.uniq

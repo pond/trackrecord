@@ -89,7 +89,7 @@ class WorkPacketTest < ActiveSupport::TestCase
     last = WorkPacket.find_latest_by_tasks()
     assert_equal "20517", last.id.to_s, "Last work packet differs from expected result (A)"
 
-    first = WorkPacket.find_first_by_tasks_and_order( [], 'worked_hours DESC, created_at ASC' )
+    first = WorkPacket.find_first_by_tasks_and_order( [], { 'worked_hours' => :desc, 'created_at' => :asc } )
     assert_equal "45587", first.id.to_s, "First work packet differs from expected result (B)"
 
     tasks = [ 93, 36, 124, 27 ] # Pretty much at random...
@@ -100,7 +100,7 @@ class WorkPacketTest < ActiveSupport::TestCase
     last = WorkPacket.find_latest_by_tasks( tasks )
     assert_equal "47488", last.id.to_s, "Last work packet differs from expected result (B)"
 
-    first = WorkPacket.find_first_by_tasks_and_order( tasks, 'worked_hours DESC, created_at ASC' )
+    first = WorkPacket.find_first_by_tasks_and_order( tasks, { 'worked_hours' => :desc, 'created_at' => :asc } )
     assert_equal "31643", first.id.to_s, "First work packet differs from expected result (D)"
   end
 end

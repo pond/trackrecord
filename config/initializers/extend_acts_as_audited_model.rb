@@ -30,8 +30,8 @@ module Audited
     #
     def self.used_range( accurate = false )
 
-      first = self.unscoped.order( "#{ USED_RANGE_COLUMN } ASC"  ).first
-       last = self.unscoped.order( "#{ USED_RANGE_COLUMN } DESC" ).first
+      first = self.unscoped.order( USED_RANGE_COLUMN => :asc  ).first
+       last = self.unscoped.order( USED_RANGE_COLUMN => :desc ).first
 
       today = Date.today
       first = first.nil? ? today : first.created_at

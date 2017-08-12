@@ -19,9 +19,9 @@ view by making a call along the lines of:
 
   uses_leightbox()
 
-...around the same place it might declare "before_filter" items and the like.
+...around the same place it might declare "before_action" items and the like.
 The "uses_leightbox" method takes a hash of options which are passed straight
-through to the Rails "before_filter" API allowing the Controller to further
+through to the Rails "before_action" API allowing the Controller to further
 refine its use of Leightbox to certain views, for example, to use Leightbox
 in an "edit" action (and in a related "update" action in case an update fails
 and re-renders the "edit" view):

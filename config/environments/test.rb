@@ -4,6 +4,10 @@ Trackrecord::Application.configure do
   # Loading files from 'lib'
   config.eager_load = false
 
+  # or `:random` one day, if that's ever possible given the way the tests
+  # are written right now.
+  config.active_support.test_order = :sorted
+
   # The test environment is used exclusively to run your application's
   # test suite.  You never need to work with it otherwise.  Remember that
   # your test database is "scratch space" for the test suite and is wiped

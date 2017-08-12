@@ -13,6 +13,6 @@ class WorkPacketsController < ApplicationController
   # Security. No direct CRUD actions are allowed at all. Everything
   # is done through timesheet editing.
 
-  before_filter( :appctrl_not_permitted )
+  before_action( :appctrl_not_permitted )
 
 end

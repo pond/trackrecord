@@ -14,7 +14,7 @@ class HelpController < ApplicationController
   # Security exemption to allow viewing help pages even when signed out.
   # The 'show' action implementation restricts this further.
   #
-  skip_before_filter :appctrl_confirm_user, :only => :show
+  skip_before_action :appctrl_confirm_user, :only => :show
 
   # Hide the main heading; it is output by the view rather than letting the
   # layout do it so that both heading and body text can be wrapped in a single

@@ -10,6 +10,8 @@
 
 class Customer < TaskGroup
 
+  default_scope( -> { order( DEFAULT_SORT_ORDER ) } )
+
   audited( {
     :except => [
       :lock_version,
@@ -59,7 +61,7 @@ class Customer < TaskGroup
   # arrays of objects.
   #
   def self.apply_default_sort_order( array )
-    array.sort! { | x, y | x.title.downcase <=> y.title.downcase }
+    array.to_a.sort! { | x, y | x.title.downcase <=> y.title.downcase }
   end
 
   # Update an object with the given attributes. This is done by a

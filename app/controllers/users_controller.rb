@@ -9,10 +9,10 @@
 
 class UsersController < ApplicationController
 
-  skip_before_filter( :appctrl_ensure_user_is_valid,
+  skip_before_action( :appctrl_ensure_user_is_valid,
                       :only => [ :new, :create, :edit, :update, :cancel ] )
 
-  before_filter :set_simple_password_suggestion, :only => [ :new, :create, :edit, :update ]
+  before_action :set_simple_password_suggestion, :only => [ :new, :create, :edit, :update ]
 
   # SecureRandom is used for simple password suggestions for the temporary
   # initial password on new accounts.
@@ -185,12 +185,12 @@ class UsersController < ApplicationController
     # be valid, implying in-progress first time account setup.
 
     if ( @current_user.nil? or @current_user.id != @user.id or @current_user.valid? )
-      flash[ :error ] = "Cancellation request not understood."
+      flash[ 'error' ] = "Cancellation request not understood."
       redirect_to( home_path() )
     else
       @user.destroy()
       reset_session()
-      flash[ :error ] = 'Sign up cancelled.'
+      flash[ 'error' ] = 'Sign up cancelled.'
       redirect_to( signin_path() )
     end
   end
@@ -219,7 +219,7 @@ class UsersController < ApplicationController
 
     @user.destroy()
 
-    flash[ :notice ] = 'User and all associated data deleted'
+    flash[ 'notice' ] = 'User and all associated data deleted'
     redirect_to( users_path() )
   end
 
@@ -393,11 +393,11 @@ private
 
   rescue ActiveRecord::StaleObjectError
     @user.control_panel.valid? # Check for control panel errors even if the user save failed
-    flash[ :error ] = 'The user details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
+    flash[ 'error' ] = 'The user details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
     redirect_to( user_path( @user ) )
 
   rescue => error
-    flash[ :error ] = error.message
+    flash[ 'error' ] = error.message
     @user.control_panel.valid? # Check for control panel errors even if the user save failed
     render( :action => failure_action )
 

@@ -13,7 +13,7 @@ class AuditsController < ApplicationController
 
   # Security.
 
-  before_filter( :permitted? )
+  before_action( :permitted? )
 
   # List audit information.
 

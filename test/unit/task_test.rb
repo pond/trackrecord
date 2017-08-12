@@ -243,7 +243,7 @@ class TaskTest < ActiveSupport::TestCase
 
     # Test the range-based calculations.
 
-    wp      = t.work_packets.order( "date ASC" )
+    wp      = t.work_packets.order( 'date' => :asc )
     wpstart = wp.first
     wpend   = wp.last
 
@@ -292,7 +292,7 @@ class TaskTest < ActiveSupport::TestCase
 
     # A wider range; first narrow down to non-zero work packets only.
 
-    wp      = t.work_packets.order( "date ASC" ).where( "worked_hours > 0" )
+    wp      = t.work_packets.order( 'date' => :asc ).where( "worked_hours > 0" )
     wpstart = wp.first
     wpend   = wp.last
 

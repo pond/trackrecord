@@ -9,7 +9,7 @@
 
 class TimesheetsController < ApplicationController
 
-  before_filter :appctrl_do_not_cache, :only => [ :new, :create, :edit, :update ]
+  before_action :appctrl_do_not_cache, :only => [ :new, :create, :edit, :update ]
 
   # YUI tree component for task selection
 
@@ -124,9 +124,9 @@ class TimesheetsController < ApplicationController
     )
 
     if ( clash )
-      flash[ :error ] = "A timesheet for week #{ @timesheet.week_number } has already been created."
+      flash[ 'error' ] = "A timesheet for week #{ @timesheet.week_number } has already been created."
     elsif ( @timesheet.save )
-      flash[ :notice ] = 'New timesheet created and ready for editing.'
+      flash[ 'notice' ] = 'New timesheet created and ready for editing.'
       redirect_to( edit_timesheet_path( @timesheet ) )
       return
     end
@@ -158,7 +158,7 @@ class TimesheetsController < ApplicationController
     @errors = update_backend( @timesheet )
 
     if ( @errors.nil? )
-      flash[ :error ] = 'This timesheet was modified by someone else while you were making changes. Please examine the updated information before editing again.'
+      flash[ 'error' ] = 'This timesheet was modified by someone else while you were making changes. Please examine the updated information before editing again.'
       redirect_to( timesheet_path( @timesheet ) )
       return
     end
@@ -169,7 +169,7 @@ class TimesheetsController < ApplicationController
     set_sections( @timesheet )
 
     if ( @errors.empty? )
-      flash[ :notice ] = "Week #{ @timesheet.week_number } changes saved."
+      flash[ 'notice' ] = "Week #{ @timesheet.week_number } changes saved."
     else
       restore_errant_form_data()
       render( :action => :edit )
@@ -183,7 +183,7 @@ class TimesheetsController < ApplicationController
       another = params[ :next ] ? @next_week : @prev_week
 
       if ( another.nil? )
-        flash[ :error ] = "Cannot find another week to edit in #{ @timesheet.year }."
+        flash[ 'error' ] = "Cannot find another week to edit in #{ @timesheet.year }."
         redirect_to( new_timesheet_path() )
         return
       end
@@ -196,12 +196,12 @@ class TimesheetsController < ApplicationController
         new_timesheet.committed = false
 
         if ( new_timesheet.nil? )
-          flash[ :error ] = "Unable to create a new timesheet for week #{ new_week }."
+          flash[ 'error' ] = "Unable to create a new timesheet for week #{ new_week }."
         else
-          flash[ :notice ] << " Now editing a new timesheet for week #{ new_week }."
+          flash[ 'notice' ] << " Now editing a new timesheet for week #{ new_week }."
         end
       else
-        flash[ :notice ] << " Now editing the timesheet for week #{ new_week }."
+        flash[ 'notice' ] << " Now editing the timesheet for week #{ new_week }."
       end
 
       if ( new_timesheet.nil? )
@@ -267,7 +267,7 @@ private
   # given timesheet's tasks (as defined by its in-position-order rows).
   #
   def set_sections( timesheet )
-    tasks = timesheet.tasks.reorder( '"timesheet_rows"."position"' )
+    tasks = timesheet.tasks.reorder( '"timesheet_rows"."position" ASC' )
     @sections = TrackRecordSections::Sections.new( tasks )
   end
 
@@ -459,7 +459,13 @@ private
       end
 
       if ( sorting )
-        row_objects = timesheet.timesheet_rows.all.dup
+        row_objects = timesheet.timesheet_rows.all
+
+        if row_objects.is_a?( Array )
+          row_objects = row_objects.dup
+        else # ActiveRecord::Relation
+          row_objects = row_objects.to_a
+        end
 
         case sorting
           when 'rows_added'

@@ -29,10 +29,6 @@ Trackrecord::Application.routes.draw do
   #   resources :customers do
   #     resources :tasks
   #   end
-  #
-  # ...and the Rails 2 equivalent used to be:
-  #
-  #  map.resources :customers, :has_many => [ :tasks ]
 
   resources( :customers      ) { resources :tasks                            }
   resources( :projects       ) { resources :tasks                            }
@@ -73,8 +69,21 @@ Trackrecord::Application.routes.draw do
   resource  :saved_report_auto_title, :only => :show
   resource  :timesheet_force_commit,  :only => [ :new, :create ]
 
-  # Finally, the normal default rules at lowest priority
+  # Rails normally routes non-GET stuff in pairs. For example, there's a
+  # GET for "new" with POST for associated "create". There's a GET for
+  # "edit" with PATCH for associated "update". For "delete", though, it
+  # just as the DELETE route. TrackRecord implements confirmation pages
+  # without fragile JavaScript that might be bypassed by client-side web
+  # crawlers via GET to 'delete' & subsequent POST to 'delete_confirm'.
+  #
+  get  '/customers/delete/:id',         :action => 'delete',         :controller => 'customers'
+  get   '/projects/delete/:id',         :action => 'delete',         :controller => 'projects'
+  get      '/users/delete/:id',         :action => 'delete',         :controller => 'users'
+  get      '/tasks/delete/:id',         :action => 'delete',         :controller => 'tasks'
 
-  get '/:controller/:action/:id' => '#index'
-  get '/:controller/:action/:id.:format' => '#index'
+  post '/customers/delete_confirm/:id', :action => 'delete_confirm', :controller => 'customers'
+  post  '/projects/delete_confirm/:id', :action => 'delete_confirm', :controller => 'projects'
+  post     '/users/delete_confirm/:id', :action => 'delete_confirm', :controller => 'users'
+  post     '/tasks/destroy/:id',        :action => 'destroy',        :controller => 'tasks'
+
 end

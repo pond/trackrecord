@@ -17,9 +17,9 @@ class SavedReportsBaseController < ApplicationController
   # down into the in-place editor so it quotes the user ID in AJAX calls.
   # "Current user" is instead assumed here.
 
-  before_filter :assign_user
-  before_filter :confirm_permission,         :except => [ :set_saved_report_title, :set_saved_report_shared ]
-  before_filter :delete_unnamed_reports_for, :only   => [ :index, :new, :create ]
+  before_action :assign_user
+  before_action :confirm_permission,         :except => [ :set_saved_report_title, :set_saved_report_shared ]
+  before_action :delete_unnamed_reports_for, :only   => [ :index, :new, :create ]
 
 private
 
@@ -39,7 +39,7 @@ private
   end
 
   # Get rid of any unnamed reports for the current user. Usually invoked via
-  # "before_filter(...)".
+  # "before_action(...)".
   #
   def delete_unnamed_reports_for
     SavedReport.where( :user_id => @current_user, :title => "" ).delete_all()

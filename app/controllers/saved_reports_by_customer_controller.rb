@@ -29,7 +29,7 @@ class SavedReportsByCustomerController < SavedReportsBaseController
     saved_report.task_grouping         = "both"
 
     if ( saved_report.active_task_ids.count.zero? && saved_report.inactive_task_ids.count.zero? )
-      flash[ :error ] = 'The customer has no associated tasks to show in a report.'
+      flash[ 'error' ] = 'The customer has no associated tasks to show in a report.'
       redirect_to( home_path() )
     elsif ( saved_report.save )
       redirect_to( report_path( saved_report ) )

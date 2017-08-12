@@ -14,7 +14,7 @@ class CustomersController < ApplicationController
   in_place_edit_for( :customer, :title )
   in_place_edit_for( :customer, :code  )
 
-  before_filter( :can_be_modified?, :only => [ :edit, :update, :set_customer_title, :set_customer_code ] )
+  before_action( :can_be_modified?, :only => [ :edit, :update, :set_customer_title, :set_customer_code ] )
 
   uses_prototype( :only => :index )
 
@@ -136,16 +136,16 @@ class CustomersController < ApplicationController
           update_tasks
         )
 
-        flash[ :notice ] = 'Customer details updated'
+        flash[ 'notice' ] = 'Customer details updated'
         redirect_to( customers_path() )
       end
 
     rescue ActiveRecord::StaleObjectError
-      flash[ :error ] = 'The customer details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
+      flash[ 'error' ] = 'The customer details were modified by someone else while you were making changes. Please examine the updated information before editing again.'
       redirect_to( customer_path( @record ) )
 
     rescue => error
-      flash[ :error ] = "Could not update customer details: #{ error }"
+      flash[ 'error' ] = "Could not update customer details: #{ error }"
       render( :action => 'edit' )
 
     end
@@ -181,12 +181,12 @@ class CustomersController < ApplicationController
           message = 'Customer deleted; projects and tasks left alone'
         end
 
-        flash[ :notice ] = message
+        flash[ 'notice' ] = message
         redirect_to( customers_path() )
       end
 
     rescue => error
-      flash[ :error ] = "Could not destroy customer: #{ error }"
+      flash[ 'error' ] = "Could not destroy customer: #{ error }"
       redirect_to( home_path() )
 
     end
@@ -212,7 +212,7 @@ private
     )
   end
 
-  # before_filter action - can the item in the params hash be modified by
+  # before_action method - can the item in the params hash be modified by
   # the current user?
   #
   def can_be_modified?

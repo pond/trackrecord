@@ -4,11 +4,11 @@
 source 'http://rubygems.org'
 ruby '2.1.10'
 
-gem 'rails', '4.0.4'
+gem 'rails', '4.2.5'
 
 gem 'pg', '~> 0.21'
 
-gem 'prototype-rails'
+gem 'prototype-rails', :git => 'https://github.com/rails/prototype-rails', :branch => '4.2'
 
 # Uncomment to use thin as the 'rails server' web server.
 # gem 'thin'
@@ -46,6 +46,12 @@ gem 'audited',                '~> 4.5'
 gem 'acts_as_list'
 gem 'browser',                '~> 0.4'
 gem 'in_place_editing'
+
+# http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#web-console
+#
+group :development do
+  gem 'web-console', '~> 2.0'
+end
 
 # For testing:
 #
