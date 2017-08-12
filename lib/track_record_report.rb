@@ -1534,9 +1534,12 @@ module TrackRecordReport
       # This does all the database leg work, pulling in summed work packets
       # for all of the assembled conditions, grouped into a hash keyed by
       # data that depends upon 'groups', with BigDecimal sum result values.
-
-      assoc = WorkPacket.joins( joins ).where( conditions ).where( non_zero ).order( groups )
-      sums  = assoc.sum( :worked_hours, :group => groups )
+      #
+      sums = WorkPacket.joins( joins      ).
+                        where( conditions ).
+                        where( non_zero   ).
+                        group( groups     ).
+                        order( groups     ).sum( :worked_hours)
 
       # The raw data needs to be assembled into a useful report.
       #
