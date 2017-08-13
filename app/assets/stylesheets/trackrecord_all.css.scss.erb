@@ -1,15 +1,24 @@
-/************************************************************************\
- * File:    trackrecord_all.css                                         *
- *          Hipposoft 2008                                              *
- *                                                                      *
- * Purpose: Default TrackRecord stylesheet. Works in conjunction with   *
- *          the standard scaffold styles. All media types.              *
- *                                                                      *
- * History: 24-May-2008 (ADH): Standard comment header added.           *
- *          02-Nov-2009 (ADH): Version 1.5 extensions added.            *
-\************************************************************************/
+//============================================================================
+// File:    trackrecord_all.css
+//          Hipposoft 2008
+//
+// Purpose: Default TrackRecord stylesheet. Works in conjunction with the
+//          standard scaffold styles. All media types.
+//
+// History: 24-May-2008 (ADH): Standard comment header added.
+//          02-Nov-2009 (ADH): Version 1.5 extensions added.
+//============================================================================
 
-/* Overall page */
+// Variables
+
+$navigation:         mix( rgb( 63,  76, 107 ), rgb(  96, 108, 136 ), 40% );
+$navigation_current: mix( rgb( 29, 103,  33 ), rgb( 129, 255, 129 ), 40% );
+
+$table_headers:      $navigation;
+$table_headers_asc:  rgb( 169, 3,   41 );
+$table_headers_desc: rgb( 3,   169, 41 );
+
+// Overall page
 
 html,
 body {
@@ -28,7 +37,7 @@ body {
   position: relative;
 }
 
-/* Global "utility" classes */
+// Global "utility" classes
 
 .nowrap {
   white-space: nowrap;
@@ -59,7 +68,7 @@ tr.top {
   width: 1px;
 }
 
-/* Heading font (and navigation bar feature area), with floated links */
+// Heading font (and navigation bar feature area), with floated links
 
 h1, h2, h3, h4, h5, h6,
 div#header * {
@@ -79,21 +88,15 @@ h6 div.floated_link {
   line-height: 170%;
 }
 
-/* Header with navigation bar */
+// Header with navigation bar
 
 div#header {
   padding: 10px 2%;
   height: 72px;
   margin-bottom: 40px;
 
-  background: rgb(96,108,136); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-  
+  background: $navigation;
+
   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow:    0px 5px 5px rgba(0, 0, 0, 0.3);
   box-shadow:         0px 5px 5px rgba(0, 0, 0, 0.3);
@@ -166,13 +169,7 @@ div#navbar a:hover {
 }
 
 div#navbar li.current {
-  background: #1d6721; /* Old browsers */
-  background: -moz-linear-gradient(top, #1d6721 0%, #81ff81 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1d6721), color-stop(100%,#81ff81)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #1d6721 0%,#81ff81 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #1d6721 0%,#81ff81 100%); /* W3C */
+  background: $navigation_current;
 
   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow:    0px 5px 5px rgba(0, 0, 0, 0.3);
@@ -184,17 +181,17 @@ div#navbar li.current a {
   height: 92px;
 }
 
-/* Float management */
+// Float management
 
 .float_clear {
   clear: both;
 }
 
-/* Main content */
+// Main content
 
 div#main_page_content {
   padding: 0 3em;
-  padding-bottom: 84px; /* Footer height plus padding, see below */
+  padding-bottom: 84px; // Footer height plus padding, see below
   font-size: 10.5pt;
 }
 
@@ -205,12 +202,11 @@ div#main_page_content h4,
 div#main_page_content h5,
 div#main_page_content h6 {
 
-  /* Prevents breakage caused by a scaffold.css 130% line height
-   * rule on various elements that cascades into headings from
-   * containing lines and causes them to actually be below 100%,
-   * so if they wrap, the lines overlap vertically. The scaffold
-   * rule is needed elsewhere, so just override this one case.
-   */
+  // Prevents breakage caused by a scaffold.css 130% line height
+  // rule on various elements that cascades into headings from
+  // containing lines and causes them to actually be below 100%,
+  // so if they wrap, the lines overlap vertically. The scaffold
+  // rule is needed elsewhere, so just override this one case.
 
   line-height: normal;
 }
@@ -221,7 +217,7 @@ input[ type="radio" ] {
   margin-right: 5px;
 }
 
-/* Footer */
+// Footer
 
 div#footer {
   position: absolute;
@@ -231,14 +227,8 @@ div#footer {
   height: 24px;
   padding: 20px 0;
 
-  background: rgb(96,108,136); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-    
+  background: $navigation;
+
   -webkit-box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow:    0px -5px 5px rgba(0, 0, 0, 0.3);
   box-shadow:         0px -5px 5px rgba(0, 0, 0, 0.3);
@@ -261,7 +251,7 @@ div#footer div:last-child {
   padding-right: 3em;
 }
 
-/* Flash messages */
+// Flash messages
 
 div.messages {
   font-size: 125%;
@@ -300,7 +290,7 @@ div.messages + div.signin {
   margin-top: 36px;
 }
 
-/* Home page sections */
+// Home page sections
 
 div#home_general,
 div#home_management,
@@ -314,7 +304,7 @@ div#home_management {
   padding-right: 2%;
 }
 
-/* Buttons leading to auto-generated reports */
+// Buttons leading to auto-generated reports
 
 div.report_button {
   display: inline-block;
@@ -326,12 +316,12 @@ div.report_button input {
   margin: 0;
 }
 
-/* Layout hackery tables */
+// Layout hackery tables
 
 table.for_layout {
   border: none;
   border-spacing: 0;
-  border-collapse: collapse;   
+  border-collapse: collapse;
 }
 
 table.for_layout tr {
@@ -344,7 +334,7 @@ table.for_layout tr td {
   padding: 0;
 }
 
-/* Sign-in table, with some related modifications for user account editing */
+// Sign-in table, with some related modifications for user account editing
 
 div.signin {
   text-align: center;
@@ -387,7 +377,7 @@ div.signin table input {
 }
 
 div.signin table input#sign_in_identity_url {
-  background: white url( <%= asset_path( "trackrecord/openid_small_logo.png" ) %> ) 2px 50% no-repeat; 
+  background: white url( <%= asset_path( "trackrecord/openid_small_logo.png" ) %> ) 2px 50% no-repeat;
   padding-left: 22px;
   padding-right: 0;
 }
@@ -407,7 +397,7 @@ div.signin table td#submit {
   padding: 15px 0 0 0;
 }
 
-/* List views */
+// List views
 
 table.list,
 table.navigation {
@@ -466,23 +456,11 @@ table.list form {
 }
 
 table.list th.sorted_column_asc {
-  background: #a90329; /* Old browsers */
-  background: -moz-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a90329), color-stop(44%,#8f0222), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%); /* W3C */
+  background: $table_headers_asc;
 }
 
 table.list th.sorted_column_desc {
-  background: #03a929; /* Old browsers */
-  background: -moz-linear-gradient(top, #03a929 0%, #028f22 44%, #006d19 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#03a929), color-stop(44%,#028f22), color-stop(100%,#006d19)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #03a929 0%,#028f22 44%,#006d19 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #03a929 0%,#028f22 44%,#006d19 100%); /* W3C */
+  background: $table_headers_desc;
 }
 
 table.list th.sorted_column_asc a:before {
@@ -493,7 +471,7 @@ table.list th.sorted_column_desc a:before {
   content: url( <%= asset_path( "trackrecord/down.png" ) %> );
 }
 
-/* Navigation links within list tables (overriding some styles above) */
+// Navigation links within list tables (overriding some styles above)
 
 tr.navigation,
 tr.navigation table,
@@ -527,7 +505,7 @@ td.navigation_page_selection {
   white-space: nowrap;
 }
 
-/* In-place editors */
+// In-place editors
 
 form.inplaceeditor-form {
   position: absolute;
@@ -556,16 +534,10 @@ form.inplaceeditor-form select {
   float: left;
 }
 
-/* Rows in general tables */
+// Rows in general tables
 
 tr.info {
-  background: rgb(96,108,136); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+  background: $table_headers;
 
   color: #fff;
   white-space: nowrap;
@@ -621,7 +593,7 @@ tr.even .overall_total {
   color: #0e0;
 }
 
-/* Edit-item and show-item presentation tables */
+// Edit-item and show-item presentation tables
 
 table.editing_table,
 table.display_table {
@@ -644,13 +616,13 @@ tr.display_row {
   text-align: center;
 }
 
-/* Search form tables */
+// Search form tables
 
 td.search_prompt {
   text-align: right;
 }
 
-/* Audit changes table */
+// Audit changes table
 
 table.audit_changes {
   color: #000;
@@ -689,7 +661,7 @@ table.audit_changes th {
   width: 60%
 }
 
-/* Timesheet year overview chart - see timesheethelp_year_chart */
+// Timesheet year overview chart - see timesheethelp_year_chart
 
 table.timesheet_chart_container {
   border: none;
@@ -716,13 +688,7 @@ table.timesheet_chart tr.last {
 }
 
 table.timesheet_chart th {
-  background: rgb(96,108,136); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom, rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+  background: $table_headers;
 
   font-weight: normal;
   color: #fff;
@@ -759,7 +725,7 @@ table.timesheet_chart form, table.timesheet_chart div {
   padding: 0;
 }
 
-/* Reports (see also timesheet editor/display styles later) */
+// Reports (see also timesheet editor/display styles later)
 
 table.report {
   white-space: nowrap;
@@ -794,7 +760,13 @@ table.report_edit_wrapper > tbody > tr > td.even {
 }
 
 div.report_edit_section {
-  padding: 1px 15px; /* 1px to work around accidental/buggy collapse on WebKit with 0 of *all* padding at top/bottom edges, including elements that have their own padding set, such as headings */
+
+  // 1px to work around accidental/buggy collapse on WebKit with 0 of *all*
+  // padding at top/bottom edges, including elements that have their own padding
+  // set, such as headings.
+  //
+  padding: 1px 15px;
+
   margin: 0;
   height: 100%;
 }
@@ -824,9 +796,7 @@ table.report tr.info th {
   padding-right: 0.25em;
 }
 
-/* Timesheet editor and display grids; reports also use some of
- * these styles.
- */
+// Timesheet editor and display grids; reports also use some of these styles
 
 table.ts_edit_table,
 table.ts_show_table {
@@ -949,54 +919,53 @@ table.ts_show_table tr.group_gap th {
   background: #fff;
 }
 
-/* Bulk task import table */
+// Bulk task import table
 
 table.bulk_task_import {
   margin: 0 auto;
   width: 80%;
   white-space: nowrap;
   border-collapse: collapse;
+
+  tr {
+    vertical-align: baseline;
+  }
+
+  tr td {
+    padding-left: 5px;
+  }
+
+  td.task_title {
+    width: 100%;
+  }
+
+  input.task_title {
+    width: 95%;
+  }
+
+  tr.breadcrumb {
+    background-color: #ccc;
+    color: black;
+    font-size: 90%;
+  }
+
+  tr.breadcrumb td {
+    padding: 5px 7px;
+    border-top: 7px solid white;
+  }
+
+  tr td table.bulk_task_import {
+    margin: 0;
+    width: auto;
+
+    tr td {
+      padding-left: 0;
+    }
+  }
 }
 
-table.bulk_task_import tr {
-  vertical-align: baseline;
-}
-
-table.bulk_task_import tr td {
-  padding-left: 5px;
-}
-
-table.bulk_task_import td.task_title {
-  width: 100%;
-}
-
-table.bulk_task_import input.task_title {
-  width: 95%;
-}
-
-table.bulk_task_import tr.breadcrumb {
-  background-color: #ccc;
-  color: black;
-  font-size: 90%;
-}
-
-table.bulk_task_import tr.breadcrumb td {
-  padding: 5px 7px;
-  border-top: 7px solid white;
-}
-
-table.bulk_task_import tr td table.bulk_task_import {
-  margin: 0;
-  width: auto;
-}
-
-table.bulk_task_import tr td table.bulk_task_import tr td {
-  padding-left: 0;
-}
-
-/* Committed / not committed timesheet labels; active / not active
- * items; overrunning / not overrunning labels.
- */
+// Committed / not committed timesheet labels; active / not active
+// items; overrunning / not overrunning labels.
 
 span.timesheet_not_committed {
   color: #a50;
@@ -1014,15 +983,14 @@ span.overrun {
   font-weight: bold;
 }
 
-/* Table cells carrying totals with italic or bold content are
- * indicating a problem with the total (see timesheet_editor.js).
- */
+// Table cells carrying totals with italic or bold content are
+// indicating a problem with the total (see timesheet_editor.js).
 
 td.total b, td.total i {
   color: #800;
 }
 
-/* Task indicators - billable / not billable, active / inactive */
+// Task indicators - billable / not billable, active / inactive
 
 .task_billable {
 }
@@ -1038,31 +1006,31 @@ td.total b, td.total i {
   text-decoration: line-through;
 }
 
-/* Definition lists */
+// Definition lists
 
 dt {
   font-weight: bold;
   padding: 1em 0;
 }
 
-/* General "floating icon" based pages and variants */
+// General "floating icon" based pages and variants
 
 div.icon_page {
   background: top left no-repeat;
   padding-left: 106px;
   min-height: 116px;
+
+  .help {
+    background-image: url( <%= asset_path( "trackrecord/info.png" ) %> );
+  }
+
+  .warning {
+    background-image: url( <%= asset_path( "trackrecord/warning.png" ) %> );
+    padding-left: 116px;
+  }
 }
 
-div.icon_page.help {
-  background-image: url( <%= asset_path( "trackrecord/info.png" ) %> );
-}
-
-div.icon_page.warning {
-  background-image: url( <%= asset_path( "trackrecord/warning.png" ) %> );
-  padding-left: 116px;
-}
-
-/* "Help" icons */
+// "Help" icons
 
 img.help {
   position: relative;
@@ -1077,14 +1045,14 @@ a:hover img.help {
   background-position: 1px -30px;
 }
 
-/* "Warning" icons on deletion pages */
+// "Warning" icons on deletion pages
 
 img.warning {
   float: left;
   padding-right: 15px;
 }
 
-/* General YUI tree view settings */
+// General YUI tree view settings
 
 div.yui-tree-container {
   border: 1px solid #ccc;
@@ -1096,29 +1064,37 @@ textarea.tree_selector_text {
   padding: 2px;
 }
 
-/* Fix some odd styles in the default YUI TreeView CSS */
+// Fix some odd styles in the default YUI TreeView CSS
 
-.ygtv-checkbox .ygtv-highlight0 .ygtvcontent,
-.ygtv-checkbox .ygtv-highlight1 .ygtvcontent,
-.ygtv-checkbox .ygtv-highlight2 .ygtvcontent {
-  padding-left: 17px; /* Check box image is 16px wide with some built-in padding and text labels rarely precisely abut their left edge due to the shapes of characters and anti-aliasing; default '1em' leaves check box too close to text for my liking */
+.ygtv-checkbox {
+  .ygtv-highlight0 .ygtvcontent,
+  .ygtv-highlight1 .ygtvcontent,
+  .ygtv-highlight2 .ygtvcontent {
+
+    // Check box image is 16px wide with some built-in padding and text labels
+    // rarely precisely abut their left edge due to the shapes of characters
+    // and anti-aliasing; default '1em' leaves check box too close to text for
+    // my liking.
+    //
+    padding-left: 17px;
+  }
 }
 
 a.ygtvspacer:hover {
-  background: none; /* Override default a:hover rule in scaffold.css */
+  background: none; // Override default a:hover rule in scaffold.css
 }
 
-/* Leightbox links */
+// Leightbox links
 
 a.lbOn {
   font-size: 90%;
 }
 
-/* Narrow viewport adjustments */
+// Narrow viewport adjustments
 
 @media all and (max-width: 800px) {
 
-  /* Header - stack vertically */
+  // Header - stack vertically
 
   div#header {
     text-align: center;
@@ -1133,7 +1109,7 @@ a.lbOn {
     font-size: 120%;
     line-height: 100%;
   }
-  
+
   span.slug {
     font-size: 12px;
   }
@@ -1166,7 +1142,7 @@ a.lbOn {
     height: 28px;
   }
 
-  /* Footer - stack vertically */
+  // Footer - stack vertically
 
   div#footer {
     text-align: center;
@@ -1183,7 +1159,7 @@ a.lbOn {
     padding: 0;
   }
 
-  /* Control panel - stack vertically */
+  // Control panel - stack vertically
 
   div#home_general,
   div#home_management,

@@ -89,6 +89,6 @@ module Trackrecord
     config.assets.precompile += %w( application.css scaffold.css trackrecord_all.css trackrecord_print.css )
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.2'
+    config.assets.version = '1.3'
   end
 end
