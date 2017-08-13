@@ -6,8 +6,16 @@
 ##############################################################################
 
 source 'http://rubygems.org'
-ruby   '2.1.10'
-gem    'rails', '4.2.5'
+
+if ENV[ 'RAILS_ENV' ] == 'test'
+  regexp  = /(?:(\d+)\.)?(?:(\d+)\.)?(?:(\d+)\.\d+)/
+  version = `ruby --version`.match( regexp )
+  ruby( version )
+else
+  ruby '2.1.10'
+end
+
+gem 'rails', '4.2.5'
 
 # Database support; change this to use other engines.
 #
