@@ -13,7 +13,7 @@ sudo: false
 cache: bundler
 
 addons:
-  postgresql: "9.6"
+  postgresql: "9.5"
 
 script:
   - TZ=Europe/London DATABASE_USER=postgres RAILS_ENV=test bundle exec rake test
