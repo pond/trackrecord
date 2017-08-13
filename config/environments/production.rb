@@ -24,10 +24,7 @@ Trackrecord::Application.configure do
   # - to test precompiled assets under Webrick or similar ("rails s") set this
   # to "true" and run the in production mode (e.g. "rails s -e production" or
   # an equivalent command, "RAILS_ENV=production rails s")
-  config.serve_static_assets = false
-
-  # Compress JavaScripts and CSS
-  config.assets.compress = true
+  config.serve_static_files = false
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
