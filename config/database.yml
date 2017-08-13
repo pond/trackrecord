@@ -4,6 +4,7 @@
 dbinfo: &dbinfo
   adapter: postgresql
   encoding: utf8
+  host: localhost
 
 production:
   <<: *dbinfo
