@@ -61,10 +61,10 @@ gem 'ruby-openid',            '~> 2.5'
 gem 'open_id_authentication', '~> 1.2'
 gem 'will_paginate',          '~> 3.0'
 gem 'audited',                '~> 4.5'
-gem 'acts_as_list'            '~> 0.9'
+gem 'acts_as_list',           '~> 0.9'
 gem 'browser',                '~> 0.4'
 gem 'in_place_editing',       '~> 1.2'
-gem 'rails_autolink',         '~> 1.6'
+gem 'rails_autolink',         '~> 1.1'
 gem 'dynamic_form',           '~> 1.1'
 
 # For development:
