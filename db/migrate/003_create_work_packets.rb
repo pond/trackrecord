@@ -14,7 +14,7 @@ class CreateWorkPackets < ActiveRecord::Migration
       t.text       :description
       t.datetime   :date,          :null => false
 
-      t.timestamps
+      t.timestamps                 :null => false
 
     end
   end

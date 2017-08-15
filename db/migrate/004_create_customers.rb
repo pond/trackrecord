@@ -12,7 +12,7 @@ class CreateCustomers < ActiveRecord::Migration
       t.string  :code
       t.text    :description
 
-      t.timestamps
+      t.timestamps :null => false
 
     end
   end

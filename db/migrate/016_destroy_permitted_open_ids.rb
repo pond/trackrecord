@@ -8,8 +8,8 @@ class DestroyPermittedOpenIds < ActiveRecord::Migration
 
   def self.down
     create_table :permitted_open_ids do | t |
-      t.text :identity_url, :null => false
-      t.timestamps
+      t.text       :identity_url, :null => false
+      t.timestamps                :null => false
     end
 
     # Try to rebuild the table based on current users listed in the

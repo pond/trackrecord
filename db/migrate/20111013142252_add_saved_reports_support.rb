@@ -56,7 +56,7 @@ class AddSavedReportsSupport < ActiveRecord::Migration
       t.string      :task_grouping,         :limit   => SavedReport::TASK_GROUPING_LIMIT,
                                             :default => SavedReport::TASK_GROUPING_DEFAULT
 
-      t.timestamps
+      t.timestamps                          :null    => false
 
       # Active task, inactive task and calculate-for-user lists are handled
       # using HABTM relationships so use join tables defined below.

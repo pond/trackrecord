@@ -15,7 +15,7 @@ class CreateTimesheets < ActiveRecord::Migration
       t.boolean    :committed,    :null => false, :default => false
       t.datetime   :committed_at
 
-      t.timestamps
+      t.timestamps                :null => false
 
     end
   end

@@ -18,18 +18,18 @@ ActiveRecord::Schema.define(version: 20170811044239) do
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
-    t.string   "auditable_type",  limit: 255
+    t.string   "auditable_type"
     t.integer  "user_id"
-    t.string   "user_type",       limit: 255
-    t.string   "username",        limit: 255
-    t.string   "action",          limit: 255
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
     t.text     "audited_changes"
-    t.integer  "version",                     default: 0
+    t.integer  "version",         default: 0
     t.datetime "created_at"
-    t.string   "comment",         limit: 255
-    t.string   "remote_address",  limit: 255
+    t.string   "comment"
+    t.string   "remote_address"
     t.integer  "associated_id"
-    t.string   "associated_type", limit: 255
+    t.string   "associated_type"
     t.string   "request_uuid"
   end
 
@@ -57,39 +57,39 @@ ActiveRecord::Schema.define(version: 20170811044239) do
   add_index "control_panels_tasks", ["task_id", "control_panel_id"], name: "index_control_panels_tasks_on_task_id_and_control_panel_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
-    t.boolean  "active",                   default: true, null: false
-    t.string   "title",        limit: 255,                null: false
-    t.string   "code",         limit: 255
+    t.boolean  "active",       default: true, null: false
+    t.string   "title",                       null: false
+    t.string   "code"
     t.text     "description"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.integer  "lock_version",             default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "lock_version", default: 0
   end
 
   create_table "open_id_authentication_associations", force: :cascade do |t|
     t.integer "issued"
     t.integer "lifetime"
-    t.string  "handle",     limit: 255
-    t.string  "assoc_type", limit: 255
+    t.string  "handle"
+    t.string  "assoc_type"
     t.binary  "server_url"
     t.binary  "secret"
   end
 
   create_table "open_id_authentication_nonces", force: :cascade do |t|
-    t.integer "timestamp",              null: false
-    t.string  "server_url", limit: 255, null: false
-    t.string  "salt",       limit: 255, null: false
+    t.integer "timestamp",  null: false
+    t.string  "server_url", null: false
+    t.string  "salt",       null: false
   end
 
   create_table "projects", force: :cascade do |t|
     t.integer  "customer_id"
-    t.boolean  "active",                   default: true, null: false
-    t.string   "title",        limit: 255,                null: false
-    t.string   "code",         limit: 255
+    t.boolean  "active",       default: true, null: false
+    t.string   "title",                       null: false
+    t.string   "code"
     t.text     "description"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.integer  "lock_version",             default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "lock_version", default: 0
   end
 
   create_table "saved_reports", force: :cascade do |t|
@@ -151,15 +151,15 @@ ActiveRecord::Schema.define(version: 20170811044239) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "project_id"
-    t.boolean  "active",                   default: true, null: false
-    t.string   "title",        limit: 255,                null: false
-    t.string   "code",         limit: 255
+    t.boolean  "active",       default: true, null: false
+    t.string   "title",                       null: false
+    t.string   "code"
     t.text     "description"
-    t.decimal  "duration",                                null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.integer  "lock_version",             default: 0
-    t.boolean  "billable",                 default: true
+    t.decimal  "duration",                    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "lock_version", default: 0
+    t.boolean  "billable",     default: true
   end
 
   create_table "tasks_users", id: false, force: :cascade do |t|
@@ -193,16 +193,16 @@ ActiveRecord::Schema.define(version: 20170811044239) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.text     "identity_url",                                   null: false
-    t.text     "name",                                           null: false
-    t.text     "email",                                          null: false
-    t.string   "code",                limit: 255
-    t.string   "user_type",           limit: 255,                null: false
-    t.boolean  "active",                          default: true, null: false
+    t.text     "identity_url",                       null: false
+    t.text     "name",                               null: false
+    t.text     "email",                              null: false
+    t.string   "code"
+    t.string   "user_type",                          null: false
+    t.boolean  "active",              default: true, null: false
     t.datetime "last_committed"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.integer  "lock_version",                    default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "lock_version",        default: 0
     t.text     "password_digest"
     t.boolean  "must_reset_password"
   end

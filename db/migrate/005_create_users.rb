@@ -15,7 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean  :active,       :null => false, :default => true
       t.datetime :last_committed
 
-      t.timestamps
+      t.timestamps              :null => false
 
     end
   end

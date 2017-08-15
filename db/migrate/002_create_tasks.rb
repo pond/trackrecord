@@ -14,7 +14,7 @@ class CreateTasks < ActiveRecord::Migration
       t.text       :description
       t.decimal    :duration, :null => false
 
-      t.timestamps
+      t.timestamps            :null => false
 
     end
   end

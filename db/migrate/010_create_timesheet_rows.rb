@@ -5,7 +5,7 @@ class CreateTimesheetRows < ActiveRecord::Migration
       t.belongs_to :timesheet, :null => false
       t.belongs_to :task,      :null => false
 
-      t.timestamps
+      t.timestamps             :null => false
 
     end
   end

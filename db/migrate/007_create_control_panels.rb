@@ -5,7 +5,7 @@ class CreateControlPanels < ActiveRecord::Migration
       t.belongs_to :project
       t.belongs_to :customer
 
-      t.timestamps
+      t.timestamps :null => false
     end
   end
 

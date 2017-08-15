@@ -5,8 +5,8 @@ class CreatePermittedOpenIds < ActiveRecord::Migration
       # In later revisions of TrackRecord this table is removed in favour
       # of up-front user account creation by the administrator.
 
-      t.text :identity_url, :null => false
-      t.timestamps
+      t.text       :identity_url, :null => false
+      t.timestamps                :null => false
 
     end
   end
