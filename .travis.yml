@@ -16,4 +16,6 @@ addons:
   postgresql: "9.4"
 
 script:
-  - TZ=Europe/London DATABASE_USER=postgres RAILS_ENV=test bundle exec rake db:create db:migrate test
+  - TZ=Europe/London DATABASE_USER=postgres RAILS_ENV=test bundle exec rake db:create
+  - TZ=Europe/London DATABASE_USER=postgres RAILS_ENV=test bundle exec rake db:migrate
+  - TZ=Europe/London DATABASE_USER=postgres RAILS_ENV=test bundle exec rake test
